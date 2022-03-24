@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app id="hello-world-webapp" version="5.0" xmlns="https://jakarta.ee/xml/ns/jakartaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd">
+    <display-name>hellog4j-world</display-name>
+    <description>Example of servlet that logs onto a rolling file</description>
+    <welcome-file-list>
+        <welcome-file>/html/hello-wadteam.html</welcome-file>
+    </welcome-file-list>
+
+    <servlet>
+        <servlet-name>LoggerServlet</servlet-name>
+        <servlet-class>it.unipd.dei.wa2122.wadteam.servlets.LoggerServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LoggerServlet</servlet-name>
+        <url-pattern>/log4jlogger/*</url-pattern>
+    </servlet-mapping>
+
+    <resource-ref>
+        <description>Connection pool to the database</description>
+        <res-ref-name>jdbc/electromechanics_shop</res-ref-name>
+        <res-type>javax.sql.DataSource</res-type>
+        <res-auth>Container</res-auth>
+    </resource-ref>
+
+</web-app>
