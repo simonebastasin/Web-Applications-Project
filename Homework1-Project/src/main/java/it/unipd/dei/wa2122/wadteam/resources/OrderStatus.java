@@ -4,37 +4,37 @@ import org.json.JSONObject;
 
 public class OrderStatus extends Resource{
     public enum OrderStatusEnum{ OPEN, PAYMENT_ACCEPTED, SHIPPED, DELIVERED }
-    Integer ID;
+    Integer id;
     OrderStatusEnum status;
     String description;
-    Integer ID_order;
-    String OS_dateTime;
+    Integer idOrder; //TODO change with the Order POJO
+    String osDateTime;
 
-    public OrderStatus(Integer ID, OrderStatusEnum status, String description, Integer ID_order, String OS_dateTime) {
-        this.ID = ID;
+    public OrderStatus(Integer id, OrderStatusEnum status, String description, Integer idOrder, String osDateTime) {
+        this.id = id;
         this.status = status;
         this.description = description;
-        this.ID_order = ID_order;
-        this.OS_dateTime = OS_dateTime;
+        this.idOrder = idOrder;
+        this.osDateTime = osDateTime;
     }
 
     @Override
     public JSONObject toJSON() {
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("ID", ID);
+        jsonObject.put("id", id);
         jsonObject.put("status", status);
         jsonObject.put("description", description);
-        jsonObject.put("ID_order", ID_order);
-        jsonObject.put("OS_dateTime", OS_dateTime);
+        jsonObject.put("idOrder", idOrder); //TODO: USE POJO
+        jsonObject.put("osDateTime", osDateTime);
         return jsonObject;
     }
 
     public static OrderStatus fromJson(JSONObject jsonObject) {
-        Integer ID = jsonObject.getInt("ID");
+        Integer id = jsonObject.getInt("id");
         OrderStatusEnum status = OrderStatusEnum.valueOf(jsonObject.getString("status"));
         String description = jsonObject.getString("description");
-        Integer ID_order = jsonObject.getInt("ID_order");
-        String OS_dateTime = jsonObject.getString("OS_dateTime");
-        return new OrderStatus(ID, status, description, ID_order, OS_dateTime);
+        Integer idOrder = jsonObject.getInt("idOrder"); //TODO: USE POJO
+        String osDateTime = jsonObject.getString("osDateTime");
+        return new OrderStatus(id, status, description, idOrder, osDateTime);
     }
 }
