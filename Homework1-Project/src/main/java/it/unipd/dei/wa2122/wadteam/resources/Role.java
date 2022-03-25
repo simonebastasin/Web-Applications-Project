@@ -2,7 +2,7 @@ package it.unipd.dei.wa2122.wadteam.resources;
 
 import org.json.JSONObject;
 
-public class Role extends Resource {
+public class Role implements Resource {
     String name;
     String description;
 

@@ -2,7 +2,7 @@ package it.unipd.dei.wa2122.wadteam.resources;
 
 import org.json.JSONObject;
 
-public class OrderStatus extends Resource{
+public class OrderStatus implements Resource {
     public enum OrderStatusEnum{ OPEN, PAYMENT_ACCEPTED, SHIPPED, DELIVERED }
     private final Integer id;
     private final OrderStatusEnum status;

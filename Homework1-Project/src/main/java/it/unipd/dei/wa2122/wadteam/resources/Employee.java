@@ -2,7 +2,7 @@ package it.unipd.dei.wa2122.wadteam.resources;
 
 import org.json.JSONObject;
 
-public class Employee extends Resource{
+public class Employee implements Resource {
     String username;
     String name;
     String surname;

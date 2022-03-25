@@ -27,11 +27,11 @@ import java.io.*;
  * @version HW1.00
  * @since 1.00
  */
-public abstract class Resource {
+public interface Resource {
 
      /**
      * Returns a JSON representation of the {@code Resource} into the given {@code OutputStream}.
      */
-    public abstract JSONObject toJSON();
+    JSONObject toJSON();
 }
 
