@@ -4,11 +4,11 @@ import org.json.JSONObject;
 
 public class OrderStatus extends Resource{
     public enum OrderStatusEnum{ OPEN, PAYMENT_ACCEPTED, SHIPPED, DELIVERED }
-    Integer id;
-    OrderStatusEnum status;
-    String description;
-    Integer idOrder; //TODO change with the Order POJO
-    String osDateTime;
+    private final Integer id;
+    private final OrderStatusEnum status;
+    private final String description;
+    private final Integer idOrder; //TODO change with the Order POJO
+    private final String osDateTime;
 
     public OrderStatus(Integer id, OrderStatusEnum status, String description, Integer idOrder, String osDateTime) {
         this.id = id;
@@ -16,6 +16,26 @@ public class OrderStatus extends Resource{
         this.description = description;
         this.idOrder = idOrder;
         this.osDateTime = osDateTime;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public OrderStatusEnum getStatus() {
+        return status;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public Integer getIdOrder() {
+        return idOrder;
+    }
+
+    public String getOsDateTime() {
+        return osDateTime;
     }
 
     @Override
