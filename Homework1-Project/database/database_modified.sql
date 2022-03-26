@@ -128,7 +128,6 @@ CREATE TABLE Assistance_Ticket(
 
                                   ID              SERIAL PRIMARY KEY,
                                   Description     TEXT NOT NULL,
-                                  E_Username      VARCHAR(50),
                                   ID_Customer     INTEGER NOT NULL,
                                   Product_Alias   VARCHAR(13) NOT NULL,
 

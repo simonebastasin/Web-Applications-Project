@@ -6,13 +6,13 @@ public class AssistantTicket implements Resource {
 
     private final int id;
     private final String description;
-    private final int idCostomer;
+    private final int idCustomer;
     private final String productAlias;
 
-    public AssistantTicket(int id, String description, int idCostomer, String productAlias) {
+    public AssistantTicket(int id, String description, int idCustomer, String productAlias) {
         this.id = id;
         this.description = description;
-        this.idCostomer = idCostomer;
+        this.idCustomer = idCustomer;
         this.productAlias = productAlias;
     }
 
@@ -24,8 +24,8 @@ public class AssistantTicket implements Resource {
         return description;
     }
 
-    public final int getIdCostomer() {
-        return idCostomer;
+    public final int getIdCustomer() {
+        return idCustomer;
     }
 
     public final String getProductAlias() {
@@ -37,7 +37,7 @@ public class AssistantTicket implements Resource {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("id",id);
         jsonObject.put("description",description);
-        jsonObject.put("idCostomer",idCostomer);
+        jsonObject.put("idCustomer",idCustomer);
         jsonObject.put("productAlias", productAlias);
         return jsonObject;
     }
@@ -45,8 +45,8 @@ public class AssistantTicket implements Resource {
     public static AssistantTicket fromJson(JSONObject jsonObject) {
         int id = jsonObject.getInt("id");
         String description = jsonObject.getString("description");
-        int idCostomer = jsonObject.getInt("idCostumer");
+        int idCustomer = jsonObject.getInt("idCustumer");
         String productAlias = jsonObject.getString("productAlias");
-        return new AssistantTicket(id, description, idCostomer, productAlias);
+        return new AssistantTicket(id, description, idCustomer, productAlias);
     }
 }
