@@ -17,9 +17,11 @@ public class ProductCategory implements Resource{
 
     public JSONObject toJSON() {
         JSONObject jsonObject = new JSONObject();
+
         jsonObject.put("name", name);
         if(description != null)
             jsonObject.put("description", description);
+
         return jsonObject;
     }
 
@@ -28,6 +30,7 @@ public class ProductCategory implements Resource{
         String description = null;
         if(jsonObject.has("description"))
             description = jsonObject.getString("description");
+
         return new ProductCategory(name, description);
     }
 }
