@@ -79,8 +79,6 @@ public class CreateEmployeeDatabase {
             if (preparedStatement != null) {
                 preparedStatement.close();
             }
-
-            con.close();
         }
 
         return resultEmployee;

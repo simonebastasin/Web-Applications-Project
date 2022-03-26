@@ -75,8 +75,6 @@ public final class GetEmployeeDatabase {
             if (preparedStatement != null) {
                 preparedStatement.close();
             }
-
-            con.close();
         }
 
         return resultEmployee;

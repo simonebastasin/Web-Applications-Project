@@ -71,8 +71,6 @@ public class ListEmployeeDatabase {
             if (preparedStatement != null) {
                 preparedStatement.close();
             }
-
-            con.close();
         }
 
         return resultEmployee;

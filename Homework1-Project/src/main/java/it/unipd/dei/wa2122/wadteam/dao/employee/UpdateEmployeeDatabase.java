@@ -77,8 +77,6 @@ public class UpdateEmployeeDatabase {
             if (preparedStatement != null) {
                 preparedStatement.close();
             }
-
-            con.close();
         }
 
         return resultEmployee;
