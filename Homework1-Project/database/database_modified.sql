@@ -29,13 +29,6 @@ CREATE TYPE TicketStatus AS ENUM (
     'Return'
     );
 
-CREATE TYPE PaymentMethod AS ENUM (
-
-    'Cash',
-    'Credit Card',
-    'Google Pay',
-    'Apple Pay'
-    );
 
 CREATE TYPE PaymentMethodOnline AS ENUM (
 
@@ -111,7 +104,6 @@ CREATE TABLE Product (
                          Purchase_Price  NUMERIC(10, 2) CHECK(Purchase_Price >= 0) NOT NULL,
                          Sale_Price      NUMERIC(10, 2) CHECK(Sale_Price >= 0) NOT NULL,
                          Quantity        INTEGER CHECK(Quantity >= 0) NOT NULL,
-                         Picture         BYTEA,
                          Category_Name   VARCHAR(25) NOT NULL,
                          evidence        boolean default false not null,
 
