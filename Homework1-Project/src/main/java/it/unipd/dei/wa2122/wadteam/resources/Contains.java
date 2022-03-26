@@ -4,11 +4,11 @@ import org.json.JSONObject;
 
 public class Contains implements Resource {
     private final int idOrder; // TODO: FOREIGN KEY _ REFERENCES OnlineOrder(id)
-    private final String productAlias; // TODO: FOREIGN KEY _ REFERENCES Product(alias)
+    private final Product productAlias;
     private final int quantity;
-    private final int priceApplied;
+    private final double priceApplied;
 
-    public Contains(int idOrder, String productAlias, int quantity, int priceApplied) {
+    public Contains(int idOrder, Product productAlias, int quantity, double priceApplied) {
         this.idOrder = idOrder;
         this.productAlias = productAlias;
         this.quantity = quantity;
@@ -17,11 +17,11 @@ public class Contains implements Resource {
 
     public final int getIdOrder() { return idOrder; }
 
-    public final String getProductAlias() { return productAlias; }
+    public final Product getProductAlias() { return productAlias; }
 
     public final int getQuantity() { return quantity; }
 
-    public final int getPriceApplied() { return priceApplied; }
+    public final double getPriceApplied() { return priceApplied; }
 
     @Override
     public JSONObject toJSON() {
@@ -35,9 +35,9 @@ public class Contains implements Resource {
 
     public static Contains fromJson(JSONObject jsonObject) {
         int idOrder = jsonObject.getInt("idOrder");
-        String productAlias = jsonObject.getString("productAlias");
+        Product productAlias = Product.fromJson(jsonObject.getJSONObject("productAlias"));
         int quantity = jsonObject.getInt("quantity");
-        int priceApplied = jsonObject.getInt("priceApplied");
+        double priceApplied = jsonObject.getDouble("priceApplied");
         return new Contains(idOrder, productAlias, quantity, priceApplied);
     }
 }
