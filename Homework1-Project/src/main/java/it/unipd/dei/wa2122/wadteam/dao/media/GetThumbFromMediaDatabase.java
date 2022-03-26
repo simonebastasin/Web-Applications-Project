@@ -1,17 +1,15 @@
 package it.unipd.dei.wa2122.wadteam.dao.media;
 
-import it.unipd.dei.wa2122.wadteam.resources.Media;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class GetMediaDatabase {
+public class GetThumbFromMediaDatabase {
     /**
      * The SQL statement to be executed
      */
-    private static final String STATEMENT = "SELECT id, mimetype, filename FROM media WHERE id = ?";
+    private static final String STATEMENT = "SELECT thumb FROM media WHERE id = ?";
 
     /**
      * The connection to the database
@@ -31,7 +29,7 @@ public class GetMediaDatabase {
      * @param id
      *            the username of the employee.
      */
-    public GetMediaDatabase(final Connection con, final int id) {
+    public GetThumbFromMediaDatabase(final Connection con, final int id) {
         this.con = con;
         this.id = id;
     }
@@ -44,13 +42,12 @@ public class GetMediaDatabase {
      * @throws SQLException
      *             if any error occurs while reading the employee.
      */
-    public Media getMedia() throws SQLException {
+    public byte[] getMedia() throws SQLException {
 
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
 
-        // the read employee
-        Media resultMedia = null;
+        byte[] resultMedia = null;
 
         try {
             preparedStatement = con.prepareStatement(STATEMENT);
@@ -59,11 +56,7 @@ public class GetMediaDatabase {
             resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) {
-                resultMedia = new Media(resultSet.getInt("id"),
-                                        resultSet.getString("mimetype"),
-                                        resultSet.getString("filename")
-                                       );
-
+                resultMedia = resultSet.getBytes(1);
             }
         } finally {
             if (resultSet != null) {
@@ -77,5 +70,4 @@ public class GetMediaDatabase {
 
         return resultMedia;
     }
-
 }
