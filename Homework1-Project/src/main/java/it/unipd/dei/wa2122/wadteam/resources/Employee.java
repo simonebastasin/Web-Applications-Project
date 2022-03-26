@@ -3,11 +3,11 @@ package it.unipd.dei.wa2122.wadteam.resources;
 import org.json.JSONObject;
 
 public class Employee implements Resource {
-    String username;
-    String name;
-    String surname;
-    Role role;
-    String password;
+    final String username;
+    final String name;
+    final String surname;
+    final Role role;
+    final String password;
 
     public Employee(String username, String name, String surname, Role role, String password) {
         this.username = username;
@@ -22,46 +22,27 @@ public class Employee implements Resource {
         this.name = name;
         this.surname = surname;
         this.role = role;
+        this.password = null;
     }
 
-    public String getUsername() {
+    public final String getUsername() {
         return username;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getName() {
+    public final String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getSurname() {
+    public final String getSurname() {
         return surname;
     }
 
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-
-    public Role getRole() {
+    public final Role getRole() {
         return role;
     }
 
-    public void setRole(Role role) {
-        this.role = role;
-    }
-
-    public String getPassword() {
+    public final String getPassword() {
         return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     @Override
