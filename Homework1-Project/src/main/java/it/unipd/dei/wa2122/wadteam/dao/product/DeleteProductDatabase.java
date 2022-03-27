@@ -1,4 +1,4 @@
-package it.unipd.dei.wa2122.wadteam.dao.onlineOrder;
+package it.unipd.dei.wa2122.wadteam.dao.product;
 
 import it.unipd.dei.wa2122.wadteam.resources.Product;
 import it.unipd.dei.wa2122.wadteam.resources.ProductCategory;
