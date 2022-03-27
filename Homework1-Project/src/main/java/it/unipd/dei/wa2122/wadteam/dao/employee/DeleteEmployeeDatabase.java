@@ -46,7 +46,7 @@ public final class DeleteEmployeeDatabase {
      * @throws SQLException
      *             if any error occurs while deleting the employee.
      */
-    public Employee getEmployee() throws SQLException {
+    public Employee deleteEmployee() throws SQLException {
 
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;

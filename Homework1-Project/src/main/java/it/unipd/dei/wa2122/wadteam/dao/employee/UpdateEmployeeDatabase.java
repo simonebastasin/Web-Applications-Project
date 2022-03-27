@@ -45,7 +45,7 @@ public class UpdateEmployeeDatabase {
      * @throws SQLException
      *             if any error occurs while reading the employee.
      */
-    public Employee getEmployee() throws SQLException {
+    public Employee updateEmployee() throws SQLException {
 
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;

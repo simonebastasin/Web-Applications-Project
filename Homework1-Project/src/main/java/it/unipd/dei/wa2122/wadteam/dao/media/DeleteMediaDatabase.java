@@ -44,7 +44,7 @@ public class DeleteMediaDatabase {
      * @throws SQLException
      *             if any error occurs while deleting the media.
      */
-    public Media getMediaTicket() throws SQLException {
+    public Media deleteMediaTicket() throws SQLException {
 
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;

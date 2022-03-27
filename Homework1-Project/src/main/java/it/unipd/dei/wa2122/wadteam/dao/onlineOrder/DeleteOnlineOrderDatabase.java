@@ -7,12 +7,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class CreateOnlineOrderDatabase {
+public class DeleteOnlineOrderDatabase {
     /**
      * The SQL statement to be executed
      */
-
-    private static final String STATEMENT = "INSERT INTO Online_Order (id, oo_datetime, id_customer) VALUES (?, ?, ?) RETURNING id, oo_datetime, id_customer";
+    private static final String STATEMENT = "DELETE FROM Online_Order WHERE id = ? RETURNING id, oo_datetime, id_customer";
 
     /**
      * The connection to the database
@@ -20,42 +19,42 @@ public class CreateOnlineOrderDatabase {
     private final Connection con;
 
     /**
-     * The onlineOrder to be updated in the database
+     * The id of the onlineOrder
      */
-    private final OnlineOrder onlineOrder;
+    private final Integer id;
 
     /**
-     * Creates a new object for update an employee.
+     * Creates a new object for deleting an onlineOrder.
      *
      * @param con
      *            the connection to the database.
-     * @param onlineOrder
-     *            the employee to be created in the database.
+     * @param id
+     *            the id of the onlineOrder.
      */
-    public CreateOnlineOrderDatabase(final Connection con, final OnlineOrder onlineOrder) {
+    public DeleteOnlineOrderDatabase(final Connection con, final Integer id) {
         this.con = con;
-        this.onlineOrder = onlineOrder;
+        this.id = id;
     }
 
     /**
-     * Creates an onlineOrder in the database.
+     * Deletes an onlineOrder from the database.
      *
-     * @return the {@code OnlineOrder} object matching the badge.
+     * @return the {@code OnlineOrder} object matching the id.
      *
      * @throws SQLException
-     *             if any error occurs while reading the onlineOrder.
+     *             if any error occurs while deleting the onlineOrder.
      */
-    public OnlineOrder createOnlineOrder() throws SQLException {
+    public OnlineOrder deleteOnlineOrder() throws SQLException {
+
         PreparedStatement pstmt = null;
         ResultSet rs = null;
 
+        // the deleted onlineOrder
         OnlineOrder resultOnlineOrder = null;
 
         try {
             pstmt = con.prepareStatement(STATEMENT);
-            pstmt.setInt(1, onlineOrder.getIdOrder());
-            pstmt.setString(2, onlineOrder.getOoDateTime());
-            pstmt.setInt(3, onlineOrder.getIdCustomer());
+            pstmt.setInt(1, id);
 
             rs = pstmt.executeQuery();
 
@@ -74,7 +73,7 @@ public class CreateOnlineOrderDatabase {
             if (pstmt != null) {
                 pstmt.close();
             }
-            con.close();
+
         }
 
         return resultOnlineOrder;

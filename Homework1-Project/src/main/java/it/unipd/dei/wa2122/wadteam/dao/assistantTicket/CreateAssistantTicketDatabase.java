@@ -13,7 +13,7 @@ public class CreateAssistantTicketDatabase {
      * The SQL statement to be executed
      */
 
-    private static final String STATEMENT = "INSERT INTO Assistance_Ticket (Description, ID_costomer, Product_Alias) VALUES (?, ?, ?) RETURNING ID, Description, ID_Custumer,Product_Alias";
+    private static final String STATEMENT = "INSERT INTO Assistance_Ticket (Description, ID_customer, Product_Alias) VALUES (?, ?, ?) RETURNING ID, Description, ID_Custumer,Product_Alias";
 
     /**
      * The connection to the database
