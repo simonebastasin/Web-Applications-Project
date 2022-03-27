@@ -12,22 +12,22 @@ public class Product implements Resource {
     private final double purchase;
     private final double sale;
     private final int quantity;
-    private final List<Integer> picture;   // This is a list of ID_Medias
     private final ProductCategory category;   //  Maybe String (of the name)?
     private final boolean evidence;
+    private final List<Integer> picture;   // This is a list of ID_Medias
 
-    public Product(String alias, String name, String brand, String description, double purchase, double sale, int quantity, List<Integer> picture, ProductCategory category, boolean evidence)
+    public Product(String alias, String name, String brand, String description, int quantity, double purchase, double sale, ProductCategory category, boolean evidence, List<Integer> picture)
     {
         this.alias = alias;
         this.name = name;
         this.brand = brand;
         this.description = description;
+        this.quantity = quantity;
         this.purchase = purchase;
         this.sale = sale;
-        this.quantity = quantity;
-        this.picture = picture;
         this.category = category;
         this.evidence = evidence;
+        this.picture = picture;
     }
 
     public final String getAlias() { return alias; }
@@ -44,11 +44,11 @@ public class Product implements Resource {
 
     public final int getQuantity() { return quantity; }
 
-    public final List<Integer> getPicture() { return picture; }
-
     public final ProductCategory getCategory() { return category; }
 
     public final boolean getEvidence() { return evidence; }
+
+    public final List<Integer> getPicture() { return picture; }
 
     public JSONObject toJSON() {
         JSONObject jsonObject = new JSONObject();
@@ -61,10 +61,10 @@ public class Product implements Resource {
         jsonObject.put("purchase", purchase);
         jsonObject.put("sale", sale);
         jsonObject.put("quantity", quantity);
-        if(picture != null)
-            jsonObject.put("picture", picture);
         jsonObject.put("category", category);
         jsonObject.put("evidence", evidence);
+        if(picture != null)
+            jsonObject.put("picture", picture);
 
         return jsonObject;
     }
@@ -85,6 +85,6 @@ public class Product implements Resource {
         ProductCategory category = ProductCategory.fromJson(jsonObject.getJSONObject("category"));
         boolean evidence = jsonObject.getBoolean("evidence");
 
-        return new Product(alias, name, brand, description, purchase, sale, quantity, picture, category, evidence);
+        return new Product(alias, name, brand, description, quantity, purchase, sale, category, evidence, picture);
     }
 }

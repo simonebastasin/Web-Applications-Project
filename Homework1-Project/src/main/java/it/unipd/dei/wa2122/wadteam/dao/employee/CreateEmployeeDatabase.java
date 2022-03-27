@@ -26,7 +26,7 @@ public class CreateEmployeeDatabase {
     private final Employee employee;
 
     /**
-     * Creates a new object for updat an employee.
+     * Creates a new object for update an employee.
      *
      * @param con
      *            the connection to the database.
