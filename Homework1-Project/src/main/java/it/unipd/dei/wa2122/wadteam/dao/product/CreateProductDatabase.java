@@ -7,12 +7,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class CreateProductDatabase {
     /**
      * The SQL statement to be executed
      */
-    private static final String STATEMENT = "INSERT INTO product (alias, name, brand, description, quantity, purchase, sale, category, evidence) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING alias, name, brand, description, quantity, purchase, sale, category, evidence";
+    private static final String STATEMENT_INSERT_PRODUCT = "INSERT INTO product (alias, name, brand, description, quantity, purchase, sale, category, evidence) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING alias, name, brand, description, quantity, purchase, sale, category, evidence";
 
     /**
      * The connection to the database
@@ -53,7 +54,7 @@ public class CreateProductDatabase {
         Product resultProduct = null;
 
         try {
-            preparedStatement = con.prepareStatement(STATEMENT);
+            preparedStatement = con.prepareStatement(STATEMENT_INSERT_PRODUCT);
             preparedStatement.setString(1, product.getAlias());
             preparedStatement.setString(2, product.getName());
             preparedStatement.setString(3, product.getBrand());
@@ -74,7 +75,7 @@ public class CreateProductDatabase {
                                             resultSet.getInt("quantity"),
                                             resultSet.getDouble("purchase_price"),
                                             resultSet.getDouble("sale_price"),
-                                            new ProductCategory(resultSet.getString("category_name"), ""), // TODO: Check how to handle the description
+                                            new ProductCategory(resultSet.getString("category"),null),
                                             resultSet.getBoolean("evidence"),
                                             product.getPicture());
             }
