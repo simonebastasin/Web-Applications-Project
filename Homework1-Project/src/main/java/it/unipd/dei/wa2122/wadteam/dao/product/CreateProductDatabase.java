@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class CreateProductDatabase {
     /**
-     * The SQL statement to be executed
+     * The SQL statements to be executed
      */
     private static final String STATEMENT_INSERT_PRODUCT = "INSERT INTO product (alias, name, brand, description, quantity, purchase, sale, category, evidence) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING alias, name, brand, description, quantity, purchase, sale, category, evidence";
 
