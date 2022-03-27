@@ -9,11 +9,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class CreateProductDatabase {
+public class GetProductDatabase {
     /**
      * The SQL statements to be executed
      */
-    private static final String STATEMENT_INSERT_PRODUCT = "INSERT INTO product (product_alias, name, brand, description, quantity, purchase, sale, category, evidence) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING alias, name, brand, description, quantity, purchase, sale, category, evidence";
+    private static final String STATEMENT_GET_PRODUCT = "SELECT product_alias, name, brand, description, quantity, purchase_price, sale_price, category, evidence) FROM product WHERE product_alias = ? RETURNING alias, name, brand, description, quantity, purchase, sale, category, evidence";
+
+    private static final String STATEMENT_GET_PICTURE = "SELECT product_alias, id_media FROM rappresented_by WHERE product_alias = ? AND id_media = ? RETURNING alias, id";
 
     /**
      * The connection to the database
@@ -21,62 +23,48 @@ public class CreateProductDatabase {
     private final Connection con;
 
     /**
-     * The product to be created in the database
+     * The product_alias of the product to be retrieved
      */
     private final Product product;
 
     /**
-     * Creates a new object for update a product.
+     * Creates a new object for getting a product.
      *
-     * @param con
-     *            the connection to the database.
-     * @param product
-     *            the product to be created in the database.
+     * @param con     the connection to the database.
+     * @param product the product.
      */
-    public CreateProductDatabase(final Connection con, final Product product) {
+    public GetProductDatabase(final Connection con, final Product product) {
         this.con = con;
         this.product = product;
     }
 
     /**
-     * Creates a product in the database.
+     * Gets a product from the database.
      *
-     * @return the {@code Product} object matching the alias.
-     *
-     * @throws SQLException
-     *             if any error occurs while reading the product.
+     * @return the {@code Product} object matching the product_alias.
+     * @throws SQLException if any error occurs while retrieving the product.
      */
-    public Product createProduct() throws SQLException {
-
+    public Product getProduct() throws SQLException {
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
 
         Product resultProduct = null;
 
         try {
-            preparedStatement = con.prepareStatement(STATEMENT_INSERT_PRODUCT);
+            preparedStatement = con.prepareStatement(STATEMENT_GET_PRODUCT);
             preparedStatement.setString(1, product.getAlias());
-            preparedStatement.setString(2, product.getName());
-            preparedStatement.setString(3, product.getBrand());
-            preparedStatement.setString(4, product.getDescription());
-            preparedStatement.setInt(5, product.getQuantity());
-            preparedStatement.setDouble(6, product.getPurchase());
-            preparedStatement.setDouble(7, product.getSale());
-            preparedStatement.setString(8, product.getCategory().getName());
-            preparedStatement.setBoolean(9, product.getEvidence());
 
             resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) {
-                resultProduct = new Product(
-                        resultSet.getString("product_alias"),
+                resultProduct = new Product(resultSet.getString("product_alias"),
                         resultSet.getString("name"),
                         resultSet.getString("brand"),
                         resultSet.getString("description"),
                         resultSet.getInt("quantity"),
                         resultSet.getDouble("purchase_price"),
                         resultSet.getDouble("sale_price"),
-                        new ProductCategory(resultSet.getString("category"),null),
+                        new ProductCategory(resultSet.getString("category"), null),
                         resultSet.getBoolean("evidence"),
                         new ArrayList<>());
             }
@@ -90,27 +78,30 @@ public class CreateProductDatabase {
             }
         }
 
-        for(var item : product.getPicture()) {
+        for (var item : product.getPicture()) {
             try {
-                preparedStatement = con.prepareStatement(STATEMENT_INSERT_PICTURE);
+                preparedStatement = con.prepareStatement(STATEMENT_GET_PICTURE);
                 preparedStatement.setString(1, product.getAlias());
                 preparedStatement.setInt(2, item);
 
                 resultSet = preparedStatement.executeQuery();
 
-                if(resultSet.next()){
+                if (resultSet.next()) {
                     assert resultProduct != null;
                     resultProduct.getPicture().add(resultSet.getInt("id_media"));
                 }
+
             } finally {
                 if (resultSet != null) {
                     resultSet.close();
                 }
 
-            if (preparedStatement != null) {
-                preparedStatement.close();
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
             }
         }
+
         return resultProduct;
     }
 }
