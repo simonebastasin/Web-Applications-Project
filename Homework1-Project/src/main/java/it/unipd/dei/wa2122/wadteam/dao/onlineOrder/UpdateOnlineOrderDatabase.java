@@ -21,19 +21,19 @@ public class UpdateOnlineOrderDatabase {
     /**
      * The id of the onlineOrder
      */
-    private final Integer id;
+    private final OnlineOrder onlineOrder;
 
     /**
      * Creates a new object for updating an onlineOrder.
      *
      * @param con
      *            the connection to the database.
-     * @param id
-     *            the id of the onlineOrder.
+     * @param onlineOrder
+     *            the new onlineOrder.
      */
-    public UpdateOnlineOrderDatabase(final Connection con, final Integer id) {
+    public UpdateOnlineOrderDatabase(final Connection con, final OnlineOrder onlineOrder) {
         this.con = con;
-        this.id = id;
+        this.onlineOrder = onlineOrder;
     }
 
     /**
@@ -54,7 +54,9 @@ public class UpdateOnlineOrderDatabase {
 
         try {
             pstmt = con.prepareStatement(STATEMENT);
-            pstmt.setInt(1, id);
+            pstmt.setString(1, onlineOrder.getOoDateTime());
+            pstmt.setInt(2, onlineOrder.getIdCustomer());
+            pstmt.setInt(3, onlineOrder.getIdOrder());
 
             rs = pstmt.executeQuery();
 
