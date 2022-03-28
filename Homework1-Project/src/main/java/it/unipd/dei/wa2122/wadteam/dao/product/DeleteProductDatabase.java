@@ -82,6 +82,7 @@ public class DeleteProductDatabase {
                 preparedStatement.close();
             }
         }
+        // TODO delete product picture BEFORE delete PRODUCT !!
 
         for (var item: product.getPicture()){
             try {
@@ -105,6 +106,8 @@ public class DeleteProductDatabase {
                 }
             }
         }
+
+        con.close();
 
         return resultProduct;
     }

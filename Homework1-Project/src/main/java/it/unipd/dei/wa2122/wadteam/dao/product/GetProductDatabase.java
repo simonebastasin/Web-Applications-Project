@@ -103,6 +103,8 @@ public class GetProductDatabase {
             }
         }
 
+        con.close();
+
         return resultProduct;
     }
 }

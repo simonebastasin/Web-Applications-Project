@@ -113,6 +113,8 @@ public class UpdateProductDatabase {
             }
         }
 
+        con.close();
+
         return resultProduct;
     }
 }

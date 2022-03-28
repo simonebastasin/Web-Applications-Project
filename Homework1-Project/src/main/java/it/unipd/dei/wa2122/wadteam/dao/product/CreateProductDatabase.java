@@ -15,6 +15,7 @@ public class CreateProductDatabase {
      */
     private static final String STATEMENT_INSERT_PRODUCT = "INSERT INTO product (product_alias, name, brand, description, quantity, purchase_price, sale_price, category_name, evidence) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING product_alias, name, brand, description, quantity, purchase_price, sale_price, category_name, evidence";
 
+    private static final String STATEMENT_INSERT_PICTURE = "INSERT INTO rappresented_by (product_alias, id_media) VALUES (? , ?)";
     /**
      * The connection to the database
      */
@@ -98,7 +99,7 @@ public class CreateProductDatabase {
 
                 resultSet = preparedStatement.executeQuery();
 
-                if(resultSet.next()){
+                if (resultSet.next()) {
                     assert resultProduct != null;
                     resultProduct.getPicture().add(resultSet.getInt("id_media"));
                 }
@@ -107,10 +108,13 @@ public class CreateProductDatabase {
                     resultSet.close();
                 }
 
-            if (preparedStatement != null) {
-                preparedStatement.close();
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
             }
         }
+        con.close();
+
         return resultProduct;
     }
 }

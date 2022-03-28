@@ -95,6 +95,8 @@ public class ListProductDatabase {
             }
         }
 
+        con.close();
+
         return resultProduct;
     }
 }
