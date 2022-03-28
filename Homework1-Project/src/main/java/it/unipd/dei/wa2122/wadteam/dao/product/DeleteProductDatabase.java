@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class DeleteProductDatabase {
     /**
@@ -52,7 +53,30 @@ public class DeleteProductDatabase {
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
 
+        List<Integer> resultPicture = new ArrayList<>();
         Product resultProduct = null;
+
+        for (var item: product.getPicture()){
+            try {
+                preparedStatement = con.prepareStatement(STATEMENT_DELETE_PICTURE);
+                preparedStatement.setString(1,product.getAlias());
+                preparedStatement.setInt(2,item);
+
+                resultSet = preparedStatement.executeQuery();
+
+                if(resultSet.next()){
+                    resultPicture.add(resultSet.getInt("id_media"));
+                }
+            } finally {
+                if (resultSet != null) {
+                    resultSet.close();
+                }
+
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+            }
+        }
 
         try {
             preparedStatement = con.prepareStatement(STATEMENT_DELETE_PRODUCT);
@@ -71,7 +95,7 @@ public class DeleteProductDatabase {
                         resultSet.getDouble("sale_price"),
                         new ProductCategory(resultSet.getString("category_name"),null),
                         resultSet.getBoolean("evidence"),
-                        new ArrayList<>());
+                        resultPicture);
             }
         } finally {
             if (resultSet != null) {
@@ -80,30 +104,6 @@ public class DeleteProductDatabase {
 
             if (preparedStatement != null) {
                 preparedStatement.close();
-            }
-        }
-        // TODO delete product picture BEFORE delete PRODUCT !!
-
-        for (var item: product.getPicture()){
-            try {
-                preparedStatement = con.prepareStatement(STATEMENT_DELETE_PICTURE);
-                preparedStatement.setString(1,product.getAlias());
-                preparedStatement.setInt(2,item);
-
-                resultSet = preparedStatement.executeQuery();
-
-                if(resultSet.next()){
-                    assert resultProduct != null;
-                    resultProduct.getPicture().add(resultSet.getInt("id_media"));
-                }
-            } finally {
-                if (resultSet != null) {
-                    resultSet.close();
-                }
-
-                if (preparedStatement != null) {
-                    preparedStatement.close();
-                }
             }
         }
 
