@@ -6,13 +6,13 @@ public class OnlineInvoice implements Resource {
 
     public enum PaymentMethodOnlineEnum{CREDIT_CARD, GOOGLE_PAY, APPLE_PAY}
     private final int id;
-    private final int idOrder; // TODO: FOREIGN KEY _ REFERENCES OnlineOrder(id)
+    private final OnlineOrder idOrder;
     private final String transactionId;
     private final PaymentMethodOnlineEnum paymentType;
     private final String oiDate; //TODO: DATE type (DEFAULT CURRENT_DATE)
     private final double totalPrice;
 
-    public OnlineInvoice(int id, int idOrder, String transactionId, PaymentMethodOnlineEnum paymentType, String oiDate, double totalPrice) {
+    public OnlineInvoice(int id, OnlineOrder idOrder, String transactionId, PaymentMethodOnlineEnum paymentType, String oiDate, double totalPrice) {
         this.id = id;
         this.idOrder = idOrder;
         this.transactionId = transactionId;
@@ -23,7 +23,7 @@ public class OnlineInvoice implements Resource {
 
     public final int getId() { return id; }
 
-    public final int getIdOrder() { return idOrder; }
+    public final OnlineOrder getIdOrder() { return idOrder; }
 
     public final String getTransactionId() { return transactionId; }
 
@@ -47,7 +47,7 @@ public class OnlineInvoice implements Resource {
 
     public static OnlineInvoice fromJson(JSONObject jsonObject) {
         int id = jsonObject.getInt("id");
-        int idOrder = jsonObject.getInt("idOrder");
+        OnlineOrder idOrder = OnlineOrder.fromJson(jsonObject.getJSONObject("idOrder"));
         String transactionId = jsonObject.getString("transactionId");
         PaymentMethodOnlineEnum paymentType = PaymentMethodOnlineEnum.valueOf(jsonObject.getString("paymentType"));
         String oiDate = jsonObject.getString("oiDate");

@@ -3,19 +3,19 @@ package it.unipd.dei.wa2122.wadteam.resources;
 import org.json.JSONObject;
 
 public class Contains implements Resource {
-    private final int idOrder; // TODO: FOREIGN KEY _ REFERENCES OnlineOrder(id)
+    private final OnlineOrder idOrder;
     private final Product productAlias;
     private final int quantity;
     private final double priceApplied;
 
-    public Contains(int idOrder, Product productAlias, int quantity, double priceApplied) {
+    public Contains(OnlineOrder idOrder, Product productAlias, int quantity, double priceApplied) {
         this.idOrder = idOrder;
         this.productAlias = productAlias;
         this.quantity = quantity;
         this.priceApplied = priceApplied;
     }
 
-    public final int getIdOrder() { return idOrder; }
+    public final OnlineOrder getIdOrder() { return idOrder; }
 
     public final Product getProductAlias() { return productAlias; }
 
@@ -34,7 +34,7 @@ public class Contains implements Resource {
     }
 
     public static Contains fromJson(JSONObject jsonObject) {
-        int idOrder = jsonObject.getInt("idOrder");
+        OnlineOrder idOrder = OnlineOrder.fromJson(jsonObject.getJSONObject("idOrder"));
         Product productAlias = Product.fromJson(jsonObject.getJSONObject("productAlias"));
         int quantity = jsonObject.getInt("quantity");
         double priceApplied = jsonObject.getDouble("priceApplied");
