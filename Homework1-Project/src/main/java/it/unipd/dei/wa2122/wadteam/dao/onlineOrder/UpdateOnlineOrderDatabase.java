@@ -49,7 +49,6 @@ public class UpdateOnlineOrderDatabase {
         PreparedStatement pstmt = null;
         ResultSet rs = null;
 
-        // the deleted onlineOrder
         OnlineOrder resultOnlineOrder = null;
 
         try {
@@ -75,6 +74,8 @@ public class UpdateOnlineOrderDatabase {
             if (pstmt != null) {
                 pstmt.close();
             }
+
+            con.close();
 
         }
 

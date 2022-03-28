@@ -74,6 +74,8 @@ public class DeleteOnlineOrderDatabase {
                 pstmt.close();
             }
 
+            con.close();
+
         }
 
         return resultOnlineOrder;

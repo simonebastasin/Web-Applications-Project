@@ -51,7 +51,6 @@ public class SearchOnlineOrderByCustomerDatabase {
         PreparedStatement pstmt = null;
         ResultSet rs = null;
 
-        // the deleted onlineOrder
         final List<OnlineOrder> orders = new ArrayList<OnlineOrder>();
 
         try {
@@ -75,6 +74,8 @@ public class SearchOnlineOrderByCustomerDatabase {
             if (pstmt != null) {
                 pstmt.close();
             }
+
+            con.close();
 
         }
 

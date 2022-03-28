@@ -1,17 +1,23 @@
 package it.unipd.dei.wa2122.wadteam.dao.onlineOrder;
 
 import it.unipd.dei.wa2122.wadteam.resources.OnlineOrder;
+import it.unipd.dei.wa2122.wadteam.resources.Product;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
-public class GetOnlineOrderDatabase {
+public class GetProductsByOrderDatabase {
     /**
      * The SQL statement to be executed
      */
-    private static final String STATEMENT = "SELECT id, oo_datetime, id_customer FROM Online_Order WHERE id = ?";
+    private static final String STATEMENT = "select o.id, p.name, p.product_alias, c.price_applied, c.quantity from online_order as o " +
+            "inner join contains as c on o.id = c.id_order " +
+            "inner join product as p on p.product_alias=c.product_alias " +
+            "where o.id = ?";
 
     /**
      * The connection to the database
@@ -31,25 +37,25 @@ public class GetOnlineOrderDatabase {
      * @param id
      *            the id of the onlineOrder.
      */
-    public GetOnlineOrderDatabase(final Connection con, final Integer id) {
+    public GetProductsByOrderDatabase(Connection con, Integer id) {
         this.con = con;
         this.id = id;
     }
 
     /**
-     * Gets an onlineOrder from the database.
+     * Gets the products associated to the onlineOrder from the database.
      *
-     * @return the {@code OnlineOrder} object matching the id.
+     * @return a list of {@code Product} object matching the id.
      *
      * @throws SQLException
      *             if any error occurs while deleting the onlineOrder.
      */
-    public OnlineOrder getOnlineOrder() throws SQLException {
+    public List<Product> getProductsByOrder() throws SQLException {
 
         PreparedStatement pstmt = null;
         ResultSet rs = null;
 
-        OnlineOrder resultOnlineOrder = null;
+        List<Product> resultProducts = new ArrayList<>();
 
         try {
             pstmt = con.prepareStatement(STATEMENT);
@@ -58,11 +64,18 @@ public class GetOnlineOrderDatabase {
             rs = pstmt.executeQuery();
 
             if (rs.next()) {
-                resultOnlineOrder = new OnlineOrder(
-                        rs.getInt("id"),
-                        rs.getInt("id_customer"),
-                        rs.getString("oo_datetime")
-                );
+                resultProducts.add(new Product(
+                        rs.getString("product_alias"),
+                        rs.getString("name"),
+                        null,
+                        null,
+                        rs.getInt("quantity"),
+                        rs.getDouble("price_applied"),
+                        0,
+                        null,
+                        false,
+                        null
+                ));
             }
         } finally {
             if (rs != null) {
@@ -74,8 +87,9 @@ public class GetOnlineOrderDatabase {
             }
 
             con.close();
+
         }
 
-        return resultOnlineOrder;
+        return resultProducts;
     }
 }
