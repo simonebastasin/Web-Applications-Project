@@ -12,7 +12,7 @@ public class Product implements Resource {
     private final double purchase;
     private final double sale;
     private final int quantity;
-    private final ProductCategory category;   //  Maybe String (of the name)?
+    private final ProductCategory category;
     private final boolean evidence;
     private final List<Integer> picture;   // This is a list of ID_Medias
 

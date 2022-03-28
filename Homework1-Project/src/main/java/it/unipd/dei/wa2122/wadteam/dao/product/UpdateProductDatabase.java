@@ -75,7 +75,7 @@ public class UpdateProductDatabase {
                         resultSet.getInt("quantity"),
                         resultSet.getDouble("purchase_price"),
                         resultSet.getDouble("sale_price"),
-                        new ProductCategory(resultSet.getString("category"),null),
+                        new ProductCategory(resultSet.getString("category_name"),null),
                         resultSet.getBoolean("evidence"),
                         new ArrayList<>());
             }

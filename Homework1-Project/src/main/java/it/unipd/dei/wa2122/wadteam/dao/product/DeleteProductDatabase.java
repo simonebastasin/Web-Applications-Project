@@ -61,7 +61,8 @@ public class DeleteProductDatabase {
             resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()){
-                resultProduct = new Product(resultSet.getString("product_alias"),
+                resultProduct = new Product(
+                        resultSet.getString("product_alias"),
                         resultSet.getString("name"),
                         resultSet.getString("brand"),
                         resultSet.getString("description"),
