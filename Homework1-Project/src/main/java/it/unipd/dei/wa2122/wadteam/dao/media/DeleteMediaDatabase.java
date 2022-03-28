@@ -73,6 +73,8 @@ public class DeleteMediaDatabase {
             }
         }
 
+        con.close();
+
         return resultMedia;
     }
 }

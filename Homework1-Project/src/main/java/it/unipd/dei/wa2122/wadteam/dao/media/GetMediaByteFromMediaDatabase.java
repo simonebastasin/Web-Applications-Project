@@ -7,11 +7,18 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class GetMediaDatabase {
+public class GetMediaByteFromMediaDatabase {
     /**
      * The SQL statement to be executed
      */
     private static final String STATEMENT = "SELECT id, mimetype, filename FROM media WHERE id = ?";
+
+    /**
+     * The SQL statement to be executed
+     */
+    private static final String STATEMENT_MEDIA = "SELECT media FROM media WHERE id = ?";
+
+    private static final String STATEMENT_THUMB = "SELECT thumb FROM media WHERE id = ?";
 
     /**
      * The connection to the database
@@ -23,17 +30,19 @@ public class GetMediaDatabase {
      */
     private final int id;
 
+    private final boolean thumb;
+
     /**
      * Creates a new object for reading an employee.
-     *
-     * @param con
+     *  @param con
      *            the connection to the database.
      * @param id
-     *            the username of the employee.
+     * @param thumb
      */
-    public GetMediaDatabase(final Connection con, final int id) {
+    public GetMediaByteFromMediaDatabase(final Connection con, final int id, boolean thumb) {
         this.con = con;
         this.id = id;
+        this.thumb = thumb;
     }
 
     /**
@@ -44,7 +53,7 @@ public class GetMediaDatabase {
      * @throws SQLException
      *             if any error occurs while reading the employee.
      */
-    public Media getMedia() throws SQLException {
+    public MediaPair getMedia() throws SQLException {
 
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
@@ -60,10 +69,33 @@ public class GetMediaDatabase {
 
             if (resultSet.next()) {
                 resultMedia = new Media(resultSet.getInt("id"),
-                                        resultSet.getString("mimetype"),
-                                        resultSet.getString("filename")
-                                       );
+                        resultSet.getString("mimetype"),
+                        resultSet.getString("filename")
+                );
 
+            }
+        } finally {
+            if (resultSet != null) {
+                resultSet.close();
+            }
+
+            if (preparedStatement != null) {
+                preparedStatement.close();
+            }
+        }
+
+        if(resultMedia == null) return  null;
+
+        byte[] resultByte = null;
+
+        try {
+            preparedStatement = con.prepareStatement(thumb ? STATEMENT_THUMB : STATEMENT_MEDIA);
+            preparedStatement.setInt(1, id);
+
+            resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                resultByte = resultSet.getBytes(1);
             }
         } finally {
             if (resultSet != null) {
@@ -77,7 +109,8 @@ public class GetMediaDatabase {
 
         con.close();
 
-        return resultMedia;
+        return new MediaPair(resultMedia, resultByte);
     }
+    public record MediaPair (Media media, byte[] bytes) {}
 
 }

@@ -69,6 +69,8 @@ public class ListMediaDatabase {
             }
         }
 
+        con.close();
+
         return resultMedia;
     }
 }

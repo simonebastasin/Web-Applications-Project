@@ -80,6 +80,8 @@ public class CreateMediaDatabase {
             }
         }
 
+        con.close();
+
         return resultMedia;
 
     }
