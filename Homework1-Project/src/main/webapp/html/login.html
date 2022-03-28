@@ -5,14 +5,14 @@
     <title>Login</title>
 </head>
 <body>
-    <form name = "login" action = "/login" method="post">
+    <form name = "login" action = "../login" method="post">
         <input type="text" name ="identification" id="identification">
         <label for = "identification">username or email</label>
         <br>
         <input type ="password" name ="password" id ="password">
         <label for = "password">password</label>
         <br>
-        <select name="usertype">
+        <select name="usertype" id="usertype">
             <option value ="customer">Customer</option>
             <option value ="employee">Employee</option>
         </select>
