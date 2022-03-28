@@ -11,7 +11,7 @@
     \c electromechanics_shop
     
     
-    -- create new data types
+     -- create new data types
 
 CREATE TYPE OrderStatus AS ENUM (
 
@@ -131,7 +131,6 @@ CREATE TABLE Assistance_Ticket(
                                   ID_Customer     INTEGER NOT NULL,
                                   Product_Alias   VARCHAR(13) NOT NULL,
 
-                                  FOREIGN KEY (E_Username) REFERENCES Employee(Username) ON UPDATE CASCADE,
                                   FOREIGN KEY (ID_Customer) REFERENCES Customer(ID) ON UPDATE CASCADE,
                                   FOREIGN KEY (Product_Alias) REFERENCES Product(Product_Alias) ON UPDATE CASCADE
 );
@@ -367,18 +366,18 @@ CREATE TRIGGER update_quantity
  
     --Product
     
-    INSERT INTO Product (Product_Alias, Name, Brand, Description, Quantity, Purchase_Price, Sale_Price, Picture, Category_Name)
+    INSERT INTO Product (Product_Alias, Name, Brand, Description, Quantity, Purchase_Price, Sale_Price, Category_Name)
         VALUES 
-            ('6465661284454', 'Drill', 'DeWALT', 'Suitable for different materials: For drilling and screwdriving in wood and metal or impact drilling in masonry', '20', '150', '200', 'xDEADBEEC', 'Drill'), 
-            ('6465661284458', 'Screwdriver', 'BOSCH', 'Micro - USB charging system with reduced charging time of 3 hours', '12', '45', '70', 'xDEADBEEF', 'Screwdriver'), 
-            ('6465661284473', 'Air compressor', 'Automan', 'Compressor with aluminum pistons. 24L tank', '10', '65', '109', 'xDEADSEFF', 'Compressors'), 
-            ('6465661284410', 'Generator', 'GEN100', '200 KVA generator.', '5', '100', '110', 'xDEADBSSF', 'Generator'), 
-            ('6465661284411', 'Transformer', 'TRAUTO', 'Fully redundant transformer 150KVA', '0', '200', '350', 'xDEDFBEFF', 'Transformer'), 
-            ('6465661284412', 'Pump', 'PMOTO', 'Hydra pump for large systems.', '0', '15', '25', 'xDEASSEFF', 'Pump'), 
-            ('6465661284413', 'Electrical Motor', 'General Electric', 'Electrical motor with the capacity 15 kW.', '15', '50', '150', 'xDEASSSFF', 'Electrical Motor'), 
-            ('6465661284414', 'Ampermeter', 'Scheneider', 'Perfect ampermeter for 4 years gurantee.', '100', '5', '10', 'xDAADSSEFF', 'Ampermeter'), 
-            ('6465661284415', 'Multimeter', 'Siemens', 'Multimeter with many functionalities.', '100', '10', '15', 'xDEASDFF', 'Multimeter'), 
-            ('6465661284416', 'Copper Cable', 'Scheneider', '100m copper cable.', '10', '10', '15', 'xDEAVVVFF', 'Cable');
+            ('6465661284454', 'Drill', 'DeWALT', 'Suitable for different materials: For drilling and screwdriving in wood and metal or impact drilling in masonry', '20', '150', '200', 'Drill'), 
+            ('6465661284458', 'Screwdriver', 'BOSCH', 'Micro - USB charging system with reduced charging time of 3 hours', '12', '45', '70', 'Screwdriver'), 
+            ('6465661284473', 'Air compressor', 'Automan', 'Compressor with aluminum pistons. 24L tank', '10', '65', '109', 'Compressors'), 
+            ('6465661284410', 'Generator', 'GEN100', '200 KVA generator.', '5', '100', '110', 'Generator'), 
+            ('6465661284411', 'Transformer', 'TRAUTO', 'Fully redundant transformer 150KVA', '0', '200', '350', 'Transformer'), 
+            ('6465661284412', 'Pump', 'PMOTO', 'Hydra pump for large systems.', '0', '15', '25','Pump'), 
+            ('6465661284413', 'Electrical Motor', 'General Electric', 'Electrical motor with the capacity 15 kW.', '15', '50', '150','Electrical Motor'), 
+            ('6465661284414', 'Ampermeter', 'Scheneider', 'Perfect ampermeter for 4 years gurantee.', '100', '5', '10','Ampermeter'), 
+            ('6465661284415', 'Multimeter', 'Siemens', 'Multimeter with many functionalities.', '100', '10', '15','Multimeter'), 
+            ('6465661284416', 'Copper Cable', 'Scheneider', '100m copper cable.', '10', '10', '15','Cable');
     
 
           
@@ -420,18 +419,18 @@ CREATE TRIGGER update_quantity
 
     --Assistance Ticket
     
-    INSERT INTO Assistance_Ticket (Description , E_Username , ID_Customer , Product_Alias)
+    INSERT INTO Assistance_Ticket (Description ,ID_Customer , Product_Alias)
         VALUES
-            ('Before the guarantee period expires, product repair is requested.' , 'Ege' , 1 , '6465661284454'), 
-            ('Return of the product is requested before the guarantee period expires.' , 'Margherita' , 2, '6465661284458'), 
-            ('The product was replaced with a new one.' , 'Gaia' , 3 , '6465661284458'), 
-            ('The product has been repaired.' , 'Tommaso' , 4 , '6465661284413'), 
-            ('The product is faulty.' , 'Boris' , 5 , '6465661284416'), 
-            ('The product is requested to be replaced with another product.' , 'Virginio' , 6 , '6465661284410'), 
-            ('The delivery date of the product is delayed.' , 'Gaia' , 7 , '6465661284414'), 
-            ('The delivery date of the product is delayed.' , 'Boris' , 8 , '6465661284414'), 
-            ('The product is faulty.' , 'Ege' , 9 , '6465661284415'), 
-            ('Return of the product is requested before the guarantee period expires.' , 'Andrea' , 10 , '6465661284412');
+            ('Before the guarantee period expires, product repair is requested.' ,1 , '6465661284454'), 
+            ('Return of the product is requested before the guarantee period expires.' ,2, '6465661284458'), 
+            ('The product was replaced with a new one.' ,3 , '6465661284458'), 
+            ('The product has been repaired.' ,4 , '6465661284413'), 
+            ('The product is faulty.' ,5 , '6465661284416'), 
+            ('The product is requested to be replaced with another product.' ,6 , '6465661284410'), 
+            ('The delivery date of the product is delayed.' ,7 , '6465661284414'), 
+            ('The delivery date of the product is delayed.' ,8 , '6465661284414'), 
+            ('The product is faulty.' ,9 , '6465661284415'), 
+            ('Return of the product is requested before the guarantee period expires.' ,10 , '6465661284412');
     
     --Ticket Status
     
