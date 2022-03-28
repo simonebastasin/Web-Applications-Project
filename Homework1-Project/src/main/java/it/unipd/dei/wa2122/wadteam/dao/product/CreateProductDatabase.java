@@ -13,7 +13,7 @@ public class CreateProductDatabase {
     /**
      * The SQL statements to be executed
      */
-    private static final String STATEMENT_INSERT_PRODUCT = "INSERT INTO product (product_alias, name, brand, description, quantity, purchase, sale, category, evidence) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING alias, name, brand, description, quantity, purchase, sale, category, evidence";
+    private static final String STATEMENT_INSERT_PRODUCT = "INSERT INTO product (product_alias, name, brand, description, quantity, purchase_price, sale_price, category_name, evidence) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING product_alias, name, brand, description, quantity, purchase_price, sale_price, category_name, evidence";
 
     /**
      * The connection to the database
@@ -76,7 +76,7 @@ public class CreateProductDatabase {
                         resultSet.getInt("quantity"),
                         resultSet.getDouble("purchase_price"),
                         resultSet.getDouble("sale_price"),
-                        new ProductCategory(resultSet.getString("category"),null),
+                        new ProductCategory(resultSet.getString("category_name"),null),
                         resultSet.getBoolean("evidence"),
                         new ArrayList<>());
             }

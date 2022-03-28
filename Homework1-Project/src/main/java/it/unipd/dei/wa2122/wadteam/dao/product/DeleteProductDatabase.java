@@ -13,9 +13,9 @@ public class DeleteProductDatabase {
     /**
      * The SQL statements to be executed
      */
-    private static final String STATEMENT_DELETE_PRODUCT = "DELETE FROM product WHERE product_alias = ? RETURNING alias, name, brand, description, quantity, purchase, sale, category, evidence";
+    private static final String STATEMENT_DELETE_PRODUCT = "DELETE FROM product WHERE product_alias = ? RETURNING product_alias, name, brand, description, quantity, purchase_price, sale_price, category_name, evidence";
 
-    private static final String STATEMENT_DELETE_PICTURE = "DELETE FROM rappresented_by WHERE product_alias = ? AND id_media = ? RETURNING alias, id";
+    private static final String STATEMENT_DELETE_PICTURE = "DELETE FROM rappresented_by WHERE product_alias = ? AND id_media = ? RETURNING product_alias, id_media";
 
     /**
      * The connection to the database
@@ -68,7 +68,7 @@ public class DeleteProductDatabase {
                         resultSet.getInt("quantity"),
                         resultSet.getDouble("purchase_price"),
                         resultSet.getDouble("sale_price"),
-                        new ProductCategory(resultSet.getString("category"),null),
+                        new ProductCategory(resultSet.getString("category_name"),null),
                         resultSet.getBoolean("evidence"),
                         new ArrayList<>());
             }

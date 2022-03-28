@@ -1,6 +1,5 @@
 package it.unipd.dei.wa2122.wadteam.dao.product;
 
-import it.unipd.dei.wa2122.wadteam.resources.Employee;
 import it.unipd.dei.wa2122.wadteam.resources.Product;
 import it.unipd.dei.wa2122.wadteam.resources.ProductCategory;
 
@@ -15,7 +14,7 @@ public class ListProductDatabase {
     /**
      * The SQL statements to be executed
      */
-    private static final String STATEMENT_LIST_PRODUCT = "SELECT * FROM product";
+    private static final String STATEMENT_LIST_PRODUCT = "SELECT product_alias, name, brand, description, quantity, purchase_price, sale_price, category_name, evidence FROM product";
 
     private static final String STATEMENT_LIST_PICTURE = "SELECT id_media FROM rappresented_by WHERE product_alias = ?";
 
@@ -60,7 +59,7 @@ public class ListProductDatabase {
                         resultSet.getInt("quantity"),
                         resultSet.getDouble("purchase_price"),
                         resultSet.getDouble("sale_price"),
-                        new ProductCategory(resultSet.getString("category"), null),
+                        new ProductCategory(resultSet.getString("category_name"), null),
                         resultSet.getBoolean("evidence"),
                         new ArrayList<>());
                 resultProduct.add(resultProductItem);
