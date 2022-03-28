@@ -41,7 +41,14 @@
         <url-pattern>/uploadmedia</url-pattern>
     </servlet-mapping>
 
-    
+    <servlet>
+        <servlet-name>ViewMediaServlet</servlet-name>
+        <servlet-class>it.unipd.dei.wa2122.wadteam.servlets.ViewMediaServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ViewMediaServlet</servlet-name>
+        <url-pattern>/viewmedia/*</url-pattern>
+    </servlet-mapping>
 
     <resource-ref>
         <description>Connection pool to the database</description>
