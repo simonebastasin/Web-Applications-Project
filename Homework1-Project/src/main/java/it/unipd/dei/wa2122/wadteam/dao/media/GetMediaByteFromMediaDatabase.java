@@ -11,11 +11,6 @@ public class GetMediaByteFromMediaDatabase {
     /**
      * The SQL statement to be executed
      */
-    private static final String STATEMENT = "SELECT id, mimetype, filename FROM media WHERE id = ?";
-
-    /**
-     * The SQL statement to be executed
-     */
     private static final String STATEMENT_MEDIA = "SELECT media FROM media WHERE id = ?";
 
     private static final String STATEMENT_THUMB = "SELECT thumb FROM media WHERE id = ?";
@@ -53,38 +48,11 @@ public class GetMediaByteFromMediaDatabase {
      * @throws SQLException
      *             if any error occurs while reading the employee.
      */
-    public MediaPair getMedia() throws SQLException {
+    public byte[] getMedia() throws SQLException {
 
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
 
-        // the read employee
-        Media resultMedia = null;
-
-        try {
-            preparedStatement = con.prepareStatement(STATEMENT);
-            preparedStatement.setInt(1, id);
-
-            resultSet = preparedStatement.executeQuery();
-
-            if (resultSet.next()) {
-                resultMedia = new Media(resultSet.getInt("id"),
-                        resultSet.getString("mimetype"),
-                        resultSet.getString("filename")
-                );
-
-            }
-        } finally {
-            if (resultSet != null) {
-                resultSet.close();
-            }
-
-            if (preparedStatement != null) {
-                preparedStatement.close();
-            }
-        }
-
-        if(resultMedia == null) return  null;
 
         byte[] resultByte = null;
 
@@ -109,8 +77,6 @@ public class GetMediaByteFromMediaDatabase {
 
         con.close();
 
-        return new MediaPair(resultMedia, resultByte);
+        return resultByte;
     }
-    public record MediaPair (Media media, byte[] bytes) {}
-
 }

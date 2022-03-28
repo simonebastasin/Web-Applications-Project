@@ -47,6 +47,10 @@ public class CreateMediaDatabase {
     }
 
     public Media createMedia() throws SQLException {
+
+        boolean previousAutoCommitMode = con.getAutoCommit();
+        con.setAutoCommit(false);
+
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
 
@@ -79,6 +83,8 @@ public class CreateMediaDatabase {
                 preparedStatement.close();
             }
         }
+
+        con.setAutoCommit(previousAutoCommitMode);
 
         con.close();
 
