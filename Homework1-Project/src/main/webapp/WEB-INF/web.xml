@@ -26,6 +26,23 @@
         <url-pattern>/login</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>UploadMediaServlet</servlet-name>
+        <servlet-class>it.unipd.dei.wa2122.wadteam.servlets.UploadMediaServlet</servlet-class>
+        <multipart-config>
+            <max-file-size>208488200</max-file-size>
+            <max-request-size>4180188410</max-request-size>
+            <file-size-threshold>1048576</file-size-threshold>
+        </multipart-config>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>UploadMediaServlet</servlet-name>
+        <url-pattern>/uploadmedia</url-pattern>
+    </servlet-mapping>
+
+    
+
     <resource-ref>
         <description>Connection pool to the database</description>
         <res-ref-name>jdbc/electromechanics_shop</res-ref-name>
