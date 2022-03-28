@@ -15,7 +15,9 @@ public class GetProductDatabase {
      */
     private static final String STATEMENT_GET_PRODUCT = "SELECT product_alias, name, brand, description, quantity, purchase_price, sale_price, category_name, evidence FROM product WHERE product_alias = ?";
 
-    private static final String STATEMENT_GET_PICTURE = "SELECT product_alias, id_media FROM rappresented_by WHERE product_alias = ? AND id_media = ?";
+    //private static final String STATEMENT_GET_PICTURE = "SELECT product_alias, id_media FROM rappresented_by WHERE product_alias = ? AND id_media = ?";
+
+    private static final String STATEMENT = "SELECT id_media FROM Rappresented_by WHERE product_alias = ?";
 
     /**
      * The connection to the database
@@ -25,17 +27,17 @@ public class GetProductDatabase {
     /**
      * The product_alias of the product to be retrieved
      */
-    private final Product product;
+    private final String alias;
 
     /**
      * Creates a new object for getting a product.
      *
      * @param con     the connection to the database.
-     * @param product the product.
+     * @param alias the product.
      */
-    public GetProductDatabase(final Connection con, final Product product) {
+    public GetProductDatabase(final Connection con, final String alias) {
         this.con = con;
-        this.product = product;
+        this.alias = alias;
     }
 
     /**
@@ -52,7 +54,7 @@ public class GetProductDatabase {
 
         try {
             preparedStatement = con.prepareStatement(STATEMENT_GET_PRODUCT);
-            preparedStatement.setString(1, product.getAlias());
+            preparedStatement.setString(1, alias);
 
             resultSet = preparedStatement.executeQuery();
 
@@ -79,6 +81,26 @@ public class GetProductDatabase {
             }
         }
 
+        try {
+            preparedStatement = con.prepareStatement(STATEMENT);
+            preparedStatement.setString(1, alias);
+
+            resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                assert resultProduct != null;
+                resultProduct.getPicture().add(resultSet.getInt("id_media"));
+            }
+        } finally {
+            if (resultSet != null) {
+                resultSet.close();
+            }
+
+            if (preparedStatement != null) {
+                preparedStatement.close();
+            }
+        }
+        /*
         for (var item : product.getPicture()) {
             try {
                 preparedStatement = con.prepareStatement(STATEMENT_GET_PICTURE);
@@ -102,7 +124,7 @@ public class GetProductDatabase {
                 }
             }
         }
-
+        */
         con.close();
 
         return resultProduct;

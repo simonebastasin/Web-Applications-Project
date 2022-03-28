@@ -16,7 +16,7 @@ public class DeleteProductDatabase {
      */
     private static final String STATEMENT_DELETE_PRODUCT = "DELETE FROM product WHERE product_alias = ? RETURNING product_alias, name, brand, description, quantity, purchase_price, sale_price, category_name, evidence";
 
-    private static final String STATEMENT_DELETE_PICTURE = "DELETE FROM rappresented_by WHERE product_alias = ? AND id_media = ? RETURNING product_alias, id_media";
+    private static final String STATEMENT_DELETE_PICTURE = "DELETE FROM rappresented_by WHERE product_alias = ? RETURNING product_alias, id_media";
 
     /**
      * The connection to the database
@@ -56,25 +56,22 @@ public class DeleteProductDatabase {
         List<Integer> resultPicture = new ArrayList<>();
         Product resultProduct = null;
 
-        for (var item: product.getPicture()){
-            try {
-                preparedStatement = con.prepareStatement(STATEMENT_DELETE_PICTURE);
-                preparedStatement.setString(1,product.getAlias());
-                preparedStatement.setInt(2,item);
+        try {
+            preparedStatement = con.prepareStatement(STATEMENT_DELETE_PICTURE);
+            preparedStatement.setString(1,product.getAlias());
 
-                resultSet = preparedStatement.executeQuery();
+            resultSet = preparedStatement.executeQuery();
 
-                if(resultSet.next()){
-                    resultPicture.add(resultSet.getInt("id_media"));
-                }
-            } finally {
-                if (resultSet != null) {
-                    resultSet.close();
-                }
+            while (resultSet.next()){
+                resultPicture.add(resultSet.getInt("id_media"));
+            }
+        } finally {
+            if (resultSet != null) {
+                resultSet.close();
+            }
 
-                if (preparedStatement != null) {
-                    preparedStatement.close();
-                }
+            if (preparedStatement != null) {
+                preparedStatement.close();
             }
         }
 
