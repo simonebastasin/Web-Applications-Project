@@ -2,7 +2,7 @@ package it.unipd.dei.wa2122.wadteam.servlets;
 
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
-import jakarta.servlet.http.HttpServlet;
+
 import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
 import javax.sql.DataSource;
@@ -14,7 +14,7 @@ import javax.sql.DataSource;
  * @version HW1.00
  * @since 1.00
  */
-public abstract class AbstractDatabaseServlet extends HttpServlet {
+public abstract class AbstractDatabaseServlet extends AbstractLoggerServlet {
 
     /**
      * The connection pool to the database.
@@ -32,7 +32,7 @@ public abstract class AbstractDatabaseServlet extends HttpServlet {
      *          if an exception has occurred that interferes with the servlet's normal operation
      */
     public void init(ServletConfig config) throws ServletException {
-
+        super.init(config);
         // the JNDI lookup context
         InitialContext cxt;
 

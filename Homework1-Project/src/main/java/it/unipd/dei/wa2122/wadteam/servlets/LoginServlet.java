@@ -1,6 +1,7 @@
 package it.unipd.dei.wa2122.wadteam.servlets;
 
 import it.unipd.dei.wa2122.wadteam.dao.login.CheckUserCredential;
+import it.unipd.dei.wa2122.wadteam.resources.Message;
 import it.unipd.dei.wa2122.wadteam.resources.UserCredentials;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -24,13 +25,13 @@ public class LoginServlet extends AbstractDatabaseServlet {
         try {
             UserCredentials userCredentials = new CheckUserCredential(getDataSource().getConnection(), userCredentialsAttempt).getUserCredentials();
             if (userCredentials.getIdentification() != null) {
-                resp.getWriter().printf("login ok");
+                writeJson(resp, userCredentials.toJSON());
             } else {
-                resp.getWriter().printf("login bad");
+                writeError(resp, new Message("Error login", "EV01", "Username or password aren't correct"),HttpServletResponse.SC_UNAUTHORIZED);
             }
 
         } catch (SQLException e) {
-            resp.getWriter().printf("login bad");
+            writeError(resp, new Message("Error login", "EV02", e.getMessage()),HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 
         }
     }
