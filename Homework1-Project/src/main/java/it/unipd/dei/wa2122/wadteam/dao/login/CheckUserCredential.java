@@ -7,13 +7,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import static it.unipd.dei.wa2122.wadteam.resources.UserCredentials.*;
+
 public class CheckUserCredential {
 
     /**
      * The SQL statement to be executed
      */
-    private final String STATEMENT_EMPLOYEE = "Select * from employee where (username = ? AND password = sha384(?))";
-    private final String STATEMENT_CUSTOMER = "Select * from customer where (username = ? AND password = sha384(?)) OR (email = ? and password = sha384(?))";
+    private final String STATEMENT_EMPLOYEE = "Select * from employee where (username = ? AND password = sha384(?::bytea))";
+    private final String STATEMENT_CUSTOMER = "Select * from customer where (username = ? AND password = sha384(?::bytea)) OR (email = ? and password = sha384(?::bytea))";
 
     /**
      * The connection to the database
@@ -57,7 +59,7 @@ public class CheckUserCredential {
         UserCredentials resultUserCredentials = null;
 
         try {
-            if(userCredentials.getType()==UserCredentials.TypeUser.EMPLOYEE){
+            if(userCredentials.getType()== TypeUser.EMPLOYEE){
                 preparedStatement = con.prepareStatement(STATEMENT_EMPLOYEE);
                 preparedStatement.setString(1, userCredentials.getIdentification());
                 preparedStatement.setString(2, userCredentials.getPassword());
@@ -71,16 +73,19 @@ public class CheckUserCredential {
                 preparedStatement.setString(4, userCredentials.getPassword());
             }
 
+            String debug = preparedStatement.toString();
+
             resultSet = preparedStatement.executeQuery();
 
-            if (resultSet.next() && userCredentials.getType()==UserCredentials.TypeUser.EMPLOYEE) {
-                resultUserCredentials = new UserCredentials(resultSet.getString("username"), null,
-                        UserCredentials.TypeUser.EMPLOYEE,resultSet.getString("Role"));
-            }
-            else if (resultSet.next() && userCredentials.getType()==UserCredentials.TypeUser.CUSTOMER){
-                resultUserCredentials = new UserCredentials(resultSet.getString("username"), null,
-                        UserCredentials.TypeUser.CUSTOMER,null);
-
+            if (resultSet.next()) {
+                if(userCredentials.getType()== TypeUser.EMPLOYEE) {
+                    resultUserCredentials = new UserCredentials(resultSet.getString("username"), null,
+                        TypeUser.EMPLOYEE,resultSet.getString("Role"));
+                }
+                else if (userCredentials.getType()== TypeUser.CUSTOMER) {
+                    resultUserCredentials = new UserCredentials(resultSet.getString("username"), null,
+                            TypeUser.CUSTOMER, null);
+                }
             }
             else{
                 resultUserCredentials = new UserCredentials(null, null,

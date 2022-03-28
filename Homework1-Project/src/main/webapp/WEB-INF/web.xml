@@ -23,7 +23,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
-        <url-pattern>/login/</url-pattern>
+        <url-pattern>/login</url-pattern>
     </servlet-mapping>
 
     <resource-ref>
