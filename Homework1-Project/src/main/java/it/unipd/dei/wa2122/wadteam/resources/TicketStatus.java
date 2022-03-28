@@ -18,23 +18,23 @@ public class TicketStatus implements Resource{
         this.idTicket = idTicket;
     }
 
-    public int getId() {
+    public final int getId() {
         return id;
     }
 
-    public String getStatus() {
+    public final String getStatus() {
         return status;
     }
 
-    public String getDescription() {
+    public final String getDescription() {
         return description;
     }
 
-    public String getTsDate() {
+    public final String getTsDate() {
         return tsDate;
     }
 
-    public int getIdTicket() {
+    public final int getIdTicket() {
         return idTicket;
     }
 

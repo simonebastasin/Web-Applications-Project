@@ -17,19 +17,19 @@ public class Discount implements Resource {
         this.endDate = endDate;
     }
 
-    public Integer getId() {
+    public final Integer getId() {
         return id;
     }
 
-    public Integer getPercentage() {
+    public final Integer getPercentage() {
         return percentage;
     }
 
-    public String getStartDate() {
+    public final String getStartDate() {
         return startDate;
     }
 
-    public String getEndDate() {
+    public final String getEndDate() {
         return endDate;
     }
 
