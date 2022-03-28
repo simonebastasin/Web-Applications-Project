@@ -52,7 +52,7 @@ public class Customer implements Resource {
     }
     public static Customer fromJson(JSONObject jsonObject) {
         Integer id = jsonObject.getInt("id");
-        Integer name = jsonObject.getString("name");
+        String name = jsonObject.getString("name");
         String surname = jsonObject.getString("surname");
         String fiscal_code = jsonObject.getString("fiscal_code");
         String address = jsonObject.getString("address");

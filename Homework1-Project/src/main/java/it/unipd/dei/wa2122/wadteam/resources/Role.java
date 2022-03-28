@@ -11,7 +11,7 @@ public class Role implements Resource {
         this.description = description;
     }
 
-    public final Role(String name) {
+    public Role(String name) {
         this.name = name;
     }
 
