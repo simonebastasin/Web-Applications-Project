@@ -13,9 +13,9 @@ public class GetProductDatabase {
     /**
      * The SQL statements to be executed
      */
-    private static final String STATEMENT_GET_PRODUCT = "SELECT product_alias, name, brand, description, quantity, purchase_price, sale_price, category_name, evidence FROM product WHERE product_alias = ? RETURNING product_alias, name, brand, description, quantity, purchase_price, sale_price, category_name, evidence";
+    private static final String STATEMENT_GET_PRODUCT = "SELECT product_alias, name, brand, description, quantity, purchase_price, sale_price, category_name, evidence FROM product WHERE product_alias = ?";
 
-    private static final String STATEMENT_GET_PICTURE = "SELECT product_alias, id_media FROM rappresented_by WHERE product_alias = ? AND id_media = ? RETURNING product_alias, id_media";
+    private static final String STATEMENT_GET_PICTURE = "SELECT product_alias, id_media FROM rappresented_by WHERE product_alias = ? AND id_media = ?";
 
     /**
      * The connection to the database
@@ -57,7 +57,8 @@ public class GetProductDatabase {
             resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) {
-                resultProduct = new Product(resultSet.getString("product_alias"),
+                resultProduct = new Product(
+                        resultSet.getString("product_alias"),
                         resultSet.getString("name"),
                         resultSet.getString("brand"),
                         resultSet.getString("description"),
