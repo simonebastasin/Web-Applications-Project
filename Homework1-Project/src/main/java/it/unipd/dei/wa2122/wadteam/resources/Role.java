@@ -3,8 +3,8 @@ package it.unipd.dei.wa2122.wadteam.resources;
 import org.json.JSONObject;
 
 public class Role implements Resource {
-    String name;
-    String description;
+    private String name;
+    private String description;
 
     public Role(String name, String description) {
         this.name = name;
