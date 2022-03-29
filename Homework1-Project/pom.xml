@@ -48,9 +48,19 @@
         </plugins>
 
         <resources>
+            <!-- copy html resorces to the target directory -->
             <resource>
                 <targetPath>${basedir}/target/${project.artifactId}-${project.version}/html</targetPath>
                 <directory>${basedir}/src/main/webapp/html</directory>
+                <includes>
+                    <include>**/*.*</include>
+                </includes>
+            </resource>
+
+            <!-- copy jsp resorces to the target directory -->
+            <resource>
+                <targetPath>${basedir}/target/${project.artifactId}-${project.version}/jsp</targetPath>
+                <directory>${basedir}/src/main/webapp/jsp</directory>
                 <includes>
                     <include>**/*.*</include>
                 </includes>
