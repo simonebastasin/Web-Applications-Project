@@ -39,7 +39,7 @@ CREATE TYPE PaymentMethodOnline AS ENUM (
 
 -- Customer
 
-create table customer
+create table Customer
 (
     id           serial primary key,
     name         varchar(50)  not null,
