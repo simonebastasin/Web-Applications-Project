@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add employee</title>
+</head>
+<body>
+<form name = "addemployee" action = "../addemployee" method="post">
+    <input type ="text" name ="username" id ="username" required>
+    <label for = "username">Username</label>
+    <br>
+    <input type="text" name ="name" id="name" required>
+    <label for = "name">Name</label>
+    <br>
+    <input type ="text" name ="surname" id ="surname" required>
+    <label for = "surname">Surname</label>
+    <br>
+    <select name="role" id="role">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+    </select>
+    <label for = "role">Role      (TODO:retrive the list of possible role from the db and implement this page in jsp)</label>
+    <br>
+    <input type ="password" name ="password" id ="password" required>
+    <label for = "password">Password</label>
+    <br>
+
+    <input type ="submit" value = "login">
+
+</body>
+</html>
