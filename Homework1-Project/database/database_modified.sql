@@ -49,7 +49,7 @@ create table customer
     email        VARCHAR(254) not null,
     phone_number varchar(20),
     username     varchar(50)  not null,
-    password     bytea
+    password     bytea not null
 );
 
 -- Role
@@ -68,7 +68,7 @@ CREATE TABLE Employee (
                           name      varchar(50) not null,
                           surname   varchar(50) not null,
                           role_name varchar(25) not null,
-                          password  bytea,
+                          password  bytea not null,
 
                           FOREIGN KEY (Role_Name) REFERENCES Role(Name) ON UPDATE CASCADE
 );
