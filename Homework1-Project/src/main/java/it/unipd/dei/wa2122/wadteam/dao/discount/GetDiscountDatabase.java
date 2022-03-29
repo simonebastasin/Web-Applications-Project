@@ -7,14 +7,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class CreateDiscountDatabase {
+public final class GetDiscountDatabase {
 
     /**
      * The SQL statement to be executed
      */
-
-
-    private static final String STATEMENT = "INSERT INTO Discount (Percentage, Start_Date, End_Date) VALUES (?, ?, ?) RETURNING ID, Percentage, Start_Date, End_Date";
+    private static final String STATEMENT = "SELECT ID, Percentage, Start_Date, End_Date FROM Discount WHERE ID = ?";
 
     /**
      * The connection to the database
@@ -22,48 +20,51 @@ public class CreateDiscountDatabase {
     private final Connection con;
 
     /**
-     * The discount to be updated in the database
+     * The badge of the discount
      */
-    private final Discount discount;
+    private final int id;
 
     /**
-     * Creates a new object for update a discount.
+     * Creates a new object for reading a discount.
      *
-     * @param con             the connection to the database.
-     * @param discount the discount to be created in the database.
+     * @param con
+     *            the connection to the database.
+     * @param id
+     *            the username of the discount.
      */
-    public CreateDiscountDatabase(final Connection con, final Discount discount) {
+    public GetDiscountDatabase(final Connection con, final int id) {
         this.con = con;
-        this.discount = discount;
+        this.id = id;
     }
 
     /**
-     * Creates a discount in the database.
+     * Reads an discount from the database.
      *
      * @return the {@code Discount} object matching the badge.
-     * @throws SQLException if any error occurs while reading the discount .
+     *
+     * @throws SQLException
+     *             if any error occurs while reading the discount.
      */
-    public Discount createDiscount() throws SQLException {
+    public Discount getDiscount() throws SQLException {
 
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
 
-        // the create discount
+        // the read discount
         Discount resultDiscount = null;
 
         try {
             preparedStatement = con.prepareStatement(STATEMENT);
-            preparedStatement.setInt(1, resultDiscount.getPercentage());
-            preparedStatement.setString(2, resultDiscount.getStartDate());// TODO: impostare data e non stringa
-            preparedStatement.setString(3, resultDiscount.getEndDate());// TODO: impostare data e non stringa
+            preparedStatement.setInt(1, id);
 
             resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) {
-                resultDiscount = new Discount(resultSet.getInt("ID"),
+                resultDiscount = new Discount(resultSet.getInt("id"),
                         resultSet.getInt("Percentage"),
                         resultSet.getString("Start_Date"),
                         resultSet.getString("End_Date"));
+
             }
         } finally {
             if (resultSet != null) {
@@ -74,8 +75,8 @@ public class CreateDiscountDatabase {
                 preparedStatement.close();
             }
         }
-
         con.close();
+
         return resultDiscount;
     }
 }

@@ -102,8 +102,7 @@ public class DeleteDiscountDatabase {
             }
         }
 
-
-
+        con.close();
         return resultDiscount;
     }
 }

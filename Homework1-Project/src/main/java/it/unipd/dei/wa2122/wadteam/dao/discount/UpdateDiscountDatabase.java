@@ -1,5 +1,6 @@
 package it.unipd.dei.wa2122.wadteam.dao.discount;
 
+
 import it.unipd.dei.wa2122.wadteam.resources.Discount;
 
 import java.sql.Connection;
@@ -7,14 +8,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class CreateDiscountDatabase {
-
+public class UpdateDiscountDatabase {
     /**
      * The SQL statement to be executed
      */
-
-
-    private static final String STATEMENT = "INSERT INTO Discount (Percentage, Start_Date, End_Date) VALUES (?, ?, ?) RETURNING ID, Percentage, Start_Date, End_Date";
+    private static final String STATEMENT = "UPDATE Discount SET Percentage = ?, Start_Date = ?, End_Date = ? WHERE ID = ?";
 
     /**
      * The connection to the database
@@ -22,48 +20,54 @@ public class CreateDiscountDatabase {
     private final Connection con;
 
     /**
-     * The discount to be updated in the database
+     * The id of the discount
      */
     private final Discount discount;
 
     /**
-     * Creates a new object for update a discount.
+     * Update a discount item.
      *
-     * @param con             the connection to the database.
-     * @param discount the discount to be created in the database.
+     * @param con
+     *            the connection to the database.
+     * @param discount
+     *            the discount to be update.
      */
-    public CreateDiscountDatabase(final Connection con, final Discount discount) {
+    public UpdateDiscountDatabase(final Connection con, final Discount discount) {
         this.con = con;
         this.discount = discount;
     }
 
     /**
-     * Creates a discount in the database.
+     * Reads a discount from the database.
      *
      * @return the {@code Discount} object matching the badge.
-     * @throws SQLException if any error occurs while reading the discount .
+     *
+     * @throws SQLException
+     *             if any error occurs while reading the employee.
      */
-    public Discount createDiscount() throws SQLException {
+    public Discount updateDiscount() throws SQLException {
 
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
 
-        // the create discount
+        // the read discount
         Discount resultDiscount = null;
 
         try {
             preparedStatement = con.prepareStatement(STATEMENT);
-            preparedStatement.setInt(1, resultDiscount.getPercentage());
-            preparedStatement.setString(2, resultDiscount.getStartDate());// TODO: impostare data e non stringa
-            preparedStatement.setString(3, resultDiscount.getEndDate());// TODO: impostare data e non stringa
+            preparedStatement.setInt(2, discount.getPercentage());
+            preparedStatement.setString(3, discount.getEndDate());
+            preparedStatement.setString(4, discount.getEndDate());
 
             resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) {
-                resultDiscount = new Discount(resultSet.getInt("ID"),
+                resultDiscount = new Discount(
+                        resultSet.getInt("ID"),
                         resultSet.getInt("Percentage"),
                         resultSet.getString("Start_Date"),
-                        resultSet.getString("End_Date"));
+                        resultSet.getString("End_Date")
+                );
             }
         } finally {
             if (resultSet != null) {
@@ -75,7 +79,6 @@ public class CreateDiscountDatabase {
             }
         }
 
-        con.close();
         return resultDiscount;
     }
 }
