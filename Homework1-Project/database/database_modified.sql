@@ -48,7 +48,7 @@ create table customer
     address      varchar(50),
     email        VARCHAR(254) not null,
     phone_number varchar(20),
-    username     varchar(50)  not null,
+    username     varchar(50)  not null unique ,
     password     bytea not null
 );
 
