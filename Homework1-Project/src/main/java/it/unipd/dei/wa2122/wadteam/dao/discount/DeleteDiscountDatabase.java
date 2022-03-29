@@ -1,20 +1,24 @@
 package it.unipd.dei.wa2122.wadteam.dao.discount;
 
 import it.unipd.dei.wa2122.wadteam.resources.Discount;
+import it.unipd.dei.wa2122.wadteam.resources.Owns;
+import it.unipd.dei.wa2122.wadteam.resources.Product;
 
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
-public class DeleteDiscount {
+public class DeleteDiscountDatabase {
     /**
-     * The SQL statement to be executed
+     * The SQL statement to be executed. Cascade deletion is handled
      */
     private static final String STATEMENT_DELETE_DISCOUNT = "DELETE FROM Discount WHERE ID = ? RETURNING *";
-    //private static final String STATEMENT_DELETE_OWNS = "DELETE FROM Owns WHERE ID_Discount = ? AND Product_Alias = ? RETURNING ID_Discount,id_media";
-    //ToDO: Delete Discount from list OWNS
+    private static final String STATEMENT_DELETE_OWNS = "DELETE FROM Owns WHERE ID_Discount = ? RETURNING ID_Discount, Product_Alias";
+
 
     /**
      * The connection to the database
@@ -22,21 +26,21 @@ public class DeleteDiscount {
     private final Connection con;
 
     /**
-     * The id of the discount
+     * The discount of the discount
      */
-    private final int id;
+    private final Discount discount;
 
     /**
      * Creates a new object for deleting a discount.
      *
      * @param con
      *            the connection to the database.
-     * @param id
+     * @param discount
      *            the id of the discount.
      */
-    public DeleteDiscount(final Connection con, final int id) {
+    public DeleteDiscountDatabase(final Connection con, final Discount discount) {
         this.con = con;
-        this.id = id;
+        this.discount = discount;
     }
 
     /**
@@ -47,17 +51,38 @@ public class DeleteDiscount {
      * @throws SQLException
      *             if any error occurs while deleting the discount.
      */
-    public Discount getDiscount() throws SQLException {
-
+    public Discount deleteDiscount() throws SQLException {
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
 
-        // the deleted employee
+        // the deleted discount
+        List<String> resultProduct = new ArrayList<>();
         Discount resultDiscount = null;
+
+
+        try {
+            preparedStatement = con.prepareStatement(STATEMENT_DELETE_OWNS);
+            preparedStatement.setInt(1, discount.getId());
+
+            resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()){
+                resultProduct.add(resultSet.getString("product_alias"));
+            }
+
+        } finally {
+            if (resultSet != null) {
+                resultSet.close();
+            }
+
+            if (preparedStatement != null) {
+                preparedStatement.close();
+            }
+        }
 
         try {
             preparedStatement = con.prepareStatement(STATEMENT_DELETE_DISCOUNT);
-            preparedStatement.setInt(1, id);
+            preparedStatement.setInt(1, discount.getId());
 
             resultSet = preparedStatement.executeQuery();
 
@@ -76,6 +101,8 @@ public class DeleteDiscount {
                 preparedStatement.close();
             }
         }
+
+
 
         return resultDiscount;
     }
