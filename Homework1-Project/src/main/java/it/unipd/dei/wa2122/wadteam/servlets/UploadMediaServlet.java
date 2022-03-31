@@ -35,20 +35,20 @@ public class UploadMediaServlet extends AbstractDatabaseServlet {
 
         try {
 
-            Media media = new CreateMediaDatabase(getDataSource().getConnection(), mimetype, filename,bytes,mimetype.startsWith("image") ? scaleImage(bytes, THUMB_SIZE) : null).createMedia();
+            Media media = new CreateMediaDatabase(getDataSource().getConnection(), filename, mimetype, bytes,mimetype.startsWith("image") ? scaleImage(bytes, THUMB_SIZE) : null).createMedia();
 
             if(media != null) {
                 Message m = new Message("Upload completed successfully.",
                         media.getId());
-                writeJson(response, m.toJSON());
+                writeResource(request,response, "jsp/message.jsp",m);
             } else {
                 Message m = new Message("Upload not completed.", "EU01", "There was a problem with upload");
-                writeError(response, m, HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                writeError(request, response, m, HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             }
 
         } catch (SQLException e) {
             Message m = new Message("Upload not completed.", "EU01", "There was a problem with upload");
-            writeError(response, m, HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            writeError(request, response, m, HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 
         }
 

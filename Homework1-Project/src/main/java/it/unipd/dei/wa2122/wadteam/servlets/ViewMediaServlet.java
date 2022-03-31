@@ -5,6 +5,7 @@ import it.unipd.dei.wa2122.wadteam.dao.media.GetMediaDatabase;
 import it.unipd.dei.wa2122.wadteam.dao.media.ListMediaDatabase;
 import it.unipd.dei.wa2122.wadteam.resources.Media;
 import it.unipd.dei.wa2122.wadteam.resources.Message;
+import it.unipd.dei.wa2122.wadteam.resources.Resource;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import org.json.JSONArray;
@@ -26,12 +27,12 @@ public class ViewMediaServlet extends AbstractDatabaseServlet {
 
                 List<Media> mediaList = new ListMediaDatabase(connection).getMedia();
 
-                writeJson(response,  new JSONArray(mediaList.stream().map(Media::toJSON).toArray()));
+                writeResource(request,response, "/jsp/media.jsp", mediaList.toArray(Resource[]::new));
 
             } catch (SQLException e) {
                 Message m = new Message("Error media list", "EV04", e.getMessage());
 
-                writeError(response, m, HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                writeError(request, response, m, HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             }
         } else {
             boolean thumb = false;
@@ -54,23 +55,23 @@ public class ViewMediaServlet extends AbstractDatabaseServlet {
                     } else {
                         Message m = new Message("Media no content", "EV01", "Media not found");
 
-                        writeError(response, m, HttpServletResponse.SC_NO_CONTENT);
+                        writeError(request,response, m, HttpServletResponse.SC_NO_CONTENT);
                     }
 
                 } else {
                     Message m = new Message("Media not found", "EV01", "Media not found");
 
-                    writeError(response, m, HttpServletResponse.SC_NOT_FOUND);
+                    writeError(request, response, m, HttpServletResponse.SC_NOT_FOUND);
                 }
 
             } catch (SQLException e) {
                 Message m = new Message("Media error", "EV02", "There was a problem with find media: " + e.getMessage());
 
-                writeError(response, m, HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                writeError(request, response, m, HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             } catch (NumberFormatException e) {
                 Message m = new Message("Error media id", "EV03", "The media ID is not in the correct format");
 
-                writeError(response, m, HttpServletResponse.SC_BAD_REQUEST);
+                writeError(request, response, m, HttpServletResponse.SC_BAD_REQUEST);
             }
         }
     }
