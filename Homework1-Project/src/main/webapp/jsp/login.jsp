@@ -6,6 +6,8 @@
 <head>
     <title>Login</title>
 </head>
+<h1>Login</h1>
+<hr/>
 <body>
 <form method="POST" action="<c:url value="/login"/>">
     <input type="text" name ="identification" id="identification">
