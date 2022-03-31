@@ -15,7 +15,7 @@ public class CreateProductDatabase {
      */
     private static final String STATEMENT_INSERT_PRODUCT = "INSERT INTO product (product_alias, name, brand, description, quantity, purchase_price, sale_price, category_name, evidence) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING product_alias, name, brand, description, quantity, purchase_price, sale_price, category_name, evidence";
 
-    private static final String STATEMENT_INSERT_PICTURE = "INSERT INTO rappresented_by (product_alias, id_media) VALUES (? , ?)";
+    private static final String STATEMENT_INSERT_PICTURE = "INSERT INTO rappresented_by (product_alias, id_media) VALUES (? , ?) RETURINING product_alias, id_media";
     /**
      * The connection to the database
      */
