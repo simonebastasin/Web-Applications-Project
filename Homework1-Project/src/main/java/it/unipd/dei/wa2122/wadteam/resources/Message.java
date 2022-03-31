@@ -132,6 +132,9 @@ public class Message implements Resource {
         return isError;
     }
 
+    public Integer getResourceId() {
+        return resourceId;
+    }
 
     @Override
     public JSONObject toJSON() {

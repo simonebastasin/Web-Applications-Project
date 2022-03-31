@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%--@elvariable id="message" type="it.unipd.dei.wa2122.wadteam.resources.Message"--%>
 <c:choose>
     <c:when test="${message.error}">
         <ul>

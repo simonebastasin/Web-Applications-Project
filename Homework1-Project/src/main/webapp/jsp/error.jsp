@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%--@elvariable id="errorCode" type="Integer"--%>
 <html>
 <head>
     <title>Error <c:out value="${errorCode}"/></title>
