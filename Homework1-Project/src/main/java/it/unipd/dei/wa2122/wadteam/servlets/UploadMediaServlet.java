@@ -20,7 +20,7 @@ public class UploadMediaServlet extends AbstractDatabaseServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doGet(req, resp);
+        writeResource(req, resp, "jsp/upload.jsp");
     }
 
     @Override
