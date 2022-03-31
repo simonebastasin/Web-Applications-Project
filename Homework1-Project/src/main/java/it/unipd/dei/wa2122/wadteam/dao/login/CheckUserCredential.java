@@ -80,7 +80,7 @@ public class CheckUserCredential {
             if (resultSet.next()) {
                 if(userCredentials.getType()== TypeUser.EMPLOYEE) {
                     resultUserCredentials = new UserCredentials(resultSet.getString("username"), null,
-                        TypeUser.EMPLOYEE,resultSet.getString("Role"));
+                        TypeUser.EMPLOYEE,resultSet.getString("role_name"));
                 }
                 else if (userCredentials.getType()== TypeUser.CUSTOMER) {
                     resultUserCredentials = new UserCredentials(resultSet.getString("username"), null,
