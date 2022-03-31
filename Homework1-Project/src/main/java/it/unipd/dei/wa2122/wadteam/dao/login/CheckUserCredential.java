@@ -25,19 +25,19 @@ public class CheckUserCredential {
     /**
      * The object of the UserCredential
      */
-    private final UserCredentials userCredentials;
+    private final UserCredentials userCredential;
 
     /**
      * Creates a new object for reading user credential.
      *
      * @param con
      *            the connection to the database.
-     * @param userCredentials
+     * @param userCredential
      *            the user credentials that have to be checked.
      */
-    public CheckUserCredential(final Connection con, UserCredentials userCredentials) {
+    public CheckUserCredential(final Connection con, UserCredentials userCredential) {
         this.con = con;
-        this.userCredentials = userCredentials;
+        this.userCredential = userCredential;
     }
 
 
@@ -59,18 +59,18 @@ public class CheckUserCredential {
         UserCredentials resultUserCredentials = null;
 
         try {
-            if(userCredentials.getType()== TypeUser.EMPLOYEE){
+            if(userCredential.getType()== TypeUser.EMPLOYEE){
                 preparedStatement = con.prepareStatement(STATEMENT_EMPLOYEE);
-                preparedStatement.setString(1, userCredentials.getIdentification());
-                preparedStatement.setString(2, userCredentials.getPassword());
+                preparedStatement.setString(1, userCredential.getIdentification());
+                preparedStatement.setString(2, userCredential.getPassword());
 
             }
             else{
                 preparedStatement = con.prepareStatement(STATEMENT_CUSTOMER);
-                preparedStatement.setString(1, userCredentials.getIdentification());
-                preparedStatement.setString(2, userCredentials.getPassword());
-                preparedStatement.setString(3, userCredentials.getIdentification());
-                preparedStatement.setString(4, userCredentials.getPassword());
+                preparedStatement.setString(1, userCredential.getIdentification());
+                preparedStatement.setString(2, userCredential.getPassword());
+                preparedStatement.setString(3, userCredential.getIdentification());
+                preparedStatement.setString(4, userCredential.getPassword());
             }
 
             String debug = preparedStatement.toString();
@@ -78,11 +78,11 @@ public class CheckUserCredential {
             resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) {
-                if(userCredentials.getType()== TypeUser.EMPLOYEE) {
+                if(userCredential.getType()== TypeUser.EMPLOYEE) {
                     resultUserCredentials = new UserCredentials(resultSet.getString("username"), null,
                         TypeUser.EMPLOYEE,resultSet.getString("role_name"));
                 }
-                else if (userCredentials.getType()== TypeUser.CUSTOMER) {
+                else if (userCredential.getType()== TypeUser.CUSTOMER) {
                     resultUserCredentials = new UserCredentials(resultSet.getString("username"), null,
                             TypeUser.CUSTOMER, null);
                 }

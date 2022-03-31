@@ -11,7 +11,7 @@ public class GetMediaDatabase {
     /**
      * The SQL statement to be executed
      */
-    private static final String STATEMENT = "SELECT id, mimetype, filename FROM media WHERE id = ?";
+    private static final String STATEMENT = "SELECT id, filename, mimetype FROM media WHERE id = ?";
 
     /**
      * The connection to the database
@@ -60,8 +60,8 @@ public class GetMediaDatabase {
 
             if (resultSet.next()) {
                 resultMedia = new Media(resultSet.getInt("id"),
-                                        resultSet.getString("mimetype"),
-                                        resultSet.getString("filename")
+                                        resultSet.getString("filename"),
+                                        resultSet.getString("mimetype")
                                        );
 
             }

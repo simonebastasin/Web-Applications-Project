@@ -11,8 +11,8 @@ public class CreateMediaDatabase {
     /**
      * The SQL statement to be executed
      */
-    private static final String STATEMENT_WITH_THUMB = "INSERT INTO media (mimetype, filename, media, thumb) VALUES (?, ?, ?, ?) RETURNING id, mimetype, filename";
-    private static final String STATEMENT_WITHOUT_THUMB = "INSERT INTO media (mimetype, filename, media) VALUES (?, ?, ?) RETURNING id, mimetype, filename";
+    private static final String STATEMENT_WITH_THUMB = "INSERT INTO media (filename, mimetype, media, thumb) VALUES (?, ?, ?, ?) RETURNING id, filename, mimetype";
+    private static final String STATEMENT_WITHOUT_THUMB = "INSERT INTO media (filename, mimetype, media) VALUES (?, ?, ?) RETURNING id, filename, mimetype";
 
     /**
      * The connection to the database
@@ -38,7 +38,7 @@ public class CreateMediaDatabase {
      * @param media
      *            the media to be create.
      */
-    public CreateMediaDatabase(final Connection con, final String filename, final String mimetype, final byte[] media, final byte[] thumb) {
+    public CreateMediaDatabase(final Connection con, final String filename, final String mimetype,  final byte[] media, final byte[] thumb) {
         this.con = con;
         this.filename = filename;
         this.mimetype = mimetype;
@@ -61,8 +61,8 @@ public class CreateMediaDatabase {
 
             preparedStatement = con.prepareStatement(hasThumb ? STATEMENT_WITH_THUMB : STATEMENT_WITHOUT_THUMB);
 
-            preparedStatement.setString(1, mimetype);
-            preparedStatement.setString(2, filename);
+            preparedStatement.setString(1, filename);
+            preparedStatement.setString(2, mimetype);
             preparedStatement.setBytes(3, media);
             if(hasThumb) preparedStatement.setBytes(4, thumb);
 
@@ -70,8 +70,8 @@ public class CreateMediaDatabase {
 
             if (resultSet.next()) {
                 resultMedia = new Media(resultSet.getInt("id"),
-                        resultSet.getString("mimetype"),
-                        resultSet.getString("filename")
+                        resultSet.getString("filename"),
+                        resultSet.getString("mimetype")
                 );
             }
         } finally {

@@ -13,7 +13,7 @@ public class ListMediaDatabase {
     /**
      * The SQL statement to be executed
      */
-    private static final String STATEMENT = "SELECT * FROM media";
+    private static final String STATEMENT = "SELECT id, filename, mimetype FROM media";
 
     /**
      * The connection to the database
