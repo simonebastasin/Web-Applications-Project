@@ -7,7 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--@elvariable id="medias" type="java.util.List<Media>"--%>
+<%--@elvariable id="mediaList" type="java.util.List<Media>"--%>
 <html>
 <head>
     <title>View Media</title>
@@ -16,7 +16,7 @@
     <h1>List media</h1>
     <hr/>
     <ul>
-    <c:forEach var="item" items="${medias}">
+    <c:forEach var="item" items="${mediaList}">
         <li><img src="<c:url value="/viewmedia/${item.id}"/>" alt="${item.filename}" width="1024px"/></li>
     </c:forEach>
     </ul>

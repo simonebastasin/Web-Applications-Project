@@ -25,7 +25,7 @@ public class ProductCategory implements Resource{
         return jsonObject;
     }
 
-    public static ProductCategory fromJson(JSONObject jsonObject) {
+    public static ProductCategory fromJSON(JSONObject jsonObject) {
         String name = jsonObject.getString("name");
         String description = null;
         if(jsonObject.has("description"))

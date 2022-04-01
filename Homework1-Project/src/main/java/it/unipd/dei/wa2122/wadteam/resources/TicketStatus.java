@@ -49,7 +49,7 @@ public class TicketStatus implements Resource{
         return jsonObject;
     }
 
-    public static TicketStatus fromJson(JSONObject jsonObject) {
+    public static TicketStatus fromJSON(JSONObject jsonObject) {
         int id = jsonObject.getInt("id");
         String status = jsonObject.getString("status");
         String description = jsonObject.getString("status");

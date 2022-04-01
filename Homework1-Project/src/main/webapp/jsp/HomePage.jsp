@@ -7,8 +7,8 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--@elvariable id="products" type="java.util.List<Product>"--%>
-<%--@elvariable id="productCategorys" type="java.util.List<ProductCategory>"--%>
+<%--@elvariable id="productList" type="java.util.List<Product>"--%>
+<%--@elvariable id="productCategoryList" type="java.util.List<ProductCategory>"--%>
 
 <html>
 <head>
@@ -22,16 +22,16 @@
     <a href="<c:url value="/viewmedia/list"/>">View Media</a>
     <hr />
     <ul>
-    <c:forEach var="item" items="${products}">
+    <c:forEach var="item" items="${productList}">
         <li>Product name ${item.name} - price: ${item.sale} - category: ${item.category.name}<br>
-            <c:forEach var="i" items="${item.picture}">
-                <img src="<c:url value="/viewmedia/${i.id}"/>" alt="${i.filename}" width="100px"/>
+            <c:forEach var="picture" items="${item.pictures}">
+                <img src="<c:url value="/viewmedia/${picture.id}"/>" alt="${picture.filename}" width="100px"/>
             </c:forEach>
         </li>
     </c:forEach>
     </ul>
     <ul>
-        <c:forEach var="item" items="${productCategorys}">
+        <c:forEach var="item" items="${productCategoryList}">
             <li>${item.name}</li>
         </c:forEach>
     </ul>

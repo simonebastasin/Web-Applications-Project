@@ -45,9 +45,9 @@ public class OnlineInvoice implements Resource {
         return jsonObject;
     }
 
-    public static OnlineInvoice fromJson(JSONObject jsonObject) {
+    public static OnlineInvoice fromJSON(JSONObject jsonObject) {
         int id = jsonObject.getInt("id");
-        OnlineOrder idOrder = OnlineOrder.fromJson(jsonObject.getJSONObject("idOrder"));
+        OnlineOrder idOrder = OnlineOrder.fromJSON(jsonObject.getJSONObject("idOrder"));
         String transactionId = jsonObject.getString("transactionId");
         PaymentMethodOnlineEnum paymentType = PaymentMethodOnlineEnum.valueOf(jsonObject.getString("paymentType"));
         String oiDate = jsonObject.getString("oiDate");

@@ -57,11 +57,11 @@ public class Employee implements Resource {
         return jsonObject;
     }
 
-    public static Employee fromJson(JSONObject jsonObject) {
+    public static Employee fromJSON(JSONObject jsonObject) {
         String username = jsonObject.getString("username");
         String name = jsonObject.getString("name");
         String surname = jsonObject.getString("surname");
-        Role role = Role.fromJson(jsonObject.getJSONObject("role"));
+        Role role = Role.fromJSON(jsonObject.getJSONObject("role"));
         String password = null;
         if(jsonObject.has("password"))
             password = jsonObject.getString("password");

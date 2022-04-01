@@ -40,7 +40,7 @@ public class Role implements Resource {
         return jsonObject;
     }
 
-    public static Role fromJson(JSONObject jsonObject) {
+    public static Role fromJSON(JSONObject jsonObject) {
         String role = jsonObject.getString("role");
         String description = null;
         if(jsonObject.has("description"))

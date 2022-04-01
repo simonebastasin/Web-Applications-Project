@@ -34,4 +34,8 @@ public class Media implements Resource {
         jsonObject.put("mimetype", mimetype);
         return  jsonObject;
     }
+
+    public static Media fromJSON(JSONObject jsonObject) {
+        return new Media(jsonObject.getInt("id"), jsonObject.getString("filename"), jsonObject.getString("mimetype"));
+    }
 }

@@ -50,7 +50,7 @@ public class Customer implements Resource {
         jsonObject.put("password", password);
         return jsonObject;
     }
-    public static Customer fromJson(JSONObject jsonObject) {
+    public static Customer fromJSON(JSONObject jsonObject) {
         Integer id = jsonObject.getInt("id");
         String name = jsonObject.getString("name");
         String surname = jsonObject.getString("surname");

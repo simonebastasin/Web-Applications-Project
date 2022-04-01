@@ -42,7 +42,7 @@ public class AssistantTicket implements Resource {
         return jsonObject;
     }
 
-    public static AssistantTicket fromJson(JSONObject jsonObject) {
+    public static AssistantTicket fromJSON(JSONObject jsonObject) {
         int id = jsonObject.getInt("id");
         String description = jsonObject.getString("description");
         int idCustomer = jsonObject.getInt("idCustomer");

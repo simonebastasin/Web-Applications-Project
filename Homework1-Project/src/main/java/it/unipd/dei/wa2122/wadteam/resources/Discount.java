@@ -1,7 +1,5 @@
 package it.unipd.dei.wa2122.wadteam.resources;
 
-import java.util.Date;
-
 import org.json.JSONObject;
 
 public class Discount implements Resource {
@@ -43,7 +41,7 @@ public class Discount implements Resource {
         return jsonObject;
     }
 
-    public static Discount fromJson(JSONObject jsonObject) {
+    public static Discount fromJSON(JSONObject jsonObject) {
         Integer id = jsonObject.getInt("id");
         Integer percentage = jsonObject.getInt("percentage");
         String startDate = jsonObject.getString("startDate");

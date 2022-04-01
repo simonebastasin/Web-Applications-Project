@@ -1,6 +1,8 @@
 package it.unipd.dei.wa2122.wadteam.resources;
 
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class Product implements Resource {
@@ -61,7 +63,7 @@ public class Product implements Resource {
         jsonObject.put("purchase", purchase);
         jsonObject.put("sale", sale);
         jsonObject.put("quantity", quantity);
-        jsonObject.put("category", category);
+        jsonObject.put("category", category.toJSON());
         jsonObject.put("evidence", evidence);
         if(pictures != null)
             jsonObject.put("pictures", pictures);
@@ -69,7 +71,7 @@ public class Product implements Resource {
         return jsonObject;
     }
 
-    public static Product fromJson(JSONObject jsonObject) {
+    public static Product fromJSON(JSONObject jsonObject) {
         String alias = jsonObject.getString("alias");
         String name = jsonObject.getString("name");
         String brand = jsonObject.getString("brand");
@@ -79,10 +81,13 @@ public class Product implements Resource {
         double purchase = jsonObject.getDouble("purchase");
         double sale = jsonObject.getDouble("sale");
         int quantity = jsonObject.getInt("quantity");
-        List<Integer> pictures = null;
-        if(jsonObject.has("picture"))
-            pictures = (List<Integer>) jsonObject.get("pictures");
-        ProductCategory category = ProductCategory.fromJson(jsonObject.getJSONObject("category"));
+        List<Integer> pictures = new ArrayList<>();
+        if(jsonObject.has("picture")){
+            for(var item :  jsonObject.getJSONArray("pictures")) {
+                pictures.add((Integer) item);
+            }
+        }
+        ProductCategory category = ProductCategory.fromJSON(jsonObject.getJSONObject("category"));
         boolean evidence = jsonObject.getBoolean("evidence");
 
         return new Product(alias, name, brand, description, quantity, purchase, sale, category, evidence, pictures);

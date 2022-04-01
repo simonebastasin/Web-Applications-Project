@@ -27,6 +27,10 @@ public enum OrderStatusEnum implements Resource {
         return  jsonObject;
     }
 
+    public static OrderStatusEnum fromJSON(JSONObject jsonObject) {
+        return fromString(jsonObject.getString("orderStatus"));
+    }
+
     public static OrderStatusEnum fromString(String text) {
         for (OrderStatusEnum item : OrderStatusEnum.values()) {
             if (item.text.equals(text)) {

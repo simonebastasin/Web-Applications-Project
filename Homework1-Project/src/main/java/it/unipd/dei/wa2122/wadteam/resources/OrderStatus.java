@@ -48,7 +48,7 @@ public class OrderStatus implements Resource {
         return jsonObject;
     }
 
-    public static OrderStatus fromJson(JSONObject jsonObject) {
+    public static OrderStatus fromJSON(JSONObject jsonObject) {
         Integer id = jsonObject.getInt("id");
         OrderStatusEnum status = OrderStatusEnum.valueOf(jsonObject.getString("status"));
         String description = jsonObject.getString("description");

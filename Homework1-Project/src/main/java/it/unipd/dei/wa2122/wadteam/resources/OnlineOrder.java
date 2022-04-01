@@ -1,6 +1,5 @@
 package it.unipd.dei.wa2122.wadteam.resources;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -48,20 +47,20 @@ public class OnlineOrder implements Resource{
         jsonObject.put("idOrder", idOrder);
         jsonObject.put("idCustomer", idCustomer);
         jsonObject.put("ooDateTime", ooDateTime);
-        jsonObject.put("products", products);
+        jsonObject.put("products", products.stream().map(Product::toJSON).toArray());
         jsonObject.put("status", status.toJSON());
         return jsonObject;
     }
 
-    public static OnlineOrder fromJson(JSONObject jsonObject){
+    public static OnlineOrder fromJSON(JSONObject jsonObject){
         Integer idOrder = jsonObject.getInt("idOrder");
         Integer idCustomer = jsonObject.getInt("idCustomer");
         String ooDateTime = jsonObject.getString("ooDateTime");
         List<Product> products = new ArrayList<>();
         for(var item : jsonObject.getJSONArray("products")) {
-            products.add(Product.fromJson((JSONObject) item));
+            products.add(Product.fromJSON((JSONObject) item));
         }
-        OrderStatus status = OrderStatus.fromJson(jsonObject.getJSONObject("status"));
+        OrderStatus status = OrderStatus.fromJSON(jsonObject.getJSONObject("status"));
         return new OnlineOrder(idOrder,idCustomer,ooDateTime,products,status);
     }
 }

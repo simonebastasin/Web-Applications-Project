@@ -18,8 +18,6 @@ package it.unipd.dei.wa2122.wadteam.resources;
 
 import org.json.JSONObject;
 
-import java.io.*;
-
 /**
  * Represents a message or an error message.
  *

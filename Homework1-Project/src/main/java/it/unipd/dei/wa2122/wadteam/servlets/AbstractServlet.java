@@ -58,13 +58,13 @@ public abstract class AbstractServlet extends HttpServlet {
             JSONObject jsonObject = new JSONObject();
 
             if(resourcesMap.entrySet().size() == 1) {
-                writeJson(response, new JSONArray(Arrays.stream(resources).map(Resource::toJSON)));
+                writeJson(response, new JSONArray(Arrays.stream(resources).map(Resource::toJSON).toArray()));
             } else {
                 for (var item : resourcesMap.entrySet()) {
                     if (item.getValue().size() == 1) {
                         jsonObject.put(decapitalize(item.getKey().getSimpleName()), item.getValue().get(0).toJSON());
                     } else {
-                        jsonObject.put(decapitalize(item.getKey().getSimpleName()) + "s", new JSONArray(item.getValue().stream().map(Resource::toJSON)));
+                        jsonObject.put(decapitalize(item.getKey().getSimpleName()) + "List", new JSONArray(item.getValue().stream().map(Resource::toJSON).toArray()));
                     }
                 }
                 writeJson(response, jsonObject);
@@ -74,7 +74,7 @@ public abstract class AbstractServlet extends HttpServlet {
                 if (item.getValue().size() == 1) {
                     request.setAttribute(decapitalize(item.getKey().getSimpleName()), item.getValue().get(0));
                 } else {
-                    request.setAttribute(decapitalize(item.getKey().getSimpleName()) + "s", item.getValue());
+                    request.setAttribute(decapitalize(item.getKey().getSimpleName()) + "List", item.getValue());
                 }
             }
             request.getRequestDispatcher(jsp).forward(request, response);

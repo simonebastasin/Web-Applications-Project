@@ -27,7 +27,7 @@ public class Owns implements Resource{
         return jsonObject;
     }
 
-    public static Owns fromJson(JSONObject jsonObject) {
+    public static Owns fromJSON(JSONObject jsonObject) {
         String product = jsonObject.getString("Product_Alias");
         Integer discount  = jsonObject.getInt("ID_Discount");
         return new Owns(discount, product);

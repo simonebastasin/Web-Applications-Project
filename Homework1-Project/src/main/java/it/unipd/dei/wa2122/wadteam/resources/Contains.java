@@ -33,9 +33,9 @@ public class Contains implements Resource {
         return jsonObject;
     }
 
-    public static Contains fromJson(JSONObject jsonObject) {
-        OnlineOrder idOrder = OnlineOrder.fromJson(jsonObject.getJSONObject("idOrder"));
-        Product productAlias = Product.fromJson(jsonObject.getJSONObject("productAlias"));
+    public static Contains fromJSON(JSONObject jsonObject) {
+        OnlineOrder idOrder = OnlineOrder.fromJSON(jsonObject.getJSONObject("idOrder"));
+        Product productAlias = Product.fromJSON(jsonObject.getJSONObject("productAlias"));
         int quantity = jsonObject.getInt("quantity");
         double priceApplied = jsonObject.getDouble("priceApplied");
         return new Contains(idOrder, productAlias, quantity, priceApplied);
