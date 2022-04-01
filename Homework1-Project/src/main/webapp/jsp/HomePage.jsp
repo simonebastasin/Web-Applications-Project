@@ -8,6 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--@elvariable id="products" type="java.util.List<Product>"--%>
+<%--@elvariable id="productCategorys" type="java.util.List<ProductCategory>"--%>
 
 <html>
 <head>
@@ -28,6 +29,11 @@
             </c:forEach>
         </li>
     </c:forEach>
+    </ul>
+    <ul>
+        <c:forEach var="item" items="${productCategorys}">
+            <li>${item.name}</li>
+        </c:forEach>
     </ul>
 
 </body>

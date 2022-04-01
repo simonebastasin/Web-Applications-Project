@@ -3,9 +3,8 @@ package it.unipd.dei.wa2122.wadteam.servlets;
 import it.unipd.dei.wa2122.wadteam.dao.onlineOrder.GetOnlineOrderByCustomerDatabase;
 import it.unipd.dei.wa2122.wadteam.dao.product.GetProductDatabase;
 import it.unipd.dei.wa2122.wadteam.dao.product.ListProductDatabase;
-import it.unipd.dei.wa2122.wadteam.resources.Message;
-import it.unipd.dei.wa2122.wadteam.resources.OnlineOrder;
-import it.unipd.dei.wa2122.wadteam.resources.Product;
+import it.unipd.dei.wa2122.wadteam.dao.productCategory.ListProductCategoryDatabase;
+import it.unipd.dei.wa2122.wadteam.resources.*;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -13,6 +12,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class HomePageServlet extends AbstractDatabaseServlet{
@@ -21,10 +21,18 @@ public class HomePageServlet extends AbstractDatabaseServlet{
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
         List<Product> products = null;
+        List<ProductCategory> categories = null;
 
         try{
             products = new ListProductDatabase(getDataSource().getConnection()).getProduct();
-            writeResource(req, res, "jsp/HomePage.jsp", products.toArray(Product[]::new));
+
+            categories = new ListProductCategoryDatabase(getDataSource().getConnection()).getProductCategory();
+
+            List<Resource> lists = new ArrayList<>();
+            lists.addAll(products);
+            lists.addAll(categories);
+
+            writeResource(req, res, "jsp/HomePage.jsp", lists.toArray(categories.toArray(Resource[]::new)));
 
         }catch (SQLException e) {
             Message m = new Message("Couldn't execute the query", "EU01", e.getMessage());
