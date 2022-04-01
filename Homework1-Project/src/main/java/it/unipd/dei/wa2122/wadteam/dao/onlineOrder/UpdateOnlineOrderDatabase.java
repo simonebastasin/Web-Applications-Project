@@ -11,7 +11,7 @@ public class UpdateOnlineOrderDatabase {
     /**
      * The SQL statement to be executed
      */
-    private static final String STATEMENT = "UPDATE OnlineOrder SET oo_datetime = ?, id_customer = ? WHERE id = ?";
+    private static final String STATEMENT = "UPDATE Order_Status SET status = ? WHERE id_order = ?";
 
     /**
      * The connection to the database
@@ -44,32 +44,19 @@ public class UpdateOnlineOrderDatabase {
      * @throws SQLException
      *             if any error occurs while deleting the onlineOrder.
      */
-    public OnlineOrder updateOnlineOrder() throws SQLException {
+    public int updateOnlineOrder() throws SQLException {
 
         PreparedStatement pstmt = null;
-        ResultSet rs = null;
-
-        OnlineOrder resultOnlineOrder = null;
+        int rs;
 
         try {
             pstmt = con.prepareStatement(STATEMENT);
-            pstmt.setString(1, onlineOrder.getOoDateTime());
-            pstmt.setInt(2, onlineOrder.getIdCustomer());
-            pstmt.setInt(3, onlineOrder.getIdOrder());
+            pstmt.setString(1, onlineOrder.getStatus().getStatus().toString());
+            pstmt.setInt(2, onlineOrder.getIdOrder());
 
-            rs = pstmt.executeQuery();
+            rs = pstmt.executeUpdate();
 
-            if (rs.next()) {
-                resultOnlineOrder = new OnlineOrder(
-                        rs.getInt("id"),
-                        rs.getInt("id_customer"),
-                        rs.getString("oo_datetime")
-                );
-            }
         } finally {
-            if (rs != null) {
-                rs.close();
-            }
 
             if (pstmt != null) {
                 pstmt.close();
@@ -79,6 +66,6 @@ public class UpdateOnlineOrderDatabase {
 
         }
 
-        return resultOnlineOrder;
+        return rs;
     }
 }

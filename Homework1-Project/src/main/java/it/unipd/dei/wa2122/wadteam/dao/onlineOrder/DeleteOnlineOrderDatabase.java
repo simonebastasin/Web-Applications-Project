@@ -11,7 +11,7 @@ public class DeleteOnlineOrderDatabase {
     /**
      * The SQL statement to be executed
      */
-    private static final String STATEMENT = "DELETE FROM Online_Order WHERE id = ? RETURNING id, oo_datetime, id_customer";
+    private static final String STATEMENT = "UPDATE Order_Status SET status = 'Cancelled' WHERE id_order = ?";
 
     /**
      * The connection to the database
@@ -44,31 +44,18 @@ public class DeleteOnlineOrderDatabase {
      * @throws SQLException
      *             if any error occurs while deleting the onlineOrder.
      */
-    public OnlineOrder deleteOnlineOrder() throws SQLException {
+    public int deleteOnlineOrder() throws SQLException {
 
         PreparedStatement pstmt = null;
-        ResultSet rs = null;
-
-        // the deleted onlineOrder
-        OnlineOrder resultOnlineOrder = null;
+        int result;
 
         try {
             pstmt = con.prepareStatement(STATEMENT);
             pstmt.setInt(1, id);
 
-            rs = pstmt.executeQuery();
+            result = pstmt.executeUpdate();
 
-            if (rs.next()) {
-                resultOnlineOrder = new OnlineOrder(
-                        rs.getInt("id"),
-                        rs.getInt("id_customer"),
-                        rs.getString("oo_datetime")
-                );
-            }
         } finally {
-            if (rs != null) {
-                rs.close();
-            }
 
             if (pstmt != null) {
                 pstmt.close();
@@ -78,6 +65,6 @@ public class DeleteOnlineOrderDatabase {
 
         }
 
-        return resultOnlineOrder;
+        return result;
     }
 }

@@ -1,10 +1,8 @@
 package it.unipd.dei.wa2122.wadteam.servlets;
 
-import it.unipd.dei.wa2122.wadteam.dao.onlineOrder.SearchOnlineOrderByCustomerDatabase;
-import it.unipd.dei.wa2122.wadteam.dao.product.GetProductDatabase;
+import it.unipd.dei.wa2122.wadteam.dao.onlineOrder.GetOnlineOrderByCustomerDatabase;
 import it.unipd.dei.wa2122.wadteam.resources.Message;
 import it.unipd.dei.wa2122.wadteam.resources.OnlineOrder;
-import it.unipd.dei.wa2122.wadteam.resources.Product;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -50,13 +48,13 @@ public class OrderListServlet extends AbstractDatabaseServlet{
         try{
             id = Integer.parseInt(req.getParameter("identification"));
 
-            list = new SearchOnlineOrderByCustomerDatabase(getDataSource().getConnection(), id).searchOnlineOrderByCustomer();
+            list = new GetOnlineOrderByCustomerDatabase(getDataSource().getConnection(), id).getOnlineOrderByCustomer();
             if(list != null)  {
                 for(int i=0;i<list.size();i++)
                 {writeJson(res, list.get(i).toJSON());}
             }
         } catch (SQLException e) {
-            Message m = new Message("Could'nt find the order", "EU01", "There was a problem with the search");
+            Message m = new Message("Could'nt find the order", "EU01", e.getMessage());
             writeError(req, res, m, HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         }
     }

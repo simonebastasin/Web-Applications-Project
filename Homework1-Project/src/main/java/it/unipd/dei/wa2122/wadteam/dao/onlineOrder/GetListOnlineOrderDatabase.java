@@ -1,6 +1,8 @@
 package it.unipd.dei.wa2122.wadteam.dao.onlineOrder;
 
 import it.unipd.dei.wa2122.wadteam.resources.OnlineOrder;
+import it.unipd.dei.wa2122.wadteam.resources.OrderStatus;
+import it.unipd.dei.wa2122.wadteam.resources.OrderStatusEnum;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,44 +11,37 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SearchOnlineOrderByCustomerDatabase {
+public class GetListOnlineOrderDatabase {
     /**
      * The SQL statement to be executed
      */
-    private static final String STATEMENT = "SELECT id, oo_datetime, id_customer FROM Online_Order WHERE id_customer = ?";
-
+    private static final String STATEMENT = "SELECT s.id_order, o.oo_datetime, o.id_customer, s.status, s.description, s.os_datetime, s.id as id_Status " +
+            "FROM Online_Order as o " +
+            "LEFT JOIN Order_Status as s on o.id = s.id_order";
     /**
      * The connection to the database
      */
     private final Connection con;
 
     /**
-     * The id of the onlineOrder
-     */
-    private final Integer id_customer;
-
-    /**
      * Creates a new object for getting an onlineOrder.
      *
      * @param con
      *            the connection to the database.
-     * @param id_customer
-     *            the id of the customer.
      */
-    public SearchOnlineOrderByCustomerDatabase(final Connection con, final Integer id_customer) {
+    public GetListOnlineOrderDatabase(final Connection con) {
         this.con = con;
-        this.id_customer = id_customer;
     }
 
     /**
      * Gets an onlineOrder from the database.
      *
-     * @return the {@code OnlineOrder} object matching the id of the customer.
+     * @return the {@code OnlineOrder} object matching the id.
      *
      * @throws SQLException
      *             if any error occurs while deleting the onlineOrder.
      */
-    public List<OnlineOrder> searchOnlineOrderByCustomer() throws SQLException {
+    public List<OnlineOrder> getListOnlineOrder() throws SQLException {
 
         PreparedStatement pstmt = null;
         ResultSet rs = null;
@@ -55,15 +50,22 @@ public class SearchOnlineOrderByCustomerDatabase {
 
         try {
             pstmt = con.prepareStatement(STATEMENT);
-            pstmt.setInt(1, id_customer);
 
             rs = pstmt.executeQuery();
 
-            while (rs.next()) {
+            if (rs.next()) {
+                OrderStatus orderStatusResult = new OrderStatus(rs.getInt("id_Status"),
+                        OrderStatusEnum.fromString(rs.getString("status")),
+                        rs.getString("description"),
+                        rs.getInt("id_order"),
+                        rs.getString("os_datetime"));
+
+
                 orders.add(new OnlineOrder(
-                        rs.getInt("id"),
+                        rs.getInt("id_order"),
                         rs.getInt("id_customer"),
-                        rs.getString("oo_datetime")
+                        rs.getString("oo_datetime"),
+                        null, orderStatusResult
                 ));
             }
         } finally {
@@ -76,7 +78,6 @@ public class SearchOnlineOrderByCustomerDatabase {
             }
 
             con.close();
-
         }
 
         return orders;
