@@ -40,6 +40,7 @@ public class OrderListServlet extends AbstractDatabaseServlet{
         out.close();
     }
 
+    @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse res) throws  ServletException, IOException {
 
         List<OnlineOrder> list = null;
@@ -54,7 +55,7 @@ public class OrderListServlet extends AbstractDatabaseServlet{
                 {writeJson(res, list.get(i).toJSON());}
             }
         } catch (SQLException e) {
-            Message m = new Message("Could'nt find the order", "EU01", e.getMessage());
+            Message m = new Message("Couldn't find the order", "EU01", e.getMessage());
             writeError(req, res, m, HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         }
     }
