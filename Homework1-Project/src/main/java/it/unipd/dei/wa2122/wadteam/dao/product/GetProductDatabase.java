@@ -89,7 +89,7 @@ public class GetProductDatabase {
 
             while (resultSet.next()) {
                 assert resultProduct != null;
-                resultProduct.getPicture().add(resultSet.getInt("id_media"));
+                resultProduct.getPictures().add(resultSet.getInt("id_media"));
             }
         } finally {
             if (resultSet != null) {

@@ -82,7 +82,7 @@ public class ListProductDatabase {
                 resultSet = preparedStatement.executeQuery();
 
                 while (resultSet.next()) {
-                    product.getPicture().add(resultSet.getInt("id_media"));
+                    product.getPictures().add(resultSet.getInt("id_media"));
                 }
             } finally {
                 if (resultSet != null) {

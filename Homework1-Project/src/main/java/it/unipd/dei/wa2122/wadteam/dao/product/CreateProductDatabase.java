@@ -91,7 +91,7 @@ public class CreateProductDatabase {
             }
         }
 
-        for(var item : product.getPicture()) {
+        for(var item : product.getPictures()) {
             try {
                 preparedStatement = con.prepareStatement(STATEMENT_INSERT_PICTURE);
                 preparedStatement.setString(1, product.getAlias());
@@ -101,7 +101,7 @@ public class CreateProductDatabase {
 
                 if (resultSet.next()) {
                     assert resultProduct != null;
-                    resultProduct.getPicture().add(resultSet.getInt("id_media"));
+                    resultProduct.getPictures().add(resultSet.getInt("id_media"));
                 }
             } finally {
                 if (resultSet != null) {

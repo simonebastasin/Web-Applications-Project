@@ -14,9 +14,9 @@ public class Product implements Resource {
     private final int quantity;
     private final ProductCategory category;
     private final boolean evidence;
-    private final List<Integer> picture;   // This is a list of ID_Medias
+    private final List<Integer> pictures;   // This is a list of ID_Medias
 
-    public Product(String alias, String name, String brand, String description, int quantity, double purchase, double sale, ProductCategory category, boolean evidence, List<Integer> picture)
+    public Product(String alias, String name, String brand, String description, int quantity, double purchase, double sale, ProductCategory category, boolean evidence, List<Integer> pictures)
     {
         this.alias = alias;
         this.name = name;
@@ -27,7 +27,7 @@ public class Product implements Resource {
         this.sale = sale;
         this.category = category;
         this.evidence = evidence;
-        this.picture = picture;
+        this.pictures = pictures;
     }
 
     public final String getAlias() { return alias; }
@@ -48,7 +48,7 @@ public class Product implements Resource {
 
     public final boolean getEvidence() { return evidence; }
 
-    public final List<Integer> getPicture() { return picture; }
+    public final List<Integer> getPictures() { return pictures; }
 
     public JSONObject toJSON() {
         JSONObject jsonObject = new JSONObject();
@@ -63,8 +63,8 @@ public class Product implements Resource {
         jsonObject.put("quantity", quantity);
         jsonObject.put("category", category);
         jsonObject.put("evidence", evidence);
-        if(picture != null)
-            jsonObject.put("picture", picture);
+        if(pictures != null)
+            jsonObject.put("pictures", pictures);
 
         return jsonObject;
     }
@@ -79,12 +79,12 @@ public class Product implements Resource {
         double purchase = jsonObject.getDouble("purchase");
         double sale = jsonObject.getDouble("sale");
         int quantity = jsonObject.getInt("quantity");
-        List<Integer> picture = null;
+        List<Integer> pictures = null;
         if(jsonObject.has("picture"))
-            picture = (List<Integer>) jsonObject.get("picture");
+            pictures = (List<Integer>) jsonObject.get("pictures");
         ProductCategory category = ProductCategory.fromJson(jsonObject.getJSONObject("category"));
         boolean evidence = jsonObject.getBoolean("evidence");
 
-        return new Product(alias, name, brand, description, quantity, purchase, sale, category, evidence, picture);
+        return new Product(alias, name, brand, description, quantity, purchase, sale, category, evidence, pictures);
     }
 }

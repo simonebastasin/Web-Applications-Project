@@ -89,7 +89,7 @@ public class UpdateProductDatabase {
             }
         }
 
-        for(var item : product.getPicture()) {
+        for(var item : product.getPictures()) {
             try {
                 preparedStatement = con.prepareStatement(STATEMENT_UPDATE_PICTURE);
                 preparedStatement.setString(1, product.getAlias());
@@ -100,7 +100,7 @@ public class UpdateProductDatabase {
 
                 if (resultSet.next()) {
                     assert resultProduct != null;
-                    resultProduct.getPicture().add(resultSet.getInt("id_media"));
+                    resultProduct.getPictures().add(resultSet.getInt("id_media"));
                 }
             } finally {
                 if (resultSet != null) {
