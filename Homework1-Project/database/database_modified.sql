@@ -19,6 +19,7 @@ CREATE TYPE OrderStatus AS ENUM (
     'Payment accepted',
     'Shipped',
     'Delivered'
+    'Canceled'	
     );
 
 CREATE TYPE TicketStatus AS ENUM (
@@ -46,7 +47,7 @@ create table Customer
     surname      varchar(50)  not null,
     fiscal_code  varchar(16)  not null,
     address      varchar(50),
-    email        VARCHAR(254) not null,
+    email        VARCHAR(254) not null unique,
     phone_number varchar(20),
     username     varchar(50)  not null unique ,
     password     bytea not null
@@ -182,7 +183,7 @@ CREATE TABLE Order_Status(
                              Status      OrderStatus NOT NULL,
                              Description TEXT,
                              OS_DateTime TIMESTAMP NOT NULL DEFAULT localtimestamp,
-                             ID_Order    INTEGER NOT NULL,
+                             ID_Order    INTEGER NOT NULL unique,
 
                              FOREIGN KEY (ID_Order) REFERENCES Online_Order(ID) ON UPDATE CASCADE
 );
