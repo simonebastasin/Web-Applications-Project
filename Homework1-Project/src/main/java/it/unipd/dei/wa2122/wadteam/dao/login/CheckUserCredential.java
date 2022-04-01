@@ -1,13 +1,13 @@
 package it.unipd.dei.wa2122.wadteam.dao.login;
 
-import it.unipd.dei.wa2122.wadteam.resources.UserCredentials;
+import it.unipd.dei.wa2122.wadteam.resources.UserCredential;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import static it.unipd.dei.wa2122.wadteam.resources.UserCredentials.*;
+import static it.unipd.dei.wa2122.wadteam.resources.UserCredential.*;
 
 public class CheckUserCredential {
 
@@ -25,7 +25,7 @@ public class CheckUserCredential {
     /**
      * The object of the UserCredential
      */
-    private final UserCredentials userCredential;
+    private final UserCredential userCredential;
 
     /**
      * Creates a new object for reading user credential.
@@ -35,7 +35,7 @@ public class CheckUserCredential {
      * @param userCredential
      *            the user credentials that have to be checked.
      */
-    public CheckUserCredential(final Connection con, UserCredentials userCredential) {
+    public CheckUserCredential(final Connection con, UserCredential userCredential) {
         this.con = con;
         this.userCredential = userCredential;
     }
@@ -50,13 +50,13 @@ public class CheckUserCredential {
      * @throws SQLException
      *             if any error occurs while reading the employee.
      */
-    public UserCredentials getUserCredentials() throws SQLException {
+    public UserCredential getUserCredentials() throws SQLException {
 
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
 
         // the read employee
-        UserCredentials resultUserCredentials = null;
+        UserCredential resultUserCredential = null;
 
         try {
             if(userCredential.getType()== TypeUser.EMPLOYEE){
@@ -79,16 +79,16 @@ public class CheckUserCredential {
 
             if (resultSet.next()) {
                 if(userCredential.getType()== TypeUser.EMPLOYEE) {
-                    resultUserCredentials = new UserCredentials(resultSet.getString("username"), null,
+                    resultUserCredential = new UserCredential(resultSet.getString("username"), null,
                         TypeUser.EMPLOYEE,resultSet.getString("role_name"));
                 }
                 else if (userCredential.getType()== TypeUser.CUSTOMER) {
-                    resultUserCredentials = new UserCredentials(resultSet.getString("username"), null,
+                    resultUserCredential = new UserCredential(resultSet.getString("username"), null,
                             TypeUser.CUSTOMER, null);
                 }
             }
             else{
-                resultUserCredentials = new UserCredentials(null, null,
+                resultUserCredential = new UserCredential(null, null,
                         null,null);
 
             }
@@ -103,6 +103,6 @@ public class CheckUserCredential {
             }
         }
 
-        return resultUserCredentials;
+        return resultUserCredential;
     }
 }

@@ -2,14 +2,14 @@ package it.unipd.dei.wa2122.wadteam.resources;
 
 import org.json.JSONObject;
 
-public class UserCredentials implements Resource {
+public class UserCredential implements Resource {
 
     private final String identification;
     private final String password;
     private final TypeUser type;
     private final String role;
 
-     public UserCredentials(String identification, String password, TypeUser type, String role) {
+     public UserCredential(String identification, String password, TypeUser type, String role) {
         this.identification = identification;
         this.role=role;
         this.password = password;

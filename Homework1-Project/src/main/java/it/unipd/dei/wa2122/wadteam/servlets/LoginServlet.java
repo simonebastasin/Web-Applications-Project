@@ -2,7 +2,7 @@ package it.unipd.dei.wa2122.wadteam.servlets;
 
 import it.unipd.dei.wa2122.wadteam.dao.login.CheckUserCredential;
 import it.unipd.dei.wa2122.wadteam.resources.Message;
-import it.unipd.dei.wa2122.wadteam.resources.UserCredentials;
+import it.unipd.dei.wa2122.wadteam.resources.UserCredential;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Locale;
 
-import static it.unipd.dei.wa2122.wadteam.resources.UserCredentials.*;
+import static it.unipd.dei.wa2122.wadteam.resources.UserCredential.*;
 
 public class LoginServlet extends AbstractDatabaseServlet {
 
@@ -24,9 +24,9 @@ public class LoginServlet extends AbstractDatabaseServlet {
         String password = req.getParameter("password");
         TypeUser type = TypeUser.valueOf(req.getParameter("usertype").toUpperCase(Locale.ROOT));
 
-        UserCredentials userCredentialAttempt = new UserCredentials(identification, password, type, null);
+        UserCredential userCredentialAttempt = new UserCredential(identification, password, type, null);
         try {
-            UserCredentials userCredential = new CheckUserCredential(getDataSource().getConnection(), userCredentialAttempt).getUserCredentials();
+            UserCredential userCredential = new CheckUserCredential(getDataSource().getConnection(), userCredentialAttempt).getUserCredentials();
             if (userCredential.getIdentification() != null) {
                 writeResource(req, resp, "jsp/user.jsp", userCredential);
             } else {
