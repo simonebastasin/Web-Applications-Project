@@ -6,7 +6,7 @@ public class OrderStatus implements Resource {
     private final int id;
     private final OrderStatusEnum status;
     private final String description;
-    private final String osDateTime;
+    private final String osDateTime; //TODO: date type
     private final int idOrder;
 
     public OrderStatus(int id, OrderStatusEnum status, String description, String osDateTime, int idOrder) {
