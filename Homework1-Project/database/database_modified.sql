@@ -1,6 +1,6 @@
     -- User creations
     
-    CREATE USER postgres WITH ENCRYPTED PASSWORD '1234';
+    CREATE USER postgres WITH ENCRYPTED PASSWORD 'PSW';
     
     -- Database creations
     
@@ -19,7 +19,7 @@ CREATE TYPE OrderStatus AS ENUM (
     'Payment accepted',
     'Shipped',
     'Delivered'
-    'Canceled'	
+    'Cancelled'
     );
 
 CREATE TYPE TicketStatus AS ENUM (
