@@ -8,7 +8,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--@elvariable id="assistantTicket" type="it.unipd.dei.wa2122.wadteam.resources.AssistantTicket"--%>
-<%--@elvariable id="ticketStatusList" type="List<it.unipd.dei.wa2122.wadteam.resources.TicketStatus>"--%>
 
 <html>
 <head>
@@ -20,7 +19,7 @@
     <p>${assistantTicket.idCustomer}</p>
     <p>${assistantTicket.productAlias}</p>
 
-    <c:forEach var="item" items="${ticketStatusList}">
+    <c:forEach var="item" items="${assistantTicket.ticketStatusList}">
         <p>${item.status}</p>
         <p>${item.description}</p>
         <p>${item.tsDate}</p>

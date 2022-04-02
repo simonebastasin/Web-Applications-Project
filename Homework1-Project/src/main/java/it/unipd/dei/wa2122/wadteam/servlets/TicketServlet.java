@@ -28,12 +28,8 @@ public class TicketServlet extends AbstractDatabaseServlet {
 
         try {
             AssistantTicket assistantTicket = new GetAssistantTicketDatabase(getDataSource().getConnection(), id).getAssistantTicket();
-            List<TicketStatus> listTicket = new ListTicketStatusDatabase(getDataSource().getConnection(), id).getTicketStatus();
-            List<Resource> resources = new ArrayList<Resource>();
-            resources.add(assistantTicket);
-            resources.addAll(listTicket);
 
-            writeResource(req, resp, "jsp/ticket.jsp",resources.toArray(Resource[]::new));
+            writeResource(req, resp, "jsp/ticket.jsp",assistantTicket);
         } catch (SQLException e) {
             writeError(req, resp, new Message("Error get", "ET02", e.getMessage()), HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         }
