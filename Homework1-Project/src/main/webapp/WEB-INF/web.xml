@@ -68,6 +68,15 @@
         <url-pattern>/ticket</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>AssistantTicketListAdmin</servlet-name>
+        <servlet-class>it.unipd.dei.wa2122.wadteam.servlets.AssistantTicketAdminServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AssistantTicketListAdmin</servlet-name>
+        <url-pattern>/AssistantTicketAdmin</url-pattern>
+    </servlet-mapping>
+
     <resource-ref>
         <description>Connection pool to the database</description>
         <res-ref-name>jdbc/electromechanics_shop</res-ref-name>
