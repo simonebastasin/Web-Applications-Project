@@ -1,6 +1,8 @@
 package it.unipd.dei.wa2122.wadteam.dao.assistantTicket;
 
 import it.unipd.dei.wa2122.wadteam.resources.AssistantTicket;
+import it.unipd.dei.wa2122.wadteam.resources.Product;
+import it.unipd.dei.wa2122.wadteam.resources.TicketStatus;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -14,6 +16,7 @@ public class ListAssistantTicketDatabase {
      * The SQL statement to be executed
      */
     private static final String STATEMENT = "SELECT * FROM Assistance_Ticket";
+    private static final String STATEMENT_STATUS = "SELECT id, status, description, ts_date, id_ticket FROM ticket_status WHERE id_ticket = ?";
 
     /**
      * The connection to the database
@@ -42,6 +45,7 @@ public class ListAssistantTicketDatabase {
 
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
+        ResultSet resultTicket= null;
 
         // the current employee
         AssistantTicket resultAssistantTicketItem = null;
@@ -54,12 +58,32 @@ public class ListAssistantTicketDatabase {
 
             while (resultSet.next()) {
 
-                resultAssistantTicketItem = new AssistantTicket(resultSet.getInt("ID"),
-                        resultSet.getString("Description"),
-                        resultSet.getInt("ID_Customer"),
-                        resultSet.getString("Product_Alias"), null);
-                resultAssistantTicket.add(resultAssistantTicketItem);
+                int id = resultSet.getInt("ID");
+                String description = resultSet.getString("Description");
+                int idCustomer = resultSet.getInt("ID_Customer");
+                String productAlias =  resultSet.getString("Product_Alias");
+
+                preparedStatement.close();
+
+                preparedStatement = con.prepareStatement(STATEMENT_STATUS);
+                preparedStatement.setInt(1, id);
+                resultTicket = preparedStatement.executeQuery();
+                List<TicketStatus> resultTicketStatus = new ArrayList<>();
+
+                while (resultSet.next()) {
+
+                    var resultTicketStatusItem = new TicketStatus(resultTicket.getInt("id"),
+                            resultTicket.getString("status"),
+                            resultTicket.getString("description"),
+                            resultTicket.getString("ts_Date"),
+                            resultTicket.getInt("idTicket")
+                    );
+                    resultTicketStatus.add(resultTicketStatusItem);
+                }
+                resultAssistantTicket.add(new AssistantTicket(id,description,idCustomer, productAlias,resultTicketStatus));
+
             }
+
         } finally {
             if (resultSet != null) {
                 resultSet.close();
