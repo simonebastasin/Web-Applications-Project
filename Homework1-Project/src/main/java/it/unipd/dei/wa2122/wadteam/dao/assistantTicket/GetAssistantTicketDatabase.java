@@ -13,7 +13,7 @@ public class GetAssistantTicketDatabase {
         /**
          * The SQL statement to be executed
          */
-        private static final String STATEMENT = "SELECT ID, Description, ID_Custumer, Product_Alias FROM Assistance_Ticket WHERE ID = ?";
+        private static final String STATEMENT = "SELECT ID, Description, ID_Customer, Product_Alias FROM Assistance_Ticket WHERE ID = ?";
 
         /**
          * The connection to the database
