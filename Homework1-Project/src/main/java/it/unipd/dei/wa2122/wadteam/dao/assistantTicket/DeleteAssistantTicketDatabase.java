@@ -63,7 +63,7 @@ public class DeleteAssistantTicketDatabase {
                     resultAssistantiTicket = new AssistantTicket(resultSet.getInt("ID"),
                             resultSet.getString("Description"),
                             resultSet.getInt("ID_Customer"),
-                            resultSet.getString("Product_Alias"));
+                            resultSet.getString("Product_Alias"), null);
                 }
             } finally {
                 if (resultSet != null) {
