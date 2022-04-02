@@ -5,7 +5,7 @@ import org.json.JSONObject;
 public enum OrderStatusEnum implements Resource {
     OPEN("Open"), PAYMENT_ACCEPTED("Payment Accepted"), SHIPPED("Shipped"), DELIVERED("Delivered"), CANCELLED("Cancelled");
 
-    final String text;
+    final String text; //user-friendly text
 
     OrderStatusEnum(final String text) {
         this.text = text;
@@ -23,7 +23,7 @@ public enum OrderStatusEnum implements Resource {
     @Override
     public JSONObject toJSON() {
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("orderStatus", text);
+        jsonObject.put("orderStatus", text); //put user-friendly text in json
         return  jsonObject;
     }
 
@@ -31,10 +31,15 @@ public enum OrderStatusEnum implements Resource {
         return fromString(jsonObject.getString("orderStatus"));
     }
 
+    /**
+     * return the OrderStatusEnum instance associated to the user-friendly text provided
+     * @param text
+     * @return the OrderStatusEnum instance associated to the user-friendly text provided
+     */
     public static OrderStatusEnum fromString(String text) {
         for (OrderStatusEnum item : OrderStatusEnum.values()) {
             if (item.text.equals(text)) {
-                return item;
+                return item; //return the OrderStatusEnum instance associated to the user-friendly text provided
             }
         }
         return null;
