@@ -41,6 +41,14 @@ public class OnlineOrder implements Resource{
         return status;
     }
 
+    public Double getTotalPrice() {
+        double totalPrize = 0;
+        for (Product product : products){
+            totalPrize+=product.getSale()*product.getQuantity();
+        }
+        return totalPrize;
+    }
+
     @Override
     public JSONObject toJSON() {
         JSONObject jsonObject = new JSONObject();

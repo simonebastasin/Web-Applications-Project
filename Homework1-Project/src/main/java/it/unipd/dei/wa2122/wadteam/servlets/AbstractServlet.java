@@ -50,6 +50,10 @@ public abstract class AbstractServlet extends HttpServlet {
     }
 
     public void writeResource(HttpServletRequest request, HttpServletResponse response, String jsp, Resource... resources) throws IOException, ServletException {
+        writeResource(request,response, jsp, false, resources);
+    }
+
+    public void writeResource(HttpServletRequest request, HttpServletResponse response, String jsp, boolean showOneItemAsArray, Resource... resources) throws IOException, ServletException {
         var resourcesMap = Arrays.stream(resources).collect(groupingBy(Resource::getClass));
 
         if(request.getHeader("Accept").contains("application/json")) {
@@ -61,7 +65,7 @@ public abstract class AbstractServlet extends HttpServlet {
                 writeJson(response, new JSONArray(Arrays.stream(resources).map(Resource::toJSON).toArray()));
             } else {
                 for (var item : resourcesMap.entrySet()) {
-                    if (item.getValue().size() == 1) {
+                    if (showOneItemAsArray && item.getValue().size() == 1) {
                         jsonObject.put(decapitalize(item.getKey().getSimpleName()), item.getValue().get(0).toJSON());
                     } else {
                         jsonObject.put(decapitalize(item.getKey().getSimpleName()) + "List", new JSONArray(item.getValue().stream().map(Resource::toJSON).toArray()));
@@ -71,7 +75,7 @@ public abstract class AbstractServlet extends HttpServlet {
             }
         } else {
             for (var item : resourcesMap.entrySet()) {
-                if (item.getValue().size() == 1) {
+                if (showOneItemAsArray && item.getValue().size() == 1) {
                     request.setAttribute(decapitalize(item.getKey().getSimpleName()), item.getValue().get(0));
                 } else {
                     request.setAttribute(decapitalize(item.getKey().getSimpleName()) + "List", item.getValue());

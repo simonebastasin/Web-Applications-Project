@@ -101,8 +101,8 @@ public class GetOnlineOrderByCustomerDatabase {
                             null,
                             null,
                             innerrs.getInt("quantity"),
+                            0.0,
                             innerrs.getDouble("price_applied"),
-                            0,
                             null,
                             false,
                             null

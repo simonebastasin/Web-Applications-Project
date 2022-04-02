@@ -99,10 +99,17 @@ public class CreateOnlineOrderDatabase {
 
                     innerrs2 = pstmt.executeQuery();
 
-                    Product resultProductItem = new Product(innerrs2.getString("product_alias"),null,
-                            null,null,
-                            innerrs2.getInt("quantity"),0.0,
-                            innerrs2.getInt("price_applied"), null,false,null);
+                    Product resultProductItem = new Product(
+                            innerrs2.getString("product_alias"),
+                            null,
+                            null,
+                            null,
+                            innerrs2.getInt("quantity"),
+                            0.0,
+                            innerrs2.getInt("price_applied"),
+                            null,
+                            false,
+                            null);
 
                     resultProductList.add(resultProductItem);
                 }
