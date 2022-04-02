@@ -13,7 +13,7 @@ public class ListAssistantTicketDatabase {
     /**
      * The SQL statement to be executed
      */
-    private static final String STATEMENT = "SELECT * FROM Assistant_Ticket";
+    private static final String STATEMENT = "SELECT * FROM Assistance_Ticket";
 
     /**
      * The connection to the database

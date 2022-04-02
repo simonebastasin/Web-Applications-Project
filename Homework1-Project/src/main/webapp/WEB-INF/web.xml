@@ -60,13 +60,14 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>HomePageServlet</servlet-name>
-        <servlet-class>it.unipd.dei.wa2122.wadteam.servlets.HomePageServlet</servlet-class>
+        <servlet-name>TicketServlet</servlet-name>
+        <servlet-class>it.unipd.dei.wa2122.wadteam.servlets.TicketServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>HomePageServlet</servlet-name>
-        <url-pattern>/homepage</url-pattern>
+        <servlet-name>TicketServlet</servlet-name>
+        <url-pattern>/ticket</url-pattern>
     </servlet-mapping>
+
     <resource-ref>
         <description>Connection pool to the database</description>
         <res-ref-name>jdbc/electromechanics_shop</res-ref-name>
