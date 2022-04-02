@@ -54,7 +54,7 @@ public class UpdateAssistantTicketDatabase {
 
         try {
             preparedStatement = con.prepareStatement(STATEMENT);
-            preparedStatement.setString(2, assistantTicket.getDescription());
+            preparedStatement.setString(2, assistantTicket.getDescription()); //TODO: check param numbers
             preparedStatement.setInt(3, assistantTicket.getIdCustomer());
             preparedStatement.setString(4, assistantTicket.getProductAlias());
 
