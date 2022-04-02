@@ -1,12 +1,15 @@
 package it.unipd.dei.wa2122.wadteam.dao.assistantTicket;
 
 import it.unipd.dei.wa2122.wadteam.resources.AssistantTicket;
+import it.unipd.dei.wa2122.wadteam.resources.TicketStatus;
 
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class GetAssistantTicketDatabase {
 
@@ -61,10 +64,37 @@ public class GetAssistantTicketDatabase {
                 resultSet = preparedStatement.executeQuery();
 
                 if (resultSet.next()) {
-                    resultAssistantTicket = new AssistantTicket(resultSet.getInt("ID"),
-                            resultSet.getString("Description"),
-                            resultSet.getInt("ID_Customer"),
-                            resultSet.getString("Product_Alias"), null);
+
+                    int id = resultSet.getInt("ID");
+                    String description = resultSet.getString("Description");
+                    int idCustomer = resultSet.getInt("ID_Customer");
+                    String productAlias =  resultSet.getString("Product_Alias");
+
+                    resultSet.close();
+                    preparedStatement.close();
+
+                    preparedStatement = con.prepareStatement(STATEMENT_STATUS);
+                    preparedStatement.setInt(1, id);
+
+                    resultSet = preparedStatement.executeQuery();
+
+                    List<TicketStatus> resultTicketStatus = new ArrayList<>();
+
+                    while (resultSet.next()) {
+
+                        var resultTicketStatusItem = new TicketStatus(resultSet.getInt("id"),
+                                resultSet.getString("status"),
+                                resultSet.getString("description"),
+                                resultSet.getString("ts_Date"),
+                                resultSet.getInt("idTicket")
+                        );
+                        resultTicketStatus.add(resultTicketStatusItem);
+                    }
+
+                    resultAssistantTicket = new AssistantTicket(id,
+                            description,
+                            idCustomer,
+                            productAlias, resultTicketStatus);
                 }
             } finally {
                 if (resultSet != null) {
