@@ -13,7 +13,7 @@ import java.util.List;
 public class GetProductByCategoryDatabase {
     private static final String STATEMENT = "SELECT product_alias, name, brand, description, purchase_price, sale_price, quantity, category_name, evidence FROM product WHERE category_name = ?";
 
-    private static final String STATEMENT_GET_PICTURE = "SELECT id_media FROM Rappresented_by WHERE product_alias = ?";
+    private static final String STATEMENT_GET_PICTURE = "SELECT id_media FROM Represented_by WHERE product_alias = ?";
 
     /**
      * The connection to the database
@@ -98,6 +98,8 @@ public class GetProductByCategoryDatabase {
                 }
             }
         }
+
+        con.close();
 
         return resultProduct;
     }

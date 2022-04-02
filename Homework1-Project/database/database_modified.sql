@@ -216,9 +216,9 @@ create table media
 );
 
 
---rappresented_by
+--Represented_by
 
-create table Reppresented_by
+create table Represented_by
 (
     product_alias varchar(13) not null,
     id_media      integer     not null,

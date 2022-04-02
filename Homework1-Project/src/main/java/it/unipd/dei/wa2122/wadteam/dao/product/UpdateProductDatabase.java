@@ -15,7 +15,7 @@ public class UpdateProductDatabase {
      */
     private static final String STATEMENT_UPDATE_PRODUCT = "UPDATE product SET name = ?, brand = ?, description = ?, quantity = ?, purchase_price = ?, sale_price = ?, category_name = ?, evidence = ? WHERE product_alias = ?";
 
-    private static final String STATEMENT_UPDATE_PICTURE = "UPDATE rappresented_by SET product_alias = ?, id_media = ? WHERE product_alias = ?";
+    private static final String STATEMENT_UPDATE_PICTURE = "UPDATE Represented_by SET product_alias = ?, id_media = ? WHERE product_alias = ?";
     /**
      * The connection to the database
      */

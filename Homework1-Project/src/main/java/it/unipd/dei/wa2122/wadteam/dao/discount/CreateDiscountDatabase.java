@@ -2,6 +2,7 @@ package it.unipd.dei.wa2122.wadteam.dao.discount;
 
 import it.unipd.dei.wa2122.wadteam.resources.DateTime;
 import it.unipd.dei.wa2122.wadteam.resources.Discount;
+import it.unipd.dei.wa2122.wadteam.resources.Product;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,6 +18,7 @@ public class CreateDiscountDatabase {
 
 
     private static final String STATEMENT = "INSERT INTO Discount (Percentage, Start_Date, End_Date) VALUES (?, ?, ?) RETURNING ID, Percentage, Start_Date, End_Date";
+
 
     /**
      * The connection to the database
@@ -48,7 +50,10 @@ public class CreateDiscountDatabase {
     public Discount createDiscount() throws SQLException {
 
         PreparedStatement preparedStatement = null;
+        PreparedStatement innerPreparedStatement = null;
+
         ResultSet resultSet = null;
+        ResultSet innerrResultSet = null;
 
         // the create discount
         Discount resultDiscount = null;
@@ -62,6 +67,9 @@ public class CreateDiscountDatabase {
             resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) {
+
+
+                /*************/
                 resultDiscount = new Discount(resultSet.getInt("ID"),
                         resultSet.getInt("Percentage"),
                         new DateTime(resultSet.getObject("Start_Date", LocalDateTime.class)),

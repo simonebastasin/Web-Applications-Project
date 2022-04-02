@@ -25,13 +25,13 @@ public abstract class AbstractServlet extends HttpServlet {
 
 
     public void writeError(HttpServletRequest request, HttpServletResponse response, Message message, int errorCode) throws IOException, ServletException {
+        response.setStatus(errorCode);
         if(request.getHeader("Accept").contains("application/json")) {
-            response.setStatus(errorCode);
             writeJson(response, message.toJSON());
         } else {
             request.setAttribute("errorCode", errorCode);
             request.setAttribute("message", message);
-            request.getRequestDispatcher("jsp/error.jsp").forward(request, response);
+            request.getRequestDispatcher("/jsp/error.jsp").forward(request, response);
 
         }
 

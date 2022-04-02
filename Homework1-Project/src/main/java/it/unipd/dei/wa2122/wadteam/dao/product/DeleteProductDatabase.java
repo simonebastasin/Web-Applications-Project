@@ -16,7 +16,7 @@ public class DeleteProductDatabase {
      */
     private static final String STATEMENT_DELETE_PRODUCT = "DELETE FROM product WHERE product_alias = ? RETURNING product_alias, name, brand, description, quantity, purchase_price, sale_price, category_name, evidence";
 
-    private static final String STATEMENT_DELETE_PICTURE = "DELETE FROM rappresented_by WHERE product_alias = ? RETURNING product_alias, id_media";
+    private static final String STATEMENT_DELETE_PICTURE = "DELETE FROM Represented_by WHERE product_alias = ? RETURNING product_alias, id_media";
 
     /**
      * The connection to the database
