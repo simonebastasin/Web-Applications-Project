@@ -65,7 +65,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>HomePageServlet</servlet-name>
-        <url-pattern>7homepage</url-pattern>
+        <url-pattern>/homepage</url-pattern>
     </servlet-mapping>
 
     <servlet>
