@@ -14,7 +14,7 @@ public class TicketServlet extends AbstractDatabaseServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        writeResource(req, resp, "jsp/getEmployee.jsp");
+        writeResource(req, resp, "/jsp/getEmployee.jsp");
     }
 
     @Override
@@ -24,7 +24,7 @@ public class TicketServlet extends AbstractDatabaseServlet {
         try {
             AssistanceTicket assistantTicket = new GetAssistanceTicketDatabase(getDataSource().getConnection(), id).getAssistanceTicket();
 
-            writeResource(req, resp, "jsp/ticket.jsp",assistantTicket);
+            writeResource(req, resp, "/jsp/ticket.jsp",assistantTicket);
         } catch (SQLException e) {
             writeError(req, resp, new Message("Error get", "ET02", e.getMessage()), HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         }

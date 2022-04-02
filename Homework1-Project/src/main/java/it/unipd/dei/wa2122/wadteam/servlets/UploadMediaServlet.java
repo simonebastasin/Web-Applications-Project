@@ -20,7 +20,7 @@ public class UploadMediaServlet extends AbstractDatabaseServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        writeResource(req, resp, "jsp/upload.jsp");
+        writeResource(req, resp, "/jsp/upload.jsp");
     }
 
     @Override
@@ -40,7 +40,7 @@ public class UploadMediaServlet extends AbstractDatabaseServlet {
             if(media != null) {
                 Message m = new Message("Upload completed successfully.",
                         media.getId());
-                writeResource(request,response, "jsp/message.jsp",m);
+                writeResource(request,response, "/jsp/message.jsp",m);
             } else {
                 Message m = new Message("Upload not completed.", "EU01", "There was a problem with upload");
                 writeError(request, response, m, HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
