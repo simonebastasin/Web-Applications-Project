@@ -42,22 +42,22 @@ public class Customer implements Resource {
         jsonObject.put("id", id);
         jsonObject.put("name", name);
         jsonObject.put("surname", surname);
-        jsonObject.put("fiscal_code", fiscal_code);
+        jsonObject.put("fiscalCode", fiscal_code);
         jsonObject.put("address", address);
         jsonObject.put("email", email);
-        jsonObject.put("phone_number", phone_number);
+        jsonObject.put("phoneNumber", phone_number);
         jsonObject.put("username", username);
         jsonObject.put("password", password);
         return jsonObject;
     }
     public static Customer fromJSON(JSONObject jsonObject) {
-        Integer id = jsonObject.getInt("id");
+        int id = jsonObject.getInt("id");
         String name = jsonObject.getString("name");
         String surname = jsonObject.getString("surname");
-        String fiscal_code = jsonObject.getString("fiscal_code");
+        String fiscal_code = jsonObject.getString("fiscalCode");
         String address = jsonObject.getString("address");
         String email=jsonObject.getString("email");
-        String phone_number=jsonObject.getString("phone_number");
+        String phone_number=jsonObject.getString("phoneNumber");
         String username=jsonObject.getString("username");
         String password=jsonObject.getString("password");
         return new Customer(id,name,surname,fiscal_code,address,email,phone_number,username,password);
