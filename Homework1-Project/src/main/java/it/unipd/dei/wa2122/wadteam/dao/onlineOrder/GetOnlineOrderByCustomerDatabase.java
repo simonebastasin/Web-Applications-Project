@@ -78,8 +78,8 @@ public class GetOnlineOrderByCustomerDatabase {
                 orderStatusResult = new OrderStatus(rs.getInt("id_Status"),
                         OrderStatusEnum.fromString(rs.getString("status")),
                         rs.getString("description"),
-                        rs.getInt("id_order"),
-                        rs.getString("os_datetime"));
+                        rs.getString("os_datetime"),
+                        rs.getInt("id_order"));
 
                 products = new ArrayList<>();
 

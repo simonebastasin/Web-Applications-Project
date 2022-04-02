@@ -86,8 +86,8 @@ public class CreateOnlineOrderDatabase {
                 OrderStatus resultOrderStatus = new OrderStatus(innerrs.getInt("id"),
                         OrderStatusEnum.fromString(innerrs.getString("Status")),
                         innerrs.getString("description"),
-                        innerrs.getInt("id_order"),
-                        innerrs.getString("os_datetime")
+                        innerrs.getString("os_datetime"),
+                        innerrs.getInt("id_order")
                         );
 
                 List<Product> resultProductList = new ArrayList<>();

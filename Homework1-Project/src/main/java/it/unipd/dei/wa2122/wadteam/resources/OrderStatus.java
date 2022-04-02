@@ -6,15 +6,15 @@ public class OrderStatus implements Resource {
     private final int id;
     private final OrderStatusEnum status;
     private final String description;
-    private final int idOrder;
     private final String osDateTime;
+    private final int idOrder;
 
-    public OrderStatus(int id, OrderStatusEnum status, String description, int idOrder, String osDateTime) {
+    public OrderStatus(int id, OrderStatusEnum status, String description, String osDateTime, int idOrder) {
         this.id = id;
         this.status = status;
         this.description = description;
-        this.idOrder = idOrder;
         this.osDateTime = osDateTime;
+        this.idOrder = idOrder;
     }
 
     public int getId() {
@@ -29,12 +29,12 @@ public class OrderStatus implements Resource {
         return description;
     }
 
-    public int getIdOrder() {
-        return idOrder;
-    }
-
     public String getOsDateTime() {
         return osDateTime;
+    }
+
+    public int getIdOrder() {
+        return idOrder;
     }
 
     @Override
@@ -43,8 +43,8 @@ public class OrderStatus implements Resource {
         jsonObject.put("id", id);
         jsonObject.put("status", status);
         jsonObject.put("description", description);
-        jsonObject.put("idOrder", idOrder);
         jsonObject.put("osDateTime", osDateTime);
+        jsonObject.put("idOrder", idOrder);
         return jsonObject;
     }
 
@@ -52,8 +52,9 @@ public class OrderStatus implements Resource {
         int id = jsonObject.getInt("id");
         OrderStatusEnum status = OrderStatusEnum.valueOf(jsonObject.getString("status"));
         String description = jsonObject.getString("description");
-        int idOrder = jsonObject.getInt("idOrder");
         String osDateTime = jsonObject.getString("osDateTime");
-        return new OrderStatus(id, status, description, idOrder, osDateTime);
+        int idOrder = jsonObject.getInt("idOrder");
+
+        return new OrderStatus(id, status, description, osDateTime, idOrder);
     }
 }
