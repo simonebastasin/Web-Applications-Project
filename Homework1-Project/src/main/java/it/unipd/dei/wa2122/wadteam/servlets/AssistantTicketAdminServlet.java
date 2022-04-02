@@ -14,7 +14,7 @@ import java.util.List;
 
 public class AssistantTicketAdminServlet extends AbstractDatabaseServlet{
 
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         ListAssistantTicketDatabase assistantTicket = null;
         List<AssistantTicket> assistantTicketList = null;
@@ -28,7 +28,7 @@ public class AssistantTicketAdminServlet extends AbstractDatabaseServlet{
 
         try {
             assistantTicketList = assistantTicket.getAssistantTicket();
-            writeResource(req, resp,"jsp/AssistantTicketAdmin.jsp" , assistantTicketList.toArray(TicketStatus[]::new));
+            writeResource(req, resp,"jsp/AssistantTicketAdmin.jsp" , assistantTicketList.toArray(AssistantTicket[]::new));
         } catch(SQLException e){
             writeError(req, resp, new Message("Error", "EV05", e.getMessage()),HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         }
