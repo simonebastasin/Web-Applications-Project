@@ -47,10 +47,8 @@ public class ListAssistantTicketDatabase {
         ResultSet resultSet = null;
         ResultSet resultTicket= null;
 
-        // the current employee
-        AssistantTicket resultAssistantTicketItem = null;
-
         List<AssistantTicket> resultAssistantTicket = new ArrayList<>();
+
         try {
             preparedStatement = con.prepareStatement(STATEMENT);
 
@@ -68,17 +66,17 @@ public class ListAssistantTicketDatabase {
                 preparedStatement = con.prepareStatement(STATEMENT_STATUS);
                 preparedStatement.setInt(1, id);
                 resultTicket = preparedStatement.executeQuery();
+
                 List<TicketStatus> resultTicketStatus = new ArrayList<>();
 
-                while (resultSet.next()) {
+                while (resultTicket.next()) {
 
-                    var resultTicketStatusItem = new TicketStatus(resultTicket.getInt("id"),
+                    resultTicketStatus.add(new TicketStatus(resultTicket.getInt("id"),
                             resultTicket.getString("status"),
                             resultTicket.getString("description"),
                             resultTicket.getString("ts_Date"),
-                            resultTicket.getInt("idTicket")
+                            resultTicket.getInt("idTicket"))
                     );
-                    resultTicketStatus.add(resultTicketStatusItem);
                 }
                 resultAssistantTicket.add(new AssistantTicket(id,description,idCustomer, productAlias,resultTicketStatus));
 

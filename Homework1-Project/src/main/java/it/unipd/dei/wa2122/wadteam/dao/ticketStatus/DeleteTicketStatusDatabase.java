@@ -48,7 +48,7 @@ public class DeleteTicketStatusDatabase {
                         resultSet.getInt("id"),
                         resultSet.getString("status"),
                         resultSet.getString("description"),
-                        resultSet.getString("tsDate"),
+                        resultSet.getString("ts_Date"),
                         resultSet.getInt("idTicket")
                 );
             }

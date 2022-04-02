@@ -63,7 +63,7 @@ public class ListTicketStatusDatabase {
                 resultTicketStatusItem = new TicketStatus(resultSet.getInt("id"),
                         resultSet.getString("status"),
                         resultSet.getString("description"),
-                        resultSet.getString("tsDate"),
+                        resultSet.getString("ts_Date"),
                         resultSet.getInt("idTicket")
                 );
                 resultTicketStatus.add(resultTicketStatusItem);
