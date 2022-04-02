@@ -28,7 +28,7 @@
             <ul>
                 <c:forEach var="prod" items="${productList}">
                     <c:if test="${prod.category.name.equals(item.name)}">
-                    <li>Product name: ${prod.name} - price: ${prod.sale} - category: ${prod.category.name}<br>
+                    <li>Product name: ${prod.name} / price: ${prod.sale} - category: ${prod.category.name}<br>
                         <c:forEach var="picture" items="${prod.pictures}">
                             <img src="<c:url value="/viewmedia/${picture.id}"/>" alt="${picture.filename}" width="100px"/>
                         </c:forEach>
