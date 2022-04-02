@@ -27,7 +27,7 @@ public class AssistanceTicketAdminServlet extends AbstractDatabaseServlet{
 
         try {
             assistantTicketList = assistanceTicket.getAssistanceTicket();
-            writeResource(req, resp,"jsp/AssistantTicketAdmin.jsp" , assistantTicketList.toArray(AssistanceTicket[]::new));
+            writeResource(req, resp,"/jsp/AssistantTicketAdmin.jsp" , assistantTicketList.toArray(AssistanceTicket[]::new));
         } catch(SQLException e){
             writeError(req, resp, new Message("Error", "EV05", e.getMessage()),HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         }

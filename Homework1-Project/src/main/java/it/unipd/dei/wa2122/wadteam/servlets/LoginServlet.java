@@ -16,7 +16,7 @@ import static it.unipd.dei.wa2122.wadteam.resources.UserCredential.*;
 public class LoginServlet extends AbstractDatabaseServlet {
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        writeResource(req, resp, "jsp/login.jsp");
+        writeResource(req, resp, "/jsp/login.jsp");
     }
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -28,7 +28,7 @@ public class LoginServlet extends AbstractDatabaseServlet {
         try {
             UserCredential userCredential = new CheckUserCredential(getDataSource().getConnection(), userCredentialAttempt).getUserCredentials();
             if (userCredential.getIdentification() != null) {
-                writeResource(req, resp, "jsp/user.jsp", userCredential);
+                writeResource(req, resp, "/jsp/user.jsp", userCredential);
             } else {
                 writeError(req, resp, new Message("Error login", "EV01", "Username or password aren't correct"),HttpServletResponse.SC_UNAUTHORIZED);
             }
