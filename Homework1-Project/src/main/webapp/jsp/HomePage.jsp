@@ -21,18 +21,21 @@
     <a href="<c:url value="/login"/>">Login</a>
     <a href="<c:url value="/viewmedia/list"/>">View Media</a>
     <hr />
-    <ul>
-    <c:forEach var="item" items="${productList}">
-        <li>Product name ${item.name} - price: ${item.sale} - category: ${item.category.name}<br>
-            <c:forEach var="picture" items="${item.pictures}">
-                <img src="<c:url value="/viewmedia/${picture.id}"/>" alt="${picture.filename}" width="100px"/>
-            </c:forEach>
-        </li>
-    </c:forEach>
-    </ul>
+
     <ul>
         <c:forEach var="item" items="${productCategoryList}">
-            <li>${item.name}</li>
+            <li><b>${item.name}</b></li>
+            <ul>
+                <c:forEach var="prod" items="${productList}">
+                    <c:if test="${prod.category.name.equals(item.name)}">
+                    <li>Product name: ${prod.name} - price: ${prod.sale} - category: ${prod.category.name}<br>
+                        <c:forEach var="picture" items="${prod.pictures}">
+                            <img src="<c:url value="/viewmedia/${picture.id}"/>" alt="${picture.filename}" width="100px"/>
+                        </c:forEach>
+                    </li>
+                    </c:if>
+                </c:forEach>
+            </ul>
         </c:forEach>
     </ul>
 
