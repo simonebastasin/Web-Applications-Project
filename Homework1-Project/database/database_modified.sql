@@ -218,7 +218,7 @@ create table media
 
 --rappresented_by
 
-create table rappresented_by
+create table Reppresented_by
 (
     product_alias varchar(13) not null,
     id_media      integer     not null,
