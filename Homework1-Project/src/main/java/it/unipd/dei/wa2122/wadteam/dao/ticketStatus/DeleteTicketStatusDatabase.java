@@ -11,7 +11,7 @@ public class DeleteTicketStatusDatabase {
     /**
      * The SQL statement to be executed
      */
-    private static final String STATEMENT = "DELETE FROM ticketstatus WHERE id = ?";
+    private static final String STATEMENT = "DELETE FROM ticket_status WHERE id = ?";
 
     /**
      * The connection to the database
