@@ -1,5 +1,6 @@
 package it.unipd.dei.wa2122.wadteam.dao.onlineOrder;
 
+import it.unipd.dei.wa2122.wadteam.resources.DateTime;
 import it.unipd.dei.wa2122.wadteam.resources.OnlineOrder;
 import it.unipd.dei.wa2122.wadteam.resources.OrderStatus;
 import it.unipd.dei.wa2122.wadteam.resources.OrderStatusEnum;
@@ -8,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -57,14 +59,14 @@ public class GetListOnlineOrderDatabase {
                 OrderStatus orderStatusResult = new OrderStatus(rs.getInt("id_Status"),
                         OrderStatusEnum.fromString(rs.getString("status")),
                         rs.getString("description"),
-                        rs.getString("os_datetime"),
+                        new DateTime(rs.getObject("os_datetime", LocalDateTime.class)),
                         rs.getInt("id_order"));
 
 
                 orders.add(new OnlineOrder(
                         rs.getInt("id_order"),
                         rs.getInt("id_customer"),
-                        rs.getString("oo_datetime"),
+                        new DateTime(rs.getObject("oo_datetime", LocalDateTime.class)),
                         null, orderStatusResult
                 ));
             }

@@ -48,7 +48,7 @@ public class AssistanceTicket implements Resource {
         jsonObject.put("description",description);
         jsonObject.put("idCustomer",idCustomer);
         jsonObject.put("productAlias", productAlias);
-        jsonObject.put("ticketStatuList",ticketStatusList.stream().map(TicketStatus::toJSON).toArray());
+        jsonObject.put("ticketStatusList",ticketStatusList.stream().map(TicketStatus::toJSON).toArray());
         return jsonObject;
     }
 

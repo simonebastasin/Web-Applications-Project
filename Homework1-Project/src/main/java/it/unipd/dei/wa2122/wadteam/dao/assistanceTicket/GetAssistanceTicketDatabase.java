@@ -1,6 +1,7 @@
 package it.unipd.dei.wa2122.wadteam.dao.assistanceTicket;
 
 import it.unipd.dei.wa2122.wadteam.resources.AssistanceTicket;
+import it.unipd.dei.wa2122.wadteam.resources.DateTime;
 import it.unipd.dei.wa2122.wadteam.resources.TicketStatus;
 
 
@@ -8,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -86,7 +88,7 @@ public class GetAssistanceTicketDatabase {
                         var resultTicketStatusItem = new TicketStatus(resultSet.getInt("id"),
                                 resultSet.getString("status"),
                                 resultSet.getString("description"),
-                                resultSet.getString("ts_Date"),
+                                new DateTime(resultSet.getObject("ts_Date", LocalDateTime.class)),
                                 resultSet.getInt("idTicket")
                         );
                         resultTicketStatus.add(resultTicketStatusItem);

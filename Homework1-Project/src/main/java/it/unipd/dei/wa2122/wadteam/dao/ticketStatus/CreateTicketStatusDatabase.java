@@ -1,11 +1,13 @@
 package it.unipd.dei.wa2122.wadteam.dao.ticketStatus;
 
+import it.unipd.dei.wa2122.wadteam.resources.DateTime;
 import it.unipd.dei.wa2122.wadteam.resources.TicketStatus;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 
 public class CreateTicketStatusDatabase {
     /**
@@ -41,7 +43,7 @@ public class CreateTicketStatusDatabase {
             preparedStatement = con.prepareStatement(STATEMENT);
             preparedStatement.setString(1, ticketStatus.getStatus());
             preparedStatement.setString(2, ticketStatus.getDescription());
-            preparedStatement.setString(3, ticketStatus.getTsDate());
+            preparedStatement.setObject(3, ticketStatus.getTsDate().getLocalDateTime());
             preparedStatement.setInt(4, ticketStatus.getIdTicket());
 
             resultSet = preparedStatement.executeQuery();
@@ -51,7 +53,7 @@ public class CreateTicketStatusDatabase {
                         resultSet.getInt("id"),
                         resultSet.getString("status"),
                         resultSet.getString("description"),
-                        resultSet.getString("ts_Date"),
+                        new DateTime(resultSet.getObject("ts_Date", LocalDateTime.class)),
                         resultSet.getInt("idTicket")
                 );
             }

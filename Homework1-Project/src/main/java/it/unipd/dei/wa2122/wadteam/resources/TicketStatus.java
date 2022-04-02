@@ -7,10 +7,10 @@ public class TicketStatus implements Resource{
     private final int id;
     private final String status;
     private final String description;
-    private final String tsDate;
+    private final DateTime tsDate;
     private final int idTicket;
 
-    public TicketStatus(int id, String status, String description, String tsDate, int idTicket) {
+    public TicketStatus(int id, String status, String description, DateTime tsDate, int idTicket) {
         this.id = id;
         this.status = status;
         this.description = description;
@@ -30,7 +30,7 @@ public class TicketStatus implements Resource{
         return description;
     }
 
-    public final String getTsDate() {
+    public final DateTime getTsDate() {
         return tsDate;
     }
 
@@ -44,7 +44,7 @@ public class TicketStatus implements Resource{
         jsonObject.put("id", id);
         jsonObject.put("status", status);
         jsonObject.put("description", description);
-        jsonObject.put("tsDate", tsDate);
+        jsonObject.put("tsDate", tsDate.toJSON());
         jsonObject.put("idTicket", idTicket);
         return jsonObject;
     }
@@ -53,7 +53,7 @@ public class TicketStatus implements Resource{
         int id = jsonObject.getInt("id");
         String status = jsonObject.getString("status");
         String description = jsonObject.getString("status");
-        String tsDate = jsonObject.getString("tsDate");
+        DateTime tsDate = DateTime.fromJSON(jsonObject.getJSONObject("tsDate"));
         int idTicket = jsonObject.getInt("idTicket");
 
         return new TicketStatus(id, status,description,tsDate, idTicket);

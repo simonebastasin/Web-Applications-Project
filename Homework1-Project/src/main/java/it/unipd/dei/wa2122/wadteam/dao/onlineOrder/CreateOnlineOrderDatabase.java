@@ -1,14 +1,12 @@
 package it.unipd.dei.wa2122.wadteam.dao.onlineOrder;
 
-import it.unipd.dei.wa2122.wadteam.resources.OnlineOrder;
-import it.unipd.dei.wa2122.wadteam.resources.OrderStatus;
-import it.unipd.dei.wa2122.wadteam.resources.OrderStatusEnum;
-import it.unipd.dei.wa2122.wadteam.resources.Product;
+import it.unipd.dei.wa2122.wadteam.resources.*;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -73,7 +71,7 @@ public class CreateOnlineOrderDatabase {
             if (rs.next()) {
                 int id = rs.getInt("id");
                 int idCustomer = rs.getInt("id_customer");
-                String ooDateTime = rs.getString("oo_datetime");
+                DateTime ooDateTime = new DateTime(rs.getObject("oo_datetime", LocalDateTime.class));
 
 
                 innerpstmt = con.prepareStatement(STATEMENT_INSERT_ORDER_STATUS);
@@ -86,7 +84,7 @@ public class CreateOnlineOrderDatabase {
                 OrderStatus resultOrderStatus = new OrderStatus(innerrs.getInt("id"),
                         OrderStatusEnum.fromString(innerrs.getString("Status")),
                         innerrs.getString("description"),
-                        innerrs.getString("os_datetime"),
+                        new DateTime(innerrs.getObject("os_datetime", LocalDateTime.class)),
                         innerrs.getInt("id_order")
                         );
 

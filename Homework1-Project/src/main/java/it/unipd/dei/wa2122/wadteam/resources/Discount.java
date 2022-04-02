@@ -5,10 +5,10 @@ import org.json.JSONObject;
 public class Discount implements Resource {
     private final Integer id;
     private final Integer percentage;
-    private final String startDate;//TODO : convert to Date
-    private final String endDate;//TODO : convert to Date
+    private final DateTime startDate;
+    private final DateTime endDate;
 
-    public Discount(Integer id, Integer percentage, String startDate, String endDate) {
+    public Discount(Integer id, Integer percentage, DateTime startDate, DateTime endDate) {
         this.id = id;
         this.percentage = percentage;
         this.startDate = startDate;
@@ -23,11 +23,11 @@ public class Discount implements Resource {
         return percentage;
     }
 
-    public final String getStartDate() {
+    public final DateTime getStartDate() {
         return startDate;
     }
 
-    public final String getEndDate() {
+    public final DateTime getEndDate() {
         return endDate;
     }
 
@@ -36,22 +36,16 @@ public class Discount implements Resource {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("id", id);
         jsonObject.put("percentage", percentage);
-        jsonObject.put("startDate", startDate);
-        jsonObject.put("endDate", endDate);
+        jsonObject.put("startDate", startDate.toJSON());
+        jsonObject.put("endDate", endDate.toJSON());
         return jsonObject;
     }
 
     public static Discount fromJSON(JSONObject jsonObject) {
         Integer id = jsonObject.getInt("id");
         Integer percentage = jsonObject.getInt("percentage");
-        String startDate = jsonObject.getString("startDate");
-        String endDate = jsonObject.getString("endDate");
-        //TODO getDate JSON
-        /*
-        String dateStr = jsonObject.getString("startDate");
-        Si sdf = new Date("yyyy-MM-dd HH:mm:ss");
-        Date birthDate = sdf.parse(dateStr);
-         */
+        DateTime startDate = DateTime.fromJSON(jsonObject.getJSONObject("startDate"));
+        DateTime endDate = DateTime.fromJSON(jsonObject.getJSONObject("endDate"));
         return new Discount(id, percentage, startDate, endDate);
     }
 }

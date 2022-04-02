@@ -9,11 +9,11 @@ public class OnlineOrder implements Resource{
 
     private final Integer idOrder;
     private final Integer idCustomer;
-    private final String ooDateTime;
+    private final DateTime ooDateTime;
     private final List<Product> products;
     private final OrderStatus status;
 
-    public OnlineOrder(Integer idOrder, Integer idCustomer, String ooDateTime, List<Product> products, OrderStatus status) {
+    public OnlineOrder(Integer idOrder, Integer idCustomer, DateTime ooDateTime, List<Product> products, OrderStatus status) {
         this.idOrder = idOrder;
         this.idCustomer = idCustomer;
         this.ooDateTime = ooDateTime;
@@ -29,7 +29,7 @@ public class OnlineOrder implements Resource{
         return idCustomer;
     }
 
-    public final String getOoDateTime() {
+    public final DateTime getOoDateTime() {
         return ooDateTime;
     }
 
@@ -46,7 +46,7 @@ public class OnlineOrder implements Resource{
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("idOrder", idOrder);
         jsonObject.put("idCustomer", idCustomer);
-        jsonObject.put("ooDateTime", ooDateTime);
+        jsonObject.put("ooDateTime", ooDateTime.toJSON());
         jsonObject.put("products", products.stream().map(Product::toJSON).toArray());
         jsonObject.put("status", status.toJSON());
         return jsonObject;
@@ -55,7 +55,7 @@ public class OnlineOrder implements Resource{
     public static OnlineOrder fromJSON(JSONObject jsonObject){
         Integer idOrder = jsonObject.getInt("idOrder");
         Integer idCustomer = jsonObject.getInt("idCustomer");
-        String ooDateTime = jsonObject.getString("ooDateTime");
+        DateTime ooDateTime = DateTime.fromJSON(jsonObject.getJSONObject("ooDateTime"));
         List<Product> products = new ArrayList<>();
         for(var item : jsonObject.getJSONArray("products")) {
             products.add(Product.fromJSON((JSONObject) item));

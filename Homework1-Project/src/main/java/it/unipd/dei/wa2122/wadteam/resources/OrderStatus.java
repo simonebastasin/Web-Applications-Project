@@ -6,10 +6,10 @@ public class OrderStatus implements Resource {
     private final int id;
     private final OrderStatusEnum status;
     private final String description;
-    private final String osDateTime; //TODO: date type
+    private final DateTime osDateTime;
     private final int idOrder;
 
-    public OrderStatus(int id, OrderStatusEnum status, String description, String osDateTime, int idOrder) {
+    public OrderStatus(int id, OrderStatusEnum status, String description, DateTime osDateTime, int idOrder) {
         this.id = id;
         this.status = status;
         this.description = description;
@@ -29,7 +29,7 @@ public class OrderStatus implements Resource {
         return description;
     }
 
-    public String getOsDateTime() {
+    public DateTime getOsDateTime() {
         return osDateTime;
     }
 
@@ -43,7 +43,7 @@ public class OrderStatus implements Resource {
         jsonObject.put("id", id);
         jsonObject.put("status", status);
         jsonObject.put("description", description);
-        jsonObject.put("osDateTime", osDateTime);
+        jsonObject.put("osDateTime", osDateTime.toJSON());
         jsonObject.put("idOrder", idOrder);
         return jsonObject;
     }
@@ -52,7 +52,7 @@ public class OrderStatus implements Resource {
         int id = jsonObject.getInt("id");
         OrderStatusEnum status = OrderStatusEnum.valueOf(jsonObject.getString("status"));
         String description = jsonObject.getString("description");
-        String osDateTime = jsonObject.getString("osDateTime");
+        DateTime osDateTime = DateTime.fromJSON(jsonObject.getJSONObject("osDateTime"));
         int idOrder = jsonObject.getInt("idOrder");
 
         return new OrderStatus(id, status, description, osDateTime, idOrder);

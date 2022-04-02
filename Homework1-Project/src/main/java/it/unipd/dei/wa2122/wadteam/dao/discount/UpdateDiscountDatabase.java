@@ -1,12 +1,14 @@
 package it.unipd.dei.wa2122.wadteam.dao.discount;
 
 
+import it.unipd.dei.wa2122.wadteam.resources.DateTime;
 import it.unipd.dei.wa2122.wadteam.resources.Discount;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 
 public class UpdateDiscountDatabase {
     /**
@@ -56,8 +58,8 @@ public class UpdateDiscountDatabase {
         try {
             preparedStatement = con.prepareStatement(STATEMENT);
             preparedStatement.setInt(2, discount.getPercentage());
-            preparedStatement.setString(3, discount.getEndDate());
-            preparedStatement.setString(4, discount.getEndDate());
+            preparedStatement.setObject(3, discount.getEndDate().getLocalDateTime());
+            preparedStatement.setObject(4, discount.getEndDate().getLocalDateTime());
 
             resultSet = preparedStatement.executeQuery();
 
@@ -65,9 +67,9 @@ public class UpdateDiscountDatabase {
                 resultDiscount = new Discount(
                         resultSet.getInt("ID"),
                         resultSet.getInt("Percentage"),
-                        resultSet.getString("Start_Date"),
-                        resultSet.getString("End_Date")
-                );
+                        new DateTime(resultSet.getObject("Start_Date", LocalDateTime.class)),
+                        new DateTime(resultSet.getObject("End_Date", LocalDateTime.class)));
+
             }
         } finally {
             if (resultSet != null) {

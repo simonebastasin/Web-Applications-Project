@@ -1,5 +1,6 @@
 package it.unipd.dei.wa2122.wadteam.dao.orderStatus;
 
+import it.unipd.dei.wa2122.wadteam.resources.DateTime;
 import it.unipd.dei.wa2122.wadteam.resources.OrderStatus;
 import it.unipd.dei.wa2122.wadteam.resources.OrderStatusEnum;
 
@@ -7,6 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 
 public class UpdateOrderStatusDatabase {
     /**
@@ -57,7 +59,7 @@ public class UpdateOrderStatusDatabase {
             preparedStatement = con.prepareStatement(STATEMENT);
             preparedStatement.setString(1, orderStatus.getStatus().getText());
             preparedStatement.setString(2, orderStatus.getDescription());
-            preparedStatement.setString(3, orderStatus.getOsDateTime());
+            preparedStatement.setObject(3, orderStatus.getOsDateTime().getLocalDateTime());
             preparedStatement.setInt(4, orderStatus.getIdOrder());
             preparedStatement.setInt(5, orderStatus.getId());
 
@@ -69,7 +71,7 @@ public class UpdateOrderStatusDatabase {
                         resultSet.getInt("id"),
                         OrderStatusEnum.valueOf(resultSet.getString("status")),
                         resultSet.getString("description"),
-                        resultSet.getString("os_datetime"),
+                        new DateTime(resultSet.getObject("os_datetime", LocalDateTime.class)),
                         resultSet.getInt("id_order"));
             }
         } finally {

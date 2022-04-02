@@ -1,12 +1,14 @@
 package it.unipd.dei.wa2122.wadteam.dao.assistanceTicket;
 
 import it.unipd.dei.wa2122.wadteam.resources.AssistanceTicket;
+import it.unipd.dei.wa2122.wadteam.resources.DateTime;
 import it.unipd.dei.wa2122.wadteam.resources.TicketStatus;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,7 +46,7 @@ public class ListAssistanceTicketDatabase {
 
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-        ResultSet resultTicket= null;
+        ResultSet innerResultSet = null;
 
         List<AssistanceTicket> resultAssistantTicket = new ArrayList<>();
 
@@ -64,26 +66,30 @@ public class ListAssistanceTicketDatabase {
 
                 preparedStatement = con.prepareStatement(STATEMENT_STATUS);
                 preparedStatement.setInt(1, id);
-                resultTicket = preparedStatement.executeQuery();
+                innerResultSet = preparedStatement.executeQuery();
 
                 List<TicketStatus> resultTicketStatus = new ArrayList<>();
 
-                while (resultTicket.next()) {
+                while (innerResultSet.next()) {
 
-                    resultTicketStatus.add(new TicketStatus(resultTicket.getInt("id"),
-                            resultTicket.getString("status"),
-                            resultTicket.getString("description"),
-                            resultTicket.getString("ts_Date"),
-                            resultTicket.getInt("idTicket"))
+                    resultTicketStatus.add(new TicketStatus(innerResultSet.getInt("id"),
+                            innerResultSet.getString("status"),
+                            innerResultSet.getString("description"),
+                            new DateTime(innerResultSet.getObject("ts_Date", LocalDateTime.class)),
+                            innerResultSet.getInt("idTicket"))
                     );
                 }
                 resultAssistantTicket.add(new AssistanceTicket(id,description,idCustomer, productAlias,resultTicketStatus));
-
+                innerResultSet.close();
             }
 
         } finally {
             if (resultSet != null) {
                 resultSet.close();
+            }
+
+            if (innerResultSet != null) {
+                innerResultSet.close();
             }
 
             if (preparedStatement != null) {
