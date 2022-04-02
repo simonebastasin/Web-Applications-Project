@@ -81,7 +81,7 @@ public class UpdateOrderStatusDatabase {
                 preparedStatement.close();
             }
         }
-
+        con.close();
         return resultOrderStatus;
     }
 }

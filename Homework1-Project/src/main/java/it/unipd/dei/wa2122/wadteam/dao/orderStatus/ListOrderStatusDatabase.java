@@ -76,7 +76,7 @@ public class ListOrderStatusDatabase {
                 preparedStatement.close();
             }
         }
-
+        con.close();
         return resultOrderStatus;
     }
 }

@@ -67,7 +67,7 @@ public class DeleteOrderStatusDatabase {
                 preparedStatement.close();
             }
         }
-
+        con.close();
         return resultOrderStatus;
     }
 }
