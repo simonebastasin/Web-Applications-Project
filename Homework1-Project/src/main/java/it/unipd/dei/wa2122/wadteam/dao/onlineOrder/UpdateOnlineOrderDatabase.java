@@ -37,7 +37,7 @@ public class UpdateOnlineOrderDatabase {
     }
 
     /**
-     * Gets an onlineOrder from the database.
+     * Gets an int from the update of the database.
      *
      * @return the {@code OnlineOrder} object matching the id.
      *

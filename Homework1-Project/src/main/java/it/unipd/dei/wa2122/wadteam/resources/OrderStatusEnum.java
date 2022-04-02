@@ -3,7 +3,7 @@ package it.unipd.dei.wa2122.wadteam.resources;
 import org.json.JSONObject;
 
 public enum OrderStatusEnum implements Resource {
-    OPEN("Open"), PAYMENT_ACCEPTED("Payment Accepted"), SHIPPED("Shipped"), DELIVERED("Delivered"), CANCELLED("Cancelled");
+    OPEN("Open"), PAYMENT_ACCEPTED("Payment accepted"), SHIPPED("Shipped"), DELIVERED("Delivered"), CANCELLED("Cancelled");
 
     final String text; //user-friendly text
 

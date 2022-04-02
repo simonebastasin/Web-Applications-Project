@@ -3,6 +3,7 @@ package it.unipd.dei.wa2122.wadteam.servlets;
 import it.unipd.dei.wa2122.wadteam.dao.onlineOrder.GetOnlineOrderByCustomerDatabase;
 import it.unipd.dei.wa2122.wadteam.resources.Message;
 import it.unipd.dei.wa2122.wadteam.resources.OnlineOrder;
+import it.unipd.dei.wa2122.wadteam.resources.Resource;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -10,6 +11,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -50,10 +52,10 @@ public class OrderListServlet extends AbstractDatabaseServlet{
             id = Integer.parseInt(req.getParameter("identification"));
 
             list = new GetOnlineOrderByCustomerDatabase(getDataSource().getConnection(), id).getOnlineOrderByCustomer();
-            if(list != null)  {
-                for(int i=0;i<list.size();i++)
-                {writeJson(res, list.get(i).toJSON());}
-            }
+            List<Resource> resList = new ArrayList<>();
+            resList.addAll(list);
+            writeResource(req,res, "/jsp/orderList.jsp", resList.toArray(Resource[]::new));
+
         } catch (SQLException e) {
             Message m = new Message("Couldn't find the order", "EU01", e.getMessage());
             writeError(req, res, m, HttpServletResponse.SC_INTERNAL_SERVER_ERROR);

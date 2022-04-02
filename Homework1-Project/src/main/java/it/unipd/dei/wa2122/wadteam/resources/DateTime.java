@@ -28,6 +28,8 @@ public class DateTime implements Resource{
         return new DateTime(LocalDateTime.parse(date, DateTimeFormatter.ofPattern(pattern)));
     }
 
+    public String getHumanDate() { return toString("dd MM yyyy hh:mm"); }
+
     @Override
     public JSONObject toJSON() {
         JSONObject jsonObject =  new JSONObject();

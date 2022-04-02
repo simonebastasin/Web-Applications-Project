@@ -128,6 +128,11 @@ public class CreateOnlineOrderDatabase {
             if (pstmt != null) {
                 pstmt.close();
             }
+
+            if (innerpstmt != null) {
+                innerpstmt.close();
+            }
+
             con.close();
         }
 
