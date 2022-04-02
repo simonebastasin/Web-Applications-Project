@@ -2,10 +2,10 @@
 <web-app id="hello-world-webapp" version="5.0" xmlns="https://jakarta.ee/xml/ns/jakartaee"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd">
-    <display-name>hellog4j-world</display-name>
-    <description>Example of servlet that logs onto a rolling file</description>
+    <display-name>Electromechanics shop</display-name>
+    <description>A very simple Electromechanics shop by wadteam</description>
     <welcome-file-list>
-        <welcome-file>/html/hello-wadteam.html</welcome-file>
+        <welcome-file>/</welcome-file>
     </welcome-file-list>
 
     <servlet>
@@ -65,7 +65,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>HomePageServlet</servlet-name>
-        <url-pattern>/homepage</url-pattern>
+        <url-pattern>/</url-pattern>
     </servlet-mapping>
 
     <servlet>
