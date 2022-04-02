@@ -16,7 +16,7 @@ public class ListProductDatabase {
      */
     private static final String STATEMENT_LIST_PRODUCT = "SELECT product_alias, name, brand, description, quantity, purchase_price, sale_price, category_name, evidence FROM product";
 
-    private static final String STATEMENT_LIST_PICTURE = "SELECT id_media FROM rappresented_by WHERE product_alias = ?";
+    private static final String STATEMENT_LIST_PICTURE = "SELECT id_media FROM Represented_by WHERE product_alias = ?";
 
     /**
      * The connection to the database

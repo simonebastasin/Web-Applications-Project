@@ -15,9 +15,7 @@ public class GetProductDatabase {
      */
     private static final String STATEMENT_GET_PRODUCT = "SELECT product_alias, name, brand, description, quantity, purchase_price, sale_price, category_name, evidence FROM product WHERE product_alias = ?";
 
-    //private static final String STATEMENT_GET_PICTURE = "SELECT product_alias, id_media FROM rappresented_by WHERE product_alias = ? AND id_media = ?";
-
-    private static final String STATEMENT = "SELECT id_media FROM Rappresented_by WHERE product_alias = ?";
+    private static final String STATEMENT = "SELECT id_media FROM Represented_by WHERE product_alias = ?";
 
     /**
      * The connection to the database
@@ -100,31 +98,7 @@ public class GetProductDatabase {
                 preparedStatement.close();
             }
         }
-        /*
-        for (var item : product.getPicture()) {
-            try {
-                preparedStatement = con.prepareStatement(STATEMENT_GET_PICTURE);
-                preparedStatement.setString(1, product.getAlias());
-                preparedStatement.setInt(2, item);
 
-                resultSet = preparedStatement.executeQuery();
-
-                if (resultSet.next()) {
-                    assert resultProduct != null;
-                    resultProduct.getPicture().add(resultSet.getInt("id_media"));
-                }
-
-            } finally {
-                if (resultSet != null) {
-                    resultSet.close();
-                }
-
-                if (preparedStatement != null) {
-                    preparedStatement.close();
-                }
-            }
-        }
-        */
         con.close();
 
         return resultProduct;
