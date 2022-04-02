@@ -60,6 +60,15 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>HomePageServlet</servlet-name>
+        <servlet-class>it.unipd.dei.wa2122.wadteam.servlets.HomePageServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>HomePageServlet</servlet-name>
+        <url-pattern>7homepage</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>TicketServlet</servlet-name>
         <servlet-class>it.unipd.dei.wa2122.wadteam.servlets.TicketServlet</servlet-class>
     </servlet>
