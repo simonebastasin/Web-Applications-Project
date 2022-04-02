@@ -1,5 +1,7 @@
 package it.unipd.dei.wa2122.wadteam.dao.onlineInvoice;
 
+import it.unipd.dei.wa2122.wadteam.dao.onlineOrder.GetOnlineOrderByIdDatabase;
+import it.unipd.dei.wa2122.wadteam.resources.DateTime;
 import it.unipd.dei.wa2122.wadteam.resources.OnlineInvoice;
 import it.unipd.dei.wa2122.wadteam.resources.PaymentMethodOnlineEnum;
 
@@ -7,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 
 public class DeleteOnlineInvoiceDatabase {
 
@@ -44,12 +47,13 @@ public class DeleteOnlineInvoiceDatabase {
             rs = pstmt.executeQuery();
 
             if (rs.next()) {
+                int idOrder = rs.getInt("id_order");
                 roi = new OnlineInvoice(
                         rs.getInt("id"),
-                        rs.getInt("id_order"),
+                        new GetOnlineOrderByIdDatabase(con, idOrder).getOnlineOrderByCustomer(),
                         rs.getString("transaction_id"),
                         PaymentMethodOnlineEnum.valueOf(rs.getString("payment_type")),
-                        rs.getString("oi_date"),
+                        new DateTime(rs.getObject("oi_date", LocalDateTime.class)),
                         rs.getDouble("total_price")
                 );
             }

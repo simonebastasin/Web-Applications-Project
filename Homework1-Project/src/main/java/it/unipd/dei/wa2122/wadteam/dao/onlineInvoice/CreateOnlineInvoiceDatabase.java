@@ -1,5 +1,7 @@
 package it.unipd.dei.wa2122.wadteam.dao.onlineInvoice;
 
+import it.unipd.dei.wa2122.wadteam.dao.onlineOrder.GetOnlineOrderByIdDatabase;
+import it.unipd.dei.wa2122.wadteam.resources.DateTime;
 import it.unipd.dei.wa2122.wadteam.resources.OnlineInvoice;
 import it.unipd.dei.wa2122.wadteam.resources.PaymentMethodOnlineEnum;
 
@@ -7,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 
 public class CreateOnlineInvoiceDatabase {
 
@@ -39,24 +42,27 @@ public class CreateOnlineInvoiceDatabase {
 
         try {
             pstmt = con.prepareStatement(STATEMENT);
-            pstmt.setInt(1, onlineInvoice.getIdOrder());
+            pstmt.setInt(1, onlineInvoice.getIdOrder().getIdOrder());
             pstmt.setString(2, onlineInvoice.getTransactionId());
             pstmt.setString(3, onlineInvoice.getPaymentType().toString()); // get user-friendly enum text
-            pstmt.setString(4, onlineInvoice.getOiDate());
+            pstmt.setObject(4, onlineInvoice.getOiDate().getLocalDateTime());
             pstmt.setDouble(5, onlineInvoice.getTotalPrice());
 
             rs = pstmt.executeQuery();
 
             if (rs.next()) {
+                int idOrder = rs.getInt("id_order");
                 roi = new OnlineInvoice(
                         rs.getInt("id"),
-                        rs.getInt("id_order"),
+                        new GetOnlineOrderByIdDatabase(con, idOrder).getOnlineOrderByCustomer(), //rs.getInt("id_order"),
                         rs.getString("transaction_id"),
                         PaymentMethodOnlineEnum.valueOf(rs.getString("payment_type")),
-                        rs.getString("oi_date"),
+                        new DateTime(rs.getObject("oi_date", LocalDateTime.class)),
                         rs.getDouble("total_price")
                 );
+
             }
+
         } finally {
             if (rs != null) {
                 rs.close();

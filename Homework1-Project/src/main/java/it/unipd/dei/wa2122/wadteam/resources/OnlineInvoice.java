@@ -2,16 +2,18 @@ package it.unipd.dei.wa2122.wadteam.resources;
 
 import org.json.JSONObject;
 
+import java.util.Date;
+
 public class OnlineInvoice implements Resource {
 
     private final int id;
     private final OnlineOrder idOrder;
     private final String transactionId;
     private final PaymentMethodOnlineEnum paymentType;
-    private final String oiDate; //TODO: DATE type (DEFAULT CURRENT_DATE)
+    private final DateTime oiDate;
     private final double totalPrice;
 
-    public OnlineInvoice(int id, OnlineOrder idOrder, String transactionId, PaymentMethodOnlineEnum paymentType, String oiDate, double totalPrice) {
+    public OnlineInvoice(int id, OnlineOrder idOrder, String transactionId, PaymentMethodOnlineEnum paymentType, DateTime oiDate, double totalPrice) {
         this.id = id;
         this.idOrder = idOrder;
         this.transactionId = transactionId;
@@ -28,7 +30,7 @@ public class OnlineInvoice implements Resource {
 
     public PaymentMethodOnlineEnum getPaymentType() { return paymentType; }
 
-    public final String getOiDate() { return oiDate; }
+    public final DateTime getOiDate() { return oiDate; }
 
     public final double getTotalPrice() { return totalPrice; }
 
@@ -36,7 +38,7 @@ public class OnlineInvoice implements Resource {
     public JSONObject toJSON() {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("id", id);
-        jsonObject.put("idOrder", idOrder);
+        jsonObject.put("idOrder", idOrder.toJSON());
         jsonObject.put("transactionId", transactionId);
         jsonObject.put("paymentType", paymentType);
         jsonObject.put("oiDate", oiDate);
@@ -49,7 +51,7 @@ public class OnlineInvoice implements Resource {
         OnlineOrder idOrder = OnlineOrder.fromJSON(jsonObject.getJSONObject("idOrder"));
         String transactionId = jsonObject.getString("transactionId");
         PaymentMethodOnlineEnum paymentType = PaymentMethodOnlineEnum.valueOf(jsonObject.getString("paymentType"));
-        String oiDate = jsonObject.getString("oiDate");
+        DateTime oiDate = DateTime.fromJSON(jsonObject.getJSONObject("oiDate"));
         double totalPrice = jsonObject.getDouble("totalPrice");
         return new OnlineInvoice(id, idOrder, transactionId, paymentType, oiDate, totalPrice);
     }
