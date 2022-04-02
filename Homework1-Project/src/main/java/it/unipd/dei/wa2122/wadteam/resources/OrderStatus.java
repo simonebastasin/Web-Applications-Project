@@ -3,13 +3,13 @@ package it.unipd.dei.wa2122.wadteam.resources;
 import org.json.JSONObject;
 
 public class OrderStatus implements Resource {
-    private final Integer id;
+    private final int id;
     private final OrderStatusEnum status;
     private final String description;
-    private final Integer idOrder;
+    private final int idOrder;
     private final String osDateTime;
 
-    public OrderStatus(Integer id, OrderStatusEnum status, String description, Integer idOrder, String osDateTime) {
+    public OrderStatus(int id, OrderStatusEnum status, String description, int idOrder, String osDateTime) {
         this.id = id;
         this.status = status;
         this.description = description;
@@ -17,7 +17,7 @@ public class OrderStatus implements Resource {
         this.osDateTime = osDateTime;
     }
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
@@ -29,7 +29,7 @@ public class OrderStatus implements Resource {
         return description;
     }
 
-    public Integer getIdOrder() {
+    public int getIdOrder() {
         return idOrder;
     }
 
@@ -49,10 +49,10 @@ public class OrderStatus implements Resource {
     }
 
     public static OrderStatus fromJSON(JSONObject jsonObject) {
-        Integer id = jsonObject.getInt("id");
+        int id = jsonObject.getInt("id");
         OrderStatusEnum status = OrderStatusEnum.valueOf(jsonObject.getString("status"));
         String description = jsonObject.getString("description");
-        Integer idOrder = jsonObject.getInt("idOrder");
+        int idOrder = jsonObject.getInt("idOrder");
         String osDateTime = jsonObject.getString("osDateTime");
         return new OrderStatus(id, status, description, idOrder, osDateTime);
     }
