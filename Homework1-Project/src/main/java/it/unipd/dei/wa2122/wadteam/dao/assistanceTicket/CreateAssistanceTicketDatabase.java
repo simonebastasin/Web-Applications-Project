@@ -1,13 +1,13 @@
-package it.unipd.dei.wa2122.wadteam.dao.assistantTicket;
+package it.unipd.dei.wa2122.wadteam.dao.assistanceTicket;
 
-import it.unipd.dei.wa2122.wadteam.resources.AssistantTicket;
+import it.unipd.dei.wa2122.wadteam.resources.AssistanceTicket;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class CreateAssistantTicketDatabase {
+public class CreateAssistanceTicketDatabase {
 
     /**
      * The SQL statement to be executed
@@ -23,7 +23,7 @@ public class CreateAssistantTicketDatabase {
     /**
      * The assistant ticket to be updated in the database
      */
-    private final AssistantTicket assistantTicket;
+    private final AssistanceTicket assistantTicket;
 
     /**
      * Creates a new object for update an assistant ticket.
@@ -31,7 +31,7 @@ public class CreateAssistantTicketDatabase {
      * @param con             the connection to the database.
      * @param assistantTicket the assistant ticket to be created in the database.
      */
-    public CreateAssistantTicketDatabase(final Connection con, final AssistantTicket assistantTicket) {
+    public CreateAssistanceTicketDatabase(final Connection con, final AssistanceTicket assistantTicket) {
         this.con = con;
         this.assistantTicket = assistantTicket;
     }
@@ -42,13 +42,13 @@ public class CreateAssistantTicketDatabase {
      * @return the {@code AssistantTicket} object matching the badge.
      * @throws SQLException if any error occurs while reading the assistant ticket .
      */
-    public AssistantTicket createAssistantTicket() throws SQLException {
+    public AssistanceTicket createAssistantTicket() throws SQLException {
 
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
 
         // the create assistant ticket
-        AssistantTicket resultAssistantTicket = null;
+        AssistanceTicket resultAssistantTicket = null;
 
         try {
             preparedStatement = con.prepareStatement(STATEMENT);
@@ -59,7 +59,7 @@ public class CreateAssistantTicketDatabase {
             resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) {
-                resultAssistantTicket = new AssistantTicket(resultSet.getInt("ID"),
+                resultAssistantTicket = new AssistanceTicket(resultSet.getInt("ID"),
                         resultSet.getString("Description"),
                         resultSet.getInt("ID_Customer"),
                         resultSet.getString("Product_Alias"), null);

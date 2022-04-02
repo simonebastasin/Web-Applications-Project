@@ -1,6 +1,6 @@
-package it.unipd.dei.wa2122.wadteam.dao.assistantTicket;
+package it.unipd.dei.wa2122.wadteam.dao.assistanceTicket;
 
-import it.unipd.dei.wa2122.wadteam.resources.AssistantTicket;
+import it.unipd.dei.wa2122.wadteam.resources.AssistanceTicket;
 import it.unipd.dei.wa2122.wadteam.resources.TicketStatus;
 
 
@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GetAssistantTicketDatabase {
+public class GetAssistanceTicketDatabase {
 
         /**
          * The SQL statement to be executed
@@ -37,7 +37,7 @@ public class GetAssistantTicketDatabase {
          * @param id
          *            the id of the assistant ticket.
          */
-        public GetAssistantTicketDatabase(final Connection con, final int id) {
+        public GetAssistanceTicketDatabase(final Connection con, final int id) {
             this.con = con;
             this.id = id;
         }
@@ -50,13 +50,13 @@ public class GetAssistantTicketDatabase {
          * @throws SQLException
          *             if any error occurs while reading the assistant ticket.
          */
-        public AssistantTicket getAssistantTicket() throws SQLException {
+        public AssistanceTicket getAssistanceTicket() throws SQLException {
 
             PreparedStatement preparedStatement = null;
             ResultSet resultSet = null;
 
             // the read employee
-            AssistantTicket resultAssistantTicket = null;
+            AssistanceTicket resultAssistantTicket = null;
 
             try {
                 preparedStatement = con.prepareStatement(STATEMENT);
@@ -92,7 +92,7 @@ public class GetAssistantTicketDatabase {
                         resultTicketStatus.add(resultTicketStatusItem);
                     }
 
-                    resultAssistantTicket = new AssistantTicket(id,
+                    resultAssistantTicket = new AssistanceTicket(id,
                             description,
                             idCustomer,
                             productAlias, resultTicketStatus);

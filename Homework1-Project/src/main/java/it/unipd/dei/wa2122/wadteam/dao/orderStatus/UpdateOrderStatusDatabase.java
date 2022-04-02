@@ -1,6 +1,5 @@
 package it.unipd.dei.wa2122.wadteam.dao.orderStatus;
 
-import it.unipd.dei.wa2122.wadteam.resources.AssistantTicket;
 import it.unipd.dei.wa2122.wadteam.resources.OrderStatus;
 import it.unipd.dei.wa2122.wadteam.resources.OrderStatusEnum;
 

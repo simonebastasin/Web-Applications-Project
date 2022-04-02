@@ -1,6 +1,6 @@
-package it.unipd.dei.wa2122.wadteam.dao.assistantTicket;
+package it.unipd.dei.wa2122.wadteam.dao.assistanceTicket;
 
-import it.unipd.dei.wa2122.wadteam.resources.AssistantTicket;
+import it.unipd.dei.wa2122.wadteam.resources.AssistanceTicket;
 
 
 import java.sql.Connection;
@@ -8,7 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class DeleteAssistantTicketDatabase {
+public class DeleteAssistanceTicketDatabase {
         /**
          * The SQL statement to be executed
          */
@@ -32,7 +32,7 @@ public class DeleteAssistantTicketDatabase {
          * @param id
          *            the id of the assistant ticket.
          */
-        public DeleteAssistantTicketDatabase(final Connection con, final int id) {
+        public DeleteAssistanceTicketDatabase(final Connection con, final int id) {
             this.con = con;
             this.id = id;
         }
@@ -45,13 +45,13 @@ public class DeleteAssistantTicketDatabase {
          * @throws SQLException
          *             if any error occurs while deleting the assistant ticket.
          */
-        public AssistantTicket getAssistantTicket() throws SQLException {
+        public AssistanceTicket getAssistanceTicket() throws SQLException {
 
             PreparedStatement preparedStatement = null;
             ResultSet resultSet = null;
 
             // the deleted employee
-            AssistantTicket resultAssistantiTicket = null;
+            AssistanceTicket resultAssistantiTicket = null;
 
             try {
                 preparedStatement = con.prepareStatement(STATEMENT);
@@ -60,7 +60,7 @@ public class DeleteAssistantTicketDatabase {
                 resultSet = preparedStatement.executeQuery();
 
                 if (resultSet.next()) {
-                    resultAssistantiTicket = new AssistantTicket(resultSet.getInt("ID"),
+                    resultAssistantiTicket = new AssistanceTicket(resultSet.getInt("ID"),
                             resultSet.getString("Description"),
                             resultSet.getInt("ID_Customer"),
                             resultSet.getString("Product_Alias"), null);

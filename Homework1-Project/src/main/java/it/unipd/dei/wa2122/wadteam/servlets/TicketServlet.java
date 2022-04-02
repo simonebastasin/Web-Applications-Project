@@ -1,19 +1,14 @@
 package it.unipd.dei.wa2122.wadteam.servlets;
 
-import it.unipd.dei.wa2122.wadteam.dao.assistantTicket.GetAssistantTicketDatabase;
-import it.unipd.dei.wa2122.wadteam.dao.ticketStatus.ListTicketStatusDatabase;
-import it.unipd.dei.wa2122.wadteam.resources.AssistantTicket;
+import it.unipd.dei.wa2122.wadteam.dao.assistanceTicket.GetAssistanceTicketDatabase;
+import it.unipd.dei.wa2122.wadteam.resources.AssistanceTicket;
 import it.unipd.dei.wa2122.wadteam.resources.Message;
-import it.unipd.dei.wa2122.wadteam.resources.Resource;
-import it.unipd.dei.wa2122.wadteam.resources.TicketStatus;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class TicketServlet extends AbstractDatabaseServlet {
 
@@ -27,7 +22,7 @@ public class TicketServlet extends AbstractDatabaseServlet {
         int id = Integer.parseInt(req.getParameter("identification"));
 
         try {
-            AssistantTicket assistantTicket = new GetAssistantTicketDatabase(getDataSource().getConnection(), id).getAssistantTicket();
+            AssistanceTicket assistantTicket = new GetAssistanceTicketDatabase(getDataSource().getConnection(), id).getAssistanceTicket();
 
             writeResource(req, resp, "jsp/ticket.jsp",assistantTicket);
         } catch (SQLException e) {

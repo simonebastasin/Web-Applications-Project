@@ -1,7 +1,6 @@
-package it.unipd.dei.wa2122.wadteam.dao.assistantTicket;
+package it.unipd.dei.wa2122.wadteam.dao.assistanceTicket;
 
-import it.unipd.dei.wa2122.wadteam.resources.AssistantTicket;
-import it.unipd.dei.wa2122.wadteam.resources.Product;
+import it.unipd.dei.wa2122.wadteam.resources.AssistanceTicket;
 import it.unipd.dei.wa2122.wadteam.resources.TicketStatus;
 
 import java.sql.Connection;
@@ -11,7 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListAssistantTicketDatabase {
+public class ListAssistanceTicketDatabase {
     /**
      * The SQL statement to be executed
      */
@@ -29,7 +28,7 @@ public class ListAssistantTicketDatabase {
      * @param con
      *            the connection to the database.
      */
-    public ListAssistantTicketDatabase(final Connection con) {
+    public ListAssistanceTicketDatabase(final Connection con) {
         this.con = con;
     }
 
@@ -41,13 +40,13 @@ public class ListAssistantTicketDatabase {
      * @throws SQLException
      *             if any error occurs while reading the assistant ticket.
      */
-    public List<AssistantTicket> getAssistantTicket() throws SQLException {
+    public List<AssistanceTicket> getAssistanceTicket() throws SQLException {
 
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         ResultSet resultTicket= null;
 
-        List<AssistantTicket> resultAssistantTicket = new ArrayList<>();
+        List<AssistanceTicket> resultAssistantTicket = new ArrayList<>();
 
         try {
             preparedStatement = con.prepareStatement(STATEMENT);
@@ -78,7 +77,7 @@ public class ListAssistantTicketDatabase {
                             resultTicket.getInt("idTicket"))
                     );
                 }
-                resultAssistantTicket.add(new AssistantTicket(id,description,idCustomer, productAlias,resultTicketStatus));
+                resultAssistantTicket.add(new AssistanceTicket(id,description,idCustomer, productAlias,resultTicketStatus));
 
             }
 

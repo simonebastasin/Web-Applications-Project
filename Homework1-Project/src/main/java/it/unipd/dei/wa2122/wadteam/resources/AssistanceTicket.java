@@ -4,9 +4,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
-import it.unipd.dei.wa2122.wadteam.resources.TicketStatus;
 
-public class AssistantTicket implements Resource {
+public class AssistanceTicket implements Resource {
 
     private final int id;
     private final String description;
@@ -14,7 +13,7 @@ public class AssistantTicket implements Resource {
     private final String productAlias;
     private final List<TicketStatus> ticketStatusList;
 
-    public AssistantTicket(int id, String description, int idCustomer, String productAlias, List<TicketStatus> ticketStatusList) {
+    public AssistanceTicket(int id, String description, int idCustomer, String productAlias, List<TicketStatus> ticketStatusList) {
         this.id = id;
         this.description = description;
         this.idCustomer = idCustomer;
@@ -53,7 +52,7 @@ public class AssistantTicket implements Resource {
         return jsonObject;
     }
 
-    public static AssistantTicket fromJSON(JSONObject jsonObject) {
+    public static AssistanceTicket fromJSON(JSONObject jsonObject) {
         int id = jsonObject.getInt("id");
         String description = jsonObject.getString("description");
         int idCustomer = jsonObject.getInt("idCustomer");
@@ -62,6 +61,6 @@ public class AssistantTicket implements Resource {
         for(var item : jsonObject.getJSONArray("ticketStatusList")) {
             ticketStatusList.add(TicketStatus.fromJSON((JSONObject) item));
         }
-        return new AssistantTicket(id, description, idCustomer, productAlias,ticketStatusList);
+        return new AssistanceTicket(id, description, idCustomer, productAlias,ticketStatusList);
     }
 }
