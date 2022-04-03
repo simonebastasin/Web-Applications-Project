@@ -76,7 +76,7 @@ public class ListAssistanceTicketDatabase {
                             innerResultSet.getString("status"),
                             innerResultSet.getString("description"),
                             new DateTime(innerResultSet.getObject("ts_Date", LocalDateTime.class)),
-                            innerResultSet.getInt("idTicket"))
+                            innerResultSet.getInt("id_Ticket"))
                     );
                 }
                 resultAssistantTicket.add(new AssistanceTicket(id,description,idCustomer, productAlias,resultTicketStatus));
