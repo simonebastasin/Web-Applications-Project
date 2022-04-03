@@ -95,6 +95,10 @@
         <servlet-name>TicketServlet</servlet-name>
         <url-pattern>/ticket</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TicketServlet</servlet-name>
+        <url-pattern>/ticket/*</url-pattern>
+    </servlet-mapping>
 
     <servlet>
         <servlet-name>AssistantTicketListAdmin</servlet-name>

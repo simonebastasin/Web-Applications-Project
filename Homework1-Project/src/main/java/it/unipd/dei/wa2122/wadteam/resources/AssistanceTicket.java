@@ -7,13 +7,13 @@ import java.util.List;
 
 public class AssistanceTicket implements Resource {
 
-    private final int id;
+    private final Integer id;
     private final String description;
     private final int idCustomer;
     private final String productAlias;
     private final List<TicketStatus> ticketStatusList;
 
-    public AssistanceTicket(int id, String description, int idCustomer, String productAlias, List<TicketStatus> ticketStatusList) {
+    public AssistanceTicket(Integer id, String description, int idCustomer, String productAlias, List<TicketStatus> ticketStatusList) {
         this.id = id;
         this.description = description;
         this.idCustomer = idCustomer;
@@ -21,7 +21,7 @@ public class AssistanceTicket implements Resource {
         this.ticketStatusList = ticketStatusList;
     }
 
-    public final int getId() {
+    public final Integer getId() {
         return id;
     }
 
