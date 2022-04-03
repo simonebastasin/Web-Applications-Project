@@ -1,6 +1,5 @@
 package it.unipd.dei.wa2122.wadteam.dao.owns;
 
-import it.unipd.dei.wa2122.wadteam.resources.Discount;
 import it.unipd.dei.wa2122.wadteam.resources.Product;
 import it.unipd.dei.wa2122.wadteam.resources.ProductCategory;
 
@@ -11,17 +10,17 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListProductsCurrentlyOnSale {
+public class ListProductsCurrentlyOnSaleDatabase {
     /**
      * The SQL statement to be executed
      */
-    private static final String STATEMENT = "SELECT product_alias, name, brand, description, quantity, purchase_price, sale_price, category_name, evidence" +
-            "FROM Owns"+
-            "INNER JOIN Discount ON Owns.ID_Discount=Discount.ID_Discount"+
-            "INNER JOIN Product ON Owns.Product_Alias=Product.Product_Alias"+
+    private static final String STATEMENT = "SELECT product_alias, name, brand, description, quantity, purchase_price, sale_price, category_name, evidence " +
+            "FROM Owns "+
+            "INNER JOIN Discount ON Owns.ID_Discount=Discount.id "+
+            "INNER JOIN Product ON Owns.Product_Alias=Product.Product_Alias "+
             "WHERE End_Date >= CURRENT_DATE() AND Start_Date <= CURRENT_DATE() ";
 
-    private static final String STATEMENT_LIST_PICTURE = "SELECT id_media FROM rappresented_by WHERE product_alias = ?";
+    private static final String STATEMENT_LIST_PICTURE = "SELECT id_media FROM represented_by WHERE product_alias = ?";
 
 
     /**
@@ -35,7 +34,7 @@ public class ListProductsCurrentlyOnSale {
      * @param con
      *            the connection to the database.
      */
-    public ListProductsCurrentlyOnSale(final Connection con) {
+    public ListProductsCurrentlyOnSaleDatabase(final Connection con) {
         this.con = con;
     }
     /**

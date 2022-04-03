@@ -13,6 +13,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Arrays;
+import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.groupingBy;
 
@@ -27,7 +28,7 @@ public abstract class AbstractServlet extends HttpServlet {
     public void writeError(HttpServletRequest request, HttpServletResponse response, Message message, int errorCode) throws IOException, ServletException {
         response.setStatus(errorCode);
         if(request.getHeader("Accept").contains("application/json")) {
-            writeJson(response, message.toJSON());
+            writeJSON(response, message.toJSON());
         } else {
             request.setAttribute("errorCode", errorCode);
             request.setAttribute("message", message);
@@ -37,13 +38,13 @@ public abstract class AbstractServlet extends HttpServlet {
 
     }
 
-    public void writeJson(HttpServletResponse response, JSONObject jsonObject) throws IOException {
+    public void writeJSON(HttpServletResponse response, JSONObject jsonObject) throws IOException {
         response.setContentType(JSON_UTF_8_MEDIA_TYPE);
 
         response.getWriter().write(jsonObject.toString(2));
     }
 
-    public void writeJson(HttpServletResponse response, JSONArray jsonArray) throws IOException {
+    public void writeJSON(HttpServletResponse response, JSONArray jsonArray) throws IOException {
         response.setContentType(JSON_UTF_8_MEDIA_TYPE);
 
         response.getWriter().write(jsonArray.toString(2));
@@ -62,7 +63,7 @@ public abstract class AbstractServlet extends HttpServlet {
             JSONObject jsonObject = new JSONObject();
 
             if(resourcesMap.entrySet().size() == 1) {
-                writeJson(response, new JSONArray(Arrays.stream(resources).map(Resource::toJSON).toArray()));
+                writeJSON(response, new JSONArray(Arrays.stream(resources).map(Resource::toJSON).toArray()));
             } else {
                 for (var item : resourcesMap.entrySet()) {
                     if (showOneItemAsArray && item.getValue().size() == 1) {
@@ -71,7 +72,7 @@ public abstract class AbstractServlet extends HttpServlet {
                         jsonObject.put(decapitalize(item.getKey().getSimpleName()) + "List", new JSONArray(item.getValue().stream().map(Resource::toJSON).toArray()));
                     }
                 }
-                writeJson(response, jsonObject);
+                writeJSON(response, jsonObject);
             }
         } else {
             for (var item : resourcesMap.entrySet()) {
@@ -99,7 +100,24 @@ public abstract class AbstractServlet extends HttpServlet {
 
     }
 
-    public static String decapitalize(String string) {
+    public JSONObject readJSON(HttpServletRequest request) throws IOException {
+        String requestData = request.getReader().lines().collect(Collectors.joining());
+        return new JSONObject(requestData);
+    }
+
+    public JSONObject readHeader(HttpServletRequest request) throws IOException, ServletException {
+        String header = request.getHeader("Content-Type");
+        if(header.contains("application/json")) {
+            return readJSON(request);
+        } else if(header.contains("application/x-www-form-urlencoded")){
+            JSONObject jsonObject = new JSONObject();
+            request.getParameterMap().forEach((key, value) -> jsonObject.put(key, (value != null && value.length == 1) ? value[0] : value));
+            return jsonObject;
+        }
+        return  null;
+    }
+
+    private static String decapitalize(String string) {
         if (string == null || string.length() == 0) {
             return string;
         }
