@@ -17,10 +17,9 @@
 
 <body>
 
+    <c:import url="/jsp/include/header.jsp"/>
     <h1>Electromechanics shop</h1>
-    <a href="<c:url value="/login"/>">Login</a>
-    <a href="<c:url value="/viewmedia/list"/>">View Media</a>
-    <hr />
+
 
     <ul>
         <c:forEach var="item" items="${productCategoryList}">

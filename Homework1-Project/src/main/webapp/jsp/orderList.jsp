@@ -14,6 +14,7 @@
     <title>Order list</title>
 </head>
 <body>
+    <c:import url="/jsp/include/header.jsp"/>
     <h1>Your orders</h1>
     <ul>
         <c:forEach var="order" items="${onlineOrderList}">

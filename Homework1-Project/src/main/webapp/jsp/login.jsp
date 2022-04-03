@@ -7,6 +7,7 @@
     <title>Login</title>
 </head>
 <body>
+<c:import url="/jsp/include/header.jsp"/>
 <h1>Login</h1>
 <hr/>
 <form method="POST" action="<c:url value="/login"/>">

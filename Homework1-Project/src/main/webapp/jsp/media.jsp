@@ -13,6 +13,7 @@
     <title>View Media</title>
 </head>
 <body>
+    <c:import url="/jsp/include/header.jsp"/>
     <h1>List media</h1>
     <hr/>
     <ul>
