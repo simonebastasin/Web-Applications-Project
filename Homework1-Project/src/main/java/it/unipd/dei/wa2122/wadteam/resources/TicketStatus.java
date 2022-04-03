@@ -4,13 +4,13 @@ import org.json.JSONObject;
 
 public class TicketStatus implements Resource{
 
-    private final int id;
+    private final Integer id;
     private final String status;
     private final String description;
     private final DateTime tsDate;
     private final int idTicket;
 
-    public TicketStatus(int id, String status, String description, DateTime tsDate, int idTicket) {
+    public TicketStatus(Integer id, String status, String description, DateTime tsDate, int idTicket) {
         this.id = id;
         this.status = status;
         this.description = description;
@@ -18,7 +18,7 @@ public class TicketStatus implements Resource{
         this.idTicket = idTicket;
     }
 
-    public final int getId() {
+    public final Integer getId() {
         return id;
     }
 

@@ -13,7 +13,7 @@ public class CreateTicketStatusDatabase {
     /**
      * The SQL statement to be executed
      */
-    private static final String STATEMENT = "INSERT INTO ticket_status (status, description, ts_date, id_ticket) VALUES (?, ?, ?, ?) RETURNING id, status, description, ts_date, id_ticket";
+    private static final String STATEMENT = "INSERT INTO ticket_status (status, description, id_ticket) VALUES (?, ?, ?) RETURNING id, status, description, ts_date, id_ticket";
 
     /**
      * The connection to the database
@@ -43,8 +43,7 @@ public class CreateTicketStatusDatabase {
             preparedStatement = con.prepareStatement(STATEMENT);
             preparedStatement.setString(1, ticketStatus.getStatus());
             preparedStatement.setString(2, ticketStatus.getDescription());
-            preparedStatement.setObject(3, ticketStatus.getTsDate().getLocalDateTime());
-            preparedStatement.setInt(4, ticketStatus.getIdTicket());
+            preparedStatement.setInt(3, ticketStatus.getIdTicket());
 
             resultSet = preparedStatement.executeQuery();
 

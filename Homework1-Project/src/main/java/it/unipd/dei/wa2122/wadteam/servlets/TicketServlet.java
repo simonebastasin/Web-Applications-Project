@@ -3,8 +3,10 @@ package it.unipd.dei.wa2122.wadteam.servlets;
 import it.unipd.dei.wa2122.wadteam.dao.assistanceTicket.CreateAssistanceTicketDatabase;
 import it.unipd.dei.wa2122.wadteam.dao.assistanceTicket.GetAssistanceTicketDatabase;
 import it.unipd.dei.wa2122.wadteam.dao.assistanceTicket.ListAssistanceTicketDatabase;
+import it.unipd.dei.wa2122.wadteam.dao.ticketStatus.CreateTicketStatusDatabase;
 import it.unipd.dei.wa2122.wadteam.resources.AssistanceTicket;
 import it.unipd.dei.wa2122.wadteam.resources.Message;
+import it.unipd.dei.wa2122.wadteam.resources.TicketStatus;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -18,6 +20,7 @@ public class TicketServlet extends AbstractDatabaseServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String path = req.getPathInfo() != null ?  req.getPathInfo().substring(1) : "";
+        String[] paths = path.split("/");
         if(path.equals("create")) {
             writeResource(req, resp, "/jsp/createTicket.jsp");
 
@@ -38,6 +41,9 @@ public class TicketServlet extends AbstractDatabaseServlet {
             } catch (SQLException e) {
                 writeError(req, resp, new Message("Error get", "ET02", e.getMessage()), HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             }
+        } else if(paths.length == 2 && paths[0].chars().allMatch( Character::isDigit )) {
+            writeResource(req, resp, "/jsp/respondTicketStatus.jsp");
+
         }
         else {
             writeResource(req, resp, "/jsp/getEmployee.jsp");
@@ -47,6 +53,7 @@ public class TicketServlet extends AbstractDatabaseServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String path = req.getPathInfo() != null ?  req.getPathInfo().substring(1) : "";
+        String[] paths = path.split("/");
         if(path.equals("create")) {
             int username = Integer.parseInt(req.getParameter("username"));
             String productalias = req.getParameter("productalias");
@@ -60,7 +67,19 @@ public class TicketServlet extends AbstractDatabaseServlet {
             } catch (SQLException e) {
                 writeError(req, resp, new Message("Error create ticket", "ET02", e.getMessage()), HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             }
-        } else {
+        } else if(paths.length == 2 && paths[0].chars().allMatch( Character::isDigit )){
+            int idTicket = Integer.parseInt(paths[0]);
+            String status = req.getParameter("status");
+            String description = req.getParameter("description");
+
+            TicketStatus temp = new TicketStatus(null, status, description,null, idTicket);
+            try {
+                TicketStatus ticketstatus = new CreateTicketStatusDatabase(getDataSource().getConnection(), temp).createTicketStatus();
+            } catch (SQLException e) {
+                writeError(req, resp, new Message("Error ticket status", "ET02", e.getMessage()), HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            }
+        }
+        else {
             int id = Integer.parseInt(req.getParameter("identification"));
 
             try {
