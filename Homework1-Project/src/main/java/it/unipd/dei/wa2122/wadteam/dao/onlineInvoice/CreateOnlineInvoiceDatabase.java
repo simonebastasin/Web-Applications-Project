@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 public class CreateOnlineInvoiceDatabase {
 
     /** SQL statement to be executed */
-    private static final String STATEMENT = "INSERT INTO Online_Invoice (id_order, transaction_id, payment_type, oi_date, total_price) VALUES (?, ?, ?, ?, ?) RETURNING id, id_order, transaction_id, payment_type, oi_date, total_price";
+    private static final String STATEMENT = "INSERT INTO Online_Invoice (id_order, transaction_id, payment_type, oi_date, total_price) VALUES (?, ?, ?::paymentmethodonline, ?, ?) RETURNING id, id_order, transaction_id, payment_type, oi_date, total_price";
 
     /** connection to database */
     private final Connection con;

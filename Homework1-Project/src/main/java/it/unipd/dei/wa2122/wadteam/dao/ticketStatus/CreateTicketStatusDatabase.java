@@ -13,7 +13,7 @@ public class CreateTicketStatusDatabase {
     /**
      * The SQL statement to be executed
      */
-    private static final String STATEMENT = "INSERT INTO ticket_status (status, description, id_ticket) VALUES (?, ?, ?) RETURNING id, status, description, ts_date, id_ticket";
+    private static final String STATEMENT = "INSERT INTO ticket_status (status, description, id_ticket) VALUES (?::ticketstatus, ?, ?) RETURNING id, status, description, ts_date, id_ticket";
 
     /**
      * The connection to the database

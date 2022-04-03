@@ -14,7 +14,7 @@ public class CreateOrderStatusDatabase {
     /**
      * The SQL statement to be executed
      */
-    private static final String STATEMENT = "INSERT INTO order_status (status, description, os_datetime, id_order) VALUES (?, ?, ?, ?) RETURNING id, status, description, os_datetime, id_order";
+    private static final String STATEMENT = "INSERT INTO order_status (status, description, os_datetime, id_order) VALUES (?::orderstatus, ?, ?, ?) RETURNING id, status, description, os_datetime, id_order";
 
     /**
      * The connection to the database

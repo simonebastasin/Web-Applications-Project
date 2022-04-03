@@ -19,7 +19,7 @@ public class CreateOnlineOrderDatabase {
 
     private static final String STATEMENT_INSERT_PRODUCT = "INSERT INTO Contains (id_order, product_alias, quantity, price_applied) VALUES (?, ?, ?, ?) RETURNING product_alias, quantity, price_applied";
 
-    private static final String STATEMENT_INSERT_ORDER_STATUS = "INSERT INTO order_Status (Status, Description, ID_Order) VALUES (?, ?, ?) RETURNING id, Status, Description, ID_Order, OS_Datetime";
+    private static final String STATEMENT_INSERT_ORDER_STATUS = "INSERT INTO order_Status (Status, Description, ID_Order) VALUES (?::orderstatus, ?, ?) RETURNING id, Status, Description, ID_Order, OS_Datetime";
     /**
      * The connection to the database
      */

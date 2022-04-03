@@ -66,7 +66,7 @@ public class ListTicketStatusDatabase {
                         resultSet.getString("status"),
                         resultSet.getString("description"),
                         new DateTime(resultSet.getObject("ts_Date", LocalDateTime.class)),
-                        resultSet.getInt("idTicket")
+                        resultSet.getInt("id_Ticket")
                 );
                 resultTicketStatus.add(resultTicketStatusItem);
             }

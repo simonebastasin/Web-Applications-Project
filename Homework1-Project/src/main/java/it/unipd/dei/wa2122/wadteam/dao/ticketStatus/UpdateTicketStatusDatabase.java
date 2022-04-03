@@ -13,7 +13,7 @@ public class UpdateTicketStatusDatabase {
     /**
      * The SQL statement to be executed
      */
-    private static final String STATEMENT = "UPDATE ticket_status SET status = ?, description = ? , ts_date = ?, id_ticket = ? WHERE id = ? ";
+    private static final String STATEMENT = "UPDATE ticket_status SET status = ?::ticketstatus, description = ? , ts_date = ?, id_ticket = ? WHERE id = ? ";
 
     /**
      * The connection to the database
@@ -55,7 +55,7 @@ public class UpdateTicketStatusDatabase {
                         resultSet.getString("status"),
                         resultSet.getString("description"),
                         new DateTime(resultSet.getObject("ts_Date", LocalDateTime.class)),
-                        resultSet.getInt("idTicket")
+                        resultSet.getInt("id_Ticket")
                 );
             }
         } finally {

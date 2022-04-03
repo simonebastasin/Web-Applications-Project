@@ -14,7 +14,7 @@ public class UpdateOrderStatusDatabase {
     /**
      * The SQL statement to be executed
      */
-    private static final String STATEMENT = "UPDATE order_status SET status = ?, description = ?, os_datetime = ?, id_order = ? WHERE id = ?";
+    private static final String STATEMENT = "UPDATE order_status SET status = ?::orderstatus, description = ?, os_datetime = ?, id_order = ? WHERE id = ?";
 
     /**
      * The connection to the database
