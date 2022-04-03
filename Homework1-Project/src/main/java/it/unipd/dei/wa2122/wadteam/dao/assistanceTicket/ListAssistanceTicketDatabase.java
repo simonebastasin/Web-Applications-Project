@@ -45,6 +45,8 @@ public class ListAssistanceTicketDatabase {
     public List<AssistanceTicket> getAssistanceTicket() throws SQLException {
 
         PreparedStatement preparedStatement = null;
+        PreparedStatement innerPreparedStatement = null;
+
         ResultSet resultSet = null;
         ResultSet innerResultSet = null;
 
@@ -62,11 +64,9 @@ public class ListAssistanceTicketDatabase {
                 int idCustomer = resultSet.getInt("ID_Customer");
                 String productAlias =  resultSet.getString("Product_Alias");
 
-                preparedStatement.close();
-
-                preparedStatement = con.prepareStatement(STATEMENT_STATUS);
-                preparedStatement.setInt(1, id);
-                innerResultSet = preparedStatement.executeQuery();
+                innerPreparedStatement = con.prepareStatement(STATEMENT_STATUS);
+                innerPreparedStatement.setInt(1, id);
+                innerResultSet = innerPreparedStatement.executeQuery();
 
                 List<TicketStatus> resultTicketStatus = new ArrayList<>();
 
@@ -81,6 +81,7 @@ public class ListAssistanceTicketDatabase {
                 }
                 resultAssistantTicket.add(new AssistanceTicket(id,description,idCustomer, productAlias,resultTicketStatus));
                 innerResultSet.close();
+                innerPreparedStatement.close();
             }
 
         } finally {
@@ -94,6 +95,10 @@ public class ListAssistanceTicketDatabase {
 
             if (preparedStatement != null) {
                 preparedStatement.close();
+            }
+
+            if (innerPreparedStatement != null) {
+                innerPreparedStatement.close();
             }
         }
 

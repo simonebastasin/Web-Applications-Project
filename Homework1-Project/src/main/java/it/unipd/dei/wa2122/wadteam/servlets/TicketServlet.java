@@ -2,6 +2,7 @@ package it.unipd.dei.wa2122.wadteam.servlets;
 
 import it.unipd.dei.wa2122.wadteam.dao.assistanceTicket.CreateAssistanceTicketDatabase;
 import it.unipd.dei.wa2122.wadteam.dao.assistanceTicket.GetAssistanceTicketDatabase;
+import it.unipd.dei.wa2122.wadteam.dao.assistanceTicket.ListAssistanceTicketDatabase;
 import it.unipd.dei.wa2122.wadteam.resources.AssistanceTicket;
 import it.unipd.dei.wa2122.wadteam.resources.Message;
 import jakarta.servlet.ServletException;
@@ -10,6 +11,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 public class TicketServlet extends AbstractDatabaseServlet {
 
@@ -19,6 +21,23 @@ public class TicketServlet extends AbstractDatabaseServlet {
         if(path.equals("create")) {
             writeResource(req, resp, "/jsp/createTicket.jsp");
 
+        } else if(path.equals("list")) {
+            try {
+                var listTicket = new ListAssistanceTicketDatabase(getDataSource().getConnection()).getAssistanceTicket();
+                writeResource(req, resp, "/jsp/ticket.jsp", listTicket.toArray(AssistanceTicket[]::new));
+            } catch (SQLException e) {
+                writeError(req, resp, new Message("Error get", "ET02", e.getMessage()), HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            }
+        } else if(path.chars().allMatch( Character::isDigit ) && !path.equals("")) {
+            int id = Integer.parseInt(path);
+
+            try {
+                AssistanceTicket assistanceTicket = new GetAssistanceTicketDatabase(getDataSource().getConnection(), id).getAssistanceTicket();
+
+                writeResource(req, resp, "/jsp/ticket.jsp", assistanceTicket);
+            } catch (SQLException e) {
+                writeError(req, resp, new Message("Error get", "ET02", e.getMessage()), HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            }
         }
         else {
             writeResource(req, resp, "/jsp/getEmployee.jsp");
@@ -37,7 +56,7 @@ public class TicketServlet extends AbstractDatabaseServlet {
 
             try {
                 AssistanceTicket assistanceTicket = new CreateAssistanceTicketDatabase(getDataSource().getConnection(), temp).createAssistantTicket();
-                writeResource(req, resp, "/jsp/ticket.jsp", true, assistanceTicket);
+                writeResource(req, resp, "/jsp/ticket.jsp", assistanceTicket);
             } catch (SQLException e) {
                 writeError(req, resp, new Message("Error create ticket", "ET02", e.getMessage()), HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             }
@@ -47,7 +66,7 @@ public class TicketServlet extends AbstractDatabaseServlet {
             try {
                 AssistanceTicket assistanceTicket = new GetAssistanceTicketDatabase(getDataSource().getConnection(), id).getAssistanceTicket();
 
-                writeResource(req, resp, "/jsp/ticket.jsp", true, assistanceTicket);
+                writeResource(req, resp, "/jsp/ticket.jsp", assistanceTicket);
             } catch (SQLException e) {
                 writeError(req, resp, new Message("Error get", "ET02", e.getMessage()), HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             }
