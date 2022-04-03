@@ -36,6 +36,15 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>OrderDetailsServlet</servlet-name>
+        <servlet-class>it.unipd.dei.wa2122.wadteam.servlets.OrderDetailsServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>OrderDetailsServlet</servlet-name>
+        <url-pattern>/order</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>UploadMediaServlet</servlet-name>
         <servlet-class>it.unipd.dei.wa2122.wadteam.servlets.UploadMediaServlet</servlet-class>
         <multipart-config>

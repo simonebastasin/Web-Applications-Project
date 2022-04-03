@@ -55,7 +55,7 @@ public class GetOnlineOrderByIdDatabase {
      * @throws SQLException
      *             if any error occurs while deleting the onlineOrder.
      */
-    public OnlineOrder getOnlineOrderByCustomer() throws SQLException {
+    public OnlineOrder getOnlineOrderId() throws SQLException {
 
         PreparedStatement pstmt = null;
         ResultSet rs = null;
