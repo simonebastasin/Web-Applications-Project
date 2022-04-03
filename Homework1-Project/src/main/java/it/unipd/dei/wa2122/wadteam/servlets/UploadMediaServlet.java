@@ -1,6 +1,7 @@
 package it.unipd.dei.wa2122.wadteam.servlets;
 
 import it.unipd.dei.wa2122.wadteam.dao.media.CreateMediaDatabase;
+import it.unipd.dei.wa2122.wadteam.resources.ErrorMessage;
 import it.unipd.dei.wa2122.wadteam.resources.Media;
 import it.unipd.dei.wa2122.wadteam.resources.Message;
 import jakarta.servlet.ServletException;
@@ -40,16 +41,13 @@ public class UploadMediaServlet extends AbstractDatabaseServlet {
             if(media != null) {
                 Message m = new Message("Upload completed successfully.",
                         media.getId());
-                writeResource(request,response, "/jsp/message.jsp",m);
+                writeResource(request,response, "/jsp/message.jsp",false, m);
             } else {
-                Message m = new Message("Upload not completed.", "EU01", "There was a problem with upload");
-                writeError(request, response, m, HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                writeError(request, response, new ErrorMessage.UploadError("There was a problem with upload"));
             }
 
         } catch (SQLException e) {
-            Message m = new Message("Upload not completed.", "EU01", "There was a problem with upload");
-            writeError(request, response, m, HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-
+            writeError(request, response, new ErrorMessage.SqlInternalError(e.getMessage()));
         }
 
     }

@@ -1,5 +1,6 @@
 package it.unipd.dei.wa2122.wadteam.servlets;
 
+import it.unipd.dei.wa2122.wadteam.resources.ErrorMessage;
 import it.unipd.dei.wa2122.wadteam.resources.Message;
 import it.unipd.dei.wa2122.wadteam.resources.Resource;
 import jakarta.servlet.ServletException;
@@ -24,13 +25,29 @@ public abstract class AbstractServlet extends HttpServlet {
     private static final String JSON_UTF_8_MEDIA_TYPE = "application/json; charset=utf-8";
 
 
-
+    /**
+     * Please migrate to writeError with ErrorMessage and not with Message
+     */
+    @Deprecated
     public void writeError(HttpServletRequest request, HttpServletResponse response, Message message, int errorCode) throws IOException, ServletException {
         response.setStatus(errorCode);
         if(request.getHeader("Accept").contains("application/json")) {
             writeJSON(response, message.toJSON());
         } else {
             request.setAttribute("errorCode", errorCode);
+            request.setAttribute("message", message);
+            request.getRequestDispatcher("/jsp/error.jsp").forward(request, response);
+
+        }
+
+    }
+
+    public void writeError(HttpServletRequest request, HttpServletResponse response, ErrorMessage message) throws IOException, ServletException {
+        response.setStatus(message.getHttpErrorCode());
+        if(request.getHeader("Accept").contains("application/json")) {
+            writeJSON(response, message.toJSON());
+        } else {
+            request.setAttribute("errorCode", message.getErrorCode());
             request.setAttribute("message", message);
             request.getRequestDispatcher("/jsp/error.jsp").forward(request, response);
 
@@ -50,8 +67,19 @@ public abstract class AbstractServlet extends HttpServlet {
         response.getWriter().write(jsonArray.toString(2));
     }
 
+    /**
+     * Please add showOneItemAsArray parameter to the call function!
+     * if the value of showOneItemAsArray is false in the case of a
+     * single element of a certain type it is passed as object, if it is true in the
+     * case of a single element it is anyway encapsulated in a list
+     */
+    @Deprecated
     public void writeResource(HttpServletRequest request, HttpServletResponse response, String jsp, Resource... resources) throws IOException, ServletException {
         writeResource(request,response, jsp, false, resources);
+    }
+
+    public void writeResource(HttpServletRequest request, HttpServletResponse response, String jsp) throws IOException, ServletException {
+        writeResource(request,response, jsp, false);
     }
 
     public void writeResource(HttpServletRequest request, HttpServletResponse response, String jsp, boolean showOneItemAsArray, Resource... resources) throws IOException, ServletException {

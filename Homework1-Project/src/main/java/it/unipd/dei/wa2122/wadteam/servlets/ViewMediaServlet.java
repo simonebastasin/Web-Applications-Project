@@ -3,6 +3,7 @@ package it.unipd.dei.wa2122.wadteam.servlets;
 import it.unipd.dei.wa2122.wadteam.dao.media.GetMediaByteFromMediaDatabase;
 import it.unipd.dei.wa2122.wadteam.dao.media.GetMediaDatabase;
 import it.unipd.dei.wa2122.wadteam.dao.media.ListMediaDatabase;
+import it.unipd.dei.wa2122.wadteam.resources.ErrorMessage;
 import it.unipd.dei.wa2122.wadteam.resources.Media;
 import it.unipd.dei.wa2122.wadteam.resources.Message;
 import it.unipd.dei.wa2122.wadteam.resources.Resource;
@@ -27,12 +28,9 @@ public class ViewMediaServlet extends AbstractDatabaseServlet {
 
                 List<Media> mediaList = new ListMediaDatabase(connection).getMedia();
 
-                writeResource(request,response, "/jsp/media.jsp", mediaList.toArray(Resource[]::new));
-
+                writeResource(request,response, "/jsp/media.jsp", false, mediaList.toArray(Resource[]::new));
             } catch (SQLException e) {
-                Message m = new Message("Error media list", "EV04", e.getMessage());
-
-                writeError(request, response, m, HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                writeError(request, response, new ErrorMessage.SqlInternalError(e.getMessage()));
             }
         } else {
             boolean thumb = false;
@@ -53,25 +51,17 @@ public class ViewMediaServlet extends AbstractDatabaseServlet {
                     if (blob != null && blob.length > 0) {
                         writeBlob(response, blob, media.getMimetype(), thumb ? media.getFilename() + "_thumb.png" : media.getFilename(), true);
                     } else {
-                        Message m = new Message("Media no content", "EV01", "Media not found");
-
-                        writeError(request,response, m, HttpServletResponse.SC_NO_CONTENT);
+                        writeError(request,response, new ErrorMessage.EmptyMediaError("The media is empty"));
                     }
 
                 } else {
-                    Message m = new Message("Media not found", "EV01", "Media not found");
-
-                    writeError(request, response, m, HttpServletResponse.SC_NOT_FOUND);
+                    writeError(request, response, new ErrorMessage.MediaNotFoundError("The media wasn't found"));
                 }
 
             } catch (SQLException e) {
-                Message m = new Message("Media error", "EV02", "There was a problem with find media: " + e.getMessage());
-
-                writeError(request, response, m, HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                writeError(request, response, new ErrorMessage.SqlInternalError(e.getMessage()));
             } catch (NumberFormatException e) {
-                Message m = new Message("Error media id", "EV03", "The media ID is not in the correct format");
-
-                writeError(request, response, m, HttpServletResponse.SC_BAD_REQUEST);
+                writeError(request, response, new ErrorMessage.IncorrectlyFormattedPathError("The media ID is not in the correct format"));
             }
         }
     }
