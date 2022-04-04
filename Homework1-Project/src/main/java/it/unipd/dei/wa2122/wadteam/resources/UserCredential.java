@@ -8,13 +8,19 @@ public class UserCredential implements Resource {
     private final String password;
     private final TypeUser type;
     private final String role;
+    private final String email;
 
-     public UserCredential(String identification, String password, TypeUser type, String role) {
+    @Deprecated
+    public UserCredential(String identification, String password, TypeUser type, String role) {
+        this(identification, password, type, role, null);
+    }
+     public UserCredential(String identification, String password, TypeUser type, String role, String email) {
         this.identification = identification;
         this.role=role;
         this.password = password;
         this.type = type;
-    }
+         this.email = email;
+     }
 
     public String getIdentification() {
         return identification;

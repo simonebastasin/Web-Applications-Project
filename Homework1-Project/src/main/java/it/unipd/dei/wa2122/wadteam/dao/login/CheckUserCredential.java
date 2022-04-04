@@ -14,8 +14,8 @@ public class CheckUserCredential {
     /**
      * The SQL statement to be executed
      */
-    private final String STATEMENT_EMPLOYEE = "Select * from employee where (username = ? AND password = sha384(?::bytea))";
-    private final String STATEMENT_CUSTOMER = "Select * from customer where (username = ? AND password = sha384(?::bytea)) OR (email = ? and password = sha384(?::bytea))";
+    private final String STATEMENT_EMPLOYEE = "Select username, name, surname, role_name from employee where (username = ? AND password = sha384(?::bytea))";
+    private final String STATEMENT_CUSTOMER = "Select username, name, surname, email from customer where (username = ? AND password = sha384(?::bytea)) OR (email = ? and password = sha384(?::bytea))";
 
     /**
      * The connection to the database
