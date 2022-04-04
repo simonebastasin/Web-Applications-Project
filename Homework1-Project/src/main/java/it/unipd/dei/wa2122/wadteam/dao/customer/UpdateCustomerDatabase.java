@@ -37,10 +37,10 @@ public class UpdateCustomerDatabase {
             preparedStatement = con.prepareStatement(STATEMENT);
             preparedStatement.setString(1, customer.getName());
             preparedStatement.setString(2, customer.getSurname());
-            preparedStatement.setString(3, customer.getFiscal_code());
+            preparedStatement.setString(3, customer.getFiscalCode());
             preparedStatement.setString(4, customer.getAddress());
             preparedStatement.setString(5, customer.getEmail());
-            preparedStatement.setString(6, customer.getPhone_number());
+            preparedStatement.setString(6, customer.getPhoneNumber());
             preparedStatement.setString(7, customer.getUsername());
             preparedStatement.setString(8, customer.getPassword());
 

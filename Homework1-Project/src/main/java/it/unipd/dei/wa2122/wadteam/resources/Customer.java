@@ -7,21 +7,21 @@ public class Customer implements Resource {
     final int id;
     final String name;
     final String surname;
-    final String fiscal_code;
+    final String fiscalCode;
     final String address;
     final String email;
-    final String phone_number;
+    final String phoneNumber;
     final String username;
     final String password;
 
-    public Customer(int id,String name,String surname,String fiscal_code,String address,String email, String  phone_number,String username,String password) {
+    public Customer(int id,String name,String surname,String fiscalCode,String address,String email, String  phoneNumber,String username,String password) {
         this.id=id;
         this.name = name;
         this.surname = surname;
-        this.fiscal_code= fiscal_code;
+        this.fiscalCode= fiscalCode;
         this.address=address;
         this.email=email;
-        this.phone_number=phone_number;
+        this.phoneNumber=phoneNumber;
         this.username = username;
         this.password = password;
     }
@@ -29,10 +29,10 @@ public class Customer implements Resource {
     public final int getId(){return id;}
     public final String getName(){return name;}
     public final String getSurname() {return surname;}
-    public final String getFiscal_code(){return fiscal_code;}
+    public final String getFiscalCode(){return fiscalCode;}
     public final String getAddress(){return address;}
     public final String getEmail() {return email;}
-    public final String getPhone_number(){return phone_number;}
+    public final String getPhoneNumber(){return phoneNumber;}
     public final String getUsername(){return username;}
     public final String getPassword(){return password;}
 
@@ -42,10 +42,12 @@ public class Customer implements Resource {
         jsonObject.put("id", id);
         jsonObject.put("name", name);
         jsonObject.put("surname", surname);
-        jsonObject.put("fiscalCode", fiscal_code);
-        jsonObject.put("address", address);
+        jsonObject.put("fiscalCode", fiscalCode);
+        if(address!=null)
+            jsonObject.put("address", address);
         jsonObject.put("email", email);
-        jsonObject.put("phoneNumber", phone_number);
+        if(phoneNumber!=null)
+            jsonObject.put("phoneNumber", phoneNumber);
         jsonObject.put("username", username);
         jsonObject.put("password", password);
         return jsonObject;
@@ -54,12 +56,16 @@ public class Customer implements Resource {
         int id = jsonObject.getInt("id");
         String name = jsonObject.getString("name");
         String surname = jsonObject.getString("surname");
-        String fiscal_code = jsonObject.getString("fiscalCode");
-        String address = jsonObject.getString("address");
+        String fiscalCode = jsonObject.getString("fiscalCode");
+        String address=null;
+        if(jsonObject.has("address"))
+         address = jsonObject.getString("address");
         String email=jsonObject.getString("email");
-        String phone_number=jsonObject.getString("phoneNumber");
+        String phoneNumber=null;
+        if(jsonObject.has("phoneNumber"))
+             phoneNumber=jsonObject.getString("phoneNumber");
         String username=jsonObject.getString("username");
         String password=jsonObject.getString("password");
-        return new Customer(id,name,surname,fiscal_code,address,email,phone_number,username,password);
+        return new Customer(id,name,surname,fiscalCode,address,email,phoneNumber,username,password);
     }
 }
