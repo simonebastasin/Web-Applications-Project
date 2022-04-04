@@ -51,6 +51,7 @@ public class GetProductByCategoryDatabase {
 
         try {
             preparedStatement = con.prepareStatement(STATEMENT);
+            preparedStatement.setString(1,category);
 
             resultSet = preparedStatement.executeQuery();
 
