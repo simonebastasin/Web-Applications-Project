@@ -42,6 +42,9 @@ public abstract class AbstractServlet extends HttpServlet {
 
     }
 
+    /**
+     * write ErrorMessage, the operation is similar to writeresource
+     */
     public void writeError(HttpServletRequest request, HttpServletResponse response, ErrorMessage message) throws IOException, ServletException {
         response.setStatus(message.getHttpErrorCode());
         if(request.getHeader("Accept").contains("application/json")) {
@@ -55,12 +58,18 @@ public abstract class AbstractServlet extends HttpServlet {
 
     }
 
+    /**
+     * write a json object to output
+     */
     public void writeJSON(HttpServletResponse response, JSONObject jsonObject) throws IOException {
         response.setContentType(JSON_UTF_8_MEDIA_TYPE);
 
         response.getWriter().write(jsonObject.toString(2));
     }
 
+    /**
+     * write a json array to output
+     */
     public void writeJSON(HttpServletResponse response, JSONArray jsonArray) throws IOException {
         response.setContentType(JSON_UTF_8_MEDIA_TYPE);
 
@@ -78,10 +87,58 @@ public abstract class AbstractServlet extends HttpServlet {
         writeResource(request,response, jsp, false, resources);
     }
 
+    /**
+     * a version of writeresource that does not print parameters in ouput or even json, only jsp
+     * even if the header accept is application/json
+     *
+     * use only in the service pages not useful in the rest api. in case you need to pass parameters to the jsp pass
+     * them before calling this function
+     *
+     * the session info is passed anyway
+     */
     public void writeResource(HttpServletRequest request, HttpServletResponse response, String jsp) throws IOException, ServletException {
-        writeResource(request,response, jsp, false);
+        // TODO decommentare  a sessioni complete
+        //  request.setAttribute("user", request.getSession(false).getAttribute("user"));
+        request.getRequestDispatcher(jsp).forward(request, response);
     }
 
+    /**
+     * writes the output resources in html or json according to the header accept: if there is application/json
+     * it returns a json, in all other cases it delegates the creation of the page to the jsp
+     *
+     * pass the jsp relative url in the parameter <code>jsp</code>, with a starter slash, like <code>/jsp/index.jsp</code>
+     *
+     * pass all the resources to be passed through the varargs <code>resources</code> at the end of the function,
+     * in the case of several resources of different types merge them into an array before sending them.
+     * in the case of lists use the  method <code>.toArray(Resource[]::new)</code>
+     * {@link java.util.List#toArray(Object[])} to pass the resources
+     * (modify <code>Resource[]</code> with the actual type)
+     *
+     * the variable names in the jsp are automatically generated according to the last derivation of the
+     * {@link Resource} class:
+     * If it is a list of  {@link it.unipd.dei.wa2122.wadteam.resources.Product} it is called
+     * <code>productList</code>, with the initial lowercase {@link AbstractServlet#decapitalize(String)}
+     * and with the fixed post <code>List</code>.
+     * If it is a single item and the boolean value <code>showOneItemAsArray</code> is set to <code>true</code> it is
+     * always added to a list, if it is set to false it is exposed as a single item named like the lowercase class,
+     * like <code>product</code>
+     *
+     * the class {@link it.unipd.dei.wa2122.wadteam.resources.UserCredential} was automatically send to jsp if
+     * it is present in the session and is called <code>user</code> TODO
+     *
+     * @param request the HttpServletRequest istance
+     * @param response the HttpServletResponse istance
+     * @param jsp the relative url of the jsp
+     * @param showOneItemAsArray a boolean value telling what to do in case of a single item of a class:
+     *                          whether to put it in a list of a single item <code>true</code> or not <code>false</code>
+     *                          the resource name will always be with the postfix in the jsp name <code>List</code>
+     *                          in the case of <code>true</code>, otherwise it can be either with the postfix in the
+     *                          case of several items or without in the case of a single item
+     * @param resources the resoruce varargs. Accept 0, 1, 2, ..., infty item of resource or a array.
+     *                  if you need to send a list use use the  method <code>.toArray(Resource[]::new)</code>
+     *                  {@link java.util.List#toArray(Object[])} to pass the resources. If you have more than one array
+     *                  merge the array before sending.
+     */
     public void writeResource(HttpServletRequest request, HttpServletResponse response, String jsp, boolean showOneItemAsArray, Resource... resources) throws IOException, ServletException {
         var resourcesMap = Arrays.stream(resources).collect(groupingBy(Resource::getClass));
 
@@ -110,10 +167,20 @@ public abstract class AbstractServlet extends HttpServlet {
                     request.setAttribute(decapitalize(item.getKey().getSimpleName()) + "List", item.getValue());
                 }
             }
+            // TODO decommentare  a sessioni complete
+            //  request.setAttribute("user", request.getSession(false).getAttribute("user"));
             request.getRequestDispatcher(jsp).forward(request, response);
         }
     }
 
+    /**
+     * write a blob (binary large object) to the output in servlet
+     * @param response the HttpServletResponse instance
+     * @param blob the blob to send to output
+     * @param mimetype the mimetype
+     * @param filename the filename that uses for helper the browser
+     * @param inline true if the Content-disposition are inline, false otherwise.
+     */
     public void writeBlob(HttpServletResponse response, byte[] blob, String mimetype, String filename, boolean inline) throws IOException {
         response.setContentType(mimetype);
         if(inline)
@@ -128,12 +195,24 @@ public abstract class AbstractServlet extends HttpServlet {
 
     }
 
+    /**
+     * read json post data
+     */
     public JSONObject readJSON(HttpServletRequest request) throws IOException {
         String requestData = request.getReader().lines().collect(Collectors.joining());
         return new JSONObject(requestData);
     }
 
-    public JSONObject readHeader(HttpServletRequest request) throws IOException, ServletException {
+    /**
+     * this function simplifies and unifies the management of the reading of input parameters on post
+     *
+      *depending on the header conten-type of the body of the post reads the data and saves it in a json object which
+     * can be used as a key-value array or as an object to  send to the readjson functions of the various resources.
+     * @param request the HttpServletRequest istance
+     * @return a JSONObject in key-value notation that ca be use as key-value array or to  send to the readjson
+     * functions of the various resources
+     */
+    public JSONObject readInputParameters(HttpServletRequest request) throws IOException, ServletException {
         String header = request.getHeader("Content-Type");
         if(header.contains("application/json")) {
             return readJSON(request);
@@ -145,6 +224,12 @@ public abstract class AbstractServlet extends HttpServlet {
         return  null;
     }
 
+    /**
+     * a high speed funciont that convert the first letter of a string to upper case to lower case, used for send
+     * a java-like name of value to jsp
+     * @param string the string to be decapitalize
+     * @return a string with first lettere in lower case
+     */
     private static String decapitalize(String string) {
         if (string == null || string.length() == 0) {
             return string;
