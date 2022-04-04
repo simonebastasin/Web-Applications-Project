@@ -20,7 +20,7 @@ public class ProductDetailServlet extends AbstractDatabaseServlet {
         try {
             product = new GetProductDatabase((getDataSource().getConnection()), req.getParameter("alias")).getProduct();
 
-            writeResource(req, res, "/jsp/productDetail.jsp", true, product);
+            writeResource(req, res, "/jsp/productDetail.jsp", false, product);
 
         } catch (SQLException e) {
             writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));

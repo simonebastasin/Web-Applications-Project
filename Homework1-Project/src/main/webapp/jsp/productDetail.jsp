@@ -12,6 +12,6 @@
     <title>Electromechanics shop</title>
 </head>
 <body>
-    <c:forEach var = "item" items="${product}">
+  
 </body>
 </html>
