@@ -10,10 +10,6 @@ public class UserCredential implements Resource {
     private final String role;
     private final String email;
 
-    @Deprecated
-    public UserCredential(String identification, String password, TypeUser type, String role) {
-        this(identification, password, type, role, null);
-    }
      public UserCredential(String identification, String password, TypeUser type, String role, String email) {
         this.identification = identification;
         this.role=role;
@@ -38,12 +34,20 @@ public class UserCredential implements Resource {
         return role;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
     public JSONObject toJSON() {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("identification", identification);
-        jsonObject.put("password", password);
+        if(password != null)
+            jsonObject.put("password", password);
         jsonObject.put("type", type);
+        if(email != null)
+            jsonObject.put("email", email);
         return jsonObject;
     }
+
     public enum TypeUser {EMPLOYEE, CUSTOMER}
 }

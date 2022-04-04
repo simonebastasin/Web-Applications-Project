@@ -80,17 +80,12 @@ public class CheckUserCredential {
             if (resultSet.next()) {
                 if(userCredential.getType()== TypeUser.EMPLOYEE) {
                     resultUserCredential = new UserCredential(resultSet.getString("username"), null,
-                        TypeUser.EMPLOYEE,resultSet.getString("role_name"));
+                        TypeUser.EMPLOYEE,resultSet.getString("role_name"), null);
                 }
                 else if (userCredential.getType()== TypeUser.CUSTOMER) {
                     resultUserCredential = new UserCredential(resultSet.getString("username"), null,
-                            TypeUser.CUSTOMER, null);
+                            TypeUser.CUSTOMER, null, resultSet.getString("email"));
                 }
-            }
-            else{
-                resultUserCredential = new UserCredential(null, null,
-                        null,null);
-
             }
 
         } finally {

@@ -24,7 +24,7 @@ public class LoginServlet extends AbstractDatabaseServlet {
         String password = req.getParameter("password");
         TypeUser type = TypeUser.valueOf(req.getParameter("usertype").toUpperCase(Locale.ROOT));
 
-        UserCredential userCredentialAttempt = new UserCredential(identification, password, type, null);
+        UserCredential userCredentialAttempt = new UserCredential(identification, password, type, null, null);
         try {
             UserCredential userCredential = new CheckUserCredential(getDataSource().getConnection(), userCredentialAttempt).getUserCredentials();
             if (userCredential.getIdentification() != null) {
