@@ -41,7 +41,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>OrderDetailsServlet</servlet-name>
-        <url-pattern>/order</url-pattern>
+        <url-pattern>/orderList/order</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -115,5 +115,14 @@
         <res-type>javax.sql.DataSource</res-type>
         <res-auth>Container</res-auth>
     </resource-ref>
+
+    <filter>
+        <filter-name>UserFilter</filter-name>
+        <filter-class>it.unipd.dei.wa2122.wadteam.filter.UserFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>UserFilter</filter-name>
+        <url-pattern>/orderList/*</url-pattern>
+    </filter-mapping>
 
 </web-app>

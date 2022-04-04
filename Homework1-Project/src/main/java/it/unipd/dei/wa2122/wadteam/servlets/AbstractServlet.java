@@ -98,7 +98,8 @@ public abstract class AbstractServlet extends HttpServlet {
      */
     public void writeResource(HttpServletRequest request, HttpServletResponse response, String jsp) throws IOException, ServletException {
         // TODO decommentare  a sessioni complete
-        //  request.setAttribute("user", request.getSession(false).getAttribute("user"));
+        //request.setAttribute("user", request.getSession(false).getAttribute("user"));
+
         request.getRequestDispatcher(jsp).forward(request, response);
     }
 

@@ -21,7 +21,7 @@
             <li>
                 <b>Order ID: ${order.idOrder}</b>
 
-                <form method="GET" action="<c:url value="/order"/>">
+                <form method="GET" action="<c:url value="/orderList/order"/>">
                     <input type="hidden" name="ID" value="${order.idOrder}">
                     <input type ="submit" value = "details">
                 </form>

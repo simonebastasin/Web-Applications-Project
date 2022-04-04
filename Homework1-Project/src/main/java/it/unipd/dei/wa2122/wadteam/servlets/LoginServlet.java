@@ -6,6 +6,7 @@ import it.unipd.dei.wa2122.wadteam.resources.UserCredential;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -28,7 +29,10 @@ public class LoginServlet extends AbstractDatabaseServlet {
         try {
             UserCredential userCredential = new CheckUserCredential(getDataSource().getConnection(), userCredentialAttempt).getUserCredentials();
             if (userCredential.getIdentification() != null) {
-                writeResource(req, resp, "/jsp/user.jsp", userCredential);
+                HttpSession session = req.getSession();
+                session.setAttribute("user",userCredential);
+                //writeResource(req, resp, "/jsp/user.jsp", userCredential);
+                resp.sendRedirect(req.getContextPath()+"/");
             } else {
                 writeError(req, resp, new Message("Error login", "EV01", "Username or password aren't correct"),HttpServletResponse.SC_UNAUTHORIZED);
             }
