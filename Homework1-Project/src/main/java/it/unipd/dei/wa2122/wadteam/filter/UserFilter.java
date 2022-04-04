@@ -14,7 +14,6 @@ import java.util.Base64;
 
 public class UserFilter extends AbstractFilter {
 
-    private static final Base64.Decoder DECODER = Base64.getDecoder();
     private static final String USER_ATTRIBUTE = "user";
     private FilterConfig config = null;
     private DataSource ds;
@@ -47,7 +46,6 @@ public class UserFilter extends AbstractFilter {
         final HttpServletResponse res = (HttpServletResponse) servletResponse;
 
         HttpSession session = req.getSession(false);
-        //String loginURI = req.getContextPath() + "/jsp/login.jsp";
         String loginURI = req.getContextPath() + "/login";
 
         if(session == null){
@@ -63,72 +61,11 @@ public class UserFilter extends AbstractFilter {
             else{
                 res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
                 res.setHeader("Pragma", "no-cache"); // HTTP 1.0.
-                filterChain.doFilter(servletRequest,servletResponse); //lancia errori?
+                filterChain.doFilter(servletRequest,servletResponse);
             }
         }
     }
 
-    /*private boolean authenticateUser(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException, SQLException {
-
-        final String auth = req.getHeader("Authorization");
-
-        if(auth == null || auth.isBlank()){
-            sendAuthenticationChallenge(res);
-            return false;
-        }
-
-        if(!auth.toUpperCase().startsWith("BASIC ")){
-            sendAuthenticationChallenge(res);
-            return false;
-        }
-
-        final String pair = new String(DECODER.decode(auth.substring(6)));
-        final String[] userDetails = pair.split(":",2);
-
-        if(checkUserCredentials(userDetails[0], userDetails[1])){
-            HttpSession session = req.getSession(true);
-            session.setAttribute(USER_ATTRIBUTE, userDetails[0]);
-            return true;
-        }
-
-        sendAuthenticationChallenge(res);
-        return false;
-    }
-
-     */
-
-    /*private boolean checkUserCredentials(String username, String password) throws SQLException, ServletException {
-
-        //list = new GetOnlineOrderByCustomerDatabase(getDataSource().getConnection(), id).getOnlineOrderByCustomer();
-
-        UserCredential credential = new UserCredential(
-                username,
-                password,
-                UserCredential.TypeUser.valueOf("CUSTOMER"),
-                null
-        );
-        try{
-
-            credential = new CheckUserCredential(ds.getConnection(),credential).getUserCredentials();
-
-            if (credential.getIdentification() != null) return true;
-
-        } catch (SQLException e) {
-            throw new ServletException(String.format("SQL exception while checking user credentials: %s", e.getMessage()));
-        }
-
-        return false;
-    }
-
-     */
-
-    /*private void sendAuthenticationChallenge(HttpServletResponse res) throws IOException {
-
-        res.setHeader("WWW-Authenticate", "Basic realm=Customer");
-        res.sendError(HttpServletResponse.SC_UNAUTHORIZED);
-    }
-
-     */
 
     @Override
     public void destroy() {

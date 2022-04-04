@@ -20,6 +20,7 @@ public class OrderListServlet extends AbstractDatabaseServlet{
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
+        //TODO parse the op string to get rid of the /project_war/ part
         String op = req.getRequestURI();
         System.out.println(op);
 

@@ -59,8 +59,8 @@ public class GetOnlineOrderByIdDatabase {
 
         PreparedStatement pstmt = null;
         ResultSet rs = null;
-        PreparedStatement pstmt_product = null;
-        ResultSet rs_product = null;
+        PreparedStatement pstmtProduct = null;
+        ResultSet rsProduct = null;
 
         OrderStatus orderStatusResult = null;
         List<Product> products = null;
@@ -90,19 +90,19 @@ public class GetOnlineOrderByIdDatabase {
 
                 order = onlineOrder;
 
-                pstmt_product = con.prepareStatement(STATEMENT_GET_PRODUCT);
-                pstmt_product.setInt(1,onlineOrder.getIdOrder());
+                pstmtProduct = con.prepareStatement(STATEMENT_GET_PRODUCT);
+                pstmtProduct.setInt(1,onlineOrder.getIdOrder());
 
-                rs_product = pstmt_product.executeQuery();
-                while(rs_product.next()) {
+                rsProduct = pstmtProduct.executeQuery();
+                while(rsProduct.next()) {
                     products.add( new Product(
-                            rs_product.getString("product_alias"),
-                            rs_product.getString("name"),
+                            rsProduct.getString("product_alias"),
+                            rsProduct.getString("name"),
                             null,
                             null,
-                            rs_product.getInt("quantity"),
+                            rsProduct.getInt("quantity"),
                             0.0,
-                            rs_product.getDouble("price_applied"),
+                            rsProduct.getDouble("price_applied"),
                             null,
                             false,
                             null
@@ -118,12 +118,12 @@ public class GetOnlineOrderByIdDatabase {
                 pstmt.close();
             }
 
-            if (rs_product != null) {
-                rs_product.close();
+            if (rsProduct != null) {
+                rsProduct.close();
             }
 
-            if (pstmt_product != null) {
-                pstmt_product.close();
+            if (pstmtProduct != null) {
+                pstmtProduct.close();
             }
             con.close();
 
