@@ -1,7 +1,7 @@
 package it.unipd.dei.wa2122.wadteam.servlets;
 
 import it.unipd.dei.wa2122.wadteam.dao.product.GetProductDatabase;
-import it.unipd.dei.wa2122.wadteam.resources.Message;
+import it.unipd.dei.wa2122.wadteam.resources.ErrorMessage;
 import it.unipd.dei.wa2122.wadteam.resources.Product;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -20,11 +20,10 @@ public class ProductDetailServlet extends AbstractDatabaseServlet {
         try {
             product = new GetProductDatabase((getDataSource().getConnection()), req.getParameter("alias")).getProduct();
 
-            writeResource(req, res, "jsp/product.jsp", product);
+            writeResource(req, res, "jsp/product.jsp", false, product);
 
         } catch (SQLException e) {
-            Message m = new Message("Couldn't execute the query", "EU01", e.getMessage());
-            writeError(req, res, m, HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
         }
     }
 
