@@ -59,8 +59,8 @@ public class GetOnlineOrderByCustomerDatabase {
 
         PreparedStatement pstmt = null;
         ResultSet rs = null;
-        PreparedStatement innerpstmt = null;
-        ResultSet innerrs = null;
+        PreparedStatement pstmt_product = null;
+        ResultSet rs_product = null;
 
         OrderStatus orderStatusResult = null;
         List<Product> products = null;
@@ -90,28 +90,25 @@ public class GetOnlineOrderByCustomerDatabase {
 
                 orders.add(onlineOrder);
 
-                innerpstmt = con.prepareStatement(STATEMENT_GET_PRODUCT);
-                innerpstmt.setInt(1,onlineOrder.getIdOrder());
+                pstmt_product = con.prepareStatement(STATEMENT_GET_PRODUCT);
+                pstmt_product.setInt(1,onlineOrder.getIdOrder());
 
-                innerrs = innerpstmt.executeQuery();
-                while(innerrs.next()) {
+                rs_product = pstmt_product.executeQuery();
+                while(rs_product.next()) {
                     products.add( new Product(
-                            innerrs.getString("product_alias"),
-                            innerrs.getString("name"),
+                            rs_product.getString("product_alias"),
+                            rs_product.getString("name"),
                             null,
                             null,
-                            innerrs.getInt("quantity"),
+                            rs_product.getInt("quantity"),
                             0.0,
-                            innerrs.getDouble("price_applied"),
+                            rs_product.getDouble("price_applied"),
                             null,
                             false,
                             null
                     ));
 
                 }
-                innerrs.close();
-                innerpstmt.close();
-
             }
         } finally {
             if (rs != null) {
@@ -122,12 +119,12 @@ public class GetOnlineOrderByCustomerDatabase {
                 pstmt.close();
             }
 
-            if (innerrs != null) {
-                innerrs.close();
+            if (rs_product != null) {
+                rs_product.close();
             }
 
-            if (innerpstmt != null) {
-                innerpstmt.close();
+            if (pstmt_product != null) {
+                pstmt_product.close();
             }
             con.close();
 

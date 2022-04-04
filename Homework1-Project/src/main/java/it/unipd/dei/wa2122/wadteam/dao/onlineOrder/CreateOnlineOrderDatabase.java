@@ -54,9 +54,12 @@ public class CreateOnlineOrderDatabase {
     public OnlineOrder createOnlineOrder() throws SQLException {
         PreparedStatement pstmt = null;
         ResultSet rs = null;
-        PreparedStatement innerpstmt = null;
-        ResultSet innerrs = null;
-        ResultSet innerrs2 = null;
+
+        PreparedStatement pstmt_order = null;
+        ResultSet rs_order = null;
+
+        PreparedStatement pstmt_product = null;
+        ResultSet rs_product = null;
 
         OnlineOrder resultOnlineOrder = null;
 
@@ -74,39 +77,39 @@ public class CreateOnlineOrderDatabase {
                 DateTime ooDateTime = new DateTime(rs.getObject("oo_datetime", LocalDateTime.class));
 
 
-                innerpstmt = con.prepareStatement(STATEMENT_INSERT_ORDER_STATUS);
-                innerpstmt.setString(1, onlineOrder.getStatus().getStatus().getText());
-                innerpstmt.setString(2, onlineOrder.getStatus().getDescription());
-                innerpstmt.setInt(3,id);
+                pstmt_order = con.prepareStatement(STATEMENT_INSERT_ORDER_STATUS);
+                pstmt_order.setString(1, onlineOrder.getStatus().getStatus().getText());
+                pstmt_order.setString(2, onlineOrder.getStatus().getDescription());
+                pstmt_order.setInt(3,id);
 
-                innerrs = innerpstmt.executeQuery();
+                rs_order = pstmt_order.executeQuery();
 
-                OrderStatus resultOrderStatus = new OrderStatus(innerrs.getInt("id"),
-                        OrderStatusEnum.fromString(innerrs.getString("Status")),
-                        innerrs.getString("description"),
-                        new DateTime(innerrs.getObject("os_datetime", LocalDateTime.class)),
-                        innerrs.getInt("id_order")
+                OrderStatus resultOrderStatus = new OrderStatus(rs_order.getInt("id"),
+                        OrderStatusEnum.fromString(rs_order.getString("Status")),
+                        rs_order.getString("description"),
+                        new DateTime(rs_order.getObject("os_datetime", LocalDateTime.class)),
+                        rs_order.getInt("id_order")
                         );
 
                 List<Product> resultProductList = new ArrayList<>();
 
                 for(var item : onlineOrder.getProducts()) {
-                    pstmt = con.prepareStatement(STATEMENT_INSERT_PRODUCT);
-                    pstmt.setInt(1, id);
-                    pstmt.setString(2, item.getAlias());
-                    pstmt.setInt(3, item.getQuantity());
-                    pstmt.setDouble(4, item.getSale());
+                    pstmt_product = con.prepareStatement(STATEMENT_INSERT_PRODUCT);
+                    pstmt_product.setInt(1, id);
+                    pstmt_product.setString(2, item.getAlias());
+                    pstmt_product.setInt(3, item.getQuantity());
+                    pstmt_product.setDouble(4, item.getSale());
 
-                    innerrs2 = pstmt.executeQuery();
+                    rs_product = pstmt_product.executeQuery();
 
                     Product resultProductItem = new Product(
-                            innerrs2.getString("product_alias"),
+                            rs_product.getString("product_alias"),
                             null,
                             null,
                             null,
-                            innerrs2.getInt("quantity"),
+                            rs_product.getInt("quantity"),
                             0.0,
-                            innerrs2.getInt("price_applied"),
+                            rs_product.getInt("price_applied"),
                             null,
                             false,
                             null);
@@ -124,20 +127,24 @@ public class CreateOnlineOrderDatabase {
                 rs.close();
             }
 
-            if(innerrs != null) {
-                innerrs.close();
+            if(rs_order != null) {
+                rs_order.close();
             }
 
-            if(innerrs2 != null) {
-                innerrs2.close();
+            if(rs_product != null) {
+                rs_product.close();
             }
 
             if (pstmt != null) {
                 pstmt.close();
             }
 
-            if (innerpstmt != null) {
-                innerpstmt.close();
+            if (pstmt_order != null) {
+                pstmt_order.close();
+            }
+
+            if (pstmt_product != null) {
+                pstmt_product.close();
             }
 
             con.close();

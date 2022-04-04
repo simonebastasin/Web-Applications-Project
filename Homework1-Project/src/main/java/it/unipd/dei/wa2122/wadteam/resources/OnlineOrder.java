@@ -52,11 +52,21 @@ public class OnlineOrder implements Resource{
     @Override
     public JSONObject toJSON() {
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("idOrder", idOrder);
-        jsonObject.put("idCustomer", idCustomer);
-        jsonObject.put("ooDateTime", ooDateTime.toJSON());
-        jsonObject.put("products", products.stream().map(Product::toJSON).toArray());
-        jsonObject.put("status", status.toJSON());
+        if(idOrder!=null){
+            jsonObject.put("idOrder", idOrder);
+        }
+        if(idCustomer!=null){
+            jsonObject.put("idCustomer", idCustomer);
+        }
+        if(ooDateTime!=null){
+            jsonObject.put("ooDateTime", ooDateTime.toJSON());
+        }
+        if(products!=null){
+            jsonObject.put("products", products.stream().map(Product::toJSON).toArray());
+        }
+        if(status!=null){
+            jsonObject.put("status", status.toJSON());
+        }
         return jsonObject;
     }
 

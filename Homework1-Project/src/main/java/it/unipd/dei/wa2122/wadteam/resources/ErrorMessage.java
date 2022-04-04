@@ -34,7 +34,7 @@ public abstract sealed class ErrorMessage extends Message  {
     }
 
     public static final class ProductNotFoundError extends ErrorMessage {
-        private ProductNotFoundError(String errorDetails) {
+        public ProductNotFoundError(String errorDetails) {
             super("Product Not Found", "40", errorDetails, HttpServletResponse.SC_NOT_FOUND);
         }
     }
@@ -48,6 +48,12 @@ public abstract sealed class ErrorMessage extends Message  {
     public static final class UserCredentialError extends ErrorMessage {
         public UserCredentialError(String errorDetails) {
             super("Username error", "51", errorDetails, HttpServletResponse.SC_UNAUTHORIZED);
+        }
+    }
+
+    public static final class OrderNotFoundError extends ErrorMessage {
+        public OrderNotFoundError(String errorDetails) {
+            super("Product Not Found", "60", errorDetails, HttpServletResponse.SC_NOT_FOUND);
         }
     }
 

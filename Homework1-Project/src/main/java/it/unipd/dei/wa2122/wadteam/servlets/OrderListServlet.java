@@ -2,10 +2,8 @@ package it.unipd.dei.wa2122.wadteam.servlets;
 
 import it.unipd.dei.wa2122.wadteam.dao.customer.GetIdCustomerDatabase;
 import it.unipd.dei.wa2122.wadteam.dao.onlineOrder.GetOnlineOrderByCustomerDatabase;
-import it.unipd.dei.wa2122.wadteam.resources.Message;
-import it.unipd.dei.wa2122.wadteam.resources.OnlineOrder;
-import it.unipd.dei.wa2122.wadteam.resources.Resource;
-import it.unipd.dei.wa2122.wadteam.resources.UserCredential;
+import it.unipd.dei.wa2122.wadteam.dao.onlineOrder.GetOnlineOrderByIdDatabase;
+import it.unipd.dei.wa2122.wadteam.resources.*;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -22,45 +20,55 @@ public class OrderListServlet extends AbstractDatabaseServlet{
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
+        String op = req.getRequestURI();
+        System.out.println(op);
+
+        switch (op){
+            case "/project_war/orderList" -> orderListOp(req,res);
+            case "/project_war/orderList/order" -> orderDetailOp(req,res);
+        }
+    }
+
+    private void orderListOp(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         List<OnlineOrder> list = null;
         HttpSession session = req.getSession(false);
         UserCredential user = (UserCredential) session.getAttribute("user");
         String identification = user.getIdentification();
-        Integer id;
+        Integer id = null;
 
         try{
             id = new GetIdCustomerDatabase(getDataSource().getConnection(), identification).getIdCustomer().getId();
             list = new GetOnlineOrderByCustomerDatabase(getDataSource().getConnection(), id).getOnlineOrderByCustomer();
             List<Resource> resList = new ArrayList<>();
             resList.addAll(list);
-            writeResource(req,res, "/jsp/orderList.jsp", resList.toArray(Resource[]::new));
+            writeResource(req,res, "/jsp/orderList.jsp",false, resList.toArray(Resource[]::new));
 
         } catch (SQLException e) {
-            Message m = new Message("Couldn't find the order", "EU01", e.getMessage());
-            writeError(req, res, m, HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            //Message m = new Message("Couldn't find the order", "EU01", e.getMessage());
+            ErrorMessage errorMessage = new ErrorMessage.OrderNotFoundError(e.getMessage());
+            writeError(req, res, errorMessage);
         }
-        /*res.setContentType("text/html; charset=utf-8");
-        PrintWriter out = res.getWriter();
+    }
 
-        out.printf("<!DOCTYPE html>%n");
-        out.printf("<html lang=\"en\">%n");
-        out.printf("<head>%n");
-        out.printf("<meta charset=\"UTF-8\">%n");
-        out.printf("<title>OrderList Servlet</title>%n");
-        out.printf("</head>%n");
+    private void orderDetailOp(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+        OnlineOrder order = null;
+        String path = req.getParameter("ID");
+        Integer id = null;
+        if(path.chars().allMatch(Character::isDigit)){
+            id = Integer.parseInt(path);
+        }
 
-        out.printf("<body>%n");
-        out.printf("<h1>OrderList Servlet prova</h1>%n");
-        out.printf("<form name = \"user\" action = \"\" method=\"post\">%n");
-        out.printf("<input type=\"text\" name =\"identification\" id=\"identification\">%n");
-        out.printf("<label for = \"identification\">userID</label>%n");
-        out.printf("<input type =\"submit\" value = \"login\">%n");
-        out.printf("</form>%n");
-        out.printf("</body>%n");
-        out.printf("</html>%n");
+        try{
 
-        out.flush();
-        out.close();*/
+            order = new GetOnlineOrderByIdDatabase(getDataSource().getConnection(), id).getOnlineOrderId();
+
+            writeResource(req,res, "/jsp/orderDetails.jsp",true, order);
+
+        } catch (SQLException e) {
+            //Message m = new Message("Couldn't find the order", "EU01", e.getMessage());
+            ErrorMessage errorMessage = new ErrorMessage.OrderNotFoundError(e.getMessage());
+            writeError(req, res, errorMessage);
+        }
     }
 
     @Override
