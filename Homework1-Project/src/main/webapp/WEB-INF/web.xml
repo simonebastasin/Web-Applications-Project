@@ -79,7 +79,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>ProductDetailServlet</servlet-name>
-        <url-pattern>/productDetail</url-pattern>
+        <url-pattern>/productDetail/*</url-pattern>
     </servlet-mapping>
 
 

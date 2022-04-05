@@ -15,12 +15,14 @@ public class ProductDetailServlet extends AbstractDatabaseServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
+        String path = req.getPathInfo() != null ? req.getPathInfo().substring(1) : "";
+
         Product product = null;
 
         try {
-            product = new GetProductDatabase((getDataSource().getConnection()), req.getParameter("alias")).getProduct();
+            product = new GetProductDatabase((getDataSource().getConnection()), path).getProduct();
 
-            writeResource(req, res, "/jsp/productDetail.jsp", false, product);
+            writeResource(req, res, "/jsp/productDetail.jsp", true, product);
 
         } catch (SQLException e) {
             writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));

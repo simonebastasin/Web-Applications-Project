@@ -7,11 +7,19 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%--@elvariable id="product" type="Product"--%>
+
 <html>
 <head>
     <title>Electromechanics shop</title>
 </head>
 <body>
-  
+    Product name: ${product.name}
+    <ul>
+        <li>Brand: ${product.brand}</li>
+        <li>Description: ${product.description}</li>
+        <li>Price: ${product.sale}</li>
+        <li>Quantity: ${product.quantity}</li>
+    </ul>
 </body>
 </html>
