@@ -15,7 +15,7 @@ public class CheckUserCredential {
      * The SQL statement to be executed
      */
     private final String STATEMENT_EMPLOYEE = "Select username, name, surname, role_name from employee where (username = ? AND password = sha384(?::bytea))";
-    private final String STATEMENT_CUSTOMER = "Select username, name, surname, email from customer where (username = ? AND password = sha384(?::bytea)) OR (email = ? and password = sha384(?::bytea))";
+    private final String STATEMENT_CUSTOMER = "Select username, name, surname, email, id from customer where (username = ? AND password = sha384(?::bytea)) OR (email = ? and password = sha384(?::bytea))";
 
     /**
      * The connection to the database
@@ -80,11 +80,11 @@ public class CheckUserCredential {
             if (resultSet.next()) {
                 if(userCredential.getType()== TypeUser.EMPLOYEE) {
                     resultUserCredential = new UserCredential(resultSet.getString("username"), null,
-                        TypeUser.EMPLOYEE,resultSet.getString("role_name"), null);
+                        TypeUser.EMPLOYEE,resultSet.getString("role_name"), null, null);
                 }
                 else if (userCredential.getType()== TypeUser.CUSTOMER) {
                     resultUserCredential = new UserCredential(resultSet.getString("username"), null,
-                            TypeUser.CUSTOMER, null, resultSet.getString("email"));
+                            TypeUser.CUSTOMER, null, resultSet.getString("email"), resultSet.getInt("id"));
                 }
             }
 

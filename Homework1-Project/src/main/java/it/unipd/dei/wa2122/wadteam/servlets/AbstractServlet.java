@@ -96,9 +96,9 @@ public abstract class AbstractServlet extends HttpServlet {
      *
      * the session info is passed anyway
      */
-    public void writeResource(HttpServletRequest request, HttpServletResponse response, String jsp) throws IOException, ServletException {
-        // TODO decommentare  a sessioni complete
-        //request.setAttribute("user", request.getSession(false).getAttribute("user"));
+    public void writeJsp(HttpServletRequest request, HttpServletResponse response, String jsp) throws IOException, ServletException {
+        if(request.getSession(false) != null)
+            request.setAttribute("user", request.getSession(false).getAttribute("user"));
 
         request.getRequestDispatcher(jsp).forward(request, response);
     }
@@ -168,8 +168,8 @@ public abstract class AbstractServlet extends HttpServlet {
                     request.setAttribute(decapitalize(item.getKey().getSimpleName()) + "List", item.getValue());
                 }
             }
-            // TODO decommentare  a sessioni complete
-            //  request.setAttribute("user", request.getSession(false).getAttribute("user"));
+            if(request.getSession(false) != null)
+                request.setAttribute("user", request.getSession(false).getAttribute("user"));
             request.getRequestDispatcher(jsp).forward(request, response);
         }
     }

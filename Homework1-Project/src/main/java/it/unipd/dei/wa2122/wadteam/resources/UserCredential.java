@@ -9,13 +9,15 @@ public class UserCredential implements Resource {
     private final TypeUser type;
     private final String role;
     private final String email;
+    private final Integer id;
 
-     public UserCredential(String identification, String password, TypeUser type, String role, String email) {
+     public UserCredential(String identification, String password, TypeUser type, String role, String email, Integer id) {
         this.identification = identification;
         this.role=role;
         this.password = password;
         this.type = type;
          this.email = email;
+         this.id = id;
      }
 
     public String getIdentification() {
@@ -47,6 +49,10 @@ public class UserCredential implements Resource {
         if(email != null)
             jsonObject.put("email", email);
         return jsonObject;
+    }
+
+    public Integer getId() {
+        return id;
     }
 
     public enum TypeUser {EMPLOYEE, CUSTOMER}

@@ -25,7 +25,8 @@
             Price: ${prod.sale} <br>
             Quantity: ${prod.quantity} <br>
             <br>
-            <input type ="submit" value = "open ticket">
+            <a href="<c:url value="/ticket/create"/>/${prod.alias}">Open Ticket</a>
+
         </li>
     </c:forEach>
     </ul>

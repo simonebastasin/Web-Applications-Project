@@ -17,7 +17,7 @@ import static it.unipd.dei.wa2122.wadteam.resources.UserCredential.*;
 public class LoginServlet extends AbstractDatabaseServlet {
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        writeResource(req, resp, "/jsp/login.jsp");
+        writeJsp(req, resp, "/jsp/login.jsp");
     }
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -25,10 +25,10 @@ public class LoginServlet extends AbstractDatabaseServlet {
         String password = req.getParameter("password");
         TypeUser type = TypeUser.valueOf(req.getParameter("usertype").toUpperCase(Locale.ROOT));
 
-        UserCredential userCredentialAttempt = new UserCredential(identification, password, type, null, null);
+        UserCredential userCredentialAttempt = new UserCredential(identification, password, type, null, null, null);
         try {
             UserCredential userCredential = new CheckUserCredential(getDataSource().getConnection(), userCredentialAttempt).getUserCredentials();
-            if (userCredential.getIdentification() != null) {
+            if (userCredential != null && userCredential.getIdentification() != null) {
                 HttpSession session = req.getSession();
                 session.setAttribute("user",userCredential);
                 //writeResource(req, resp, "/jsp/user.jsp", userCredential);

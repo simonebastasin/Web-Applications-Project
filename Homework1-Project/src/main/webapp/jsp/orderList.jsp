@@ -20,11 +20,7 @@
         <c:forEach var="order" items="${onlineOrderList}">
             <li>
                 <b>Order ID: ${order.idOrder}</b>
-
-                <form method="GET" action="<c:url value="/orderList/order"/>">
-                    <input type="hidden" name="ID" value="${order.idOrder}">
-                    <input type ="submit" value = "details">
-                </form>
+                <a href="<c:url value="/order/detail"/>/${order.idOrder}">Details</a>
             </li>
             <ul>
             <c:forEach var="prod" items="${order.products}">

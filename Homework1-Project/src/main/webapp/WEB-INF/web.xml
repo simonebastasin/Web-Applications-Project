@@ -32,11 +32,11 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>OrderListServlet</servlet-name>
-        <url-pattern>/orderList</url-pattern>
+        <url-pattern>/order</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>OrderListServlet</servlet-name>
-        <url-pattern>/orderList/order</url-pattern>
+        <url-pattern>/order/*</url-pattern>
     </servlet-mapping>
 
 
@@ -118,7 +118,10 @@
     </filter>
     <filter-mapping>
         <filter-name>UserFilter</filter-name>
-        <url-pattern>/orderList/*</url-pattern>
+        <url-pattern>/order/*</url-pattern>
     </filter-mapping>
-
+    <filter-mapping>
+        <filter-name>UserFilter</filter-name>
+        <url-pattern>/order</url-pattern>
+    </filter-mapping>
 </web-app>

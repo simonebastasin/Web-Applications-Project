@@ -13,13 +13,7 @@
     <title>Create Ticket</title>
 </head>
 <body>
-<form method="POST" action="<c:url value="/ticket/create"/>">
-  <input type="text" name ="username" id="username">
-  <label for = "username">username id</label>
-  <br>
-  <input type="text" name ="productalias" id="productalias">
-  <label for = "productalias">product alias</label>
-  <br>
+<form method="POST" action="">
   <textarea name ="description" id="description"> </textarea>
   <label for = "description">description</label>
   <br>

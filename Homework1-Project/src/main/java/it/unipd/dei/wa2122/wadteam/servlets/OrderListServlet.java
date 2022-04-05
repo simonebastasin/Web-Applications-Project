@@ -19,14 +19,13 @@ import java.util.List;
 public class OrderListServlet extends AbstractDatabaseServlet{
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+        String path = req.getPathInfo() != null ? req.getPathInfo().substring(1).lastIndexOf('/') != -1 ? req.getPathInfo().substring(1,req.getPathInfo().lastIndexOf('/')) : req.getPathInfo().substring(1) : "";
+        String param = req.getPathInfo() != null ? req.getPathInfo().substring(1).lastIndexOf('/') != -1 ? req.getPathInfo().substring(req.getPathInfo().lastIndexOf('/')+1) : "" : "";
 
-        //TODO parse the op string to get rid of the /project_war/ part
-        String op = req.getRequestURI();
-        System.out.println(op);
-
-        switch (op){
-            case "/project_war/orderList" -> orderListOp(req,res);
-            case "/project_war/orderList/order" -> orderDetailOp(req,res);
+        switch (path){
+            //case "orderList" -> orderListOp(req,res);
+            case "detail" -> orderDetailOp(req,res, param);
+            case "list" -> orderListOp(req,res);
         }
     }
 
@@ -34,11 +33,9 @@ public class OrderListServlet extends AbstractDatabaseServlet{
         List<OnlineOrder> list = null;
         HttpSession session = req.getSession(false);
         UserCredential user = (UserCredential) session.getAttribute("user");
-        String identification = user.getIdentification();
-        Integer id = null;
+        Integer id = user.getId();
 
         try{
-            id = new GetIdCustomerDatabase(getDataSource().getConnection(), identification).getIdCustomer().getId();
             list = new GetOnlineOrderByCustomerDatabase(getDataSource().getConnection(), id).getOnlineOrderByCustomer();
             List<Resource> resList = new ArrayList<>();
             resList.addAll(list);
@@ -51,9 +48,9 @@ public class OrderListServlet extends AbstractDatabaseServlet{
         }
     }
 
-    private void orderDetailOp(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+    private void orderDetailOp(HttpServletRequest req, HttpServletResponse res, String path) throws ServletException, IOException {
         OnlineOrder order = null;
-        String path = req.getParameter("ID");
+        //String path = req.getParameter("ID");
         Integer id = null;
         if(path.chars().allMatch(Character::isDigit)){
             id = Integer.parseInt(path);
