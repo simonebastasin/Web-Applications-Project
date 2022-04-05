@@ -71,6 +71,15 @@
         <url-pattern>/productDetail/*</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>ProductCategoryDetailServlet</servlet-name>
+        <servlet-class>it.unipd.dei.wa2122.wadteam.servlets.ProductCategoryDetailServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ProductCategoryDetailServlet</servlet-name>
+        <url-pattern>/categoryDetail/*</url-pattern>
+    </servlet-mapping>
+
 
     <servlet>
         <servlet-name>TicketServlet</servlet-name>

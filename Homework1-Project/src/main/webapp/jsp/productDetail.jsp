@@ -14,6 +14,10 @@
     <title>Electromechanics shop</title>
 </head>
 <body>
+
+    <c:import url="/jsp/include/header.jsp"/>
+    <h1>Electromechanics shop</h1>
+
     Product name: ${product.name}
     <ul>
         <li>Brand: ${product.brand}</li>

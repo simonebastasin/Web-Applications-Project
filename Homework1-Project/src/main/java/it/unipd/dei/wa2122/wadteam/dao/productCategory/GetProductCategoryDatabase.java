@@ -11,7 +11,7 @@ public class GetProductCategoryDatabase {
     /**
      * The SQL statement to be executed
      */
-    private static final String STATEMENT = "SELECT name, description FROM product_category WHERE name = ?";
+    private static final String STATEMENT = "SELECT name, description FROM Product_Category WHERE name = ?";
 
     /**
      * The connection to the database
@@ -21,7 +21,7 @@ public class GetProductCategoryDatabase {
     /**
      * The productCategory to be created in the database
      */
-    private final ProductCategory category;
+    private final String category;
 
     /**
      * Creates a new object for update a productCategory.
@@ -31,7 +31,7 @@ public class GetProductCategoryDatabase {
      * @param category
      *            the productCategory to be created in the database.
      */
-    public GetProductCategoryDatabase(final Connection con, final ProductCategory category) {
+    public GetProductCategoryDatabase(final Connection con, final String category) {
         this.con = con;
         this.category = category;
     }
@@ -50,7 +50,7 @@ public class GetProductCategoryDatabase {
 
         try {
             preparedStatement = con.prepareStatement(STATEMENT);
-            preparedStatement.setString(1,category.getName());
+            preparedStatement.setString(1,category);
 
             resultSet = preparedStatement.executeQuery();
 
