@@ -16,7 +16,7 @@
 <body>
 <h1>Login</h1>
 <hr/>
-<form method="post" action="<c:url value="/uploadmedia"/>" enctype="multipart/form-data">
+<form method="post" action="<c:url value="/media/upload"/>" enctype="multipart/form-data">
     <input type="file" name="file" />
     <input type="submit" value="Upload" />
 </form>

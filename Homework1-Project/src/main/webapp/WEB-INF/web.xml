@@ -39,29 +39,18 @@
         <url-pattern>/order/*</url-pattern>
     </servlet-mapping>
 
-
     <servlet>
-        <servlet-name>UploadMediaServlet</servlet-name>
-        <servlet-class>it.unipd.dei.wa2122.wadteam.servlets.UploadMediaServlet</servlet-class>
+        <servlet-name>MediaServlet</servlet-name>
+        <servlet-class>it.unipd.dei.wa2122.wadteam.servlets.MediaServlet</servlet-class>
         <multipart-config>
             <max-file-size>208488200</max-file-size>
             <max-request-size>4180188410</max-request-size>
             <file-size-threshold>1048576</file-size-threshold>
         </multipart-config>
     </servlet>
-
     <servlet-mapping>
-        <servlet-name>UploadMediaServlet</servlet-name>
-        <url-pattern>/uploadmedia</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>ViewMediaServlet</servlet-name>
-        <servlet-class>it.unipd.dei.wa2122.wadteam.servlets.ViewMediaServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>ViewMediaServlet</servlet-name>
-        <url-pattern>/viewmedia/*</url-pattern>
+        <servlet-name>MediaServlet</servlet-name>
+        <url-pattern>/media/*</url-pattern>
     </servlet-mapping>
 
     <servlet>

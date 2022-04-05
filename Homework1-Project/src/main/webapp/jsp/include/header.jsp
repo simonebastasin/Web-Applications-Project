@@ -10,6 +10,8 @@
 
 <a href="<c:url value="/"/>">Home</a>
 <a href="<c:url value="/login"/>">Login</a>
-<a href="<c:url value="/viewmedia/list"/>">View Media</a>
+<a href="<c:url value="/media/list"/>">View Media</a>
 <a href="<c:url value="/order/list"/>">Your orders</a>
+<a href="<c:url value="/ticket/list"/>">View Ticket</a>
+
 <hr />

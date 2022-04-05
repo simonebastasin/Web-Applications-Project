@@ -18,7 +18,7 @@
     <hr/>
     <ul>
     <c:forEach var="item" items="${mediaList}">
-        <li><img src="<c:url value="/viewmedia/${item.id}"/>" alt="${item.filename}" width="1024px"/></li>
+        <li><img src="<c:url value="/media/view"/>/${item.id}" alt="${item.filename}" width="1024px"/></li>
     </c:forEach>
     </ul>
 </body>

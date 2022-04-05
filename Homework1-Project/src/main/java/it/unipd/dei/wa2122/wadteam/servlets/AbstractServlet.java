@@ -104,6 +104,9 @@ public abstract class AbstractServlet extends HttpServlet {
     }
 
     /**
+     * Pass true if the designated value if you need a single objet, pass false if you need a list
+     *
+     *
      * writes the output resources in html or json according to the header accept: if there is application/json
      * it returns a json, in all other cases it delegates the creation of the page to the jsp
      *
@@ -120,9 +123,10 @@ public abstract class AbstractServlet extends HttpServlet {
      * If it is a list of  {@link it.unipd.dei.wa2122.wadteam.resources.Product} it is called
      * <code>productList</code>, with the initial lowercase {@link AbstractServlet#decapitalize(String)}
      * and with the fixed post <code>List</code>.
-     * If it is a single item and the boolean value <code>showOneItemAsArray</code> is set to <code>true</code> it is
-     * always added to a list, if it is set to false it is exposed as a single item named like the lowercase class,
-     * like <code>product</code>
+     *
+     * If it is a single item and the boolean value <code>showOneItemAsItem</code> is set to <code>false</code> it is
+     * always added to a list, if it is set to <code>true</false> it is exposed as a single item named like the
+     * lowercase class,  like <code>product</code>
      *
      * the class {@link it.unipd.dei.wa2122.wadteam.resources.UserCredential} was automatically send to jsp if
      * it is present in the session and is called <code>user</code> TODO
@@ -130,17 +134,17 @@ public abstract class AbstractServlet extends HttpServlet {
      * @param request the HttpServletRequest istance
      * @param response the HttpServletResponse istance
      * @param jsp the relative url of the jsp
-     * @param showOneItemAsArray a boolean value telling what to do in case of a single item of a class:
-     *                          whether to put it in a list of a single item <code>true</code> or not <code>false</code>
+     * @param showOneItemAsItem a boolean value telling what to do in case of a single item of a class:
+     *                          whether to put it in a list of a single item <code>false</code> or not <code>true</code>
      *                          the resource name will always be with the postfix in the jsp name <code>List</code>
-     *                          in the case of <code>true</code>, otherwise it can be either with the postfix in the
+     *                          in the case of <code>false</code>, otherwise it can be either with the postfix in the
      *                          case of several items or without in the case of a single item
      * @param resources the resoruce varargs. Accept 0, 1, 2, ..., infty item of resource or a array.
      *                  if you need to send a list use use the  method <code>.toArray(Resource[]::new)</code>
      *                  {@link java.util.List#toArray(Object[])} to pass the resources. If you have more than one array
      *                  merge the array before sending.
      */
-    public void writeResource(HttpServletRequest request, HttpServletResponse response, String jsp, boolean showOneItemAsArray, Resource... resources) throws IOException, ServletException {
+    public void writeResource(HttpServletRequest request, HttpServletResponse response, String jsp, boolean showOneItemAsItem, Resource... resources) throws IOException, ServletException {
         var resourcesMap = Arrays.stream(resources).collect(groupingBy(Resource::getClass));
 
         if(request.getHeader("Accept").contains("application/json")) {
@@ -152,7 +156,7 @@ public abstract class AbstractServlet extends HttpServlet {
                 writeJSON(response, new JSONArray(Arrays.stream(resources).map(Resource::toJSON).toArray()));
             } else {
                 for (var item : resourcesMap.entrySet()) {
-                    if (showOneItemAsArray && item.getValue().size() == 1) {
+                    if (showOneItemAsItem && item.getValue().size() == 1) {
                         jsonObject.put(decapitalize(item.getKey().getSimpleName()), item.getValue().get(0).toJSON());
                     } else {
                         jsonObject.put(decapitalize(item.getKey().getSimpleName()) + "List", new JSONArray(item.getValue().stream().map(Resource::toJSON).toArray()));
@@ -162,7 +166,7 @@ public abstract class AbstractServlet extends HttpServlet {
             }
         } else {
             for (var item : resourcesMap.entrySet()) {
-                if (showOneItemAsArray && item.getValue().size() == 1) {
+                if (showOneItemAsItem && item.getValue().size() == 1) {
                     request.setAttribute(decapitalize(item.getKey().getSimpleName()), item.getValue().get(0));
                 } else {
                     request.setAttribute(decapitalize(item.getKey().getSimpleName()) + "List", item.getValue());
