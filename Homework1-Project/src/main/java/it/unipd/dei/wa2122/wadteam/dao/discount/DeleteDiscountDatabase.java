@@ -2,8 +2,6 @@ package it.unipd.dei.wa2122.wadteam.dao.discount;
 
 import it.unipd.dei.wa2122.wadteam.resources.DateTime;
 import it.unipd.dei.wa2122.wadteam.resources.Discount;
-import it.unipd.dei.wa2122.wadteam.resources.Owns;
-import it.unipd.dei.wa2122.wadteam.resources.Product;
 
 
 import java.sql.Connection;

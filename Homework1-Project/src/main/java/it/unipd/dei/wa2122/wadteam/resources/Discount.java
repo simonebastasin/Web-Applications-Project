@@ -2,6 +2,9 @@ package it.unipd.dei.wa2122.wadteam.resources;
 
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Discount implements Resource {
     private final Integer id;
     private final Integer percentage;
@@ -13,6 +16,7 @@ public class Discount implements Resource {
         this.percentage = percentage;
         this.startDate = startDate;
         this.endDate = endDate;
+
     }
 
     public final Integer getId() {

@@ -7,7 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class DeleteOwnDatabase {
+public class DeleteOwnsDatabase {
     /**
      * The SQL statement to be executed
      */
@@ -31,7 +31,7 @@ public class DeleteOwnDatabase {
      * @param own
      *            the own of the Owns Collection.
      */
-    public DeleteOwnDatabase(final Connection con, final Owns own) {
+    public DeleteOwnsDatabase(final Connection con, final Owns own) {
         this.con = con;
         this.own = own;
     }

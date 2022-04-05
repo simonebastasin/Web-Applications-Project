@@ -1,48 +1,42 @@
 package it.unipd.dei.wa2122.wadteam.dao.owns;
 
-import it.unipd.dei.wa2122.wadteam.resources.Discount;
-import it.unipd.dei.wa2122.wadteam.resources.Owns;
-import it.unipd.dei.wa2122.wadteam.resources.Product;
+import it.unipd.dei.wa2122.wadteam.resources.*;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
 
-public class createOwnsDiscountFromListProduct {
+public class CreateOwnsDatabase {
 
     /**
      * The SQL statement to be executed
      */
     private static final String STATEMENT = "INSERT INTO Owns(ID_Discount, Product_Alias) VALUES (?, ?) RETURNING ID_Discount, Product_Alias";
+
     /**
      * The connection to the database
      */
     private final Connection con;
 
     /**
-     * The list of products to be updated in the database
+     * The employee to be updated in the database
      */
-    private final List<Product> products;
-
-    /**
-     * The list of products to be updated in the database
-     */
-    private final Discount discount;
+    private final Owns own;
 
     /**
      * Creates a new object for update an employee.
-     *  @param con
+     *
+     * @param con
      *            the connection to the database.
-     * @param products
-     * @param discount
+     * @param own
+     *            the employee to be created in the database.
      */
-    public createOwnsDiscountFromListProduct(Connection con, List<Product> products, Discount discount) {
+    public CreateOwnsDatabase(final Connection con, final Owns own) {
         this.con = con;
-        this.products = products;
-        this.discount = discount;
+        this.own = own;
     }
+
     /**
      * Creates an Own in the database.
      *
@@ -51,28 +45,26 @@ public class createOwnsDiscountFromListProduct {
      * @throws SQLException
      *             if any error occurs while reading the employee.
      */
-
-    public List<Owns> createOwnsDiscountFromList() throws SQLException {
+    public Owns createOwn() throws SQLException {
 
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
 
         // the create employee
-        List<Owns> resultOwns =  null;
+        Owns resultOwn = null;
 
         try {
+            preparedStatement = con.prepareStatement(STATEMENT);
+            preparedStatement.setInt(1, own.getDiscount());
+            preparedStatement.setString(2, own.getProduct());
 
-            for(var product : products){
-                preparedStatement = con.prepareStatement(STATEMENT);
-                preparedStatement.setInt(1, discount.getId());
-                preparedStatement.setString(2, product.getAlias());
+            resultSet = preparedStatement.executeQuery();
 
-                resultSet = preparedStatement.executeQuery();
-
-                resultOwns.add(new Owns(
+            if (resultSet.next()) {
+                resultOwn = new Owns(
                         resultSet.getInt("ID_Discount"),
                         resultSet.getString("Product_Alias")
-                ));
+                );
 
             }
         } finally {
@@ -86,6 +78,7 @@ public class createOwnsDiscountFromListProduct {
         }
 
         con.close();
-        return resultOwns;
+        return resultOwn;
     }
+
 }
