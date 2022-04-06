@@ -16,6 +16,7 @@
 <body>
 <h1>Login</h1>
 <hr/>
+<c:import url="/jsp/include/header.jsp"/>
 <form method="post" action="<c:url value="/media/upload"/>" enctype="multipart/form-data">
     <input type="file" name="file" />
     <input type="submit" value="Upload" />

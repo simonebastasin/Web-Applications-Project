@@ -12,6 +12,7 @@
     <title>Respond Ticket Status</title>
 </head>
 <body>
+<c:import url="/jsp/include/header.jsp"/>
 <form method="POST" action="">
     <input type="text" name ="status" id="status">
     <label for = "status">status</label>

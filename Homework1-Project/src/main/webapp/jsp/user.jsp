@@ -7,18 +7,20 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--@elvariable id="userCredential" type="it.unipd.dei.wa2122.wadteam.resources.UserCredential"--%>
+<%--@elvariable id="user" type="it.unipd.dei.wa2122.wadteam.resources.UserCredential"--%>
 <html>
 <head>
     <title>User
-    <c:out value="${userCredential.identification}"/></title>
+    <c:out value="${user.identification}"/></title>
 </head>
 <body>
-<h1>User <c:out value="${userCredential.identification}"/></h1>
+<h1>User <c:out value="${user.identification}"/></h1>
 <hr/>
 <ul>
-    <li>User <c:out value="${userCredential.identification}"/></li>
-    <li>Role <c:out value="${userCredential.role}"/></li>
+    <li>User <c:out value="${user.identification}"/></li>
+    <li>Email <c:out value="${user.email}"/> </li>
+    <li>Type <c:out value="${user.type.toString()}"></li>
+    <li>Role <c:out value="${user.role}"/></li>
 </ul>
 </body>
 </html>

@@ -31,7 +31,6 @@ public class LoginServlet extends AbstractDatabaseServlet {
             if (userCredential != null && userCredential.getIdentification() != null) {
                 HttpSession session = req.getSession();
                 session.setAttribute("user",userCredential);
-                //writeResource(req, resp, "/jsp/user.jsp", userCredential);
                 resp.sendRedirect(req.getContextPath()+"/");
             } else {
                 writeError(req, resp, new Message("Error login", "EV01", "Username or password aren't correct"),HttpServletResponse.SC_UNAUTHORIZED);

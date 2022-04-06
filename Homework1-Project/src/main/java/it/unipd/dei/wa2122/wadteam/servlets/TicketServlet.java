@@ -24,7 +24,7 @@ public class TicketServlet extends AbstractDatabaseServlet {
             case "list" -> {
                 try {
                     var listTicket = new ListAssistanceTicketDatabase(getDataSource().getConnection()).getAssistanceTicket();
-                    writeResource(req, resp, "/jsp/ticket.jsp", listTicket.toArray(AssistanceTicket[]::new));
+                    writeResource(req, resp, "/jsp/ticket.jsp", false, listTicket.toArray(AssistanceTicket[]::new));
                 } catch (SQLException e) {
                     writeError(req, resp, new Message("Error get", "ET02", e.getMessage()), HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
                 }
@@ -36,7 +36,7 @@ public class TicketServlet extends AbstractDatabaseServlet {
                     try {
                         AssistanceTicket assistanceTicket = new GetAssistanceTicketDatabase(getDataSource().getConnection(), id).getAssistanceTicket();
 
-                        writeResource(req, resp, "/jsp/ticket.jsp", assistanceTicket);
+                        writeResource(req, resp, "/jsp/ticket.jsp", true, assistanceTicket);
                     } catch (SQLException e) {
                         writeError(req, resp, new Message("Error get", "ET02", e.getMessage()), HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
                     }
@@ -66,7 +66,7 @@ public class TicketServlet extends AbstractDatabaseServlet {
 
                 try {
                     AssistanceTicket assistanceTicket = new CreateAssistanceTicketDatabase(getDataSource().getConnection(), temp).createAssistantTicket();
-                    writeResource(req, resp, "/jsp/ticket.jsp", assistanceTicket);
+                    writeResource(req, resp, "/jsp/ticket.jsp", true , assistanceTicket);
                 } catch (SQLException e) {
                     writeError(req, resp, new Message("Error create ticket", "ET02", e.getMessage()), HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
                 }
@@ -92,7 +92,7 @@ public class TicketServlet extends AbstractDatabaseServlet {
                     try {
                         AssistanceTicket assistanceTicket = new GetAssistanceTicketDatabase(getDataSource().getConnection(), id).getAssistanceTicket();
 
-                        writeResource(req, resp, "/jsp/ticket.jsp", assistanceTicket);
+                        writeResource(req, resp, "/jsp/ticket.jsp", true, assistanceTicket);
                     } catch (SQLException e) {
                         writeError(req, resp, new Message("Error get", "ET02", e.getMessage()), HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
                     }

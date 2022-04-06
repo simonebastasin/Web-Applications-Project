@@ -12,6 +12,7 @@
     <title>Ticket</title>
 </head>
 <body>
+<c:import url="/jsp/include/header.jsp"/>
 
 <form method="POST" action="<c:url value="/ticket"/>">
     <input type="text" name ="identification" id="identification">

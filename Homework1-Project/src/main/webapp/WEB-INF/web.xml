@@ -95,14 +95,17 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>AssistantTicketListAdmin</servlet-name>
-        <servlet-class>it.unipd.dei.wa2122.wadteam.servlets.AssistanceTicketAdminServlet</servlet-class>
+        <servlet-name>UserServlet</servlet-name>
+        <servlet-class>it.unipd.dei.wa2122.wadteam.servlets.UserServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>AssistantTicketListAdmin</servlet-name>
-        <url-pattern>/AssistantTicketAdmin</url-pattern>
+        <servlet-name>UserServlet</servlet-name>
+        <url-pattern>/user/*</url-pattern>
     </servlet-mapping>
-
+    <servlet-mapping>
+        <servlet-name>UserServlet</servlet-name>
+        <url-pattern>/user</url-pattern>
+    </servlet-mapping>
     <resource-ref>
         <description>Connection pool to the database</description>
         <res-ref-name>jdbc/electromechanics_shop</res-ref-name>

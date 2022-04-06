@@ -13,6 +13,8 @@
     <title>Error <c:out value="${errorCode}"/></title>
 </head>
 <body>
+<c:import url="/jsp/include/header.jsp"/>
+
 <h1>Error <c:out value="${errorCode}"/></h1>
 <hr />
 <br />

@@ -13,6 +13,8 @@
     <title>Create Ticket</title>
 </head>
 <body>
+<c:import url="/jsp/include/header.jsp"/>
+
 <form method="POST" action="">
   <textarea name ="description" id="description"> </textarea>
   <label for = "description">description</label>

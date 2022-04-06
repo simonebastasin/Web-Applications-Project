@@ -32,7 +32,7 @@ public class HomePageServlet extends AbstractDatabaseServlet{
             lists.addAll(products);
             lists.addAll(categories);
 
-            writeResource(req, res, "/jsp/HomePage.jsp", lists.toArray(categories.toArray(Resource[]::new)));
+            writeResource(req, res, "/jsp/HomePage.jsp", true, lists.toArray(categories.toArray(Resource[]::new)));
 
         }catch (SQLException e) {
             Message m = new Message("Couldn't execute the query", "EU01", e.getMessage());

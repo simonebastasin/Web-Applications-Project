@@ -14,17 +14,24 @@
     <title>ticket</title>
 </head>
 <body>
+<c:import url="/jsp/include/header.jsp"/>
+<ul>
     <c:forEach var="assistanceTicket" items="${assistanceTicketList}">
-        <p>${assistanceTicket.id}</p>
-        <p>${assistanceTicket.description}</p>
-        <p>${assistanceTicket.idCustomer}</p>
-        <p>${assistanceTicket.productAlias}</p>
+        <li>
+        ${assistanceTicket.id}
+        <ul>
+        <li>${assistanceTicket.description}</li>
+        <li>${assistanceTicket.idCustomer}</li>
+        <li>${assistanceTicket.productAlias}</li>
 
         <c:forEach var="item" items="${assistanceTicket.ticketStatusList}">
-            <p>${item.status}</p>
-            <p>${item.description}</p>
-            <p>${item.tsDate}</p>
+            <li>${item.status}</li>
+            <ul><li>${item.description}</li>
+            <li>${item.tsDate}</li></ul>
         </c:forEach>
+        </ul>
+        </li>
     </c:forEach>
+</ul>
 </body>
 </html>

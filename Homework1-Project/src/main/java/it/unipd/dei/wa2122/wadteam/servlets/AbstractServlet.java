@@ -77,17 +77,6 @@ public abstract class AbstractServlet extends HttpServlet {
     }
 
     /**
-     * Please add showOneItemAsArray parameter to the call function!
-     * if the value of showOneItemAsArray is false in the case of a
-     * single element of a certain type it is passed as object, if it is true in the
-     * case of a single element it is anyway encapsulated in a list
-     */
-    @Deprecated
-    public void writeResource(HttpServletRequest request, HttpServletResponse response, String jsp, Resource... resources) throws IOException, ServletException {
-        writeResource(request,response, jsp, false, resources);
-    }
-
-    /**
      * a version of writeresource that does not print parameters in ouput or even json, only jsp
      * even if the header accept is application/json
      *

@@ -12,6 +12,7 @@
     <title>Message</title>
 </head>
 <body>
+<c:import url="/jsp/include/header.jsp"/>
 <h1>Message</h1>
 <hr />
 <br />
