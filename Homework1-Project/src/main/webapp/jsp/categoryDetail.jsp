@@ -7,7 +7,8 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--@elvariable id="productCategory" type="ProductCategory"--%>
+<%--@elvariable id="productCategoryList" type="java.util.List<ProductCategory>"--%>
+<%--@elvariable id="productList" type="java.util.List<Product>"--%>
 
 <html>
 <head>
@@ -15,11 +16,22 @@
 </head>
 <body>
 <c:import url="/jsp/include/header.jsp"/>
-<h1>Category: ${productCategory.name}</h1>
 
-${productCategory.description}
+<c:forEach var="category" items="${productCategoryList}">
+<h1>Category: ${category.name}</h1>
+
+${category.description}
 <hr />
 
+<c:forEach var="prod" items="${productList}">
+    <li>Product name: <a href="<c:url value="/productDetail/${prod.alias}"/>">${prod.name}</a>  - price: ${prod.sale} - category: ${prod.category.name}<br>
+        <c:forEach var="picture" items="${prod.pictures}">
+            <img src="<c:url value="/viewmedia/${picture.id}"/>" alt="${picture.filename}" width="100px"/>
+        </c:forEach>
+    </li>
+</c:forEach>
+
+</c:forEach>
 
 </body>
 </html>

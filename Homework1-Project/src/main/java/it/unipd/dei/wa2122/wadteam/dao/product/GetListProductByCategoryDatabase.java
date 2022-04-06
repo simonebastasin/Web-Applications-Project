@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GetProductByCategoryDatabase {
+public class GetListProductByCategoryDatabase {
     private static final String STATEMENT = "SELECT product_alias, name, brand, description, purchase_price, sale_price, quantity, category_name, evidence FROM product WHERE category_name = ?";
 
     private static final String STATEMENT_GET_PICTURE = "SELECT id_media FROM Represented_by WHERE product_alias = ?";
@@ -31,7 +31,7 @@ public class GetProductByCategoryDatabase {
      * @param con     the connection to the database.
      * @param category the product.
      */
-    public GetProductByCategoryDatabase(final Connection con, final String category) {
+    public GetListProductByCategoryDatabase(final Connection con, final String category) {
         this.con = con;
         this.category = category;
     }
@@ -42,7 +42,7 @@ public class GetProductByCategoryDatabase {
      * @return the {@code Product} object matching the product_alias.
      * @throws SQLException if any error occurs while retrieving the product.
      */
-    public List<Product> getProductByCategory() throws SQLException {
+    public List<Product> getListProductByCategory() throws SQLException {
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
 
