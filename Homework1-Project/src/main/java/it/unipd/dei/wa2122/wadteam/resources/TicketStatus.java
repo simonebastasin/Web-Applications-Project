@@ -5,12 +5,12 @@ import org.json.JSONObject;
 public class TicketStatus implements Resource{
 
     private final Integer id;
-    private final String status;
+    private final TicketStatusEnum status;
     private final String description;
     private final DateTime tsDate;
     private final int idTicket;
 
-    public TicketStatus(Integer id, String status, String description, DateTime tsDate, int idTicket) {
+    public TicketStatus(Integer id,TicketStatusEnum status, String description, DateTime tsDate, int idTicket) {
         this.id = id;
         this.status = status;
         this.description = description;
@@ -22,7 +22,7 @@ public class TicketStatus implements Resource{
         return id;
     }
 
-    public final String getStatus() {
+    public final TicketStatusEnum getStatus() {
         return status;
     }
 
@@ -42,7 +42,7 @@ public class TicketStatus implements Resource{
     public JSONObject toJSON() {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("id", id);
-        jsonObject.put("status", status);
+        jsonObject.put("status", status.toJSON());
         jsonObject.put("description", description);
         jsonObject.put("tsDate", tsDate.toJSON());
         jsonObject.put("idTicket", idTicket);
@@ -51,7 +51,7 @@ public class TicketStatus implements Resource{
 
     public static TicketStatus fromJSON(JSONObject jsonObject) {
         int id = jsonObject.getInt("id");
-        String status = jsonObject.getString("status");
+        TicketStatusEnum status = TicketStatusEnum.fromJSON(jsonObject.getJSONObject("status"));
         String description = jsonObject.getString("status");
         DateTime tsDate = DateTime.fromJSON(jsonObject.getJSONObject("tsDate"));
         int idTicket = jsonObject.getInt("idTicket");

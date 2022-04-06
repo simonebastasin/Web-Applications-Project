@@ -2,6 +2,7 @@ package it.unipd.dei.wa2122.wadteam.dao.ticketStatus;
 
 import it.unipd.dei.wa2122.wadteam.resources.DateTime;
 import it.unipd.dei.wa2122.wadteam.resources.TicketStatus;
+import it.unipd.dei.wa2122.wadteam.resources.TicketStatusEnum;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -41,7 +42,7 @@ public class CreateTicketStatusDatabase {
 
         try {
             preparedStatement = con.prepareStatement(STATEMENT);
-            preparedStatement.setString(1, ticketStatus.getStatus());
+            preparedStatement.setString(1, String.valueOf(ticketStatus.getStatus()));
             preparedStatement.setString(2, ticketStatus.getDescription());
             preparedStatement.setInt(3, ticketStatus.getIdTicket());
 
@@ -50,7 +51,7 @@ public class CreateTicketStatusDatabase {
             if (resultSet.next()) {
                 resultTicketStatus = new TicketStatus(
                         resultSet.getInt("id"),
-                        resultSet.getString("status"),
+                        TicketStatusEnum.valueOf(resultSet.getString("status")),
                         resultSet.getString("description"),
                         new DateTime(resultSet.getObject("ts_Date", LocalDateTime.class)),
                         resultSet.getInt("idTicket")

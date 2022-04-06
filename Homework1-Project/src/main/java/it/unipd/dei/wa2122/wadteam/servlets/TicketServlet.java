@@ -74,10 +74,10 @@ public class TicketServlet extends AbstractDatabaseServlet {
             case "detail" -> {
                 if (param.chars().allMatch(Character::isDigit) && !param.equals("")) {
                     int idTicket = Integer.parseInt(param);
-                    String status = req.getParameter("status");
+                    String status = String.valueOf(req.getParameter("status"));
                     String description = req.getParameter("description");
 
-                    TicketStatus temp = new TicketStatus(null, status, description, null, idTicket);
+                    TicketStatus temp = new TicketStatus(null, TicketStatusEnum.valueOf(status), description, null, idTicket);
                     try {
                         TicketStatus ticketstatus = new CreateTicketStatusDatabase(getDataSource().getConnection(), temp).createTicketStatus();
                     } catch (SQLException e) {

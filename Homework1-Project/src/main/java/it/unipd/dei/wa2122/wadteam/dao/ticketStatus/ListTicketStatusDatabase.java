@@ -1,9 +1,6 @@
 package it.unipd.dei.wa2122.wadteam.dao.ticketStatus;
 
-import it.unipd.dei.wa2122.wadteam.resources.DateTime;
-import it.unipd.dei.wa2122.wadteam.resources.Employee;
-import it.unipd.dei.wa2122.wadteam.resources.Role;
-import it.unipd.dei.wa2122.wadteam.resources.TicketStatus;
+import it.unipd.dei.wa2122.wadteam.resources.*;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -63,7 +60,7 @@ public class ListTicketStatusDatabase {
             while (resultSet.next()) {
 
                 resultTicketStatusItem = new TicketStatus(resultSet.getInt("id"),
-                        resultSet.getString("status"),
+                        TicketStatusEnum.valueOf(resultSet.getString("status")),
                         resultSet.getString("description"),
                         new DateTime(resultSet.getObject("ts_Date", LocalDateTime.class)),
                         resultSet.getInt("id_Ticket")

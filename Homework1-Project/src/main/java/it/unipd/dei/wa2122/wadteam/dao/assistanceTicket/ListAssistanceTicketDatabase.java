@@ -3,6 +3,7 @@ package it.unipd.dei.wa2122.wadteam.dao.assistanceTicket;
 import it.unipd.dei.wa2122.wadteam.resources.AssistanceTicket;
 import it.unipd.dei.wa2122.wadteam.resources.DateTime;
 import it.unipd.dei.wa2122.wadteam.resources.TicketStatus;
+import it.unipd.dei.wa2122.wadteam.resources.TicketStatusEnum;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -73,7 +74,7 @@ public class ListAssistanceTicketDatabase {
                 while (innerResultSet.next()) {
 
                     resultTicketStatus.add(new TicketStatus(innerResultSet.getInt("id"),
-                            innerResultSet.getString("status"),
+                            TicketStatusEnum.valueOf(innerResultSet.getString("status")),
                             innerResultSet.getString("description"),
                             new DateTime(innerResultSet.getObject("ts_Date", LocalDateTime.class)),
                             innerResultSet.getInt("id_Ticket"))
