@@ -7,7 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--@elvariable id="category" type="ProductCategory"--%>
+<%--@elvariable id="productCategory" type="ProductCategory"--%>
 
 <html>
 <head>
@@ -15,12 +15,11 @@
 </head>
 <body>
 <c:import url="/jsp/include/header.jsp"/>
-<h1>Electromechanics shop</h1>
+<h1>Category: ${productCategory.name}</h1>
 
-Category name: ${category.name}
-<ul>
-    <li>Description: ${category.description}</li>
-</ul>
+${productCategory.description}
+<hr />
+
 
 </body>
 </html>

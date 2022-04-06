@@ -18,13 +18,14 @@ public class ProductCategoryDetailServlet extends AbstractDatabaseServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
         String path = req.getPathInfo() != null ? req.getPathInfo().substring(1) : "";
+        System.out.println(path);
 
         ProductCategory category = null;
 
         try {
             category = new GetProductCategoryDatabase((getDataSource().getConnection()), path).getProductCategory();
 
-            System.out.println(category.getName() + " " + category.getDescription());
+            System.out.println(category.getName() + "AOAOO" + category.getDescription());
 
             writeResource(req, res, "/jsp/categoryDetail.jsp", true, category);
 
