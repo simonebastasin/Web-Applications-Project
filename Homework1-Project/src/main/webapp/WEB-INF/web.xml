@@ -114,15 +114,15 @@
     </resource-ref>
 
     <filter>
-        <filter-name>UserFilter</filter-name>
-        <filter-class>it.unipd.dei.wa2122.wadteam.filter.UserFilter</filter-class>
+        <filter-name>CustomerFilter</filter-name>
+        <filter-class>it.unipd.dei.wa2122.wadteam.filter.CustomerFilter</filter-class>
     </filter>
     <filter-mapping>
-        <filter-name>UserFilter</filter-name>
+        <filter-name>CustomerFilter</filter-name>
         <url-pattern>/order/*</url-pattern>
     </filter-mapping>
     <filter-mapping>
-        <filter-name>UserFilter</filter-name>
+        <filter-name>CustomerFilter</filter-name>
         <url-pattern>/order</url-pattern>
     </filter-mapping>
 </web-app>

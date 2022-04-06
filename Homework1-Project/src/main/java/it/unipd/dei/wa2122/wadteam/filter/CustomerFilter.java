@@ -10,9 +10,8 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 import java.io.IOException;
-import java.util.Base64;
 
-public class UserFilter extends AbstractFilter {
+public class CustomerFilter extends AbstractFilter {
 
     private static final String USER_ATTRIBUTE = "user";
     private FilterConfig config = null;
