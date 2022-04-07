@@ -1,6 +1,8 @@
 package it.unipd.dei.wa2122.wadteam.servlets;
 
+import it.unipd.dei.wa2122.wadteam.dao.customer.GetIdCustomerDatabase;
 import it.unipd.dei.wa2122.wadteam.dao.employee.GetEmployeeDatabase;
+import it.unipd.dei.wa2122.wadteam.resources.Customer;
 import it.unipd.dei.wa2122.wadteam.resources.Employee;
 import it.unipd.dei.wa2122.wadteam.resources.ErrorMessage;
 import it.unipd.dei.wa2122.wadteam.resources.UserCredential;
@@ -18,7 +20,7 @@ public class UserServlet extends AbstractDatabaseServlet {
         String [] param1=req.getPathInfo() != null ? req.getPathInfo().split("/"):null;
         String username=param1[3].trim();
         String type=param1[2];
-        System.out.println(param1[1]);
+
 
 
         switch (param1[1]) {
@@ -26,12 +28,12 @@ public class UserServlet extends AbstractDatabaseServlet {
                 System.out.println("ok");
                 if ("EMPLOYEE".equals(type))
                 {
-                    System.out.println(username);
+
                     Employee em=null;
                     try {
                          em=new GetEmployeeDatabase(getDataSource().getConnection(),username).getEmployee();
 
-                        System.out.println(em.getSurname());
+
                     } catch (SQLException e) {
                         e.printStackTrace();
                     }
@@ -40,7 +42,15 @@ public class UserServlet extends AbstractDatabaseServlet {
                 }
                 else
                 {
+                    Customer cu=null;
+                    try {
 
+                        cu= new GetIdCustomerDatabase(getDataSource().getConnection(),username).getIdCustomer();
+
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                    writeResource(req,resp,"/jsp/CustomerDetail.jsp",true,cu);
                 }
             }
 
