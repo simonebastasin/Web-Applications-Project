@@ -18,23 +18,14 @@
         <li>Name: <input type="text" name="name" value="${customer.name}" required></li>
         <li>Surname: <input type="text" name="surname" value="${customer.surname}" required></li>
         <li>Fiscal Code: <input type="text" name="fiscalCode" value="${customer.fiscalCode}" required></li>
-        <li>Email: <input type="email" name="email" value="${customer.email}" required></li>
+       <input type="hidden" name="email" value="${customer.email}" required>
         <li>Phone Number: <input type="text" name="phoneNumber" value="${customer.phoneNumber}"></li>
         <li>Address :<input type="text" name="address" value="${customer.address}"></li>
 
         <li>Password: <input type="password" id="password "name="password" disabled="true">
+            <button onclick="disable()">change password</button>
 
-            <button onclick="undisable()">change Password</button>
-        <script>
-           function disable()
-           {
-               document.getElementById("password").disabled=true;
-           }
-           function undisable()
-           {
-               document.getElementById("password").disabled=false ;
-           }
-        </script>
+
         </li>
 
         <input type="hidden" value="${customer.username}" name="username">
@@ -43,5 +34,15 @@
     </ul>
 
 </form>
+<script>
+    function disable()
+    {
+        document.getElementById("password").disabled=true;
+    }
+    function undisable()
+    {
+        document.getElementById("password").disabled=false ;
+    }
+</script>
 </body>
 </html>
