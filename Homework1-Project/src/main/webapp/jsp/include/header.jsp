@@ -8,6 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--@elvariable id="user" type="it.unipd.dei.wa2122.wadteam.resources.UserCredential"--%>
+<%--@elvariable id="employee" type="it.unipd.dei.wa2122.wadteam.resources.Employee"--%>
 
 <a href="<c:url value="/"/>">Home</a>
 <a href="<c:url value="/media/list"/>">View Media</a>
@@ -15,7 +16,7 @@
 <a href="<c:url value="/ticket/list"/>">View Ticket</a>
 <c:choose>
     <c:when test="${not empty user}">
-        Hello, <a href="<c:url value="/user/info"/>">${user.identification}</a>
+        Hello, <a href="<c:url value="/user/info/${user.identification}/${user.type.toString()}"/>">${user.identification}</a>
         <a href="<c:url value="/user/logout"/>">Logout</a>
     </c:when>
     <c:otherwise>
