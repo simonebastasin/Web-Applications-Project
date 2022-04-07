@@ -1,6 +1,5 @@
 package it.unipd.dei.wa2122.wadteam.servlets;
 
-import it.unipd.dei.wa2122.wadteam.dao.onlineOrder.GetOnlineOrderByCustomerDatabase;
 import it.unipd.dei.wa2122.wadteam.dao.product.GetProductDatabase;
 import it.unipd.dei.wa2122.wadteam.dao.product.ListProductDatabase;
 import it.unipd.dei.wa2122.wadteam.dao.productCategory.ListProductCategoryDatabase;
@@ -10,10 +9,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class HomePageServlet extends AbstractDatabaseServlet{
 
@@ -29,8 +26,12 @@ public class HomePageServlet extends AbstractDatabaseServlet{
             categories = new ListProductCategoryDatabase(getDataSource().getConnection()).getProductCategory();
 
             List<Resource> lists = new ArrayList<>();
-            lists.addAll(products);
+            for(var prod : products){
+                if (prod.getQuantity() > 0)
+                    lists.add(prod);
+            }
             lists.addAll(categories);
+
 
             writeResource(req, res, "/jsp/HomePage.jsp", false, lists.toArray(categories.toArray(Resource[]::new)));
 

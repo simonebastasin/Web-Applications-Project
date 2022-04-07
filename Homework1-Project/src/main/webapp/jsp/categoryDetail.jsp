@@ -22,14 +22,20 @@
 
 ${category.description}
 <hr />
-
-<c:forEach var="prod" items="${productList}">
-    <li>Product name: <a href="<c:url value="/productDetail/${prod.alias}"/>">${prod.name}</a>  - price: ${prod.sale} - category: ${prod.category.name}<br>
-        <c:forEach var="picture" items="${prod.pictures}">
-            <img src="<c:url value="/viewmedia/${picture.id}"/>" alt="${picture.filename}" width="100px"/>
+<c:choose>
+    <c:when test="${productList.size() > 0}">
+        <c:forEach var="prod" items="${productList}">
+            <li>Product name: <a href="<c:url value="/productDetail/${prod.alias}"/>">${prod.name}</a>  - price: ${prod.sale} - quantity: ${prod.quantity}<br>
+                <c:forEach var="picture" items="${prod.pictures}">
+                    <img src="<c:url value="/viewmedia/${picture.id}"/>" alt="${picture.filename}" width="100px"/>
+                </c:forEach>
+            </li>
         </c:forEach>
-    </li>
-</c:forEach>
+    </c:when>
+    <c:otherwise>
+        There are no more products for this category! =(
+    </c:otherwise>
+</c:choose>
 
 </c:forEach>
 

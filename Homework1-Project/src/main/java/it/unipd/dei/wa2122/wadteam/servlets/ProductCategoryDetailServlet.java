@@ -33,7 +33,10 @@ public class ProductCategoryDetailServlet extends AbstractDatabaseServlet {
 
             List<Resource> list = new ArrayList<>();
             list.add(category);
-            list.addAll(products);
+            for(var prod : products){
+                if (prod.getQuantity() > 0)
+                    list.add(prod);
+            }
 
             writeResource(req, res, "/jsp/categoryDetail.jsp", false, list.toArray(products.toArray(Resource[]::new)));
 

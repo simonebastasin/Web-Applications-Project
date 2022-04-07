@@ -20,20 +20,30 @@
     <c:import url="/jsp/include/header.jsp"/>
     <h1>Electromechanics shop</h1>
 
-
     <ul>
         <c:forEach var="item" items="${productCategoryList}">
-            <li><b>${item.name}</b></li>
+            <li><b><a href="<c:url value="/categoryDetail/${item.name}"/>">${item.name}</a></b></li>
+
+            <%! boolean empty = true;  %>
+
             <ul>
                 <c:forEach var="prod" items="${productList}">
                     <c:if test="${prod.category.name.equals(item.name)}">
-                    <li>Product name: <a href="<c:url value="/productDetail/${prod.alias}"/>">${prod.name}</a>  - price: ${prod.sale} - category: <a href="<c:url value="/categoryDetail/${prod.category.name}"/>">${prod.category.name}</a><br>
-                        <c:forEach var="picture" items="${prod.pictures}">
-                            <img src="<c:url value="/viewmedia/${picture.id}"/>" alt="${picture.filename}" width="100px"/>
-                        </c:forEach>
-                    </li>
+
+                        <% empty = false; %>
+
+                        <li>Product name: <a href="<c:url value="/productDetail/${prod.alias}"/>">${prod.name}</a>  - price: ${prod.sale} - quantity: ${prod.quantity}<br>
+                            <c:forEach var="picture" items="${prod.pictures}">
+                                <img src="<c:url value="/viewmedia/${picture.id}"/>" alt="${picture.filename}" width="100px"/>
+                            </c:forEach>
+                        </li>
                     </c:if>
                 </c:forEach>
+
+                <% if (empty) {
+
+                }%>
+
             </ul>
         </c:forEach>
     </ul>
