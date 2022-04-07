@@ -84,7 +84,7 @@ public class GetAssistanceTicketDatabase {
                     while (resultSet.next()) {
 
                         var resultTicketStatusItem = new TicketStatus(resultSet.getInt("id"),
-                                TicketStatusEnum.valueOf(resultSet.getString("status")),
+                                TicketStatusEnum.fromString(resultSet.getString("status")),
                                 resultSet.getString("description"),
                                 new DateTime(resultSet.getObject("ts_Date", LocalDateTime.class)),
                                 resultSet.getInt("id_Ticket")

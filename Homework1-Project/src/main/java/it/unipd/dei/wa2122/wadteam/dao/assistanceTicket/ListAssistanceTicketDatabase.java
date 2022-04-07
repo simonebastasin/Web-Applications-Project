@@ -74,7 +74,7 @@ public class ListAssistanceTicketDatabase {
                 while (innerResultSet.next()) {
 
                     resultTicketStatus.add(new TicketStatus(innerResultSet.getInt("id"),
-                            TicketStatusEnum.valueOf(innerResultSet.getString("status")),
+                            TicketStatusEnum.fromString(innerResultSet.getString("status")),
                             innerResultSet.getString("description"),
                             new DateTime(innerResultSet.getObject("ts_Date", LocalDateTime.class)),
                             innerResultSet.getInt("id_Ticket"))
