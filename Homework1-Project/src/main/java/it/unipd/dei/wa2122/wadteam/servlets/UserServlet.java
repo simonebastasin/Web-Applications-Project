@@ -16,8 +16,8 @@ public class UserServlet extends AbstractDatabaseServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String path = req.getPathInfo() != null ? req.getPathInfo().substring(1).lastIndexOf('/') != -1 ? req.getPathInfo().substring(1,req.getPathInfo().lastIndexOf('/')) : req.getPathInfo().substring(1) : "";
         String [] param1=req.getPathInfo() != null ? req.getPathInfo().split("/"):null;
-        String username=param1[2].trim();
-        String type=param1[3];
+        String username=param1[3].trim();
+        String type=param1[2];
         System.out.println(param1[1]);
 
 
