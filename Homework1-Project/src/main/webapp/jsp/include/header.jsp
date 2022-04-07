@@ -14,6 +14,20 @@
 <a href="<c:url value="/media/list"/>">View Media</a>
 <a href="<c:url value="/order/list"/>">Your orders</a>
 <a href="<c:url value="/ticket/list"/>">View Ticket</a>
+
+
+<c:choose>
+    <c:when test="${user.role == 'Administrator'}">
+        &nbsp | &nbsp
+        <a href="<c:url value="/Admin/ProductManagment"/>">Product Management</a>
+        <a href="<c:url value="/user/logout"/>">Discount Management</a>
+        <a href="<c:url value="/user/logout"/>">User Management</a>
+        <a href="<c:url value="/user/logout"/>">Data Export</a>
+
+
+    </c:when>
+</c:choose>
+&nbsp | &nbsp
 <c:choose>
     <c:when test="${not empty user}">
         Hello, <a href="<c:url value="/user/${user.type.toString()}/info/${user.identification}"/>">${user.identification}</a>
@@ -24,6 +38,7 @@
         <a href="<c:url value="/user/register"/>">Register</a>
     </c:otherwise>
 </c:choose>
+
 
 
 
