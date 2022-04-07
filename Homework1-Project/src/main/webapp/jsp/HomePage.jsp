@@ -24,13 +24,13 @@
         <c:forEach var="item" items="${productCategoryList}">
             <li><b><a href="<c:url value="/categoryDetail/${item.name}"/>">${item.name}</a></b></li>
 
-            <%! boolean empty = true;  %>
+            <c:set value="${true}" var="empty_cat"/>
 
             <ul>
                 <c:forEach var="prod" items="${productList}">
                     <c:if test="${prod.category.name.equals(item.name)}">
 
-                        <% empty = false; %>
+                        <c:set value="${false}" var="empty_cat"/>
 
                         <li>Product name: <a href="<c:url value="/productDetail/${prod.alias}"/>">${prod.name}</a>  - price: ${prod.sale} - quantity: ${prod.quantity}<br>
                             <c:forEach var="picture" items="${prod.pictures}">
@@ -40,9 +40,9 @@
                     </c:if>
                 </c:forEach>
 
-                <% if (empty) {
-
-                }%>
+                <c:if test="${empty_cat}">
+                    <li>There are no more products for this category! =(</li>
+                </c:if>
 
             </ul>
         </c:forEach>
