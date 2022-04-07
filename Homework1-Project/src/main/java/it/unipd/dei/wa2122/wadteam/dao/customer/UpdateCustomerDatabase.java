@@ -14,8 +14,8 @@ public class UpdateCustomerDatabase {
     private static final String STATEMENT = "UPDATE Customer " +
             "SET name = ?, surname = ?, fiscal_code = ?," +
             "address=?, email=?, phone_number=?," +
-            "username=?, password=?" +
-            " WHERE id = ?";
+            "username=?" +
+            " WHERE username = ?";
     private final Connection con;
 
     private final Customer customer;
@@ -42,12 +42,12 @@ public class UpdateCustomerDatabase {
             preparedStatement.setString(5, customer.getEmail());
             preparedStatement.setString(6, customer.getPhoneNumber());
             preparedStatement.setString(7, customer.getUsername());
-            preparedStatement.setString(8, customer.getPassword());
+            preparedStatement.setString(8,customer.getUsername());
 
 
-            resultSet = preparedStatement.executeQuery();
+            int i = preparedStatement.executeUpdate();
 
-            if (resultSet.next()) {
+           /* if (resultSet.next()) {
                 resultCustomer = new Customer(
                         resultSet.getInt("id"),
                         resultSet.getString("name"),
@@ -59,7 +59,7 @@ public class UpdateCustomerDatabase {
                         resultSet.getString("username"),
                         null
                 );
-            }
+            }*/
         } finally {
             if (resultSet != null) {
                 resultSet.close();

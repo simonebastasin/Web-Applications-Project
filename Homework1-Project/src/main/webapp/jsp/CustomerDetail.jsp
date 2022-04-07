@@ -21,9 +21,6 @@
         <li>FiscalCode: ${customer.fiscalCode}</li>
     </ul>
 
-    <form action="/modify/customer" method="get">
-        <input type="hidden" id="username" value="${customer.username}">
-        <input type="submit" value="Edit">
-    </form>
+    <a href="<c:url value="/user/CUSTOMER/modify/${customer.username}"/>">Edit</a>
 </body>
 </html>

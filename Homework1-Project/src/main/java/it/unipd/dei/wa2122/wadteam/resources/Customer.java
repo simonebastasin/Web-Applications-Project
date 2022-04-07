@@ -4,7 +4,7 @@ import org.json.JSONObject;
 
 public class Customer implements Resource {
 
-    final int id;
+    final Integer id;
     final String name;
     final String surname;
     final String fiscalCode;
@@ -14,7 +14,7 @@ public class Customer implements Resource {
     final String username;
     final String password;
 
-    public Customer(int id,String name,String surname,String fiscalCode,String address,String email, String  phoneNumber,String username,String password) {
+    public Customer(Integer id,String name,String surname,String fiscalCode,String address,String email, String  phoneNumber,String username,String password) {
         this.id=id;
         this.name = name;
         this.surname = surname;
@@ -53,7 +53,7 @@ public class Customer implements Resource {
         return jsonObject;
     }
     public static Customer fromJSON(JSONObject jsonObject) {
-        int id = jsonObject.getInt("id");
+        Integer id = jsonObject.getInt("id");
         String name = jsonObject.getString("name");
         String surname = jsonObject.getString("surname");
         String fiscalCode = jsonObject.getString("fiscalCode");

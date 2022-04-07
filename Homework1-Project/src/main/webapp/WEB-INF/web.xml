@@ -106,18 +106,7 @@
         <url-pattern>/ticket/*</url-pattern>
     </servlet-mapping>
 
-    <servlet>
-        <servlet-name>UpdateCustomerServlet</servlet-name>
-        <servlet-class>it.unipd.dei.wa2122.wadteam.servlets.UpdateCustomerServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>UpdateCustomerServlet</servlet-name>
-        <url-pattern>/customer/modify</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>UserServlet</servlet-name>
-        <url-pattern>/customer/modify/*</url-pattern>
-    </servlet-mapping>
+
     <servlet>
         <servlet-name>UserServlet</servlet-name>
         <servlet-class>it.unipd.dei.wa2122.wadteam.servlets.UserServlet</servlet-class>
