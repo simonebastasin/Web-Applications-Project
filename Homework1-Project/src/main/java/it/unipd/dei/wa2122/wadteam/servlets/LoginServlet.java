@@ -1,6 +1,6 @@
 package it.unipd.dei.wa2122.wadteam.servlets;
 
-import it.unipd.dei.wa2122.wadteam.dao.login.CheckUserCredential;
+import it.unipd.dei.wa2122.wadteam.dao.checkUser.CheckUserCredential;
 import it.unipd.dei.wa2122.wadteam.resources.Message;
 import it.unipd.dei.wa2122.wadteam.resources.UserCredential;
 import jakarta.servlet.ServletException;

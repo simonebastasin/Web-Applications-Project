@@ -1,4 +1,4 @@
-package it.unipd.dei.wa2122.wadteam.dao.login;
+package it.unipd.dei.wa2122.wadteam.dao.checkUser;
 
 import it.unipd.dei.wa2122.wadteam.resources.UserCredential;
 

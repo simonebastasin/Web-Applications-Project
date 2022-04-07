@@ -11,7 +11,7 @@ public class UpdateAssistanceTicketDatabase {
     /**
      * The SQL statement to be executed
      */
-    private static final String STATEMENT = "UPDATE Employee SET Description = ?, ID_customer = ?, Product_Alias = ? WHERE ID = ?";
+    private static final String STATEMENT = "UPDATE Assistance_Ticket SET Description = ?, ID_customer = ?, Product_Alias = ? WHERE ID = ?";
 
     /**
      * The connection to the database

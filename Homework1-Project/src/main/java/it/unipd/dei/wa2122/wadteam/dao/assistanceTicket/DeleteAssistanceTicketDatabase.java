@@ -12,7 +12,7 @@ public class DeleteAssistanceTicketDatabase {
         /**
          * The SQL statement to be executed
          */
-        private static final String STATEMENT = "DELETE FROM Assisistant_Ticket WHERE ID = ? RETURNING *";
+        private static final String STATEMENT = "DELETE FROM Assistance_Ticket WHERE ID = ? RETURNING *";
 
         /**
          * The connection to the database
