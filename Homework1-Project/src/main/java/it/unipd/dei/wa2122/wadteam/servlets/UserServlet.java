@@ -31,10 +31,7 @@ public class UserServlet extends AbstractDatabaseServlet {
                     try {
                          em=new GetEmployeeDatabase(getDataSource().getConnection(),username).getEmployee();
 
-                         if(em==null)
-                             System.out.println("nooooooooooo");
-                         else
-                             System.out.println("siii");
+                        System.out.println(em.getSurname());
                     } catch (SQLException e) {
                         e.printStackTrace();
                     }

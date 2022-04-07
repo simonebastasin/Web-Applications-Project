@@ -15,6 +15,11 @@
         <c:out value="${employee.username}"/></title>
 </head>
 <body>
+    <ul>
+        <li>Name: ${employee.name}</li>
+        <li>Surname: ${employee.surname} </li>
+        <li>Role: ${employee.role.toString()}</li>
 
+    </ul>
 </body>
 </html>

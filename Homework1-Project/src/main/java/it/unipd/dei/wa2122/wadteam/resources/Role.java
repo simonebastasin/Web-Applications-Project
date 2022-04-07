@@ -32,6 +32,9 @@ public class Role implements Resource {
     }
 
     @Override
+    public final String toString()
+    {return name;}
+    @Override
     public JSONObject toJSON() {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("name", name);
