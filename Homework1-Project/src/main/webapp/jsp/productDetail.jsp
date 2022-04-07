@@ -16,13 +16,12 @@
 <body>
 
     <c:import url="/jsp/include/header.jsp"/>
-    <h1>Electromechanics shop</h1>
+    <h1>Product: ${product.name}</h1>
 
-    Product name: ${product.name}
     <ul>
         <li>Brand: ${product.brand}</li>
         <li>Description: ${product.description}</li>
-        <li>Price: ${product.sale}</li>
+        <li>Price: ${product.sale}€</li>
         <li>Quantity: ${product.quantity}</li>
     </ul>
 

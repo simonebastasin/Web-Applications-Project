@@ -21,6 +21,8 @@ public class BuyProductServlet extends AbstractDatabaseServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse res) throws  ServletException, IOException {
         String path = req.getPathInfo() != null ? req.getPathInfo().substring(1) : "";
 
+        int selected = Integer.parseInt(req.getParameter("quantity"));
+
         Product product = null;
 
         try {
