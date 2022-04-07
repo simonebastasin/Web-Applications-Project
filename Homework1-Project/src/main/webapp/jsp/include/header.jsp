@@ -16,7 +16,7 @@
 <a href="<c:url value="/ticket/list"/>">View Ticket</a>
 <c:choose>
     <c:when test="${not empty user}">
-        Hello, <a href="<c:url value="/user/info/${user.type.toString()}/${user.identification}"/>">${user.identification}</a>
+        Hello, <a href="<c:url value="/user/${user.type.toString()}/info/${user.identification}"/>">${user.identification}</a>
         <a href="<c:url value="/user/logout"/>">Logout</a>
     </c:when>
     <c:otherwise>

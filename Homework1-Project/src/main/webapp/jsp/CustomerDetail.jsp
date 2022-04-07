@@ -20,5 +20,10 @@
         <li>Email: ${customer.email}</li>
         <li>FiscalCode: ${customer.fiscalCode}</li>
     </ul>
+
+    <form action="/modify/customer" method="get">
+        <input type="hidden" id="username" value="${customer.username}">
+        <input type="submit" value="Edit">
+    </form>
 </body>
 </html>

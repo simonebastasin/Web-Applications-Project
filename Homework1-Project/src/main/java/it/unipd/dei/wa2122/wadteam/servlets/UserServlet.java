@@ -19,11 +19,11 @@ public class UserServlet extends AbstractDatabaseServlet {
         String path = req.getPathInfo() != null ? req.getPathInfo().substring(1).lastIndexOf('/') != -1 ? req.getPathInfo().substring(1,req.getPathInfo().lastIndexOf('/')) : req.getPathInfo().substring(1) : "";
         String [] param1=req.getPathInfo() != null ? req.getPathInfo().split("/"):null;
         String username=param1[3].trim();
-        String type=param1[2];
+        String type=param1[1];
 
 
 
-        switch (param1[1]) {
+        switch (param1[2]) {
             case "info" -> {
                 System.out.println("ok");
                 if ("EMPLOYEE".equals(type))
