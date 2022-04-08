@@ -17,9 +17,7 @@ import static it.unipd.dei.wa2122.wadteam.resources.UserCredential.*;
 public class LoginServlet extends AbstractDatabaseServlet {
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String path = req.getRequestURI().split("/",4)[3];
-        path = req.getServletPath();
-        System.out.println(path);
+        String path = req.getServletPath();
         switch (path){
             case "/user/login" -> writeJsp(req, resp, "/jsp/login.jsp");
             case "/user/logout" -> {

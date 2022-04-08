@@ -22,7 +22,7 @@
 
     <ul>
         <c:forEach var="item" items="${productCategoryList}">
-            <li><b><a href="<c:url value="/categoryDetail/${item.name}"/>">${item.name}</a></b></li>
+            <li><b><a href="<c:url value="products/category/${item.name}"/>">${item.name}</a></b></li>
 
             <c:set value="${true}" var="empty_cat"/>
 
@@ -32,7 +32,7 @@
 
                         <c:set value="${false}" var="empty_cat"/>
 
-                        <li>Product name: <a href="<c:url value="/productDetail/${prod.alias}"/>">${prod.name}</a>  - price: ${prod.sale}€ - quantity: ${prod.quantity}<br>
+                        <li>Product name: <a href="<c:url value="/products/details/${prod.alias}"/>">${prod.name}</a>  - price: ${prod.sale}€ - quantity: ${prod.quantity}<br>
                             <c:forEach var="picture" items="${prod.pictures}">
                                 <img src="<c:url value="/viewmedia/${picture.id}"/>" alt="${picture.filename}" width="100px"/>
                             </c:forEach>

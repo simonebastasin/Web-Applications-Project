@@ -60,24 +60,7 @@
     <servlet-mapping>
         <servlet-name>HomePageServlet</servlet-name>
         <url-pattern>/</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>ProductDetailServlet</servlet-name>
-        <servlet-class>it.unipd.dei.wa2122.wadteam.servlets.ProductDetailServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>ProductDetailServlet</servlet-name>
-        <url-pattern>/productDetail/*</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>ProductCategoryDetailServlet</servlet-name>
-        <servlet-class>it.unipd.dei.wa2122.wadteam.servlets.ProductCategoryDetailServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>ProductCategoryDetailServlet</servlet-name>
-        <url-pattern>/categoryDetail/*</url-pattern>
+        <url-pattern>/products/*</url-pattern>
     </servlet-mapping>
 
     <servlet>
