@@ -24,6 +24,8 @@ public class UserServlet extends AbstractDatabaseServlet {
         String path = req.getPathInfo() != null ? req.getPathInfo().substring(1).lastIndexOf('/') != -1 ? req.getPathInfo().substring(1,req.getPathInfo().lastIndexOf('/')) : req.getPathInfo().substring(1) : "";
         String [] param1=req.getPathInfo() != null ? req.getPathInfo().split("/"):null;
         String username="";
+        UserCredential us=(UserCredential)req.getSession(false).getAttribute("user");
+        username=us.getIdentification();
         if(param1.length>3)
             username=param1[3].trim();
         String type=param1[1];
@@ -105,8 +107,8 @@ public class UserServlet extends AbstractDatabaseServlet {
                     Employee em=null;
                     try {
 
-                        UserCredential us=(UserCredential)req.getSession(false).getAttribute("user");
-                        em=new GetEmployeeDatabase(getDataSource().getConnection(),us.getIdentification()).getEmployee();
+
+                        em=new GetEmployeeDatabase(getDataSource().getConnection(),username).getEmployee();
 
                     } catch (SQLException e) {
                         e.printStackTrace();
@@ -123,7 +125,9 @@ public class UserServlet extends AbstractDatabaseServlet {
         protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
             String[] param1 = req.getPathInfo() != null ? req.getPathInfo().split("/") : null;
-
+            String username="";
+            UserCredential us=(UserCredential)req.getSession(false).getAttribute("user");
+            username=us.getIdentification();
 
             switch (param1[2]) {
 
@@ -135,7 +139,7 @@ public class UserServlet extends AbstractDatabaseServlet {
                     try {
 
                         cu = new UpdateCustomerDatabase(getDataSource().getConnection(), cu).updateCustomer();
-                        cu=new GetIdCustomerDatabase(getDataSource().getConnection(),req.getParameter("username")).getIdCustomer();
+                        cu=new GetIdCustomerDatabase(getDataSource().getConnection(),username).getIdCustomer();
                         System.out.println(req.getParameter("username"));
 
                     } catch (SQLException e) {
@@ -149,7 +153,7 @@ public class UserServlet extends AbstractDatabaseServlet {
                     {
                         Employee emNew=null;
                         try {
-                            Employee emOld=new GetEmployeeDatabase(getDataSource().getConnection(),req.getParameter("username")).getEmployee();
+                            Employee emOld=new GetEmployeeDatabase(getDataSource().getConnection(),username).getEmployee();
                             String role=req.getParameter("role");
                             System.out.println("Matteo");
                             if("notchange".equals(role))
@@ -170,8 +174,8 @@ public class UserServlet extends AbstractDatabaseServlet {
                         Customer cu = null;
                         try {
 
-                            cu = new GetIdCustomerDatabase(getDataSource().getConnection(), req.getParameter("username")).getIdCustomer();
-                            int result = new UpdatePasswordCustomerDatabase(getDataSource().getConnection(), req.getParameter("oldPassword"), req.getParameter("newPassword"), req.getParameter("username")).updatePassword();
+                            cu = new GetIdCustomerDatabase(getDataSource().getConnection(), username).getIdCustomer();
+                            int result = new UpdatePasswordCustomerDatabase(getDataSource().getConnection(), req.getParameter("oldPassword"), req.getParameter("newPassword"), username).updatePassword();
                             if (result == 0)
                                 writeError(req, resp, new ErrorMessage.ChangePasswordError("old password wrong"));
                             else {
@@ -187,9 +191,9 @@ public class UserServlet extends AbstractDatabaseServlet {
                     {
                         Employee em=null;
                         try {
-                            UserCredential us= (UserCredential) req.getSession(false).getAttribute("user");
-                            em= new GetEmployeeDatabase(getDataSource().getConnection(),us.getIdentification()).getEmployee();
-                            int result=new UpdatePasswordEmployeeDatabase(getDataSource().getConnection(),req.getParameter("oldPassword"),req.getParameter("newPassword"),us.getIdentification()).updatePassword();
+
+                            em= new GetEmployeeDatabase(getDataSource().getConnection(),username).getEmployee();
+                            int result=new UpdatePasswordEmployeeDatabase(getDataSource().getConnection(),req.getParameter("oldPassword"),req.getParameter("newPassword"),username).updatePassword();
                             if (result == 0)
                                 writeError(req, resp, new ErrorMessage.ChangePasswordError("old password wrong"));
                             else {

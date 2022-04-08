@@ -4,11 +4,11 @@
 <%--@elvariable id="user" type="it.unipd.dei.wa2122.wadteam.resources.UserCredential"--%>
 <html>
 <head>
-    <title>Change password ${customer.username}</title>
+    <title>Change password ${user.identification}</title>
 </head>
 <body>
 <c:import url="/jsp/include/header.jsp"/>
-<form method="post" action="<c:url value="/user/${user.type.toString()}/password/${customer.username}"/>">
+<form method="post" action="<c:url value="/user/${user.type.toString()}/password/"/>">
     <ul>
         <li>Old Password: <input type="password" name="oldPassword" required></li>
         <li>newPassword: <input type="password" name="newPassword" required></li>

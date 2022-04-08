@@ -44,7 +44,7 @@
 
         </c:choose>
         &nbsp | &nbsp
-        Hello, <a href="<c:url value="/user/${user.type.toString()}/info/${user.identification}"/>">${user.identification}</a>
+        Hello, <a href="<c:url value="/user/${user.type.toString()}/info"/>">${user.identification}</a>
 
         <a href="<c:url value="/session/logout"/>">Logout</a>
     </c:when>

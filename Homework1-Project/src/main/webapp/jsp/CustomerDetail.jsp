@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%--@elvariable id="customer" type="it.unipd.dei.wa2122.wadteam.resources.Customer"--%>
+<%--@elvariable id="user" type="it.unipd.dei.wa2122.wadteam.resources.UserCredential"--%>
 <html>
 <head>
     <title>Customer ${customer.username}</title>
@@ -22,7 +23,7 @@
         <li>FiscalCode: ${customer.fiscalCode}</li>
     </ul>
 
-    <a href="<c:url value="/user/CUSTOMER/modify/${customer.username}"/>">Edit</a>
-    <a href="<c:url value="/user/CUSTOMER/password/${customer.username}"/>">change Password</a>
+    <a href="<c:url value="/user/CUSTOMER/modify"/>">Edit</a>
+    <a href="<c:url value="/user/CUSTOMER/password"/>">change Password</a>
 </body>
 </html>
