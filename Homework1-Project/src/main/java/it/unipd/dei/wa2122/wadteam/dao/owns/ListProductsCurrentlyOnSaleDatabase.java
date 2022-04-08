@@ -104,7 +104,6 @@ public class ListProductsCurrentlyOnSaleDatabase {
                 }
             }
         }
-
         con.close();
 
         return resultProduct;

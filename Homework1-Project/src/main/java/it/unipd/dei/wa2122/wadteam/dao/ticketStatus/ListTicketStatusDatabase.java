@@ -76,6 +76,7 @@ public class ListTicketStatusDatabase {
                 preparedStatement.close();
             }
         }
+        con.close();
 
         return resultTicketStatus;
     }

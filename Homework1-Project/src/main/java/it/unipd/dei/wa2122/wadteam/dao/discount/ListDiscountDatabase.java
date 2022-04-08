@@ -75,6 +75,7 @@ public final class ListDiscountDatabase {
                 preparedStatement.close();
             }
         }
+        con.close();
 
         return resultDiscount;
     }

@@ -74,6 +74,7 @@ public class CreateProductCategoryDatabase {
                 preparedStatement.close();
             }
         }
+        con.close();
 
         return resultCategory;
     }

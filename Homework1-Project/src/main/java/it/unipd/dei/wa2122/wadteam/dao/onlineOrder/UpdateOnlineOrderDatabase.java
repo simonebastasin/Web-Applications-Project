@@ -61,10 +61,8 @@ public class UpdateOnlineOrderDatabase {
             if (pstmt != null) {
                 pstmt.close();
             }
-
-            con.close();
-
         }
+        con.close();
 
         return rs;
     }

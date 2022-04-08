@@ -74,7 +74,6 @@ public class GetMediaByteFromMediaDatabase {
                 preparedStatement.close();
             }
         }
-
         con.close();
 
         return resultByte;

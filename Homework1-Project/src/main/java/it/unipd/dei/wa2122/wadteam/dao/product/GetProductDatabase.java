@@ -98,7 +98,6 @@ public class GetProductDatabase {
                 preparedStatement.close();
             }
         }
-
         con.close();
 
         return resultProduct;

@@ -56,6 +56,7 @@ public class DeleteCustomerDatabase {
                 preparedStatement.close();
             }
         }
+        con.close();
 
         return resultCustomer;
     }

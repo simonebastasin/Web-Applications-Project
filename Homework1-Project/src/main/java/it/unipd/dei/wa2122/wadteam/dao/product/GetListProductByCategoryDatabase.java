@@ -97,9 +97,9 @@ public class GetListProductByCategoryDatabase {
                 if (preparedStatement != null) {
                     preparedStatement.close();
                 }
+
             }
         }
-
         con.close();
 
         return resultProduct;

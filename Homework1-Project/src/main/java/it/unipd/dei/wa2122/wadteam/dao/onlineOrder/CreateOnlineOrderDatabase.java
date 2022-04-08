@@ -146,9 +146,8 @@ public class CreateOnlineOrderDatabase {
             if (pstmtProduct != null) {
                 pstmtProduct.close();
             }
-
-            con.close();
         }
+        con.close();
 
         return resultOnlineOrder;
     }

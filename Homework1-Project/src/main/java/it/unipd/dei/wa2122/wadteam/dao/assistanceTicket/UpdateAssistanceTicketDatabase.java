@@ -75,6 +75,7 @@ public class UpdateAssistanceTicketDatabase {
                 preparedStatement.close();
             }
         }
+        con.close();
 
         return resultAssistantTicket;
     }

@@ -66,6 +66,7 @@ public class CreateTicketStatusDatabase {
                 preparedStatement.close();
             }
         }
+        con.close();
 
         return resultTicketStatus;
     }

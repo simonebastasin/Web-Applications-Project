@@ -71,9 +71,8 @@ public class CreateOnlineInvoiceDatabase {
             if (pstmt != null) {
                 pstmt.close();
             }
-
-            con.close();
         }
+        con.close();
 
         return roi;
     }

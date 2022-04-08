@@ -84,8 +84,8 @@ public class CreateDiscountDatabase {
                 preparedStatement.close();
             }
         }
-
         con.close();
+
         return resultDiscount;
     }
 }

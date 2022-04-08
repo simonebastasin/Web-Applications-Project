@@ -72,6 +72,7 @@ public class ListEmployeeDatabase {
                 preparedStatement.close();
             }
         }
+        con.close();
 
         return resultEmployee;
     }

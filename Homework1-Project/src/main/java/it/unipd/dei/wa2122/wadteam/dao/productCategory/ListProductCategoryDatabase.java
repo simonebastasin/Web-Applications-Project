@@ -63,6 +63,7 @@ public class ListProductCategoryDatabase {
                 preparedStatement.close();
             }
         }
+        con.close();
 
         return resultProductCategory;
     }

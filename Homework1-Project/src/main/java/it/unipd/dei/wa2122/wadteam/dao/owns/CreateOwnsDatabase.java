@@ -76,8 +76,8 @@ public class CreateOwnsDatabase {
                 preparedStatement.close();
             }
         }
-
         con.close();
+
         return resultOwn;
     }
 

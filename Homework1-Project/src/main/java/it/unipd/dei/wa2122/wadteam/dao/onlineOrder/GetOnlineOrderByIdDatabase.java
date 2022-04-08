@@ -125,9 +125,9 @@ public class GetOnlineOrderByIdDatabase {
             if (pstmtProduct != null) {
                 pstmtProduct.close();
             }
-            con.close();
-
         }
+        con.close();
+
         return order;
     }
 }

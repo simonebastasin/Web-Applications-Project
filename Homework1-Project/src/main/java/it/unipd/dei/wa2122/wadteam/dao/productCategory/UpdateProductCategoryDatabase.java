@@ -71,6 +71,7 @@ public class UpdateProductCategoryDatabase {
                 preparedStatement.close();
             }
         }
+        con.close();
 
         return resultCategory;
     }

@@ -76,6 +76,7 @@ public final class DeleteEmployeeDatabase {
                 preparedStatement.close();
             }
         }
+        con.close();
 
         return resultEmployee;
     }

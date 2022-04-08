@@ -74,6 +74,7 @@ public class DeleteAssistanceTicketDatabase {
                     preparedStatement.close();
                 }
             }
+            con.close();
 
             return resultAssistantiTicket;
         }

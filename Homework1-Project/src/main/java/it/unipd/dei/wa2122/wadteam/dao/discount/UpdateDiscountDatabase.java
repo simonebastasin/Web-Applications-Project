@@ -80,6 +80,7 @@ public class UpdateDiscountDatabase {
                 preparedStatement.close();
             }
         }
+        con.close();
 
         return resultDiscount;
     }

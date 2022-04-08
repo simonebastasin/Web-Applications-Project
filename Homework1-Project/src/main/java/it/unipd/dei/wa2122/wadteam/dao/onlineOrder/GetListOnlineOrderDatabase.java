@@ -78,9 +78,8 @@ public class GetListOnlineOrderDatabase {
             if (pstmt != null) {
                 pstmt.close();
             }
-
-            con.close();
         }
+        con.close();
 
         return orders;
     }

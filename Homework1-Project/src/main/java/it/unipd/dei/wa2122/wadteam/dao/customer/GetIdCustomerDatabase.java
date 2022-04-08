@@ -58,6 +58,8 @@ public class GetIdCustomerDatabase {
                 preparedStatement.close();
             }
         }
+        con.close();
+
 
         return resultCustomer;
     }

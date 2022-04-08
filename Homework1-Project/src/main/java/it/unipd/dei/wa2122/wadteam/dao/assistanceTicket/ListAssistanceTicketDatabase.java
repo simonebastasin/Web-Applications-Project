@@ -102,6 +102,7 @@ public class ListAssistanceTicketDatabase {
                 innerPreparedStatement.close();
             }
         }
+        con.close();
 
         return resultAssistantTicket;
     }

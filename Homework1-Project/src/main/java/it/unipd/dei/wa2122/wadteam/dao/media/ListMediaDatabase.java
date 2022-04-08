@@ -68,7 +68,6 @@ public class ListMediaDatabase {
                 preparedStatement.close();
             }
         }
-
         con.close();
 
         return resultMedia;

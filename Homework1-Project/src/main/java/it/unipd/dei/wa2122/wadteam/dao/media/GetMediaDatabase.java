@@ -74,7 +74,6 @@ public class GetMediaDatabase {
                 preparedStatement.close();
             }
         }
-
         con.close();
 
         return resultMedia;

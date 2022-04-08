@@ -66,9 +66,8 @@ public class CreateCustomerDatabase {
                 preparedStatement.close();
             }
         }
+        con.close();
 
         return resultCustomer;
     }
-
-
 }

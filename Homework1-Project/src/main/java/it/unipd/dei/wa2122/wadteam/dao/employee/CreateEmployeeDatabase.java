@@ -80,6 +80,7 @@ public class CreateEmployeeDatabase {
                 preparedStatement.close();
             }
         }
+        con.close();
 
         return resultEmployee;
     }

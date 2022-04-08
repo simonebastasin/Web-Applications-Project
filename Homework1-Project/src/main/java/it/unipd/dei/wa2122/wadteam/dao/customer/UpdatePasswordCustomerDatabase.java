@@ -25,7 +25,6 @@ public class UpdatePasswordCustomerDatabase {
     public int updatePassword() throws SQLException
     {
         PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
 
 
         int result=0;
@@ -42,14 +41,12 @@ public class UpdatePasswordCustomerDatabase {
 
 
         } finally {
-            if (resultSet != null) {
-                resultSet.close();
-            }
 
             if (preparedStatement != null) {
                 preparedStatement.close();
             }
         }
+        con.close();
 
         return result;
 

@@ -27,7 +27,6 @@ public class UpdateCustomerDatabase {
     public Customer updateCustomer() throws SQLException {
 
         PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
 
         // the read employee
         Customer resultCustomer = null;
@@ -60,14 +59,12 @@ public class UpdateCustomerDatabase {
                 );
             }*/
         } finally {
-            if (resultSet != null) {
-                resultSet.close();
-            }
 
             if (preparedStatement != null) {
                 preparedStatement.close();
             }
         }
+        con.close();
 
         return resultCustomer;
     }

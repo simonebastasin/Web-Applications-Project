@@ -126,9 +126,8 @@ public class GetOnlineOrderByCustomerDatabase {
             if (pstmtProduct != null) {
                 pstmtProduct.close();
             }
-            con.close();
-
         }
+        con.close();
 
         return orders;
     }

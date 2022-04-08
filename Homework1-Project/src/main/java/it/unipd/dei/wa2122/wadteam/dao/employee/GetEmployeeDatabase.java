@@ -76,6 +76,7 @@ public final class GetEmployeeDatabase {
                 preparedStatement.close();
             }
         }
+        con.close();
 
         return resultEmployee;
     }

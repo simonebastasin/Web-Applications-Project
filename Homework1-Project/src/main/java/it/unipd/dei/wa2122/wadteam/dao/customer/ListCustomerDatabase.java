@@ -61,6 +61,7 @@ public class ListCustomerDatabase {
                 preparedStatement.close();
             }
         }
+        con.close();
 
         return resultCustomer;
     }

@@ -78,6 +78,7 @@ public class UpdateEmployeeDatabase {
                 preparedStatement.close();
             }
         }
+        con.close();
 
         return resultEmployee;
     }

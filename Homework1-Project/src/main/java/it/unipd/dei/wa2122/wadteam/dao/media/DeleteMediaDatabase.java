@@ -72,7 +72,6 @@ public class DeleteMediaDatabase {
                 preparedStatement.close();
             }
         }
-
         con.close();
 
         return resultMedia;

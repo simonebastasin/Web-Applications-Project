@@ -64,6 +64,7 @@ public class DeleteTicketStatusDatabase {
                 preparedStatement.close();
             }
         }
+        con.close();
 
         return resultTicketStatus;
     }

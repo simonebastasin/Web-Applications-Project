@@ -106,6 +106,7 @@ public class GetAssistanceTicketDatabase {
                     preparedStatement.close();
                 }
             }
+           con.close();
 
             return resultAssistantTicket;
         }

@@ -101,8 +101,8 @@ public class DeleteDiscountDatabase {
                 preparedStatement.close();
             }
         }
-
         con.close();
+
         return resultDiscount;
     }
 }

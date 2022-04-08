@@ -60,10 +60,8 @@ public class DeleteOnlineOrderDatabase {
             if (pstmt != null) {
                 pstmt.close();
             }
-
-            con.close();
-
         }
+        con.close();
 
         return result;
     }

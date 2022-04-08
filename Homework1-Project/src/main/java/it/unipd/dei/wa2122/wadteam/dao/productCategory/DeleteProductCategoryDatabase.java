@@ -70,6 +70,7 @@ public class DeleteProductCategoryDatabase {
                 preparedStatement.close();
             }
         }
+        con.close();
 
         return resultCategory;
     }

@@ -73,6 +73,7 @@ public class CreateAssistanceTicketDatabase {
                 preparedStatement.close();
             }
         }
+        con.close();
 
         return resultAssistantTicket;
     }

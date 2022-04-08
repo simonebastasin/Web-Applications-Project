@@ -84,8 +84,8 @@ public class CreateOwnsDiscountFromListProductsDatabase {
                 preparedStatement.close();
             }
         }
-
         con.close();
+
         return resultOwns;
     }
 }

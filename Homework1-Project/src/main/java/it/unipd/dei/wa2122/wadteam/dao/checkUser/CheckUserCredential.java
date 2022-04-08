@@ -97,6 +97,7 @@ public class CheckUserCredential {
                 preparedStatement.close();
             }
         }
+        con.close();
 
         return resultUserCredential;
     }

@@ -113,7 +113,6 @@ public class UpdateProductQuantityByAliasDatabase {
                 preparedStatement.close();
             }
         }
-
         con.close();
 
         return resultProduct;

@@ -103,7 +103,6 @@ public class DeleteProductDatabase {
                 preparedStatement.close();
             }
         }
-
         con.close();
 
         return resultProduct;

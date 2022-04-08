@@ -68,6 +68,7 @@ public class GetProductCategoryDatabase {
                 preparedStatement.close();
             }
         }
+        con.close();
 
         return resultCategory;
     }
