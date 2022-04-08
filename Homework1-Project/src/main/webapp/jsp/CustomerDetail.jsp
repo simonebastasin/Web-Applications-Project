@@ -12,6 +12,7 @@
     <title>Customer ${customer.username}</title>
 </head>
 <body>
+    <c:import url="/jsp/include/header.jsp"/>
     <ul>
         <li>Name: ${customer.name}</li>
         <li>Surname: ${customer.surname}</li>

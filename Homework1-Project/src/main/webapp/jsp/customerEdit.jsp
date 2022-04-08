@@ -13,6 +13,7 @@
     <title>Customer ${customer.username}</title>
 </head>
 <body>
+<c:import url="/jsp/include/header.jsp"/>
 <form method="post" action="<c:url value="/user/CUSTOMER/modify/${customer.username}"/>">
     <ul>
         <li>Name: <input type="text" name="name" value="${customer.name}" required></li>
@@ -22,10 +23,6 @@
         <li>Phone Number: <input type="text" name="phoneNumber" value="${customer.phoneNumber}"></li>
         <li>Address :<input type="text" name="address" value="${customer.address}"></li>
 
-        <li>Password: <input type="password" id="password "name="password" disabled="true">
-            <button onclick="disable()">change password</button>
-
-
         </li>
 
         <input type="hidden" value="${customer.username}" name="username">
@@ -34,15 +31,6 @@
     </ul>
 
 </form>
-<script>
-    function disable()
-    {
-        document.getElementById("password").disabled=true;
-    }
-    function undisable()
-    {
-        document.getElementById("password").disabled=false ;
-    }
-</script>
+
 </body>
 </html>
