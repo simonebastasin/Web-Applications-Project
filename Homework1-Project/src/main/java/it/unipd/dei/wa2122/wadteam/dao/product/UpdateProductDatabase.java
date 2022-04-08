@@ -98,7 +98,7 @@ public class UpdateProductDatabase {
 
                 resultSet = preparedStatement.executeQuery();
 
-                if (resultSet.next()) {
+                while (resultSet.next()) {
                     assert resultProduct != null;
                     resultProduct.getPictures().add(resultSet.getInt("id_media"));
                 }

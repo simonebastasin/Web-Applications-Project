@@ -27,7 +27,7 @@
 
 <hr />
 
-    <form method="POST" action="<c:url value="/buy/${product.alias}"/>">
+    <form method="POST" action="<c:url value="/buy/product/${product.alias}"/>">
         <label for="quantity">Selected quantity</label>
         <input type="number" name ="quantity" max="${product.quantity}" min="1" id="quantity" required> <br>
 
