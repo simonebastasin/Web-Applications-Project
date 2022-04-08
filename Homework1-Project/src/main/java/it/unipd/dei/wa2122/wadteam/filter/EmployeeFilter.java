@@ -11,7 +11,7 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 import java.io.IOException;
 
-public class CustomerFilter extends AbstractFilter {
+public class EmployeeFilter extends AbstractFilter {
 
     private static final String USER_ATTRIBUTE = "user";
     private FilterConfig config = null;
@@ -58,7 +58,7 @@ public class CustomerFilter extends AbstractFilter {
                 res.sendRedirect(loginURI);
             }
             else{
-                if(user.getRole() != null){
+                if(!"EMPLOYEE".equalsIgnoreCase(user.getType().toString()) || !"Administrator".equals(user.getRole())){
                     res.sendRedirect(req.getContextPath() + "/");
                 }
                 else{

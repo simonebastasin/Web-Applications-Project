@@ -166,4 +166,23 @@
         <filter-name>AdminFilter</filter-name>
         <url-pattern>/management</url-pattern>
     </filter-mapping>
+    <filter-mapping>
+        <filter-name>AdminFilter</filter-name>
+        <url-pattern>/media/list</url-pattern>
+    </filter-mapping>
+
+
+    <filter>
+        <filter-name>EmployeeFilter</filter-name>
+        <filter-class>it.unipd.dei.wa2122.wadteam.filter.EmployeeFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>EmployeeFilter</filter-name>
+        <url-pattern>/media/upload</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>EmployeeFilter</filter-name>
+        <url-pattern>/media/list</url-pattern>
+    </filter-mapping>
+
 </web-app>
