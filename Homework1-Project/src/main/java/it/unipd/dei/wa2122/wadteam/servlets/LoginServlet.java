@@ -17,8 +17,18 @@ import static it.unipd.dei.wa2122.wadteam.resources.UserCredential.*;
 public class LoginServlet extends AbstractDatabaseServlet {
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        writeJsp(req, resp, "/jsp/login.jsp");
+        String path = req.getRequestURI().split("/",4)[3];
+        path = req.getServletPath();
+        System.out.println(path);
+        switch (path){
+            case "/user/login" -> writeJsp(req, resp, "/jsp/login.jsp");
+            case "/user/logout" -> {
+                req.getSession().invalidate();
+                resp.sendRedirect(req.getContextPath() + "/");
+            }
+        }
     }
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String identification = req.getParameter("identification");
@@ -31,7 +41,10 @@ public class LoginServlet extends AbstractDatabaseServlet {
             if (userCredential != null && userCredential.getIdentification() != null) {
                 HttpSession session = req.getSession();
                 session.setAttribute("user",userCredential);
-                resp.sendRedirect(req.getContextPath()+"/");
+
+                System.out.println(userCredential);
+
+                resp.sendRedirect(req.getContextPath() + "/");
             } else {
                 writeError(req, resp, new Message("Error login", "EV01", "Username or password aren't correct"),HttpServletResponse.SC_UNAUTHORIZED);
             }
