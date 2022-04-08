@@ -60,15 +60,15 @@ public class UpdateEmployeeDatabase {
             preparedStatement.setString(3, employee.getRole().getName());
             preparedStatement.setString(4, employee.getUsername());
 
-            resultSet = preparedStatement.executeQuery();
+            int result = preparedStatement.executeUpdate();
 
-            if (resultSet.next()) {
+           /* if (resultSet.next()) {
                 resultEmployee = new Employee(resultSet.getString("username"),
                         resultSet.getString("name"),
                         resultSet.getString("surname"),
                         new Role(resultSet.getString("role"))
                 );
-            }
+            }*/
         } finally {
             if (resultSet != null) {
                 resultSet.close();

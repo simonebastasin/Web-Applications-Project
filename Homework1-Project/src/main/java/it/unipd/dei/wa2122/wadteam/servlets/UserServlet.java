@@ -4,6 +4,7 @@ import it.unipd.dei.wa2122.wadteam.dao.customer.GetIdCustomerDatabase;
 import it.unipd.dei.wa2122.wadteam.dao.customer.UpdateCustomerDatabase;
 import it.unipd.dei.wa2122.wadteam.dao.customer.UpdatePasswordCustomerDatabase;
 import it.unipd.dei.wa2122.wadteam.dao.employee.GetEmployeeDatabase;
+import it.unipd.dei.wa2122.wadteam.dao.employee.UpdateEmployeeDatabase;
 import it.unipd.dei.wa2122.wadteam.resources.*;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -131,6 +132,20 @@ public class UserServlet extends AbstractDatabaseServlet {
                 }
                     else
                     {
+                        Employee emNew=null;
+                        try {
+                            Employee emOld=new GetEmployeeDatabase(getDataSource().getConnection(),req.getParameter("username")).getEmployee();
+                            String role=req.getParameter("role");
+                            System.out.println("Matteo");
+                            if("notchange".equals(role))
+                                emNew=new Employee(req.getParameter("username"),req.getParameter("name"),req.getParameter("surname"),emOld.getRole());
+                            else
+                                emNew=new Employee(req.getParameter("username"),req.getParameter("name"),req.getParameter("surname"),new Role(req.getParameter("role")));
+                            Employee em=new UpdateEmployeeDatabase(getDataSource().getConnection(),emNew).updateEmployee();
+                            writeResource(req, resp, "/jsp/user.jsp", true, emNew);
+                        } catch (SQLException e) {
+                            writeError(req,resp,new ErrorMessage.SqlInternalError(e.getMessage()));
+                        }
 
                     }
                 }
