@@ -25,7 +25,7 @@
               driverClassName="org.postgresql.Driver"
               url="jdbc:postgresql://localhost:5432/electromechanics_shop"
               username="postgres"
-              password="matteo"
+              password="PSW"
               testOnBorrow="true"
               validationQuery="SELECT 1"
               timeBetweenEvictionRunsMillis="30000"
