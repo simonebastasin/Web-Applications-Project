@@ -5,6 +5,7 @@ import it.unipd.dei.wa2122.wadteam.dao.customer.UpdateCustomerDatabase;
 import it.unipd.dei.wa2122.wadteam.dao.customer.UpdatePasswordCustomerDatabase;
 import it.unipd.dei.wa2122.wadteam.dao.employee.GetEmployeeDatabase;
 import it.unipd.dei.wa2122.wadteam.dao.employee.UpdateEmployeeDatabase;
+import it.unipd.dei.wa2122.wadteam.dao.employee.UpdatePasswordEmployeeDatabase;
 import it.unipd.dei.wa2122.wadteam.resources.*;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -88,16 +89,30 @@ public class UserServlet extends AbstractDatabaseServlet {
                         }
                     }
             case "password" -> {
-                Customer cu=null;
-                try {
+                if("CUSTOMER".equals(type)) {
+                    Customer cu = null;
+                    try {
 
-                    cu= new GetIdCustomerDatabase(getDataSource().getConnection(),username).getIdCustomer();
+                        cu = new GetIdCustomerDatabase(getDataSource().getConnection(), username).getIdCustomer();
 
-                } catch (SQLException e) {
-                    e.printStackTrace();
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                    writeResource(req, resp, "/jsp/changePassword.jsp", true, cu);
                 }
-                writeResource(req,resp,"/jsp/changePassword.jsp",true,cu);
+                else
+                {
+                    Employee em=null;
+                    try {
 
+                        UserCredential us=(UserCredential)req.getSession(false).getAttribute("user");
+                        em=new GetEmployeeDatabase(getDataSource().getConnection(),us.getIdentification()).getEmployee();
+
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                    writeResource(req, resp, "/jsp/changePassword.jsp", true, em);
+                }
             }
             case "register" -> writeJsp(req, resp, "/jsp/user.jsp"); // TODO change
             default -> writeError(req, resp, new ErrorMessage.IncorrectlyFormattedPathError("page not found"));
@@ -151,22 +166,41 @@ public class UserServlet extends AbstractDatabaseServlet {
                 }
 
                 case "password" -> {
-                    Customer cu=null;
-                    try {
+                    if("CUSTOMER".equals(param1[1])) {
+                        Customer cu = null;
+                        try {
 
-                        cu=new GetIdCustomerDatabase(getDataSource().getConnection(),req.getParameter("username")).getIdCustomer();
-                        int result=new UpdatePasswordCustomerDatabase(getDataSource().getConnection(),req.getParameter("oldPassword"),req.getParameter("newPassword"),req.getParameter("username")).updatePassword();
-                        if(result==0)
-                           writeError(req,resp,new ErrorMessage.ChangePasswordError("old password wrong"));
-                        else
-                        {
-                            Message m=new Message("password changed");
-                            writeResource(req,resp,"/jsp/message.jsp",true,m);
+                            cu = new GetIdCustomerDatabase(getDataSource().getConnection(), req.getParameter("username")).getIdCustomer();
+                            int result = new UpdatePasswordCustomerDatabase(getDataSource().getConnection(), req.getParameter("oldPassword"), req.getParameter("newPassword"), req.getParameter("username")).updatePassword();
+                            if (result == 0)
+                                writeError(req, resp, new ErrorMessage.ChangePasswordError("old password wrong"));
+                            else {
+                                Message m = new Message("password changed");
+                                writeResource(req, resp, "/jsp/message.jsp", true, m);
+                            }
+                        } catch (SQLException e) {
+                            e.printStackTrace();
                         }
-                    } catch (SQLException e) {
-                        e.printStackTrace();
+                        writeResource(req, resp, "/jsp/CustomerDetail.jsp", true, cu);
                     }
-                    writeResource(req,resp,"/jsp/CustomerDetail.jsp",true,cu);
+                    else
+                    {
+                        Employee em=null;
+                        try {
+                            UserCredential us= (UserCredential) req.getSession(false).getAttribute("user");
+                            em= new GetEmployeeDatabase(getDataSource().getConnection(),us.getIdentification()).getEmployee();
+                            int result=new UpdatePasswordEmployeeDatabase(getDataSource().getConnection(),req.getParameter("oldPassword"),req.getParameter("newPassword"),us.getIdentification()).updatePassword();
+                            if (result == 0)
+                                writeError(req, resp, new ErrorMessage.ChangePasswordError("old password wrong"));
+                            else {
+                                Message m = new Message("password changed");
+                                writeResource(req, resp, "/jsp/message.jsp", true, m);
+                            }
+                        } catch (SQLException e) {
+                            e.printStackTrace();
+                        }
+                        writeResource(req, resp, "/jsp/user.jsp", true, em);
+                    }
 
                 }
                 case "register" -> writeJsp(req, resp, "/jsp/user.jsp"); // TODO change
