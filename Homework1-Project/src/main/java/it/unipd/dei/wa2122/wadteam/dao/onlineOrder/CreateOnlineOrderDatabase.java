@@ -19,7 +19,7 @@ public class CreateOnlineOrderDatabase {
 
     private static final String STATEMENT_INSERT_PRODUCT = "INSERT INTO Contains (id_order, product_alias, quantity, price_applied) VALUES (?, ?, ?, ?) RETURNING product_alias, quantity, price_applied";
 
-    private static final String STATEMENT_INSERT_ORDER_STATUS = "INSERT INTO order_Status (Status, Description, ID_Order) VALUES (?::orderstatus, ?, ?) RETURNING id, Status, Description, ID_Order, OS_Datetime";
+    private static final String STATEMENT_INSERT_ORDER_STATUS = "INSERT INTO order_Status (Status, Description, ID_Order) VALUES (?::orderstatus, ?, ?) RETURNING id, Status, Description, OS_Datetime, ID_Order";
     /**
      * The connection to the database
      */
@@ -63,8 +63,6 @@ public class CreateOnlineOrderDatabase {
 
         OnlineOrder resultOnlineOrder = null;
 
-
-
         try {
             pstmt = con.prepareStatement(STATEMENT);
             pstmt.setInt(1, onlineOrder.getIdCustomer());
@@ -84,12 +82,19 @@ public class CreateOnlineOrderDatabase {
 
                 rsOrder = pstmtOrder.executeQuery();
 
-                OrderStatus resultOrderStatus = new OrderStatus(rsOrder.getInt("id"),
-                        OrderStatusEnum.fromString(rsOrder.getString("Status")),
-                        rsOrder.getString("description"),
-                        new DateTime(rsOrder.getObject("os_datetime", LocalDateTime.class)),
-                        rsOrder.getInt("id_order")
-                        );
+                // Il problema inizia qua
+                // TODO: check this problem
+
+                OrderStatus resultOrderStatus = null;
+                if(rsOrder.next()) {
+                    resultOrderStatus = new OrderStatus(
+                            rsOrder.getInt("id"),
+                            OrderStatusEnum.fromString(rsOrder.getString("Status")),
+                            rsOrder.getString("Description"),
+                            new DateTime(rsOrder.getObject("OS_Datetime", LocalDateTime.class)),
+                            rsOrder.getInt("ID_Order")
+                    );
+                }
 
                 List<Product> resultProductList = new ArrayList<>();
 
@@ -102,17 +107,20 @@ public class CreateOnlineOrderDatabase {
 
                     rsProduct = pstmtProduct.executeQuery();
 
-                    Product resultProductItem = new Product(
-                            rsProduct.getString("product_alias"),
-                            null,
-                            null,
-                            null,
-                            rsProduct.getInt("quantity"),
-                            0.0,
-                            rsProduct.getInt("price_applied"),
-                            null,
-                            false,
-                            null);
+                    Product resultProductItem = null;
+                    if(rsProduct.next()) {
+                        resultProductItem = new Product(
+                                rsProduct.getString("product_alias"),
+                                null,
+                                null,
+                                null,
+                                rsProduct.getInt("quantity"),
+                                0.0,
+                                rsProduct.getInt("price_applied"),
+                                null,
+                                false,
+                                null);
+                    }
 
                     resultProductList.add(resultProductItem);
                 }

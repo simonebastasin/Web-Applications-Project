@@ -7,13 +7,25 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--@elvariable id="product" type="Product"--%>
+<%--@elvariable id="productList" type="java.util.List<Product>"--%>
+<%--@elvariable id="onlineOrderList" type="java.util.List<OnlineOrder>"--%>
+
 <html>
 <head>
     <title>Electromechanics Shop</title>
 </head>
 <body>
-<h1>${product.name}</h1>
+<c:import url="/jsp/include/header.jsp"/>
 
+<c:forEach var="prod" items="${productList}">
+    <c:forEach var="order" items="${onlineOrderList}">
+
+        <h1>Product purchased: ${product.name}</h1>
+
+        You have just successfully completed your purchase. <br>
+        Check out your <a href="<c:url value="/order/detail/${order.idOrder}"/>">order.</a>
+
+    </c:forEach>
+</c:forEach>
 </body>
 </html>
