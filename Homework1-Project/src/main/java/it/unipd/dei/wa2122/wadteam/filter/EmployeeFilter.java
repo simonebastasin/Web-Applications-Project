@@ -45,7 +45,7 @@ public class EmployeeFilter extends AbstractFilter {
         final HttpServletResponse res = (HttpServletResponse) servletResponse;
 
         HttpSession session = req.getSession(false);
-        String loginURI = req.getContextPath() + "/user/login";
+        String loginURI = req.getContextPath() + "/session/login";
 
         if(session == null){
             res.sendRedirect(loginURI);

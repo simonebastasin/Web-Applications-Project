@@ -23,11 +23,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
-        <url-pattern>/user/login</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>LoginServlet</servlet-name>
-        <url-pattern>/user/logout</url-pattern>
+        <url-pattern>/session/*</url-pattern>
     </servlet-mapping>
 
     <servlet>

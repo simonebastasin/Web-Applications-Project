@@ -9,15 +9,18 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--@elvariable id="user" type="it.unipd.dei.wa2122.wadteam.resources.UserCredential"--%>
 <%--@elvariable id="employee" type="it.unipd.dei.wa2122.wadteam.resources.Employee"--%>
-
-
+<%--@elvariable id="categories" type="java.util.List<ProductCategory>"--%>
 
 <a href="<c:url value="/"/>">Home</a>
 
-
-
-
-
+<select  name="category" id="category" onchange="location = this.value;" autofocus>
+    <option value="label">-- categories --</option>
+    <c:forEach var="cat" items="${categories}">
+        <option value="<c:url value="/products/category"/>/${cat.name}">
+        ${cat.name}
+        </option>
+    </c:forEach>
+</select>
 
 <c:choose>
     <c:when test="${not empty user}">
@@ -43,11 +46,11 @@
         &nbsp | &nbsp
         Hello, <a href="<c:url value="/user/${user.type.toString()}/info/${user.identification}"/>">${user.identification}</a>
 
-        <a href="<c:url value="/user/logout"/>">Logout</a>
+        <a href="<c:url value="/session/logout"/>">Logout</a>
     </c:when>
     <c:otherwise>
-        <a href="<c:url value="/user/login"/>">Login</a>
-        <a href="<c:url value="/user/register"/>">Register</a>
+        <a href="<c:url value="/session/login"/>">Login</a>
+        <a href="<c:url value="/session/register"/>">Register</a>
     </c:otherwise>
 </c:choose>
 

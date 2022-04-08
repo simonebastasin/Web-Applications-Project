@@ -17,10 +17,13 @@ import static it.unipd.dei.wa2122.wadteam.resources.UserCredential.*;
 public class LoginServlet extends AbstractDatabaseServlet {
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String path = req.getServletPath();
+        String path = req.getPathInfo() != null ? req.getPathInfo().substring(1).lastIndexOf('/') != -1 ? req.getPathInfo().substring(1,req.getPathInfo().lastIndexOf('/')) : req.getPathInfo().substring(1) : "";
+        //String param = req.getPathInfo() != null ? req.getPathInfo().substring(1).lastIndexOf('/') != -1 ? req.getPathInfo().substring(req.getPathInfo().lastIndexOf('/')+1) : "" : "";
+
+        System.out.println(path);
         switch (path){
-            case "/user/login" -> writeJsp(req, resp, "/jsp/login.jsp");
-            case "/user/logout" -> {
+            case "login" -> writeJsp(req, resp, "/jsp/login.jsp");
+            case "logout" -> {
                 req.getSession().invalidate();
                 resp.sendRedirect(req.getContextPath() + "/");
             }
@@ -39,8 +42,6 @@ public class LoginServlet extends AbstractDatabaseServlet {
             if (userCredential != null && userCredential.getIdentification() != null) {
                 HttpSession session = req.getSession();
                 session.setAttribute("user",userCredential);
-
-                System.out.println(userCredential);
 
                 resp.sendRedirect(req.getContextPath() + "/");
             } else {

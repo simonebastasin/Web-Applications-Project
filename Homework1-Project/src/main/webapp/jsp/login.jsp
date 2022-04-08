@@ -10,7 +10,7 @@
 <c:import url="/jsp/include/header.jsp"/>
 <h1>Login</h1>
 <hr/>
-<form method="POST" action="<c:url value="/user/login"/>">
+<form method="POST" action="<c:url value="/session/login"/>">
     <input type="text" name ="identification" id="identification">
     <label for = "identification">username or email</label>
     <br>
