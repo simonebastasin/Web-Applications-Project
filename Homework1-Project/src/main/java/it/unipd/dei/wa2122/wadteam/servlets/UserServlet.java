@@ -9,6 +9,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -95,6 +96,8 @@ public class UserServlet extends AbstractDatabaseServlet {
             switch (param1[2]) {
 
                 case "modify" -> {
+                    if("CUSTOMER".equals(param1[1]))
+                    {
                     System.out.println("ciao");
                     Customer cu = new Customer(null, req.getParameter("name"), req.getParameter("surname"), req.getParameter("fiscalCode"), req.getParameter("address"), req.getParameter("email"), req.getParameter("phoneNumber"), req.getParameter("username"),"ciao");
                     try {
@@ -110,6 +113,12 @@ public class UserServlet extends AbstractDatabaseServlet {
                         System.out.print("noooo");
                     writeResource(req, resp, "/jsp/CustomerDetail.jsp", true, cu);
                 }
+                    else
+                    {
+
+                    }
+                }
+
                 case "password" -> {
                     Customer cu=null;
                     try {
