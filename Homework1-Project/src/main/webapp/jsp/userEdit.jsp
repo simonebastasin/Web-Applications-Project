@@ -21,9 +21,10 @@
         <li>Surname: <input type="text" name="surname" value="${employee.surname}" required></li>
 
         <select name="role" autofocus required>
+            <option value="noTchange" selected>not change</option>
             <c:choose>
                 <c:when test='${employee.role.toString()}.equalsIgnoreCase("Technician")'>
-                    <option value="Technician" selected="selected">Technician</option>
+                    <option value="Technician" selected>Technician</option>
                 </c:when>
                 <c:otherwise>
                     <option value="Technician" >Technician</option>
@@ -31,7 +32,7 @@
             </c:choose>
             <c:choose>
                 <c:when test='${employee.role.toString()}.equalsIgnoreCase("Technician")'>
-                    <option value="Seller" selected="selected">Seller</option>
+                    <option value="Seller" selected>Seller</option>
                 </c:when>
                 <c:otherwise>
                     <option value="Seller" >Seller</option>
@@ -39,7 +40,7 @@
             </c:choose>
             <c:choose>
                 <c:when test='${employee.role.toString()}.equalsIgnoreCase("Administrator")'>
-                    <option value="Administrator" selected="selected">Administrator</option>
+                    <option value="Administrator" selected>Administrator</option>
                 </c:when>
                 <c:otherwise>
                     <option value="Administrator" >Administrator</option>
@@ -47,7 +48,7 @@
             </c:choose>
             <c:choose>
                 <c:when test='${employee.role.toString()}.equalsIgnoreCase("Accountant")'>
-                    <option value="Accountant" selected="selected">Accountant</option>
+                    <option value="Accountant" selected>Accountant</option>
                 </c:when>
                 <c:otherwise>
                     <option value="Accountant" >Accountant</option>
@@ -55,7 +56,7 @@
             </c:choose>
             <c:choose>
                 <c:when test='${employee.role.toString()}.equalsIgnoreCase("Warehouse Manager")'>
-                    <option value="Warehouse Manager" selected="selected">Warehouse Manager</option>
+                    <option value="Warehouse Manager" selected>Warehouse Manager</option>
                 </c:when>
                 <c:otherwise>
                     <option value="Warehouse Manager" >Warehouse Manager</option>
