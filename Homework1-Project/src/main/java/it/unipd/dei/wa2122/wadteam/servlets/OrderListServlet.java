@@ -14,6 +14,7 @@ import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 
 public class OrderListServlet extends AbstractDatabaseServlet{
@@ -50,7 +51,7 @@ public class OrderListServlet extends AbstractDatabaseServlet{
 
     private void orderDetailOp(HttpServletRequest req, HttpServletResponse res, String path) throws ServletException, IOException {
         OnlineOrder order = null;
-        //String path = req.getParameter("ID");
+        Integer id_customer = null;
         Integer id = null;
         if(path.chars().allMatch(Character::isDigit)){
             id = Integer.parseInt(path);
@@ -58,9 +59,18 @@ public class OrderListServlet extends AbstractDatabaseServlet{
 
         try{
 
-            order = new GetOnlineOrderByIdDatabase(getDataSource().getConnection(), id).getOnlineOrderId();
 
-            writeResource(req,res, "/jsp/orderDetails.jsp",true, order);
+            order = new GetOnlineOrderByIdDatabase(getDataSource().getConnection(), id).getOnlineOrderId();
+            id_customer = order.getIdCustomer();
+            UserCredential user = (UserCredential) req.getSession(false).getAttribute("user");
+            if(!Objects.equals(id_customer, user.getId())){
+                writeJsp(req,res,"/jsp/unauthorized.jsp");
+            }
+            else{
+                writeResource(req,res, "/jsp/orderDetails.jsp",true, order);
+            }
+
+
 
         } catch (SQLException e) {
             //Message m = new Message("Couldn't find the order", "EU01", e.getMessage());
