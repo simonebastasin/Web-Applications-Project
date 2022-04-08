@@ -2,11 +2,9 @@ package it.unipd.dei.wa2122.wadteam.servlets;
 
 import it.unipd.dei.wa2122.wadteam.dao.customer.GetIdCustomerDatabase;
 import it.unipd.dei.wa2122.wadteam.dao.customer.UpdateCustomerDatabase;
+import it.unipd.dei.wa2122.wadteam.dao.customer.UpdatePasswordCustomerDatabase;
 import it.unipd.dei.wa2122.wadteam.dao.employee.GetEmployeeDatabase;
-import it.unipd.dei.wa2122.wadteam.resources.Customer;
-import it.unipd.dei.wa2122.wadteam.resources.Employee;
-import it.unipd.dei.wa2122.wadteam.resources.ErrorMessage;
-import it.unipd.dei.wa2122.wadteam.resources.UserCredential;
+import it.unipd.dei.wa2122.wadteam.resources.*;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -60,7 +58,7 @@ public class UserServlet extends AbstractDatabaseServlet {
             }
             case "modify"->
                     {
-                        System.out.println("ciao");
+
                         Customer cu=null;
                         try {
 
@@ -71,7 +69,18 @@ public class UserServlet extends AbstractDatabaseServlet {
                         }
                         writeResource(req,resp,"/jsp/customerEdit.jsp",true,cu);
                     }
-            case "logout" -> writeJsp(req, resp, "/jsp/user.jsp"); // TODO change
+            case "password" -> {
+                Customer cu=null;
+                try {
+
+                    cu= new GetIdCustomerDatabase(getDataSource().getConnection(),username).getIdCustomer();
+
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+                writeResource(req,resp,"/jsp/changePassword.jsp",true,cu);
+
+            }
             case "register" -> writeJsp(req, resp, "/jsp/user.jsp"); // TODO change
             default -> writeError(req, resp, new ErrorMessage.IncorrectlyFormattedPathError("page not found"));
 
@@ -101,7 +110,25 @@ public class UserServlet extends AbstractDatabaseServlet {
                         System.out.print("noooo");
                     writeResource(req, resp, "/jsp/CustomerDetail.jsp", true, cu);
                 }
-                case "logout" -> writeJsp(req, resp, "/jsp/user.jsp"); // TODO change
+                case "password" -> {
+                    Customer cu=null;
+                    try {
+
+                        cu=new GetIdCustomerDatabase(getDataSource().getConnection(),req.getParameter("username")).getIdCustomer();
+                        int result=new UpdatePasswordCustomerDatabase(getDataSource().getConnection(),req.getParameter("oldPassword"),req.getParameter("newPassword"),req.getParameter("username")).updatePassword();
+                        if(result==0)
+                           writeError(req,resp,new ErrorMessage.ChangePasswordError("old password wrong"));
+                        else
+                        {
+                            Message m=new Message("password changed");
+                            writeResource(req,resp,"/jsp/message.jsp",true,m);
+                        }
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                    writeResource(req,resp,"/jsp/CustomerDetail.jsp",true,cu);
+
+                }
                 case "register" -> writeJsp(req, resp, "/jsp/user.jsp"); // TODO change
                 default -> writeError(req, resp, new ErrorMessage.IncorrectlyFormattedPathError("page not found"));
 

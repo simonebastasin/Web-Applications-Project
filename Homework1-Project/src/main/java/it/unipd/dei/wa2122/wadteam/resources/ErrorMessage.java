@@ -74,5 +74,10 @@ public abstract sealed class ErrorMessage extends Message  {
             super("Upload error", "220", errorDetails, HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         }
     }
+    public static final class ChangePasswordError extends ErrorMessage {
+        public ChangePasswordError(String errorDetails) {
+            super("password not changed", "240", errorDetails, HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+        }
+    }
 
 }

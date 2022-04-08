@@ -1,8 +1,7 @@
 package it.unipd.dei.wa2122.wadteam.dao.customer;
 
 import it.unipd.dei.wa2122.wadteam.resources.Customer;
-import it.unipd.dei.wa2122.wadteam.resources.Employee;
-import it.unipd.dei.wa2122.wadteam.resources.Role;
+
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

@@ -23,5 +23,6 @@
     </ul>
 
     <a href="<c:url value="/user/CUSTOMER/modify/${customer.username}"/>">Edit</a>
+    <a href="<c:url value="/user/CUSTOMER/password/${customer.username}"/>">change Password</a>
 </body>
 </html>
