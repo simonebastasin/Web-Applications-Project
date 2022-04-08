@@ -53,7 +53,7 @@ public class CustomerFilter extends AbstractFilter {
         else {
             final UserCredential user = (UserCredential) session.getAttribute(USER_ATTRIBUTE);
 
-            if(user == null || user.getIdentification().isBlank()){
+            if(user == null || user.getIdentification().isBlank() || user.getRole() == null){
                 session.invalidate();
                 res.sendRedirect(loginURI);
             }

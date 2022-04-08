@@ -137,14 +137,14 @@
     </filter-mapping>
     <filter-mapping>
         <filter-name>CustomerFilter</filter-name>
-        <url-pattern>/order</url-pattern>
-    </filter-mapping>
-    <filter-mapping>
-        <filter-name>CustomerFilter</filter-name>
         <url-pattern>/buy</url-pattern>
     </filter-mapping>
     <filter-mapping>
         <filter-name>CustomerFilter</filter-name>
         <url-pattern>/buy/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>CustomerFilter</filter-name>
+        <url-pattern>user/CUSTOMER/*</url-pattern>
     </filter-mapping>
 </web-app>
