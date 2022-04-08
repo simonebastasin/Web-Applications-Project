@@ -10,8 +10,9 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 import java.io.IOException;
+import java.util.Objects;
 
-public class CustomerFilter extends AbstractFilter {
+public class AdminFilter extends AbstractFilter {
 
     private static final String USER_ATTRIBUTE = "user";
     private FilterConfig config = null;
@@ -53,7 +54,7 @@ public class CustomerFilter extends AbstractFilter {
         else {
             final UserCredential user = (UserCredential) session.getAttribute(USER_ATTRIBUTE);
 
-            if(user == null || user.getIdentification().isBlank() || user.getRole() != null){
+            if(user == null || user.getIdentification().isBlank() || !"Administrator".equals(user.getRole())){
                 session.invalidate();
                 res.sendRedirect(loginURI);
             }
@@ -64,7 +65,6 @@ public class CustomerFilter extends AbstractFilter {
             }
         }
     }
-
 
     @Override
     public void destroy() {

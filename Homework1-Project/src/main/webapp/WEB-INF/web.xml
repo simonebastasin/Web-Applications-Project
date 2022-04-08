@@ -155,6 +155,15 @@
     </filter-mapping>
     <filter-mapping>
         <filter-name>CustomerFilter</filter-name>
-        <url-pattern>user/CUSTOMER/*</url-pattern>
+        <url-pattern>/user/CUSTOMER/*</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>AdminFilter</filter-name>
+        <filter-class>it.unipd.dei.wa2122.wadteam.filter.AdminFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>AdminFilter</filter-name>
+        <url-pattern>/management</url-pattern>
     </filter-mapping>
 </web-app>
