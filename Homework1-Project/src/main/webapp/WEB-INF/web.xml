@@ -127,6 +127,16 @@
         <res-auth>Container</res-auth>
     </resource-ref>
 
+
+    <servlet>
+        <servlet-name>ProductManagmentServlet</servlet-name>
+        <servlet-class>it.unipd.dei.wa2122.wadteam.servlets.ProductManagmentServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ProductManagmentServlet</servlet-name>
+        <url-pattern>/Admin/ProductManagment</url-pattern>
+    </servlet-mapping>
+
     <filter>
         <filter-name>CustomerFilter</filter-name>
         <filter-class>it.unipd.dei.wa2122.wadteam.filter.CustomerFilter</filter-class>
