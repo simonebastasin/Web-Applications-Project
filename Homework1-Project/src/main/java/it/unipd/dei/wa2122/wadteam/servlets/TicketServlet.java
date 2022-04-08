@@ -3,6 +3,7 @@ package it.unipd.dei.wa2122.wadteam.servlets;
 import it.unipd.dei.wa2122.wadteam.dao.assistanceTicket.CreateAssistanceTicketDatabase;
 import it.unipd.dei.wa2122.wadteam.dao.assistanceTicket.GetAssistanceTicketDatabase;
 import it.unipd.dei.wa2122.wadteam.dao.assistanceTicket.ListAssistanceTicketDatabase;
+import it.unipd.dei.wa2122.wadteam.dao.assistanceTicket.ListAssistanceTicketFromUserDatabase;
 import it.unipd.dei.wa2122.wadteam.dao.ticketStatus.CreateTicketStatusDatabase;
 import it.unipd.dei.wa2122.wadteam.resources.*;
 import jakarta.servlet.ServletException;
@@ -11,6 +12,10 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Objects;
+
+import static it.unipd.dei.wa2122.wadteam.resources.UserCredential.TypeUser.CUSTOMER;
+import static it.unipd.dei.wa2122.wadteam.resources.UserCredential.TypeUser.EMPLOYEE;
 
 public class TicketServlet extends AbstractDatabaseServlet {
 
@@ -23,9 +28,23 @@ public class TicketServlet extends AbstractDatabaseServlet {
             case "create" ->   writeJsp(req, resp, "/jsp/createTicket.jsp");
             case "list" -> {
                 try {
-                    var listTicket = new ListAssistanceTicketDatabase(getDataSource().getConnection()).getAssistanceTicket();
-                    writeResource(req, resp, "/jsp/ticket.jsp", false, listTicket.toArray(AssistanceTicket[]::new));
-                } catch (SQLException e) {
+                    if (req.getSession(false) != null && req.getSession(false).getAttribute("user") != null) {
+                        var ut = ((UserCredential) req.getSession(false).getAttribute("user")).getType();
+
+                        switch (ut) {
+                            case CUSTOMER -> {
+                                var listTicket = new ListAssistanceTicketFromUserDatabase(getDataSource().getConnection(), ((UserCredential) req.getSession(false).getAttribute("user")).getId()).getAssistanceTicketFromUser();
+                                writeResource(req, resp, "/jsp/ticket.jsp", false, listTicket.toArray(AssistanceTicket[]::new));
+                            }
+                            case EMPLOYEE ->  {
+                                var listTicket = new ListAssistanceTicketDatabase(getDataSource().getConnection()).getAssistanceTicket();
+                                writeResource(req, resp, "/jsp/ticket.jsp", false, listTicket.toArray(AssistanceTicket[]::new));
+                            }
+                            default ->  writeError(req, resp, new ErrorMessage.UserCredentialError("User credential error"));
+                        }
+                    }
+                }
+                catch (SQLException e) {
                     writeError(req, resp, new Message("Error get", "ET02", e.getMessage()), HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
                 }
             }
