@@ -60,6 +60,7 @@ public abstract class AbstractDatabaseServlet extends AbstractLoggerServlet {
      *
      * @return the {@code DataSource} for managing the connection pool to the database
      */
+    @Override
     protected final DataSource getDataSource() {
         return ds;
     }

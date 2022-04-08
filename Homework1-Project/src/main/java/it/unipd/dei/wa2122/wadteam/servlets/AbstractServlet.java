@@ -1,5 +1,6 @@
 package it.unipd.dei.wa2122.wadteam.servlets;
 
+import it.unipd.dei.wa2122.wadteam.dao.productCategory.ListProductCategoryDatabase;
 import it.unipd.dei.wa2122.wadteam.resources.ErrorMessage;
 import it.unipd.dei.wa2122.wadteam.resources.Message;
 import it.unipd.dei.wa2122.wadteam.resources.Resource;
@@ -11,8 +12,10 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import javax.sql.DataSource;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
@@ -86,10 +89,17 @@ public abstract class AbstractServlet extends HttpServlet {
      * the session info is passed anyway
      */
     public void writeJsp(HttpServletRequest request, HttpServletResponse response, String jsp) throws IOException, ServletException {
-        if(request.getSession(false) != null)
-            request.setAttribute("user", request.getSession(false).getAttribute("user"));
+        try {
+            var list = new ListProductCategoryDatabase(getDataSource().getConnection()).getProductCategory();
+            request.setAttribute("categories", list);
+            if(request.getSession(false) != null)
+                request.setAttribute("user", request.getSession(false).getAttribute("user"));
 
-        request.getRequestDispatcher(jsp).forward(request, response);
+            request.getRequestDispatcher(jsp).forward(request, response);
+        } catch (SQLException e) {
+            writeError(request, response, new ErrorMessage.SqlInternalError(e.getMessage()));
+        }
+
     }
 
     /**
@@ -134,6 +144,7 @@ public abstract class AbstractServlet extends HttpServlet {
      *                  merge the array before sending.
      */
     public void writeResource(HttpServletRequest request, HttpServletResponse response, String jsp, boolean showOneItemAsItem, Resource... resources) throws IOException, ServletException {
+        try {
         var resourcesMap = Arrays.stream(resources).collect(groupingBy(Resource::getClass));
 
         if(request.getHeader("Accept").contains("application/json")) {
@@ -143,27 +154,32 @@ public abstract class AbstractServlet extends HttpServlet {
 
             if(resourcesMap.entrySet().size() == 1) {
                 writeJSON(response, new JSONArray(Arrays.stream(resources).map(Resource::toJSON).toArray()));
+                } else {
+                    for (var item : resourcesMap.entrySet()) {
+                        if (showOneItemAsItem && item.getValue().size() == 1) {
+                            jsonObject.put(decapitalize(item.getKey().getSimpleName()), item.getValue().get(0).toJSON());
+                        } else {
+                            jsonObject.put(decapitalize(item.getKey().getSimpleName()) + "List", new JSONArray(item.getValue().stream().map(Resource::toJSON).toArray()));
+                        }
+                    }
+                    writeJSON(response, jsonObject);
+                }
             } else {
+            var list = new ListProductCategoryDatabase(getDataSource().getConnection()).getProductCategory();
+            request.setAttribute("categories", list);
                 for (var item : resourcesMap.entrySet()) {
                     if (showOneItemAsItem && item.getValue().size() == 1) {
-                        jsonObject.put(decapitalize(item.getKey().getSimpleName()), item.getValue().get(0).toJSON());
+                        request.setAttribute(decapitalize(item.getKey().getSimpleName()), item.getValue().get(0));
                     } else {
-                        jsonObject.put(decapitalize(item.getKey().getSimpleName()) + "List", new JSONArray(item.getValue().stream().map(Resource::toJSON).toArray()));
+                        request.setAttribute(decapitalize(item.getKey().getSimpleName()) + "List", item.getValue());
                     }
                 }
-                writeJSON(response, jsonObject);
+                if(request.getSession(false) != null)
+                    request.setAttribute("user", request.getSession(false).getAttribute("user"));
+                request.getRequestDispatcher(jsp).forward(request, response);
             }
-        } else {
-            for (var item : resourcesMap.entrySet()) {
-                if (showOneItemAsItem && item.getValue().size() == 1) {
-                    request.setAttribute(decapitalize(item.getKey().getSimpleName()), item.getValue().get(0));
-                } else {
-                    request.setAttribute(decapitalize(item.getKey().getSimpleName()) + "List", item.getValue());
-                }
-            }
-            if(request.getSession(false) != null)
-                request.setAttribute("user", request.getSession(false).getAttribute("user"));
-            request.getRequestDispatcher(jsp).forward(request, response);
+        } catch (SQLException e) {
+            writeError(request, response, new ErrorMessage.SqlInternalError(e.getMessage()));
         }
     }
 
@@ -234,4 +250,7 @@ public abstract class AbstractServlet extends HttpServlet {
 
         return new String(c);
     }
+
+    abstract protected DataSource getDataSource();
+
 }
