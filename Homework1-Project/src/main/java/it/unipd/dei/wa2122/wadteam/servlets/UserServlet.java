@@ -37,25 +37,23 @@ public class UserServlet extends AbstractDatabaseServlet {
 
 
 
-        switch (param1[2]) {
-            case "info" -> {
-                System.out.println("ok");
-                if ("EMPLOYEE".equals(type))
-                {
-
-                    Employee em=null;
-                    try {
-                         em=new GetEmployeeDatabase(getDataSource().getConnection(),username).getEmployee();
+        switch (type+"/"+action) {
+            case "EMPLOYEE/info" -> {
 
 
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    }
+                Employee em = null;
+                try {
+                    em = new GetEmployeeDatabase(getDataSource().getConnection(), username).getEmployee();
 
-                    writeResource(req,resp,"/jsp/user.jsp",true,em);
+
+                } catch (SQLException e) {
+                    e.printStackTrace();
                 }
-                else
-                {
+
+                writeResource(req, resp, "/jsp/user.jsp", true, em);
+            }
+                case "CUSTOMER/info" ->
+                        {
                     Customer cu=null;
                     try {
 
@@ -65,38 +63,37 @@ public class UserServlet extends AbstractDatabaseServlet {
                         e.printStackTrace();
                     }
                     writeResource(req,resp,"/jsp/CustomerDetail.jsp",true,cu);
-                }
+
             }
-            case "modify"->
+            case "CUSTOMER/modify"-> {
+
+                Customer cu = null;
+                try {
+
+                    cu = new GetIdCustomerDatabase(getDataSource().getConnection(), username).getIdCustomer();
+
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+                writeResource(req, resp, "/jsp/customerEdit.jsp", true, cu);
+            }
+            case "EMPLOYEE/modify"->
                     {
-                        if("CUSTOMER".equals(type)) {
-                            Customer cu = null;
-                            try {
+                        Employee em=null;
+                        try {
 
-                                cu = new GetIdCustomerDatabase(getDataSource().getConnection(), username).getIdCustomer();
-
-                            } catch (SQLException e) {
-                                e.printStackTrace();
-                            }
-                            writeResource(req, resp, "/jsp/customerEdit.jsp", true, cu);
-                        }
-                        else
-                        {
-                            Employee em=null;
-                            try {
-
-                               em=new GetEmployeeDatabase(getDataSource().getConnection(),username).getEmployee();
-                               System.out.println(em.getUsername());
+                            em=new GetEmployeeDatabase(getDataSource().getConnection(),username).getEmployee();
+                            System.out.println(em.getUsername());
 
 
                             } catch (SQLException e) {
                                 e.printStackTrace();
                             }
                             writeResource(req, resp, "/jsp/userEdit.jsp", true, em);
-                        }
+
                     }
-            case "password" -> {
-                if("CUSTOMER".equals(type)) {
+            case "CUSTOMER/password" -> {
+
                     Customer cu = null;
                     try {
 
@@ -107,7 +104,7 @@ public class UserServlet extends AbstractDatabaseServlet {
                     }
                     writeResource(req, resp, "/jsp/changePassword.jsp", true, cu);
                 }
-                else
+            case "EMPLOYEE/password" ->
                 {
                     Employee em=null;
                     try {
@@ -120,7 +117,7 @@ public class UserServlet extends AbstractDatabaseServlet {
                     }
                     writeResource(req, resp, "/jsp/changePassword.jsp", true, em);
                 }
-            }
+
             case "register" -> writeJsp(req, resp, "/jsp/user.jsp"); // TODO change
             default -> writeError(req, resp, new ErrorMessage.IncorrectlyFormattedPathError("page not found"));
 
