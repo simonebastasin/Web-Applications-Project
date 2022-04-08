@@ -105,17 +105,23 @@ public class TicketServlet extends AbstractDatabaseServlet {
 
     private void postDetailTicket(HttpServletRequest req, HttpServletResponse resp, String param) throws IOException, ServletException {
         if (param.chars().allMatch(Character::isDigit) && !param.equals("")) {
-            int idTicket = Integer.parseInt(param);
-            String status = String.valueOf(req.getParameter("status"));
-            String description = req.getParameter("description");
+            var ut = ((UserCredential) req.getSession(false).getAttribute("user")).getType();
+            switch (ut) {
+                case CUSTOMER -> {
+                    int idTicket = Integer.parseInt(param);
+                    String status = String.valueOf(req.getParameter("status"));
+                    String description = req.getParameter("description");
 
-            TicketStatus temp = new TicketStatus(null, TicketStatusEnum.valueOf(status), description, null, idTicket);
-            try {
-                TicketStatus ticketstatus = new CreateTicketStatusDatabase(getDataSource().getConnection(), temp).createTicketStatus();
-                Message m = new Message("Ticket Status create", ticketstatus.getId());
-                writeResource(req, resp, "jsp/message.jsp", true, m);
-            } catch (SQLException e) {
-                writeError(req, resp, new Message("Error ticket status", "ET02", e.getMessage()), HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                    TicketStatus temp = new TicketStatus(null, TicketStatusEnum.valueOf(status), description, null, idTicket);
+                    try {
+                        TicketStatus ticketstatus = new CreateTicketStatusDatabase(getDataSource().getConnection(), temp).createTicketStatus();
+                        Message m = new Message("Ticket Status create", ticketstatus.getId());
+                        writeResource(req, resp, "jsp/message.jsp", true, m);
+                    } catch (SQLException e) {
+                        writeError(req, resp, new Message("Error ticket status", "ET02", e.getMessage()), HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                    }
+                }
+                case EMPLOYEE -> writeError(req, resp, new ErrorMessage.UserCredentialError("User credential error"));
             }
         }
     }
