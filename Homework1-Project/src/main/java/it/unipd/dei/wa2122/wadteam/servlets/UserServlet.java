@@ -12,6 +12,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import javax.swing.*;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 public class UserServlet extends AbstractDatabaseServlet {
     @Override
@@ -59,16 +60,31 @@ public class UserServlet extends AbstractDatabaseServlet {
             }
             case "modify"->
                     {
+                        if("CUSTOMER".equals(type)) {
+                            Customer cu = null;
+                            try {
 
-                        Customer cu=null;
-                        try {
+                                cu = new GetIdCustomerDatabase(getDataSource().getConnection(), username).getIdCustomer();
 
-                            cu= new GetIdCustomerDatabase(getDataSource().getConnection(),username).getIdCustomer();
-
-                        } catch (SQLException e) {
-                            e.printStackTrace();
+                            } catch (SQLException e) {
+                                e.printStackTrace();
+                            }
+                            writeResource(req, resp, "/jsp/customerEdit.jsp", true, cu);
                         }
-                        writeResource(req,resp,"/jsp/customerEdit.jsp",true,cu);
+                        else
+                        {
+                            Employee em=null;
+                            try {
+
+                               em=new GetEmployeeDatabase(getDataSource().getConnection(),username).getEmployee();
+                               System.out.println(em.getUsername());
+
+
+                            } catch (SQLException e) {
+                                e.printStackTrace();
+                            }
+                            writeResource(req, resp, "/jsp/userEdit.jsp", true, em);
+                        }
                     }
             case "password" -> {
                 Customer cu=null;

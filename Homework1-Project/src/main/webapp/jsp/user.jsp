@@ -18,9 +18,9 @@
     <ul>
         <li>Name: ${employee.name}</li>
         <li>Surname: ${employee.surname} </li>
-        <li>Role: ${employee.role.toString()}</li>
-        <a href="<c:url value="/user/EMPLOYEE/modify/${customer.username}"/>">Edit</a>
-        <a href="<c:url value="/user/EMPLOYEE/password/${customer.username}"/>">change Password</a>
+        <li>Role: ${employee.role.toString()}
+        <a href="<c:url value="/user/EMPLOYEE/modify/${employee.username}"/>">Edit</a>
+        <a href="<c:url value="/user/EMPLOYEE/password/${employee.username}"/>">change Password</a>
     </ul>
 </body>
 </html>
