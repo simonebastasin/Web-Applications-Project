@@ -13,6 +13,7 @@
 <head>
     <title>Electromechanics shop</title>
 </head>
+
 <body>
 
     <c:import url="/jsp/include/header.jsp"/>
@@ -21,8 +22,8 @@
     <ul>
         <li>Brand: ${product.brand}</li>
         <li>Description: ${product.description}</li>
-        <li>Price: ${product.sale}€</li>
         <li>Quantity: ${product.quantity}</li>
+        <li>Price: ${product.sale}€</li>
     </ul>
 
 <hr />

@@ -14,7 +14,9 @@
 <head>
     <title>Electromechanics Shop</title>
 </head>
+
 <body>
+
 <c:import url="/jsp/include/header.jsp"/>
 
 <c:forEach var="prod" items="${productList}">
@@ -27,5 +29,6 @@
 
     </c:forEach>
 </c:forEach>
+
 </body>
 </html>

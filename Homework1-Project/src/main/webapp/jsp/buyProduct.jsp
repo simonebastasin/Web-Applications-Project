@@ -13,9 +13,11 @@
 <head>
     <title>Electromechanics shop</title>
 </head>
+
 <body>
 
 <c:import url="/jsp/include/header.jsp"/>
+
 <h1>Product: ${product.name}</h1>
 
 Quantity selected: <c:out value="${pageContext.request.getParameter('quantity')}"/> <br>

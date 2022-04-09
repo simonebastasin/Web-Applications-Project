@@ -14,6 +14,7 @@
 <head>
     <title>Electromechanics shop</title>
 </head>
+
 <body>
 <c:import url="/jsp/include/header.jsp"/>
 
@@ -25,7 +26,7 @@ ${category.description}
 <c:choose>
     <c:when test="${productList.size() > 0}">
         <c:forEach var="prod" items="${productList}">
-            <li>Product name: <a href="<c:url value="/products/details/${prod.alias}"/>">${prod.name}</a>  - price: ${prod.sale} - quantity: ${prod.quantity}<br>
+            <li>Product name: <a href="<c:url value="/products/details/${prod.alias}"/>">${prod.name}</a>  - Brand: ${prod.brand} - Quantity: ${prod.quantity} - Price: ${prod.sale}<br>
                 <c:forEach var="picture" items="${prod.pictures}">
                     <img src="<c:url value="/viewmedia/${picture.id}"/>" alt="${picture.filename}" width="100px"/>
                 </c:forEach>

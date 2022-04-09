@@ -22,14 +22,14 @@
     <c:forEach var="prod" items="${onlineOrder.products}">
         <li>
             Product name: ${prod.name} <br>
-            Price: ${prod.sale} <br>
+            Price: ${prod.sale}€ <br>
             Quantity: ${prod.quantity} <br>
             <br>
             <a href="<c:url value="/ticket/create"/>/${prod.alias}">Open Ticket</a>
-
         </li>
     </c:forEach>
     </ul>
+
     Date: ${onlineOrder.ooDateTime.getHumanDate()} <br>
     Status: ${onlineOrder.status.status.text} <br>
     Total price: ${onlineOrder.getTotalPrice()} <br>

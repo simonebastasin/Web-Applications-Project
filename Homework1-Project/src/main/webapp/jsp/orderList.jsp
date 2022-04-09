@@ -26,14 +26,14 @@
             <c:forEach var="prod" items="${order.products}">
                 <li>
                     Product name: ${prod.name} <br>
-                    Price: ${prod.sale} <br>
+                    Price: ${prod.sale}€ <br>
                     Quantity: ${prod.quantity} <br>
                 </li>
             </c:forEach>
             </ul>
             Date: ${order.ooDateTime.getHumanDate()} <br>
             Status: ${order.status.status.text} <br>
-            Total price: ${order.getTotalPrice()} <br>
+            Total price: ${order.getTotalPrice()}€ <br>
         </c:forEach>
     </ul>
 

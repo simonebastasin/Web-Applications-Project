@@ -49,12 +49,10 @@
         <a href="<c:url value="/session/logout"/>">Logout</a>
     </c:when>
     <c:otherwise>
+        &nbsp | &nbsp
         <a href="<c:url value="/session/login"/>">Login</a>
         <a href="<c:url value="/session/register"/>">Register</a>
     </c:otherwise>
 </c:choose>
-
-
-
 
 <hr />
