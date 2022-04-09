@@ -101,12 +101,10 @@ public class BuyProductServlet extends AbstractDatabaseServlet {
             resources.add(purchased);
             resources.add(processedOrder);
 
-            writeResource(req, res, "/jsp/confirmedPayment.jsp", true, resources.toArray(Resource[]::new));
+            writeResource(req, res, "/jsp/confirmedPayment.jsp", false, resources.toArray(Resource[]::new));
 
         } catch (SQLException e) {
             writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
         }
-
-
     }
 }

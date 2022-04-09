@@ -26,7 +26,6 @@ public class ProductManagmentServlet extends AbstractDatabaseServlet{
         try{
             products = new ListProductDatabase(getDataSource().getConnection()).getProduct();
 
-
             List<Resource> lists = new ArrayList<>();
             for(var prod : products){
                     lists.add(prod);

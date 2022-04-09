@@ -20,7 +20,7 @@
 <c:forEach var="prod" items="${productList}">
     <c:forEach var="order" items="${onlineOrderList}">
 
-        <h1>Product purchased: ${product.name}</h1>
+        <h1>Product purchased: ${prod.name}</h1>
 
         You have just successfully completed your purchase. <br>
         Check out your <a href="<c:url value="/order/detail/${order.idOrder}"/>">order.</a>

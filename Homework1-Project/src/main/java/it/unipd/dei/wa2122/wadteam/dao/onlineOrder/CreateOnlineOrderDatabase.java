@@ -82,9 +82,6 @@ public class CreateOnlineOrderDatabase {
 
                 rsOrder = pstmtOrder.executeQuery();
 
-                // Il problema inizia qua
-                // TODO: check this problem
-
                 OrderStatus resultOrderStatus = null;
                 if(rsOrder.next()) {
                     resultOrderStatus = new OrderStatus(
