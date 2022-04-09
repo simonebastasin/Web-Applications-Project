@@ -25,17 +25,31 @@ public class TicketServlet extends AbstractDatabaseServlet {
         String param = req.getPathInfo() != null ? req.getPathInfo().substring(1).lastIndexOf('/') != -1 ? req.getPathInfo().substring(req.getPathInfo().lastIndexOf('/')+1) : "" : "";
 
         switch (path) {
-            case "create" ->   writeJsp(req, resp, "/jsp/createTicket.jsp");
+            case "create" -> getCreateTicket(req, resp);
             case "list" -> getListTicket(req, resp);
             case "detail" -> getDetailTicket(req, resp, path, param);
-            case "respond" -> {
-                if(param.chars().allMatch( Character::isDigit ) && !param.equals("")) {
-                    writeJsp(req, resp, "/jsp/respondTicketStatus.jsp");
-                }
-            }
+            case "respond" -> getRespondTicket(req, resp, param);
             default -> writeError(req, resp, new ErrorMessage.IncorrectlyFormattedPathError("page not found"));
         }
 
+    }
+
+    private void getCreateTicket(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+        var ut = ((UserCredential) req.getSession(false).getAttribute("user")).getType();
+        switch (ut) {
+            case CUSTOMER -> writeJsp(req, resp, "/jsp/createTicket.jsp");
+            case EMPLOYEE -> writeError(req, resp, new ErrorMessage.UserCredentialError("User credential error"));
+        }
+    }
+
+    private void getRespondTicket(HttpServletRequest req, HttpServletResponse resp, String param) throws IOException, ServletException {
+        if(param.chars().allMatch( Character::isDigit ) && !param.equals("")) {
+            var ut = ((UserCredential) req.getSession(false).getAttribute("user")).getType();
+            switch (ut) {
+                case EMPLOYEE -> writeJsp(req, resp, "/jsp/respondTicketStatus.jsp");
+                case CUSTOMER -> writeError(req, resp, new ErrorMessage.UserCredentialError("User credential error"));
+            }
+        }
     }
 
     private void getDetailTicket(HttpServletRequest req, HttpServletResponse resp, String path, String param) throws IOException, ServletException {
@@ -47,14 +61,26 @@ public class TicketServlet extends AbstractDatabaseServlet {
 
                     try {
                         AssistanceTicket assistanceTicket = new GetAssistanceTicketDatabase(getDataSource().getConnection(), id).getAssistanceTicket();
-
-                        writeResource(req, resp, "/jsp/ticket.jsp", true, assistanceTicket);
+                        int user = ((UserCredential) req.getSession(false).getAttribute("user")).getId();
+                        if(assistanceTicket.getId() == user)
+                            writeResource(req, resp, "/jsp/ticket.jsp", true, assistanceTicket);
+                        else
+                            writeError(req, resp, new ErrorMessage.UserCredentialError("User error"));
                     } catch (SQLException e) {
                         writeError(req, resp, new Message("Error get", "ET02", e.getMessage()), HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
                     }
 
                 }
-                case EMPLOYEE -> writeError(req, resp, new ErrorMessage.UserCredentialError("User credential error"));
+                case EMPLOYEE -> {
+                    int id = Integer.parseInt(path);
+
+                    try {
+                        AssistanceTicket assistanceTicket = new GetAssistanceTicketDatabase(getDataSource().getConnection(), id).getAssistanceTicket();
+                        writeResource(req, resp, "/jsp/ticket.jsp", true, assistanceTicket);
+                    } catch (SQLException e) {
+                        writeError(req, resp, new Message("Error get", "ET02", e.getMessage()), HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                    }
+                }
             }
         }
     }
@@ -71,7 +97,7 @@ public class TicketServlet extends AbstractDatabaseServlet {
                     }
                     case EMPLOYEE ->  {
                         var listTicket = new ListAssistanceTicketDatabase(getDataSource().getConnection()).getAssistanceTicket();
-                        writeResource(req, resp, "/jsp/ticket.jsp", false, listTicket.toArray(AssistanceTicket[]::new));
+                        writeResource(req, resp, "/jsp/ticketRespond.jsp", false, listTicket.toArray(AssistanceTicket[]::new));
                     }
                     default ->  writeError(req, resp, new ErrorMessage.UserCredentialError("User credential error"));
                 }
@@ -105,7 +131,7 @@ public class TicketServlet extends AbstractDatabaseServlet {
                     try {
                         AssistanceTicket assistanceTicket = new GetAssistanceTicketDatabase(getDataSource().getConnection(), id).getAssistanceTicket();
 
-                        writeResource(req, resp, "/jsp/ticket.jsp", true, assistanceTicket);
+                        writeResource(req, resp, "/jsp/ticket.jsp", false, assistanceTicket);
                     } catch (SQLException e) {
                         writeError(req, resp, new Message("Error get", "ET02", e.getMessage()), HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
                     }
@@ -127,9 +153,15 @@ public class TicketServlet extends AbstractDatabaseServlet {
 
                     TicketStatus temp = new TicketStatus(null, TicketStatusEnum.valueOf(status), description, null, idTicket);
                     try {
+                        int user = ((UserCredential) req.getSession(false).getAttribute("user")).getId();
                         TicketStatus ticketstatus = new CreateTicketStatusDatabase(getDataSource().getConnection(), temp).createTicketStatus();
-                        Message m = new Message("Ticket Status create", ticketstatus.getId());
-                        writeResource(req, resp, "jsp/message.jsp", true, m);
+
+                        if(ticketstatus.getId() == user) {
+                            Message m = new Message("Ticket Status create", ticketstatus.getId());
+                            writeResource(req, resp, "jsp/message.jsp", true, m);
+                        }
+                        else
+                            writeError(req, resp, new ErrorMessage.UserCredentialError("User error"));
                     } catch (SQLException e) {
                         writeError(req, resp, new Message("Error ticket status", "ET02", e.getMessage()), HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
                     }
@@ -147,7 +179,7 @@ public class TicketServlet extends AbstractDatabaseServlet {
 
         try {
             AssistanceTicket assistanceTicket = new CreateAssistanceTicketDatabase(getDataSource().getConnection(), temp).createAssistantTicket();
-            writeResource(req, resp, "/jsp/ticket.jsp", true , assistanceTicket);
+            writeResource(req, resp, "/jsp/ticket.jsp", false , assistanceTicket);
         } catch (SQLException e) {
             writeError(req, resp, new Message("Error create ticket", "ET02", e.getMessage()), HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         }
