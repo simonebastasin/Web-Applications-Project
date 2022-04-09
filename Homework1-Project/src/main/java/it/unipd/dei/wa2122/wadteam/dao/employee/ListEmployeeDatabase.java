@@ -59,7 +59,7 @@ public class ListEmployeeDatabase {
                 resultEmployeeItem = new Employee(resultSet.getString("username"),
                         resultSet.getString("name"),
                         resultSet.getString("surname"),
-                        new Role(resultSet.getString("role"))
+                        new Role(resultSet.getString("role_name"))
                 );
                 resultEmployee.add(resultEmployeeItem);
             }

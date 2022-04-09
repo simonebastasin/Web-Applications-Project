@@ -15,9 +15,9 @@
 <body>
 
 <c:import url="/jsp/include/header.jsp"/>
-<h1>Electromechanics shop</h1>
+<h1>Electruct List</h1>
 
-<table style="width:80%">
+<table>
 
     <tr>
 
@@ -33,12 +33,12 @@
     <c:forEach var="prod" items="${productList}">
 
         <tr>
-            <td valign="middle"><a href="<c:url value="/productDetail/${prod.alias}"/>">${prod.name}</a></td>
-            <td valign="middle">${prod.brand}</td>
-            <td valign="middle">${prod.sale}</td>
-            <td valign="middle">${prod.quantity}</td>
-            <td valign="middle">${prod.evidence}</td>
-            <td valign="middle"><button type="button">i</button></td>
+            <td><a href="<c:url value="/productDetail/${prod.alias}"/>">${prod.name}</a></td>
+            <td>${prod.brand}</td>
+            <td>${prod.sale}</td>
+            <td>${prod.quantity}</td>
+            <td>${prod.evidence}</td>
+            <td><button type="button">i</button></td>
         </tr>
 
     </c:forEach>
