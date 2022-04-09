@@ -15,10 +15,10 @@
 <c:import url="/jsp/include/header.jsp"/>
 <form method="POST" action="">
     <input type="text" name ="status" id="status">
-    <label for = "status">status</label>
+    <label for = "status"><b> Status </b></label>
     <br>
     <textarea name ="description" id="description"> </textarea>
-    <label for = "description">description</label>
+    <label for = "description"><b> Description </b></label>
     <br>
 
     <br>
