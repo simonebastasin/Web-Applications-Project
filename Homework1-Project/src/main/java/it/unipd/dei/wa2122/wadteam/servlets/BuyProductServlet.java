@@ -29,27 +29,35 @@ public class BuyProductServlet extends AbstractDatabaseServlet {
         assert paths != null;
         String path = paths[0];
 
+        int selected;
+
         switch (path){
             case "product" -> {
                 String param = paths[1];
-                buyProduct(req,res, param);
+                selected = Integer.parseInt(req.getParameter("quantity"));
+                buyProduct(req,res, param, selected);
             }
             case "confirmed" -> {
                 String param = paths[1];
-                int selected = Integer.parseInt(paths[2]);
+                selected = Integer.parseInt(paths[2]);
                 confirmPayment(req,res, param, selected);
             }
         }
     }
 
-    private void buyProduct(HttpServletRequest req, HttpServletResponse res, String param) throws  ServletException, IOException {
+    private void buyProduct(HttpServletRequest req, HttpServletResponse res, String param, int selected) throws  ServletException, IOException {
 
         Product product = null;
 
         try {
             product = new GetProductDatabase((getDataSource().getConnection()), param).getProduct();
 
-            writeResource(req, res, "/jsp/buyProduct.jsp", true, product);
+            if(selected > product.getQuantity() || selected < 1){
+                writeError(req, res, new ErrorMessage.SqlInternalError("Product quantity out of bounds"));
+            }
+            else {
+                writeResource(req, res, "/jsp/buyProduct.jsp", true, product);
+            }
 
         } catch (SQLException e) {
             writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
@@ -66,43 +74,50 @@ public class BuyProductServlet extends AbstractDatabaseServlet {
 
             product = new GetProductDatabase((getDataSource().getConnection()), param).getProduct();
 
-            System.out.println("AOAOAOAOAOA");
+            if(selected > product.getQuantity() || selected < 1){
+                writeError(req, res, new ErrorMessage.SqlInternalError("Product quantity out of bounds"));
+            }
+            else {
+                HttpSession session = req.getSession(false);
+                int customerId = ((UserCredential) session.getAttribute("user")).getId();
 
-            HttpSession session = req.getSession(false);
-            int customerId = ((UserCredential) session.getAttribute("user")).getId();
+                Product purchased = new Product(
+                        product.getAlias(),
+                        product.getName(),
+                        product.getBrand(),
+                        product.getDescription(),
+                        selected,
+                        product.getPurchase(),
+                        product.getSale(),
+                        product.getCategory(),
+                        product.getEvidence(),
+                        product.getPictures()
+                );
 
-            Product purchased = new Product(
-                    product.getAlias(),
-                    product.getName(),
-                    product.getBrand(),
-                    product.getDescription(),
-                    selected,
-                    product.getPurchase(),
-                    product.getSale(),
-                    product.getCategory(),
-                    product.getEvidence(),
-                    product.getPictures()
-            );
+                List<Product> list = new ArrayList<>();
+                list.add(purchased);
 
-            List<Product> list = new ArrayList<>();
-            list.add(purchased);
+                newOrder = new OnlineOrder(
+                        null,
+                        customerId,
+                        null,
+                        list,
+                        new OrderStatus(
+                                1,
+                                OrderStatusEnum.OPEN,
+                                null,
+                                null,
+                                1)
+                );
 
-            newOrder = new OnlineOrder(
-                    null,
-                    customerId,
-                    null,
-                    list,
-                    new OrderStatus(1, OrderStatusEnum.OPEN, null, null, 1)
-            );
+                OnlineOrder processedOrder = new CreateOnlineOrderDatabase((getDataSource().getConnection()), newOrder).createOnlineOrder();
 
-            OnlineOrder processedOrder = new CreateOnlineOrderDatabase((getDataSource().getConnection()), newOrder).createOnlineOrder();
+                List<Resource> resources = new ArrayList<>();
+                resources.add(purchased);
+                resources.add(processedOrder);
 
-            List<Resource> resources = new ArrayList<>();
-            resources.add(purchased);
-            resources.add(processedOrder);
-
-            writeResource(req, res, "/jsp/confirmedPayment.jsp", false, resources.toArray(Resource[]::new));
-
+                writeResource(req, res, "/jsp/confirmedPayment.jsp", false, resources.toArray(Resource[]::new));
+            }
         } catch (SQLException e) {
             writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
         }

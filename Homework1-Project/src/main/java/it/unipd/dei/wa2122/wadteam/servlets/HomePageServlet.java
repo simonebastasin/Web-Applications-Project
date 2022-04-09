@@ -27,8 +27,6 @@ public class HomePageServlet extends AbstractDatabaseServlet{
             case "details" -> productDetail(req,res,param);
             case "category" -> productCategory(req,res,param);
         }
-
-
     }
 
     private void homePage(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
