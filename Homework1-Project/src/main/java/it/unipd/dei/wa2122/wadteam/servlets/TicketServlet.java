@@ -115,7 +115,7 @@ public class TicketServlet extends AbstractDatabaseServlet {
 
         switch (path) {
             case "create" -> postCreateTicket(req, resp, param);
-            case "detail" -> postDetailTicket(req, resp, param);
+            case "detail" -> getDetailTicket(req, resp, path, param);
             case "respond" -> postRespondTicket(req, resp, param);
             default -> writeError(req, resp, new ErrorMessage.IncorrectlyFormattedPathError("page not found"));
         }
@@ -126,7 +126,7 @@ public class TicketServlet extends AbstractDatabaseServlet {
             var ut = ((UserCredential) req.getSession(false).getAttribute("user")).getType();
             switch (ut) {
                 case EMPLOYEE -> {
-                    int id = Integer.parseInt(req.getParameter("identification"));
+                    int id = Integer.parseInt(param);
 
                     try {
                         AssistanceTicket assistanceTicket = new GetAssistanceTicketDatabase(getDataSource().getConnection(), id).getAssistanceTicket();
@@ -138,35 +138,6 @@ public class TicketServlet extends AbstractDatabaseServlet {
 
                 }
                 case CUSTOMER -> writeError(req, resp, new ErrorMessage.UserCredentialError("User credential error"));
-            }
-        }
-    }
-
-    private void postDetailTicket(HttpServletRequest req, HttpServletResponse resp, String param) throws IOException, ServletException {
-        if (param.chars().allMatch(Character::isDigit) && !param.equals("")) {
-            var ut = ((UserCredential) req.getSession(false).getAttribute("user")).getType();
-            switch (ut) {
-                case CUSTOMER -> {
-                    int idTicket = Integer.parseInt(param);
-                    String status = String.valueOf(req.getParameter("status"));
-                    String description = req.getParameter("description");
-
-                    TicketStatus temp = new TicketStatus(null, TicketStatusEnum.valueOf(status), description, null, idTicket);
-                    try {
-                        int user = ((UserCredential) req.getSession(false).getAttribute("user")).getId();
-                        TicketStatus ticketstatus = new CreateTicketStatusDatabase(getDataSource().getConnection(), temp).createTicketStatus();
-
-                        if(ticketstatus.getId() == user) {
-                            Message m = new Message("Ticket Status create", ticketstatus.getId());
-                            writeResource(req, resp, "jsp/message.jsp", true, m);
-                        }
-                        else
-                            writeError(req, resp, new ErrorMessage.UserCredentialError("User error"));
-                    } catch (SQLException e) {
-                        writeError(req, resp, new Message("Error ticket status", "ET02", e.getMessage()), HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-                    }
-                }
-                case EMPLOYEE -> writeError(req, resp, new ErrorMessage.UserCredentialError("User credential error"));
             }
         }
     }
