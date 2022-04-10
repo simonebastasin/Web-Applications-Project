@@ -1,10 +1,8 @@
 package it.unipd.dei.wa2122.wadteam.servlets;
 
 import it.unipd.dei.wa2122.wadteam.dao.product.ListProductDatabase;
-import it.unipd.dei.wa2122.wadteam.dao.productCategory.ListProductCategoryDatabase;
 import it.unipd.dei.wa2122.wadteam.resources.Message;
 import it.unipd.dei.wa2122.wadteam.resources.Product;
-import it.unipd.dei.wa2122.wadteam.resources.ProductCategory;
 import it.unipd.dei.wa2122.wadteam.resources.Resource;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

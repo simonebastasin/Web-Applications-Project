@@ -28,7 +28,7 @@
 
         <c:choose>
             <c:when test="${user.role == 'Administrator'}">
-                <a href="<c:url value="/Admin/ProductManagment"/>">Product Management</a>>
+                <a href="<c:url value="/Admin/ProductManagment"/>">Product Management</a>
                 <a href="<c:url value="/Admin/UserManagmentServlet"/>">User Management</a>
                 <a href="<c:url value="/management"/>">Discount Management</a>
                 <a href="<c:url value="/management"/>">Data Export</a>

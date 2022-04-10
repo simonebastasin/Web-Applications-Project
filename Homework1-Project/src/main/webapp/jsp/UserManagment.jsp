@@ -7,7 +7,6 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--@elvariable id="userList" type="java.util.List<it.unipd.dei.wa2122.wadteam.resources.Employee>"--%>
 
 <html>
 <head>
@@ -18,27 +17,38 @@
 
 <c:import url="/jsp/include/header.jsp"/>
 <h1>User List</h1>
-
 <table>
+
+
 
   <tr>
     <th>Username</th>
     <th>Name</th>
     <th>Surname</th>
     <th>Role</th>
-    <th>Details</th>
+    <th>Edit</th>
+    <th>Delete</th>
+
   </tr>
 
 
-  size ${userList.size()}
-  <c:forEach var="user" items="${userList}">
+  <c:forEach var="user" items="${employeeList}">
 
     <tr>
       <td>${user.username}</td>
       <td>${user.name}</td>
       <td>${user.surname}</td>
-      <td>${user.Role}</td>
-      <td valign="middle"><button type="button">i</button></td>
+      <td>${user.role}</td>
+      <td>
+      <form method="POST" action="<c:url value="/Admin/ProductManagment"/>">
+        <input type ="submit" value = "i">
+      </form>
+      </td>
+      <form method="POST" action="<c:url value="/Admin/ProductManagment"/>">
+        <input type ="submit" value = "X">
+      </form>
+      </td>
+
     </tr>
 
   </c:forEach>

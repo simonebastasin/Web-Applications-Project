@@ -4,6 +4,7 @@ import it.unipd.dei.wa2122.wadteam.dao.employee.ListEmployeeDatabase;
 import it.unipd.dei.wa2122.wadteam.resources.Employee;
 import it.unipd.dei.wa2122.wadteam.resources.Message;
 import it.unipd.dei.wa2122.wadteam.resources.Resource;
+import it.unipd.dei.wa2122.wadteam.resources.Role;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -19,14 +20,13 @@ public class UserManagmentServlet extends AbstractDatabaseServlet{
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
-        List<Employee> Employees = null;
+        List<Employee> employeeListmployees = null;
 
         try{
-            Employees = new ListEmployeeDatabase(getDataSource().getConnection()).getEmployee();
+            employeeListmployees = new ListEmployeeDatabase(getDataSource().getConnection()).getEmployee();
 
             List<Resource> lists = new ArrayList<>();
-            for(var employee : Employees){
-                System.out.println("stampa");
+            for(var employee : employeeListmployees){
                 lists.add(employee);
             }
 
