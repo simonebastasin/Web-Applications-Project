@@ -115,6 +115,10 @@
         <servlet-name>ProductManagmentServlet</servlet-name>
         <url-pattern>/Admin/ProductManagment</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProductManagmentServlet</servlet-name>
+        <url-pattern>/Admin/ProductManagment/*</url-pattern>
+    </servlet-mapping>
 
     <servlet>
         <servlet-name>UserManagmentServlet</servlet-name>

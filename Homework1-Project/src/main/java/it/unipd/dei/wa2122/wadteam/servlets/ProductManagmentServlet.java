@@ -21,6 +21,7 @@ public class ProductManagmentServlet extends AbstractDatabaseServlet{
 
         switch (path) {
             case "" -> getListProduct(req, res);
+            case "CreateProduct" -> getCreateProduct(req, res);
             default -> writeError(req, res, new ErrorMessage.IncorrectlyFormattedPathError("page not found"));
         }
 
@@ -52,7 +53,16 @@ public class ProductManagmentServlet extends AbstractDatabaseServlet{
                     writeError(req, res, m, HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
                 }
             }
+        }
+    }
 
+    private void getCreateProduct(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
+        var ut = ((UserCredential) req.getSession(false).getAttribute("user")).getType();
+        switch (ut) {
+            case CUSTOMER -> writeError(req, res, new ErrorMessage.UserCredentialError("User credential error"));
+            case EMPLOYEE -> {
+                writeJsp(req,res,"/jsp/createProduct.jsp");
+            }
         }
     }
 
