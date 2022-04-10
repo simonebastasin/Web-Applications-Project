@@ -15,7 +15,15 @@
 </head>
 <body>
 <c:import url="/jsp/include/header.jsp"/>
+<h1> Ticket List </h1>
 <ul>
+    <style>
+        .ticket-OPEN{color: green;}
+        .ticket-PROCESSING{color: blue;}
+        .ticket-CLOSED{color: red;}
+        .ticket-RETURN{color: black;}
+    </style>
+
     <c:forEach var="assistanceTicket" items="${assistanceTicketList}">
         <li><b>Ticket ID: ${assistanceTicket.id}</b>
             <ul>
@@ -24,13 +32,14 @@
                 <li>${assistanceTicket.productAlias}</li>
 
                 <c:forEach var="item" items="${assistanceTicket.ticketStatusList}">
-                    <li><b> Ticket Status : ${item.status}</b></li>
+                    <li><b> Ticket Status : <span class = "ticket-${item.status}">${item.status}</span></b></li>
                     <ul><li><i>${item.description}</i></li>
                         <li>${item.tsDate}</li></ul>
                 </c:forEach>
             </ul>
             <a href="<c:url value="/ticket/respond/${assistanceTicket.id}"/>">Respond</a>
         </li>
+        <br>
     </c:forEach>
 </ul>
 
