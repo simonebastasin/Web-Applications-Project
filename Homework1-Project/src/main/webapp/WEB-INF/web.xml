@@ -128,6 +128,12 @@
         <servlet-name>UserManagmentServlet</servlet-name>
         <url-pattern>/Admin/UserManagmentServlet</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserManagmentServlet</servlet-name>
+        <url-pattern>/Admin/UserManagmentServlet/*</url-pattern>
+    </servlet-mapping>
+
+    <!-- FINE ADMIN -->
 
     <filter>
         <filter-name>CustomerFilter</filter-name>
@@ -176,5 +182,8 @@
         <filter-name>EmployeeFilter</filter-name>
         <url-pattern>/media/list</url-pattern>
     </filter-mapping>
+
+
+
 
 </web-app>

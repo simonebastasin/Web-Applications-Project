@@ -64,7 +64,7 @@ public final class DeleteEmployeeDatabase {
                 resultEmployee = new Employee(resultSet.getString("username"),
                         resultSet.getString("name"),
                         resultSet.getString("surname"),
-                        new Role(resultSet.getString("role"))
+                        new Role(resultSet.getString("role_name"))
                 );
             }
         } finally {

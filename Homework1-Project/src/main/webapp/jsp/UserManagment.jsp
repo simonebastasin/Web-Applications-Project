@@ -40,13 +40,12 @@
       <td>${user.surname}</td>
       <td>${user.role}</td>
       <td>
-      <form method="POST" action="<c:url value="/Admin/ProductManagment"/>">
+      <form method="POST" action="<c:url value="/Admin/UserManagmentServlet/delete/${user.username}"/>">
         <input type ="submit" value = "i">
       </form>
       </td>
-      <form method="POST" action="<c:url value="/Admin/ProductManagment"/>">
-        <input type ="submit" value = "X">
-      </form>
+      <td>
+        <a href="<c:url value="/Admin/UserManagmentServlet/delete/${user.username}"/>">X</a>
       </td>
 
     </tr>
