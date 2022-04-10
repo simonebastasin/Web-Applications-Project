@@ -91,28 +91,31 @@ public class CreateProductDatabase {
             }
         }
 
-        for(var item : product.getPictures()) {
-            try {
-                preparedStatement = con.prepareStatement(STATEMENT_INSERT_PICTURE);
-                preparedStatement.setString(1, product.getAlias());
-                preparedStatement.setInt(2, item);
+        if(product.getPictures()!=null){ //if there are images associated to the product to be created
+            for(var item : product.getPictures()) {
+                try {
+                    preparedStatement = con.prepareStatement(STATEMENT_INSERT_PICTURE);
+                    preparedStatement.setString(1, product.getAlias());
+                    preparedStatement.setInt(2, item);
 
-                resultSet = preparedStatement.executeQuery();
+                    resultSet = preparedStatement.executeQuery();
 
-                if (resultSet.next()) {
-                    assert resultProduct != null;
-                    resultProduct.getPictures().add(resultSet.getInt("id_media"));
-                }
-            } finally {
-                if (resultSet != null) {
-                    resultSet.close();
-                }
+                    if (resultSet.next()) {
+                        assert resultProduct != null;
+                        resultProduct.getPictures().add(resultSet.getInt("id_media"));
+                    }
+                } finally {
+                    if (resultSet != null) {
+                        resultSet.close();
+                    }
 
-                if (preparedStatement != null) {
-                    preparedStatement.close();
+                    if (preparedStatement != null) {
+                        preparedStatement.close();
+                    }
                 }
             }
         }
+
         con.close();
 
         return resultProduct;
