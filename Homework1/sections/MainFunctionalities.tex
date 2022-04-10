@@ -1,4 +1,15 @@
 \section{Main Functionalities}
 %What are the main functionalities of the web app? what services does it offer and how it is organized?
 
-This web application will be mainly used to allow the not registered users to retrived information about specific product sold by the shop. Instead the registered user can buy products and ask for assistance.
+This web application will be mainly used to allow the not registered users to retrived information about specific product sold by the shop. Instead the registered user can buy products and ask for assistance. Below we specify better the functionalities of the web application:
+\begin{itemize}
+    \item \textbf{Customers}: can register to our web application using the specific form and then they can buy product and seeing the online invoices related with the orders, request for assistance ticket, modify their account changing the information provided during the registration.
+    \item \textbf{Employee}: they can do different things inside the application according to the role they have inside the shop, their account is provided by the administrator of the web application:
+    \begin{itemize}
+        \item \textbf{Sellers}: can manage the product, adding new products and modify their details (e.g. name, brand, price, discount...), can see the order done by the customer and update the order status.
+        \item \textbf{Technicians}: can manage the request for assistance from the customer (Assistance Ticket) and update the information of the ticket status.
+        \item \textbf{Accountants}: Can manage the payment done by the customer, in practical terms they can manage the online invoice.
+        \item \textbf{Administrators}: are to be considered the "super user" of the web application. They own all the permission of the other user and, in addition, they are the user that create the account for the employee user.
+    \end{itemize}
+    With "manage" we intend the main operation : Insert, Update, Delete, Select. Only for product we decided to not implement the delete operation in order to maintain the history of the other infomation related with it (i.e. orders and ticket assistance).
+\end{itemize}
