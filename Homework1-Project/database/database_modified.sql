@@ -90,8 +90,8 @@ CREATE TABLE Discount (
 
                           ID          SERIAL PRIMARY KEY,
                           Percentage  SMALLINT CHECK(Percentage>=0 AND Percentage<=100) NOT NULL,
-                          Start_Date  DATE NOT NULL,
-                          End_Date    DATE NOT NULL
+                          Start_Date  TIMESTAMP NOT NULL,
+                          End_Date    TIMESTAMP NOT NULL
 );
 
 -- Product
@@ -168,7 +168,7 @@ CREATE TABLE Online_Invoice(
                                ID_Order        INTEGER NOT NULL,
                                Transaction_ID  VARCHAR(30) NOT NULL,
                                Payment_Type    PaymentMethodOnline NOT NULL,
-                               OI_Date         DATE NOT NULL DEFAULT CURRENT_DATE,
+                               OI_Date         TIMESTAMP NOT NULL DEFAULT CURRENT_DATE,
                                Total_Price     NUMERIC(10, 2) CHECK(Total_Price >= 0) NOT NULL,
 
                                FOREIGN KEY (ID_Order) REFERENCES Online_Order(ID) ON UPDATE CASCADE
