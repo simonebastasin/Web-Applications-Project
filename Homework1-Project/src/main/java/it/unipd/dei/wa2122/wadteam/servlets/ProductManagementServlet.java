@@ -1,6 +1,5 @@
 package it.unipd.dei.wa2122.wadteam.servlets;
 
-import it.unipd.dei.wa2122.wadteam.dao.assistanceTicket.CreateAssistanceTicketDatabase;
 import it.unipd.dei.wa2122.wadteam.dao.product.CreateProductDatabase;
 import it.unipd.dei.wa2122.wadteam.dao.product.ListProductDatabase;
 import it.unipd.dei.wa2122.wadteam.resources.*;
@@ -14,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class ProductManagmentServlet extends AbstractDatabaseServlet{
+public class ProductManagementServlet extends AbstractDatabaseServlet{
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
@@ -23,7 +22,7 @@ public class ProductManagmentServlet extends AbstractDatabaseServlet{
 
         switch (path) {
             case "" -> getListProduct(req, res);
-            case "CreateProduct" -> getCreateProduct(req, res);
+            case "createProduct" -> getCreateProduct(req, res);
             default -> writeError(req, res, new ErrorMessage.IncorrectlyFormattedPathError("page not found"));
         }
 
@@ -35,7 +34,7 @@ public class ProductManagmentServlet extends AbstractDatabaseServlet{
         String param = req.getPathInfo() != null ? req.getPathInfo().substring(1).lastIndexOf('/') != -1 ? req.getPathInfo().substring(req.getPathInfo().lastIndexOf('/')+1) : "" : "";
 
         switch (path) {
-            case "CreateProduct" -> postCreateProduct(req,res,param);
+            case "createProduct" -> postCreateProduct(req,res,param);
             default -> writeError(req, res, new ErrorMessage.IncorrectlyFormattedPathError("page not found"));
         }
 
@@ -56,7 +55,7 @@ public class ProductManagmentServlet extends AbstractDatabaseServlet{
                         lists.add(prod);
                     }
 
-                    writeResource(req, res, "/jsp/ProductManagment.jsp", false, lists.toArray(Resource[]::new));
+                    writeResource(req, res, "/jsp/productManagement.jsp", false, lists.toArray(Resource[]::new));
 
                 }catch (SQLException e) {
                     Message m = new Message("Couldn't execute the query", "EU01", e.getMessage());
@@ -115,7 +114,7 @@ public class ProductManagmentServlet extends AbstractDatabaseServlet{
                 try {
                     Product product = new CreateProductDatabase(getDataSource().getConnection(), temp).createProduct();
                     //writeResource(req, res, "/jsp/productDetail.jsp", true , product); //view result
-                    res.sendRedirect(req.getContextPath() + "/Admin/ProductManagement");
+                    res.sendRedirect(req.getContextPath() + "/management/productManagement");
                 } catch (SQLException e) {
                     writeError(req, res, new Message("Error create ticket", "ET02", e.getMessage()), HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
                 }

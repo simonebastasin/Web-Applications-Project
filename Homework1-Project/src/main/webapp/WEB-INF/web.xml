@@ -108,29 +108,29 @@
 
     <!-- ADMIN -->
     <servlet>
-        <servlet-name>ProductManagmentServlet</servlet-name>
-        <servlet-class>it.unipd.dei.wa2122.wadteam.servlets.ProductManagmentServlet</servlet-class>
+        <servlet-name>ProductManagementServlet</servlet-name>
+        <servlet-class>it.unipd.dei.wa2122.wadteam.servlets.ProductManagementServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>ProductManagmentServlet</servlet-name>
-        <url-pattern>/Admin/ProductManagment</url-pattern>
+        <servlet-name>ProductManagementServlet</servlet-name>
+        <url-pattern>/management/productManagement</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ProductManagmentServlet</servlet-name>
-        <url-pattern>/Admin/ProductManagment/*</url-pattern>
+        <servlet-name>ProductManagementServlet</servlet-name>
+        <url-pattern>/management/productManagement/*</url-pattern>
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>UserManagmentServlet</servlet-name>
-        <servlet-class>it.unipd.dei.wa2122.wadteam.servlets.UserManagmentServlet</servlet-class>
+        <servlet-name>UserManagementServlet</servlet-name>
+        <servlet-class>it.unipd.dei.wa2122.wadteam.servlets.UserManagementServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>UserManagmentServlet</servlet-name>
-        <url-pattern>/Admin/UserManagmentServlet</url-pattern>
+        <servlet-name>UserManagementServlet</servlet-name>
+        <url-pattern>/management/userManagementServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>UserManagmentServlet</servlet-name>
-        <url-pattern>/Admin/UserManagmentServlet/*</url-pattern>
+        <servlet-name>UserManagementServlet</servlet-name>
+        <url-pattern>/management/userManagementServlet/*</url-pattern>
     </servlet-mapping>
 
     <!-- FINE ADMIN -->
@@ -163,6 +163,10 @@
     <filter-mapping>
         <filter-name>AdminFilter</filter-name>
         <url-pattern>/management</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>AdminFilter</filter-name>
+        <url-pattern>/management/*</url-pattern>
     </filter-mapping>
     <filter-mapping>
         <filter-name>AdminFilter</filter-name>

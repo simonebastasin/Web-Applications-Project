@@ -3,7 +3,6 @@ package it.unipd.dei.wa2122.wadteam.servlets;
 import it.unipd.dei.wa2122.wadteam.dao.employee.DeleteEmployeeDatabase;
 import it.unipd.dei.wa2122.wadteam.dao.employee.GetEmployeeDatabase;
 import it.unipd.dei.wa2122.wadteam.dao.employee.ListEmployeeDatabase;
-import it.unipd.dei.wa2122.wadteam.dao.product.GetProductDatabase;
 import it.unipd.dei.wa2122.wadteam.resources.*;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -15,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class UserManagmentServlet extends AbstractDatabaseServlet{
+public class UserManagementServlet extends AbstractDatabaseServlet{
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
@@ -44,7 +43,7 @@ public class UserManagmentServlet extends AbstractDatabaseServlet{
                 lists.add(employee);
             }
 
-            writeResource(req, res, "/jsp/UserManagment.jsp", false, lists.toArray(Resource[]::new));
+            writeResource(req, res, "/jsp/userManagement.jsp", false, lists.toArray(Resource[]::new));
 
         }catch (SQLException e) {
             Message m = new Message("Couldn't execute the query", "EU01", e.getMessage());
@@ -96,7 +95,7 @@ public class UserManagmentServlet extends AbstractDatabaseServlet{
 
 
             employee = new DeleteEmployeeDatabase((getDataSource().getConnection()), userName).deleteEmployee();
-            res.sendRedirect(req.getContextPath() + "/Admin/UserManagmentServlet");
+            res.sendRedirect(req.getContextPath() + "/management/userManagementServlet");
 
 
         } catch (SQLException e) {
