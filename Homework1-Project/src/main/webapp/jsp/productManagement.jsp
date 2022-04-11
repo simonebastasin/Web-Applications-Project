@@ -15,12 +15,14 @@
 <body>
 
 <c:import url="/jsp/include/header.jsp"/>
-<h1>Electruct List</h1>
+<h1>Product List</h1>
+
+<div>
+    <a href="<c:url value="/management/productManagement/createProduct"/>">Add a new product</a>
+</div><br>
 
 <table>
-
     <tr>
-
         <th>Name</th>
         <th>Brand</th>
         <th>Price</th>
