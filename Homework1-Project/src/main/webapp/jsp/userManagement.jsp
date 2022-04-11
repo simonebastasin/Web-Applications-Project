@@ -14,12 +14,14 @@
 </head>
 
 <body>
-
 <c:import url="/jsp/include/header.jsp"/>
 <h1>User List</h1>
+
+<div>
+  <a href="<c:url value="/management/userManagement/createEmployee"/>">Add new employee</a>
+</div><br>
+
 <table>
-
-
 
   <tr>
     <th>Username</th>
@@ -28,32 +30,27 @@
     <th>Role</th>
     <th>Edit</th>
     <th>Delete</th>
-
   </tr>
 
-
-  <c:forEach var="user" items="${employeeList}">
-
+  <c:forEach var="employee" items="${employeeList}">
     <tr>
-      <td>${user.username}</td>
-      <td>${user.name}</td>
-      <td>${user.surname}</td>
-      <td>${user.role}</td>
+      <td>${employee.username}</td>
+      <td>${employee.name}</td>
+      <td>${employee.surname}</td>
+      <td>${employee.role}</td>
       <td>
-      <form method="POST" action="<c:url value="/Admin/UserManagmentServlet/delete/${user.username}"/>">
-        <input type ="submit" value = "i">
-      </form>
+        <a href="<c:url value="/management/userManagement"/>">Edit</a>
       </td>
       <td>
-        <a href="<c:url value="/Admin/UserManagmentServlet/delete/${user.username}"/>">X</a>
+        <form method="GET" action="<c:url value="/management/userManagement/deleteEmployee"/>">
+          <input type ="hidden" name = "employeeToDelete" value = ${employee.username}>
+          <input type ="submit" value = "Delete">
+        </form>
       </td>
-
     </tr>
-
   </c:forEach>
 
 </table>
 
 </body>
 </html>
-
