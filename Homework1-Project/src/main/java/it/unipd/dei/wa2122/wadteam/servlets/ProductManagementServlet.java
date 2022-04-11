@@ -2,6 +2,7 @@ package it.unipd.dei.wa2122.wadteam.servlets;
 
 import it.unipd.dei.wa2122.wadteam.dao.product.CreateProductDatabase;
 import it.unipd.dei.wa2122.wadteam.dao.product.ListProductDatabase;
+import it.unipd.dei.wa2122.wadteam.dao.productCategory.ListProductCategoryDatabase;
 import it.unipd.dei.wa2122.wadteam.resources.*;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -69,7 +70,16 @@ public class ProductManagementServlet extends AbstractDatabaseServlet{
      * @throws ServletException
      */
     private void getCreateProduct(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
-        writeJsp(req,res,"/jsp/createProduct.jsp");
+        List<ProductCategory> categories = null;
+
+       try{
+            categories = new ListProductCategoryDatabase(getDataSource().getConnection()).getProductCategory();
+            writeResource(req, res, "/jsp/createProduct.jsp", false, categories.toArray(Resource[]::new));
+
+        }catch (SQLException e) {
+            Message m = new Message("Couldn't execute the query", "EU01", e.getMessage());
+            writeError(req, res, m, HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+        }
     }
 
     /**
@@ -87,8 +97,7 @@ public class ProductManagementServlet extends AbstractDatabaseServlet{
         double purchase = Double.parseDouble(req.getParameter("purchase"));
         double sale = Double.parseDouble(req.getParameter("sale"));
         int quantity = Integer.parseInt(req.getParameter("quantity"));
-        //ProductCategory category = req.getParameter("category"); //todo
-        ProductCategory category = new ProductCategory("Screwdriver", "Electrical Screwdriver with multiple tools");
+        ProductCategory category = new ProductCategory(req.getParameter("category"),req.getParameter("category"));
         boolean evidence = req.getParameter("evidence") == "yes"? true : false;;
         //private final List<Integer> pictures;   // todo
 

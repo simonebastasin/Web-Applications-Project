@@ -25,15 +25,18 @@
         <label for="sale">Sale price:</label><br>
         €<input type="number" min="0.01" step="0.01" max="2500" value="25.67" id="sale" name="sale"/><br>
         <label for="quantity">Quantity:</label><br>
-        €<input type="number" min="1" step="1" value="1" id="quantity" name="quantity"/><br>
+        <input type="number" min="1" step="1" value="1" id="quantity" name="quantity"/><br>
         <label for="category">Category:</label><br>
         <select  name="category" id="category">
-            <option value="drills">drills</option>
-            <option value="screwdrivers">screwdrivers</option>
-            <option value="hammers">hammers</option>
-        </select><br>
-        <p>Evidence:</p><br>
+            <c:forEach var="cat" items="${categories}">
+                <option value="${cat.name}">
+                        ${cat.name}
+                </option>
+            </c:forEach>
+        </select>
+        <a href="<c:url value="/management/productManagement/createCategory"/>">Add a new category</a>
         <div>
+            Evidence:
             <input type="radio" id="yes"
                    name="evidence" value="yes">
             <label for="yes">Yes</label>
