@@ -27,7 +27,7 @@ public class CreateOwnsDiscountFromListProductsDatabase {
     private final List<Product> products;
 
     /**
-     * The list of products to be updated in the database
+     * The discount to be updated in the database
      */
     private final Discount discount;
 

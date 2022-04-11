@@ -20,7 +20,7 @@ public class CreateOwnsDatabase {
     private final Connection con;
 
     /**
-     * The employee to be updated in the database
+     * The Owns to be updated in the database
      */
     private final Owns own;
 

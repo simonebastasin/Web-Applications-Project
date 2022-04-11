@@ -30,7 +30,7 @@
             <c:when test="${user.role == 'Administrator'}">
                 <a href="<c:url value="/management/productManagement"/>">Product Management</a>
                 <a href="<c:url value="/management/userManagement"/>">User Management</a>
-                <a href="<c:url value="/management"/>">Discount Management</a>
+                <a href="<c:url value="/management/discountManagement"/>">Discount Management</a>
                 <a href="<c:url value="/management"/>">Data Export</a>
                 <a href="<c:url value="/media/list"/>">View Media</a>
             </c:when>
