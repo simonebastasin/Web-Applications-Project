@@ -41,28 +41,24 @@ public class ProductManagementServlet extends AbstractDatabaseServlet{
     }
 
     private void getListProduct(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
-        var ut = ((UserCredential) req.getSession(false).getAttribute("user")).getType();
-        switch (ut) {
-            case CUSTOMER -> writeError(req, res, new ErrorMessage.UserCredentialError("User credential error"));
-            case EMPLOYEE -> {
-                List<Product> products = null;
 
-                try{
-                    products = new ListProductDatabase(getDataSource().getConnection()).getProduct();
+        List<Product> products = null;
 
-                    List<Resource> lists = new ArrayList<>();
-                    for(var prod : products){
-                        lists.add(prod);
-                    }
+        try{
+            products = new ListProductDatabase(getDataSource().getConnection()).getProduct();
 
-                    writeResource(req, res, "/jsp/productManagement.jsp", false, lists.toArray(Resource[]::new));
-
-                }catch (SQLException e) {
-                    Message m = new Message("Couldn't execute the query", "EU01", e.getMessage());
-                    writeError(req, res, m, HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-                }
+            List<Resource> lists = new ArrayList<>();
+            for(var prod : products){
+                lists.add(prod);
             }
+
+            writeResource(req, res, "/jsp/productManagement.jsp", false, lists.toArray(Resource[]::new));
+
+        }catch (SQLException e) {
+            Message m = new Message("Couldn't execute the query", "EU01", e.getMessage());
+            writeError(req, res, m, HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         }
+
     }
 
     /**
@@ -73,13 +69,7 @@ public class ProductManagementServlet extends AbstractDatabaseServlet{
      * @throws ServletException
      */
     private void getCreateProduct(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
-        var ut = ((UserCredential) req.getSession(false).getAttribute("user")).getType();
-        switch (ut) {
-            case CUSTOMER -> writeError(req, res, new ErrorMessage.UserCredentialError("User credential error"));
-            case EMPLOYEE -> {
-                writeJsp(req,res,"/jsp/createProduct.jsp");
-            }
-        }
+        writeJsp(req,res,"/jsp/createProduct.jsp");
     }
 
     /**
@@ -90,38 +80,28 @@ public class ProductManagementServlet extends AbstractDatabaseServlet{
      * @throws ServletException
      */
     private void postCreateProduct(HttpServletRequest req, HttpServletResponse res, String param) throws IOException, ServletException {
-        var ut = ((UserCredential) req.getSession(false).getAttribute("user")).getType();
-        switch (ut) {
-            case CUSTOMER -> writeError(req, res, new ErrorMessage.UserCredentialError("User credential error"));
-            case EMPLOYEE -> {
-                //writeJsp(req,res,"/jsp/HomePage.jsp");
+        String alias = req.getParameter("alias");
+        String name = req.getParameter("name");
+        String brand = req.getParameter("brand");
+        String description = req.getParameter("description");
+        double purchase = Double.parseDouble(req.getParameter("purchase"));
+        double sale = Double.parseDouble(req.getParameter("sale"));
+        int quantity = Integer.parseInt(req.getParameter("quantity"));
+        //ProductCategory category = req.getParameter("category"); //todo
+        ProductCategory category = new ProductCategory("Screwdriver", "Electrical Screwdriver with multiple tools");
+        boolean evidence = req.getParameter("evidence") == "yes"? true : false;;
+        //private final List<Integer> pictures;   // todo
 
+        Product temp = new Product(alias,name,brand,description,quantity,purchase,sale,category,evidence,null);
 
-                String alias = req.getParameter("alias");
-                String name = req.getParameter("name");
-                String brand = req.getParameter("brand");
-                String description = req.getParameter("description");
-                double purchase = Double.parseDouble(req.getParameter("purchase"));
-                double sale = Double.parseDouble(req.getParameter("sale"));
-                int quantity = Integer.parseInt(req.getParameter("quantity"));
-                //ProductCategory category = req.getParameter("category"); //todo
-                ProductCategory category = new ProductCategory("Screwdriver", "Electrical Screwdriver with multiple tools");
-                boolean evidence = req.getParameter("evidence") == "yes"? true : false;;
-                //private final List<Integer> pictures;   // todo
-
-                Product temp = new Product(alias,name,brand,description,quantity,purchase,sale,category,evidence,null);
-
-                try {
-                    Product product = new CreateProductDatabase(getDataSource().getConnection(), temp).createProduct();
-                    //writeResource(req, res, "/jsp/productDetail.jsp", true , product); //view result
-                    res.sendRedirect(req.getContextPath() + "/management/productManagement");
-                } catch (SQLException e) {
-                    writeError(req, res, new Message("Error create ticket", "ET02", e.getMessage()), HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-                }
-
-
-            }
+        try {
+            Product product = new CreateProductDatabase(getDataSource().getConnection(), temp).createProduct();
+            //writeResource(req, res, "/jsp/productDetail.jsp", true , product); //view result
+            res.sendRedirect(req.getContextPath() + "/management/productManagement");
+        } catch (SQLException e) {
+            writeError(req, res, new Message("Error create ticket", "ET02", e.getMessage()), HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         }
+
     }
 
 }
