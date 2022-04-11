@@ -13,7 +13,7 @@ public class CreateEmployeeDatabase {
     /**
      * The SQL statement to be executed
      */
-    private static final String STATEMENT = "INSERT INTO Employee (username, name, surname, role_name, password) VALUES (?, ?, ?, ?, sha384(?::bitea)) RETURNING username, name, surname, role_name";
+    private static final String STATEMENT = "INSERT INTO Employee (username, name, surname, role_name, password) VALUES (?, ?, ?, ?, sha384(?::bytea)) RETURNING username, name, surname, role_name";
 
     /**
      * The connection to the database
@@ -68,7 +68,7 @@ public class CreateEmployeeDatabase {
                 resultEmployee = new Employee(resultSet.getString("username"),
                                               resultSet.getString("name"),
                                               resultSet.getString("surname"),
-                                              new Role(resultSet.getString("role"))
+                                              new Role(resultSet.getString("role_name"))
                                              );
             }
         } finally {
