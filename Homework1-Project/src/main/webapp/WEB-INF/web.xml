@@ -133,6 +133,17 @@
         <url-pattern>/management/userManagement/*</url-pattern>
     </servlet-mapping>
 
+
+    <servlet>
+        <servlet-name>DiscountManagementServlet</servlet-name>
+        <servlet-class>it.unipd.dei.wa2122.wadteam.servlets.DiscountManagementServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DiscountManagementServlet</servlet-name>
+        <url-pattern>/management/discountManagement</url-pattern>
+    </servlet-mapping>
+
+
     <!-- FINE ADMIN -->
 
     <filter>
