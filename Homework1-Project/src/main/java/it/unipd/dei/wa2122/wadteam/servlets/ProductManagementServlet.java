@@ -2,6 +2,7 @@ package it.unipd.dei.wa2122.wadteam.servlets;
 
 import it.unipd.dei.wa2122.wadteam.dao.product.CreateProductDatabase;
 import it.unipd.dei.wa2122.wadteam.dao.product.ListProductDatabase;
+import it.unipd.dei.wa2122.wadteam.dao.productCategory.CreateProductCategoryDatabase;
 import it.unipd.dei.wa2122.wadteam.dao.productCategory.ListProductCategoryDatabase;
 import it.unipd.dei.wa2122.wadteam.resources.*;
 import jakarta.servlet.ServletException;
@@ -24,6 +25,7 @@ public class ProductManagementServlet extends AbstractDatabaseServlet{
         switch (path) {
             case "" -> getListProduct(req, res);
             case "createProduct" -> getCreateProduct(req, res);
+            case "createCategory" -> getCreateCategory(req,res);
             default -> writeError(req, res, new ErrorMessage.IncorrectlyFormattedPathError("page not found"));
         }
 
@@ -36,6 +38,7 @@ public class ProductManagementServlet extends AbstractDatabaseServlet{
 
         switch (path) {
             case "createProduct" -> postCreateProduct(req,res,param);
+            case "createCategory" -> postCreateCategory(req,res,param);
             default -> writeError(req, res, new ErrorMessage.IncorrectlyFormattedPathError("page not found"));
         }
 
@@ -83,6 +86,17 @@ public class ProductManagementServlet extends AbstractDatabaseServlet{
     }
 
     /**
+     * get the jsp page createCategory.jsp for creating a new category
+     * @param req
+     * @param res
+     * @throws IOException
+     * @throws ServletException
+     */
+    private void getCreateCategory(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
+        writeJsp(req,res,"/jsp/createCategory.jsp");
+    }
+
+    /**
      * creates a new product in the database
      * @param req
      * @param res
@@ -107,6 +121,29 @@ public class ProductManagementServlet extends AbstractDatabaseServlet{
             Product product = new CreateProductDatabase(getDataSource().getConnection(), temp).createProduct();
             //writeResource(req, res, "/jsp/productDetail.jsp", true , product); //view result
             res.sendRedirect(req.getContextPath() + "/management/productManagement");
+        } catch (SQLException e) {
+            writeError(req, res, new Message("Error create ticket", "ET02", e.getMessage()), HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+        }
+
+    }
+
+
+    /**
+     * creates a new category in the database
+     * @param req
+     * @param res
+     * @throws IOException
+     * @throws ServletException
+     */
+    private void postCreateCategory(HttpServletRequest req, HttpServletResponse res, String param) throws IOException, ServletException {
+        String name = req.getParameter("name");
+        String description = req.getParameter("description");
+
+        ProductCategory temp = new ProductCategory(name,description);
+
+        try {
+            ProductCategory resultProductCategory = new CreateProductCategoryDatabase(getDataSource().getConnection(), temp).createProductCategory();
+            res.sendRedirect(req.getContextPath() + "/management/productManagement/createProduct");
         } catch (SQLException e) {
             writeError(req, res, new Message("Error create ticket", "ET02", e.getMessage()), HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         }
