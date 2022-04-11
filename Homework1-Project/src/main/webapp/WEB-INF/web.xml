@@ -126,11 +126,11 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>UserManagementServlet</servlet-name>
-        <url-pattern>/management/userManagementServlet</url-pattern>
+        <url-pattern>/management/userManagement</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>UserManagementServlet</servlet-name>
-        <url-pattern>/management/userManagementServlet/*</url-pattern>
+        <url-pattern>/management/userManagement/*</url-pattern>
     </servlet-mapping>
 
     <!-- FINE ADMIN -->
