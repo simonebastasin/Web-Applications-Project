@@ -21,15 +21,19 @@ public class UserServlet extends AbstractDatabaseServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
        //todo controlli sui parametri
         String param = req.getPathInfo() != null ? req.getPathInfo().lastIndexOf('/') != -1 ? req.getPathInfo().substring(req.getPathInfo().lastIndexOf('/')+1) : "" : "";
-        String path = req.getPathInfo() != null ? req.getPathInfo().substring(1).lastIndexOf('/') != -1 ? req.getPathInfo().substring(1,req.getPathInfo().lastIndexOf('/')) : req.getPathInfo().substring(1) : "";
-        String [] params=req.getPathInfo().split("/");
-        String username="";
 
-        UserCredential us=(UserCredential)req.getSession(false).getAttribute("user");
-        username=us.getIdentification();
-        String ut = us.getType().toString();
-        System.out.println(ut);
-        System.out.println(param+"ciao");
+        String username="";
+        String ut="";
+        UserCredential us=null;
+        if(req.getSession(false).getAttribute("user")!=null) {
+            us = (UserCredential) req.getSession(false).getAttribute("user");
+            username = us.getIdentification();
+            ut = us.getType().toString();
+        }
+        if("".equals(ut))
+        {
+            writeError(req, resp, new ErrorMessage.NotLogin("not allowed"));
+        }
 
 
 
@@ -118,6 +122,8 @@ public class UserServlet extends AbstractDatabaseServlet {
                             writeResource(req, resp, "/jsp/changePassword.jsp", true, em);
                         }
 
+
+
                         case "register" -> writeJsp(req, resp, "/jsp/user.jsp"); // TODO change
                         default -> writeError(req, resp, new ErrorMessage.IncorrectlyFormattedPathError("page not found"));
 
@@ -132,10 +138,17 @@ public class UserServlet extends AbstractDatabaseServlet {
             String param = req.getPathInfo() != null ? req.getPathInfo().lastIndexOf('/') != -1 ? req.getPathInfo().substring(req.getPathInfo().lastIndexOf('/')+1) : "" : "";
 
             String username="";
-            UserCredential us=(UserCredential)req.getSession(false).getAttribute("user");
-            username=us.getIdentification();
-            String ut = us.getType().toString();
-            System.out.println(ut);
+            String ut="";
+            UserCredential us=null;
+            if(req.getSession(false).getAttribute("user")!=null) {
+                us = (UserCredential) req.getSession(false).getAttribute("user");
+                username = us.getIdentification();
+                ut = us.getType().toString();
+            }
+            if("".equals(ut))
+            {
+                writeError(req, resp, new ErrorMessage.NotLogin("not allowed"));
+            }
             switch (param) {
 
                 case "modify" -> {

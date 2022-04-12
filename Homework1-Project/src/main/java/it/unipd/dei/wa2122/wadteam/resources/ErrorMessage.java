@@ -79,5 +79,9 @@ public abstract sealed class ErrorMessage extends Message  {
             super("password not changed", "240", errorDetails, HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         }
     }
-
+    public static final class NotLogin extends ErrorMessage {
+        public NotLogin(String errorDetails) {
+            super("to see this page you have to login", "260", errorDetails, HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+        }
+    }
 }
