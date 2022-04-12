@@ -27,26 +27,29 @@
         <a href="<c:url value="/ticket/list"/>">View Ticket</a>
 
         <c:choose>
-            <c:when test="${user.role == 'Administrator'}">
-                <a href="<c:url value="/management/productManagement"/>">Product Management</a>
-                <a href="<c:url value="/management/userManagement"/>">User Management</a>
-                <a href="<c:url value="/management/discountManagement"/>">Discount Management</a>
-                <a href="<c:url value="/management/orderManagement"/>">Order Management</a>
-                <a href="<c:url value="/management"/>">Data Export</a>
-                <a href="<c:url value="/media/list"/>">View Media</a>
+            <c:when test="${empty user.role}">
+                <a href="<c:url value="/order/list"/>">Your orders</a>
             </c:when>
-            <c:otherwise>
-                <c:choose>
-                    <c:when test="${empty user.role}">
-                        <a href="<c:url value="/order/list"/>">Your orders</a>
-                    </c:when>
-                </c:choose>
-            </c:otherwise>
-
         </c:choose>
         &nbsp | &nbsp
         Hello, <a href="<c:url value="/user/${user.type.toString()}/info"/>">${user.identification}</a>
-
+        <c:choose>
+            <c:when test="${not empty user.role}">
+            <select  name="management" id="management" onchange="location = this.value;" autofocus>
+                <option value="label">-- infos --</option>
+                <option value="<c:url value="/management/productManagement"/>">Product Management</option>
+                <option value="<c:url value="/management/discountManagement"/>">Discount Management</option>
+                <option value="<c:url value="/management/orderManagement"/>">Order Management</option>
+                <option value="<c:url value="/media/list"/>">View Media</option>
+                <c:choose>
+                    <c:when test="${user.role == 'Administrator'}">
+                        <option value="<c:url value="/management/userManagement"/>">User Management</option>
+                        <option value="<c:url value="/management"/>">Data Export</option>
+                    </c:when>
+                </c:choose>
+            </select>
+            </c:when>
+        </c:choose>
         <a href="<c:url value="/session/logout"/>">Logout</a>
     </c:when>
     <c:otherwise>
