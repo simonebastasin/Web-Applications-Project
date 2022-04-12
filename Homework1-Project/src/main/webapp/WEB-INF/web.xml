@@ -106,7 +106,8 @@
         <res-auth>Container</res-auth>
     </resource-ref>
 
-    <!-- ADMIN -->
+    <!-- ADMIN SECTION: START -->
+
     <servlet>
         <servlet-name>ProductManagementServlet</servlet-name>
         <servlet-class>it.unipd.dei.wa2122.wadteam.servlets.ProductManagementServlet</servlet-class>
@@ -133,7 +134,6 @@
         <url-pattern>/management/userManagement/*</url-pattern>
     </servlet-mapping>
 
-
     <servlet>
         <servlet-name>DiscountManagementServlet</servlet-name>
         <servlet-class>it.unipd.dei.wa2122.wadteam.servlets.DiscountManagementServlet</servlet-class>
@@ -143,8 +143,20 @@
         <url-pattern>/management/discountManagement</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>OrderManagementServlet</servlet-name>
+        <servlet-class>it.unipd.dei.wa2122.wadteam.servlets.OrderManagementServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>OrderManagementServlet</servlet-name>
+        <url-pattern>/management/orderManagement</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>OrderManagementServlet</servlet-name>
+        <url-pattern>/management/orderManagement/*</url-pattern>
+    </servlet-mapping>
 
-    <!-- FINE ADMIN -->
+    <!-- ADMIN SECTION: END -->
 
     <filter>
         <filter-name>CustomerFilter</filter-name>
