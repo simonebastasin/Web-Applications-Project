@@ -34,7 +34,6 @@ public class HomePageServlet extends AbstractDatabaseServlet{
                 }
                 else productSearch(req,res,query);
             }
-
         }
     }
 
@@ -79,12 +78,10 @@ public class HomePageServlet extends AbstractDatabaseServlet{
             }
             lists.addAll(categories);
 
-
             writeResource(req, res, "/jsp/HomePage.jsp", false, lists.toArray(categories.toArray(Resource[]::new)));
 
         }catch (SQLException e) {
-            Message m = new Message("Couldn't execute the query", "EU01", e.getMessage());
-            writeError(req, res, m, HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
         }
     }
 
