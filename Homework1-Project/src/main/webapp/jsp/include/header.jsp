@@ -22,6 +22,12 @@
     </c:forEach>
 </select>
 
+<form method="GET" action="<c:url value="/products/search"/>">
+<input type="text" id="q" name="q" pattern="[A-Za-z0-9]{1,20}">
+<input type="submit" value="Submit">
+</form>
+
+
 <c:choose>
     <c:when test="${not empty user}">
         <a href="<c:url value="/ticket/list"/>">View Ticket</a>
