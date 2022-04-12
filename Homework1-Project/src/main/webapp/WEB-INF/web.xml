@@ -185,11 +185,7 @@
     </filter>
     <filter-mapping>
         <filter-name>AdminFilter</filter-name>
-        <url-pattern>/management</url-pattern>
-    </filter-mapping>
-    <filter-mapping>
-        <filter-name>AdminFilter</filter-name>
-        <url-pattern>/management/*</url-pattern>
+        <url-pattern>/management/userManagement</url-pattern>
     </filter-mapping>
     <filter-mapping>
         <filter-name>AdminFilter</filter-name>
@@ -209,6 +205,11 @@
         <filter-name>EmployeeFilter</filter-name>
         <url-pattern>/media/list</url-pattern>
     </filter-mapping>
+    <filter-mapping>
+        <filter-name>EmployeeFilter</filter-name>
+        <url-pattern>/management/*</url-pattern>
+    </filter-mapping>
+
 
 
 

@@ -46,6 +46,7 @@ public class EmployeeFilter extends AbstractFilter {
 
         HttpSession session = req.getSession(false);
         String loginURI = req.getContextPath() + "/session/login";
+        String unauthorizedUri = "/jsp/unauthorized.jsp";
 
         if(session == null){
             res.sendRedirect(loginURI);
@@ -58,8 +59,8 @@ public class EmployeeFilter extends AbstractFilter {
                 res.sendRedirect(loginURI);
             }
             else{
-                if(!"EMPLOYEE".equalsIgnoreCase(user.getType().toString()) || !"Administrator".equals(user.getRole())){
-                    res.sendRedirect(req.getContextPath() + "/");
+                if(!"EMPLOYEE".equalsIgnoreCase(user.getType().toString())){
+                    req.getRequestDispatcher(unauthorizedUri).forward(req, res);
                 }
                 else{
                     res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
