@@ -15,6 +15,7 @@
 <body>
 <c:import url="/jsp/include/header.jsp"/>
 <form method="post" action="<c:url value="/user/modify"/>">
+
     <ul>
         <li>Name: <input type="text" name="name" value="${customer.name}" required></li>
         <li>Surname: <input type="text" name="surname" value="${customer.surname}" required></li>

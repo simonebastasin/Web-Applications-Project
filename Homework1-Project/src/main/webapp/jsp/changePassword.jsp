@@ -12,7 +12,7 @@
     <ul>
         <li>Old Password: <input type="password" name="oldPassword" required></li>
         <li>newPassword: <input type="password" name="newPassword" required></li>
-        <input type="hidden" value="${customer.username}" name="username">
+
         <input type="submit" value="submit">
 
     </ul>
