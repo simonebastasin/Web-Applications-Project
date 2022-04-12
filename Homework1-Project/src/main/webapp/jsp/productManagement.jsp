@@ -28,7 +28,6 @@
         <th>Price</th>
         <th>Quantity</th>
         <th>Evidence</th>
-        <th>Details</th>
     </tr>
 
 
@@ -40,7 +39,7 @@
             <td>${prod.sale}</td>
             <td>${prod.quantity}</td>
             <td>${prod.evidence}</td>
-            <td><button type="button">i</button></td>
+            <td><button type="button">Modifica</button></td>
         </tr>
 
     </c:forEach>

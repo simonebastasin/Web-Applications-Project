@@ -111,7 +111,7 @@ public class ProductManagementServlet extends AbstractDatabaseServlet{
         double sale = Double.parseDouble(req.getParameter("sale"));
         int quantity = Integer.parseInt(req.getParameter("quantity"));
         ProductCategory category = new ProductCategory(req.getParameter("category"),req.getParameter("category"));
-        boolean evidence = req.getParameter("evidence") == "yes"? true : false;;
+        boolean evidence = req.getParameter("evidence").equals("yes");
         //private final List<Integer> pictures;   // todo
 
         Product temp = new Product(alias,name,brand,description,quantity,purchase,sale,category,evidence,null);
