@@ -26,7 +26,6 @@
 
         </li>
 
-        <input type="hidden" value="${customer.username}" name="username">
         <input type="submit" value="submit">
 
     </ul>

@@ -148,8 +148,8 @@ public class UserServlet extends AbstractDatabaseServlet {
                 case "modify" -> {
                     switch (ut) {
                         case "CUSTOMER" -> {
-                            System.out.println("ciao");
-                            Customer cu = new Customer(null, req.getParameter("name"), req.getParameter("surname"), req.getParameter("fiscalCode"), req.getParameter("address"), req.getParameter("email"), req.getParameter("phoneNumber"), req.getParameter("username"), "ciao");
+
+                            Customer cu = new Customer(null, req.getParameter("name"), req.getParameter("surname"), req.getParameter("fiscalCode"), req.getParameter("address"), req.getParameter("email"), req.getParameter("phoneNumber"), username, "ciao");
                             try {
 
                                 cu = new UpdateCustomerDatabase(getDataSource().getConnection(), cu).updateCustomer();
@@ -222,7 +222,7 @@ public class UserServlet extends AbstractDatabaseServlet {
                         }
                     }
                 }
-              }
             }
         }
+    }
 
