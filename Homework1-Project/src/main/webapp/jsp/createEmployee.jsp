@@ -26,9 +26,11 @@
     <input type="text" id="surname" name="surname"><br>
     <label for="role">Role:</label><br>
     <select id="role" name="role">
-        <option value="role1">role 1</option>
-        <option value="role2">role 2</option>
-        <option value="role3">role 3</option>
+        <c:forEach var="role" items="${roleList}">
+            <option value="${role.name}">
+                    ${role.name}
+            </option>
+        </c:forEach>
     </select><br>
     <label for="password">Password:</label><br>
     <input type="text" id="password" name="password"><br>

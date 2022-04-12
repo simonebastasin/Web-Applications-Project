@@ -4,6 +4,7 @@ import it.unipd.dei.wa2122.wadteam.dao.employee.CreateEmployeeDatabase;
 import it.unipd.dei.wa2122.wadteam.dao.employee.DeleteEmployeeDatabase;
 import it.unipd.dei.wa2122.wadteam.dao.employee.GetEmployeeDatabase;
 import it.unipd.dei.wa2122.wadteam.dao.employee.ListEmployeeDatabase;
+import it.unipd.dei.wa2122.wadteam.dao.role.ListRoleDatabase;
 import it.unipd.dei.wa2122.wadteam.resources.*;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -66,14 +67,14 @@ public class UserManagementServlet extends AbstractDatabaseServlet {
      * @throws ServletException
      */
     private void getCreateEmployee(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
-        /* List<Role> roles = null;
+        List<Role> roles = null;
         try {
             roles = new ListRoleDatabase(getDataSource().getConnection()).getRole();
             writeResource(req, res, "/jsp/createEmployee.jsp", false, roles.toArray(Resource[]::new));
         } catch (SQLException e) {
             Message m = new Message("Couldn't execute the query", "EU01", e.getMessage());
             writeError(req, res, m, HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-        }*/
+        }
         writeJsp(req, res,"/jsp/createEmployee.jsp");
     }
 
@@ -89,8 +90,8 @@ public class UserManagementServlet extends AbstractDatabaseServlet {
         String username = req.getParameter("username");
         String name = req.getParameter("name");
         String surname = req.getParameter("surname");
-        Role role = new Role("Administrator", "Admin of the software who has all authorization and authentication.");
-        // String role = req.getParameter("role"); // FK
+        Role role = new Role(req.getParameter("role"));
+        //Role role = new Role("Administrator", "Admin of the software who has all authorization and authentication.");
         String password = req.getParameter("password");
 
         Employee temp = new Employee(username,name,surname,role,password);
