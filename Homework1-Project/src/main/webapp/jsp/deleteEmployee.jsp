@@ -37,7 +37,6 @@ Employee you are deleting:<br><br>
 Sure to delete?<br><br>
 
 <form method="POST" action="">
-    <input type ="hidden" name = "employeeToDelete" value = ${employee.username}>
     <input type ="submit" value = "Yes">
 </form>
 <a href="<c:url value="/management/userManagement"/>">

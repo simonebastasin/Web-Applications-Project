@@ -42,8 +42,7 @@
         <a href="<c:url value="/management/userManagement"/>">Edit</a>
       </td>
       <td>
-        <form method="GET" action="<c:url value="/management/userManagement/deleteEmployee"/>">
-          <input type ="hidden" name = "employeeToDelete" value = ${employee.username}>
+        <form method="GET" action="<c:url value="/management/userManagement/deleteEmployee/${employee.username}"/>">
           <input type ="submit" value = "Delete">
         </form>
       </td>
