@@ -25,6 +25,9 @@ public class LoginServlet extends AbstractDatabaseServlet {
                 req.getSession().invalidate();
                 resp.sendRedirect(req.getContextPath() + "/");
             }
+            case "register" -> {
+                writeJsp(req,resp,"/jsp/register.jsp");
+            }
         }
     }
 
