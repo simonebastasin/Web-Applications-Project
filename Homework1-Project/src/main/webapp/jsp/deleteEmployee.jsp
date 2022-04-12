@@ -10,7 +10,7 @@
 
 <html>
 <head>
-    <title>Electromechanics shop</title>
+    <title>Delete Employee</title>
 </head>
 
 <body>

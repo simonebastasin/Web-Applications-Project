@@ -15,7 +15,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class UserManagementServlet extends AbstractDatabaseServlet {
 
     @Override
@@ -44,6 +43,13 @@ public class UserManagementServlet extends AbstractDatabaseServlet {
         }
     }
 
+    /**
+     * show the list of all the employees in the database
+     * @param req
+     * @param res
+     * @throws ServletException
+     * @throws IOException
+     */
     private void getEmployeeList(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         List<Employee> employeeList = null;
         try{
@@ -79,7 +85,7 @@ public class UserManagementServlet extends AbstractDatabaseServlet {
     }
 
     /**
-     * add a new employee in the database
+     * add a new employee to the database
      * @param req
      * @param res
      * @param param
@@ -143,4 +149,3 @@ public class UserManagementServlet extends AbstractDatabaseServlet {
         }
     }
 }
-

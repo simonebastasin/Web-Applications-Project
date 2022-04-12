@@ -10,12 +10,12 @@
 
 <html>
 <head>
-    <title>User List</title>
+    <title>Employee Management</title>
 </head>
 
 <body>
 <c:import url="/jsp/include/header.jsp"/>
-<h1>User List</h1>
+<h1>Employee List</h1>
 
 <div>
     <a href="<c:url value="/management/userManagement/createEmployee"/>">
