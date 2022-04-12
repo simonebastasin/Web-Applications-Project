@@ -20,7 +20,7 @@ public class UserServlet extends AbstractDatabaseServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
        //todo controlli sui parametri
-        String param = req.getPathInfo() != null ? req.getPathInfo().lastIndexOf('/') != -1 ? req.getPathInfo().substring(req.getPathInfo().lastIndexOf('/')+1) : "" : "";
+        String path = req.getPathInfo() != null ? req.getPathInfo().lastIndexOf('/') != -1 ? req.getPathInfo().substring(req.getPathInfo().lastIndexOf('/')+1) : "" : "";
 
         String username="";
         String ut="";
@@ -37,7 +37,7 @@ public class UserServlet extends AbstractDatabaseServlet {
 
 
 
-        switch (param) {
+        switch (path) {
             case "info" -> {
 
                 switch (ut) {
@@ -121,12 +121,6 @@ public class UserServlet extends AbstractDatabaseServlet {
                             }
                             writeResource(req, resp, "/jsp/changePassword.jsp", true, em);
                         }
-
-
-
-                        case "register" -> writeJsp(req, resp, "/jsp/user.jsp"); // TODO change
-                        default -> writeError(req, resp, new ErrorMessage.IncorrectlyFormattedPathError("page not found"));
-
                     }
                 }
             }
@@ -135,7 +129,7 @@ public class UserServlet extends AbstractDatabaseServlet {
         @Override
         protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-            String param = req.getPathInfo() != null ? req.getPathInfo().lastIndexOf('/') != -1 ? req.getPathInfo().substring(req.getPathInfo().lastIndexOf('/')+1) : "" : "";
+            String path = req.getPathInfo() != null ? req.getPathInfo().lastIndexOf('/') != -1 ? req.getPathInfo().substring(req.getPathInfo().lastIndexOf('/')+1) : "" : "";
 
             String username="";
             String ut="";
@@ -149,7 +143,7 @@ public class UserServlet extends AbstractDatabaseServlet {
             {
                 writeError(req, resp, new ErrorMessage.NotLogin("not allowed"));
             }
-            switch (param) {
+            switch (path) {
 
                 case "modify" -> {
                     switch (ut) {
@@ -227,15 +221,8 @@ public class UserServlet extends AbstractDatabaseServlet {
                             writeResource(req, resp, "/jsp/user.jsp", true, em);
                         }
                     }
-
                 }
-
-                case "register" -> writeJsp(req, resp, "/jsp/user.jsp"); // TODO change
-                default -> {writeError(req, resp, new ErrorMessage.IncorrectlyFormattedPathError("page not found"));
-
-                }
-
+              }
             }
         }
 
-}
