@@ -9,25 +9,25 @@
 <body>
 
     <c:import url="/jsp/include/header.jsp"/>
-    <h1>Add product</h1>
+    <h1>Edit product</h1>
 
     <form method="POST" action="">
         <label for="alias">Alias:</label><br>
-        <input type="text" id="alias" name="alias"/><br>
+        <input type="text" id="alias" name="alias" value="${product.alias}"/><br>
         <label for="name">Name:</label><br>
-        <input type="text" id="name" name="name"/><br>
+        <input type="text" id="name" name="name" value="${product.name}"/><br>
         <label for="brand">Brand:</label><br>
-        <input type="text" id="brand" name="brand"/><br>
+        <input type="text" id="brand" name="brand" value="${product.brand}"/><br>
         <label for="description">Description:</label><br>
-        <input type="text" id="description" name="description"/><br>
+        <input type="text" id="description" name="description" value="${product.description}"/><br>
         <label for="purchase">Purchase price:</label><br>
-        €<input type="number" min="0.01" step="0.01" max="2500" value="25.67" id="purchase" name="purchase"/><br>
+        €<input type="number" min="0.01" step="0.01" max="2500" id="purchase" name="purchase" value="${product.purchase}"/><br>
         <label for="sale">Sale price:</label><br>
-        €<input type="number" min="0.01" step="0.01" max="2500" value="25.67" id="sale" name="sale"/><br>
+        €<input type="number" min="0.01" step="0.01" max="2500" id="sale" name="sale" value="${product.sale}"/><br>
         <label for="quantity">Quantity:</label><br>
-        <input type="number" min="1" step="1" value="1" id="quantity" name="quantity"/><br>
+        <input type="number" min="1" step="1" id="quantity" name="quantity" value="${product.quantity}"/><br>
         <label for="category">Category:</label><br>
-        <select  name="category" id="category">
+        <select  name="category" id="category" selected="${product.category}">
             <c:forEach var="cat" items="${categories}">
                 <option value="${cat.name}">
                         ${cat.name}

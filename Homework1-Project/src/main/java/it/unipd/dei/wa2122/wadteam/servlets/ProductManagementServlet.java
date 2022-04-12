@@ -1,6 +1,8 @@
 package it.unipd.dei.wa2122.wadteam.servlets;
 
+import it.unipd.dei.wa2122.wadteam.dao.employee.GetEmployeeDatabase;
 import it.unipd.dei.wa2122.wadteam.dao.product.CreateProductDatabase;
+import it.unipd.dei.wa2122.wadteam.dao.product.GetProductDatabase;
 import it.unipd.dei.wa2122.wadteam.dao.product.ListProductDatabase;
 import it.unipd.dei.wa2122.wadteam.dao.productCategory.CreateProductCategoryDatabase;
 import it.unipd.dei.wa2122.wadteam.dao.productCategory.ListProductCategoryDatabase;
@@ -26,6 +28,7 @@ public class ProductManagementServlet extends AbstractDatabaseServlet{
             case "" -> getListProduct(req, res);
             case "createProduct" -> getCreateProduct(req, res);
             case "createCategory" -> getCreateCategory(req,res);
+            case "editProduct" -> getEditProduct(req,res,param);
             default -> writeError(req, res, new ErrorMessage.IncorrectlyFormattedPathError("page not found"));
         }
 
@@ -94,6 +97,26 @@ public class ProductManagementServlet extends AbstractDatabaseServlet{
     private void getCreateCategory(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
         writeJsp(req,res,"/jsp/createCategory.jsp");
     }
+
+    /**
+     * get the jsp page editProduct.jsp for modifying an existing product
+     * @param req
+     * @param res
+     * @throws IOException
+     * @throws ServletException
+     */
+    private void getEditProduct(HttpServletRequest req, HttpServletResponse res, String param) throws IOException, ServletException {
+        Product product = null;
+        try {
+            product = new GetProductDatabase(getDataSource().getConnection(), param).getProduct();
+            writeResource(req, res, "/jsp/editProduct.jsp", true, product);
+        } catch (SQLException e) {
+            writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
+        }
+
+    }
+
+
 
     /**
      * creates a new product in the database

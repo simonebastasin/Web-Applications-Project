@@ -24,6 +24,7 @@
 <table>
     <tr>
         <th>Name</th>
+        <th>Alias</th>
         <th>Brand</th>
         <th>Price</th>
         <th>Quantity</th>
@@ -34,12 +35,13 @@
     <c:forEach var="prod" items="${productList}">
 
         <tr>
-            <td><a href="<c:url value="/productDetail/${prod.alias}"/>">${prod.name}</a></td>
+            <td><a href="<c:url value="/products/details/${prod.alias}"/>">${prod.name}</a></td>
+            <td>${prod.alias}</td>
             <td>${prod.brand}</td>
             <td>${prod.sale}</td>
             <td>${prod.quantity}</td>
             <td>${prod.evidence}</td>
-            <td><button type="button">Modifica</button></td>
+            <td><a href="<c:url value="/management/productManagement/editProduct/${prod.alias}"/>">Edit</a></td>
         </tr>
 
     </c:forEach>
