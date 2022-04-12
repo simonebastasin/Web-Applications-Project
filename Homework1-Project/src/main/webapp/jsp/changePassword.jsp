@@ -8,7 +8,7 @@
 </head>
 <body>
 <c:import url="/jsp/include/header.jsp"/>
-<form method="post" action="<c:url value="/user/${user.type.toString()}/password/"/>">
+<form method="post" action="<c:url value="/user/password"/>">
     <ul>
         <li>Old Password: <input type="password" name="oldPassword" required></li>
         <li>newPassword: <input type="password" name="newPassword" required></li>

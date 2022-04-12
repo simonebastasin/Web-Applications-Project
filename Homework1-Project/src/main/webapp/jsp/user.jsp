@@ -20,8 +20,8 @@
         <li>Name: ${employee.name}</li>
         <li>Surname: ${employee.surname} </li>
         <li>Role: ${employee.role.toString()}
-        <a href="<c:url value="/user/EMPLOYEE/modify"/>">Edit</a>
-        <a href="<c:url value="/user/EMPLOYEE/password"/>">change Password</a>
+        <a href="<c:url value="/user/modify"/>">Edit</a>
+        <a href="<c:url value="/user/password"/>">change Password</a>
     </ul>
 <%@ include file="/html/include/footer.html"%>
 </body>

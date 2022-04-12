@@ -38,7 +38,7 @@
             </c:when>
         </c:choose>
         &nbsp | &nbsp
-        Hello, <a href="<c:url value="/user/${user.type.toString()}/info"/>">${user.identification}</a>
+        Hello, <a href="<c:url value="/user/info"/>">${user.identification}</a>
         <c:choose>
             <c:when test="${not empty user.role}">
             <select  name="management" id="management" onchange="location = this.value;" autofocus>

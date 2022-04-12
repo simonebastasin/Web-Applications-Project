@@ -23,8 +23,8 @@
         <li>FiscalCode: ${customer.fiscalCode}</li>
     </ul>
 
-    <a href="<c:url value="/user/CUSTOMER/modify"/>">Edit</a>
-    <a href="<c:url value="/user/CUSTOMER/password"/>">change Password</a>
+    <a href="<c:url value="/user/modify"/>">Edit</a>
+    <a href="<c:url value="/user/password"/>">change Password</a>
     <%@ include file="/html/include/footer.html"%>
 </body>
 </html>
