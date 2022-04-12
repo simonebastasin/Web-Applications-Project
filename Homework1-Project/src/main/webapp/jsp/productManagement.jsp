@@ -46,6 +46,6 @@
     </c:forEach>
 
 </table>
-
+<%@ include file="/html/include/footer.html"%>
 </body>
 </html>

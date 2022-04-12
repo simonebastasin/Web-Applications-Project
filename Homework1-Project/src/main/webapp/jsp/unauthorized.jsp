@@ -17,5 +17,6 @@
 
 <h1>Unauthorized access</h1>
 <p>You do not have the permits to access the requested page.</p>
+<%@ include file="/html/include/footer.html"%>
 </body>
 </html>

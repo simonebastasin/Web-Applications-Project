@@ -31,6 +31,6 @@
     </ul>
 
 </form>
-
+<%@ include file="/html/include/footer.html"%>
 </body>
 </html>

@@ -44,5 +44,6 @@
             <input type ="submit" value = "Cancel your order">
         </c:when>
     </c:choose>
+    <%@ include file="/html/include/footer.html"%>
 </body>
 </html>

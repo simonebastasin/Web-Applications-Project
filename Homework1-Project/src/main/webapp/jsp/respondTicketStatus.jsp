@@ -24,5 +24,6 @@
     <br>
     <input type ="submit" value = "respond ticket status">
 </form>
+<%@ include file="/html/include/footer.html"%>
 </body>
 </html>

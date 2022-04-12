@@ -23,5 +23,6 @@
         <a href="<c:url value="/user/EMPLOYEE/modify"/>">Edit</a>
         <a href="<c:url value="/user/EMPLOYEE/password"/>">change Password</a>
     </ul>
+<%@ include file="/html/include/footer.html"%>
 </body>
 </html>

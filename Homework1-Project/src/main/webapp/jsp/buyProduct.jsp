@@ -35,6 +35,6 @@ Total price: <c:out value="${product.sale*pageContext.request.getParameter('quan
 <form action="<c:url value="/buy/confirmed/${product.alias}/${pageContext.request.getParameter('quantity')}"/>">
     <input type ="submit" value = "Confirm payment">
 </form>
-
+<%@ include file="/html/include/footer.html"%>
 </body>
 </html>

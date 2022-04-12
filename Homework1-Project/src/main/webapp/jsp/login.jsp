@@ -24,6 +24,6 @@
     <br>
     <input type ="submit" value = "login">
 </form>
-
+<%@ include file="/html/include/footer.html"%>
 </body>
 </html>

@@ -36,6 +36,6 @@
     <input type="text" id="password" name="password"><br>
     <input type="submit" value="Submit">
 </form>
-
+<%@ include file="/html/include/footer.html"%>
 </body>
 </html>

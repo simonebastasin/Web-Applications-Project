@@ -45,6 +45,6 @@ Sure to delete?<br><br>
 <a href="<c:url value="/management/orderManagement"/>">
     <input type ="submit" value = "No"/>
 </a>
-
+<%@ include file="/html/include/footer.html"%>
 </body>
 </html>

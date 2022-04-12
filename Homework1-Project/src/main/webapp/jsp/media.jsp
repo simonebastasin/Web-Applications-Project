@@ -21,5 +21,6 @@
         <li><img src="<c:url value="/media/view"/>/${item.id}" alt="${item.filename}" width="1024px"/></li>
     </c:forEach>
     </ul>
+    <%@ include file="/html/include/footer.html"%>
 </body>
 </html>

@@ -47,6 +47,6 @@
         </div>
         <input type="submit" value="Submit">
     </form>
-
+    <%@ include file="/html/include/footer.html"%>
 </body>
 </html>

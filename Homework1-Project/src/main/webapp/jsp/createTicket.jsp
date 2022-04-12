@@ -23,5 +23,6 @@
   <br>
   <input type ="submit" value = "create ticket">
 </form>
+<%@ include file="/html/include/footer.html"%>
 </body>
 </html>

@@ -36,6 +36,6 @@
             Total price: ${order.getTotalPrice()}€ <br>
         </c:forEach>
     </ul>
-
+    <%@ include file="/html/include/footer.html"%>
 </body>
 </html>

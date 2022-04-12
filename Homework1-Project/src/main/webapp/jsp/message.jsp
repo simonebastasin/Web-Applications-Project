@@ -17,5 +17,6 @@
 <hr />
 <br />
     <c:import url="/jsp/include/message.jsp"/>
+    <%@ include file="/html/include/footer.html"%>
 </body>
 </html>

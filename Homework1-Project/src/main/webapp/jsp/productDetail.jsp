@@ -34,6 +34,6 @@
 
         <input type ="submit" value = "Buy now">
     </form>
-
+    <%@ include file="/html/include/footer.html"%>
 </body>
 </html>
