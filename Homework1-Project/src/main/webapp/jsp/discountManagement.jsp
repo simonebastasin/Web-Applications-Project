@@ -19,6 +19,10 @@
 <c:import url="/jsp/include/header.jsp"/>
 <h1>Discount List</h1>
 
+<div>
+    <a href="<c:url value="/management/discountManagement/createDiscount"/>">Add new discount</a>
+</div><br>
+
 <table>
 
     <tr>

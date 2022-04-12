@@ -50,19 +50,17 @@ public class CreateDiscountDatabase {
     public Discount createDiscount() throws SQLException {
 
         PreparedStatement preparedStatement = null;
-        PreparedStatement innerPreparedStatement = null;
 
         ResultSet resultSet = null;
-        ResultSet innerrResultSet = null;
-
         // the create discount
         Discount resultDiscount = null;
 
+
         try {
             preparedStatement = con.prepareStatement(STATEMENT);
-            preparedStatement.setInt(1, resultDiscount.getPercentage());
-            preparedStatement.setObject(2, resultDiscount.getStartDate().getLocalDateTime());
-            preparedStatement.setObject(3, resultDiscount.getEndDate().getLocalDateTime());
+            preparedStatement.setInt(1, discount.getPercentage());
+            preparedStatement.setObject(2, discount.getStartDate().getLocalDateTime());
+            preparedStatement.setObject(3, discount.getEndDate().getLocalDateTime());
 
             resultSet = preparedStatement.executeQuery();
 
