@@ -13,61 +13,73 @@ import java.time.LocalDateTime;
 
 public class DeleteOnlineInvoiceDatabase {
 
-    /** SQL statement to be executed */
+    /**
+     * SQL statement to be executed
+     */
     private static final String STATEMENT = "DELETE FROM Online_Invoice WHERE id = ? RETURNING id, id_order, transaction_id, payment_type, oi_date, total_price";
 
-    /** connection to database */
+    /**
+     * connection to the database
+     */
     private final Connection con;
 
-    /** id of the OnlineInvoice instance to delete */
+    /**
+     * id of the OnlineInvoice instance to delete
+     */
     private final int id;
 
-    /** class constructor */
+    /**
+     * creates an object to delete the online invoice desired from the database
+     *
+     * @param con   connection to the database
+     * @param id    id of the OnlineInvoice instance to delete
+     */
     public DeleteOnlineInvoiceDatabase(final Connection con, final int id) {
         this.con = con;
         this.id = id;
     }
 
     /**
-     * delete from database the Online_Invoice instance with matching id
+     * delete from the database the Online_Invoice instance with matching id
      *
-     * @return the {@code OnlineInvoice} object removed from database
+     * @return the {@code OnlineInvoice} object removed from the database
      * @throws SQLException if any SQL error using "DELETE FROM" occurs
      */
     public OnlineInvoice deleteOnlineInvoice() throws SQLException {
 
-        PreparedStatement pstmt = null;
-        ResultSet rs = null;
-        OnlineInvoice roi = null; // OnlineInvoice instance managed
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        OnlineInvoice resultOnlineInvoice = null;
 
         try {
-            pstmt = con.prepareStatement(STATEMENT);
-            pstmt.setInt(1, id);
+            preparedStatement = con.prepareStatement(STATEMENT);
+            preparedStatement.setInt(1, id);
 
-            rs = pstmt.executeQuery();
+            resultSet = preparedStatement.executeQuery();
 
-            if (rs.next()) {
-                int idOrder = rs.getInt("id_order");
-                roi = new OnlineInvoice(
-                        rs.getInt("id"),
+            if (resultSet.next()) {
+                int idOrder = resultSet.getInt("id_order");
+                resultOnlineInvoice = new OnlineInvoice(
+                        resultSet.getInt("id"),
                         new GetOnlineOrderByIdDatabase(con, idOrder).getOnlineOrderId(),
-                        rs.getString("transaction_id"),
-                        PaymentMethodOnlineEnum.valueOf(rs.getString("payment_type")),
-                        new DateTime(rs.getObject("oi_date", LocalDateTime.class)),
-                        rs.getDouble("total_price")
+                        resultSet.getString("transaction_id"),
+                        PaymentMethodOnlineEnum.valueOf(resultSet.getString("payment_type")),
+                        new DateTime(resultSet.getObject("oi_date", LocalDateTime.class)),
+                        resultSet.getDouble("total_price")
                 );
             }
-        } finally {
-            if (rs != null) {
-                rs.close();
-            }
 
-            if (pstmt != null) {
-                pstmt.close();
+        } finally {
+
+            if (resultSet != null) {
+                resultSet.close();
+            }
+            if (preparedStatement != null) {
+                preparedStatement.close();
             }
         }
         con.close();
 
-        return roi;
+        return resultOnlineInvoice;
     }
 }

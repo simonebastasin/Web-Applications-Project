@@ -13,67 +13,77 @@ import java.time.LocalDateTime;
 
 public class CreateOnlineInvoiceDatabase {
 
-    /** SQL statement to be executed */
+    /**
+     * SQL statement to be executed
+     */
     private static final String STATEMENT = "INSERT INTO Online_Invoice (id_order, transaction_id, payment_type, oi_date, total_price) VALUES (?, ?, ?::paymentmethodonline, ?, ?) RETURNING id, id_order, transaction_id, payment_type, oi_date, total_price";
 
-    /** connection to database */
+    /**
+     * connection to the database
+     */
     private final Connection con;
 
-    /** object OnlineInvoice instance to create */
+    /**
+     * object OnlineInvoice instance to create
+     */
     private final OnlineInvoice onlineInvoice;
 
-    /** class constructor */
+    /**
+     * creates an object to create the online invoice desired in the database
+     *
+     * @param con   connection to the database
+     * @param onlineInvoice object OnlineInvoice instance to create
+     */
     public CreateOnlineInvoiceDatabase(final Connection con, final OnlineInvoice onlineInvoice) {
         this.con = con;
         this.onlineInvoice = onlineInvoice;
     }
 
     /**
-     * add to database the Online_Invoice instance specified
+     * add to the database the Online_Invoice instance specified
      *
-     * @return the {@code OnlineInvoice} object added to database
+     * @return the {@code OnlineInvoice} object added to the database
      * @throws SQLException if any SQL error using "INSERT INTO" occurs
      */
     public OnlineInvoice createOnlineInvoice() throws SQLException {
 
-        PreparedStatement pstmt = null;
-        ResultSet rs = null;
-        OnlineInvoice roi = null; // OnlineInvoice instance managed
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        OnlineInvoice resultOnlineInvoice = null;
 
         try {
-            pstmt = con.prepareStatement(STATEMENT);
-            pstmt.setInt(1, onlineInvoice.getIdOrder().getIdOrder());
-            pstmt.setString(2, onlineInvoice.getTransactionId());
-            pstmt.setString(3, onlineInvoice.getPaymentType().toString()); // get user-friendly enum text
-            pstmt.setObject(4, onlineInvoice.getOiDate().getLocalDateTime());
-            pstmt.setDouble(5, onlineInvoice.getTotalPrice());
+            preparedStatement = con.prepareStatement(STATEMENT);
+            preparedStatement.setInt(1, onlineInvoice.getIdOrder().getIdOrder());
+            preparedStatement.setString(2, onlineInvoice.getTransactionId());
+            preparedStatement.setString(3, onlineInvoice.getPaymentType().toString()); // get user-friendly enum text
+            preparedStatement.setObject(4, onlineInvoice.getOiDate().getLocalDateTime());
+            preparedStatement.setDouble(5, onlineInvoice.getTotalPrice());
 
-            rs = pstmt.executeQuery();
+            resultSet = preparedStatement.executeQuery();
 
-            if (rs.next()) {
-                int idOrder = rs.getInt("id_order");
-                roi = new OnlineInvoice(
-                        rs.getInt("id"),
+            if (resultSet.next()) {
+                int idOrder = resultSet.getInt("id_order");
+                resultOnlineInvoice = new OnlineInvoice(
+                        resultSet.getInt("id"),
                         new GetOnlineOrderByIdDatabase(con, idOrder).getOnlineOrderId(), //rs.getInt("id_order"),
-                        rs.getString("transaction_id"),
-                        PaymentMethodOnlineEnum.valueOf(rs.getString("payment_type")),
-                        new DateTime(rs.getObject("oi_date", LocalDateTime.class)),
-                        rs.getDouble("total_price")
+                        resultSet.getString("transaction_id"),
+                        PaymentMethodOnlineEnum.valueOf(resultSet.getString("payment_type")),
+                        new DateTime(resultSet.getObject("oi_date", LocalDateTime.class)),
+                        resultSet.getDouble("total_price")
                 );
-
             }
 
         } finally {
-            if (rs != null) {
-                rs.close();
-            }
 
-            if (pstmt != null) {
-                pstmt.close();
+            if (resultSet != null) {
+                resultSet.close();
+            }
+            if (preparedStatement != null) {
+                preparedStatement.close();
             }
         }
         con.close();
 
-        return roi;
+        return resultOnlineInvoice;
     }
 }
