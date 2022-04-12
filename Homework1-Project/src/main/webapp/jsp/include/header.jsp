@@ -12,18 +12,21 @@
 <%--@elvariable id="categories" type="java.util.List<ProductCategory>"--%>
 
 <a href="<c:url value="/"/>">Home</a>
+<c:choose>
+    <c:when test="${not empty categories}">
+        <select  name="category" id="category" onchange="location = this.value;">
+            <option value="" disabled selected>-- categories --</option>
+            <c:forEach var="cat" items="${categories}">
+                <option value="<c:url value="/products/category"/>/${cat.name}">
+                ${cat.name}
+                </option>
+            </c:forEach>
+        </select>
+    </c:when>
+</c:choose>
 
-<select  name="category" id="category" onchange="location = this.value;" autofocus>
-    <option value="">-- categories --</option>
-    <c:forEach var="cat" items="${categories}">
-        <option value="<c:url value="/products/category"/>/${cat.name}">
-        ${cat.name}
-        </option>
-    </c:forEach>
-</select>
-
-<form method="GET" action="<c:url value="/products/search"/>">
-<input type="text" id="q" name="q" pattern="[A-Za-z0-9]{1,20}">
+<form method="GET" action="<c:url value="/products/search"/>" style="display: inline;">
+<input type="text" id="q" name="q" pattern="[A-Za-z0-9]{1,20}" placeholder="Write here for search">
 <input type="submit" value="Submit">
 </form>
 
@@ -41,8 +44,8 @@
         Hello, <a href="<c:url value="/user/info"/>">${user.identification}</a>
         <c:choose>
             <c:when test="${not empty user.role}">
-            <select  name="management" id="management" onchange="location = this.value;" autofocus>
-                <option value="">-- infos --</option>
+            <select  name="management" id="management" onchange="location = this.value;">
+                <option value="" disabled selected>-- infos --</option>
                 <option value="<c:url value="/management/productManagement"/>">Product Management</option>
                 <option value="<c:url value="/management/discountManagement"/>">Discount Management</option>
                 <option value="<c:url value="/management/orderManagement"/>">Order Management</option>

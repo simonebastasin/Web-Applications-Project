@@ -2,6 +2,7 @@ package it.unipd.dei.wa2122.wadteam.servlets;
 
 import it.unipd.dei.wa2122.wadteam.dao.productCategory.ListProductCategoryDatabase;
 import it.unipd.dei.wa2122.wadteam.resources.ErrorMessage;
+import it.unipd.dei.wa2122.wadteam.resources.GenericError;
 import it.unipd.dei.wa2122.wadteam.resources.Message;
 import it.unipd.dei.wa2122.wadteam.resources.Resource;
 import jakarta.servlet.ServletException;
@@ -28,21 +29,13 @@ public abstract class AbstractServlet extends HttpServlet {
     private static final String JSON_UTF_8_MEDIA_TYPE = "application/json; charset=utf-8";
 
 
-    /**
-     * Please migrate to writeError with ErrorMessage and not with Message
-     */
-    @Deprecated
-    public void writeError(HttpServletRequest request, HttpServletResponse response, Message message, int errorCode) throws IOException, ServletException {
-        response.setStatus(errorCode);
+    public void writeError(HttpServletRequest request, HttpServletResponse response, GenericError error) throws IOException, ServletException {
+        response.setStatus(error.getHttpErrorCode());
         if(request.getHeader("Accept").contains("application/json")) {
-            writeJSON(response, message.toJSON());
+            writeJSON(response, error.toJSON());
         } else {
-            request.setAttribute("errorCode", errorCode);
-            request.setAttribute("message", message);
-            request.getRequestDispatcher("/jsp/error.jsp").forward(request, response);
-
+            request.getRequestDispatcher(error.getJsp()).forward(request, response);
         }
-
     }
 
     /**

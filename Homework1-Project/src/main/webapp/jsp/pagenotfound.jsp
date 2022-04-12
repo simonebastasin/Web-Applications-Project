@@ -10,13 +10,13 @@
 
 <html>
 <head>
-    <title>Error 401 - Unauthorized access</title>
+    <title>Error 404 - Not found</title>
 </head>
 <body>
 <c:import url="/jsp/include/header.jsp"/>
 
-<h1>Error 401 - Unauthorized access</h1>
-<p>You do not have the permits to access the requested page. Are you hacking us?</p>
+<h1>Error 404 - Not found</h1>
+<p>This page dosen't exists. Are you hacking us?</p>
 <%@ include file="/html/include/footer.html"%>
 </body>
 </html>

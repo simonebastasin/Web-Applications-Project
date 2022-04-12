@@ -8,6 +8,17 @@
         <welcome-file>/</welcome-file>
     </welcome-file-list>
 
+
+    <servlet>
+        <servlet-name>HomePageServlet</servlet-name>
+        <servlet-class>it.unipd.dei.wa2122.wadteam.servlets.HomePageServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>HomePageServlet</servlet-name>
+        <url-pattern></url-pattern>
+        <url-pattern>/products/*</url-pattern>
+    </servlet-mapping>
+
     <servlet>
         <servlet-name>LoggerServlet</servlet-name>
         <servlet-class>it.unipd.dei.wa2122.wadteam.servlets.LoggerServlet</servlet-class>
@@ -49,15 +60,6 @@
         <url-pattern>/media/*</url-pattern>
     </servlet-mapping>
 
-    <servlet>
-        <servlet-name>HomePageServlet</servlet-name>
-        <servlet-class>it.unipd.dei.wa2122.wadteam.servlets.HomePageServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>HomePageServlet</servlet-name>
-        <url-pattern>/</url-pattern>
-        <url-pattern>/products/*</url-pattern>
-    </servlet-mapping>
 
     <servlet>
         <servlet-name>BuyProductServlet</servlet-name>
@@ -66,9 +68,6 @@
     <servlet-mapping>
         <servlet-name>BuyProductServlet</servlet-name>
         <url-pattern>/buy</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>BuyProductServlet</servlet-name>
         <url-pattern>/buy/*</url-pattern>
     </servlet-mapping>
 
@@ -79,9 +78,6 @@
     <servlet-mapping>
         <servlet-name>TicketServlet</servlet-name>
         <url-pattern>/ticket</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>TicketServlet</servlet-name>
         <url-pattern>/ticket/*</url-pattern>
     </servlet-mapping>
 
@@ -93,9 +89,6 @@
     <servlet-mapping>
         <servlet-name>UserServlet</servlet-name>
         <url-pattern>/user/*</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>UserServlet</servlet-name>
         <url-pattern>/user</url-pattern>
     </servlet-mapping>
 
@@ -115,9 +108,6 @@
     <servlet-mapping>
         <servlet-name>ProductManagementServlet</servlet-name>
         <url-pattern>/management/productManagement</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ProductManagementServlet</servlet-name>
         <url-pattern>/management/productManagement/*</url-pattern>
     </servlet-mapping>
 
@@ -128,9 +118,6 @@
     <servlet-mapping>
         <servlet-name>UserManagementServlet</servlet-name>
         <url-pattern>/management/userManagement</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>UserManagementServlet</servlet-name>
         <url-pattern>/management/userManagement/*</url-pattern>
     </servlet-mapping>
 
@@ -141,6 +128,7 @@
     <servlet-mapping>
         <servlet-name>DiscountManagementServlet</servlet-name>
         <url-pattern>/management/discountManagement</url-pattern>
+        <url-pattern>/management/discountManagement/*</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -150,9 +138,6 @@
     <servlet-mapping>
         <servlet-name>OrderManagementServlet</servlet-name>
         <url-pattern>/management/orderManagement</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>OrderManagementServlet</servlet-name>
         <url-pattern>/management/orderManagement/*</url-pattern>
     </servlet-mapping>
 
@@ -165,18 +150,8 @@
     <filter-mapping>
         <filter-name>CustomerFilter</filter-name>
         <url-pattern>/order/*</url-pattern>
-    </filter-mapping>
-    <filter-mapping>
-        <filter-name>CustomerFilter</filter-name>
         <url-pattern>/buy</url-pattern>
-    </filter-mapping>
-    <filter-mapping>
-        <filter-name>CustomerFilter</filter-name>
         <url-pattern>/buy/*</url-pattern>
-    </filter-mapping>
-    <filter-mapping>
-        <filter-name>CustomerFilter</filter-name>
-        <url-pattern>/user/CUSTOMER/*</url-pattern>
     </filter-mapping>
 
     <filter>
@@ -186,9 +161,6 @@
     <filter-mapping>
         <filter-name>AdminFilter</filter-name>
         <url-pattern>/management/userManagement</url-pattern>
-    </filter-mapping>
-    <filter-mapping>
-        <filter-name>AdminFilter</filter-name>
         <url-pattern>/media/list</url-pattern>
     </filter-mapping>
 
@@ -200,18 +172,12 @@
     <filter-mapping>
         <filter-name>EmployeeFilter</filter-name>
         <url-pattern>/media/upload</url-pattern>
-    </filter-mapping>
-    <filter-mapping>
-        <filter-name>EmployeeFilter</filter-name>
         <url-pattern>/media/list</url-pattern>
-    </filter-mapping>
-    <filter-mapping>
-        <filter-name>EmployeeFilter</filter-name>
         <url-pattern>/management/*</url-pattern>
     </filter-mapping>
 
-
-
-
-
+    <error-page>
+        <error-code>404</error-code>
+        <location>/jsp/pagenotfound.jsp</location>
+    </error-page>
 </web-app>

@@ -20,26 +20,25 @@ public class UserManagementServlet extends AbstractDatabaseServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         String path = req.getPathInfo() != null ? req.getPathInfo().substring(1).lastIndexOf('/') != -1 ? req.getPathInfo().substring(1,req.getPathInfo().lastIndexOf('/')) : req.getPathInfo().substring(1) : "";
-        String param = req.getParameter("employeeToDelete");
+        String param = req.getPathInfo() != null ? req.getPathInfo().substring(1).lastIndexOf('/') != -1 ? req.getPathInfo().substring(req.getPathInfo().lastIndexOf('/')+1) : "" : "";
 
         switch (path) {
             case "" -> getEmployeeList(req,res);
             case "createEmployee" -> getCreateEmployee(req, res);
             case "deleteEmployee" -> getDeleteEmployee(req, res, param);
-            default -> writeError(req, res, new ErrorMessage.IncorrectlyFormattedPathError("page not found"));
+            default -> writeError(req, res, GenericError.PAGE_NOT_FOUND);
         }
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse res) throws  ServletException, IOException {
-        String[] paths = req.getPathInfo() != null ? req.getPathInfo().substring(1).split("/") : null;
-        String path = paths[0];
-        String param = req.getParameter("employeeToDelete");
+        String path = req.getPathInfo() != null ? req.getPathInfo().substring(1).lastIndexOf('/') != -1 ? req.getPathInfo().substring(1,req.getPathInfo().lastIndexOf('/')) : req.getPathInfo().substring(1) : "";
+        String param = req.getPathInfo() != null ? req.getPathInfo().substring(1).lastIndexOf('/') != -1 ? req.getPathInfo().substring(req.getPathInfo().lastIndexOf('/')+1) : "" : "";
 
         switch (path) {
             case "createEmployee" -> postCreateEmployee(req, res,"param");
             case "deleteEmployee" -> postDeleteEmployee(req, res, param);
-            default -> writeError(req, res, new ErrorMessage.IncorrectlyFormattedPathError("page not found"));
+            default -> writeError(req, res, GenericError.PAGE_NOT_FOUND);
         }
     }
 
@@ -60,8 +59,8 @@ public class UserManagementServlet extends AbstractDatabaseServlet {
             }
             writeResource(req, res, "/jsp/userManagement.jsp", false, lists.toArray(Resource[]::new));
         } catch (SQLException e) {
-            Message m = new Message("Couldn't execute the query", "EU01", e.getMessage());
-            writeError(req, res, m, HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
+
         }
     }
 
@@ -78,8 +77,8 @@ public class UserManagementServlet extends AbstractDatabaseServlet {
             roles = new ListRoleDatabase(getDataSource().getConnection()).getRole();
             writeResource(req, res, "/jsp/createEmployee.jsp", false, roles.toArray(Resource[]::new));
         } catch (SQLException e) {
-            Message m = new Message("Couldn't execute the query", "EU01", e.getMessage());
-            writeError(req, res, m, HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
+
         }
         writeJsp(req, res,"/jsp/createEmployee.jsp");
     }
@@ -106,7 +105,7 @@ public class UserManagementServlet extends AbstractDatabaseServlet {
             //writeResource(req, res, "/jsp/employeeDetail.jsp", true , product); //view result
             res.sendRedirect(req.getContextPath() + "/management/userManagement");
         } catch (SQLException e) {
-            writeError(req, res, new Message("Error trying to create the employee", "ET02", e.getMessage()), HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
         }
     }
 
@@ -126,8 +125,8 @@ public class UserManagementServlet extends AbstractDatabaseServlet {
             list.add(employee);
             writeResource(req, res, "/jsp/deleteEmployee.jsp", false, list.toArray(Resource[]::new));
         } catch (SQLException e) {
-            Message m = new Message("Couldn't execute the query", "EU01", e.getMessage());
-            writeError(req, res, m, HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
+
         }
     }
 

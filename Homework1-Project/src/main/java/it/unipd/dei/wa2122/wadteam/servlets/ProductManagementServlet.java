@@ -32,8 +32,7 @@ public class ProductManagementServlet extends AbstractDatabaseServlet{
     }
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse res) throws  ServletException, IOException {
-        String[] paths = req.getPathInfo() != null ? req.getPathInfo().substring(1).split("/") : null;
-        String path = paths[0];
+        String path = req.getPathInfo() != null ? req.getPathInfo().substring(1).lastIndexOf('/') != -1 ? req.getPathInfo().substring(1,req.getPathInfo().lastIndexOf('/')) : req.getPathInfo().substring(1) : "";
         String param = req.getPathInfo() != null ? req.getPathInfo().substring(1).lastIndexOf('/') != -1 ? req.getPathInfo().substring(req.getPathInfo().lastIndexOf('/')+1) : "" : "";
 
         switch (path) {
@@ -59,8 +58,8 @@ public class ProductManagementServlet extends AbstractDatabaseServlet{
             writeResource(req, res, "/jsp/productManagement.jsp", false, lists.toArray(Resource[]::new));
 
         }catch (SQLException e) {
-            Message m = new Message("Couldn't execute the query", "EU01", e.getMessage());
-            writeError(req, res, m, HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
+
         }
 
     }
@@ -80,8 +79,8 @@ public class ProductManagementServlet extends AbstractDatabaseServlet{
             writeResource(req, res, "/jsp/createProduct.jsp", false, categories.toArray(Resource[]::new));
 
         }catch (SQLException e) {
-            Message m = new Message("Couldn't execute the query", "EU01", e.getMessage());
-            writeError(req, res, m, HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
+
         }
     }
 
@@ -122,7 +121,7 @@ public class ProductManagementServlet extends AbstractDatabaseServlet{
             //writeResource(req, res, "/jsp/productDetail.jsp", true , product); //view result
             res.sendRedirect(req.getContextPath() + "/management/productManagement");
         } catch (SQLException e) {
-            writeError(req, res, new Message("Error create ticket", "ET02", e.getMessage()), HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
         }
 
     }
@@ -145,7 +144,7 @@ public class ProductManagementServlet extends AbstractDatabaseServlet{
             ProductCategory resultProductCategory = new CreateProductCategoryDatabase(getDataSource().getConnection(), temp).createProductCategory();
             res.sendRedirect(req.getContextPath() + "/management/productManagement/createProduct");
         } catch (SQLException e) {
-            writeError(req, res, new Message("Error create ticket", "ET02", e.getMessage()), HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
         }
 
     }

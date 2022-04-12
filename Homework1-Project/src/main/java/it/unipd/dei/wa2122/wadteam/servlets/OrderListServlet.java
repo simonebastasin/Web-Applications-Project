@@ -23,10 +23,10 @@ public class OrderListServlet extends AbstractDatabaseServlet{
         String path = req.getPathInfo() != null ? req.getPathInfo().substring(1).lastIndexOf('/') != -1 ? req.getPathInfo().substring(1,req.getPathInfo().lastIndexOf('/')) : req.getPathInfo().substring(1) : "";
         String param = req.getPathInfo() != null ? req.getPathInfo().substring(1).lastIndexOf('/') != -1 ? req.getPathInfo().substring(req.getPathInfo().lastIndexOf('/')+1) : "" : "";
 
-
         switch (path){
             case "detail" -> orderDetailOp(req,res, param);
             case "list" -> orderListOp(req,res);
+            default -> writeError(req, res, GenericError.PAGE_NOT_FOUND);
         }
     }
 
@@ -81,7 +81,6 @@ public class OrderListServlet extends AbstractDatabaseServlet{
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse res) throws  ServletException, IOException {
-
-
+        doGet(req, res);
     }
 }

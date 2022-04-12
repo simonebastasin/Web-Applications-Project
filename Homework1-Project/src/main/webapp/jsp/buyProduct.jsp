@@ -23,16 +23,17 @@
 Quantity selected: <c:out value="${pageContext.request.getParameter('quantity')}"/> <br>
 Total price: <c:out value="${product.sale*pageContext.request.getParameter('quantity')}€"/> <br>
 
-<label for="payment">Select a payment method: </label>
-<select name="payment" id="payment" autofocus required>
-    <option value="Credit card">Credit card</option>
-    <option value="Apple pay">Apple pay</option>
-    <option value="PayPal">PayPal</option>
-    <option value="Postepay">Postepay</option>
-    <option value="Nexi">Nexi</option>
-</select>
+<form method="post" action="<c:url value="/buy/confirmed/${product.alias}"/>">
+    <label for="payment">Select a payment method: </label>
+    <select name="payment" id="payment" autofocus required>
+        <option value="Credit card">Credit card</option>
+        <option value="Apple pay">Apple pay</option>
+        <option value="PayPal">PayPal</option>
+        <option value="Postepay">Postepay</option>
+        <option value="Nexi">Nexi</option>
+    </select>
 
-<form method="post" action="<c:url value="/buy/confirmed/${product.alias}/${pageContext.request.getParameter('quantity')}"/>">
+    <input type="hidden" value="${pageContext.request.getParameter('quantity')}" name="quantity">
     <input type ="submit" value = "Confirm payment">
 </form>
 <%@ include file="/html/include/footer.html"%>

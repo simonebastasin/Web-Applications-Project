@@ -11,65 +11,53 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-import javax.swing.*;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.List;
 
 public class UserServlet extends AbstractDatabaseServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-       //todo controlli sui parametri
-        String path = req.getPathInfo() != null ? req.getPathInfo().lastIndexOf('/') != -1 ? req.getPathInfo().substring(req.getPathInfo().lastIndexOf('/')+1) : "" : "";
+        String path = req.getPathInfo() != null ? req.getPathInfo().lastIndexOf('/') != -1 ? req.getPathInfo().substring(req.getPathInfo().lastIndexOf('/') + 1) : "" : "";
+        String param = req.getPathInfo() != null ? req.getPathInfo().substring(1).lastIndexOf('/') != -1 ? req.getPathInfo().substring(req.getPathInfo().lastIndexOf('/') + 1) : "" : "";
 
-        String username="";
-        String ut="";
-        UserCredential us=null;
-        if(req.getSession(false).getAttribute("user")!=null) {
-            us = (UserCredential) req.getSession(false).getAttribute("user");
-            username = us.getIdentification();
-            ut = us.getType().toString();
-        }
-        if("".equals(ut))
-        {
-            writeError(req, resp, new ErrorMessage.NotLogin("not allowed"));
-        }
+        if (req.getSession(false) != null && req.getSession(false).getAttribute("user") != null) {
+            UserCredential us = (UserCredential) req.getSession(false).getAttribute("user");
+            String username = us.getIdentification();
+            UserCredential.TypeUser ut = us.getType();
 
-
-
-        switch (path) {
-            case "info" -> {
-
-                switch (ut) {
-                    case "EMPLOYEE" -> {
-                        Employee em = null;
-                        try {
-                            em = new GetEmployeeDatabase(getDataSource().getConnection(), username).getEmployee();
+            switch (path) {
+                case "info" -> {
+                    switch (ut) {
+                        case EMPLOYEE -> {
+                            Employee em = null;
+                            try {
+                                em = new GetEmployeeDatabase(getDataSource().getConnection(), username).getEmployee();
 
 
-                        } catch (SQLException e) {
-                            e.printStackTrace();
+                            } catch (SQLException e) {
+                                e.printStackTrace();
+                            }
+
+                            writeResource(req, resp, "/jsp/user.jsp", true, em);
                         }
+                        case CUSTOMER -> {
+                            Customer cu = null;
+                            try {
 
-                        writeResource(req, resp, "/jsp/user.jsp", true, em);
-                    }
-                    case "CUSTOMER" -> {
-                        Customer cu = null;
-                        try {
+                                cu = new GetIdCustomerDatabase(getDataSource().getConnection(), username).getIdCustomer();
 
-                            cu = new GetIdCustomerDatabase(getDataSource().getConnection(), username).getIdCustomer();
+                            } catch (SQLException e) {
+                                e.printStackTrace();
+                            }
+                            writeResource(req, resp, "/jsp/CustomerDetail.jsp", true, cu);
 
-                        } catch (SQLException e) {
-                            e.printStackTrace();
                         }
-                        writeResource(req, resp, "/jsp/CustomerDetail.jsp", true, cu);
-
+                        default -> writeError(req, resp, new ErrorMessage.NotLogin("not allowed"));
                     }
                 }
-            }
                 case "modify" -> {
                     switch (ut) {
-                        case "CUSTOMER" -> {
+                        case CUSTOMER -> {
                             Customer cu = null;
                             try {
 
@@ -80,7 +68,7 @@ public class UserServlet extends AbstractDatabaseServlet {
                             }
                             writeResource(req, resp, "/jsp/customerEdit.jsp", true, cu);
                         }
-                        case "EMPLOYEE" -> {
+                        case EMPLOYEE -> {
                             Employee em = null;
                             try {
 
@@ -94,11 +82,12 @@ public class UserServlet extends AbstractDatabaseServlet {
                             writeResource(req, resp, "/jsp/userEdit.jsp", true, em);
 
                         }
+                        default -> writeError(req, resp, GenericError.UNAUTHORIZED);
                     }
                 }
                 case "password" -> {
                     switch (ut) {
-                        case "CUSTOMER" -> {
+                        case CUSTOMER -> {
                             Customer cu = null;
                             try {
 
@@ -109,7 +98,7 @@ public class UserServlet extends AbstractDatabaseServlet {
                             }
                             writeResource(req, resp, "/jsp/changePassword.jsp", true, cu);
                         }
-                        case "EMPLOYEE" -> {
+                        case EMPLOYEE -> {
                             Employee em = null;
                             try {
 
@@ -121,33 +110,30 @@ public class UserServlet extends AbstractDatabaseServlet {
                             }
                             writeResource(req, resp, "/jsp/changePassword.jsp", true, em);
                         }
+                        default -> writeError(req, resp, GenericError.UNAUTHORIZED);
                     }
                 }
+                default -> writeError(req, resp, GenericError.PAGE_NOT_FOUND);
             }
+        } else {
+            writeError(req, resp, GenericError.UNAUTHORIZED);
         }
+    }
 
-        @Override
-        protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String path = req.getPathInfo() != null ? req.getPathInfo().lastIndexOf('/') != -1 ? req.getPathInfo().substring(req.getPathInfo().lastIndexOf('/') + 1) : "" : "";
+        String param = req.getPathInfo() != null ? req.getPathInfo().substring(1).lastIndexOf('/') != -1 ? req.getPathInfo().substring(req.getPathInfo().lastIndexOf('/') + 1) : "" : "";
 
-            String path = req.getPathInfo() != null ? req.getPathInfo().lastIndexOf('/') != -1 ? req.getPathInfo().substring(req.getPathInfo().lastIndexOf('/')+1) : "" : "";
+        if (req.getSession(false) != null && req.getSession(false).getAttribute("user") != null) {
+            UserCredential us = (UserCredential) req.getSession(false).getAttribute("user");
+            String username = us.getIdentification();
+            UserCredential.TypeUser ut = us.getType();
 
-            String username="";
-            String ut="";
-            UserCredential us=null;
-            if(req.getSession(false).getAttribute("user")!=null) {
-                us = (UserCredential) req.getSession(false).getAttribute("user");
-                username = us.getIdentification();
-                ut = us.getType().toString();
-            }
-            if("".equals(ut))
-            {
-                writeError(req, resp, new ErrorMessage.NotLogin("not allowed"));
-            }
             switch (path) {
-
                 case "modify" -> {
                     switch (ut) {
-                        case "CUSTOMER" -> {
+                        case CUSTOMER -> {
 
                             Customer cu = new Customer(null, req.getParameter("name"), req.getParameter("surname"), req.getParameter("fiscalCode"), req.getParameter("address"), req.getParameter("email"), req.getParameter("phoneNumber"), username, "ciao");
                             try {
@@ -163,7 +149,7 @@ public class UserServlet extends AbstractDatabaseServlet {
                                 System.out.print("noooo");
                             writeResource(req, resp, "/jsp/CustomerDetail.jsp", true, cu);
                         }
-                        case "EMPLOYEE" -> {
+                        case EMPLOYEE -> {
                             Employee emNew = null;
                             try {
                                 Employee emOld = new GetEmployeeDatabase(getDataSource().getConnection(), username).getEmployee();
@@ -180,13 +166,12 @@ public class UserServlet extends AbstractDatabaseServlet {
                             }
 
                         }
+                        default -> writeError(req, resp, GenericError.UNAUTHORIZED);
                     }
                 }
-
-
                 case "password" -> {
                     switch (ut) {
-                        case "CUSTOMER" -> {
+                        case CUSTOMER -> {
                             Customer cu = null;
                             try {
                                 System.out.println("imin");
@@ -203,7 +188,7 @@ public class UserServlet extends AbstractDatabaseServlet {
                             }
                             writeResource(req, resp, "/jsp/CustomerDetail.jsp", true, cu);
                         }
-                        case "EMPLOYEE"-> {
+                        case EMPLOYEE -> {
                             Employee em = null;
                             try {
 
@@ -220,9 +205,14 @@ public class UserServlet extends AbstractDatabaseServlet {
                             }
                             writeResource(req, resp, "/jsp/user.jsp", true, em);
                         }
+                        default -> writeError(req, resp, GenericError.UNAUTHORIZED);
                     }
                 }
+                default -> writeError(req, resp, GenericError.PAGE_NOT_FOUND);
             }
+        } else {
+            writeError(req, resp, GenericError.UNAUTHORIZED);
         }
     }
+}
 

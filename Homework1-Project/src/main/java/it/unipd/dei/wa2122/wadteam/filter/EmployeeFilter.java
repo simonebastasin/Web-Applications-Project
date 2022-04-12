@@ -60,6 +60,7 @@ public class EmployeeFilter extends AbstractFilter {
             }
             else{
                 if(!"EMPLOYEE".equalsIgnoreCase(user.getType().toString())){
+                    res.setStatus(401);
                     req.getRequestDispatcher(unauthorizedUri).forward(req, res);
                 }
                 else{

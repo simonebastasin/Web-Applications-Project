@@ -19,9 +19,9 @@ public class HomePageServlet extends AbstractDatabaseServlet{
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-
         String path = req.getPathInfo() != null ? req.getPathInfo().substring(1).lastIndexOf('/') != -1 ? req.getPathInfo().substring(1,req.getPathInfo().lastIndexOf('/')) : req.getPathInfo().substring(1) : "";
         String param = req.getPathInfo() != null ? req.getPathInfo().substring(1).lastIndexOf('/') != -1 ? req.getPathInfo().substring(req.getPathInfo().lastIndexOf('/')+1) : "" : "";
+
         String query = req.getParameter("q");
 
         switch (path){
@@ -34,6 +34,7 @@ public class HomePageServlet extends AbstractDatabaseServlet{
                 }
                 else productSearch(req,res,query);
             }
+            default -> writeError(req, res, GenericError.PAGE_NOT_FOUND);
         }
     }
 
@@ -42,9 +43,6 @@ public class HomePageServlet extends AbstractDatabaseServlet{
         List<Product> products = null;
 
         try {
-            //category = new GetProductCategoryDatabase((getDataSource().getConnection()), param).getProductCategory();
-            //products = new GetListProductByCategoryDatabase(getDataSource().getConnection(), param).getListProductByCategory();
-
             products = new SearchProductListDatabase(getDataSource().getConnection(), param).searchProductList();
 
             List<Resource> list = new ArrayList<>();

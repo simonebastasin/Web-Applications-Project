@@ -10,13 +10,13 @@
 
 <html>
 <head>
-    <title>Error 401 - Unauthorized access</title>
+    <title>Error 500 - Server error</title>
 </head>
 <body>
 <c:import url="/jsp/include/header.jsp"/>
 
-<h1>Error 401 - Unauthorized access</h1>
-<p>You do not have the permits to access the requested page. Are you hacking us?</p>
+<h1>Error 500 - Server error</h1>
+<p>There is a problem processing the request. Are you hacking us?</p>
 <%@ include file="/html/include/footer.html"%>
 </body>
 </html>

@@ -27,6 +27,12 @@ public abstract sealed class ErrorMessage extends Message  {
         }
     }
 
+    public static final class IncorrectlyFormattedDataError extends ErrorMessage {
+        public IncorrectlyFormattedDataError(String errorDetails) {
+            super("Incorrectly Formatted Data Error", "21", errorDetails, HttpServletResponse.SC_BAD_REQUEST);
+        }
+    }
+
     public static final class EmptyMediaError extends ErrorMessage {
         public EmptyMediaError(String errorDetails) {
             super("Empty Media", "30", errorDetails, HttpServletResponse.SC_NO_CONTENT);
@@ -64,7 +70,7 @@ public abstract sealed class ErrorMessage extends Message  {
     }
 
     public static final class InternalError extends ErrorMessage {
-        private InternalError(String errorDetails) {
+        public InternalError(String errorDetails) {
             super("Internal error", "200", errorDetails, HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         }
     }

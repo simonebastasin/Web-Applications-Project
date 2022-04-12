@@ -4,10 +4,7 @@ import it.unipd.dei.wa2122.wadteam.dao.media.CreateMediaDatabase;
 import it.unipd.dei.wa2122.wadteam.dao.media.GetMediaByteFromMediaDatabase;
 import it.unipd.dei.wa2122.wadteam.dao.media.GetMediaDatabase;
 import it.unipd.dei.wa2122.wadteam.dao.media.ListMediaDatabase;
-import it.unipd.dei.wa2122.wadteam.resources.ErrorMessage;
-import it.unipd.dei.wa2122.wadteam.resources.Media;
-import it.unipd.dei.wa2122.wadteam.resources.Message;
-import it.unipd.dei.wa2122.wadteam.resources.Resource;
+import it.unipd.dei.wa2122.wadteam.resources.*;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 
@@ -30,7 +27,6 @@ public class MediaServlet extends AbstractDatabaseServlet {
         String path = request.getPathInfo() != null ? request.getPathInfo().substring(1).lastIndexOf('/') != -1 ? request.getPathInfo().substring(1,request.getPathInfo().lastIndexOf('/')) : request.getPathInfo().substring(1) : "";
         String param = request.getPathInfo() != null ? request.getPathInfo().substring(1).lastIndexOf('/') != -1 ? request.getPathInfo().substring(request.getPathInfo().lastIndexOf('/')+1) : "" : "";
 
-
         switch (path) {
             case "list" -> {
                 try {
@@ -41,9 +37,7 @@ public class MediaServlet extends AbstractDatabaseServlet {
                     writeError(request, response, new ErrorMessage.SqlInternalError(e.getMessage()));
                 }
             }
-            case "upload" -> {
-                writeJsp(request, response, "/jsp/upload.jsp");
-            }
+            case "upload" -> writeJsp(request, response, "/jsp/upload.jsp");
             case "thumb" -> {
                 if (param.chars().allMatch(Character::isDigit) && !param.equals("")) {
                     writeImage(request, response, param, true);
@@ -54,7 +48,7 @@ public class MediaServlet extends AbstractDatabaseServlet {
                     writeImage(request, response, param, false);
                 }
             }
-            default -> writeError(request, response, new ErrorMessage.IncorrectlyFormattedPathError("page not found"));
+            default -> writeError(request, response, GenericError.PAGE_NOT_FOUND);
         }
     }
 

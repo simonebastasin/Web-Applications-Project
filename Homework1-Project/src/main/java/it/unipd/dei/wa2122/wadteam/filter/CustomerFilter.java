@@ -60,6 +60,7 @@ public class CustomerFilter extends AbstractFilter {
             }
             else{
                 if(user.getRole() != null){
+                    res.setStatus(401);
                     req.getRequestDispatcher(unauthorizedUri).forward(req, res);
                 }
                 else{

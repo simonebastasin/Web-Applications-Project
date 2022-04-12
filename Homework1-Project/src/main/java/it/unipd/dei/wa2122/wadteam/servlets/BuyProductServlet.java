@@ -17,31 +17,37 @@ import java.util.List;
 public class BuyProductServlet extends AbstractDatabaseServlet {
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-        this.doPost(req, res);
+    protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+        this.doGet(req, res);
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse res) throws  ServletException, IOException {
-
-        String[] paths = req.getPathInfo() != null ? req.getPathInfo().substring(1).split("/") : null;
-
-        assert paths != null;
-        String path = paths[0];
+    protected void doGet(HttpServletRequest req, HttpServletResponse res) throws  ServletException, IOException {
+        String path = req.getPathInfo() != null ? req.getPathInfo().substring(1).lastIndexOf('/') != -1 ? req.getPathInfo().substring(1,req.getPathInfo().lastIndexOf('/')) : req.getPathInfo().substring(1) : "";
+        String param = req.getPathInfo() != null ? req.getPathInfo().substring(1).lastIndexOf('/') != -1 ? req.getPathInfo().substring(req.getPathInfo().lastIndexOf('/')+1) : "" : "";
 
         int selected;
 
         switch (path){
             case "product" -> {
-                String param = paths[1];
-                selected = Integer.parseInt(req.getParameter("quantity"));
-                buyProduct(req,res, param, selected);
+                String stringSelected = req.getParameter("quantity");
+                if(stringSelected.chars().allMatch( Character::isDigit ) && !stringSelected.equals("")) {
+                    selected = Integer.parseInt(stringSelected);
+                    buyProduct(req,res, param, selected);
+                } else {
+                    writeError(req, res, new ErrorMessage.IncorrectlyFormattedDataError("quantity"));
+                }
             }
             case "confirmed" -> {
-                String param = paths[1];
-                selected = Integer.parseInt(paths[2]);
-                confirmPayment(req,res, param, selected);
+                String stringSelected = req.getParameter("quantity");
+                if(stringSelected.chars().allMatch( Character::isDigit ) && !stringSelected.equals("")) {
+                    selected = Integer.parseInt(stringSelected);
+                    confirmPayment(req,res, param, selected);
+                } else {
+                    writeError(req, res, new ErrorMessage.IncorrectlyFormattedDataError("quantity"));
+                }
             }
+            default -> writeError(req, res, GenericError.PAGE_NOT_FOUND);
         }
     }
 
@@ -70,14 +76,12 @@ public class BuyProductServlet extends AbstractDatabaseServlet {
         OnlineOrder newOrder = null;
 
         try {
-            //product = new UpdateProductQuantityByAliasDatabase((getDataSource().getConnection()), param, selected).updateProductQuantity();
-
             product = new GetProductDatabase((getDataSource().getConnection()), param).getProduct();
 
             if(selected > product.getQuantity() || selected < 1){
-                writeError(req, res, new ErrorMessage.SqlInternalError("Product quantity out of bounds"));
+                writeError(req, res, new ErrorMessage.InternalError("Product quantity out of bounds"));
             }
-            else {
+            else if(req.getSession(false) != null && req.getSession(false).getAttribute("user") != null){
                 HttpSession session = req.getSession(false);
                 int customerId = ((UserCredential) session.getAttribute("user")).getId();
 
@@ -117,6 +121,8 @@ public class BuyProductServlet extends AbstractDatabaseServlet {
                 resources.add(processedOrder);
 
                 writeResource(req, res, "/jsp/confirmedPayment.jsp", false, resources.toArray(Resource[]::new));
+            } else {
+                writeError(req, res, GenericError.UNAUTHORIZED);
             }
         } catch (SQLException e) {
             writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));

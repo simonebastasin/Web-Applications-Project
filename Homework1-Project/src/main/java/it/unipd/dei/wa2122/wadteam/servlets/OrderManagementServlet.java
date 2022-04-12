@@ -18,30 +18,25 @@ public class OrderManagementServlet extends AbstractDatabaseServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         String path = req.getPathInfo() != null ? req.getPathInfo().substring(1).lastIndexOf('/') != -1 ? req.getPathInfo().substring(1,req.getPathInfo().lastIndexOf('/')) : req.getPathInfo().substring(1) : "";
-        int param = 0;
-        if (req.getParameter("orderToDelete") != null) {
-            param = Integer.parseInt(req.getParameter("orderToDelete"));
-        }
+        String param = req.getPathInfo() != null ? req.getPathInfo().substring(1).lastIndexOf('/') != -1 ? req.getPathInfo().substring(req.getPathInfo().lastIndexOf('/')+1) : "" : "";
+
         switch (path) {
             case "" -> getOrderList(req,res);
             case "editOrder" -> getEditOrder(req, res);
             case "deleteOrder" -> getDeleteOrder(req, res, param);
-            default -> writeError(req, res, new ErrorMessage.IncorrectlyFormattedPathError("page not found"));
+            default -> writeError(req, res, GenericError.PAGE_NOT_FOUND);
         }
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse res) throws  ServletException, IOException {
-        String[] paths = req.getPathInfo() != null ? req.getPathInfo().substring(1).split("/") : null;
-        String path = paths[0];
-        int param = 0;
-        if (req.getParameter("orderToDelete") != null) {
-            param = Integer.parseInt(req.getParameter("orderToDelete"));
-        }
+        String path = req.getPathInfo() != null ? req.getPathInfo().substring(1).lastIndexOf('/') != -1 ? req.getPathInfo().substring(1,req.getPathInfo().lastIndexOf('/')) : req.getPathInfo().substring(1) : "";
+        String param = req.getPathInfo() != null ? req.getPathInfo().substring(1).lastIndexOf('/') != -1 ? req.getPathInfo().substring(req.getPathInfo().lastIndexOf('/')+1) : "" : "";
+
         switch (path) {
-            case "editOrder" -> postEditOrder(req, res,0);
+            case "editOrder" -> postEditOrder(req, res, param);
             case "deleteOrder" -> postDeleteOrder(req, res, param);
-            default -> writeError(req, res, new ErrorMessage.IncorrectlyFormattedPathError("page not found"));
+            default -> writeError(req, res, GenericError.PAGE_NOT_FOUND);
         }
     }
 
@@ -63,8 +58,8 @@ public class OrderManagementServlet extends AbstractDatabaseServlet {
             }
             writeResource(req, res, "/jsp/orderManagement.jsp", false, lists.toArray(Resource[]::new));
         } catch (SQLException e) {
-            Message m = new Message("Couldn't execute the query", "EU01", e.getMessage());
-            writeError(req, res, m, HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
+
         }
     }
 
@@ -88,7 +83,7 @@ public class OrderManagementServlet extends AbstractDatabaseServlet {
      * @throws IOException
      * @throws ServletException
      */
-    private void postEditOrder(HttpServletRequest req, HttpServletResponse res, int param) throws IOException, ServletException {
+    private void postEditOrder(HttpServletRequest req, HttpServletResponse res, String param) throws IOException, ServletException {
         // TODO
         writeJsp(req, res,"/jsp/orderManagement.jsp");
     }
@@ -101,16 +96,20 @@ public class OrderManagementServlet extends AbstractDatabaseServlet {
      * @throws ServletException
      * @throws IOException
      */
-    private void getDeleteOrder(HttpServletRequest req, HttpServletResponse res, int param) throws ServletException, IOException {
+    private void getDeleteOrder(HttpServletRequest req, HttpServletResponse res, String param) throws ServletException, IOException {
         OnlineOrder order = null;
-        try {
-            order = new GetOnlineOrderByIdDatabase(getDataSource().getConnection(), param).getOnlineOrderId();
-            List<OnlineOrder> list = new ArrayList<>();
-            list.add(order);
-            writeResource(req, res, "/jsp/deleteOrder.jsp", false, list.toArray(Resource[]::new));
-        } catch (SQLException e) {
-            Message m = new Message("Couldn't execute the query", "EU01", e.getMessage());
-            writeError(req, res, m, HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+        if(param.chars().allMatch( Character::isDigit ) && !param.equals("")) {
+            int intParam = Integer.parseInt(param);
+            try {
+                order = new GetOnlineOrderByIdDatabase(getDataSource().getConnection(), intParam).getOnlineOrderId();
+                List<OnlineOrder> list = new ArrayList<>();
+                list.add(order);
+                writeResource(req, res, "/jsp/deleteOrder.jsp", false, list.toArray(Resource[]::new));
+            } catch (SQLException e) {
+                writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
+            }
+        } else {
+            writeError(req, res, new ErrorMessage.IncorrectlyFormattedPathError("path aren't a number"));
         }
     }
 
@@ -122,13 +121,17 @@ public class OrderManagementServlet extends AbstractDatabaseServlet {
      * @throws ServletException,
      * @throws IOException
      */
-    private void postDeleteOrder(HttpServletRequest req, HttpServletResponse res, int param) throws  ServletException, IOException {
-        int idOrder;
-        try {
-            idOrder = new DeleteOnlineOrderDatabase((getDataSource().getConnection()), param).deleteOnlineOrder();
-            res.sendRedirect(req.getContextPath() + "/management/orderManagement");
-        } catch (SQLException e) {
-            writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
+    private void postDeleteOrder(HttpServletRequest req, HttpServletResponse res, String param) throws  ServletException, IOException {
+        if(param.chars().allMatch( Character::isDigit ) && !param.equals("")) {
+            try {
+                int intParam = Integer.parseInt(param);
+                var idOrder = new DeleteOnlineOrderDatabase((getDataSource().getConnection()), intParam).deleteOnlineOrder();
+                res.sendRedirect(req.getContextPath() + "/management/orderManagement");
+            } catch (SQLException e) {
+                writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
+            }
+        } else {
+            writeError(req, res, new ErrorMessage.IncorrectlyFormattedPathError("path aren't a number"));
         }
     }
 }
