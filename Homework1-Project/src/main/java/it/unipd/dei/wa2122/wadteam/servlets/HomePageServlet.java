@@ -3,6 +3,7 @@ package it.unipd.dei.wa2122.wadteam.servlets;
 import it.unipd.dei.wa2122.wadteam.dao.product.GetListProductByCategoryDatabase;
 import it.unipd.dei.wa2122.wadteam.dao.product.GetProductDatabase;
 import it.unipd.dei.wa2122.wadteam.dao.product.ListProductDatabase;
+import it.unipd.dei.wa2122.wadteam.dao.product.SearchProductListDatabase;
 import it.unipd.dei.wa2122.wadteam.dao.productCategory.GetProductCategoryDatabase;
 import it.unipd.dei.wa2122.wadteam.dao.productCategory.ListProductCategoryDatabase;
 import it.unipd.dei.wa2122.wadteam.resources.*;
@@ -26,6 +27,32 @@ public class HomePageServlet extends AbstractDatabaseServlet{
             case "" -> homePage(req,res);
             case "details" -> productDetail(req,res,param);
             case "category" -> productCategory(req,res,param);
+            case "search" -> productSearch(req,res,param);
+        }
+    }
+
+    private void productSearch(HttpServletRequest req, HttpServletResponse res, String param) throws ServletException, IOException{
+        String partialAlias = null;
+        List<Product> products = null;
+
+        try {
+            //category = new GetProductCategoryDatabase((getDataSource().getConnection()), param).getProductCategory();
+            //products = new GetListProductByCategoryDatabase(getDataSource().getConnection(), param).getListProductByCategory();
+
+            products = new SearchProductListDatabase(getDataSource().getConnection(), param).searchProductList();
+
+            List<Resource> list = new ArrayList<>();
+            //list.add(category);
+            for(var prod : products){
+                if (prod.getQuantity() > 0)
+                    list.add(prod);
+            }
+
+            writeResource(req, res, "/jsp/searchProduct.jsp", false, list.toArray(products.toArray(Resource[]::new)));
+
+        } catch (SQLException e) {
+            System.out.println("lol");
+            writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
         }
     }
 
