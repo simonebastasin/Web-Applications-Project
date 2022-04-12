@@ -14,7 +14,7 @@
 <a href="<c:url value="/"/>">Home</a>
 
 <select  name="category" id="category" onchange="location = this.value;" autofocus>
-    <option value="label">-- categories --</option>
+    <option value="">-- categories --</option>
     <c:forEach var="cat" items="${categories}">
         <option value="<c:url value="/products/category"/>/${cat.name}">
         ${cat.name}
@@ -42,7 +42,7 @@
         <c:choose>
             <c:when test="${not empty user.role}">
             <select  name="management" id="management" onchange="location = this.value;" autofocus>
-                <option value="label">-- infos --</option>
+                <option value="">-- infos --</option>
                 <option value="<c:url value="/management/productManagement"/>">Product Management</option>
                 <option value="<c:url value="/management/discountManagement"/>">Discount Management</option>
                 <option value="<c:url value="/management/orderManagement"/>">Order Management</option>

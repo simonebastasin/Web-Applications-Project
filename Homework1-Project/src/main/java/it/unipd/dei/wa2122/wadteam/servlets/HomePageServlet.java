@@ -22,17 +22,17 @@ public class HomePageServlet extends AbstractDatabaseServlet{
 
         String path = req.getPathInfo() != null ? req.getPathInfo().substring(1).lastIndexOf('/') != -1 ? req.getPathInfo().substring(1,req.getPathInfo().lastIndexOf('/')) : req.getPathInfo().substring(1) : "";
         String param = req.getPathInfo() != null ? req.getPathInfo().substring(1).lastIndexOf('/') != -1 ? req.getPathInfo().substring(req.getPathInfo().lastIndexOf('/')+1) : "" : "";
-        String param2 = req.getParameter("q");
+        String query = req.getParameter("q");
 
         switch (path){
             case "" -> homePage(req,res);
             case "details" -> productDetail(req,res,param);
             case "category" -> productCategory(req,res,param);
             case "search" -> {
-                if(param2.isBlank() || param2.isEmpty()){
+                if(query.isBlank() || query.isEmpty()){
                     homePage(req,res);
                 }
-                else productSearch(req,res,param2);
+                else productSearch(req,res,query);
             }
 
         }
