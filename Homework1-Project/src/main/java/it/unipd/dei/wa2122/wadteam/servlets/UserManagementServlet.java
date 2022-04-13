@@ -1,9 +1,6 @@
 package it.unipd.dei.wa2122.wadteam.servlets;
 
-import it.unipd.dei.wa2122.wadteam.dao.employee.CreateEmployeeDatabase;
-import it.unipd.dei.wa2122.wadteam.dao.employee.DeleteEmployeeDatabase;
-import it.unipd.dei.wa2122.wadteam.dao.employee.GetEmployeeDatabase;
-import it.unipd.dei.wa2122.wadteam.dao.employee.ListEmployeeDatabase;
+import it.unipd.dei.wa2122.wadteam.dao.employee.*;
 import it.unipd.dei.wa2122.wadteam.dao.role.ListRoleDatabase;
 import it.unipd.dei.wa2122.wadteam.resources.*;
 import jakarta.servlet.ServletException;
@@ -25,6 +22,7 @@ public class UserManagementServlet extends AbstractDatabaseServlet {
         switch (path) {
             case "" -> getEmployeeList(req,res);
             case "createEmployee" -> getCreateEmployee(req, res);
+            case "editEmployee" -> getEditEmployee(req, res, param);
             case "deleteEmployee" -> getDeleteEmployee(req, res, param);
             default -> writeError(req, res, GenericError.PAGE_NOT_FOUND);
         }
@@ -36,7 +34,8 @@ public class UserManagementServlet extends AbstractDatabaseServlet {
         String param = req.getPathInfo() != null ? req.getPathInfo().substring(1).lastIndexOf('/') != -1 ? req.getPathInfo().substring(req.getPathInfo().lastIndexOf('/')+1) : "" : "";
 
         switch (path) {
-            case "createEmployee" -> postCreateEmployee(req, res,"param");
+            case "createEmployee" -> postCreateEmployee(req, res);
+            case "editEmployee" -> postEditEmployee(req, res, param);
             case "deleteEmployee" -> postDeleteEmployee(req, res, param);
             default -> writeError(req, res, GenericError.PAGE_NOT_FOUND);
         }
@@ -50,17 +49,16 @@ public class UserManagementServlet extends AbstractDatabaseServlet {
      * @throws IOException
      */
     private void getEmployeeList(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-        List<Employee> employeeList = null;
-        try{
+        List<Employee> employeeList;
+        List<Resource> list = new ArrayList<>();
+        try {
             employeeList = new ListEmployeeDatabase(getDataSource().getConnection()).getEmployee();
-            List<Resource> lists = new ArrayList<>();
             for(var employee : employeeList){
-                lists.add(employee);
+                list.add(employee);
             }
-            writeResource(req, res, "/jsp/userManagement.jsp", false, lists.toArray(Resource[]::new));
+            writeResource(req, res, "/jsp/userManagement.jsp", false, list.toArray(Resource[]::new));
         } catch (SQLException e) {
             writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
-
         }
     }
 
@@ -72,36 +70,75 @@ public class UserManagementServlet extends AbstractDatabaseServlet {
      * @throws ServletException
      */
     private void getCreateEmployee(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
-        List<Role> roles = null;
+        List<Role> roleList;
         try {
-            roles = new ListRoleDatabase(getDataSource().getConnection()).getRole();
-            writeResource(req, res, "/jsp/createEmployee.jsp", false, roles.toArray(Resource[]::new));
+            roleList = new ListRoleDatabase(getDataSource().getConnection()).getRole();
+            writeResource(req, res, "/jsp/createEmployee.jsp", false, roleList.toArray(Resource[]::new));
         } catch (SQLException e) {
             writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
-
         }
-        writeJsp(req, res,"/jsp/createEmployee.jsp");
+        //writeJsp(req, res,"/jsp/createEmployee.jsp");
     }
 
     /**
      * add a new employee to the database
      * @param req
      * @param res
-     * @param param
      * @throws IOException
      * @throws ServletException
      */
-    private void postCreateEmployee(HttpServletRequest req, HttpServletResponse res, String param) throws IOException, ServletException {
+    private void postCreateEmployee(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
         String username = req.getParameter("username");
         String name = req.getParameter("name");
         String surname = req.getParameter("surname");
         Role role = new Role(req.getParameter("role"));
-        //Role role = new Role("Administrator", "Admin of the software who has all authorization and authentication.");
         String password = req.getParameter("password");
 
-        Employee temp = new Employee(username,name,surname,role,password);
+        Employee employee = new Employee(username, name, surname, role, password);
         try {
-            Employee employee = new CreateEmployeeDatabase(getDataSource().getConnection(), temp).createEmployee();
+            employee = new CreateEmployeeDatabase(getDataSource().getConnection(), employee).createEmployee();
+            //writeResource(req, res, "/jsp/employeeDetail.jsp", true , product); //view result
+            res.sendRedirect(req.getContextPath() + "/management/userManagement");
+        } catch (SQLException e) {
+            writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
+        }
+    }
+
+    /**
+     * get editEmployee.jsp page to edit an existing employee
+     * @param req
+     * @param res
+     * @throws IOException
+     * @throws ServletException
+     */
+    private void getEditEmployee(HttpServletRequest req, HttpServletResponse res, String param) throws IOException, ServletException {
+        Employee employee;
+        try {
+            employee = new GetEmployeeDatabase(getDataSource().getConnection(), param).getEmployee();
+            writeResource(req, res, "/jsp/editEmployee.jsp", true, employee);
+        } catch (SQLException e) {
+            writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
+        }
+    }
+
+    /**
+     * edit an existing employee to the database
+     * @param req
+     * @param res
+     * @param param
+     * @throws IOException
+     * @throws ServletException
+     */
+    private void postEditEmployee(HttpServletRequest req, HttpServletResponse res, String param) throws IOException, ServletException {
+        String username = req.getParameter("username");
+        String name = req.getParameter("name");
+        String surname = req.getParameter("surname");
+        Role role = new Role(req.getParameter("role"));
+        String password = req.getParameter("password");
+
+        Employee employee = new Employee(username, name, surname, role, password);
+        try {
+            employee = new UpdateEmployeeDatabase(getDataSource().getConnection(), employee).updateEmployee();
             //writeResource(req, res, "/jsp/employeeDetail.jsp", true , product); //view result
             res.sendRedirect(req.getContextPath() + "/management/userManagement");
         } catch (SQLException e) {
@@ -118,15 +155,12 @@ public class UserManagementServlet extends AbstractDatabaseServlet {
      * @throws IOException
      */
     private void getDeleteEmployee(HttpServletRequest req, HttpServletResponse res, String param) throws ServletException, IOException {
-        Employee employee = null;
+        Employee employee;
         try {
             employee = new GetEmployeeDatabase(getDataSource().getConnection(), param).getEmployee();
-            List<Employee> list = new ArrayList<>();
-            list.add(employee);
-            writeResource(req, res, "/jsp/deleteEmployee.jsp", false, list.toArray(Resource[]::new));
+            writeResource(req, res, "/jsp/deleteEmployee.jsp", true, employee);
         } catch (SQLException e) {
             writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
-
         }
     }
 
@@ -139,7 +173,7 @@ public class UserManagementServlet extends AbstractDatabaseServlet {
      * @throws IOException
      */
     private void postDeleteEmployee(HttpServletRequest req, HttpServletResponse res, String param) throws  ServletException, IOException {
-        Employee employee = null;
+        Employee employee;
         try {
             employee = new DeleteEmployeeDatabase((getDataSource().getConnection()), param).deleteEmployee();
             res.sendRedirect(req.getContextPath() + "/management/userManagement");
