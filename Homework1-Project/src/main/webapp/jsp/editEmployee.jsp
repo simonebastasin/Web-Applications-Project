@@ -27,9 +27,9 @@
     <input type="text" id="surname" name="surname" value="${employee.surname}"><br>
     <label for="role">Role:</label><br>
     <select id="role" name="role" selected="${employee.role}">
-        <c:forEach var="roll" items="${roleList}">
-            <option value="${roll.name}">
-                    ${roll.name}
+        <c:forEach var="role" items="${roleList}">
+            <option value="${role.name}">
+                    ${role.name}
             </option>
         </c:forEach>
     </select><br>

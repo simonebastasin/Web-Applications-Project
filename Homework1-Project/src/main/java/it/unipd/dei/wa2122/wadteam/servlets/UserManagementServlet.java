@@ -108,6 +108,7 @@ public class UserManagementServlet extends AbstractDatabaseServlet {
      * get editEmployee.jsp page to edit an existing employee
      * @param req
      * @param res
+     * @param param     username of selected employee to confirm editing
      * @throws IOException
      * @throws ServletException
      */
@@ -125,7 +126,7 @@ public class UserManagementServlet extends AbstractDatabaseServlet {
      * edit an existing employee to the database
      * @param req
      * @param res
-     * @param param
+     * @param param     username of selected employee to edit
      * @throws IOException
      * @throws ServletException
      */
