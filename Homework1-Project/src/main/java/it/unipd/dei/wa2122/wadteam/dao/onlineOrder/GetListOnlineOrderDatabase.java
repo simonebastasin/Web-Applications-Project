@@ -1,9 +1,6 @@
 package it.unipd.dei.wa2122.wadteam.dao.onlineOrder;
 
-import it.unipd.dei.wa2122.wadteam.resources.DateTime;
-import it.unipd.dei.wa2122.wadteam.resources.OnlineOrder;
-import it.unipd.dei.wa2122.wadteam.resources.OrderStatus;
-import it.unipd.dei.wa2122.wadteam.resources.OrderStatusEnum;
+import it.unipd.dei.wa2122.wadteam.resources.*;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -47,28 +44,30 @@ public class GetListOnlineOrderDatabase {
 
         PreparedStatement pstmt = null;
         ResultSet rs = null;
+        OnlineOrder onlineOrderResult;
+        OrderStatus orderStatusResult;
+        List<Product> productsResult = new ArrayList<>(); // to fill
 
-        final List<OnlineOrder> orders = new ArrayList<OnlineOrder>();
-
+        List<OnlineOrder> orders = new ArrayList<>();
         try {
             pstmt = con.prepareStatement(STATEMENT);
-
             rs = pstmt.executeQuery();
 
-            if (rs.next()) {
-                OrderStatus orderStatusResult = new OrderStatus(rs.getInt("id_Status"),
+            while (rs.next()) {
+                orderStatusResult = new OrderStatus(rs.getInt("id_Status"),
                         OrderStatusEnum.fromString(rs.getString("status")),
                         rs.getString("description"),
                         new DateTime(rs.getObject("os_datetime", LocalDateTime.class)),
                         rs.getInt("id_order"));
 
-
-                orders.add(new OnlineOrder(
+                onlineOrderResult = new OnlineOrder(
                         rs.getInt("id_order"),
                         rs.getInt("id_customer"),
                         new DateTime(rs.getObject("oo_datetime", LocalDateTime.class)),
-                        null, orderStatusResult
-                ));
+                        productsResult,
+                        orderStatusResult
+                );
+                orders.add(onlineOrderResult);
             }
         } finally {
             if (rs != null) {

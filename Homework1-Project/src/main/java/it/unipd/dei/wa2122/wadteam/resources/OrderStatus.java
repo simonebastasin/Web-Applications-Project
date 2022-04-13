@@ -38,6 +38,11 @@ public class OrderStatus implements Resource {
     }
 
     @Override
+    public final String toString() {
+        return status.getText();
+    }
+
+    @Override
     public JSONObject toJSON() {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("id", id);
