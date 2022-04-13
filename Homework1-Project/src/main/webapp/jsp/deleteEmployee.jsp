@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%--@elvariable id="employee" type="it.unipd.dei.wa2122.wadteam.resources.Employee"--%>
 
 <html>
 <head>
@@ -25,14 +26,12 @@ Employee you are deleting:<br><br>
         <th>Surname</th>
         <th>Role</th>
     </tr>
-    <c:forEach var="employee" items="${employeeList}">
-        <tr>
-            <td>${employee.username}</td>
-            <td>${employee.name}</td>
-            <td>${employee.surname}</td>
-            <td>${employee.role}</td>
-        </tr>
-    </c:forEach>
+    <tr>
+        <td>${employee.username}</td>
+        <td>${employee.name}</td>
+        <td>${employee.surname}</td>
+        <td>${employee.role}</td>
+    </tr>
 </table><br>
 Sure to delete?<br><br>
 
@@ -42,6 +41,7 @@ Sure to delete?<br><br>
 <a href="<c:url value="/management/userManagement"/>">
     <input type ="submit" value = "No"/>
 </a>
+
 <%@ include file="/html/include/footer.html"%>
 </body>
 </html>

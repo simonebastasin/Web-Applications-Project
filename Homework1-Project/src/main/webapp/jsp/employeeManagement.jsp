@@ -19,7 +19,7 @@
 
 <div>
     <a href="<c:url value="/management/userManagement/createEmployee"/>">
-        Add new employee
+        <input type="submit" value="Add new employee">
     </a>
 </div><br>
 
@@ -41,18 +41,20 @@
             <td>${employee.surname}</td>
             <td>${employee.role}</td>
             <td>
-                <a href="<c:url value="/management/userManagement"/>">Edit</a>
+                <a href="<c:url value="/management/userManagement/editEmployee/${employee.username}"/>">
+                    Edit
+                </a>
             </td>
             <td>
-                <form method="GET" action="<c:url value="/management/userManagement/deleteEmployee"/>">
-                    <input type ="hidden" name = "employeeToDelete" value = ${employee.username}>
-                    <input type ="submit" value = "Delete">
-                </form>
+                <a href="<c:url value="/management/userManagement/deleteEmployee/${employee.username}"/>">
+                    Delete
+                </a>
             </td>
         </tr>
     </c:forEach>
 
 </table>
+
 <%@ include file="/html/include/footer.html"%>
 </body>
 </html>

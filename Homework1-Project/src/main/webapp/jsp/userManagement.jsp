@@ -10,7 +10,7 @@
 
 <html>
 <head>
-  <title>User List</title>
+  <title>User Management</title>
 </head>
 
 <body>
@@ -28,6 +28,7 @@
     <th>Name</th>
     <th>Surname</th>
     <th>Role</th>
+    <th>Password[debug]</th>
     <th>Edit</th>
     <th>Delete</th>
   </tr>
@@ -38,18 +39,25 @@
       <td>${employee.name}</td>
       <td>${employee.surname}</td>
       <td>${employee.role}</td>
+      <td>${employee.password}</td>
       <td>
         <a href="<c:url value="/management/userManagement"/>">Edit</a>
       </td>
       <td>
-        <form method="GET" action="<c:url value="/management/userManagement/deleteEmployee/${employee.username}"/>">
-          <input type ="submit" value = "Delete">
-        </form>
+        <a href="<c:url value="/management/userManagement/editEmployee/${employee.username}"/>">
+          Edit
+        </a>
+      </td>
+      <td>
+        <a href="<c:url value="/management/userManagement/deleteEmployee/${employee.username}"/>">
+          Delete
+        </a>
       </td>
     </tr>
   </c:forEach>
 
 </table>
+
 <%@ include file="/html/include/footer.html"%>
 </body>
 </html>
