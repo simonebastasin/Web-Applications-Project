@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%--@elvariable id="order" type="it.unipd.dei.wa2122.wadteam.resources.OnlineOrder"--%>
 
 <html>
 <head>
@@ -20,33 +21,33 @@
 <table>
 
     <tr>
-        <th>ID</th>
+        <th>ID_Order</th>
         <th>ID_Customer</th>
-        <th>Date</th>
+        <th>Order_Date</th>
         <th>Products</th>
         <th>Status</th>
+        <th>Edit</th>
+        <th>Delete</th>
     </tr>
 
     <c:forEach var="order" items="${orderList}">
         <tr>
-            <td>${order.id_order}</td>
-            <td>${order.id_customer}</td>
-            <td>${order.os_datetime}</td>
+            <td>${order.idOrder}</td>
+            <td>${order.idCustomer}</td>
+            <td>${order.ooDateTime}</td>
             <td>${order.products}</td>
-            <td>${order.id_Status}</td>
+            <td>${order.status}</td>
             <td>
-                <a href="<c:url value="/management/orderManagement"/>">Edit</a>
+                <a href="<c:url value="/management/orderManagement/editOrder/${order.idOrder}"/>">Edit</a>
             </td>
             <td>
-                <form method="GET" action="<c:url value="/management/orderManagement/deleteOrder"/>">
-                    <input type ="hidden" name = "orderToDelete" value = ${order.id_order}>
-                    <input type ="submit" value = "Delete">
-                </form>
+                <a href="<c:url value="/management/orderManagement/deleteOrder/${order.idOrder}"/>">Delete</a>
             </td>
         </tr>
     </c:forEach>
 
 </table>
+
 <%@ include file="/html/include/footer.html"%>
 </body>
 </html>

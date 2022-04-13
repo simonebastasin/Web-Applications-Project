@@ -22,7 +22,7 @@ public class OrderManagementServlet extends AbstractDatabaseServlet {
 
         switch (path) {
             case "" -> getOrderList(req,res);
-            case "editOrder" -> getEditOrder(req, res);
+            case "editOrder" -> getEditOrder(req, res, param);
             case "deleteOrder" -> getDeleteOrder(req, res, param);
             default -> writeError(req, res, GenericError.PAGE_NOT_FOUND);
         }
@@ -48,38 +48,45 @@ public class OrderManagementServlet extends AbstractDatabaseServlet {
      * @throws IOException
      */
     private void getOrderList(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-        List<OnlineOrder> orderList = null;
-        try{
+        List<OnlineOrder> orderList;
+        List<Resource> list = new ArrayList<>();
+        try {
             orderList = new GetListOnlineOrderDatabase(getDataSource().getConnection()).getListOnlineOrder();
-            System.out.println("--->" + orderList.size());
-            List<OnlineOrder> lists = new ArrayList<OnlineOrder>();
-            for(var order : orderList){
-                lists.add(order);
+            /* for(OnlineOrder tmp : orderList) {
+                System.out.println("*_*_*");
+                System.out.println(tmp.getIdOrder() + " | " +
+                        tmp.getIdCustomer() + " | " +
+                        tmp.getOoDateTime() + " | " +
+                        tmp.getProducts() + " | " +
+                        tmp.getStatus());
+            } */
+            for(var order : orderList) {
+                list.add(order);
             }
-            writeResource(req, res, "/jsp/orderManagement.jsp", false, lists.toArray(Resource[]::new));
+            writeResource(req, res, "/jsp/orderManagement.jsp", false, list.toArray(Resource[]::new));
         } catch (SQLException e) {
             writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
-
         }
     }
 
     /**
-     *
+     * get editOrder.jsp page to edit an existing online order
      * @param req
      * @param res
+     * @param param       id of selected online order to confirm editing
      * @throws IOException
      * @throws ServletException
      */
-    private void getEditOrder(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
+    private void getEditOrder(HttpServletRequest req, HttpServletResponse res, String param) throws IOException, ServletException {
         // TODO
         writeJsp(req, res,"/jsp/orderManagement.jsp");
     }
 
     /**
-     *
+     * edit an existing online order to the database
      * @param req
      * @param res
-     * @param param
+     * @param param     id of selected online order to edit
      * @throws IOException
      * @throws ServletException
      */
@@ -92,19 +99,17 @@ public class OrderManagementServlet extends AbstractDatabaseServlet {
      * get deleteOrder.jsp page to confirm deletion of selected online order
      * @param req
      * @param res
-     * @param param     username of selected employee to confirm deletion
+     * @param param     id of selected online order to confirm deletion
      * @throws ServletException
      * @throws IOException
      */
     private void getDeleteOrder(HttpServletRequest req, HttpServletResponse res, String param) throws ServletException, IOException {
-        OnlineOrder order = null;
-        if(param.chars().allMatch( Character::isDigit ) && !param.equals("")) {
+        OnlineOrder order;
+        if (param.chars().allMatch(Character::isDigit) && !param.equals("")) {
             int intParam = Integer.parseInt(param);
             try {
                 order = new GetOnlineOrderByIdDatabase(getDataSource().getConnection(), intParam).getOnlineOrderId();
-                List<OnlineOrder> list = new ArrayList<>();
-                list.add(order);
-                writeResource(req, res, "/jsp/deleteOrder.jsp", false, list.toArray(Resource[]::new));
+                writeResource(req, res, "/jsp/deleteOrder.jsp", true, order);
             } catch (SQLException e) {
                 writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
             }
@@ -122,7 +127,7 @@ public class OrderManagementServlet extends AbstractDatabaseServlet {
      * @throws IOException
      */
     private void postDeleteOrder(HttpServletRequest req, HttpServletResponse res, String param) throws  ServletException, IOException {
-        if(param.chars().allMatch( Character::isDigit ) && !param.equals("")) {
+        if (param.chars().allMatch(Character::isDigit) && !param.equals("")) {
             try {
                 int intParam = Integer.parseInt(param);
                 var idOrder = new DeleteOnlineOrderDatabase((getDataSource().getConnection()), intParam).deleteOnlineOrder();
