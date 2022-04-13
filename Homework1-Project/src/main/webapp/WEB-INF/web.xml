@@ -130,10 +130,6 @@
         <url-pattern>/management/discountManagement</url-pattern>
         <url-pattern>/management/discountManagement/*</url-pattern>
     </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>DiscountManagementServlet</servlet-name>
-        <url-pattern>/management/discountManagement/*</url-pattern>
-    </servlet-mapping>
 
     <servlet>
         <servlet-name>OrderManagementServlet</servlet-name>
@@ -144,7 +140,6 @@
         <url-pattern>/management/orderManagement</url-pattern>
         <url-pattern>/management/orderManagement/*</url-pattern>
     </servlet-mapping>
-
 
     <!-- ADMIN SECTION: END -->
 

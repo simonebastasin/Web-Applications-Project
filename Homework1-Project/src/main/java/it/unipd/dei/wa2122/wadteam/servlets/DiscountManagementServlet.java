@@ -84,7 +84,7 @@ public class DiscountManagementServlet extends AbstractDatabaseServlet{
 
         }catch (SQLException e) {
             Message m = new Message("Couldn't execute the query", "EU01", e.getMessage());
-            writeError(req, res, m, HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            //writeError(req, res, m, HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         }
 
     }
@@ -135,7 +135,7 @@ public class DiscountManagementServlet extends AbstractDatabaseServlet{
             //writeResource(req, res, "/jsp/productDetail.jsp", true , product); //view result
             res.sendRedirect(req.getContextPath() + "/management/discountManagement");
         } catch (SQLException e) {
-            writeError(req, res, new Message("Error create ticket", "ET02", e.getMessage()), HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            //writeError(req, res, new Message("Error create ticket", "ET02", e.getMessage()), HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         }
 
     }
