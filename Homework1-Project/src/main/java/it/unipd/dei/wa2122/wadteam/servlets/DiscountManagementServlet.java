@@ -1,8 +1,11 @@
 package it.unipd.dei.wa2122.wadteam.servlets;
 
 import it.unipd.dei.wa2122.wadteam.dao.discount.CreateDiscountDatabase;
+import it.unipd.dei.wa2122.wadteam.dao.discount.DeleteDiscountDatabase;
 import it.unipd.dei.wa2122.wadteam.dao.discount.GetDiscountDatabase;
 import it.unipd.dei.wa2122.wadteam.dao.discount.ListDiscountDatabase;
+import it.unipd.dei.wa2122.wadteam.dao.employee.DeleteEmployeeDatabase;
+import it.unipd.dei.wa2122.wadteam.dao.employee.GetEmployeeDatabase;
 import it.unipd.dei.wa2122.wadteam.dao.owns.CreateOwnsDiscountFromListProductsDatabase;
 import it.unipd.dei.wa2122.wadteam.dao.owns.ListProductsFromIdDiscoutDatabase;
 import it.unipd.dei.wa2122.wadteam.dao.product.CreateProductDatabase;
@@ -27,6 +30,7 @@ public class DiscountManagementServlet extends AbstractDatabaseServlet{
         switch (path) {
             case "" -> getListDiscount(req, res);
             case "createDiscount" -> getCreateDiscount(req, res);
+            case "deleteDiscount" -> getDeleteEmployee(req, res, param);
             default -> writeError(req, res, new ErrorMessage.IncorrectlyFormattedPathError("page not found"));
         }
 
@@ -35,10 +39,13 @@ public class DiscountManagementServlet extends AbstractDatabaseServlet{
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse res) throws  ServletException, IOException {
         String[] paths = req.getPathInfo() != null ? req.getPathInfo().substring(1).split("/") : null;
+        String param = req.getPathInfo() != null ? req.getPathInfo().substring(1).lastIndexOf('/') != -1 ? req.getPathInfo().substring(req.getPathInfo().lastIndexOf('/')+1) : "" : "";
+
         String path = paths[0];
 
         switch (path) {
             case "createDiscount" -> postCreateDiscount(req,res);
+            case "deleteDiscount" -> postDeleteDiscount(req, res, param);
             default -> writeError(req, res, new ErrorMessage.IncorrectlyFormattedPathError("page not found"));
         }
 
@@ -73,6 +80,7 @@ public class DiscountManagementServlet extends AbstractDatabaseServlet{
         List<Product> products = null;
 
         try{
+            //TODO: Implement control in date input
             products = new ListProductDatabase(getDataSource().getConnection()).getProduct();
 
             List<Resource> lists = new ArrayList<>();
@@ -87,6 +95,28 @@ public class DiscountManagementServlet extends AbstractDatabaseServlet{
             //writeError(req, res, m, HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         }
 
+    }
+
+    /**
+     * get deleteDiscount.jsp page to confirm deletion of selected discount
+     * @param req
+     * @param res
+     * @param param     id of selected discount to confirm deletion
+     * @throws ServletException
+     * @throws IOException
+     */
+    private void getDeleteEmployee(HttpServletRequest req, HttpServletResponse res, String param) throws ServletException, IOException {
+        Discount discount;
+        try {
+            discount = new GetDiscountDatabase(getDataSource().getConnection(), Integer.parseInt(param)).getDiscount();
+            List<Product> products = new ListProductsFromIdDiscoutDatabase(getDataSource().getConnection(), discount).getListProductsFromIdDiscoutDatabase();
+            DiscountListProduct DiscountListProduct = new DiscountListProduct(discount, products);
+
+
+            writeResource(req, res, "/jsp/deleteDiscount.jsp", true, DiscountListProduct);
+        } catch (SQLException e) {
+            writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
+        }
     }
 
     /**
@@ -130,12 +160,33 @@ public class DiscountManagementServlet extends AbstractDatabaseServlet{
 
             List<Owns> list = new CreateOwnsDiscountFromListProductsDatabase(getDataSource().getConnection(), productAliasList, discount).createOwnsDiscountFromList();
 
-            
+
             res.sendRedirect(req.getContextPath() + "/management/discountManagement");
         } catch (SQLException e) {
             writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
         }
 
+
+
+    }
+    /**
+     * delete selected discount from the database
+     * @param req
+     * @param res
+     * @param param     id of selected discount to delete
+     * @throws ServletException,
+     * @throws IOException
+     */
+    private void postDeleteDiscount(HttpServletRequest req, HttpServletResponse res, String param) throws  ServletException, IOException {
+        Discount discount;
+        try {
+            discount = new DeleteDiscountDatabase((getDataSource().getConnection()), Integer.parseInt(param)).deleteDiscount();
+
+            res.sendRedirect(req.getContextPath() + "/management/discountManagement");
+        } catch (SQLException e) {
+            writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
+        }
     }
 }
+
 

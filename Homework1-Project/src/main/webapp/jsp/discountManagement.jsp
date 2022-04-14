@@ -51,7 +51,13 @@
             </td>
 
             <td><button type="button">i</button></td>
-            <td><button type="button">X</button></td>
+            <td>
+                <a href="<c:url value="/management/discountManagement/deleteDiscount/${discountListProduct.discount.id}"/>">
+                    Delete
+                </a>
+
+            </td>
+
         </tr>
 
     </c:forEach>

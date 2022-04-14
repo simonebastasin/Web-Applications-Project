@@ -28,7 +28,7 @@ public class DeleteDiscountDatabase {
     /**
      * The discount of the discount
      */
-    private final Discount discount;
+    private final int discount;
 
     /**
      * Creates a new object for deleting a discount.
@@ -38,7 +38,7 @@ public class DeleteDiscountDatabase {
      * @param discount
      *            the id of the discount.
      */
-    public DeleteDiscountDatabase(final Connection con, final Discount discount) {
+    public DeleteDiscountDatabase(final Connection con, final int discount) {
         this.con = con;
         this.discount = discount;
     }
@@ -62,7 +62,7 @@ public class DeleteDiscountDatabase {
 
         try {
             preparedStatement = con.prepareStatement(STATEMENT_DELETE_OWNS);
-            preparedStatement.setInt(1, discount.getId());
+            preparedStatement.setInt(1, discount);
 
             resultSet = preparedStatement.executeQuery();
 
@@ -82,7 +82,7 @@ public class DeleteDiscountDatabase {
 
         try {
             preparedStatement = con.prepareStatement(STATEMENT_DELETE_DISCOUNT);
-            preparedStatement.setInt(1, discount.getId());
+            preparedStatement.setInt(1, discount);
 
             resultSet = preparedStatement.executeQuery();
 
