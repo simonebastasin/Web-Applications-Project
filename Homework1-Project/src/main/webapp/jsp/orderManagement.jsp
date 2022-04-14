@@ -26,11 +26,9 @@
         <th>Order_Date</th>
         <th>Products</th>
         <th>Status</th>
-        <th>Edit</th>
-        <th>Delete</th>
     </tr>
 
-    <c:forEach var="order" items="${orderList}">
+    <c:forEach var="order" items="${onlineOrderList}">
         <tr>
             <td>${order.idOrder}</td>
             <td>${order.idCustomer}</td>

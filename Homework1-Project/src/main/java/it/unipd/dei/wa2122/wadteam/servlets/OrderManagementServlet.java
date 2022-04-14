@@ -1,8 +1,12 @@
 package it.unipd.dei.wa2122.wadteam.servlets;
 
+import it.unipd.dei.wa2122.wadteam.dao.employee.GetEmployeeDatabase;
+import it.unipd.dei.wa2122.wadteam.dao.employee.UpdateEmployeeDatabase;
 import it.unipd.dei.wa2122.wadteam.dao.onlineOrder.DeleteOnlineOrderDatabase;
 import it.unipd.dei.wa2122.wadteam.dao.onlineOrder.GetListOnlineOrderDatabase;
 import it.unipd.dei.wa2122.wadteam.dao.onlineOrder.GetOnlineOrderByIdDatabase;
+import it.unipd.dei.wa2122.wadteam.dao.onlineOrder.UpdateOnlineOrderDatabase;
+import it.unipd.dei.wa2122.wadteam.dao.role.ListRoleDatabase;
 import it.unipd.dei.wa2122.wadteam.resources.*;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -52,18 +56,7 @@ public class OrderManagementServlet extends AbstractDatabaseServlet {
         List<Resource> list = new ArrayList<>();
         try {
             orderList = new GetListOnlineOrderDatabase(getDataSource().getConnection()).getListOnlineOrder();
-            /* for(OnlineOrder tmp : orderList) {
-                System.out.println("*_*_*");
-                System.out.println(tmp.getIdOrder() + " | " +
-                        tmp.getIdCustomer() + " | " +
-                        tmp.getOoDateTime() + " | " +
-                        tmp.getProducts() + " | " +
-                        tmp.getStatus());
-            } */
-            for(var order : orderList) {
-                list.add(order);
-            }
-            writeResource(req, res, "/jsp/orderManagement.jsp", false, list.toArray(Resource[]::new));
+            writeResource(req, res, "/jsp/orderManagement.jsp", false, orderList.toArray(Resource[]::new));
         } catch (SQLException e) {
             writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
         }
@@ -130,7 +123,7 @@ public class OrderManagementServlet extends AbstractDatabaseServlet {
         if (param.chars().allMatch(Character::isDigit) && !param.equals("")) {
             try {
                 int intParam = Integer.parseInt(param);
-                var idOrder = new DeleteOnlineOrderDatabase((getDataSource().getConnection()), intParam).deleteOnlineOrder();
+                int idOrder = new DeleteOnlineOrderDatabase((getDataSource().getConnection()), intParam).deleteOnlineOrder();
                 res.sendRedirect(req.getContextPath() + "/management/orderManagement");
             } catch (SQLException e) {
                 writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
