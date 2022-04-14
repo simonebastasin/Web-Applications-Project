@@ -140,10 +140,6 @@
         <url-pattern>/management/discountManagement</url-pattern>
         <url-pattern>/management/discountManagement/*</url-pattern>
     </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>DiscountManagementServlet</servlet-name>
-        <url-pattern>/management/discountManagement/*</url-pattern>
-    </servlet-mapping>
 
     <servlet>
         <servlet-name>OrderManagementServlet</servlet-name>
@@ -154,7 +150,6 @@
         <url-pattern>/management/orderManagement</url-pattern>
         <url-pattern>/management/orderManagement/*</url-pattern>
     </servlet-mapping>
-
 
     <!-- ADMIN SECTION: END -->
 
@@ -176,9 +171,6 @@
     <filter-mapping>
         <filter-name>AdminFilter</filter-name>
         <url-pattern>/management/userManagement</url-pattern>
-    </filter-mapping>
-    <filter-mapping>
-        <filter-name>AdminFilter</filter-name>
         <url-pattern>/media/list</url-pattern>
     </filter-mapping>
 
