@@ -113,7 +113,7 @@ public class DiscountManagementServlet extends AbstractDatabaseServlet{
         Integer endDatemonth = Integer.valueOf(req.getParameter("endDatemonth"));
         Integer endDateyear = Integer.valueOf(req.getParameter("endDateyear"));
 
-        DateTime endDate = new DateTime(LocalDateTime.of(startDateyear, startDatemonth, startDateday, 0,0,0));
+        DateTime endDate = new DateTime(LocalDateTime.of(endDateyear, endDatemonth, endDateday, 0,0,0));
 
         String[] productList = req.getParameterValues("productList");
         List<Product> productAliasList = new ArrayList<Product>();
@@ -125,17 +125,15 @@ public class DiscountManagementServlet extends AbstractDatabaseServlet{
         Discount temp = new Discount(55, percentage, startDate, endDate );
 
 
-
-
         try {
             Discount discount = new CreateDiscountDatabase(getDataSource().getConnection(), temp).createDiscount();
 
-            new CreateOwnsDiscountFromListProductsDatabase(getDataSource().getConnection(), productAliasList, discount);
+            List<Owns> list = new CreateOwnsDiscountFromListProductsDatabase(getDataSource().getConnection(), productAliasList, discount).createOwnsDiscountFromList();
 
-            //writeResource(req, res, "/jsp/productDetail.jsp", true , product); //view result
+            
             res.sendRedirect(req.getContextPath() + "/management/discountManagement");
         } catch (SQLException e) {
-            //writeError(req, res, new Message("Error create ticket", "ET02", e.getMessage()), HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
         }
 
     }

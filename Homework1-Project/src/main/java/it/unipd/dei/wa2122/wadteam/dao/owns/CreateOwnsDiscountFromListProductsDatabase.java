@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class CreateOwnsDiscountFromListProductsDatabase {
@@ -58,21 +59,25 @@ public class CreateOwnsDiscountFromListProductsDatabase {
         ResultSet resultSet = null;
 
         // the create employee
-        List<Owns> resultOwns =  null;
+        List<Owns> resultOwns =  new ArrayList<>();
 
         try {
 
             for(var product : products){
+
                 preparedStatement = con.prepareStatement(STATEMENT);
                 preparedStatement.setInt(1, discount.getId());
                 preparedStatement.setString(2, product.getAlias());
 
                 resultSet = preparedStatement.executeQuery();
 
-                resultOwns.add(new Owns(
-                        resultSet.getInt("ID_Discount"),
-                        resultSet.getString("Product_Alias")
-                ));
+                if(resultSet.next()){
+                    resultOwns.add(new Owns(
+                            resultSet.getInt("ID_Discount"),
+                            resultSet.getString("Product_Alias")
+                    ));
+                }
+
 
             }
         } finally {
