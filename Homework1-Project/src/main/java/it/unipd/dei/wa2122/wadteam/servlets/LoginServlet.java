@@ -105,6 +105,10 @@ public class LoginServlet extends AbstractDatabaseServlet {
                                 System.out.println(((UserCredential)session.getAttribute("user")).getIdentification());
                                 resp.sendRedirect(req.getContextPath() + "/");
                             }
+                            else
+                            {
+                                writeError(req,resp,new ErrorMessage.ElementRedundant("email already present"));
+                            }
                         }
                         else
                         {
@@ -112,6 +116,7 @@ public class LoginServlet extends AbstractDatabaseServlet {
                         }
                     } catch (SQLException e) {
                         e.printStackTrace();
+                        writeError(req,resp,new ErrorMessage.ElementRedundant("email already present"));
                     }
 
                 }

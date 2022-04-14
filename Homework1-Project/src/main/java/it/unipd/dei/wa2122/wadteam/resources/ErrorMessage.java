@@ -92,7 +92,7 @@ public abstract sealed class ErrorMessage extends Message  {
     }
     public static final class ElementRedundant extends ErrorMessage {
         public ElementRedundant(String errorDetails) {
-            super("Error! username already present!", "280", errorDetails, HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            super("Error! data already present!", "280", errorDetails, HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         }
     }
 }
