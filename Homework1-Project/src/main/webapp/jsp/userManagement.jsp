@@ -29,8 +29,6 @@
     <th>Surname</th>
     <th>Role</th>
     <th>Password[debug]</th>
-    <th>Edit</th>
-    <th>Delete</th>
   </tr>
 
   <c:forEach var="employee" items="${employeeList}">
@@ -41,17 +39,10 @@
       <td>${employee.role}</td>
       <td>${employee.password}</td>
       <td>
-        <a href="<c:url value="/management/userManagement"/>">Edit</a>
+        <a href="<c:url value="/management/userManagement/editEmployee/${employee.username}"/>">Edit</a>
       </td>
       <td>
-        <a href="<c:url value="/management/userManagement/editEmployee/${employee.username}"/>">
-          Edit
-        </a>
-      </td>
-      <td>
-        <a href="<c:url value="/management/userManagement/deleteEmployee/${employee.username}"/>">
-          Delete
-        </a>
+        <a href="<c:url value="/management/userManagement/deleteEmployee/${employee.username}"/>">Delete</a>
       </td>
     </tr>
   </c:forEach>

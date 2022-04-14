@@ -29,7 +29,7 @@ public class UserManagementServlet extends AbstractDatabaseServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse res) throws  ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         String path = req.getPathInfo() != null ? req.getPathInfo().substring(1).lastIndexOf('/') != -1 ? req.getPathInfo().substring(1,req.getPathInfo().lastIndexOf('/')) : req.getPathInfo().substring(1) : "";
         String param = req.getPathInfo() != null ? req.getPathInfo().substring(1).lastIndexOf('/') != -1 ? req.getPathInfo().substring(req.getPathInfo().lastIndexOf('/')+1) : "" : "";
 
@@ -50,13 +50,9 @@ public class UserManagementServlet extends AbstractDatabaseServlet {
      */
     private void getEmployeeList(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         List<Employee> employeeList;
-        List<Resource> list = new ArrayList<>();
         try {
             employeeList = new ListEmployeeDatabase(getDataSource().getConnection()).getEmployee();
-            for(var employee : employeeList){
-                list.add(employee);
-            }
-            writeResource(req, res, "/jsp/userManagement.jsp", false, list.toArray(Resource[]::new));
+            writeResource(req, res, "/jsp/userManagement.jsp", false, employeeList.toArray(Resource[]::new));
         } catch (SQLException e) {
             writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
         }
@@ -114,9 +110,16 @@ public class UserManagementServlet extends AbstractDatabaseServlet {
      */
     private void getEditEmployee(HttpServletRequest req, HttpServletResponse res, String param) throws IOException, ServletException {
         Employee employee;
+        List<Role> roleList;
+        List<Resource> lists = new ArrayList<>();
         try {
+            roleList = new ListRoleDatabase(getDataSource().getConnection()).getRole();
             employee = new GetEmployeeDatabase(getDataSource().getConnection(), param).getEmployee();
-            writeResource(req, res, "/jsp/editEmployee.jsp", true, employee);
+            lists.add(employee);
+            for(var role : roleList){
+                lists.add(role);
+            }
+            writeResource(req, res, "/jsp/editEmployee.jsp", false, lists.toArray(Resource[]::new));
         } catch (SQLException e) {
             writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
         }
@@ -173,7 +176,7 @@ public class UserManagementServlet extends AbstractDatabaseServlet {
      * @throws ServletException,
      * @throws IOException
      */
-    private void postDeleteEmployee(HttpServletRequest req, HttpServletResponse res, String param) throws  ServletException, IOException {
+    private void postDeleteEmployee(HttpServletRequest req, HttpServletResponse res, String param) throws ServletException, IOException {
         Employee employee;
         try {
             employee = new DeleteEmployeeDatabase((getDataSource().getConnection()), param).deleteEmployee();
