@@ -17,37 +17,37 @@ public abstract sealed class ErrorMessage extends Message  {
 
     public static final class MediaNotFoundError extends ErrorMessage {
         public MediaNotFoundError(String errorDetails) {
-            super("Media Not Found", "10", errorDetails, HttpServletResponse.SC_NOT_FOUND);
+            super("Media not found", "10", errorDetails, HttpServletResponse.SC_NOT_FOUND);
         }
     }
 
     public static final class IncorrectlyFormattedPathError extends ErrorMessage {
         public IncorrectlyFormattedPathError(String errorDetails) {
-            super("Incorrectly Formatted Path Error", "20", errorDetails, HttpServletResponse.SC_BAD_REQUEST);
+            super("Path incorrectly formatted", "20", errorDetails, HttpServletResponse.SC_BAD_REQUEST);
         }
     }
 
     public static final class IncorrectlyFormattedDataError extends ErrorMessage {
         public IncorrectlyFormattedDataError(String errorDetails) {
-            super("Incorrectly Formatted Data Error", "21", errorDetails, HttpServletResponse.SC_BAD_REQUEST);
+            super("Data incorrectly formatted", "21", errorDetails, HttpServletResponse.SC_BAD_REQUEST);
         }
     }
 
     public static final class EmptyMediaError extends ErrorMessage {
         public EmptyMediaError(String errorDetails) {
-            super("Empty Media", "30", errorDetails, HttpServletResponse.SC_NO_CONTENT);
+            super("Empty media", "30", errorDetails, HttpServletResponse.SC_NO_CONTENT);
         }
     }
 
     public static final class ProductNotFoundError extends ErrorMessage {
         public ProductNotFoundError(String errorDetails) {
-            super("Product Not Found", "40", errorDetails, HttpServletResponse.SC_NOT_FOUND);
+            super("Product not found", "40", errorDetails, HttpServletResponse.SC_NOT_FOUND);
         }
     }
 
     public static final class UserCredentialNotCorrectError extends ErrorMessage {
         public UserCredentialNotCorrectError(String errorDetails) {
-            super("Username or password aren't correct", "50", errorDetails, HttpServletResponse.SC_UNAUTHORIZED);
+            super("Username or password not correct", "50", errorDetails, HttpServletResponse.SC_UNAUTHORIZED);
         }
     }
 
@@ -59,7 +59,7 @@ public abstract sealed class ErrorMessage extends Message  {
 
     public static final class OrderNotFoundError extends ErrorMessage {
         public OrderNotFoundError(String errorDetails) {
-            super("Product Not Found", "60", errorDetails, HttpServletResponse.SC_NOT_FOUND);
+            super("Product not found", "60", errorDetails, HttpServletResponse.SC_NOT_FOUND);
         }
     }
 
@@ -80,19 +80,22 @@ public abstract sealed class ErrorMessage extends Message  {
             super("Upload error", "220", errorDetails, HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         }
     }
+
     public static final class ChangePasswordError extends ErrorMessage {
         public ChangePasswordError(String errorDetails) {
-            super("password not changed", "240", errorDetails, HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            super("Password not changed", "240", errorDetails, HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         }
     }
+
     public static final class NotLogin extends ErrorMessage {
         public NotLogin(String errorDetails) {
-            super("to see this page you have to login", "260", errorDetails, HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            super("Login required to see this page", "260", errorDetails, HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         }
     }
+
     public static final class ElementRedundant extends ErrorMessage {
         public ElementRedundant(String errorDetails) {
-            super("Error! data already present!", "280", errorDetails, HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            super("Data element already present", "280", errorDetails, HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         }
     }
 }
