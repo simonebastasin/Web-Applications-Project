@@ -2,6 +2,7 @@ package it.unipd.dei.wa2122.wadteam.servlets;
 
 import it.unipd.dei.wa2122.wadteam.dao.checkUser.CheckUserCredential;
 import it.unipd.dei.wa2122.wadteam.dao.customer.CreateCustomerDatabase;
+import it.unipd.dei.wa2122.wadteam.dao.customer.GetEmailCustomerDatabase;
 import it.unipd.dei.wa2122.wadteam.dao.customer.GetIdCustomerDatabase;
 import it.unipd.dei.wa2122.wadteam.resources.*;
 import jakarta.servlet.ServletException;
@@ -82,11 +83,14 @@ public class LoginServlet extends AbstractDatabaseServlet {
                     writeError(req, resp, GenericError.UNAUTHORIZED);
                 }else {
                     String username=req.getParameter("username");
+                    String email=req.getParameter("email");
                     Customer customer=null;
+                    Customer custumerEmail=null;
                     try {
 
                         customer=new GetIdCustomerDatabase(getDataSource().getConnection(),username).getIdCustomer();
-                        if (customer==null)
+                        custumerEmail=new GetEmailCustomerDatabase(getDataSource().getConnection(),email).getEmailCustomer();
+                        if (customer==null&&custumerEmail==null)
                         {
                             customer=new Customer(null, req.getParameter("name"), req.getParameter("surname"), req.getParameter("fiscalCode"), req.getParameter("address"), req.getParameter("email"), req.getParameter("phoneNumber"), username, req.getParameter("password"));
                             Customer cu=new CreateCustomerDatabase(getDataSource().getConnection(),customer).createCustomer();
@@ -105,18 +109,17 @@ public class LoginServlet extends AbstractDatabaseServlet {
                                 System.out.println(((UserCredential)session.getAttribute("user")).getIdentification());
                                 resp.sendRedirect(req.getContextPath() + "/");
                             }
-                            else
-                            {
-                                writeError(req,resp,new ErrorMessage.ElementRedundant("email already present"));
-                            }
+
                         }
-                        else
+                        else if(customer!=null)
                         {
                             writeError(req,resp,new ErrorMessage.ElementRedundant("username already present"));
                         }
+                        else
+                            writeError(req,resp,new ErrorMessage.ElementRedundant("email already present"));
                     } catch (SQLException e) {
                         e.printStackTrace();
-                        writeError(req,resp,new ErrorMessage.ElementRedundant("email already present"));
+
                     }
 
                 }
