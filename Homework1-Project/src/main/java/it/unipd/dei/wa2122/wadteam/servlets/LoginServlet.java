@@ -1,10 +1,9 @@
 package it.unipd.dei.wa2122.wadteam.servlets;
 
 import it.unipd.dei.wa2122.wadteam.dao.checkUser.CheckUserCredential;
-import it.unipd.dei.wa2122.wadteam.resources.ErrorMessage;
-import it.unipd.dei.wa2122.wadteam.resources.GenericError;
-import it.unipd.dei.wa2122.wadteam.resources.Message;
-import it.unipd.dei.wa2122.wadteam.resources.UserCredential;
+import it.unipd.dei.wa2122.wadteam.dao.customer.CreateCustomerDatabase;
+import it.unipd.dei.wa2122.wadteam.dao.customer.GetIdCustomerDatabase;
+import it.unipd.dei.wa2122.wadteam.resources.*;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -76,6 +75,47 @@ public class LoginServlet extends AbstractDatabaseServlet {
 
                     }
                 }
+            }
+            case "register"->{
+
+                if(req.getSession(false) != null && req.getSession(false).getAttribute("users") != null) {
+                    writeError(req, resp, GenericError.UNAUTHORIZED);
+                }else {
+                    String username=req.getParameter("username");
+                    Customer customer=null;
+                    try {
+
+                        customer=new GetIdCustomerDatabase(getDataSource().getConnection(),username).getIdCustomer();
+                        if (customer==null)
+                        {
+                            customer=new Customer(null, req.getParameter("name"), req.getParameter("surname"), req.getParameter("fiscalCode"), req.getParameter("address"), req.getParameter("email"), req.getParameter("phoneNumber"), username, req.getParameter("password"));
+                            Customer cu=new CreateCustomerDatabase(getDataSource().getConnection(),customer).createCustomer();
+                            String identification = req.getParameter("identification");
+                            String password = req.getParameter("password");
+                            TypeUser type = TypeUser.CUSTOMER;
+
+                            UserCredential userCredentialAttempt = new UserCredential(username, password, type, null, req.getParameter("email"), cu.getId());
+                            if(cu!=null)
+                            {
+                                //Message m = new Message("Customer created");
+                                //writeResource(req, resp, "/jsp/message.jsp", true, m);
+                                HttpSession session = req.getSession();
+                                session.setAttribute("user", userCredentialAttempt);
+                                System.out.println("user:");
+                                System.out.println(((UserCredential)session.getAttribute("user")).getIdentification());
+                                resp.sendRedirect(req.getContextPath() + "/");
+                            }
+                        }
+                        else
+                        {
+                            writeError(req,resp,new ErrorMessage.ElementRedundant("username already present"));
+                        }
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+
             }
             default -> writeError(req, resp, GenericError.PAGE_NOT_FOUND);
 

@@ -90,4 +90,9 @@ public abstract sealed class ErrorMessage extends Message  {
             super("to see this page you have to login", "260", errorDetails, HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         }
     }
+    public static final class ElementRedundant extends ErrorMessage {
+        public ElementRedundant(String errorDetails) {
+            super("Error! username already present!", "280", errorDetails, HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+        }
+    }
 }

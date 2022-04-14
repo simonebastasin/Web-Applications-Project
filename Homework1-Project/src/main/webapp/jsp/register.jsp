@@ -24,7 +24,7 @@
         <li>Phone Number: <input type="text" name="phoneNumber" ></li>
         <li>Address :<input type="text" name="address" ></li>
         <li>Username: <input type="text" name="username"  required></li>
-        <li>Password: <input type="text" name="password"  required></li>
+        <li>Password: <input type="password" name="password"  required></li>
 
         </li>
 

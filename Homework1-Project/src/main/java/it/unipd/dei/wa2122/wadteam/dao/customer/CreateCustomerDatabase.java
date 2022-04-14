@@ -11,7 +11,7 @@ import java.sql.SQLException;
 public class CreateCustomerDatabase {
 
     private static final String STATEMENT = "INSERT INTO Customer (name,surname,fiscal_code,address,email,phone_number,username,password)" +
-            " VALUES (?, ?, ?, ?,?,?,?, sha384(?::bitea))" +
+            " VALUES (?, ?, ?, ?,?,?,?, sha384(?::bytea))" +
             " RETURNING id,name,surname,fiscal_code,address,email,phone_number,username";
 
     private final Connection con;
@@ -27,7 +27,7 @@ public class CreateCustomerDatabase {
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
 
-        // the create employee
+
        Customer resultCustomer = null;
 
         try {
