@@ -83,7 +83,7 @@ public class InvoiceServlet extends AbstractDatabaseServlet{
                     }
                     case EMPLOYEE ->  {
                         var listInvoice = new ListOnlineInvoiceDatabase(getDataSource().getConnection()).getOnlineInvoice();
-                        writeResource(req, resp, "/jsp/ticketRespond.jsp", false, listInvoice.toArray(AssistanceTicket[]::new));
+                        writeResource(req, resp, "/jsp/invoice.jsp", false, listInvoice.toArray(AssistanceTicket[]::new));
                     }
                     default ->  writeError(req, resp, GenericError.UNAUTHORIZED);
                 }
@@ -100,15 +100,14 @@ public class InvoiceServlet extends AbstractDatabaseServlet{
         String param = req.getPathInfo() != null ? req.getPathInfo().substring(1).lastIndexOf('/') != -1 ? req.getPathInfo().substring(req.getPathInfo().lastIndexOf('/')+1) : "" : "";
 
         switch (path) {
-            case "create" -> postCreateInvoice(req, resp,param);
+            case "create" -> postCreateInvoice(req, resp);
             default ->  writeError(req, resp, GenericError.PAGE_NOT_FOUND);
         }
     }
 
-    private void postCreateInvoice(HttpServletRequest req, HttpServletResponse resp,String param) throws IOException, ServletException {
+    private void postCreateInvoice(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         try {
-
-            OnlineOrder onlineOrder = new GetOnlineOrderByIdDatabase(getDataSource().getConnection(), Integer.valueOf(param)).getOnlineOrderId();
+            OnlineOrder onlineOrder = new GetOnlineOrderByIdDatabase(getDataSource().getConnection(), Integer.valueOf(req.getParameter("idOrder"))).getOnlineOrderId();
             String transactionId = req.getParameter("transactionId");
             PaymentMethodOnlineEnum paymentType = PaymentMethodOnlineEnum.valueOf(req.getParameter("paymentType"));
             DateTime oiDate = new DateTime(LocalDateTime.now());
