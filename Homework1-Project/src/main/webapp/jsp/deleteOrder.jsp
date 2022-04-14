@@ -28,11 +28,11 @@ Order you are deleting:<br><br>
         <th>Status</th>
     </tr>
     <tr>
-        <td>${order.idOrder}</td>
-        <td>${order.idCustomer}</td>
-        <td>${order.ooDateTime}</td>
-        <td>${order.products}</td>
-        <td>${order.status}</td>
+        <td>${onlineOrder.idOrder}</td>
+        <td>${onlineOrder.idCustomer}</td>
+        <td>${onlineOrder.ooDateTime}</td>
+        <td>${onlineOrder.products}</td>
+        <td>${onlineOrder.status}</td>
     </tr>
 </table><br>
 Sure to delete?<br><br>
