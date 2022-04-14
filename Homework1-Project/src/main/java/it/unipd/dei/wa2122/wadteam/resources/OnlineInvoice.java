@@ -6,14 +6,14 @@ import java.util.Date;
 
 public class OnlineInvoice implements Resource {
 
-    private final int id;
+    private final Integer id;
     private final OnlineOrder idOrder;
     private final String transactionId;
     private final PaymentMethodOnlineEnum paymentType;
     private final DateTime oiDate;
     private final double totalPrice;
 
-    public OnlineInvoice(int id, OnlineOrder idOrder, String transactionId, PaymentMethodOnlineEnum paymentType, DateTime oiDate, double totalPrice) {
+    public OnlineInvoice(Integer id, OnlineOrder idOrder, String transactionId, PaymentMethodOnlineEnum paymentType, DateTime oiDate, double totalPrice) {
         this.id = id;
         this.idOrder = idOrder;
         this.transactionId = transactionId;

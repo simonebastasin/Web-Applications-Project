@@ -42,9 +42,9 @@ public class GetOnlineOrderByIdDatabase {
      * @param idCustomer
      *            the id of the customer.
      */
-    public GetOnlineOrderByIdDatabase(final Connection con, final Integer idCustomer) {
+    public GetOnlineOrderByIdDatabase(final Connection con, final Integer idOrder) {
         this.con = con;
-        this.idOrder = idCustomer;
+        this.idOrder = idOrder;
     }
 
     /**
