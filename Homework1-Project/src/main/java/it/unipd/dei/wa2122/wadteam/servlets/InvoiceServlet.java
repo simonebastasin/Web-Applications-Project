@@ -100,7 +100,7 @@ public class InvoiceServlet extends AbstractDatabaseServlet{
         String param = req.getPathInfo() != null ? req.getPathInfo().substring(1).lastIndexOf('/') != -1 ? req.getPathInfo().substring(req.getPathInfo().lastIndexOf('/')+1) : "" : "";
 
         switch (path) {
-            case "create" -> postCreateInvoice(req, resp);
+            case "createInvoice" -> postCreateInvoice(req, resp);
             default ->  writeError(req, resp, GenericError.PAGE_NOT_FOUND);
         }
     }

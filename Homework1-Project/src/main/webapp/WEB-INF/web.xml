@@ -81,6 +81,16 @@
         <url-pattern>/ticket/*</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>InvoiceServlet</servlet-name>
+        <servlet-class>it.unipd.dei.wa2122.wadteam.servlets.InvoiceServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>InvoiceServlet</servlet-name>
+        <url-pattern>/invoice</url-pattern>
+        <url-pattern>/invoice/*</url-pattern>
+    </servlet-mapping>
+
 
     <servlet>
         <servlet-name>UserServlet</servlet-name>
