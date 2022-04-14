@@ -41,7 +41,7 @@
       <td>${employee.role}</td>
       <td>${employee.password}</td>
       <td>
-        <a href="<c:url value="/management/userManagement"/>">Edit</a>
+        <a href="<c:url value="/management/userManagement/editEmployee/${employee.username}"/>">Edit</a>
       </td>
       <td>
         <a href="<c:url value="/management/userManagement/editEmployee/${employee.username}"/>">

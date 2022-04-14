@@ -75,7 +75,8 @@ public class UserManagementServlet extends AbstractDatabaseServlet {
             roleList = new ListRoleDatabase(getDataSource().getConnection()).getRole();
             writeResource(req, res, "/jsp/createEmployee.jsp", false, roleList.toArray(Resource[]::new));
         } catch (SQLException e) {
-            writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
+            Message m = new Message("Couldn't execute the query", "EU01", e.getMessage());
+            writeError(req, res, m, HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         }
         //writeJsp(req, res,"/jsp/createEmployee.jsp");
     }
@@ -161,7 +162,8 @@ public class UserManagementServlet extends AbstractDatabaseServlet {
             employee = new GetEmployeeDatabase(getDataSource().getConnection(), param).getEmployee();
             writeResource(req, res, "/jsp/deleteEmployee.jsp", true, employee);
         } catch (SQLException e) {
-            writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
+            Message m = new Message("Couldn't execute the query", "EU01", e.getMessage());
+            writeError(req, res, m, HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         }
     }
 
