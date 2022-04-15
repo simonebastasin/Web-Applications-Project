@@ -73,6 +73,18 @@ public class OrderManagementServlet extends AbstractDatabaseServlet {
      */
     private void getEditOrder(HttpServletRequest req, HttpServletResponse res, String param) throws IOException, ServletException {
         // TODO
+        OnlineOrder order = null;
+
+        try {
+            order = new GetOnlineOrderByIdDatabase(getDataSource().getConnection(), Integer.parseInt(param)).getOnlineOrderId();
+            writeResource(req, res, "/jsp/editOrder.jsp", false, order);
+        } catch (SQLException e) {
+            logger.error(e.getMessage());
+            writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
+        }
+
+
+
         writeJsp(req, res,"/jsp/orderManagement.jsp");
     }
 
