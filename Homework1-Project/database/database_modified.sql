@@ -18,7 +18,7 @@ CREATE TYPE OrderStatus AS ENUM (
     'Open',
     'Payment accepted',
     'Shipped',
-    'Delivered'
+    'Delivered',
     'Cancelled'
     );
 
