@@ -118,11 +118,17 @@ public class UserManagementServlet extends AbstractDatabaseServlet {
         try {
             roleList = new ListRoleDatabase(getDataSource().getConnection()).getRole();
             employee = new GetEmployeeDatabase(getDataSource().getConnection(), param).getEmployee();
-            lists.add(employee);
+            /*
             for(var role : roleList){
                 lists.add(role);
             }
-            writeResource(req, res, "/jsp/editEmployee.jsp", false, lists.toArray(Resource[]::new));
+
+             */
+
+            lists.add(employee);
+            lists.addAll(roleList);
+
+            writeResource(req, res, "/jsp/editEmployee.jsp", false, lists.toArray(roleList.toArray(Resource[]::new)));
         } catch (SQLException e) {
             logger.error(e.getMessage());
             writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
