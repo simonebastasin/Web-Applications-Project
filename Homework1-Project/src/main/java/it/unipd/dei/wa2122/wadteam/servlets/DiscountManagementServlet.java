@@ -4,11 +4,8 @@ import it.unipd.dei.wa2122.wadteam.dao.discount.CreateDiscountDatabase;
 import it.unipd.dei.wa2122.wadteam.dao.discount.DeleteDiscountDatabase;
 import it.unipd.dei.wa2122.wadteam.dao.discount.GetDiscountDatabase;
 import it.unipd.dei.wa2122.wadteam.dao.discount.ListDiscountDatabase;
-import it.unipd.dei.wa2122.wadteam.dao.employee.DeleteEmployeeDatabase;
-import it.unipd.dei.wa2122.wadteam.dao.employee.GetEmployeeDatabase;
 import it.unipd.dei.wa2122.wadteam.dao.owns.CreateOwnsDiscountFromListProductsDatabase;
 import it.unipd.dei.wa2122.wadteam.dao.owns.ListProductsFromIdDiscoutDatabase;
-import it.unipd.dei.wa2122.wadteam.dao.product.CreateProductDatabase;
 import it.unipd.dei.wa2122.wadteam.dao.product.ListProductDatabase;
 import it.unipd.dei.wa2122.wadteam.resources.*;
 import jakarta.servlet.ServletException;
@@ -148,7 +145,7 @@ public class DiscountManagementServlet extends AbstractDatabaseServlet{
         String[] productList = req.getParameterValues("productList");
         List<Product> productAliasList = new ArrayList<Product>();
         for(var pr : productList){
-            productAliasList.add(new Product(pr, null, null, null, 0, 0.0, 0.0, null, false, null));
+            productAliasList.add(new Product(pr, null, null, null, 0, 0.0, 0.0, null, false, null, null));
         }
 
 

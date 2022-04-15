@@ -1,6 +1,5 @@
 package it.unipd.dei.wa2122.wadteam.servlets;
 
-import it.unipd.dei.wa2122.wadteam.dao.employee.GetEmployeeDatabase;
 import it.unipd.dei.wa2122.wadteam.dao.product.CreateProductDatabase;
 import it.unipd.dei.wa2122.wadteam.dao.product.GetProductDatabase;
 import it.unipd.dei.wa2122.wadteam.dao.product.ListProductDatabase;
@@ -140,7 +139,7 @@ public class ProductManagementServlet extends AbstractDatabaseServlet{
         boolean evidence = req.getParameter("evidence").equals("yes");
         //private final List<Integer> pictures;   // todo
 
-        Product temp = new Product(alias,name,brand,description,quantity,purchase,sale,category,evidence,null);
+        Product temp = new Product(alias,name,brand,description,quantity,purchase,sale,category,evidence,null, null);
 
         try {
             Product product = new CreateProductDatabase(getDataSource().getConnection(), temp).createProduct();

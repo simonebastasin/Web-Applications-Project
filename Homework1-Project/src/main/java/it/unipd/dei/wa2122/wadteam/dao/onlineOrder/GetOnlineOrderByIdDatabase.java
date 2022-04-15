@@ -105,8 +105,8 @@ public class GetOnlineOrderByIdDatabase {
                             rsProduct.getDouble("price_applied"),
                             null,
                             false,
-                            null
-                    ));
+                            null,
+                            null));
                 }
             }
         } finally {

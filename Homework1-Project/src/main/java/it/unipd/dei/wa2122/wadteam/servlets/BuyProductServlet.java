@@ -2,7 +2,6 @@ package it.unipd.dei.wa2122.wadteam.servlets;
 
 import it.unipd.dei.wa2122.wadteam.dao.onlineOrder.CreateOnlineOrderDatabase;
 import it.unipd.dei.wa2122.wadteam.dao.product.GetProductDatabase;
-import it.unipd.dei.wa2122.wadteam.dao.product.UpdateProductQuantityByAliasDatabase;
 import it.unipd.dei.wa2122.wadteam.resources.*;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -95,8 +94,8 @@ public class BuyProductServlet extends AbstractDatabaseServlet {
                         product.getSale(),
                         product.getCategory(),
                         product.getEvidence(),
-                        product.getPictures()
-                );
+                        product.getPictures(),
+                        null);
 
                 List<Product> list = new ArrayList<>();
                 list.add(purchased);

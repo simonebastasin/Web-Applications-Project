@@ -1,5 +1,7 @@
 package it.unipd.dei.wa2122.wadteam.dao.product;
 
+import it.unipd.dei.wa2122.wadteam.resources.DateTime;
+import it.unipd.dei.wa2122.wadteam.resources.Discount;
 import it.unipd.dei.wa2122.wadteam.resources.Product;
 import it.unipd.dei.wa2122.wadteam.resources.ProductCategory;
 
@@ -7,13 +9,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class GetProductDatabase {
     /**
      * The SQL statements to be executed
      */
-    private static final String STATEMENT_GET_PRODUCT = "SELECT product_alias, name, brand, description, quantity, purchase_price, sale_price, category_name, evidence FROM product WHERE product_alias = ?";
+    private static final String STATEMENT_GET_PRODUCT = "SELECT p.product_alias, p.name, p.brand, p.description, p.quantity, p.purchase_price, p.sale_price, p.category_name, p.evidence, d.*  FROM product AS p LEFT JOIN (SELECT DISTINCT ON (o.product_alias) o.product_alias, d.* FROM owns o LEFT JOIN discount d on o.id_discount = d.id WHERE d.start_date <= now() AND d.end_date >= now() ORDER BY o.product_alias, d.percentage DESC) as d ON d.product_alias = p.product_alias WHERE p.product_alias = ?";
 
     private static final String STATEMENT = "SELECT id_media FROM Represented_by WHERE product_alias = ?";
 
@@ -56,6 +59,8 @@ public class GetProductDatabase {
 
             resultSet = preparedStatement.executeQuery();
 
+            String query = preparedStatement.toString();
+
             if (resultSet.next()) {
                 resultProduct = new Product(
                         resultSet.getString("product_alias"),
@@ -67,7 +72,10 @@ public class GetProductDatabase {
                         resultSet.getDouble("sale_price"),
                         new ProductCategory(resultSet.getString("category_name"), null),
                         resultSet.getBoolean("evidence"),
-                        new ArrayList<>());
+                        new ArrayList<>(), resultSet.getObject("percentage") != null ? new Discount(resultSet.getInt("id"),
+                                                        resultSet.getInt("percentage"),
+                                                        new DateTime(resultSet.getObject("start_date", LocalDateTime.class)),
+                                                        new DateTime(resultSet.getObject("end_date", LocalDateTime.class))) : null);
             }
         } finally {
             if (resultSet != null) {

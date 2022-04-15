@@ -92,7 +92,7 @@ public class DeleteProductDatabase {
                         resultSet.getDouble("sale_price"),
                         new ProductCategory(resultSet.getString("category_name"),null),
                         resultSet.getBoolean("evidence"),
-                        resultPicture);
+                        resultPicture, null);
             }
         } finally {
             if (resultSet != null) {

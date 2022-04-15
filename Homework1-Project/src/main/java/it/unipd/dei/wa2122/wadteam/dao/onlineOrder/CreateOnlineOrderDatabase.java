@@ -116,7 +116,7 @@ public class CreateOnlineOrderDatabase {
                                 rsProduct.getInt("price_applied"),
                                 null,
                                 false,
-                                null);
+                                null, null);
                     }
 
                     resultProductList.add(resultProductItem);

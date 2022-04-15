@@ -17,8 +17,9 @@ public class Product implements Resource {
     private final ProductCategory category;
     private final boolean evidence;
     private final List<Integer> pictures;   // This is a list of ID_Medias
+    private final Discount discount;
 
-    public Product(String alias, String name, String brand, String description, int quantity, double purchase, double sale, ProductCategory category, boolean evidence, List<Integer> pictures)
+    public Product(String alias, String name, String brand, String description, int quantity, double purchase, double sale, ProductCategory category, boolean evidence, List<Integer> pictures, Discount discount)
     {
         this.alias = alias;
         this.name = name;
@@ -30,6 +31,7 @@ public class Product implements Resource {
         this.category = category;
         this.evidence = evidence;
         this.pictures = pictures;
+        this.discount = discount;
     }
 
     public final String getAlias() { return alias; }
@@ -45,6 +47,11 @@ public class Product implements Resource {
     public final double getSale() { return sale; }
 
     public final int getQuantity() { return quantity; }
+
+    public final Double getDiscountSale() {
+        if(discount == null) return  null;
+        return (sale - (sale)/100.0* discount.getPercentage());
+    }
 
     public final ProductCategory getCategory() { return category; }
 
@@ -67,7 +74,8 @@ public class Product implements Resource {
         jsonObject.put("evidence", evidence);
         if(pictures != null)
             jsonObject.put("pictures", pictures);
-
+        if(discount != null)
+            jsonObject.put("discount", discount);
         return jsonObject;
     }
 
@@ -89,7 +97,12 @@ public class Product implements Resource {
         }
         ProductCategory category = ProductCategory.fromJSON(jsonObject.getJSONObject("category"));
         boolean evidence = jsonObject.getBoolean("evidence");
+        Discount discount = Discount.fromJSON(jsonObject.getJSONObject("discount"));
 
-        return new Product(alias, name, brand, description, quantity, purchase, sale, category, evidence, pictures);
+        return new Product(alias, name, brand, description, quantity, purchase, sale, category, evidence, pictures, discount);
+    }
+
+    public Discount getDiscount() {
+        return discount;
     }
 }
