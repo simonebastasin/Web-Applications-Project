@@ -59,6 +59,7 @@ public class Product implements Resource {
 
     public final List<Integer> getPictures() { return pictures; }
 
+    @Override
     public JSONObject toJSON() {
         JSONObject jsonObject = new JSONObject();
 

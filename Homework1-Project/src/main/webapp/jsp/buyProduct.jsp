@@ -21,7 +21,15 @@
 <h1>Product: ${product.name}</h1>
 
 Quantity selected: <c:out value="${pageContext.request.getParameter('quantity')}"/> <br>
-Total price: <c:out value="${product.sale*pageContext.request.getParameter('quantity')}€"/> <br>
+
+<c:choose>
+    <c:when test="${not empty product.discount}">
+        Total price: <span  style="text-decoration: line-through;"><c:out value="${product.sale*pageContext.request.getParameter('quantity')}"/>€</span> <span style="color: red;"><c:out value="${product.discountSale*pageContext.request.getParameter('quantity')}"/>€</span> <br>
+    </c:when>
+    <c:otherwise>
+        Total price: <c:out value="${product.sale*pageContext.request.getParameter('quantity')}€"/> <br>
+    </c:otherwise>
+</c:choose>
 
 <form method="post" action="<c:url value="/buy/confirmed/${product.alias}"/>">
     <label for="payment">Select a payment method: </label>

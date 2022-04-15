@@ -15,6 +15,7 @@ public class ProductCategory implements Resource{
 
     public final String getDescription() { return description; }
 
+    @Override
     public JSONObject toJSON() {
         JSONObject jsonObject = new JSONObject();
 
