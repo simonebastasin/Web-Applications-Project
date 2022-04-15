@@ -17,36 +17,55 @@
 
 <body>
 
-    <c:import url="/jsp/include/header.jsp"/>
-    <h1>Electromechanics shop</h1>
+<c:import url="/jsp/include/header.jsp"/>
+<h1>Electromechanics shop</h1>
 
-    <ul>
-        <c:forEach var="item" items="${productCategoryList}">
-            <li><b><a href="<c:url value="products/category/${item.name}"/>">${item.name}</a></b></li>
+<hr>
 
-            <c:set value="${true}" var="empty_cat"/>
-
-            <ul>
-                <c:forEach var="prod" items="${productList}">
-                    <c:if test="${prod.category.name.equals(item.name)}">
-
-                        <c:set value="${false}" var="empty_cat"/>
-
-                        <li>Product name: <a href="<c:url value="/products/details/${prod.alias}"/>">${prod.name}</a>  - Brand: ${prod.brand} - Quantity: ${prod.quantity} - Price: ${prod.sale}€<br>
-                            <c:forEach var="picture" items="${prod.pictures}">
-                                <img src="<c:url value="/viewmedia/${picture.id}"/>" alt="${picture.filename}" width="100px"/>
-                            </c:forEach>
-                        </li>
-                    </c:if>
+<h3>Featured products</h3>
+<ul>
+    <c:forEach var="prod" items="${productList}">
+        <c:if test="${prod.evidence == true}">
+            <li>Product name: <a href="<c:url value="/products/details/${prod.alias}"/>">${prod.name}</a>  - Brand: ${prod.brand} - Category:<a href="<c:url value="products/category/${prod.category.name}"/>">${prod.category.name}</a> - Quantity: ${prod.quantity} - Price: ${prod.sale}€<br>
+                <c:forEach var="picture" items="${prod.pictures}">
+                    <img src="<c:url value="/viewmedia/${picture.id}"/>" alt="${picture.filename}" width="100px"/>
                 </c:forEach>
+            </li>
+        </c:if>
+    </c:forEach>
+</ul>
 
-                <c:if test="${empty_cat}">
-                    <li>There are no more products for this category! =(</li>
+<hr>
+
+<h3>Available products</h3>
+<ul>
+    <c:forEach var="item" items="${productCategoryList}">
+        <li><b><a href="<c:url value="products/category/${item.name}"/>">${item.name}</a></b></li>
+
+        <c:set value="${true}" var="empty_cat"/>
+
+        <ul>
+            <c:forEach var="prod" items="${productList}">
+                <c:if test="${prod.category.name.equals(item.name)}">
+
+                    <c:set value="${false}" var="empty_cat"/>
+
+                    <li>Product name: <a href="<c:url value="/products/details/${prod.alias}"/>">${prod.name}</a>  - Brand: ${prod.brand} - Quantity: ${prod.quantity} - Price: ${prod.sale}€<br>
+                        <c:forEach var="picture" items="${prod.pictures}">
+                            <img src="<c:url value="/viewmedia/${picture.id}"/>" alt="${picture.filename}" width="100px"/>
+                        </c:forEach>
+                    </li>
                 </c:if>
-            </ul>
-        </c:forEach>
-    </ul>
+            </c:forEach>
 
-    <%@ include file="/html/include/footer.html"%>
+            <c:if test="${empty_cat}">
+                <li>There are no more products for this category! =(</li>
+            </c:if>
+        </ul>
+    </c:forEach>
+</ul>
+
+<%@ include file="/html/include/footer.html"%>
+
 </body>
 </html>
