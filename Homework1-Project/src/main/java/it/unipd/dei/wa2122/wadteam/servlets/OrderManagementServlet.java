@@ -58,6 +58,7 @@ public class OrderManagementServlet extends AbstractDatabaseServlet {
             orderList = new GetListOnlineOrderDatabase(getDataSource().getConnection()).getListOnlineOrder();
             writeResource(req, res, "/jsp/orderManagement.jsp", false, orderList.toArray(Resource[]::new));
         } catch (SQLException e) {
+            logger.error(e.getMessage());
             writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
         }
     }
@@ -104,6 +105,7 @@ public class OrderManagementServlet extends AbstractDatabaseServlet {
                 order = new GetOnlineOrderByIdDatabase(getDataSource().getConnection(), intParam).getOnlineOrderId();
                 writeResource(req, res, "/jsp/deleteOrder.jsp", true, order);
             } catch (SQLException e) {
+                logger.error(e.getMessage());
                 writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
             }
         } else {
@@ -126,6 +128,7 @@ public class OrderManagementServlet extends AbstractDatabaseServlet {
                 int idOrder = new DeleteOnlineOrderDatabase((getDataSource().getConnection()), intParam).deleteOnlineOrder();
                 res.sendRedirect(req.getContextPath() + "/management/orderManagement");
             } catch (SQLException e) {
+                logger.error(e.getMessage());
                 writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
             }
         } else {

@@ -24,19 +24,22 @@ public class LoginServlet extends AbstractDatabaseServlet {
 
         switch (path){
             case "login" ->  {
-                if(req.getSession(false) != null && req.getSession(false).getAttribute("user") != null) {
+                if(req.getSession(false) != null && req.getSession(false).getAttribute(USER_ATTRIBUTE) != null) {
                     writeError(req, resp, GenericError.UNAUTHORIZED);
                 } else {
                     writeJsp(req, resp, "/jsp/login.jsp");
                 }
             }
             case "logout" -> {
+                logger.info("User "+((UserCredential)req.getSession(false).getAttribute(USER_ATTRIBUTE)).getIdentification() +" was logout");
+
                 req.getSession().invalidate();
                 resp.sendRedirect(req.getContextPath() + "/");
+
             }
             case "register" -> {
 
-                if(req.getSession(false) != null && req.getSession(false).getAttribute("user") != null) {
+                if(req.getSession(false) != null && req.getSession(false).getAttribute(USER_ATTRIBUTE) != null) {
                     writeError(req, resp, GenericError.UNAUTHORIZED);
                 } else {
                     writeJsp(req,resp,"/jsp/register.jsp");
@@ -53,7 +56,7 @@ public class LoginServlet extends AbstractDatabaseServlet {
 
         switch (path) {
             case "login" -> {
-                if(req.getSession(false) != null && req.getSession(false).getAttribute("user") != null) {
+                if(req.getSession(false) != null && req.getSession(false).getAttribute(USER_ATTRIBUTE) != null) {
                     writeError(req, resp, GenericError.UNAUTHORIZED);
                 }else {
                     String identification = req.getParameter("identification");
@@ -65,14 +68,18 @@ public class LoginServlet extends AbstractDatabaseServlet {
                         UserCredential userCredential = new CheckUserCredential(getDataSource().getConnection(), userCredentialAttempt).getUserCredentials();
                         if (userCredential != null && userCredential.getIdentification() != null) {
                             HttpSession session = req.getSession();
-                            session.setAttribute("user", userCredential);
-
+                            session.setAttribute(USER_ATTRIBUTE, userCredential);
+                            logger.info("User "+userCredential.getIdentification() +" was logged");
                             resp.sendRedirect(req.getContextPath() + "/");
                         } else {
+                            logger.info("User "+identification+" failed to log in");
+
                             writeError(req, resp, new ErrorMessage.UserCredentialError("Username or password aren't correct"));
                         }
 
                     } catch (SQLException e) {
+                        logger.error(e.getMessage());
+
                         writeError(req, resp, new ErrorMessage.SqlInternalError(e.getMessage()));
 
                     }
@@ -80,7 +87,7 @@ public class LoginServlet extends AbstractDatabaseServlet {
             }
             case "register"->{
 
-                if (req.getSession(false) != null && req.getSession(false).getAttribute("user") != null) {
+                if (req.getSession(false) != null && req.getSession(false).getAttribute(USER_ATTRIBUTE) != null) {
                     writeError(req, resp, GenericError.UNAUTHORIZED);
                 }else {
                     String username=req.getParameter("username");
@@ -95,32 +102,35 @@ public class LoginServlet extends AbstractDatabaseServlet {
                         {
                             customer=new Customer(null, req.getParameter("name"), req.getParameter("surname"), req.getParameter("fiscalCode"), req.getParameter("address"), req.getParameter("email"), req.getParameter("phoneNumber"), username, req.getParameter("password"));
                             Customer cu=new CreateCustomerDatabase(getDataSource().getConnection(),customer).createCustomer();
-                            String identification = req.getParameter("identification");
+                            logger.info("User "+cu.getUsername() +" was created");
                             String password = req.getParameter("password");
                             TypeUser type = TypeUser.CUSTOMER;
 
                             UserCredential userCredentialAttempt = new UserCredential(username, password, type, null, req.getParameter("email"), cu.getId());
                             if(cu!=null)
                             {
-                                //Message m = new Message("Customer created");
-                                //writeResource(req, resp, "/jsp/message.jsp", true, m);
-                                HttpSession session = req.getSession();
-                                session.setAttribute("user", userCredentialAttempt);
-                                System.out.println("user:");
-                                System.out.println(((UserCredential)session.getAttribute("user")).getIdentification());
+                                HttpSession session = req.getSession(false);
+                                session.setAttribute(USER_ATTRIBUTE, userCredentialAttempt);
+                                logger.info("User "+userCredentialAttempt.getIdentification() +" was logged");
+
                                 resp.sendRedirect(req.getContextPath() + "/");
                             }
-
                         }
                         else if(customer!=null)
                         {
+                            logger.info("User "+username +" is attempting to re-register");
+
                             writeError(req,resp,new ErrorMessage.ElementRedundant("username already present"));
                         }
-                        else
-                            writeError(req,resp,new ErrorMessage.ElementRedundant("email already present"));
-                    } catch (SQLException e) {
-                        e.printStackTrace();
+                        else {
+                            logger.info("User "+email +" is attempting to re-register");
 
+                            writeError(req, resp, new ErrorMessage.ElementRedundant("email already present"));
+                        }
+                    } catch (SQLException e) {
+                        logger.error(e.getMessage());
+
+                        writeError(req,resp,new ErrorMessage.SqlInternalError(e.getMessage()));
                     }
 
                 }

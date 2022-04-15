@@ -33,7 +33,7 @@ public class OrderListServlet extends AbstractDatabaseServlet{
     private void orderListOp(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         List<OnlineOrder> list = null;
         HttpSession session = req.getSession(false);
-        UserCredential user = (UserCredential) session.getAttribute("user");
+        UserCredential user = (UserCredential) session.getAttribute(USER_ATTRIBUTE);
         Integer id = user.getId();
 
         try{
@@ -43,7 +43,7 @@ public class OrderListServlet extends AbstractDatabaseServlet{
             writeResource(req,res, "/jsp/orderList.jsp",false, resList.toArray(Resource[]::new));
 
         } catch (SQLException e) {
-            //Message m = new Message("Couldn't find the order", "EU01", e.getMessage());
+            logger.error(e.getMessage());
             ErrorMessage errorMessage = new ErrorMessage.OrderNotFoundError(e.getMessage());
             writeError(req, res, errorMessage);
         }
@@ -51,7 +51,7 @@ public class OrderListServlet extends AbstractDatabaseServlet{
 
     private void orderDetailOp(HttpServletRequest req, HttpServletResponse res, String path) throws ServletException, IOException {
         OnlineOrder order = null;
-        Integer id_customer = null;
+        Integer idCustomer = null;
         Integer id = null;
         if(path.chars().allMatch(Character::isDigit)){
             id = Integer.parseInt(path);
@@ -61,9 +61,9 @@ public class OrderListServlet extends AbstractDatabaseServlet{
 
 
             order = new GetOnlineOrderByIdDatabase(getDataSource().getConnection(), id).getOnlineOrderId();
-            id_customer = order.getIdCustomer();
-            UserCredential user = (UserCredential) req.getSession(false).getAttribute("user");
-            if(!Objects.equals(id_customer, user.getId())){
+            idCustomer = order.getIdCustomer();
+            UserCredential user = (UserCredential) req.getSession(false).getAttribute(USER_ATTRIBUTE);
+            if(!Objects.equals(idCustomer, user.getId())){
                 writeJsp(req,res,"/jsp/unauthorized.jsp");
             }
             else{
@@ -73,7 +73,7 @@ public class OrderListServlet extends AbstractDatabaseServlet{
 
 
         } catch (SQLException e) {
-            //Message m = new Message("Couldn't find the order", "EU01", e.getMessage());
+            logger.error(e.getMessage());
             ErrorMessage errorMessage = new ErrorMessage.OrderNotFoundError(e.getMessage());
             writeError(req, res, errorMessage);
         }

@@ -20,11 +20,8 @@
         <li>Name: <input type="text" name="name" value="${customer.name}" required></li>
         <li>Surname: <input type="text" name="surname" value="${customer.surname}" required></li>
         <li>Fiscal Code: <input type="text" name="fiscalCode" value="${customer.fiscalCode}" required></li>
-       <input type="hidden" name="email" value="${customer.email}" required>
         <li>Phone Number: <input type="text" name="phoneNumber" value="${customer.phoneNumber}"></li>
         <li>Address :<input type="text" name="address" value="${customer.address}"></li>
-
-        </li>
 
         <input type="submit" value="submit">
 

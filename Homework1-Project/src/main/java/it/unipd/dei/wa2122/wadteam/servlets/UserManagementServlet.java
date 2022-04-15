@@ -54,6 +54,7 @@ public class UserManagementServlet extends AbstractDatabaseServlet {
             employeeList = new ListEmployeeDatabase(getDataSource().getConnection()).getEmployee();
             writeResource(req, res, "/jsp/userManagement.jsp", false, employeeList.toArray(Resource[]::new));
         } catch (SQLException e) {
+            logger.error(e.getMessage());
             writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
         }
     }
@@ -71,6 +72,7 @@ public class UserManagementServlet extends AbstractDatabaseServlet {
             roleList = new ListRoleDatabase(getDataSource().getConnection()).getRole();
             writeResource(req, res, "/jsp/createEmployee.jsp", false, roleList.toArray(Resource[]::new));
         } catch (SQLException e) {
+            logger.error(e.getMessage());
             writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
         }
         //writeJsp(req, res,"/jsp/createEmployee.jsp");
@@ -96,6 +98,7 @@ public class UserManagementServlet extends AbstractDatabaseServlet {
             //writeResource(req, res, "/jsp/employeeDetail.jsp", true , product); //view result
             res.sendRedirect(req.getContextPath() + "/management/userManagement");
         } catch (SQLException e) {
+            logger.error(e.getMessage());
             writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
         }
     }
@@ -121,6 +124,7 @@ public class UserManagementServlet extends AbstractDatabaseServlet {
             }
             writeResource(req, res, "/jsp/editEmployee.jsp", false, lists.toArray(Resource[]::new));
         } catch (SQLException e) {
+            logger.error(e.getMessage());
             writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
         }
     }
@@ -146,6 +150,7 @@ public class UserManagementServlet extends AbstractDatabaseServlet {
             //writeResource(req, res, "/jsp/employeeDetail.jsp", true , product); //view result
             res.sendRedirect(req.getContextPath() + "/management/userManagement");
         } catch (SQLException e) {
+            logger.error(e.getMessage());
             writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
         }
     }
@@ -164,6 +169,7 @@ public class UserManagementServlet extends AbstractDatabaseServlet {
             employee = new GetEmployeeDatabase(getDataSource().getConnection(), param).getEmployee();
             writeResource(req, res, "/jsp/deleteEmployee.jsp", true, employee);
         } catch (SQLException e) {
+            logger.error(e.getMessage());
             writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
         }
     }
@@ -182,6 +188,7 @@ public class UserManagementServlet extends AbstractDatabaseServlet {
             employee = new DeleteEmployeeDatabase((getDataSource().getConnection()), param).deleteEmployee();
             res.sendRedirect(req.getContextPath() + "/management/userManagement");
         } catch (SQLException e) {
+            logger.error(e.getMessage());
             writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
         }
     }

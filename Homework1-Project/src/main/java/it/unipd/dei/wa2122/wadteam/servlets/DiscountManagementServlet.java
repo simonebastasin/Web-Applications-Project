@@ -38,10 +38,8 @@ public class DiscountManagementServlet extends AbstractDatabaseServlet{
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse res) throws  ServletException, IOException {
-        String[] paths = req.getPathInfo() != null ? req.getPathInfo().substring(1).split("/") : null;
+        String path = req.getPathInfo() != null ? req.getPathInfo().substring(1).lastIndexOf('/') != -1 ? req.getPathInfo().substring(1,req.getPathInfo().lastIndexOf('/')) : req.getPathInfo().substring(1) : "";
         String param = req.getPathInfo() != null ? req.getPathInfo().substring(1).lastIndexOf('/') != -1 ? req.getPathInfo().substring(req.getPathInfo().lastIndexOf('/')+1) : "" : "";
-
-        String path = paths[0];
 
         switch (path) {
             case "createDiscount" -> postCreateDiscount(req,res);
@@ -71,6 +69,7 @@ public class DiscountManagementServlet extends AbstractDatabaseServlet{
             writeResource(req, res, "/jsp/discountManagement.jsp", false, lists.toArray(Resource[]::new));
 
         }catch (SQLException e) {
+            logger.error(e.getMessage());
             writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
 
         }
@@ -91,8 +90,8 @@ public class DiscountManagementServlet extends AbstractDatabaseServlet{
             writeResource(req, res, "/jsp/createDiscount.jsp", false, lists.toArray(Resource[]::new));
 
         }catch (SQLException e) {
-            Message m = new Message("Couldn't execute the query", "EU01", e.getMessage());
-            //writeError(req, res, m, HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            logger.error(e.getMessage());
+            writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
         }
 
     }
@@ -115,6 +114,7 @@ public class DiscountManagementServlet extends AbstractDatabaseServlet{
 
             writeResource(req, res, "/jsp/deleteDiscount.jsp", true, DiscountListProduct);
         } catch (SQLException e) {
+            logger.error(e.getMessage());
             writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
         }
     }
@@ -163,6 +163,7 @@ public class DiscountManagementServlet extends AbstractDatabaseServlet{
 
             res.sendRedirect(req.getContextPath() + "/management/discountManagement");
         } catch (SQLException e) {
+            logger.error(e.getMessage());
             writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
         }
 
@@ -184,6 +185,7 @@ public class DiscountManagementServlet extends AbstractDatabaseServlet{
 
             res.sendRedirect(req.getContextPath() + "/management/discountManagement");
         } catch (SQLException e) {
+            logger.error(e.getMessage());
             writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
         }
     }

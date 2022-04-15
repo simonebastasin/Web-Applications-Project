@@ -61,6 +61,7 @@ public class ProductManagementServlet extends AbstractDatabaseServlet{
             writeResource(req, res, "/jsp/productManagement.jsp", false, lists.toArray(Resource[]::new));
 
         }catch (SQLException e) {
+            logger.error(e.getMessage());
             writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
 
         }
@@ -82,7 +83,8 @@ public class ProductManagementServlet extends AbstractDatabaseServlet{
             writeResource(req, res, "/jsp/createProduct.jsp", false, categories.toArray(Resource[]::new));
 
         }catch (SQLException e) {
-            writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
+           logger.error(e.getMessage());
+           writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
 
         }
     }
@@ -111,6 +113,7 @@ public class ProductManagementServlet extends AbstractDatabaseServlet{
             product = new GetProductDatabase(getDataSource().getConnection(), param).getProduct();
             writeResource(req, res, "/jsp/editProduct.jsp", true, product);
         } catch (SQLException e) {
+            logger.error(e.getMessage());
             writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
         }
 
@@ -144,6 +147,7 @@ public class ProductManagementServlet extends AbstractDatabaseServlet{
             //writeResource(req, res, "/jsp/productDetail.jsp", true , product); //view result
             res.sendRedirect(req.getContextPath() + "/management/productManagement");
         } catch (SQLException e) {
+            logger.error(e.getMessage());
             writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
         }
 
@@ -167,6 +171,7 @@ public class ProductManagementServlet extends AbstractDatabaseServlet{
             ProductCategory resultProductCategory = new CreateProductCategoryDatabase(getDataSource().getConnection(), temp).createProductCategory();
             res.sendRedirect(req.getContextPath() + "/management/productManagement/createProduct");
         } catch (SQLException e) {
+            logger.error(e.getMessage());
             writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
         }
 

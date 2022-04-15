@@ -28,6 +28,9 @@ public abstract class AbstractServlet extends HttpServlet {
      */
     private static final String JSON_UTF_8_MEDIA_TYPE = "application/json; charset=utf-8";
 
+    protected static final String USER_ATTRIBUTE = "user";
+
+
 
     public void writeError(HttpServletRequest request, HttpServletResponse response, GenericError error) throws IOException, ServletException {
         response.setStatus(error.getHttpErrorCode());
@@ -80,15 +83,17 @@ public abstract class AbstractServlet extends HttpServlet {
      * them before calling this function
      *
      * the session info is passed anyway
+     *
+     * @param path  a String specifying the pathname to the resource
      */
-    public void writeJsp(HttpServletRequest request, HttpServletResponse response, String jsp) throws IOException, ServletException {
+    public void writeJsp(HttpServletRequest request, HttpServletResponse response, String path) throws IOException, ServletException {
         try {
             var list = new ListProductCategoryDatabase(getDataSource().getConnection()).getProductCategory();
             request.setAttribute("categories", list);
             if(request.getSession(false) != null)
-                request.setAttribute("user", request.getSession(false).getAttribute("user"));
+                request.setAttribute(USER_ATTRIBUTE, request.getSession(false).getAttribute(USER_ATTRIBUTE));
 
-            request.getRequestDispatcher(jsp).forward(request, response);
+            request.getRequestDispatcher(path).forward(request, response);
         } catch (SQLException e) {
             writeError(request, response, new ErrorMessage.SqlInternalError(e.getMessage()));
         }
@@ -168,7 +173,7 @@ public abstract class AbstractServlet extends HttpServlet {
                     }
                 }
                 if(request.getSession(false) != null)
-                    request.setAttribute("user", request.getSession(false).getAttribute("user"));
+                    request.setAttribute(USER_ATTRIBUTE, request.getSession(false).getAttribute(USER_ATTRIBUTE));
                 request.getRequestDispatcher(jsp).forward(request, response);
             }
         } catch (SQLException e) {

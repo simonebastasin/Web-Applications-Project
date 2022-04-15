@@ -55,7 +55,7 @@ public class HomePageServlet extends AbstractDatabaseServlet{
             writeResource(req, res, "/jsp/searchProduct.jsp", false, list.toArray(products.toArray(Resource[]::new)));
 
         } catch (SQLException e) {
-            System.out.println("lol");
+            logger.error(e.getMessage());
             writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
         }
     }
@@ -78,7 +78,8 @@ public class HomePageServlet extends AbstractDatabaseServlet{
 
             writeResource(req, res, "/jsp/HomePage.jsp", false, lists.toArray(categories.toArray(Resource[]::new)));
 
-        }catch (SQLException e) {
+        } catch (SQLException e) {
+            logger.error(e.getMessage());
             writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
         }
     }
@@ -102,6 +103,7 @@ public class HomePageServlet extends AbstractDatabaseServlet{
             writeResource(req, res, "/jsp/categoryDetail.jsp", false, list.toArray(products.toArray(Resource[]::new)));
 
         } catch (SQLException e) {
+            logger.error(e.getMessage());
             writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
         }
     }

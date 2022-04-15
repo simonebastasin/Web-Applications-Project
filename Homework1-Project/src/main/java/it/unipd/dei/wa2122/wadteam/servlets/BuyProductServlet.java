@@ -81,9 +81,9 @@ public class BuyProductServlet extends AbstractDatabaseServlet {
             if(selected > product.getQuantity() || selected < 1){
                 writeError(req, res, new ErrorMessage.InternalError("Product quantity out of bounds"));
             }
-            else if(req.getSession(false) != null && req.getSession(false).getAttribute("user") != null){
+            else if(req.getSession(false) != null && req.getSession(false).getAttribute(USER_ATTRIBUTE) != null){
                 HttpSession session = req.getSession(false);
-                int customerId = ((UserCredential) session.getAttribute("user")).getId();
+                int customerId = ((UserCredential) session.getAttribute(USER_ATTRIBUTE)).getId();
 
                 Product purchased = new Product(
                         product.getAlias(),

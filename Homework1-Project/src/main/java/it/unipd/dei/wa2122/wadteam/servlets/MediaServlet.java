@@ -34,6 +34,8 @@ public class MediaServlet extends AbstractDatabaseServlet {
 
                     writeResource(request,response, "/jsp/media.jsp", false, mediaList.toArray(Resource[]::new));
                 } catch (SQLException e) {
+                    logger.error(e.getMessage());
+
                     writeError(request, response, new ErrorMessage.SqlInternalError(e.getMessage()));
                 }
             }
@@ -82,42 +84,38 @@ public class MediaServlet extends AbstractDatabaseServlet {
             }
 
         } catch (SQLException e) {
+            logger.error(e.getMessage());
+
             writeError(request, response, new ErrorMessage.SqlInternalError(e.getMessage()));
         } catch (NumberFormatException e) {
-            writeError(request, response, new ErrorMessage.IncorrectlyFormattedPathError("The media ID is not in the correct format"));
+            logger.error(e.getMessage());
+
+            writeError(request, response, GenericError.PAGE_NOT_FOUND);
         }
     }
 
-    private byte[] scaleImage(byte[] source, int size) {
-        try {
+    private byte[] scaleImage(byte[] source, int size) throws IOException {
 
-            BufferedImage sourceImage = ImageIO.read(new ByteArrayInputStream(source));
-            int width = sourceImage.getWidth();
-            int height = sourceImage.getHeight();
-            float dimMin = Math.min(width, height);
-            float dimMax = Math.max(width, height);
-            float extraSize = dimMin - size;
-            float percent = dimMax - (dimMax  * extraSize / dimMin);
-            int nWidth = width > height ? (int) percent : size;
-            int nHeight = width > height ? size : (int) percent;
-            BufferedImage img = new BufferedImage(nWidth, nHeight, typeBufferedImage(sourceImage));
-            Image scaledImage = sourceImage.getScaledInstance(nWidth, nHeight, Image.SCALE_SMOOTH);
-            img.createGraphics().drawImage(scaledImage, 0, 0, null);
+        BufferedImage sourceImage = ImageIO.read(new ByteArrayInputStream(source));
+        int width = sourceImage.getWidth();
+        int height = sourceImage.getHeight();
+        float dimMin = Math.min(width, height);
+        float dimMax = Math.max(width, height);
+        float extraSize = dimMin - size;
+        float percent = dimMax - (dimMax  * extraSize / dimMin);
+        int nWidth = width > height ? (int) percent : size;
+        int nHeight = width > height ? size : (int) percent;
+        BufferedImage img = new BufferedImage(nWidth, nHeight, typeBufferedImage(sourceImage));
+        Image scaledImage = sourceImage.getScaledInstance(nWidth, nHeight, Image.SCALE_SMOOTH);
+        img.createGraphics().drawImage(scaledImage, 0, 0, null);
 
-            int nX = width > height ? (int) ((percent - size) / 2) : 0;
-            int nY = width > height ? 0 : (int) ((percent - size) / 2);
-            BufferedImage squareImg = img.getSubimage(nX, nY, size, size);
-            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        int nX = width > height ? (int) ((percent - size) / 2) : 0;
+        int nY = width > height ? 0 : (int) ((percent - size) / 2);
+        BufferedImage squareImg = img.getSubimage(nX, nY, size, size);
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
 
-            ImageIO.write(squareImg, "png", bos);
-            return bos.toByteArray();
-
-
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
-
+        ImageIO.write(squareImg, "png", bos);
+        return bos.toByteArray();
     }
 
     private int typeBufferedImage(BufferedImage image) {
@@ -139,12 +137,18 @@ public class MediaServlet extends AbstractDatabaseServlet {
             if(media != null) {
                 Message m = new Message("Upload completed successfully.",
                         media.getId());
+
+                logger.info("media "+media.getId()+ "Upload completed successfully from user"+((UserCredential)request.getSession(false).getAttribute(USER_ATTRIBUTE)).getIdentification());
                 writeResource(request,response, "/jsp/message.jsp",true, m);
             } else {
+                logger.error("There was a problem with upload");
+
                 writeError(request, response, new ErrorMessage.UploadError("There was a problem with upload"));
             }
 
         } catch (SQLException e) {
+            logger.error(e.getMessage());
+
             writeError(request, response, new ErrorMessage.SqlInternalError(e.getMessage()));
         }
     }

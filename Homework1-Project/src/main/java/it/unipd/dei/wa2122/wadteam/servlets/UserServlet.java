@@ -20,8 +20,8 @@ public class UserServlet extends AbstractDatabaseServlet {
         String path = req.getPathInfo() != null ? req.getPathInfo().lastIndexOf('/') != -1 ? req.getPathInfo().substring(req.getPathInfo().lastIndexOf('/') + 1) : "" : "";
         String param = req.getPathInfo() != null ? req.getPathInfo().substring(1).lastIndexOf('/') != -1 ? req.getPathInfo().substring(req.getPathInfo().lastIndexOf('/') + 1) : "" : "";
 
-        if (req.getSession(false) != null && req.getSession(false).getAttribute("user") != null) {
-            UserCredential us = (UserCredential) req.getSession(false).getAttribute("user");
+        if (req.getSession(false) != null && req.getSession(false).getAttribute(USER_ATTRIBUTE) != null) {
+            UserCredential us = (UserCredential) req.getSession(false).getAttribute(USER_ATTRIBUTE);
             String username = us.getIdentification();
             UserCredential.TypeUser ut = us.getType();
 
@@ -35,7 +35,8 @@ public class UserServlet extends AbstractDatabaseServlet {
 
 
                             } catch (SQLException e) {
-                                e.printStackTrace();
+                                logger.error(e.getMessage());
+                                writeError(req, resp, new ErrorMessage.SqlInternalError(e.getMessage()));
                             }
 
                             writeResource(req, resp, "/jsp/user.jsp", true, em);
@@ -47,7 +48,8 @@ public class UserServlet extends AbstractDatabaseServlet {
                                 cu = new GetIdCustomerDatabase(getDataSource().getConnection(), username).getIdCustomer();
 
                             } catch (SQLException e) {
-                                e.printStackTrace();
+                                logger.error(e.getMessage());
+                                writeError(req, resp, new ErrorMessage.SqlInternalError(e.getMessage()));
                             }
                             writeResource(req, resp, "/jsp/CustomerDetail.jsp", true, cu);
 
@@ -64,7 +66,8 @@ public class UserServlet extends AbstractDatabaseServlet {
                                 cu = new GetIdCustomerDatabase(getDataSource().getConnection(), username).getIdCustomer();
 
                             } catch (SQLException e) {
-                                e.printStackTrace();
+                                logger.error(e.getMessage());
+                                writeError(req, resp, new ErrorMessage.SqlInternalError(e.getMessage()));
                             }
                             writeResource(req, resp, "/jsp/customerEdit.jsp", true, cu);
                         }
@@ -77,7 +80,8 @@ public class UserServlet extends AbstractDatabaseServlet {
 
 
                             } catch (SQLException e) {
-                                e.printStackTrace();
+                                logger.error(e.getMessage());
+                                writeError(req, resp, new ErrorMessage.SqlInternalError(e.getMessage()));
                             }
                             writeResource(req, resp, "/jsp/userEdit.jsp", true, em);
 
@@ -90,23 +94,22 @@ public class UserServlet extends AbstractDatabaseServlet {
                         case CUSTOMER -> {
                             Customer cu = null;
                             try {
-
                                 cu = new GetIdCustomerDatabase(getDataSource().getConnection(), username).getIdCustomer();
 
                             } catch (SQLException e) {
-                                e.printStackTrace();
+                                logger.error(e.getMessage());
+                                writeError(req, resp, new ErrorMessage.SqlInternalError(e.getMessage()));
                             }
                             writeResource(req, resp, "/jsp/changePassword.jsp", true, cu);
                         }
                         case EMPLOYEE -> {
                             Employee em = null;
                             try {
-
-
                                 em = new GetEmployeeDatabase(getDataSource().getConnection(), username).getEmployee();
 
                             } catch (SQLException e) {
-                                e.printStackTrace();
+                                logger.error(e.getMessage());
+                                writeError(req, resp, new ErrorMessage.SqlInternalError(e.getMessage()));
                             }
                             writeResource(req, resp, "/jsp/changePassword.jsp", true, em);
                         }
@@ -125,8 +128,8 @@ public class UserServlet extends AbstractDatabaseServlet {
         String path = req.getPathInfo() != null ? req.getPathInfo().lastIndexOf('/') != -1 ? req.getPathInfo().substring(req.getPathInfo().lastIndexOf('/') + 1) : "" : "";
         String param = req.getPathInfo() != null ? req.getPathInfo().substring(1).lastIndexOf('/') != -1 ? req.getPathInfo().substring(req.getPathInfo().lastIndexOf('/') + 1) : "" : "";
 
-        if (req.getSession(false) != null && req.getSession(false).getAttribute("user") != null) {
-            UserCredential us = (UserCredential) req.getSession(false).getAttribute("user");
+        if (req.getSession(false) != null && req.getSession(false).getAttribute(USER_ATTRIBUTE) != null) {
+            UserCredential us = (UserCredential) req.getSession(false).getAttribute(USER_ATTRIBUTE);
             String username = us.getIdentification();
             UserCredential.TypeUser ut = us.getType();
 
@@ -135,15 +138,16 @@ public class UserServlet extends AbstractDatabaseServlet {
                     switch (ut) {
                         case CUSTOMER -> {
 
-                            Customer cu = new Customer(null, req.getParameter("name"), req.getParameter("surname"), req.getParameter("fiscalCode"), req.getParameter("address"), req.getParameter("email"), req.getParameter("phoneNumber"), username, "ciao");
+                            Customer cu = new Customer(null, req.getParameter("name"), req.getParameter("surname"), req.getParameter("fiscalCode"), req.getParameter("address"), us.getEmail(), req.getParameter("phoneNumber"), username, "ciao");
                             try {
 
                                 cu = new UpdateCustomerDatabase(getDataSource().getConnection(), cu).updateCustomer();
                                 cu = new GetIdCustomerDatabase(getDataSource().getConnection(), username).getIdCustomer();
-                                System.out.println(req.getParameter("username"));
 
                             } catch (SQLException e) {
-                                e.printStackTrace();
+                                logger.error(e.getMessage());
+                                writeError(req, resp, new ErrorMessage.SqlInternalError(e.getMessage()));
+
                             }
                             if (cu == null)
                                 System.out.print("noooo");
@@ -156,12 +160,13 @@ public class UserServlet extends AbstractDatabaseServlet {
                                 String role = req.getParameter("role");
                                 System.out.println("Matteo");
                                 if ("notchange".equals(role))
-                                    emNew = new Employee(req.getParameter("username"), req.getParameter("name"), req.getParameter("surname"), emOld.getRole());
+                                    emNew = new Employee(emOld.getUsername(), req.getParameter("name"), req.getParameter("surname"), emOld.getRole());
                                 else
-                                    emNew = new Employee(req.getParameter("username"), req.getParameter("name"), req.getParameter("surname"), new Role(req.getParameter("role")));
+                                    emNew = new Employee(emOld.getUsername(), req.getParameter("name"), req.getParameter("surname"), new Role(req.getParameter("role")));
                                 Employee em = new UpdateEmployeeDatabase(getDataSource().getConnection(), emNew).updateEmployee();
                                 writeResource(req, resp, "/jsp/user.jsp", true, emNew);
                             } catch (SQLException e) {
+                                logger.error(e.getMessage());
                                 writeError(req, resp, new ErrorMessage.SqlInternalError(e.getMessage()));
                             }
 
@@ -184,9 +189,10 @@ public class UserServlet extends AbstractDatabaseServlet {
                                     writeResource(req, resp, "/jsp/message.jsp", true, m);
                                 }
                             } catch (SQLException e) {
-                                e.printStackTrace();
+                                logger.error(e.getMessage());
+                                writeError(req, resp, new ErrorMessage.SqlInternalError(e.getMessage()));
                             }
-                            writeResource(req, resp, "/jsp/CustomerDetail.jsp", true, cu);
+                            writeResource(req, resp, "/jsp/CustomerDetail.jsp", true, cu); // TODO WHY?
                         }
                         case EMPLOYEE -> {
                             Employee em = null;
@@ -201,9 +207,10 @@ public class UserServlet extends AbstractDatabaseServlet {
                                     writeResource(req, resp, "/jsp/message.jsp", true, m);
                                 }
                             } catch (SQLException e) {
-                                e.printStackTrace();
+                                logger.error(e.getMessage());
+                                writeError(req, resp, new ErrorMessage.SqlInternalError(e.getMessage()));
                             }
-                            writeResource(req, resp, "/jsp/user.jsp", true, em);
+                            writeResource(req, resp, "/jsp/user.jsp", true, em); // TODO WHY?
                         }
                         default -> writeError(req, resp, GenericError.UNAUTHORIZED);
                     }

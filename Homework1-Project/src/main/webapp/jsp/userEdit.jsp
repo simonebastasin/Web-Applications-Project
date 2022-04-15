@@ -29,7 +29,6 @@
             <option value="Warehouse Manager" >Warehouse Manager</option>
         </select></li>
 
-        <input type="hidden" value="${employee.username}" name="username">
         <input type="submit" value="submit">
 
     </ul>
