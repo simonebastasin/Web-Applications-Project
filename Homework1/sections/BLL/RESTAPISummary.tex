@@ -5,7 +5,31 @@
 \begin{longtable}{|p{.375\columnwidth}|p{.1\columnwidth} |p{.35\columnwidth}|p{.1\columnwidth}|} 
 \hline
 \textbf{URI} & \textbf{Method} & \textbf{Description} & \textbf{Filter} \\\hline
-What is the URI? & What HTTP method uses? &  Describe briefly the result of calling the URI & is it behind a filter?\\\hline
+/ & GET \& POST & return a list of category and product  &  \\\hline
+/buy/product ? & GET \& POST & performs a check on the product order if it is eligible or not & C\\\hline
+/buy/confirmed ? & GET \& POST & finalize an order & C\\\hline
+/buy/ & & &\\\hline
+/invoice/ & & &\\\hline
+/products/details/\textit{product alias}/ & GET \& POST & return product details & \\\hline
+/products/category/\textit{category name}/ & GET \& POST & returns a list of products from the category & \\\hline
+/products/search/ & GET \& POST & returns a list of products matching your search text & \\\hline
+/products/ & & &\\\hline
+/session/login/ & POST & login via a session &  \\\hline
+/session/logout/ & GET & logout via a session &  \\\hline
+/session/register/ & POST & register customer amd login via session &  \\\hline
+/session/ & & &\\\hline
+/media/list/ & GET & returns a list containing id, mimetype and name of uploaded media & E\\\hline
+/media/upload/ & POST &  api for the uplaod of an image & E\\\hline
+/media/view/\textit{image id}/ & GET \& POST &  view media &  \\\hline
+/media/thumb/\textit{image id}/ & GET \& POST & view thumb of media &  \\\hline
+/order/ & & &\\\hline
+/ticket/ & & &\\\hline
+/user/ & & &\\\hline
+/management/discount/ & & &\\\hline
+/management/order/ & & &\\\hline
+/management/product/ & & &\\\hline
+/management/user/ & & &\\\hline
+
 \caption{Describe in this table your REST API}
 \label{tab:termGlossary}
 \end{longtable}

@@ -2,4 +2,17 @@
 
 %if needed write here other details about your Data Logic Layer that cannot be expressed directly through the ER schema
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+The database has been modified, compared to the one created by e-team, improving the management of images, transforming
+it from hard-coded within the records of the product to separate with an association N:N, this has allowed to realize
+a more efficient and better management on the web app side.
+
+The ticket part has been modified to make it 1:N (from 1:1) so it can contain all the information of the ticket history.
+
+For the discount visualization was proposed the implementation of a view, but this could have problems with the storage
+of the list in cache and increase the slowness in the upload phase, so in the end we preferred a nested query.
+
+For the management of orders, the management has remained 1:1 with modification of the previous state because it was
+not considered useful to save all the history.
+
+Finally, nullable values, defaults, and small writing errors discovered during the implementation of the application
+were corrected.
