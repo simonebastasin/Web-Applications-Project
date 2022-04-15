@@ -24,7 +24,7 @@ public class LoginServlet extends AbstractDatabaseServlet {
 
         switch (path){
             case "login" ->  {
-                if(req.getSession(false) != null && req.getSession(false).getAttribute("users") != null) {
+                if(req.getSession(false) != null && req.getSession(false).getAttribute("user") != null) {
                     writeError(req, resp, GenericError.UNAUTHORIZED);
                 } else {
                     writeJsp(req, resp, "/jsp/login.jsp");
@@ -35,7 +35,8 @@ public class LoginServlet extends AbstractDatabaseServlet {
                 resp.sendRedirect(req.getContextPath() + "/");
             }
             case "register" -> {
-                if(req.getSession(false) != null && req.getSession(false).getAttribute("users") != null) {
+
+                if(req.getSession(false) != null && req.getSession(false).getAttribute("user") != null) {
                     writeError(req, resp, GenericError.UNAUTHORIZED);
                 } else {
                     writeJsp(req,resp,"/jsp/register.jsp");
@@ -52,7 +53,7 @@ public class LoginServlet extends AbstractDatabaseServlet {
 
         switch (path) {
             case "login" -> {
-                if(req.getSession(false) != null && req.getSession(false).getAttribute("users") != null) {
+                if(req.getSession(false) != null && req.getSession(false).getAttribute("user") != null) {
                     writeError(req, resp, GenericError.UNAUTHORIZED);
                 }else {
                     String identification = req.getParameter("identification");
@@ -79,7 +80,7 @@ public class LoginServlet extends AbstractDatabaseServlet {
             }
             case "register"->{
 
-                if(req.getSession(false) != null && req.getSession(false).getAttribute("users") != null) {
+                if (req.getSession(false) != null && req.getSession(false).getAttribute("user") != null) {
                     writeError(req, resp, GenericError.UNAUTHORIZED);
                 }else {
                     String username=req.getParameter("username");
