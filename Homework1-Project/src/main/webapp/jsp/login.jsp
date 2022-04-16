@@ -18,8 +18,8 @@
     <label for = "password">password</label>
     <br>
     <select name="usertype" id="usertype">
-        <option value ="customer">Customer</option>
-        <option value ="employee">Employee</option>
+        <option value ="Customer">Customer</option>
+        <option value ="Employee">Employee</option>
     </select>
     <br>
     <input type ="submit" value = "login">
