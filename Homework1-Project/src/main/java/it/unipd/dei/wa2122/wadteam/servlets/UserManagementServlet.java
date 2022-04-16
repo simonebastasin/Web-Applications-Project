@@ -125,10 +125,13 @@ public class UserManagementServlet extends AbstractDatabaseServlet {
 
              */
 
-            lists.add(employee);
-            lists.addAll(roleList);
+            if(employee != null){
+                lists.add(employee);
+                lists.addAll(roleList);
 
-            writeResource(req, res, "/jsp/editEmployee.jsp", false, lists.toArray(roleList.toArray(Resource[]::new)));
+                writeResource(req, res, "/jsp/editEmployee.jsp", false, lists.toArray(roleList.toArray(Resource[]::new)));
+            }
+            else writeError(req,res,GenericError.PAGE_NOT_FOUND);
         } catch (SQLException e) {
             logger.error(e.getMessage());
             writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));

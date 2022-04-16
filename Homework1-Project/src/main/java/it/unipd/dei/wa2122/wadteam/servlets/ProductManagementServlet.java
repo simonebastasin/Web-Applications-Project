@@ -110,7 +110,10 @@ public class ProductManagementServlet extends AbstractDatabaseServlet{
         Product product = null;
         try {
             product = new GetProductDatabase(getDataSource().getConnection(), param).getProduct();
-            writeResource(req, res, "/jsp/editProduct.jsp", true, product);
+
+            if(product != null) writeResource(req, res, "/jsp/editProduct.jsp", true, product);
+            else writeError(req,res,GenericError.PAGE_NOT_FOUND);
+
         } catch (SQLException e) {
             logger.error(e.getMessage());
             writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));

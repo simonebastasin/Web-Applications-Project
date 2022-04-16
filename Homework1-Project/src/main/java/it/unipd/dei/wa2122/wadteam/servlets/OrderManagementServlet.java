@@ -77,7 +77,10 @@ public class OrderManagementServlet extends AbstractDatabaseServlet {
 
         try {
             order = new GetOnlineOrderByIdDatabase(getDataSource().getConnection(), Integer.parseInt(param)).getOnlineOrderId();
-            writeResource(req, res, "/jsp/editOrder.jsp", false, order);
+
+            if(order != null) writeResource(req, res, "/jsp/editOrder.jsp", false, order);
+            else writeError(req,res,GenericError.PAGE_NOT_FOUND);
+
         } catch (SQLException e) {
             logger.error(e.getMessage());
             writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));

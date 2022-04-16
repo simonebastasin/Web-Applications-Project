@@ -25,7 +25,7 @@ public class LoginServlet extends AbstractDatabaseServlet {
         switch (path){
             case "login" ->  {
                 if(req.getSession(false) != null && req.getSession(false).getAttribute(USER_ATTRIBUTE) != null) {
-                    writeError(req, resp, GenericError.UNAUTHORIZED);
+                    resp.sendRedirect(req.getContextPath() + "/");
                 } else {
                     writeJsp(req, resp, "/jsp/login.jsp");
                 }
@@ -40,7 +40,7 @@ public class LoginServlet extends AbstractDatabaseServlet {
             case "register" -> {
 
                 if(req.getSession(false) != null && req.getSession(false).getAttribute(USER_ATTRIBUTE) != null) {
-                    writeError(req, resp, GenericError.UNAUTHORIZED);
+                    resp.sendRedirect(req.getContextPath() + "/");
                 } else {
                     writeJsp(req,resp,"/jsp/register.jsp");
                 }
