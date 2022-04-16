@@ -44,13 +44,7 @@ public class OnlineOrder implements Resource{
     public Double getTotalPrice() {
         double totalPrize = 0;
         for (Product product : products){
-            System.out.println("Sconto " + product.getDiscountSale());
-            if (product.getDiscountSale() == null) {
-                totalPrize+=product.getSalePrice()*product.getQuantity();
-            }
-            else {
-                totalPrize+=product.getDiscountSale()*product.getQuantity();
-            }
+            totalPrize += product.getSalePrice()*product.getQuantity();
         }
         return totalPrize;
     }

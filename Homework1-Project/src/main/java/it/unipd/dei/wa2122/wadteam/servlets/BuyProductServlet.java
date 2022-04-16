@@ -91,7 +91,7 @@ public class BuyProductServlet extends AbstractDatabaseServlet {
                         product.getDescription(),
                         selected,
                         product.getPurchasePrice(),
-                        product.getSalePrice(),
+                        product.getDiscountSale() != null ? product.getDiscountSale() : product.getSalePrice(),
                         product.getCategory(),
                         product.getEvidence(),
                         product.getPictures(),

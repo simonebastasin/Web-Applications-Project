@@ -20,32 +20,19 @@
 
     <ul>
     <c:forEach var="prod" items="${onlineOrder.products}">
-        <c:choose>
-            <c:when test="${not empty prod.discount}">
-                <li>
-                    Product name: ${prod.name} <br>
-                    Price: ${prod.getDiscountSale}€ <br>
-                    Quantity: ${prod.quantity} <br>
-                    <br>
-                    <a href="<c:url value="/ticket/create"/>/${prod.alias}">Open Ticket</a>
-                </li>
-            </c:when>
-            <c:otherwise>
-                <li>
-                    Product name: ${prod.name} <br>
-                    Price: ${prod.salePrice}€ <br>
-                    Quantity: ${prod.quantity} <br>
-                    <br>
-                    <a href="<c:url value="/ticket/create"/>/${prod.alias}">Open Ticket</a>
-                </li>
-            </c:otherwise>
-        </c:choose>
+        <li>
+            Product name: ${prod.name} <br>
+            Price: ${prod.salePrice}€ <br>
+            Quantity: ${prod.quantity} <br>
+            <br>
+            <a href="<c:url value="/ticket/create"/>/${prod.alias}">Open Ticket</a>
+        </li>
     </c:forEach>
     </ul>
 
     Date: ${onlineOrder.ooDateTime.getHumanDate()} <br>
     Status: ${onlineOrder.status.status.text} <br>
-    Total price: ${onlineOrder.getTotalPrice()} <br>
+    Total price: ${onlineOrder.getTotalPrice()}€ <br>
 
     <c:choose>
         <c:when test="${onlineOrder.status.status.text != \"Open\" }">
