@@ -14,7 +14,7 @@ public class ListTicketStatusDatabase {
     /**
      * The SQL statement to be executed
      */
-    private static final String STATEMENT = "SELECT id, status, description, ts_date, id_ticket FROM ticket_status WHERE id_ticket = ? ORDER BY ts_date DESC";
+    private static final String STATEMENT = "SELECT id, status, description, ts_date, id_ticket FROM ticket_status WHERE id_ticket = ? ORDER BY ts_date ASC";
 
     /**
      * The connection to the database

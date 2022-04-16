@@ -35,7 +35,7 @@
                 <c:forEach var="item" items="${assistanceTicket.ticketStatusList}">
                     <li><b> Ticket Status : <span class = "ticket-${item.status}">${item.status}</span></b></li>
                     <ul><li><i>${item.description}</i></li>
-                        <li>${item.tsDate}</li></ul>
+                        <li>${item.tsDate.humanDate}</li></ul>
                 </c:forEach>
             </ul>
 
