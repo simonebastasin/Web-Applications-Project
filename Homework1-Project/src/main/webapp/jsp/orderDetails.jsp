@@ -20,13 +20,26 @@
 
     <ul>
     <c:forEach var="prod" items="${onlineOrder.products}">
-        <li>
-            Product name: ${prod.name} <br>
-            Price: ${prod.salePrice}€ <br>
-            Quantity: ${prod.quantity} <br>
-            <br>
-            <a href="<c:url value="/ticket/create"/>/${prod.alias}">Open Ticket</a>
-        </li>
+        <c:choose>
+            <c:when test="${not empty prod.discount}">
+                <li>
+                    Product name: ${prod.name} <br>
+                    Price: ${prod.getDiscountSale}€ <br>
+                    Quantity: ${prod.quantity} <br>
+                    <br>
+                    <a href="<c:url value="/ticket/create"/>/${prod.alias}">Open Ticket</a>
+                </li>
+            </c:when>
+            <c:otherwise>
+                <li>
+                    Product name: ${prod.name} <br>
+                    Price: ${prod.salePrice}€ <br>
+                    Quantity: ${prod.quantity} <br>
+                    <br>
+                    <a href="<c:url value="/ticket/create"/>/${prod.alias}">Open Ticket</a>
+                </li>
+            </c:otherwise>
+        </c:choose>
     </c:forEach>
     </ul>
 

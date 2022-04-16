@@ -95,7 +95,7 @@ public class BuyProductServlet extends AbstractDatabaseServlet {
                         product.getCategory(),
                         product.getEvidence(),
                         product.getPictures(),
-                        null);
+                        product.getDiscount());
 
                 List<Product> list = new ArrayList<>();
                 list.add(purchased);

@@ -113,10 +113,11 @@ public class CreateOnlineOrderDatabase {
                                 null,
                                 rsProduct.getInt("quantity"),
                                 0.0,
-                                rsProduct.getInt("price_applied"),
+                                rsProduct.getDouble("price_applied"),
                                 null,
                                 false,
-                                null, null);
+                                null,
+                                null);
                     }
 
                     resultProductList.add(resultProductItem);
