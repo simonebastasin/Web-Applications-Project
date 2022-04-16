@@ -137,16 +137,22 @@ public class TicketServlet extends AbstractDatabaseServlet {
             switch (ut) {
                 case EMPLOYEE -> {
                     int id = Integer.parseInt(param);
-                    TicketStatusEnum status = TicketStatusEnum.fromString(req.getParameter("status"));
-                    String description = req.getParameter("description");
-
-                    TicketStatus temp = new TicketStatus(null, status, description, null, id);
-
                     try {
-                        TicketStatus ticketstatus = new CreateTicketStatusDatabase(getDataSource().getConnection(), temp).createTicketStatus();
                         AssistanceTicket assistanceTicket = new GetAssistanceTicketDatabase(getDataSource().getConnection(), id).getAssistanceTicket();
+                        if(assistanceTicket.getTicketStatusList().isEmpty() || assistanceTicket.getTicketStatusList().get(0).getStatus() != TicketStatusEnum.CLOSED) {
+                            TicketStatusEnum status = TicketStatusEnum.fromString(req.getParameter("status"));
+                            String description = req.getParameter("description");
 
-                        writeResource(req, resp, "/jsp/ticketRespond.jsp", false, assistanceTicket);
+                            TicketStatus temp = new TicketStatus(null, status, description, null, id);
+
+                            TicketStatus ticketstatus = new CreateTicketStatusDatabase(getDataSource().getConnection(), temp).createTicketStatus();
+                            assistanceTicket.getTicketStatusList().add(ticketstatus);
+
+                            writeResource(req, resp, "/jsp/ticketRespond.jsp", false, assistanceTicket);
+                        }
+                        else
+                            writeError(req, resp, new ErrorMessage.InternalError("The ticket is closed"));
+
                     } catch (SQLException e) {
                         logger.error(e.getMessage());
                         writeError(req, resp, new ErrorMessage.SqlInternalError(e.getMessage()));
