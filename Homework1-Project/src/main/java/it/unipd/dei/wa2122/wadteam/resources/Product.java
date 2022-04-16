@@ -11,23 +11,23 @@ public class Product implements Resource {
     private final String name;
     private final String brand;
     private final String description;
-    private final double purchase;
-    private final double sale;
+    private final double purchasePrice;
+    private final double salePrice;
     private final int quantity;
     private final ProductCategory category;
     private final boolean evidence;
     private final List<Integer> pictures;   // This is a list of ID_Medias
     private final Discount discount;
 
-    public Product(String alias, String name, String brand, String description, int quantity, double purchase, double sale, ProductCategory category, boolean evidence, List<Integer> pictures, Discount discount)
+    public Product(String alias, String name, String brand, String description, int quantity, double purchasePrice, double salePrice, ProductCategory category, boolean evidence, List<Integer> pictures, Discount discount)
     {
         this.alias = alias;
         this.name = name;
         this.brand = brand;
         this.description = description;
         this.quantity = quantity;
-        this.purchase = purchase;
-        this.sale = sale;
+        this.purchasePrice = purchasePrice;
+        this.salePrice = salePrice;
         this.category = category;
         this.evidence = evidence;
         this.pictures = pictures;
@@ -42,15 +42,15 @@ public class Product implements Resource {
 
     public final String getDescription() { return  description; }
 
-    public final double getPurchase() { return purchase; }
+    public final double getPurchase() { return purchasePrice; }
 
-    public final double getSale() { return sale; }
+    public final double getSale() { return salePrice; }
 
     public final int getQuantity() { return quantity; }
 
     public final Double getDiscountSale() {
         if(discount == null) return  null;
-        return (sale - (sale)/100.0* discount.getPercentage());
+        return (salePrice - (salePrice)/100.0* discount.getPercentage());
     }
 
     public final ProductCategory getCategory() { return category; }
@@ -68,8 +68,8 @@ public class Product implements Resource {
         jsonObject.put("brand", brand);
         if(description != null)
             jsonObject.put("description", description);
-        jsonObject.put("purchase", purchase);
-        jsonObject.put("sale", sale);
+        jsonObject.put("purchase", purchasePrice);
+        jsonObject.put("sale", salePrice);
         jsonObject.put("quantity", quantity);
         jsonObject.put("category", category.toJSON());
         jsonObject.put("evidence", evidence);

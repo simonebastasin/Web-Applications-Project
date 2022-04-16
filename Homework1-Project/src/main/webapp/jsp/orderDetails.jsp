@@ -37,13 +37,10 @@
     <c:choose>
         <c:when test="${onlineOrder.status.status.text != \"Open\" }">
             <input type ="submit" value = "Get invoice">
-        </c:when>
-    </c:choose>
-    <c:choose>
-        <c:when test="${onlineOrder.status.status.text != \"Cancelled\"}">
             <input type ="submit" value = "Cancel your order">
         </c:when>
     </c:choose>
+
     <%@ include file="/html/include/footer.html"%>
 </body>
 </html>
