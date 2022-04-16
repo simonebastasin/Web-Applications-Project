@@ -28,7 +28,7 @@
         <li><b>Ticket ID: ${assistanceTicket.id}</b>
         <ul>
         <li>${assistanceTicket.description}</li>
-            <li><a href="<c:url value="/ticket/respond/${assistanceTicket.id}"/>">Product ${assistanceTicket.productAlias}</a></li>
+            <li><a href="<c:url value="/products/details/${assistanceTicket.productAlias}"/>">Product ${assistanceTicket.productAlias}</a></li>
 
         <c:forEach var="item" items="${assistanceTicket.ticketStatusList}">
             <li><b> Ticket Status : <span class = "ticket-${item.status}">${item.status}</span></b></li>
