@@ -16,7 +16,7 @@ public class GetProductDatabase {
     /**
      * The SQL statements to be executed
      */
-    private static final String STATEMENT_GET_PRODUCT = "SELECT p.product_alias, p.name, p.brand, p.description, p.quantity, p.purchase_price, p.sale_price, p.category_name, p.evidence, d.*  FROM product AS p LEFT JOIN (SELECT DISTINCT ON (o.product_alias) o.product_alias, d.* FROM owns o LEFT JOIN discount d on o.id_discount = d.id WHERE d.start_date <= now() AND d.end_date >= now() ORDER BY o.product_alias, d.percentage DESC) as d ON d.product_alias = p.product_alias WHERE p.product_alias = ?";
+    private static final String STATEMENT_GET_PRODUCT = "SELECT p.product_alias, p.name, p.brand, p.description, p.quantity, p.purchase_price, p.sale_price, p.category_name, p.evidence, d.*  FROM product AS p LEFT JOIN (SELECT DISTINCT ON (o.product_alias) o.product_alias, d.* FROM owns o LEFT JOIN discount d on o.id_discount = d.id WHERE d.start_date <= CURRENT_DATE AND d.end_date >= CURRENT_DATE ORDER BY o.product_alias, d.percentage DESC) as d ON d.product_alias = p.product_alias WHERE p.product_alias = ?";
 
     private static final String STATEMENT = "SELECT id_media FROM Represented_by WHERE product_alias = ?";
 
