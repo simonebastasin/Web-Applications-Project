@@ -7,9 +7,8 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 import java.io.IOException;
 
-public class AbstractFilter implements Filter {
+abstract class AbstractFilter implements Filter {
 
-    private static DataSource ds = null;
     private FilterConfig config = null;
 
     @Override
@@ -20,14 +19,6 @@ public class AbstractFilter implements Filter {
         }
         this.config = config;
 
-
-        try{
-            ds = getDataSource();
-        } catch (NamingException e) {
-            ds = null;
-            throw new ServletException(String.format("Impossible to access the database: %s", e.getMessage()));
-
-        }
     }
 
     @Override
@@ -39,16 +30,6 @@ public class AbstractFilter implements Filter {
     @Override
     public void destroy() {
         config = null;
-        ds = null;
     }
 
-
-    public DataSource getDataSource() throws NamingException {
-
-        if (ds == null) {
-            InitialContext ctx = new InitialContext();
-            ds = (DataSource) ctx.lookup("java:/comp/env/jdbc/electromechanics_shop");
-        }
-        return ds;
-    }
 }

@@ -15,25 +15,7 @@ import java.util.Objects;
 public class AdminFilter extends AbstractFilter {
 
     private static final String USER_ATTRIBUTE = "user";
-    private FilterConfig config = null;
-    private DataSource ds;
 
-    @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
-        if (filterConfig == null){
-            throw new ServletException("Filter configuration cannot be null");
-        }
-        this.config = filterConfig;
-        InitialContext ctx;
-        try{
-            ctx = new InitialContext();
-            ds = (DataSource) ctx.lookup("java:/comp/env/jdbc/electromechanics_shop");
-
-        } catch (NamingException e) {
-            ds = null;
-            throw new ServletException(String.format("Impossible to access the database: %s", e.getMessage()));
-        }
-    }
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
@@ -68,14 +50,7 @@ public class AdminFilter extends AbstractFilter {
                     res.setHeader("Pragma", "no-cache"); // HTTP 1.0.
                     filterChain.doFilter(servletRequest,servletResponse);
                 }
-
             }
         }
-    }
-
-    @Override
-    public void destroy() {
-        config = null;
-        ds = null;
     }
 }

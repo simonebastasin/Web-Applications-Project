@@ -1,5 +1,6 @@
 package it.unipd.dei.wa2122.wadteam.filter;
 
+import it.unipd.dei.wa2122.wadteam.resources.TypeUserEnum;
 import it.unipd.dei.wa2122.wadteam.resources.UserCredential;
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
@@ -14,25 +15,6 @@ import java.io.IOException;
 public class CustomerFilter extends AbstractFilter {
 
     private static final String USER_ATTRIBUTE = "user";
-    private FilterConfig config = null;
-    private DataSource ds;
-
-    @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
-        if (filterConfig == null){
-            throw new ServletException("Filter configuration cannot be null");
-        }
-        this.config = filterConfig;
-        InitialContext ctx;
-        try{
-            ctx = new InitialContext();
-            ds = (DataSource) ctx.lookup("java:/comp/env/jdbc/electromechanics_shop");
-
-        } catch (NamingException e) {
-            ds = null;
-            throw new ServletException(String.format("Impossible to access the database: %s", e.getMessage()));
-        }
-    }
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
@@ -59,23 +41,16 @@ public class CustomerFilter extends AbstractFilter {
                 res.sendRedirect(loginURI);
             }
             else{
-                if(user.getRole() != null){
-                    res.setStatus(401);
-                    req.getRequestDispatcher(unauthorizedUri).forward(req, res);
-                }
-                else{
+                if (user.getType() == TypeUserEnum.CUSTOMER) {
                     res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
                     res.setHeader("Pragma", "no-cache"); // HTTP 1.0.
-                    filterChain.doFilter(servletRequest,servletResponse);
+                    filterChain.doFilter(servletRequest, servletResponse);
+                } else {
+                    res.setStatus(401);
+                    req.getRequestDispatcher(unauthorizedUri).forward(req, res);
                 }
             }
         }
     }
 
-
-    @Override
-    public void destroy() {
-        config = null;
-        ds = null;
-    }
 }
