@@ -129,8 +129,14 @@ public class TicketServlet extends AbstractDatabaseServlet {
             switch (ut) {
                 case EMPLOYEE -> {
                     int id = Integer.parseInt(param);
+                    String status = String.valueOf(req.getParameter("status"));
+                    String description = req.getParameter("description");
+
+                    TicketStatus temp = new TicketStatus(null, TicketStatusEnum.valueOf(status), description, null, id);
 
                     try {
+                        int user = ((UserCredential) req.getSession(false).getAttribute(USER_ATTRIBUTE)).getId();
+                        TicketStatus ticketstatus = new CreateTicketStatusDatabase(getDataSource().getConnection(), temp).createTicketStatus();
                         AssistanceTicket assistanceTicket = new GetAssistanceTicketDatabase(getDataSource().getConnection(), id).getAssistanceTicket();
 
                         writeResource(req, resp, "/jsp/ticket.jsp", false, assistanceTicket);
