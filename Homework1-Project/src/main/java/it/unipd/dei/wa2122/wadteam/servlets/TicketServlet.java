@@ -14,8 +14,6 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Objects;
 
-import static it.unipd.dei.wa2122.wadteam.resources.UserCredential.TypeUser.CUSTOMER;
-import static it.unipd.dei.wa2122.wadteam.resources.UserCredential.TypeUser.EMPLOYEE;
 
 public class TicketServlet extends AbstractDatabaseServlet {
 

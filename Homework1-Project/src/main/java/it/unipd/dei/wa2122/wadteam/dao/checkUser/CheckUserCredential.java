@@ -1,5 +1,6 @@
 package it.unipd.dei.wa2122.wadteam.dao.checkUser;
 
+import it.unipd.dei.wa2122.wadteam.resources.TypeUserEnum;
 import it.unipd.dei.wa2122.wadteam.resources.UserCredential;
 
 import java.sql.Connection;
@@ -59,7 +60,7 @@ public class CheckUserCredential {
         UserCredential resultUserCredential = null;
 
         try {
-            if(userCredential.getType()== TypeUser.EMPLOYEE){
+            if(userCredential.getType()== TypeUserEnum.EMPLOYEE){
                 preparedStatement = con.prepareStatement(STATEMENT_EMPLOYEE);
                 preparedStatement.setString(1, userCredential.getIdentification());
                 preparedStatement.setString(2, userCredential.getPassword());
@@ -78,13 +79,13 @@ public class CheckUserCredential {
             resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) {
-                if(userCredential.getType()== TypeUser.EMPLOYEE) {
+                if(userCredential.getType()== TypeUserEnum.EMPLOYEE) {
                     resultUserCredential = new UserCredential(resultSet.getString("username"), null,
-                        TypeUser.EMPLOYEE,resultSet.getString("role_name"), null, null);
+                            TypeUserEnum.EMPLOYEE,resultSet.getString("role_name"), null, null);
                 }
-                else if (userCredential.getType()== TypeUser.CUSTOMER) {
+                else if (userCredential.getType()== TypeUserEnum.CUSTOMER) {
                     resultUserCredential = new UserCredential(resultSet.getString("username"), null,
-                            TypeUser.CUSTOMER, null, resultSet.getString("email"), resultSet.getInt("id"));
+                            TypeUserEnum.CUSTOMER, null, resultSet.getString("email"), resultSet.getInt("id"));
                 }
             }
 

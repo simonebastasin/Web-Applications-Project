@@ -6,12 +6,12 @@ public class UserCredential implements Resource {
 
     private final String identification;
     private final String password;
-    private final TypeUser type;
+    private final TypeUserEnum type;
     private final String role;
     private final String email;
     private final Integer id;
 
-     public UserCredential(String identification, String password, TypeUser type, String role, String email, Integer id) {
+     public UserCredential(String identification, String password, TypeUserEnum type, String role, String email, Integer id) {
         this.identification = identification;
         this.role=role;
         this.password = password;
@@ -28,7 +28,7 @@ public class UserCredential implements Resource {
         return password;
     }
 
-    public final TypeUser getType(){
+    public final TypeUserEnum getType(){
         return type;
     }
 
@@ -55,5 +55,5 @@ public class UserCredential implements Resource {
         return id;
     }
 
-    public enum TypeUser {EMPLOYEE, CUSTOMER}
+    //public enum TypeUser {EMPLOYEE, CUSTOMER}
 }

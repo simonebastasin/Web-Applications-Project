@@ -23,7 +23,7 @@ public class UserServlet extends AbstractDatabaseServlet {
         if (req.getSession(false) != null && req.getSession(false).getAttribute(USER_ATTRIBUTE) != null) {
             UserCredential us = (UserCredential) req.getSession(false).getAttribute(USER_ATTRIBUTE);
             String username = us.getIdentification();
-            UserCredential.TypeUser ut = us.getType();
+            TypeUserEnum ut = us.getType();
 
             switch (path) {
                 case "info" -> {
@@ -131,7 +131,7 @@ public class UserServlet extends AbstractDatabaseServlet {
         if (req.getSession(false) != null && req.getSession(false).getAttribute(USER_ATTRIBUTE) != null) {
             UserCredential us = (UserCredential) req.getSession(false).getAttribute(USER_ATTRIBUTE);
             String username = us.getIdentification();
-            UserCredential.TypeUser ut = us.getType();
+            TypeUserEnum ut = us.getType();
 
             switch (path) {
                 case "modify" -> {

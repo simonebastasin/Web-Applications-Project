@@ -61,7 +61,7 @@ public class LoginServlet extends AbstractDatabaseServlet {
                 }else {
                     String identification = req.getParameter("identification");
                     String password = req.getParameter("password");
-                    TypeUser type = TypeUser.valueOf(req.getParameter("usertype").toUpperCase(Locale.ROOT));
+                    TypeUserEnum type = TypeUserEnum.valueOf((req.getParameter("usertype").toUpperCase(Locale.ROOT)));
 
                     UserCredential userCredentialAttempt = new UserCredential(identification, password, type, null, null, null);
                     try {
@@ -104,7 +104,7 @@ public class LoginServlet extends AbstractDatabaseServlet {
                             Customer cu=new CreateCustomerDatabase(getDataSource().getConnection(),customer).createCustomer();
                             logger.info("User "+cu.getUsername() +" was created");
                             String password = req.getParameter("password");
-                            TypeUser type = TypeUser.CUSTOMER;
+                            TypeUserEnum type = TypeUserEnum.CUSTOMER;
 
                             UserCredential userCredentialAttempt = new UserCredential(username, password, type, null, req.getParameter("email"), cu.getId());
                             if(cu!=null)
