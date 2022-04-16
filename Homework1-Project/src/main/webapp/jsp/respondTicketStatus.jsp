@@ -14,8 +14,12 @@
 <body>
 <c:import url="/jsp/include/header.jsp"/>
 <form method="POST" action="">
-    <input type="text" name ="status" id="status">
-    <label for = "status"><b> Status </b></label>
+    <select name="status" id="status">
+        <option value ="open">Open</option>
+        <option value ="processing">Processing</option>
+        <option value ="closed">Closed</option>
+        <option value ="return">Return</option>
+    </select>
     <br>
     <textarea name ="description" id="description"> </textarea>
     <label for = "description"><b> Description </b></label>

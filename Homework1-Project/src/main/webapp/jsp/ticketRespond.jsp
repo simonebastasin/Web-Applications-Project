@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="it.unipd.dei.wa2122.wadteam.resources.TicketStatusEnum" %>
 <%--@elvariable id="assistanceTicketList" type="List<it.unipd.dei.wa2122.wadteam.resources.AssistanceTicket>"--%>
 
 <html>
@@ -25,7 +26,7 @@
     </style>
 
     <c:forEach var="assistanceTicket" items="${assistanceTicketList}">
-        <li><b>Ticket ID: ${assistanceTicket.id}</b>
+        <b>Ticket ID: ${assistanceTicket.id}</b>
             <ul>
                 <li>${assistanceTicket.description}</li>
                 <li>${assistanceTicket.idCustomer}</li>
@@ -37,7 +38,17 @@
                         <li>${item.tsDate}</li></ul>
                 </c:forEach>
             </ul>
-            <a href="<c:url value="/ticket/respond/${assistanceTicket.id}"/>">Respond</a>
+
+        <c:choose>
+            <c:when test="${empty assistanceTicket.ticketStatusList}" >
+                <a href="<c:url value="/ticket/respond/${assistanceTicket.id}"/>">Respond</a>
+            </c:when>
+            <c:when test="${not (assistanceTicket.ticketStatusList[0].status eq TicketStatusEnum.CLOSED) }">
+                <a href="<c:url value="/ticket/respond/${assistanceTicket.id}"/>">Respond</a>
+            </c:when>
+            <c:otherwise>The ticket is closed</c:otherwise>
+        </c:choose>
+
         </li>
         <br>
     </c:forEach>
