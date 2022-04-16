@@ -13,12 +13,15 @@
 </head>
 <body>
 <c:import url="/jsp/include/header.jsp"/>
+<h1> Respond Ticket Status </h1>
+<hr>
+
 <form method="POST" action="">
     <select name="status" id="status">
-        <option value ="open">Open</option>
-        <option value ="processing">Processing</option>
-        <option value ="closed">Closed</option>
-        <option value ="return">Return</option>
+        <option value ="Open">Open</option>
+        <option value ="Processing">Processing</option>
+        <option value ="Closed">Closed</option>
+        <option value ="Return">Return</option>
     </select>
     <br>
     <textarea name ="description" id="description"> </textarea>

@@ -143,7 +143,7 @@ CREATE TABLE Ticket_Status(
                               ID SERIAL   PRIMARY KEY,
                               Status      TicketStatus NOT NULL,
                               Description TEXT,
-                              TS_Date     TIMESTAMP NOT NULL DEFAULT CURRENT_DATE,
+                              TS_Date     TIMESTAMP NOT NULL DEFAULT localtimestamp,
                               ID_Ticket   INTEGER NOT NULL,
 
                               FOREIGN KEY (ID_Ticket) REFERENCES Assistance_Ticket(ID) ON UPDATE CASCADE

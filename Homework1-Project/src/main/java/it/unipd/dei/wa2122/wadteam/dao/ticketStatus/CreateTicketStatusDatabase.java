@@ -42,7 +42,7 @@ public class CreateTicketStatusDatabase {
 
         try {
             preparedStatement = con.prepareStatement(STATEMENT);
-            preparedStatement.setString(1, String.valueOf(ticketStatus.getStatus()));
+            preparedStatement.setString(1, ticketStatus.getStatus().toString());
             preparedStatement.setString(2, ticketStatus.getDescription());
             preparedStatement.setInt(3, ticketStatus.getIdTicket());
 
@@ -51,10 +51,10 @@ public class CreateTicketStatusDatabase {
             if (resultSet.next()) {
                 resultTicketStatus = new TicketStatus(
                         resultSet.getInt("id"),
-                        TicketStatusEnum.valueOf(resultSet.getString("status")),
+                        TicketStatusEnum.fromString(resultSet.getString("status")),
                         resultSet.getString("description"),
                         new DateTime(resultSet.getObject("ts_Date", LocalDateTime.class)),
-                        resultSet.getInt("idTicket")
+                        resultSet.getInt("id_Ticket")
                 );
             }
         } finally {
