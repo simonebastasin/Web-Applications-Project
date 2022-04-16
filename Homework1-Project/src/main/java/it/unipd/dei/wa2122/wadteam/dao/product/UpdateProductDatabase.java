@@ -59,8 +59,8 @@ public class UpdateProductDatabase {
             preparedStatement.setString(2, product.getBrand());
             preparedStatement.setString(3, product.getDescription());
             preparedStatement.setInt(4, product.getQuantity());
-            preparedStatement.setDouble(5, product.getPurchase());
-            preparedStatement.setDouble(6, product.getSale());
+            preparedStatement.setDouble(5, product.getPurchasePrice());
+            preparedStatement.setDouble(6, product.getSalePrice());
             preparedStatement.setString(7, product.getCategory().getName());
             preparedStatement.setBoolean(8, product.getEvidence());
             preparedStatement.setString(9, product.getAlias());

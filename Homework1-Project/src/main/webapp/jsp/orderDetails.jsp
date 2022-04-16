@@ -22,7 +22,7 @@
     <c:forEach var="prod" items="${onlineOrder.products}">
         <li>
             Product name: ${prod.name} <br>
-            Price: ${prod.sale}€ <br>
+            Price: ${prod.salePrice}€ <br>
             Quantity: ${prod.quantity} <br>
             <br>
             <a href="<c:url value="/ticket/create"/>/${prod.alias}">Open Ticket</a>

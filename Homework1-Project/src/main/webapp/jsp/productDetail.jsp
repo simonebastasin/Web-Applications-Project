@@ -25,11 +25,11 @@
         <li>Quantity: ${product.quantity}</li>
         <c:choose>
             <c:when test="${not empty product.discount}">
-                <li>Price: <span  style="text-decoration: line-through;">${product.sale}€</span> <span style="color: red;">${product.discountSale}€</span></li>
+                <li>Price: <span  style="text-decoration: line-through;">${product.salePrice}€</span> <span style="color: red;">${product.discountSale}€</span></li>
                 <li>Discount: ${product.discount.percentage}% (until ${product.discount.endDate.humanDate})</li>
             </c:when>
             <c:otherwise>
-                <li>Price: ${product.sale}€</li>
+                <li>Price: ${product.salePrice}€</li>
             </c:otherwise>
         </c:choose>
     </ul>

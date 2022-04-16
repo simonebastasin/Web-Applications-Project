@@ -24,10 +24,10 @@ Quantity selected: <c:out value="${pageContext.request.getParameter('quantity')}
 
 <c:choose>
     <c:when test="${not empty product.discount}">
-        Total price: <span  style="text-decoration: line-through;"><c:out value="${product.sale*pageContext.request.getParameter('quantity')}"/>€</span> <span style="color: red;"><c:out value="${product.discountSale*pageContext.request.getParameter('quantity')}"/>€</span> <br>
+        Total price: <span  style="text-decoration: line-through;"><c:out value="${product.salePrice*pageContext.request.getParameter('quantity')}"/>€</span> <span style="color: red;"><c:out value="${product.discountSale*pageContext.request.getParameter('quantity')}"/>€</span> <br>
     </c:when>
     <c:otherwise>
-        Total price: <c:out value="${product.sale*pageContext.request.getParameter('quantity')}€"/> <br>
+        Total price: <c:out value="${product.salePrice*pageContext.request.getParameter('quantity')}€"/> <br>
     </c:otherwise>
 </c:choose>
 

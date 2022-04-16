@@ -26,7 +26,7 @@
             <c:forEach var="prod" items="${order.products}">
                 <li>
                     Product name: ${prod.name} <br>
-                    Price: ${prod.sale}€ <br>
+                    Price: ${prod.salePrice}€ <br>
                     Quantity: ${prod.quantity} <br>
                 </li>
             </c:forEach>

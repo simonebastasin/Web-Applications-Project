@@ -28,14 +28,14 @@ ${category.description}
         <c:forEach var="prod" items="${productList}">
             <c:choose>
                 <c:when test="${not empty prod.discount}">
-                    <li>Product name: <a href="<c:url value="/products/details/${prod.alias}"/>">${prod.name}</a>  - Brand: ${prod.brand} - Quantity: ${prod.quantity} - Price: <span  style="text-decoration: line-through;">${prod.sale}€</span> <span style="color: red;">${prod.discountSale}€</span><br>
+                    <li>Product name: <a href="<c:url value="/products/details/${prod.alias}"/>">${prod.name}</a>  - Brand: ${prod.brand} - Quantity: ${prod.quantity} - Price: <span  style="text-decoration: line-through;">${prod.salePrice}€</span> <span style="color: red;">${prod.discountSale}€</span><br>
                         <c:forEach var="picture" items="${prod.pictures}">
                             <img src="<c:url value="/viewmedia/${picture.id}"/>" alt="${picture.filename}" width="100px"/>
                         </c:forEach>
                     </li>
                 </c:when>
                 <c:otherwise>
-                    <li>Product name: <a href="<c:url value="/products/details/${prod.alias}"/>">${prod.name}</a>  - Brand: ${prod.brand} - Quantity: ${prod.quantity} - Price${prod.sale}€<br>
+                    <li>Product name: <a href="<c:url value="/products/details/${prod.alias}"/>">${prod.name}</a>  - Brand: ${prod.brand} - Quantity: ${prod.quantity} - Price${prod.salePrice}€<br>
                         <c:forEach var="picture" items="${prod.pictures}">
                             <img src="<c:url value="/viewmedia/${picture.id}"/>" alt="${picture.filename}" width="100px"/>
                         </c:forEach>

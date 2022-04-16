@@ -100,7 +100,7 @@ public class CreateOnlineOrderDatabase {
                     pstmtProduct.setInt(1, id);
                     pstmtProduct.setString(2, item.getAlias());
                     pstmtProduct.setInt(3, item.getQuantity());
-                    pstmtProduct.setDouble(4, item.getSale());
+                    pstmtProduct.setDouble(4, item.getSalePrice());
 
                     rsProduct = pstmtProduct.executeQuery();
 

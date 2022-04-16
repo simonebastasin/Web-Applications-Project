@@ -42,9 +42,9 @@ public class Product implements Resource {
 
     public final String getDescription() { return  description; }
 
-    public final double getPurchase() { return purchasePrice; }
+    public final double getPurchasePrice() { return purchasePrice; }
 
-    public final double getSale() { return salePrice; }
+    public final double getSalePrice() { return salePrice; }
 
     public final int getQuantity() { return quantity; }
 

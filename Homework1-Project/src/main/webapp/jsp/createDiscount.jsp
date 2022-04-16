@@ -164,7 +164,7 @@
         ${prod.alias}&nbsp
         <a href="<c:url value="/productDetail/${prod.alias}"/>">${prod.name}</a>&nbsp
         ${prod.brand}&nbsp
-        ${prod.sale}&nbsp
+        ${prod.salePrice}&nbsp
         ${prod.quantity}&nbsp
         ${prod.category}&nbsp
         ${prod.evidence}<br>

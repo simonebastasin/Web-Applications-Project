@@ -61,8 +61,8 @@ public class CreateProductDatabase {
             preparedStatement.setString(3, product.getBrand());
             preparedStatement.setString(4, product.getDescription());
             preparedStatement.setInt(5, product.getQuantity());
-            preparedStatement.setDouble(6, product.getPurchase());
-            preparedStatement.setDouble(7, product.getSale());
+            preparedStatement.setDouble(6, product.getPurchasePrice());
+            preparedStatement.setDouble(7, product.getSalePrice());
             preparedStatement.setString(8, product.getCategory().getName());
             preparedStatement.setBoolean(9, product.getEvidence());
 

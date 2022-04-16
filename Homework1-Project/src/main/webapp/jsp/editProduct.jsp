@@ -21,9 +21,9 @@
         <label for="description">Description:</label><br>
         <input type="text" id="description" name="description" value="${product.description}"/><br>
         <label for="purchase">Purchase price:</label><br>
-        €<input type="number" min="0.01" step="0.01" max="2500" id="purchase" name="purchase" value="${product.purchase}"/><br>
+        €<input type="number" min="0.01" step="0.01" max="2500" id="purchase" name="purchase" value="${product.purchasePrice}"/><br>
         <label for="sale">Sale price:</label><br>
-        €<input type="number" min="0.01" step="0.01" max="2500" id="sale" name="sale" value="${product.sale}"/><br>
+        €<input type="number" min="0.01" step="0.01" max="2500" id="sale" name="sale" value="${product.salePrice}"/><br>
         <label for="quantity">Quantity:</label><br>
         <input type="number" min="1" step="1" id="quantity" name="quantity" value="${product.quantity}"/><br>
         <label for="category">Category:</label><br>

@@ -38,7 +38,7 @@
             <td><a href="<c:url value="/products/details/${prod.alias}"/>">${prod.name}</a></td>
             <td>${prod.alias}</td>
             <td>${prod.brand}</td>
-            <td>${prod.sale}</td>
+            <td>${prod.salePrice}</td>
             <td>${prod.quantity}</td>
             <td>${prod.evidence}</td>
             <td><a href="<c:url value="/management/productManagement/editProduct/${prod.alias}"/>">Edit</a></td>
