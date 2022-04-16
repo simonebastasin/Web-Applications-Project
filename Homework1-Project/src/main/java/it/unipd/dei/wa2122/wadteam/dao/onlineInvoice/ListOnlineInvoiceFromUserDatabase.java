@@ -58,7 +58,7 @@ public class ListOnlineInvoiceFromUserDatabase {
                 int id = resultSet.getInt("oi.ID");
                 int idOrder = resultSet.getInt("oi.ID_Order");
                 String transactionId = resultSet.getString("oi.Transaction_ID");
-                PaymentMethodOnlineEnum paymentType = PaymentMethodOnlineEnum.valueOf(resultSet.getString("oi.Payment_Type "));
+                PaymentMethodOnlineEnum paymentType = PaymentMethodOnlineEnum.fromString(resultSet.getString("oi.Payment_Type "));
                 DateTime date = resultSet.getObject("oi.OI_Date  ", DateTime.class);
                 Double totalPrice=resultSet.getDouble("oi.Total_Price");
 

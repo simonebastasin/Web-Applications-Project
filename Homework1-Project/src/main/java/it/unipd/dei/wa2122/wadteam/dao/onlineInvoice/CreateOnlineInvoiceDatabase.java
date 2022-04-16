@@ -67,7 +67,7 @@ public class CreateOnlineInvoiceDatabase {
                         resultSet.getInt("id"),
                         new GetOnlineOrderByIdDatabase(con, idOrder).getOnlineOrderId(), //rs.getInt("id_order"),
                         resultSet.getString("transaction_id"),
-                        PaymentMethodOnlineEnum.valueOf(resultSet.getString("payment_type")),
+                        PaymentMethodOnlineEnum.fromString(resultSet.getString("payment_type")),
                         new DateTime(resultSet.getObject("oi_date", LocalDateTime.class)),
                         resultSet.getDouble("total_price")
                 );

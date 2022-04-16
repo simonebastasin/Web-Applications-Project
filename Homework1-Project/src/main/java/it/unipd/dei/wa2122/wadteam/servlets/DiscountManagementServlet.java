@@ -125,20 +125,20 @@ public class DiscountManagementServlet extends AbstractDatabaseServlet{
      */
     private void postCreateDiscount(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 
-        int percentage = Integer.valueOf(req.getParameter("percentage"));
+        int percentage = Integer.parseInt(req.getParameter("percentage"));
 
 
         //StartDate
-        int startDateday = Integer.valueOf(req.getParameter("startDateday"));
-        int startDatemonth = Integer.valueOf(req.getParameter("startDatemonth"));
-        int startDateyear = Integer.valueOf(req.getParameter("startDateyear"));
+        int startDateday = Integer.parseInt(req.getParameter("startDateday"));
+        int startDatemonth = Integer.parseInt(req.getParameter("startDatemonth"));
+        int startDateyear = Integer.parseInt(req.getParameter("startDateyear"));
 
 
         DateTime startDate = new DateTime(LocalDateTime.of(startDateyear, startDatemonth, startDateday, 0,0,0));
         //StartDate
-        Integer endDateday = Integer.valueOf(req.getParameter("endDateday"));
-        Integer endDatemonth = Integer.valueOf(req.getParameter("endDatemonth"));
-        Integer endDateyear = Integer.valueOf(req.getParameter("endDateyear"));
+        Integer endDateday = Integer.parseInt(req.getParameter("endDateday"));
+        Integer endDatemonth = Integer.parseInt(req.getParameter("endDatemonth"));
+        Integer endDateyear = Integer.parseInt(req.getParameter("endDateyear"));
 
         DateTime endDate = new DateTime(LocalDateTime.of(endDateyear, endDatemonth, endDateday, 0,0,0));
 

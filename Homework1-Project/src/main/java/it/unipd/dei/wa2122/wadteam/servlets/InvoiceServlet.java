@@ -110,11 +110,11 @@ public class InvoiceServlet extends AbstractDatabaseServlet{
 
     private void postCreateInvoice(HttpServletRequest req, HttpServletResponse resp, String param) throws IOException, ServletException {
         try {
-            OnlineOrder onlineOrder = new GetOnlineOrderByIdDatabase(getDataSource().getConnection(), Integer.valueOf(param)).getOnlineOrderId();
+            OnlineOrder onlineOrder = new GetOnlineOrderByIdDatabase(getDataSource().getConnection(), Integer.parseInt(param)).getOnlineOrderId();
             String transactionId = req.getParameter("transactionId");
-            PaymentMethodOnlineEnum paymentType = PaymentMethodOnlineEnum.valueOf(req.getParameter("paymentType"));
+            PaymentMethodOnlineEnum paymentType = PaymentMethodOnlineEnum.fromString(req.getParameter("paymentType"));
             DateTime oiDate = new DateTime(LocalDateTime.now());
-            double totalPrice = Double.valueOf(req.getParameter("totalPrice"));
+            double totalPrice = Double.parseDouble(req.getParameter("totalPrice"));
 
             OnlineInvoice temp = new OnlineInvoice(null, onlineOrder,transactionId,paymentType,oiDate,totalPrice );
 

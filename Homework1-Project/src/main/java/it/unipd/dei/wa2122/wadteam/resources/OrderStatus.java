@@ -55,7 +55,7 @@ public class OrderStatus implements Resource {
 
     public static OrderStatus fromJSON(JSONObject jsonObject) {
         int id = jsonObject.getInt("id");
-        OrderStatusEnum status = OrderStatusEnum.valueOf(jsonObject.getString("status"));
+        OrderStatusEnum status = OrderStatusEnum.fromString(jsonObject.getString("status"));
         String description = jsonObject.getString("description");
         DateTime osDateTime = DateTime.fromJSON(jsonObject.getJSONObject("osDateTime"));
         int idOrder = jsonObject.getInt("idOrder");

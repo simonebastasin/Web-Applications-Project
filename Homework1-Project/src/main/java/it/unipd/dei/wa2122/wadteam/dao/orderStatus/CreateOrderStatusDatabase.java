@@ -52,7 +52,7 @@ public class CreateOrderStatusDatabase {
             if (resultSet.next()) {
                 resultOrderStatus = new OrderStatus(
                         resultSet.getInt("id"),
-                        OrderStatusEnum.valueOf(resultSet.getString("status")),
+                        OrderStatusEnum.fromString(resultSet.getString("status")),
                         resultSet.getString("description"),
                         new DateTime(resultSet.getObject("oo_datetime", LocalDateTime.class)),
                         resultSet.getInt("id_order")
