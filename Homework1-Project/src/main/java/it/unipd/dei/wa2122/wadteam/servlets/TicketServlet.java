@@ -22,13 +22,17 @@ public class TicketServlet extends AbstractDatabaseServlet {
         String path = req.getPathInfo() != null ? req.getPathInfo().substring(1).lastIndexOf('/') != -1 ? req.getPathInfo().substring(1,req.getPathInfo().lastIndexOf('/')) : req.getPathInfo().substring(1) : "";
         String param = req.getPathInfo() != null ? req.getPathInfo().substring(1).lastIndexOf('/') != -1 ? req.getPathInfo().substring(req.getPathInfo().lastIndexOf('/')+1) : "" : "";
 
-        switch (path) {
-            case "create" -> getCreateTicket(req, resp);
-            case "list" -> getListTicket(req, resp);
-            case "detail" -> getDetailTicket(req, resp, path, param);
-            case "respond" -> getRespondTicket(req, resp, param);
-            default ->  writeError(req, resp, GenericError.PAGE_NOT_FOUND);
+        if (req.getSession(false) != null && req.getSession(false).getAttribute(USER_ATTRIBUTE) != null) {
+            switch (path) {
+                case "create" -> getCreateTicket(req, resp);
+                case "list" -> getListTicket(req, resp);
+                case "detail" -> getDetailTicket(req, resp, path, param);
+                case "respond" -> getRespondTicket(req, resp, param);
+                default -> writeError(req, resp, GenericError.PAGE_NOT_FOUND);
+            }
         }
+        else
+            writeError(req, resp, GenericError.UNAUTHORIZED);
 
     }
 
@@ -115,12 +119,16 @@ public class TicketServlet extends AbstractDatabaseServlet {
         String path = req.getPathInfo() != null ? req.getPathInfo().substring(1).lastIndexOf('/') != -1 ? req.getPathInfo().substring(1,req.getPathInfo().lastIndexOf('/')) : req.getPathInfo().substring(1) : "";
         String param = req.getPathInfo() != null ? req.getPathInfo().substring(1).lastIndexOf('/') != -1 ? req.getPathInfo().substring(req.getPathInfo().lastIndexOf('/')+1) : "" : "";
 
-        switch (path) {
-            case "create" -> postCreateTicket(req, resp, param);
-            case "detail" -> getDetailTicket(req, resp, path, param);
-            case "respond" -> postRespondTicket(req, resp, param);
-            default ->  writeError(req, resp, GenericError.PAGE_NOT_FOUND);
+        if (req.getSession(false) != null && req.getSession(false).getAttribute(USER_ATTRIBUTE) != null) {
+            switch (path) {
+                case "create" -> postCreateTicket(req, resp, param);
+                case "detail" -> getDetailTicket(req, resp, path, param);
+                case "respond" -> postRespondTicket(req, resp, param);
+                default -> writeError(req, resp, GenericError.PAGE_NOT_FOUND);
+            }
         }
+        else
+            writeError(req, resp, GenericError.UNAUTHORIZED);
     }
 
     private void postRespondTicket(HttpServletRequest req, HttpServletResponse resp, String param) throws IOException, ServletException {
