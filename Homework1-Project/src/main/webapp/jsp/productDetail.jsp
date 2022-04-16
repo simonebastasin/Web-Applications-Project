@@ -8,6 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--@elvariable id="product" type="Product"--%>
+<%--@elvariable id="user" type="it.unipd.dei.wa2122.wadteam.resources.UserCredential"--%>
 
 <html>
 <head>
@@ -36,12 +37,17 @@
 
 <hr />
 
-    <form method="POST" action="<c:url value="/buy/product/${product.alias}"/>">
-        <label for="quantity">Selected quantity</label>
-        <input type="number" name ="quantity" max="${product.quantity}" min="1" id="quantity" required> <br>
+<c:choose>
+    <c:when test="${not empty user && empty user.role}">
+        <form method="POST" action="<c:url value="/buy/product/${product.alias}"/>">
+            <label for="quantity">Selected quantity</label>
+            <input type="number" name ="quantity" max="${product.quantity}" min="1" id="quantity" required> <br>
 
-        <input type ="submit" value = "Buy now">
-    </form>
+            <input type ="submit" value = "Buy now">
+        </form>
+    </c:when>
+</c:choose>
+
     <%@ include file="/html/include/footer.html"%>
 </body>
 </html>

@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.sql.SQLException;
 import java.util.Arrays;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.groupingBy;
@@ -143,39 +144,39 @@ public abstract class AbstractServlet extends HttpServlet {
      */
     public void writeResource(HttpServletRequest request, HttpServletResponse response, String jsp, boolean showOneItemAsItem, Resource... resources) throws IOException, ServletException {
         try {
-        var resourcesMap = Arrays.stream(resources).collect(groupingBy(Resource::getClass));
+            var resourcesMap = Arrays.stream(resources).filter(Objects::nonNull).collect(groupingBy(Resource::getClass));
 
-        if(request.getHeader("Accept").contains("application/json")) {
-            response.setContentType(JSON_UTF_8_MEDIA_TYPE);
+            if(request.getHeader("Accept").contains("application/json")) {
+                response.setContentType(JSON_UTF_8_MEDIA_TYPE);
 
-            JSONObject jsonObject = new JSONObject();
+                JSONObject jsonObject = new JSONObject();
 
-            if(resourcesMap.entrySet().size() == 1) {
-                writeJSON(response, new JSONArray(Arrays.stream(resources).map(Resource::toJSON).toArray()));
+                if(resourcesMap.entrySet().size() == 1) {
+                    writeJSON(response, new JSONArray(Arrays.stream(resources).map(Resource::toJSON).toArray()));
+                    } else {
+                        for (var item : resourcesMap.entrySet()) {
+                            if (showOneItemAsItem && item.getValue().size() == 1) {
+                                jsonObject.put(decapitalize(item.getKey().getSimpleName()), item.getValue().get(0).toJSON());
+                            } else {
+                                jsonObject.put(decapitalize(item.getKey().getSimpleName()) + "List", new JSONArray(item.getValue().stream().map(Resource::toJSON).toArray()));
+                            }
+                        }
+                        writeJSON(response, jsonObject);
+                    }
                 } else {
+                var list = new ListProductCategoryDatabase(getDataSource().getConnection()).getProductCategory();
+                request.setAttribute("categories", list);
                     for (var item : resourcesMap.entrySet()) {
                         if (showOneItemAsItem && item.getValue().size() == 1) {
-                            jsonObject.put(decapitalize(item.getKey().getSimpleName()), item.getValue().get(0).toJSON());
+                            request.setAttribute(decapitalize(item.getKey().getSimpleName()), item.getValue().get(0));
                         } else {
-                            jsonObject.put(decapitalize(item.getKey().getSimpleName()) + "List", new JSONArray(item.getValue().stream().map(Resource::toJSON).toArray()));
+                            request.setAttribute(decapitalize(item.getKey().getSimpleName()) + "List", item.getValue());
                         }
                     }
-                    writeJSON(response, jsonObject);
+                    if(request.getSession(false) != null)
+                        request.setAttribute(USER_ATTRIBUTE, request.getSession(false).getAttribute(USER_ATTRIBUTE));
+                    request.getRequestDispatcher(jsp).forward(request, response);
                 }
-            } else {
-            var list = new ListProductCategoryDatabase(getDataSource().getConnection()).getProductCategory();
-            request.setAttribute("categories", list);
-                for (var item : resourcesMap.entrySet()) {
-                    if (showOneItemAsItem && item.getValue().size() == 1) {
-                        request.setAttribute(decapitalize(item.getKey().getSimpleName()), item.getValue().get(0));
-                    } else {
-                        request.setAttribute(decapitalize(item.getKey().getSimpleName()) + "List", item.getValue());
-                    }
-                }
-                if(request.getSession(false) != null)
-                    request.setAttribute(USER_ATTRIBUTE, request.getSession(false).getAttribute(USER_ATTRIBUTE));
-                request.getRequestDispatcher(jsp).forward(request, response);
-            }
         } catch (SQLException e) {
             writeError(request, response, new ErrorMessage.SqlInternalError(e.getMessage()));
         }

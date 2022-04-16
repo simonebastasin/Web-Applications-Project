@@ -91,16 +91,22 @@ public class HomePageServlet extends AbstractDatabaseServlet{
 
         try {
             category = new GetProductCategoryDatabase((getDataSource().getConnection()), param).getProductCategory();
-            products = new GetListProductByCategoryDatabase(getDataSource().getConnection(), param).getListProductByCategory();
 
-            List<Resource> list = new ArrayList<>();
-            list.add(category);
-            for(var prod : products){
-                if (prod.getQuantity() > 0)
-                    list.add(prod);
+
+            if(category != null){
+                products = new GetListProductByCategoryDatabase(getDataSource().getConnection(), param).getListProductByCategory();
+                List<Resource> list = new ArrayList<>();
+                list.add(category);
+                for(var prod : products){
+                    if (prod.getQuantity() > 0)
+                        list.add(prod);
+                }
+
+                writeResource(req, res, "/jsp/categoryDetail.jsp", false, list.toArray(products.toArray(Resource[]::new)));
             }
+            else writeError(req, res, GenericError.PAGE_NOT_FOUND);
 
-            writeResource(req, res, "/jsp/categoryDetail.jsp", false, list.toArray(products.toArray(Resource[]::new)));
+
 
         } catch (SQLException e) {
             logger.error(e.getMessage());
@@ -115,7 +121,11 @@ public class HomePageServlet extends AbstractDatabaseServlet{
         try {
             product = new GetProductDatabase((getDataSource().getConnection()), param).getProduct();
 
-            writeResource(req, res, "/jsp/productDetail.jsp", true, product);
+            if(product != null){
+                writeResource(req, res, "/jsp/productDetail.jsp", true, product);
+            }
+            else writeError(req, res, GenericError.PAGE_NOT_FOUND);
+
 
         } catch (SQLException e) {
             writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
