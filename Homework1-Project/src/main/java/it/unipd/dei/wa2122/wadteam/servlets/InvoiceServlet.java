@@ -23,7 +23,7 @@ public class InvoiceServlet extends AbstractDatabaseServlet{
         switch (path) {
             case "create" -> getCreateInvoice(req, resp);
             case "list" -> getListInvoice(req, resp);
-            case "detail" -> getDetailInvoice(req, resp, path, param);
+            case "detail" -> getDetailInvoice(req, resp, param);
             default ->  writeError(req, resp, GenericError.PAGE_NOT_FOUND);
         }
 
@@ -37,12 +37,12 @@ public class InvoiceServlet extends AbstractDatabaseServlet{
         }
     }
 
-    private void getDetailInvoice(HttpServletRequest req, HttpServletResponse resp, String path, String param) throws IOException, ServletException {
+    private void getDetailInvoice(HttpServletRequest req, HttpServletResponse resp, String param) throws IOException, ServletException {
         if(param.chars().allMatch( Character::isDigit ) && !param.equals("")) {
             var ut = ((UserCredential) req.getSession(false).getAttribute(USER_ATTRIBUTE)).getType();
             switch (ut) {
                 case CUSTOMER -> {
-                    int id = Integer.parseInt(path);
+                    int id = Integer.parseInt(param);
 
                     try {
                         OnlineInvoice onlineInvoice = new GetOnlineInvoice(getDataSource().getConnection(), id).getOnlineInvoice();
@@ -58,7 +58,7 @@ public class InvoiceServlet extends AbstractDatabaseServlet{
 
                 }
                 case EMPLOYEE -> {
-                    int id = Integer.parseInt(path);
+                    int id = Integer.parseInt(param);
 
                     try {
                         OnlineInvoice onlineInvoice = new GetOnlineInvoice(getDataSource().getConnection(), id).getOnlineInvoice();
