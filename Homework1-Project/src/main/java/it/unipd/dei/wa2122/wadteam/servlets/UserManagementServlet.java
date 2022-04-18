@@ -118,20 +118,14 @@ public class UserManagementServlet extends AbstractDatabaseServlet {
         try {
             roleList = new ListRoleDatabase(getDataSource().getConnection()).getRole();
             employee = new GetEmployeeDatabase(getDataSource().getConnection(), param).getEmployee();
-            /*
-            for(var role : roleList){
-                lists.add(role);
-            }
-
-             */
-
-            if(employee != null){
+            if(employee != null) {
                 lists.add(employee);
                 lists.addAll(roleList);
-
                 writeResource(req, res, "/jsp/editEmployee.jsp", false, lists.toArray(roleList.toArray(Resource[]::new)));
             }
-            else writeError(req,res,GenericError.PAGE_NOT_FOUND);
+            else {
+                writeError(req, res, GenericError.PAGE_NOT_FOUND);
+            }
         } catch (SQLException e) {
             logger.error(e.getMessage());
             writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
@@ -176,7 +170,12 @@ public class UserManagementServlet extends AbstractDatabaseServlet {
         Employee employee;
         try {
             employee = new GetEmployeeDatabase(getDataSource().getConnection(), param).getEmployee();
-            writeResource(req, res, "/jsp/deleteEmployee.jsp", true, employee);
+            if(employee != null) {
+                writeResource(req, res, "/jsp/deleteEmployee.jsp", true, employee);
+            }
+            else {
+                writeError(req, res, GenericError.PAGE_NOT_FOUND);
+            }
         } catch (SQLException e) {
             logger.error(e.getMessage());
             writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));

@@ -21,41 +21,43 @@
 
 
 <c:forEach var="employee" items="${employeeList}">
-<form method="POST" action="">
-    <label for="username">Username:</label><br>
-    <input type="text" id="username" name="username" value="${employee.username}" readonly><br>
-    <label for="name">Name:</label><br>
-    <input type="text" id="name" name="name" value="${employee.name}"><br>
-    <label for="surname">Surname:</label><br>
-    <input type="text" id="surname" name="surname" value="${employee.surname}"><br>
-    <label for="role">Role:</label><br>
-    <select id="role" name="role">
-        <c:forEach var="role" items="${roleList}">
+    <form method="POST" action="">
 
-            <c:choose>
-                <c:when test="${role.name != employee.role}">
-                    <option value="${role.name}">
-                            ${role.name}
-                    </option>
-                </c:when>
-                <c:otherwise>
-                    <option value="${role.name}" selected>
-                            ${role.name}
-                    </option>
-                </c:otherwise>
-            </c:choose>
+        <label for="username">Username:</label><br>
+        <input type="text" id="username" name="username" value="${employee.username}" readonly><br>
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name" value="${employee.name}"><br>
+        <label for="surname">Surname:</label><br>
+        <input type="text" id="surname" name="surname" value="${employee.surname}"><br>
 
+        <label for="role">Role:</label><br>
+        <select id="role" name="role">
+            <c:forEach var="role" items="${roleList}">
+                <c:choose>
+                    <c:when test="${role.name != employee.role}">
+                        <option value="${role.name}">
+                                ${role.name}
+                        </option>
+                    </c:when>
+                    <c:otherwise>
+                        <option value="${role.name}" selected>
+                                ${role.name}
+                        </option>
+                    </c:otherwise>
+                </c:choose>
+            </c:forEach>
+        </select><br>
 
+        <label for="password">Password:</label><br>
+        <input type="text" id="password" name="password" value="${employee.surname}" readonly><br>
 
+        <br>
+        <input type="submit" value="Submit">
 
-        </c:forEach>
-    </select><br>
-    <label for="password">Password:</label><br>
-    <input type="text" id="password" name="password" value="${employee.surname}" readonly><br>
-    <input type="submit" value="Submit">
-</form>
-
+    </form>
 </c:forEach>
+
+
 <%@ include file="/html/include/footer.html"%>
 </body>
 </html>
