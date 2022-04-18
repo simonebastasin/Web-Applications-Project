@@ -72,23 +72,24 @@ public class OrderManagementServlet extends AbstractDatabaseServlet {
      * @throws ServletException
      */
     private void getEditOrder(HttpServletRequest req, HttpServletResponse res, String param) throws IOException, ServletException {
-        // TODO
-        OnlineOrder order = null;
-
-        try {
-            order = new GetOnlineOrderByIdDatabase(getDataSource().getConnection(), Integer.parseInt(param)).getOnlineOrderId();
-
-            if(order != null) writeResource(req, res, "/jsp/editOrder.jsp", false, order);
-            else writeError(req,res,GenericError.PAGE_NOT_FOUND);
-
-        } catch (SQLException e) {
-            logger.error(e.getMessage());
-            writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
+        OnlineOrder order;
+        if (param.chars().allMatch(Character::isDigit) && !param.equals("")) {
+            int intParam = Integer.parseInt(param);
+            try {
+                order = new GetOnlineOrderByIdDatabase(getDataSource().getConnection(), intParam).getOnlineOrderId();
+                if(order != null) {
+                    writeResource(req, res, "/jsp/editOrder.jsp", false, order);
+                }
+                else {
+                    writeError(req,res,GenericError.PAGE_NOT_FOUND);
+                }
+            } catch (SQLException e) {
+                logger.error(e.getMessage());
+                writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
+            }
+        } else {
+            writeError(req, res, new ErrorMessage.IncorrectlyFormattedPathError("path aren't a number"));
         }
-
-
-
-        writeJsp(req, res,"/jsp/orderManagement.jsp");
     }
 
     /**
@@ -100,8 +101,25 @@ public class OrderManagementServlet extends AbstractDatabaseServlet {
      * @throws ServletException
      */
     private void postEditOrder(HttpServletRequest req, HttpServletResponse res, String param) throws IOException, ServletException {
-        // TODO
-        writeJsp(req, res,"/jsp/orderManagement.jsp");
+        // TODO: get new params
+        /* e.g.:
+        String idOrder = req.getParameter("username");
+        Role role = new Role(req.getParameter("role"));
+        */
+        OnlineOrder order;
+        if (param.chars().allMatch(Character::isDigit) && !param.equals("")) {
+            try {
+                int intParam = Integer.parseInt(param);
+                order = new GetOnlineOrderByIdDatabase(getDataSource().getConnection(), intParam).getOnlineOrderId();
+                int idOrder = new UpdateOnlineOrderDatabase((getDataSource().getConnection()), order).updateOnlineOrder();
+                res.sendRedirect(req.getContextPath() + "/management/orderManagement");
+            } catch (SQLException e) {
+                logger.error(e.getMessage());
+                writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
+            }
+        } else {
+            writeError(req, res, new ErrorMessage.IncorrectlyFormattedPathError("path aren't a number"));
+        }
     }
 
     /**
