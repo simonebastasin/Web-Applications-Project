@@ -16,19 +16,11 @@
     <c:import url="/jsp/include/header.jsp"/>
 
         <c:forEach var="invoice" items="${onlineInvoiceList}">
-            <il><b>Invoice ID: ${invoice.id}</b></il>
-            <li>Transaction ID: ${invoice.transactionId}</li>
-            <li>Payment Type: ${invoice.paymentType}</li>
+            <li><b>Invoice ID: ${invoice.id}</b></li>
             <li>Date: ${invoice.oiDate}</li>
             <li>Price: ${invoice.totalPrice}</li>
 
-            <h2>Product list:</h2>
-
-            <c:forEach var="product" items="${invoice.idOrder}">
-
-                <il><b>Product ID: ID: ${product.alias}</b></il>
-
-            </c:forEach>
+            <li><a href="<c:url value="/invoice/detail/${invoice.id}"/>">Detail Invoice</a></li>
 
         </c:forEach>
 
