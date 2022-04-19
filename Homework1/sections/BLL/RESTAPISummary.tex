@@ -5,30 +5,38 @@
 \begin{longtable}{|p{.375\columnwidth}|p{.1\columnwidth} |p{.35\columnwidth}|p{.1\columnwidth}|} 
 \hline
 \textbf{URI} & \textbf{Method} & \textbf{Description} & \textbf{Filter} \\\hline
-/ & GET \& POST & return a list of category and product  &  \\\hline
-/buy/product ? & GET \& POST & performs a check on the product order if it is eligible or not & C\\\hline
-/buy/confirmed ? & GET \& POST & finalize an order & C\\\hline
-/buy/ & & &\\\hline
-/invoice/ & & &\\\hline
-/products/details/\textit{product alias}/ & GET \& POST & return product details & \\\hline
-/products/category/\textit{category name}/ & GET \& POST & returns a list of products from the category & \\\hline
-/products/search/ & GET \& POST & returns a list of products matching your search text & \\\hline
-/products/ & & &\\\hline
-/session/login/ & POST & login via a session &  \\\hline
-/session/logout/ & GET & logout via a session &  \\\hline
-/session/register/ & POST & register customer amd login via session &  \\\hline
-/session/ & & &\\\hline
-/media/list/ & GET & returns a list containing id, mimetype and name of uploaded media & E\\\hline
-/media/upload/ & POST &  api for the uplaod of an image & E\\\hline
-/media/view/\textit{image id}/ & GET \& POST &  view media &  \\\hline
-/media/thumb/\textit{image id}/ & GET \& POST & view thumb of media &  \\\hline
-/order/ & & &\\\hline
-/ticket/ & & &\\\hline
-/user/ & & &\\\hline
-/management/discount/ & & &\\\hline
-/management/order/ & & &\\\hline
-/management/product/ & & &\\\hline
-/management/user/ & & &\\\hline
+\texttt{/rest/} & GET \& POST & return a list of category and a list of product  &  \\\hline
+%\texttt{/rest/buy/product} ? & GET \& POST & performs a check on the product order if it is eligible or not & C\\\hline
+%\texttt{/rest/buy/confirmed} ? & GET \& POST & finalize an order & C\\\hline
+%\texttt{/rest/buy/} & & & C\\\hline
+\texttt{/rest/products/details/}\textit{product alias} & GET \& POST & return product details & \\\hline
+%\texttt{/rest/products/list/} & GET \& POST & return list of product & \\\hline
+\texttt{/rest/products/category/}\textit{category name} & GET \& POST & returns a list of products belonging to a category & \\\hline
+%\texttt{/rest/products/category/} & GET \& POST & returns a list of all category & \\\hline
+\texttt{/rest/products/search/} & GET \& POST & returns a list of products matching your search text & \\\hline
+\texttt{/rest/session/login/} & POST & login via a session &  \\\hline
+\texttt{/rest/session/logout/} & GET & logout via a session &  \\\hline
+\texttt{/rest/session/register/} & POST & register customer amd login via session &  \\\hline
+\texttt{/rest/media/list/} & GET & returns a list containing id, mimetype and name of uploaded media & E\\\hline
+\texttt{/rest/media/upload/} & POST &  api for the upload of an image & E\\\hline
+\texttt{/rest/media/view/}\textit{image id} & GET \& POST &  view media &  \\\hline
+\texttt{/rest/media/thumb/}\textit{image id} & GET \& POST & view thumb of media &  \\\hline
+\texttt{/rest/order/list/} & GET \& POST & view order list (if customer can only see their own order, if employee all of them) & L\\\hline
+\texttt{/rest/order/detail/}\textit{order id} & GET \& POST & view order detail (if customer can only see their own order, if employee all of them) & L\\\hline
+\texttt{/rest/invoice/list/} & GET \& POST & view invoice list (if customer can only see their own invoices, if employee all of them) & L\\\hline
+\texttt{/rest/invoice/detail/}\textit{invoice id} & GET \& POST & view invoice detail from invoice id (if customer can only see their own invoices, if employee all of them) & L\\\hline
+\texttt{/rest/invoice/order/}\textit{order id} & GET \& POST & view invoice detail from order id (if customer can only see their own invoices, if employee all of them) & L\\\hline
+\texttt{/rest/ticket/create/} & POST  & create a ticket & C \\\hline
+\texttt{/rest/ticket/list/} & GET \& POST  & list of ticket (if customer can only see their own invoices, if employee all of them) & L \\\hline
+\texttt{/rest/ticket/detail/}\textit{ticket id} & GET \& POST & detail of a ticket from ticket id (if customer can only see their own invoices, if employee all of them) & L \\\hline
+\texttt{/rest/ticket/respond/}\textit{ticket id} & GET \& POST & respond a ticket: create ticket status & E \\\hline
+\texttt{/rest/user/info} & GET & view personal data & L \\\hline
+\texttt{/rest/user/modify} & POST & update personal data & L\\\hline
+\texttt{/rest/user/password} & POST & edit password & L\\\hline
+\texttt{/rest/management/discount/} & & &\\\hline
+\texttt{/rest/management/order/} & & &\\\hline
+\texttt{/rest/management/product/} & & &\\\hline
+\texttt{/rest/management/user/} & & &\\\hline
 
 \caption{Describe in this table your REST API}
 \label{tab:termGlossary}
