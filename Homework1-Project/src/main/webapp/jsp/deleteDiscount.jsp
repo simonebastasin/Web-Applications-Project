@@ -6,6 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <html>
 <head>
     <title>Delete Discount</title>
@@ -26,8 +28,8 @@ Discount you are deleting:<br><br>
     <tr>
         <td>${discountListProduct.discount.id}</td>
         <td>${discountListProduct.discount.percentage}</td>
-        <td>${discountListProduct.discount.startDate}</td>
-        <td>${discountListProduct.discount.endDate}</td>
+        <td>${discountListProduct.discount.startDate.getHumanDateTimeless()}</td>
+        <td>${discountListProduct.discount.endDate.getHumanDateTimeless()}</td>
 
         <td>
             <c:forEach var="prod" items="${discountListProduct.productList}">
