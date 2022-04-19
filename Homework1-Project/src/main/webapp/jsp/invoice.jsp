@@ -14,10 +14,12 @@
 </head>
 <body>
     <c:import url="/jsp/include/header.jsp"/>
+    <h1> Invoice List </h1>
+    <hr>
 
         <c:forEach var="invoice" items="${onlineInvoiceList}">
-            <li><b>Invoice ID: ${invoice.id}</b></li>
-            <li>Date: ${invoice.oiDate}</li>
+            <h2>Invoice ID: ${invoice.id}</h2>
+            <li>Date: ${invoice.oiDate.humanDate}</li>
             <li>Price: ${invoice.totalPrice}</li>
 
             <li><a href="<c:url value="/invoice/detail/${invoice.id}"/>">Detail Invoice</a></li>

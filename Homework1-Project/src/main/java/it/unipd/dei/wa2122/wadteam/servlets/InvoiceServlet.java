@@ -1,7 +1,7 @@
 package it.unipd.dei.wa2122.wadteam.servlets;
 
 import it.unipd.dei.wa2122.wadteam.dao.onlineInvoice.CreateOnlineInvoiceDatabase;
-import it.unipd.dei.wa2122.wadteam.dao.onlineInvoice.GetOnlineInvoice;
+import it.unipd.dei.wa2122.wadteam.dao.onlineInvoice.GetOnlineInvoiceDatabase;
 import it.unipd.dei.wa2122.wadteam.dao.onlineInvoice.ListOnlineInvoiceDatabase;
 import it.unipd.dei.wa2122.wadteam.dao.onlineInvoice.ListOnlineInvoiceFromUserDatabase;
 import it.unipd.dei.wa2122.wadteam.dao.onlineOrder.GetOnlineOrderByIdDatabase;
@@ -45,7 +45,7 @@ public class InvoiceServlet extends AbstractDatabaseServlet{
                     int id = Integer.parseInt(param);
 
                     try {
-                        OnlineInvoice onlineInvoice = new GetOnlineInvoice(getDataSource().getConnection(), id).getOnlineInvoice();
+                        OnlineInvoice onlineInvoice = new GetOnlineInvoiceDatabase(getDataSource().getConnection(), id).getOnlineInvoice();
 
                         writeResource(req, resp, "/jsp/detailInvoice.jsp", true, onlineInvoice);
                     } catch (SQLException e) {
@@ -58,7 +58,7 @@ public class InvoiceServlet extends AbstractDatabaseServlet{
                     int id = Integer.parseInt(param);
 
                     try {
-                        OnlineInvoice onlineInvoice = new GetOnlineInvoice(getDataSource().getConnection(), id).getOnlineInvoice();
+                        OnlineInvoice onlineInvoice = new GetOnlineInvoiceDatabase(getDataSource().getConnection(), id).getOnlineInvoice();
                         writeResource(req, resp, "/jsp/detailInvoice.jsp", true, onlineInvoice);
                     } catch (SQLException e) {
                         logger.error(e.getMessage());
