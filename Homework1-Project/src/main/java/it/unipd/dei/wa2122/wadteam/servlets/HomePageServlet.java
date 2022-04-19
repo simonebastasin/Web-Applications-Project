@@ -119,7 +119,7 @@ public class HomePageServlet extends AbstractDatabaseServlet{
         Product product = null;
 
         try {
-            product = new GetProductDatabase((getDataSource().getConnection()), param).getProduct();
+            product = new GetProductDatabase(getDataSource().getConnection(), param).getProduct();
 
             if(product != null){
                 writeResource(req, res, "/jsp/productDetail.jsp", true, product);

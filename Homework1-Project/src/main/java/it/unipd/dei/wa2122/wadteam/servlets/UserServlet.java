@@ -18,7 +18,6 @@ public class UserServlet extends AbstractDatabaseServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String path = req.getPathInfo() != null ? req.getPathInfo().lastIndexOf('/') != -1 ? req.getPathInfo().substring(req.getPathInfo().lastIndexOf('/') + 1) : "" : "";
-        String param = req.getPathInfo() != null ? req.getPathInfo().substring(1).lastIndexOf('/') != -1 ? req.getPathInfo().substring(req.getPathInfo().lastIndexOf('/') + 1) : "" : "";
 
         if (req.getSession(false) != null && req.getSession(false).getAttribute(USER_ATTRIBUTE) != null) {
             UserCredential us = (UserCredential) req.getSession(false).getAttribute(USER_ATTRIBUTE);
@@ -126,7 +125,6 @@ public class UserServlet extends AbstractDatabaseServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String path = req.getPathInfo() != null ? req.getPathInfo().lastIndexOf('/') != -1 ? req.getPathInfo().substring(req.getPathInfo().lastIndexOf('/') + 1) : "" : "";
-        String param = req.getPathInfo() != null ? req.getPathInfo().substring(1).lastIndexOf('/') != -1 ? req.getPathInfo().substring(req.getPathInfo().lastIndexOf('/') + 1) : "" : "";
 
         if (req.getSession(false) != null && req.getSession(false).getAttribute(USER_ATTRIBUTE) != null) {
             UserCredential us = (UserCredential) req.getSession(false).getAttribute(USER_ATTRIBUTE);
@@ -150,8 +148,8 @@ public class UserServlet extends AbstractDatabaseServlet {
 
                             }
                             if (cu == null)
-                                System.out.print("noooo");
-                            writeResource(req, resp, "/jsp/CustomerDetail.jsp", true, cu);
+                                writeError(req,resp,GenericError.SERVER_ERROR);
+                            else writeResource(req, resp, "/jsp/CustomerDetail.jsp", true, cu);
                         }
                         case EMPLOYEE -> {
                             Employee emNew = null;
@@ -177,10 +175,8 @@ public class UserServlet extends AbstractDatabaseServlet {
                 case "password" -> {
                     switch (ut) {
                         case CUSTOMER -> {
-                            Customer cu = null;
                             try {
                                 System.out.println("imin");
-                                cu = new GetIdCustomerDatabase(getDataSource().getConnection(), username).getIdCustomer();
                                 int result = new UpdatePasswordCustomerDatabase(getDataSource().getConnection(), req.getParameter("oldPassword"), req.getParameter("newPassword"), username).updatePassword();
                                 if (result == 0)
                                     writeError(req, resp, new ErrorMessage.ChangePasswordError("old password wrong"));
@@ -192,13 +188,9 @@ public class UserServlet extends AbstractDatabaseServlet {
                                 logger.error(e.getMessage());
                                 writeError(req, resp, new ErrorMessage.SqlInternalError(e.getMessage()));
                             }
-                            writeResource(req, resp, "/jsp/CustomerDetail.jsp", true, cu); // TODO WHY?
                         }
                         case EMPLOYEE -> {
-                            Employee em = null;
                             try {
-
-                                em = new GetEmployeeDatabase(getDataSource().getConnection(), username).getEmployee();
                                 int result = new UpdatePasswordEmployeeDatabase(getDataSource().getConnection(), req.getParameter("oldPassword"), req.getParameter("newPassword"), username).updatePassword();
                                 if (result == 0)
                                     writeError(req, resp, new ErrorMessage.ChangePasswordError("old password wrong"));
@@ -210,7 +202,6 @@ public class UserServlet extends AbstractDatabaseServlet {
                                 logger.error(e.getMessage());
                                 writeError(req, resp, new ErrorMessage.SqlInternalError(e.getMessage()));
                             }
-                            writeResource(req, resp, "/jsp/user.jsp", true, em); // TODO WHY?
                         }
                         default -> writeError(req, resp, GenericError.UNAUTHORIZED);
                     }
