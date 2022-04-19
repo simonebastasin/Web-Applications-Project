@@ -62,8 +62,8 @@ public class GetOnlineOrderByCustomerDatabase {
         PreparedStatement pstmtProduct = null;
         ResultSet rsProduct = null;
 
-        OrderStatus orderStatusResult = null;
-        List<Product> products = null;
+        OrderStatus orderStatusResult;
+        List<Product> products;
         final List<OnlineOrder> orders = new ArrayList<OnlineOrder>();
 
         try {

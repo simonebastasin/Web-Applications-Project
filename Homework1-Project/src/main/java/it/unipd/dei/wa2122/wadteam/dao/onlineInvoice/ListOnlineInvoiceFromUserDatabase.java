@@ -56,12 +56,12 @@ public class ListOnlineInvoiceFromUserDatabase {
         List<OnlineInvoice> resultOnlineInvoice = new ArrayList<>();
         PreparedStatement preparedStatement = null;
         PreparedStatement innerPreparedStatement = null;
-        PreparedStatement pstmtProduct = null;
-        ResultSet rsProduct = null;
+        PreparedStatement pstmtProduct;
+        ResultSet rsProduct;
         ResultSet innerResultSet = null;
 
-        OrderStatus orderStatusResult = null;
-        List<Product> products = null;
+        OrderStatus orderStatusResult;
+        List<Product> products;
 
         try {
             preparedStatement = con.prepareStatement(STATEMENT);

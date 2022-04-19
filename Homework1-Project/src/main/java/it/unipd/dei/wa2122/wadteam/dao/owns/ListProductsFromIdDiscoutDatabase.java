@@ -62,7 +62,7 @@ public class ListProductsFromIdDiscoutDatabase {
         ResultSet resultSet = null;
 
         // the read discount
-        Product resultProductItem = null;
+        Product resultProductItem;
 
         List<Product> resultProduct = new ArrayList<>();
         try {

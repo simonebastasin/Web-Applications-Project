@@ -97,8 +97,8 @@ public class LoginServlet extends AbstractDatabaseServlet {
                 }else {
                     String username=req.getParameter("username");
                     String email=req.getParameter("email");
-                    Customer customer=null;
-                    Customer custumerEmail=null;
+                    Customer customer;
+                    Customer custumerEmail;
                     try {
 
                         customer=new GetIdCustomerDatabase(getDataSource().getConnection(),username).getIdCustomer();

@@ -68,7 +68,7 @@ public class BuyProductServlet extends AbstractDatabaseServlet {
 
     private void buyProduct(HttpServletRequest req, HttpServletResponse res, String alias, int quantity) throws  ServletException, IOException {
 
-        Product product = null;
+        Product product;
 
         try {
             product = new GetProductDatabase((getDataSource().getConnection()), alias).getProduct();
@@ -87,8 +87,8 @@ public class BuyProductServlet extends AbstractDatabaseServlet {
 
     private void confirmPayment(HttpServletRequest req, HttpServletResponse res, String alias, int quantity) throws  ServletException, IOException {
 
-        Product product = null;
-        OnlineOrder newOrder = null;
+        Product product;
+        OnlineOrder newOrder;
 
         PaymentMethodOnlineEnum paymentMethodOnlineEnum = PaymentMethodOnlineEnum.fromString(req.getParameter("payment"));
 

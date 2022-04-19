@@ -40,7 +40,7 @@ public class HomePageServlet extends AbstractDatabaseServlet{
 
     private void productSearch(HttpServletRequest req, HttpServletResponse res, String param) throws ServletException, IOException{
         String partialAlias = null;
-        List<Product> products = null;
+        List<Product> products;
 
         try {
             products = new SearchProductListDatabase(getDataSource().getConnection(), param).searchProductList();
@@ -59,8 +59,8 @@ public class HomePageServlet extends AbstractDatabaseServlet{
     }
 
     private void homePage(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
-        List<Product> products = null;
-        List<ProductCategory> categories = null;
+        List<Product> products;
+        List<ProductCategory> categories;
 
         try{
             products = new ListProductDatabase(getDataSource().getConnection()).getProduct();
@@ -85,8 +85,8 @@ public class HomePageServlet extends AbstractDatabaseServlet{
 
     private void productCategory(HttpServletRequest req, HttpServletResponse res, String param) throws ServletException, IOException{
 
-        ProductCategory category = null;
-        List<Product> products = null;
+        ProductCategory category;
+        List<Product> products;
 
         try {
             category = new GetProductCategoryDatabase((getDataSource().getConnection()), param).getProductCategory();
@@ -116,7 +116,7 @@ public class HomePageServlet extends AbstractDatabaseServlet{
 
     private void productDetail(HttpServletRequest req, HttpServletResponse res, String param) throws ServletException, IOException{
 
-        Product product = null;
+        Product product;
 
         try {
             product = new GetProductDatabase(getDataSource().getConnection(), param).getProduct();

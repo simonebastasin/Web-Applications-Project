@@ -51,7 +51,7 @@ public class ListOrderStatusDatabase {
         ResultSet resultSet = null;
 
         // the read discount
-        OrderStatus resultOrderStatusItem = null;
+        OrderStatus resultOrderStatusItem;
 
         List<OrderStatus> resultOrderStatus = new ArrayList<>();
         try {

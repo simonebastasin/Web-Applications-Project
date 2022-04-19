@@ -48,7 +48,7 @@ public class ListTicketStatusDatabase {
         ResultSet resultSet = null;
 
         // the current ticket status
-        TicketStatus resultTicketStatusItem = null;
+        TicketStatus resultTicketStatusItem;
 
         List<TicketStatus> resultTicketStatus = new ArrayList<>();
         try {

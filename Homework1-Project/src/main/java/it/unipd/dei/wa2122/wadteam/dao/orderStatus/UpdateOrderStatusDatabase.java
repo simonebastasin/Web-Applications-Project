@@ -51,7 +51,7 @@ public class UpdateOrderStatusDatabase {
     public int updateOrderStatus() throws SQLException {
 
         PreparedStatement preparedStatement = null;
-        int result = 0;
+        int result;
 
         try {
             preparedStatement = con.prepareStatement(STATEMENT);

@@ -62,8 +62,8 @@ public class GetOnlineOrderByIdDatabase {
         PreparedStatement pstmtProduct = null;
         ResultSet rsProduct = null;
 
-        OrderStatus orderStatusResult = null;
-        List<Product> products = null;
+        OrderStatus orderStatusResult;
+        List<Product> products;
         OnlineOrder order = null;
 
         try {

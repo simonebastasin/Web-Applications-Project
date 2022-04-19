@@ -49,7 +49,7 @@ public class GetListProductByCategoryDatabase {
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
 
-        Product resultProductItem = null;
+        Product resultProductItem;
         List<Product> resultProduct = new ArrayList<>();
 
         try {

@@ -66,11 +66,11 @@ public class GetOnlineInvoiceDatabase {
         ResultSet resultSet = null;
         ResultSet innerResultSet = null;
 
-        PreparedStatement pstmtProduct = null;
-        ResultSet rsProduct = null;
+        PreparedStatement pstmtProduct;
+        ResultSet rsProduct;
 
-        OrderStatus orderStatusResult = null;
-        List<Product> products = null;
+        OrderStatus orderStatusResult;
+        List<Product> products;
 
         // the read employee
         OnlineInvoice resultOnlineInvoice = null;

@@ -16,6 +16,7 @@
     <servlet-mapping>
         <servlet-name>HomePageServlet</servlet-name>
         <url-pattern/>
+        <url-pattern>/rest/</url-pattern>
         <url-pattern>/products/*</url-pattern>
         <url-pattern>/rest/products/*</url-pattern>
     </servlet-mapping>

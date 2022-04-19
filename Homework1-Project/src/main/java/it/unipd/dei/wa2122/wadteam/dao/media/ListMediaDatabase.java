@@ -44,7 +44,7 @@ public class ListMediaDatabase {
         ResultSet resultSet = null;
 
         // the current media
-        Media resultMediaItem = null;
+        Media resultMediaItem;
 
         List<Media> resultMedia = new ArrayList<>();
         try {

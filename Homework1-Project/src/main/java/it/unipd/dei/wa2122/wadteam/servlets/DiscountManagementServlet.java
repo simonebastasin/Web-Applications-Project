@@ -48,7 +48,7 @@ public class DiscountManagementServlet extends AbstractDatabaseServlet{
     }
 
     private void getListDiscount(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
-        List<Discount> discounts = null;
+        List<Discount> discounts;
 
         try{
             discounts = new ListDiscountDatabase(getDataSource().getConnection()).getDiscounts();
@@ -73,7 +73,7 @@ public class DiscountManagementServlet extends AbstractDatabaseServlet{
     }
 
     private void getCreateDiscount(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
-        List<Product> products = null;
+        List<Product> products;
 
         try{
             //TODO: Implement control in date input

@@ -49,7 +49,7 @@ public class ProductManagementServlet extends AbstractDatabaseServlet{
 
     private void getListProduct(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 
-        List<Product> products = null;
+        List<Product> products;
 
         try{
             products = new ListProductDatabase(getDataSource().getConnection()).getProduct();
@@ -77,7 +77,7 @@ public class ProductManagementServlet extends AbstractDatabaseServlet{
      * @throws ServletException
      */
     private void getCreateProduct(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
-        List<ProductCategory> categories = null;
+        List<ProductCategory> categories;
 
        try{
             categories = new ListProductCategoryDatabase(getDataSource().getConnection()).getProductCategory();
@@ -109,7 +109,7 @@ public class ProductManagementServlet extends AbstractDatabaseServlet{
      * @throws ServletException
      */
     private void getEditProduct(HttpServletRequest req, HttpServletResponse res, String param) throws IOException, ServletException {
-        Product product = null;
+        Product product;
         try {
             product = new GetProductDatabase(getDataSource().getConnection(), param).getProduct();
 

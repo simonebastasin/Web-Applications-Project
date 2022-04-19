@@ -40,7 +40,7 @@ public class ListProductCategoryDatabase {
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
 
-        ProductCategory resultProductCategoryItem = null;
+        ProductCategory resultProductCategoryItem;
         List<ProductCategory> resultProductCategory = new ArrayList<>();
 
         try {

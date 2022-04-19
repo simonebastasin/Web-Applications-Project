@@ -28,7 +28,7 @@ public class UpdatePasswordEmployeeDatabase {
         ResultSet resultSet = null;
 
 
-        int result=0;
+        int result;
 
         try {
             preparedStatement = con.prepareStatement(STATEMENT);

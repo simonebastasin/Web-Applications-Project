@@ -40,7 +40,7 @@ public class ListRoleDatabase {
 
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-        Role resultRoleItem = null;
+        Role resultRoleItem;
         List<Role> resultRoleList = new ArrayList<>();
 
         try {

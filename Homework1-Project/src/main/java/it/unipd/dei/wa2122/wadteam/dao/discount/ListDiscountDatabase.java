@@ -49,7 +49,7 @@ public final class ListDiscountDatabase {
         ResultSet resultSet = null;
 
         // the read discount
-        Discount resultDiscountItem = null;
+        Discount resultDiscountItem;
 
         List<Discount> resultDiscount = new ArrayList<>();
         try {

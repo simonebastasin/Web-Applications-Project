@@ -27,7 +27,7 @@ public class ListCustomerDatabase {
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
 
-        Customer resultCustomerItem = null;
+        Customer resultCustomerItem;
         List<Customer> resultCustomer = new ArrayList<>();
 
 

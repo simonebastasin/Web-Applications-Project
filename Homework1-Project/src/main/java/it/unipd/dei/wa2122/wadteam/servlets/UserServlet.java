@@ -28,30 +28,24 @@ public class UserServlet extends AbstractDatabaseServlet {
                 case "info" -> {
                     switch (ut) {
                         case EMPLOYEE -> {
-                            Employee em = null;
+                            Employee em;
                             try {
                                 em = new GetEmployeeDatabase(getDataSource().getConnection(), username).getEmployee();
-
-
+                                writeResource(req, resp, "/jsp/user.jsp", true, em);
                             } catch (SQLException e) {
                                 logger.error(e.getMessage());
                                 writeError(req, resp, new ErrorMessage.SqlInternalError(e.getMessage()));
                             }
-
-                            writeResource(req, resp, "/jsp/user.jsp", true, em);
                         }
                         case CUSTOMER -> {
-                            Customer cu = null;
+                            Customer cu;
                             try {
-
                                 cu = new GetIdCustomerDatabase(getDataSource().getConnection(), username).getIdCustomer();
-
+                                writeResource(req, resp, "/jsp/CustomerDetail.jsp", true, cu);
                             } catch (SQLException e) {
                                 logger.error(e.getMessage());
                                 writeError(req, resp, new ErrorMessage.SqlInternalError(e.getMessage()));
                             }
-                            writeResource(req, resp, "/jsp/CustomerDetail.jsp", true, cu);
-
                         }
                         default -> writeError(req, resp, new ErrorMessage.NotLogin("not allowed"));
                     }
@@ -59,31 +53,24 @@ public class UserServlet extends AbstractDatabaseServlet {
                 case "modify" -> {
                     switch (ut) {
                         case CUSTOMER -> {
-                            Customer cu = null;
+                            Customer cu;
                             try {
-
                                 cu = new GetIdCustomerDatabase(getDataSource().getConnection(), username).getIdCustomer();
-
+                                writeResource(req, resp, "/jsp/customerEdit.jsp", true, cu);
                             } catch (SQLException e) {
                                 logger.error(e.getMessage());
                                 writeError(req, resp, new ErrorMessage.SqlInternalError(e.getMessage()));
                             }
-                            writeResource(req, resp, "/jsp/customerEdit.jsp", true, cu);
                         }
                         case EMPLOYEE -> {
-                            Employee em = null;
+                            Employee em;
                             try {
-
                                 em = new GetEmployeeDatabase(getDataSource().getConnection(), username).getEmployee();
-                                System.out.println(em.getUsername());
-
-
+                                writeResource(req, resp, "/jsp/userEdit.jsp", true, em);
                             } catch (SQLException e) {
                                 logger.error(e.getMessage());
                                 writeError(req, resp, new ErrorMessage.SqlInternalError(e.getMessage()));
                             }
-                            writeResource(req, resp, "/jsp/userEdit.jsp", true, em);
-
                         }
                         default -> writeError(req, resp, GenericError.UNAUTHORIZED);
                     }
@@ -91,26 +78,25 @@ public class UserServlet extends AbstractDatabaseServlet {
                 case "password" -> {
                     switch (ut) {
                         case CUSTOMER -> {
-                            Customer cu = null;
+                            Customer cu;
                             try {
                                 cu = new GetIdCustomerDatabase(getDataSource().getConnection(), username).getIdCustomer();
-
+                                writeResource(req, resp, "/jsp/changePassword.jsp", true, cu);
                             } catch (SQLException e) {
                                 logger.error(e.getMessage());
                                 writeError(req, resp, new ErrorMessage.SqlInternalError(e.getMessage()));
                             }
-                            writeResource(req, resp, "/jsp/changePassword.jsp", true, cu);
                         }
                         case EMPLOYEE -> {
-                            Employee em = null;
+                            Employee em;
                             try {
                                 em = new GetEmployeeDatabase(getDataSource().getConnection(), username).getEmployee();
+                                writeResource(req, resp, "/jsp/changePassword.jsp", true, em);
 
                             } catch (SQLException e) {
                                 logger.error(e.getMessage());
                                 writeError(req, resp, new ErrorMessage.SqlInternalError(e.getMessage()));
                             }
-                            writeResource(req, resp, "/jsp/changePassword.jsp", true, em);
                         }
                         default -> writeError(req, resp, GenericError.UNAUTHORIZED);
                     }
@@ -136,11 +122,9 @@ public class UserServlet extends AbstractDatabaseServlet {
                     switch (ut) {
                         case CUSTOMER -> {
 
-                            Customer cu = new Customer(null, req.getParameter("name"), req.getParameter("surname"), req.getParameter("fiscalCode"), req.getParameter("address"), us.getEmail(), req.getParameter("phoneNumber"), username, "ciao");
+                            Customer cu = new Customer(us.getId(), req.getParameter("name"), req.getParameter("surname"), req.getParameter("fiscalCode"), req.getParameter("address"), us.getEmail(), req.getParameter("phoneNumber"), username, null);
                             try {
-
                                 cu = new UpdateCustomerDatabase(getDataSource().getConnection(), cu).updateCustomer();
-                                cu = new GetIdCustomerDatabase(getDataSource().getConnection(), username).getIdCustomer();
 
                             } catch (SQLException e) {
                                 logger.error(e.getMessage());
@@ -152,17 +136,16 @@ public class UserServlet extends AbstractDatabaseServlet {
                             else writeResource(req, resp, "/jsp/CustomerDetail.jsp", true, cu);
                         }
                         case EMPLOYEE -> {
-                            Employee emNew = null;
+                            Employee emNew;
                             try {
                                 Employee emOld = new GetEmployeeDatabase(getDataSource().getConnection(), username).getEmployee();
                                 String role = req.getParameter("role");
-                                System.out.println("Matteo");
                                 if ("notchange".equals(role))
                                     emNew = new Employee(emOld.getUsername(), req.getParameter("name"), req.getParameter("surname"), emOld.getRole());
                                 else
                                     emNew = new Employee(emOld.getUsername(), req.getParameter("name"), req.getParameter("surname"), new Role(req.getParameter("role")));
                                 Employee em = new UpdateEmployeeDatabase(getDataSource().getConnection(), emNew).updateEmployee();
-                                writeResource(req, resp, "/jsp/user.jsp", true, emNew);
+                                writeResource(req, resp, "/jsp/user.jsp", true, em);
                             } catch (SQLException e) {
                                 logger.error(e.getMessage());
                                 writeError(req, resp, new ErrorMessage.SqlInternalError(e.getMessage()));
@@ -176,7 +159,6 @@ public class UserServlet extends AbstractDatabaseServlet {
                     switch (ut) {
                         case CUSTOMER -> {
                             try {
-                                System.out.println("imin");
                                 int result = new UpdatePasswordCustomerDatabase(getDataSource().getConnection(), req.getParameter("oldPassword"), req.getParameter("newPassword"), username).updatePassword();
                                 if (result == 0)
                                     writeError(req, resp, new ErrorMessage.ChangePasswordError("old password wrong"));

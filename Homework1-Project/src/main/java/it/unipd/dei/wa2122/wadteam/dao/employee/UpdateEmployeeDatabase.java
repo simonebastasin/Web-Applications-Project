@@ -12,7 +12,7 @@ public class UpdateEmployeeDatabase {
     /**
      * The SQL statement to be executed
      */
-    private static final String STATEMENT = "UPDATE Employee SET name = ?, surname = ?, role_name = ? WHERE username = ?";
+    private static final String STATEMENT = "UPDATE Employee SET name = ?, surname = ?, role_name = ? WHERE username = ? RETURNING username, name, surname, role_name";
 
     /**
      * The connection to the database
@@ -62,13 +62,13 @@ public class UpdateEmployeeDatabase {
 
             int result = preparedStatement.executeUpdate();
 
-           /* if (resultSet.next()) {
+            if (resultSet.next()) {
                 resultEmployee = new Employee(resultSet.getString("username"),
                         resultSet.getString("name"),
                         resultSet.getString("surname"),
                         new Role(resultSet.getString("role"))
                 );
-            }*/
+            }
         } finally {
             if (resultSet != null) {
                 resultSet.close();

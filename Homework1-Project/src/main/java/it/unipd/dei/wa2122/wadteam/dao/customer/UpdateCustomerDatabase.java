@@ -12,9 +12,8 @@ public class UpdateCustomerDatabase {
 
     private static final String STATEMENT = "UPDATE Customer " +
             "SET name = ?, surname = ?, fiscal_code = ?," +
-            "address=?, email=?, phone_number=?," +
-            "username=?" +
-            " WHERE username = ?";
+            "address=?, email=?, phone_number=? " +
+            "WHERE username = ? RETURNING id, name, surname, fiscal_code, address, email, phone_number, username";
     private final Connection con;
 
     private final Customer customer;
@@ -27,7 +26,7 @@ public class UpdateCustomerDatabase {
     public Customer updateCustomer() throws SQLException {
 
         PreparedStatement preparedStatement = null;
-
+        ResultSet resultSet = null;
         // the read employee
         Customer resultCustomer = null;
 
@@ -40,12 +39,11 @@ public class UpdateCustomerDatabase {
             preparedStatement.setString(5, customer.getEmail());
             preparedStatement.setString(6, customer.getPhoneNumber());
             preparedStatement.setString(7, customer.getUsername());
-            preparedStatement.setString(8,customer.getUsername());
 
 
-            int i = preparedStatement.executeUpdate();
+            resultSet = preparedStatement.executeQuery();
 
-           /* if (resultSet.next()) {
+            if (resultSet.next()) {
                 resultCustomer = new Customer(
                         resultSet.getInt("id"),
                         resultSet.getString("name"),
@@ -57,8 +55,11 @@ public class UpdateCustomerDatabase {
                         resultSet.getString("username"),
                         null
                 );
-            }*/
+            }
         } finally {
+            if (resultSet != null) {
+                resultSet.close();
+            }
 
             if (preparedStatement != null) {
                 preparedStatement.close();

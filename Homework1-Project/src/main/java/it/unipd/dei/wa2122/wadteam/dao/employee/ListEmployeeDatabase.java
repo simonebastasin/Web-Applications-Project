@@ -46,7 +46,7 @@ public class ListEmployeeDatabase {
         ResultSet resultSet = null;
 
         // the current employee
-        Employee resultEmployeeItem = null;
+        Employee resultEmployeeItem;
 
         List<Employee> resultEmployee = new ArrayList<>();
         try {

@@ -53,7 +53,7 @@ public class ListProductsCurrentlyOnSaleDatabase {
         ResultSet resultSet = null;
 
         // the read discount
-        Product resultProductItem = null;
+        Product resultProductItem;
 
         List<Product> resultProduct = new ArrayList<>();
         try {
