@@ -16,7 +16,7 @@ public class CreateOnlineInvoiceDatabase {
     /**
      * SQL statement to be executed
      */
-    private static final String STATEMENT = "INSERT INTO Online_Invoice (id_order, transaction_id, payment_type, oi_date, total_price) VALUES (?, ?, ?::paymentmethodonline, ?, ?) RETURNING id, id_order, transaction_id, payment_type, oi_date, total_price";
+    private static final String STATEMENT = "INSERT INTO Online_Invoice (id_order, transaction_id, payment_type, total_price) VALUES (?, ?, ?::paymentmethodonline, ?) RETURNING id, id_order, transaction_id, payment_type, oi_date, total_price";
 
     /**
      * connection to the database
@@ -56,7 +56,6 @@ public class CreateOnlineInvoiceDatabase {
             preparedStatement.setInt(1, onlineInvoice.getIdOrder().getIdOrder());
             preparedStatement.setString(2, onlineInvoice.getTransactionId());
             preparedStatement.setString(3, onlineInvoice.getPaymentType().toString()); // get user-friendly enum text
-            preparedStatement.setObject(4, onlineInvoice.getOiDate().getLocalDateTime());
             preparedStatement.setDouble(5, onlineInvoice.getTotalPrice());
 
             resultSet = preparedStatement.executeQuery();
@@ -68,7 +67,6 @@ public class CreateOnlineInvoiceDatabase {
                         new GetOnlineOrderByIdDatabase(con, idOrder).getOnlineOrderId(), //rs.getInt("id_order"),
                         resultSet.getString("transaction_id"),
                         PaymentMethodOnlineEnum.fromString(resultSet.getString("payment_type")),
-                        new DateTime(resultSet.getObject("oi_date", LocalDateTime.class)),
                         resultSet.getDouble("total_price")
                 );
             }

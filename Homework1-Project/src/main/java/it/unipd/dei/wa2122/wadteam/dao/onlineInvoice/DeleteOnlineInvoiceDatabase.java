@@ -64,7 +64,6 @@ public class DeleteOnlineInvoiceDatabase {
                         new GetOnlineOrderByIdDatabase(con, idOrder).getOnlineOrderId(),
                         resultSet.getString("transaction_id"),
                         PaymentMethodOnlineEnum.fromString(resultSet.getString("payment_type")),
-                        new DateTime(resultSet.getObject("oi_date", LocalDateTime.class)),
                         resultSet.getDouble("total_price")
                 );
             }

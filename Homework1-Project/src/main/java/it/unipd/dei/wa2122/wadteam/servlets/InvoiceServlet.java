@@ -116,7 +116,7 @@ public class InvoiceServlet extends AbstractDatabaseServlet{
             DateTime oiDate = new DateTime(LocalDateTime.now());
             double totalPrice = Double.parseDouble(req.getParameter("totalPrice"));
 
-            OnlineInvoice temp = new OnlineInvoice(null, onlineOrder,transactionId,paymentType,oiDate,totalPrice );
+            OnlineInvoice temp = new OnlineInvoice(null, onlineOrder,transactionId,paymentType,totalPrice );
 
             OnlineInvoice onlineInvoice = new CreateOnlineInvoiceDatabase(getDataSource().getConnection(), temp).createOnlineInvoice();
             writeResource(req, resp, "/jsp/invoice.jsp", false , onlineInvoice);

@@ -50,6 +50,7 @@
                 <option value="<c:url value="/management/discountManagement"/>">Discount Management</option>
                 <option value="<c:url value="/management/orderManagement"/>">Order Management</option>
                 <option value="<c:url value="/media/list"/>">View Media</option>
+                <option value="<c:url value="/invoice/list"/>">Invoice List</option>
                 <c:choose>
                     <c:when test="${user.role == 'Administrator'}">
                         <option value="<c:url value="/management/userManagement"/>">User Management</option>

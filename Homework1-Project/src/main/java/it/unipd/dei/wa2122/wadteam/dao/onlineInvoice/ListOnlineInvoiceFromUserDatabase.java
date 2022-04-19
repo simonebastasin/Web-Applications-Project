@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -59,10 +60,9 @@ public class ListOnlineInvoiceFromUserDatabase {
                 int idOrder = resultSet.getInt("oi.ID_Order");
                 String transactionId = resultSet.getString("oi.Transaction_ID");
                 PaymentMethodOnlineEnum paymentType = PaymentMethodOnlineEnum.fromString(resultSet.getString("oi.Payment_Type "));
-                DateTime date = resultSet.getObject("oi.OI_Date  ", DateTime.class);
                 Double totalPrice=resultSet.getDouble("oi.Total_Price");
 
-                resultOnlineInvoice.add(new OnlineInvoice(id,new GetOnlineOrderByIdDatabase(con,idOrder).getOnlineOrderId(),transactionId,paymentType,date,totalPrice));
+                resultOnlineInvoice.add(new OnlineInvoice(id,new GetOnlineOrderByIdDatabase(con,idOrder).getOnlineOrderId(),transactionId,paymentType,totalPrice));
 
             }
 
