@@ -46,11 +46,8 @@ public class InvoiceServlet extends AbstractDatabaseServlet{
 
                     try {
                         OnlineInvoice onlineInvoice = new GetOnlineInvoice(getDataSource().getConnection(), id).getOnlineInvoice();
-                        int user = ((UserCredential) req.getSession(false).getAttribute(USER_ATTRIBUTE)).getId();
-                        if(onlineInvoice.getId() == user)
-                            writeResource(req, resp, "/jsp/detailInvoice.jsp", true, onlineInvoice);
-                        else
-                            writeError(req, resp, new ErrorMessage.UserCredentialError("User error"));
+
+                        writeResource(req, resp, "/jsp/detailInvoice.jsp", true, onlineInvoice);
                     } catch (SQLException e) {
                         logger.error(e.getMessage());
                         writeError(req, resp, new ErrorMessage.SqlInternalError(e.getMessage()));
