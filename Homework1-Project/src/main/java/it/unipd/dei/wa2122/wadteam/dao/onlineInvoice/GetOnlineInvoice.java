@@ -90,9 +90,6 @@ public class GetOnlineInvoice {
                 PaymentMethodOnlineEnum paymentType = PaymentMethodOnlineEnum.fromString(resultSet.getString("Payment_Type "));
                 DateTime date = resultSet.getObject("OI_Date  ", DateTime.class);
                 Double totalPrice = resultSet.getDouble("Total_Price");
-                PaymentMethodOnlineEnum paymentType = PaymentMethodOnlineEnum.fromString(resultSet.getString("Payment_Type"));
-                DateTime date = new DateTime(resultSet.getObject("OI_Date", LocalDateTime.class));
-                Double totalPrice=resultSet.getDouble("Total_Price");
 
                 innerPreparedStatement = con.prepareStatement(STATEMENT_ORDER);
                 innerPreparedStatement.setInt(1, idOrder);
