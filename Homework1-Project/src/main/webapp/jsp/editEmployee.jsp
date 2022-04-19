@@ -48,9 +48,6 @@
             </c:forEach>
         </select><br>
 
-        <label for="password">Password:</label><br>
-        <input type="text" id="password" name="password" value="${employee.surname}" readonly><br>
-
         <br>
         <input type="submit" value="Submit">
 
