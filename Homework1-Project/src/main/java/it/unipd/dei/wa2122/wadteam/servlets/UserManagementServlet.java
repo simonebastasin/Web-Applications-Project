@@ -96,7 +96,7 @@ public class UserManagementServlet extends AbstractDatabaseServlet {
         try {
             employee = new CreateEmployeeDatabase(getDataSource().getConnection(), employee).createEmployee();
             //writeResource(req, res, "/jsp/employeeDetail.jsp", true , product); //view result
-            res.sendRedirect(req.getContextPath() + "/management/userManagement");
+            res.sendRedirect(req.getContextPath() +(req.getServletPath().startsWith("/rest/") ? "/rest" : "") + "/management/userManagement");
         } catch (SQLException e) {
             logger.error(e.getMessage());
             writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
@@ -150,7 +150,7 @@ public class UserManagementServlet extends AbstractDatabaseServlet {
         try {
             employee = new UpdateEmployeeDatabase(getDataSource().getConnection(), employee).updateEmployee();
             //writeResource(req, res, "/jsp/employeeDetail.jsp", true , product); //view result
-            res.sendRedirect(req.getContextPath() + "/management/userManagement");
+            res.sendRedirect(req.getContextPath() + (req.getServletPath().startsWith("/rest/") ? "/rest" : "") +"/management/userManagement");
         } catch (SQLException e) {
             logger.error(e.getMessage());
             writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
@@ -193,7 +193,7 @@ public class UserManagementServlet extends AbstractDatabaseServlet {
         Employee employee;
         try {
             employee = new DeleteEmployeeDatabase((getDataSource().getConnection()), param).deleteEmployee();
-            res.sendRedirect(req.getContextPath() + "/management/userManagement");
+            res.sendRedirect(req.getContextPath() + (req.getServletPath().startsWith("/rest/") ? "/rest" : "") +"/management/userManagement");
         } catch (SQLException e) {
             logger.error(e.getMessage());
             writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));

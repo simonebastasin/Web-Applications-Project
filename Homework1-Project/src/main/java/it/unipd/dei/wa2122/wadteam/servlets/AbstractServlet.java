@@ -35,7 +35,7 @@ public abstract class AbstractServlet extends HttpServlet {
 
     public void writeError(HttpServletRequest request, HttpServletResponse response, GenericError error) throws IOException, ServletException {
         response.setStatus(error.getHttpErrorCode());
-        if(request.getHeader("Accept").contains("application/json")) {
+        if(request.getServletPath().startsWith("/rest/") || request.getHeader("Accept").contains("application/json")) {
             writeJSON(response, error.toJSON());
         } else {
             request.getRequestDispatcher(error.getJsp()).forward(request, response);
@@ -47,7 +47,7 @@ public abstract class AbstractServlet extends HttpServlet {
      */
     public void writeError(HttpServletRequest request, HttpServletResponse response, ErrorMessage message) throws IOException, ServletException {
         response.setStatus(message.getHttpErrorCode());
-        if(request.getHeader("Accept").contains("application/json")) {
+        if(request.getServletPath().startsWith("/rest/") || request.getHeader("Accept").contains("application/json")) {
             writeJSON(response, message.toJSON());
         } else {
             request.setAttribute("errorCode", message.getErrorCode());
@@ -146,7 +146,7 @@ public abstract class AbstractServlet extends HttpServlet {
         try {
             var resourcesMap = Arrays.stream(resources).filter(Objects::nonNull).collect(groupingBy(Resource::getClass));
 
-            if(request.getHeader("Accept").contains("application/json")) {
+            if(request.getServletPath().startsWith("/rest/") || request.getHeader("Accept").contains("application/json")) {
                 response.setContentType(JSON_UTF_8_MEDIA_TYPE);
 
                 JSONObject jsonObject = new JSONObject();

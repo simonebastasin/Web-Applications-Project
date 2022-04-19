@@ -78,7 +78,8 @@ public class Product implements Resource {
         if(salePrice != null)
             jsonObject.put("sale", salePrice);
         jsonObject.put("quantity", quantity);
-        jsonObject.put("category", category.toJSON());
+        if(category != null)
+            jsonObject.put("category", category.toJSON());
         jsonObject.put("evidence", evidence);
         if(pictures != null)
             jsonObject.put("pictures", pictures);
@@ -91,9 +92,7 @@ public class Product implements Resource {
         String alias = jsonObject.getString("alias");
         String name = jsonObject.getString("name");
         String brand = jsonObject.getString("brand");
-        String description = null;
-        if(jsonObject.has("description"))
-            description = jsonObject.getString("description");
+        String description = jsonObject.has("description") ?   jsonObject.getString("description") : null;
         double purchase = jsonObject.getDouble("purchase");
         double sale = jsonObject.getDouble("sale");
         int quantity = jsonObject.getInt("quantity");
@@ -103,7 +102,7 @@ public class Product implements Resource {
                 pictures.add((Integer) item);
             }
         }
-        ProductCategory category = ProductCategory.fromJSON(jsonObject.getJSONObject("category"));
+        ProductCategory category =jsonObject.has("category") ? ProductCategory.fromJSON(jsonObject.getJSONObject("category")) : null;
         boolean evidence = jsonObject.getBoolean("evidence");
         Discount discount = Discount.fromJSON(jsonObject.getJSONObject("discount"));
 

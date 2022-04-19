@@ -149,7 +149,7 @@ public class ProductManagementServlet extends AbstractDatabaseServlet{
         try {
             Product product = new CreateProductDatabase(getDataSource().getConnection(), temp).createProduct();
             //writeResource(req, res, "/jsp/productDetail.jsp", true , product); //view result
-            res.sendRedirect(req.getContextPath() + "/management/productManagement");
+            res.sendRedirect(req.getContextPath() + (req.getServletPath().startsWith("/rest/") ? "/rest" : "") +"/management/productManagement");
         } catch (SQLException e) {
             logger.error(e.getMessage());
             writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
@@ -173,7 +173,7 @@ public class ProductManagementServlet extends AbstractDatabaseServlet{
 
         try {
             ProductCategory resultProductCategory = new CreateProductCategoryDatabase(getDataSource().getConnection(), temp).createProductCategory();
-            res.sendRedirect(req.getContextPath() + "/management/productManagement/createProduct");
+            res.sendRedirect(req.getContextPath() + (req.getServletPath().startsWith("/rest/") ? "/rest" : "") +"/management/productManagement/createProduct");
         } catch (SQLException e) {
             logger.error(e.getMessage());
             writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
@@ -206,7 +206,7 @@ public class ProductManagementServlet extends AbstractDatabaseServlet{
         try {
             Product product = new UpdateProductDatabase(getDataSource().getConnection(), temp).updateProduct();
             //writeResource(req, res, "/jsp/productDetail.jsp", true , product); //view result
-            res.sendRedirect(req.getContextPath() + "/management/productManagement");
+            res.sendRedirect(req.getContextPath() + (req.getServletPath().startsWith("/rest/") ? "/rest" : "") +"/management/productManagement");
         } catch (SQLException e) {
             logger.error(e.getMessage());
             writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
