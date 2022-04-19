@@ -3,6 +3,7 @@ package it.unipd.dei.wa2122.wadteam.servlets;
 import it.unipd.dei.wa2122.wadteam.dao.product.CreateProductDatabase;
 import it.unipd.dei.wa2122.wadteam.dao.product.GetProductDatabase;
 import it.unipd.dei.wa2122.wadteam.dao.product.ListProductDatabase;
+import it.unipd.dei.wa2122.wadteam.dao.product.UpdateProductDatabase;
 import it.unipd.dei.wa2122.wadteam.dao.productCategory.CreateProductCategoryDatabase;
 import it.unipd.dei.wa2122.wadteam.dao.productCategory.ListProductCategoryDatabase;
 import it.unipd.dei.wa2122.wadteam.resources.*;
@@ -40,6 +41,7 @@ public class ProductManagementServlet extends AbstractDatabaseServlet{
         switch (path) {
             case "createProduct" -> postCreateProduct(req,res,param);
             case "createCategory" -> postCreateCategory(req,res,param);
+            case "editProduct" -> postEditProduct(req,res,param);
             default -> writeError(req, res, new ErrorMessage.IncorrectlyFormattedPathError("page not found"));
         }
 
@@ -172,6 +174,39 @@ public class ProductManagementServlet extends AbstractDatabaseServlet{
         try {
             ProductCategory resultProductCategory = new CreateProductCategoryDatabase(getDataSource().getConnection(), temp).createProductCategory();
             res.sendRedirect(req.getContextPath() + "/management/productManagement/createProduct");
+        } catch (SQLException e) {
+            logger.error(e.getMessage());
+            writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
+        }
+
+    }
+
+
+    /**
+     * edit an existing product in the database
+     * @param req
+     * @param res
+     * @throws IOException
+     * @throws ServletException
+     */
+    private void postEditProduct(HttpServletRequest req, HttpServletResponse res, String param) throws IOException, ServletException {
+        String alias = req.getParameter("alias");
+        String name = req.getParameter("name");
+        String brand = req.getParameter("brand");
+        String description = req.getParameter("description");
+        double purchase = Double.parseDouble(req.getParameter("purchase"));
+        double sale = Double.parseDouble(req.getParameter("sale"));
+        int quantity = Integer.parseInt(req.getParameter("quantity"));
+        ProductCategory category = new ProductCategory(req.getParameter("category"),req.getParameter("category"));
+        boolean evidence = req.getParameter("evidence").equals("yes");
+        //private final List<Integer> pictures;   // todo
+
+        Product temp = new Product(alias,name,brand,description,quantity,purchase,sale,category,evidence,null, null);
+
+        try {
+            Product product = new UpdateProductDatabase(getDataSource().getConnection(), temp).updateProduct();
+            //writeResource(req, res, "/jsp/productDetail.jsp", true , product); //view result
+            res.sendRedirect(req.getContextPath() + "/management/productManagement");
         } catch (SQLException e) {
             logger.error(e.getMessage());
             writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));

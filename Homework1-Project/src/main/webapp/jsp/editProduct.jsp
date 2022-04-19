@@ -13,7 +13,7 @@
 
     <form method="POST" action="">
         <label for="alias">Alias:</label><br>
-        <input type="text" id="alias" name="alias" value="${product.alias}"/><br>
+        <input type="text" id="alias" name="alias" value="${product.alias}" disabled/><br>
         <label for="name">Name:</label><br>
         <input type="text" id="name" name="name" value="${product.name}"/><br>
         <label for="brand">Brand:</label><br>

@@ -50,7 +50,6 @@ public class UpdateProductDatabase {
     public Product updateProduct() throws SQLException {
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-
         Product resultProduct = null;
 
         try {
@@ -77,8 +76,10 @@ public class UpdateProductDatabase {
                         resultSet.getDouble("sale_price"),
                         new ProductCategory(resultSet.getString("category_name"),null),
                         resultSet.getBoolean("evidence"),
-                        new ArrayList<>(), null);
+                        new ArrayList<>(),
+                        null);
             }
+
         } finally {
             if (resultSet != null) {
                 resultSet.close();
@@ -88,6 +89,7 @@ public class UpdateProductDatabase {
                 preparedStatement.close();
             }
         }
+
 
         for(var item : product.getPictures()) {
             try {
@@ -112,6 +114,8 @@ public class UpdateProductDatabase {
                 }
             }
         }
+
+
         con.close();
 
         return resultProduct;
