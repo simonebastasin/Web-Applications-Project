@@ -196,6 +196,8 @@
         <url-pattern>/ticket</url-pattern>
         <url-pattern>/user/*</url-pattern>
         <url-pattern>/user</url-pattern>
+        <url-pattern>/invoice/*</url-pattern>
+        <url-pattern>/invoice</url-pattern>
     </filter-mapping>
 
     <error-page>
