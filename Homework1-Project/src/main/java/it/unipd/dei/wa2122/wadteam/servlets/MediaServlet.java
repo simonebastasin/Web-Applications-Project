@@ -130,6 +130,14 @@ public class MediaServlet extends AbstractDatabaseServlet {
         InputStream filePartInputStream = filePart.getInputStream();
         byte[] bytes = filePartInputStream.readAllBytes();
 
+        if(bytes.length == 0) {
+            logger.error("cannot upload a empty media");
+
+            writeError(request, response, new ErrorMessage.EmptyMediaError("cannot upload a empty media"));
+
+            return;
+        }
+
         try {
 
             Media media = new CreateMediaDatabase(getDataSource().getConnection(), filename, mimetype, bytes,mimetype.startsWith("image") ? scaleImage(bytes, THUMB_SIZE) : null).createMedia();
