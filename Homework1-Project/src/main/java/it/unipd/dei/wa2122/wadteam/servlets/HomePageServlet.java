@@ -44,14 +44,12 @@ public class HomePageServlet extends AbstractDatabaseServlet{
 
         try {
             products = new SearchProductListDatabase(getDataSource().getConnection(), param).searchProductList();
-
             List<Resource> list = new ArrayList<>();
-            //list.add(category);
             for(var prod : products){
                 if (prod.getQuantity() > 0)
                     list.add(prod);
             }
-
+            logger.info("A customer is using the search bar to look for: "+ param);
             writeResource(req, res, "/jsp/searchProduct.jsp", false, list.toArray(products.toArray(Resource[]::new)));
 
         } catch (SQLException e) {
@@ -76,6 +74,7 @@ public class HomePageServlet extends AbstractDatabaseServlet{
             }
             lists.addAll(categories);
 
+            logger.info("The homepage is loaded");
             writeResource(req, res, "/jsp/HomePage.jsp", false, lists.toArray(categories.toArray(Resource[]::new)));
 
         } catch (SQLException e) {
@@ -102,6 +101,7 @@ public class HomePageServlet extends AbstractDatabaseServlet{
                         list.add(prod);
                 }
 
+                logger.info("The category "+ category.getName() + " is loaded");
                 writeResource(req, res, "/jsp/categoryDetail.jsp", false, list.toArray(products.toArray(Resource[]::new)));
             }
             else writeError(req, res, GenericError.PAGE_NOT_FOUND);
@@ -122,12 +122,14 @@ public class HomePageServlet extends AbstractDatabaseServlet{
             product = new GetProductDatabase(getDataSource().getConnection(), param).getProduct();
 
             if(product != null){
+                logger.info("Product "+ product.getName() +" is loaded");
                 writeResource(req, res, "/jsp/productDetail.jsp", true, product);
             }
             else writeError(req, res, GenericError.PAGE_NOT_FOUND);
 
 
         } catch (SQLException e) {
+            logger.error(e.getMessage());
             writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
         }
     }

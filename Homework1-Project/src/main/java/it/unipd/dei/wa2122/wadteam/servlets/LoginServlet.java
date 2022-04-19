@@ -31,7 +31,7 @@ public class LoginServlet extends AbstractDatabaseServlet {
                 }
             }
             case "logout" -> {
-                logger.info("User "+((UserCredential)req.getSession(false).getAttribute(USER_ATTRIBUTE)).getIdentification() +" was logout");
+                logger.info("User "+((UserCredential)req.getSession(false).getAttribute(USER_ATTRIBUTE)).getIdentification() +" has logout");
 
                 req.getSession().invalidate();
                 resp.sendRedirect(req.getContextPath() + "/");
@@ -69,7 +69,7 @@ public class LoginServlet extends AbstractDatabaseServlet {
                         if (userCredential != null && userCredential.getIdentification() != null) {
                             HttpSession session = req.getSession();
                             session.setAttribute(USER_ATTRIBUTE, userCredential);
-                            logger.info("User "+userCredential.getIdentification() +" was logged");
+                            logger.info("User "+userCredential.getIdentification() +" has logged in");
                             resp.sendRedirect(req.getContextPath() + "/");
                         } else {
                             logger.info("User "+identification+" failed to log in");

@@ -37,6 +37,7 @@ public class OrderListServlet extends AbstractDatabaseServlet{
         try{
             list = new GetOnlineOrderByCustomerDatabase(getDataSource().getConnection(), id).getOnlineOrderByCustomer();
             Collections.reverse(list);
+            logger.info("The user is able to look at its orders");
             writeResource(req,res, "/jsp/orderList.jsp",false, list.toArray(Resource[]::new));
 
         } catch (SQLException e) {
@@ -60,9 +61,11 @@ public class OrderListServlet extends AbstractDatabaseServlet{
             idCustomer = order.getIdCustomer();
             UserCredential user = (UserCredential) req.getSession(false).getAttribute(USER_ATTRIBUTE);
             if(!Objects.equals(idCustomer, user.getId())){
+                logger.error("unauthorized");
                 writeJsp(req,res,"/jsp/unauthorized.jsp");
             }
             else{
+                logger.info("The user is able to look at its order: "+id);
                 writeResource(req,res, "/jsp/orderDetails.jsp",true, order);
             }
 
