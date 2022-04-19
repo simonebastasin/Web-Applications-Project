@@ -34,7 +34,7 @@
 <c:choose>
     <c:when test="${not empty user}">
         <a href="<c:url value="/ticket/list"/>">View Ticket</a>
-
+        <a href="<c:url value="/invoice/list"/>">View Invoice</a>
         <c:choose>
             <c:when test="${empty user.role}">
                 <a href="<c:url value="/order/list"/>">Your orders</a>
@@ -50,6 +50,7 @@
                 <option value="<c:url value="/management/discountManagement"/>">Discount Management</option>
                 <option value="<c:url value="/management/orderManagement"/>">Order Management</option>
                 <option value="<c:url value="/media/list"/>">View Media</option>
+                <option value="<c:url value="/invoice/list"/>">View Invoice List</option>
                 <c:choose>
                     <c:when test="${user.role == 'Administrator'}">
                         <option value="<c:url value="/management/userManagement"/>">User Management</option>

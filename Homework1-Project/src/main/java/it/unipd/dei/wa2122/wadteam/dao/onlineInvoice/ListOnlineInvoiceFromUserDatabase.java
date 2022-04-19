@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,25 +43,27 @@ public class ListOnlineInvoiceFromUserDatabase {
      * @throws SQLException
      *             if any error occurs while reading the assistant ticket.
      */
-    ResultSet resultSet = null;
+
 
     public List<OnlineInvoice> getOnlineInvoice() throws SQLException {
+        ResultSet resultSet = null;
         List<OnlineInvoice> resultOnlineInvoice = new ArrayList<>();
         PreparedStatement preparedStatement = null;
 
         try {
             preparedStatement = con.prepareStatement(STATEMENT);
+            preparedStatement.setInt(1, id);
 
             resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
 
-                int id = resultSet.getInt("oi.ID");
-                int idOrder = resultSet.getInt("oi.ID_Order");
-                String transactionId = resultSet.getString("oi.Transaction_ID");
-                PaymentMethodOnlineEnum paymentType = PaymentMethodOnlineEnum.fromString(resultSet.getString("oi.Payment_Type "));
-                DateTime date = resultSet.getObject("oi.OI_Date  ", DateTime.class);
-                Double totalPrice=resultSet.getDouble("oi.Total_Price");
+                int id = resultSet.getInt("ID");
+                int idOrder = resultSet.getInt("ID_Order");
+                String transactionId = resultSet.getString("Transaction_ID");
+                PaymentMethodOnlineEnum paymentType = PaymentMethodOnlineEnum.fromString(resultSet.getString("Payment_Type"));
+                DateTime date = new DateTime(resultSet.getObject("OI_Date", LocalDateTime.class));
+                Double totalPrice=resultSet.getDouble("Total_Price");
 
                 resultOnlineInvoice.add(new OnlineInvoice(id,new GetOnlineOrderByIdDatabase(con,idOrder).getOnlineOrderId(),transactionId,paymentType,date,totalPrice));
 

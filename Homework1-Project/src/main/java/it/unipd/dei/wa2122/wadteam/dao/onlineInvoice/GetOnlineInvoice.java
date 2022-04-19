@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 
 public class GetOnlineInvoice {
 
@@ -66,8 +67,8 @@ public class GetOnlineInvoice {
                 int id = resultSet.getInt("ID");
                 int idOrder = resultSet.getInt("ID_Order");
                 String transactionId = resultSet.getString("Transaction_ID");
-                PaymentMethodOnlineEnum paymentType = PaymentMethodOnlineEnum.fromString(resultSet.getString("Payment_Type "));
-                DateTime date = resultSet.getObject("OI_Date  ", DateTime.class);
+                PaymentMethodOnlineEnum paymentType = PaymentMethodOnlineEnum.fromString(resultSet.getString("Payment_Type"));
+                DateTime date = new DateTime(resultSet.getObject("OI_Date", LocalDateTime.class));
                 Double totalPrice=resultSet.getDouble("Total_Price");
 
                 resultSet.close();
