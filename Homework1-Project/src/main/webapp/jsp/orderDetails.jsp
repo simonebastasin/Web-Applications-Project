@@ -19,7 +19,7 @@
 
     <c:import url="/jsp/include/header.jsp"/>
     <h1>Order ID: ${onlineOrder.idOrder}</h1>
-
+    <hr>
     <ul>
     <c:forEach var="prod" items="${onlineOrder.products}">
         <li>

@@ -16,12 +16,11 @@
 <body>
     <c:import url="/jsp/include/header.jsp"/>
     <h1>Your orders</h1>
-    <ul>
+    <hr>
+
         <c:forEach var="order" items="${onlineOrderList}">
-            <li>
-                <b>Order ID: ${order.idOrder}</b>
+            <h2>Order ID: ${order.idOrder}</h2>
                 <a href="<c:url value="/order/detail"/>/${order.idOrder}">Details</a>
-            </li>
             <ul>
             <c:forEach var="prod" items="${order.products}">
                 <li>
@@ -35,7 +34,7 @@
             Status: ${order.status.status.text} <br>
             Total price: ${order.getTotalPrice()}€ <br>
         </c:forEach>
-    </ul>
+
     <%@ include file="/html/include/footer.html"%>
 </body>
 </html>

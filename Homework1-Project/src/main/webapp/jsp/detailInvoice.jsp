@@ -17,14 +17,14 @@
 <h1> Invoice Detail </h1>
 <hr>
 
-  <h2><b>Invoice ID: ${onlineInvoice.id}</b></h2>
+  <h2>Invoice ID: ${onlineInvoice.id}</h2>
   <li>Transaction ID: ${onlineInvoice.transactionId}</li>
-  <li>Payment Type: ${onlineInvoice.paymentType}</li>
+  <li>Payment Type: ${onlineInvoice.paymentType.text}</li>
   <li>Date: ${onlineInvoice.oiDate.humanDate}</li>
   <li>Price: ${onlineInvoice.totalPrice}</li>
 
-  <h2>Product list:</h2>
-  <h3>Order ID: ${onlineInvoice.idOrder.idOrder}</h3>
+  <h2>Product list</h2>
+  <b>Order ID: ${onlineInvoice.idOrder.idOrder}</b>
 
     <table>
       <tr>

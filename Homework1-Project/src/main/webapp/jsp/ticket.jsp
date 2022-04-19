@@ -16,6 +16,7 @@
 <body>
 <c:import url="/jsp/include/header.jsp"/>
 <h1> Ticket List </h1>
+<hr>
 <ul>
     <style>
         .ticket-OPEN{color: green;}
@@ -25,7 +26,7 @@
     </style>
 
     <c:forEach var="assistanceTicket" items="${assistanceTicketList}">
-        <li><b>Ticket ID: ${assistanceTicket.id}</b>
+        <li><h2>Ticket ID: ${assistanceTicket.id}</h2>
         <ul>
         <li>${assistanceTicket.description}</li>
             <li><a href="<c:url value="/products/details/${assistanceTicket.productAlias}"/>">Product ${assistanceTicket.productAlias}</a></li>
