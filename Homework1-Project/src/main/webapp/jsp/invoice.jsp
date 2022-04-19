@@ -17,6 +17,7 @@
 
         <c:forEach var="invoice" items="${onlineInvoiceList}">
             <li><b>Invoice ID: ${invoice.id}</b></li>
+            <li>Date: ${invoice.oiDate}</li>
             <li>Price: ${invoice.totalPrice}</li>
 
             <li><a href="<c:url value="/invoice/detail/${invoice.id}"/>">Detail Invoice</a></li>

@@ -19,6 +19,7 @@
   <li><b>Invoice ID: ${invoice.id}</b></li>
   <li>Transaction ID: ${invoice.transactionId}</li>
   <li>Payment Type: ${invoice.paymentType}</li>
+  <li>Date: ${invoice.oiDate}</li>
   <li>Price: ${invoice.totalPrice}</li>
 
   <h2>Product list:</h2>

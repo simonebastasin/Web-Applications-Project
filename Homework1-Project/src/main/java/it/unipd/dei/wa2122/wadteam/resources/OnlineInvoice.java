@@ -10,13 +10,15 @@ public class OnlineInvoice implements Resource {
     private final OnlineOrder idOrder;
     private final String transactionId;
     private final PaymentMethodOnlineEnum paymentType;
+    private final DateTime oiDate;
     private final double totalPrice;
 
-    public OnlineInvoice(Integer id, OnlineOrder idOrder, String transactionId, PaymentMethodOnlineEnum paymentType, double totalPrice) {
+    public OnlineInvoice(Integer id, OnlineOrder idOrder, String transactionId, PaymentMethodOnlineEnum paymentType, DateTime oiDate, double totalPrice) {
         this.id = id;
         this.idOrder = idOrder;
         this.transactionId = transactionId;
         this.paymentType = paymentType;
+        this.oiDate = oiDate;
         this.totalPrice = totalPrice;
     }
 
@@ -28,6 +30,8 @@ public class OnlineInvoice implements Resource {
 
     public PaymentMethodOnlineEnum getPaymentType() { return paymentType; }
 
+    public final DateTime getOiDate() { return oiDate; }
+
     public final double getTotalPrice() { return totalPrice; }
 
     @Override
@@ -37,6 +41,7 @@ public class OnlineInvoice implements Resource {
         jsonObject.put("idOrder", idOrder.toJSON());
         jsonObject.put("transactionId", transactionId);
         jsonObject.put("paymentType", paymentType);
+        jsonObject.put("oiDate", oiDate);
         jsonObject.put("totalPrice", totalPrice);
         return jsonObject;
     }
@@ -48,6 +53,6 @@ public class OnlineInvoice implements Resource {
         PaymentMethodOnlineEnum paymentType = PaymentMethodOnlineEnum.fromString(jsonObject.getString("paymentType"));
         DateTime oiDate = DateTime.fromJSON(jsonObject.getJSONObject("oiDate"));
         double totalPrice = jsonObject.getDouble("totalPrice");
-        return new OnlineInvoice(id, idOrder, transactionId, paymentType, totalPrice);
+        return new OnlineInvoice(id, idOrder, transactionId, paymentType, oiDate, totalPrice);
     }
 }
