@@ -33,12 +33,21 @@
                 <li>Price: ${product.salePrice}€</li>
             </c:otherwise>
         </c:choose>
+        <c:choose>
+            <c:when test="${not empty product.pictures}">
+                <li>Pictures:
+                    <c:forEach var="picture" items="${product.pictures}">
+                        <img src="<c:url value="/viewmedia/${picture.id}"/>" alt="${picture.filename}" width="100px"/>
+                    </c:forEach>
+                </li>
+            </c:when>
+        </c:choose>
     </ul>
-
-<hr />
 
 <c:choose>
     <c:when test="${not empty user && empty user.role}">
+        <hr>
+
         <form method="POST" action="<c:url value="/buy/product/${product.alias}"/>">
             <label for="quantity">Selected quantity</label>
             <input type="number" name ="quantity" max="${product.quantity}" min="1" id="quantity" required> <br>
