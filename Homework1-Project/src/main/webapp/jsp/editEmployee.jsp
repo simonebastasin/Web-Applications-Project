@@ -24,7 +24,7 @@
     <form method="POST" action="">
 
         <label for="username">Username:</label><br>
-        <input type="text" id="username" name="username" value="${employee.username}" readonly><br>
+        <input type="text" id="username" name="username" value="${employee.username}" disabled><br>
         <label for="name">Name:</label><br>
         <input type="text" id="name" name="name" value="${employee.name}"><br>
         <label for="surname">Surname:</label><br>

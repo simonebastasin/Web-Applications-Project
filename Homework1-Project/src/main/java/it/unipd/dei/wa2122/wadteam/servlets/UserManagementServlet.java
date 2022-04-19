@@ -145,9 +145,8 @@ public class UserManagementServlet extends AbstractDatabaseServlet {
         String name = req.getParameter("name");
         String surname = req.getParameter("surname");
         Role role = new Role(req.getParameter("role"));
-        String password = req.getParameter("password");
 
-        Employee employee = new Employee(username, name, surname, role, password);
+        Employee employee = new Employee(username, name, surname, role, null);
         try {
             employee = new UpdateEmployeeDatabase(getDataSource().getConnection(), employee).updateEmployee();
             //writeResource(req, res, "/jsp/employeeDetail.jsp", true , product); //view result
