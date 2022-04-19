@@ -44,11 +44,21 @@ public class AssistanceTicket implements Resource {
     @Override
     public JSONObject toJSON() {
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("id",id);
-        jsonObject.put("description",description);
-        jsonObject.put("idCustomer",idCustomer);
-        jsonObject.put("productAlias", productAlias);
-        jsonObject.put("ticketStatusList",ticketStatusList.stream().map(TicketStatus::toJSON).toArray());
+        if(id!=null) {
+            jsonObject.put("id", id);
+        }
+        if(description!=null) {
+            jsonObject.put("description", description);
+        }
+        if(idCustomer!=null) {
+            jsonObject.put("idCustomer", idCustomer);
+        }
+        if(productAlias!=null) {
+            jsonObject.put("productAlias", productAlias);
+        }
+        if(ticketStatusList!=null) {
+            jsonObject.put("ticketStatusList", ticketStatusList.stream().map(TicketStatus::toJSON).toArray());
+        }
         return jsonObject;
     }
 

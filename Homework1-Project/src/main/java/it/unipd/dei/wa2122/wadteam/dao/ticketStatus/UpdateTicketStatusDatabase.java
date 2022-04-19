@@ -24,7 +24,7 @@ public class UpdateTicketStatusDatabase {
     /**
      * The ticket status of the ticket status
      */
-    private TicketStatus ticketStatus;
+    private final TicketStatus ticketStatus;
 
     public UpdateTicketStatusDatabase(final Connection con, final TicketStatus ticketStatus) {
         this.con = con;
