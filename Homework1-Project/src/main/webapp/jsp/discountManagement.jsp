@@ -41,7 +41,7 @@
 
         <tr>
             <td>${discountListProduct.discount.id}</td>
-            <td>${discountListProduct.discount.percentage}</td>
+            <td>${discountListProduct.discount.percentage}%</td>
             <td>${discountListProduct.discount.startDate.getHumanDateTimeless()}</td>
             <td>${discountListProduct.discount.endDate.getHumanDateTimeless()}</td>
 

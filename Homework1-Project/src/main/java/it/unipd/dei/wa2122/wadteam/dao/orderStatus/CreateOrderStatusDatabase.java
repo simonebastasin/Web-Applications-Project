@@ -24,7 +24,7 @@ public class CreateOrderStatusDatabase {
     /**
      * The order status
      */
-    private OrderStatus orderStatus;
+    private final OrderStatus orderStatus;
 
     public CreateOrderStatusDatabase(final Connection con, final OrderStatus orderStatus) {
         this.con = con;
