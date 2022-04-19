@@ -47,10 +47,9 @@ public class UpdateProductDatabase {
      * @throws SQLException
      *             if any error occurs while updating the product.
      */
-    public Product updateProduct() throws SQLException {
+    public int updateProduct() throws SQLException {
         PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
-        Product resultProduct = null;
+        int result = 0;
 
         try {
             preparedStatement = con.prepareStatement(STATEMENT_UPDATE_PRODUCT);
@@ -64,60 +63,35 @@ public class UpdateProductDatabase {
             preparedStatement.setBoolean(8, product.getEvidence());
             preparedStatement.setString(9, product.getAlias());
 
-            resultSet = preparedStatement.executeQuery();
-
-            if(resultSet.next()){
-                resultProduct = new Product(resultSet.getString("product_alias"),
-                        resultSet.getString("name"),
-                        resultSet.getString("brand"),
-                        resultSet.getString("description"),
-                        resultSet.getInt("quantity"),
-                        resultSet.getDouble("purchase_price"),
-                        resultSet.getDouble("sale_price"),
-                        new ProductCategory(resultSet.getString("category_name"),null),
-                        resultSet.getBoolean("evidence"),
-                        new ArrayList<>(),
-                        null);
-            }
+            result += preparedStatement.executeUpdate();
 
         } finally {
-            if (resultSet != null) {
-                resultSet.close();
-            }
-
             if (preparedStatement != null) {
                 preparedStatement.close();
             }
         }
 
+        if(product.getPictures() != null)
+            for(var item : product.getPictures()) {
+                try {
+                    preparedStatement = con.prepareStatement(STATEMENT_UPDATE_PICTURE);
+                    preparedStatement.setString(1, product.getAlias());
+                    preparedStatement.setInt(2, item);
+                    preparedStatement.setString(3, product.getAlias());
 
-        for(var item : product.getPictures()) {
-            try {
-                preparedStatement = con.prepareStatement(STATEMENT_UPDATE_PICTURE);
-                preparedStatement.setString(1, product.getAlias());
-                preparedStatement.setInt(2, item);
-                preparedStatement.setString(3, product.getAlias());
+                    result += preparedStatement.executeUpdate();
 
-                resultSet = preparedStatement.executeQuery();
 
-                while (resultSet.next()) {
-                    assert resultProduct != null;
-                    resultProduct.getPictures().add(resultSet.getInt("id_media"));
-                }
-            } finally {
-                if (resultSet != null) {
-                    resultSet.close();
-                }
+                } finally {
 
-                if (preparedStatement != null) {
-                    preparedStatement.close();
+                    if (preparedStatement != null) {
+                        preparedStatement.close();
+                    }
                 }
             }
-        }
-
 
         con.close();
 
-        return resultProduct;
+        return result;
     }
 }

@@ -190,7 +190,7 @@ public class ProductManagementServlet extends AbstractDatabaseServlet{
      * @throws ServletException
      */
     private void postEditProduct(HttpServletRequest req, HttpServletResponse res, String param) throws IOException, ServletException {
-        String alias = req.getParameter("alias");
+        String alias = param;
         String name = req.getParameter("name");
         String brand = req.getParameter("brand");
         String description = req.getParameter("description");
@@ -204,11 +204,12 @@ public class ProductManagementServlet extends AbstractDatabaseServlet{
         Product temp = new Product(alias,name,brand,description,quantity,purchase,sale,category,evidence,null, null);
 
         try {
-            Product product = new UpdateProductDatabase(getDataSource().getConnection(), temp).updateProduct();
+            int edit = new UpdateProductDatabase(getDataSource().getConnection(), temp).updateProduct();
             //writeResource(req, res, "/jsp/productDetail.jsp", true , product); //view result
             res.sendRedirect(req.getContextPath() + (req.getServletPath().startsWith("/rest/") ? "/rest" : "") +"/management/productManagement");
         } catch (SQLException e) {
             logger.error(e.getMessage());
+            e.printStackTrace();
             writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
         }
 
