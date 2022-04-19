@@ -3,7 +3,7 @@ package it.unipd.dei.wa2122.wadteam.resources;
 import org.json.JSONObject;
 
 public enum TicketStatusEnum implements Resource{
-    OPEN("Open"), PROCESSING("Processing"), CLOSED("Closed"), RETURN("RETURN");
+    OPEN("Open"), PROCESSING("Processing"), CLOSED("Closed"), RETURN("Return");
 
     final String text; //user-friendly text
 
