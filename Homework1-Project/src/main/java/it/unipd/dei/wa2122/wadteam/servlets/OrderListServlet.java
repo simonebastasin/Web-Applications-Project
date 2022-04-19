@@ -10,6 +10,7 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -35,6 +36,7 @@ public class OrderListServlet extends AbstractDatabaseServlet{
 
         try{
             list = new GetOnlineOrderByCustomerDatabase(getDataSource().getConnection(), id).getOnlineOrderByCustomer();
+            Collections.reverse(list);
             writeResource(req,res, "/jsp/orderList.jsp",false, list.toArray(Resource[]::new));
 
         } catch (SQLException e) {
@@ -53,7 +55,6 @@ public class OrderListServlet extends AbstractDatabaseServlet{
         }
 
         try{
-
 
             order = new GetOnlineOrderByIdDatabase(getDataSource().getConnection(), id).getOnlineOrderId();
             idCustomer = order.getIdCustomer();

@@ -12,6 +12,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Collections;
 import java.util.Objects;
 
 
@@ -98,10 +99,12 @@ public class TicketServlet extends AbstractDatabaseServlet {
                 switch (ut) {
                     case CUSTOMER -> {
                         var listTicket = new ListAssistanceTicketFromUserDatabase(getDataSource().getConnection(), ((UserCredential) req.getSession(false).getAttribute(USER_ATTRIBUTE)).getId()).getAssistanceTicketFromUser();
+                        Collections.reverse(listTicket);
                         writeResource(req, resp, "/jsp/ticket.jsp", false, listTicket.toArray(AssistanceTicket[]::new));
                     }
                     case EMPLOYEE ->  {
                         var listTicket = new ListAssistanceTicketDatabase(getDataSource().getConnection()).getAssistanceTicket();
+                        Collections.reverse(listTicket);
                         writeResource(req, resp, "/jsp/ticketRespond.jsp", false, listTicket.toArray(AssistanceTicket[]::new));
                     }
                     default ->  writeError(req, resp, GenericError.UNAUTHORIZED);

@@ -16,6 +16,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class OrderManagementServlet extends AbstractDatabaseServlet {
@@ -56,6 +57,7 @@ public class OrderManagementServlet extends AbstractDatabaseServlet {
         List<OnlineOrder> orderList;
         try {
             orderList = new GetListOnlineOrderDatabase(getDataSource().getConnection()).getListOnlineOrder();
+            Collections.reverse(orderList);
             writeResource(req, res, "/jsp/orderManagement.jsp", false, orderList.toArray(Resource[]::new));
         } catch (SQLException e) {
             logger.error(e.getMessage());

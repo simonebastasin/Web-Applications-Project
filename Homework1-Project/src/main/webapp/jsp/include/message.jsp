@@ -19,7 +19,11 @@
     <c:otherwise>
         <ul>
             <li>message: <c:out value="${message.message}"/></li>
-            <li>resource id: <c:out value="${message.resourceId}"/></li>
+            <c:choose>
+                <c:when test="not empty ${message.resourceId}">
+                    <li>resource id: <c:out value="${message.resourceId}"/></li>
+                </c:when>
+            </c:choose>
         </ul>
     </c:otherwise>
 </c:choose>
