@@ -1,9 +1,6 @@
 package it.unipd.dei.wa2122.wadteam.servlets;
 
-import it.unipd.dei.wa2122.wadteam.dao.onlineInvoice.CreateOnlineInvoiceDatabase;
-import it.unipd.dei.wa2122.wadteam.dao.onlineInvoice.GetOnlineInvoiceDatabase;
-import it.unipd.dei.wa2122.wadteam.dao.onlineInvoice.ListOnlineInvoiceDatabase;
-import it.unipd.dei.wa2122.wadteam.dao.onlineInvoice.ListOnlineInvoiceFromUserDatabase;
+import it.unipd.dei.wa2122.wadteam.dao.onlineInvoice.*;
 import it.unipd.dei.wa2122.wadteam.dao.onlineOrder.GetOnlineOrderByIdDatabase;
 import it.unipd.dei.wa2122.wadteam.resources.*;
 import jakarta.servlet.ServletException;
@@ -24,9 +21,54 @@ public class InvoiceServlet extends AbstractDatabaseServlet{
             case "create" -> getCreateInvoice(req, resp);
             case "list" -> getListInvoice(req, resp);
             case "detail" -> getDetailInvoice(req, resp, param);
+            case "order" -> getDetailInvoiceFromOrderId(req, resp, param);
             default ->  writeError(req, resp, GenericError.PAGE_NOT_FOUND);
         }
 
+    }
+
+    private void getDetailInvoiceFromOrderId(HttpServletRequest req, HttpServletResponse resp, String param) throws IOException, ServletException {
+        if(param.chars().allMatch( Character::isDigit ) && !param.equals("")) {
+            var ut = ((UserCredential) req.getSession(false).getAttribute(USER_ATTRIBUTE)).getType();
+            switch (ut) {
+                case CUSTOMER -> {
+                    int id = Integer.parseInt(param);
+
+                    try {
+                        OnlineInvoice onlineInvoice = new GetOnlineInvoiceFromOrderDatabase(getDataSource().getConnection(), id).getOnlineInvoice();
+                        if(onlineInvoice == null) writeError(req, resp, GenericError.PAGE_NOT_FOUND);
+                        else {
+                            var uid = ((UserCredential) req.getSession(false).getAttribute(USER_ATTRIBUTE)).getId();
+
+                            if (onlineInvoice.getIdOrder().getIdCustomer().equals(uid)) {
+                                writeResource(req, resp, "/jsp/detailInvoice.jsp", true, onlineInvoice);
+                            } else {
+                                writeError(req, resp, GenericError.PAGE_NOT_FOUND);
+                            }
+                        }
+                    } catch (SQLException e) {
+                        logger.error(e.getMessage());
+                        writeError(req, resp, new ErrorMessage.SqlInternalError(e.getMessage()));
+                    }
+
+                }
+                case EMPLOYEE -> {
+                    int id = Integer.parseInt(param);
+
+                    try {
+                        OnlineInvoice onlineInvoice = new GetOnlineInvoiceFromOrderDatabase(getDataSource().getConnection(), id).getOnlineInvoice();
+                        if(onlineInvoice == null) writeError(req, resp, GenericError.PAGE_NOT_FOUND);
+                        else {
+                            writeResource(req, resp, "/jsp/detailInvoice.jsp", true, onlineInvoice);
+                        }
+                    } catch (SQLException e) {
+                        logger.error(e.getMessage());
+                        writeError(req, resp, new ErrorMessage.SqlInternalError(e.getMessage()));
+                    }
+                }
+                default ->  writeError(req, resp, GenericError.UNAUTHORIZED);
+            }
+        }
     }
 
     private void getCreateInvoice(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
@@ -46,8 +88,16 @@ public class InvoiceServlet extends AbstractDatabaseServlet{
 
                     try {
                         OnlineInvoice onlineInvoice = new GetOnlineInvoiceDatabase(getDataSource().getConnection(), id).getOnlineInvoice();
+                        if(onlineInvoice == null) writeError(req, resp, GenericError.PAGE_NOT_FOUND);
+                        else {
+                            var uid = ((UserCredential) req.getSession(false).getAttribute(USER_ATTRIBUTE)).getId();
 
-                        writeResource(req, resp, "/jsp/detailInvoice.jsp", true, onlineInvoice);
+                            if (onlineInvoice.getIdOrder().getIdCustomer().equals(uid)) {
+                                writeResource(req, resp, "/jsp/detailInvoice.jsp", true, onlineInvoice);
+                            } else {
+                                writeError(req, resp, GenericError.PAGE_NOT_FOUND);
+                            }
+                        }
                     } catch (SQLException e) {
                         logger.error(e.getMessage());
                         writeError(req, resp, new ErrorMessage.SqlInternalError(e.getMessage()));
@@ -59,7 +109,10 @@ public class InvoiceServlet extends AbstractDatabaseServlet{
 
                     try {
                         OnlineInvoice onlineInvoice = new GetOnlineInvoiceDatabase(getDataSource().getConnection(), id).getOnlineInvoice();
-                        writeResource(req, resp, "/jsp/detailInvoice.jsp", true, onlineInvoice);
+                        if(onlineInvoice == null) writeError(req, resp, GenericError.PAGE_NOT_FOUND);
+                        else {
+                            writeResource(req, resp, "/jsp/detailInvoice.jsp", true, onlineInvoice);
+                        }
                     } catch (SQLException e) {
                         logger.error(e.getMessage());
                         writeError(req, resp, new ErrorMessage.SqlInternalError(e.getMessage()));

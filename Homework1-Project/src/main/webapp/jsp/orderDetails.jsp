@@ -7,6 +7,8 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="it.unipd.dei.wa2122.wadteam.resources.OrderStatusEnum" %>
+
 <%--@elvariable id="onlineOrder" type="OnlineOrder"--%>
 
 <html>
@@ -34,12 +36,16 @@
     Status: ${onlineOrder.status.status.text} <br>
     Total price: ${onlineOrder.getTotalPrice()}€ <br>
 
-    <c:choose>
-        <c:when test="${onlineOrder.status.status.text != \"Open\" }">
-            <input type ="submit" value = "Get invoice">
-            <input type ="submit" value = "Cancel your order">
-        </c:when>
-    </c:choose>
+    <c:if test="${onlineOrder.status.status ne OrderStatusEnum.OPEN }">
+        <a href="<c:url value="/invoice/order/${onlineOrder.idOrder}"/>">Invoice</a>
+    </c:if>
+    <c:if test="${onlineOrder.status.status eq OrderStatusEnum.OPEN }">
+        <a href="<c:url value="/buy/pay/${onlineOrder.idOrder}"/>">Pay</a>
+        <a href="<c:url value="/buy/cancel/${onlineOrder.idOrder}"/>">Cancel</a>
+    </c:if>
+    <c:if test="${onlineOrder.status.status eq OrderStatusEnum.PAYMENT_ACCEPTED }">
+        <a href="<c:url value="/buy/cancel/${onlineOrder.idOrder}"/>">Cancel</a>
+    </c:if>
 
     <%@ include file="/html/include/footer.html"%>
 </body>
