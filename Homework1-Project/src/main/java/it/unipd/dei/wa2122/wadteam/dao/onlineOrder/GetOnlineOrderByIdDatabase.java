@@ -19,7 +19,7 @@ public class GetOnlineOrderByIdDatabase {
             "LEFT JOIN Order_Status as s on o.id = s.id_order " +
             "WHERE s.id_order = ?";
 
-    private static final String STATEMENT_GET_PRODUCT = "select o.id, p.name, p.product_alias, c.price_applied, c.quantity from online_order as o " +
+    private static final String STATEMENT_GET_PRODUCT = "select o.id, p.name, p.brand, p.product_alias, c.price_applied, c.quantity from online_order as o " +
             "inner join contains as c on o.id = c.id_order " +
             "inner join product as p on p.product_alias=c.product_alias " +
             "where o.id = ?";
@@ -39,8 +39,8 @@ public class GetOnlineOrderByIdDatabase {
      *
      * @param con
      *            the connection to the database.
-     * @param idCustomer
-     *            the id of the customer.
+     * @param idOrder
+     *            the id of the order.
      */
     public GetOnlineOrderByIdDatabase(final Connection con, final Integer idOrder) {
         this.con = con;
@@ -94,11 +94,12 @@ public class GetOnlineOrderByIdDatabase {
                 pstmtProduct.setInt(1,onlineOrder.getIdOrder());
 
                 rsProduct = pstmtProduct.executeQuery();
+
                 while(rsProduct.next()) {
                     products.add( new Product(
                             rsProduct.getString("product_alias"),
                             rsProduct.getString("name"),
-                            null,
+                            rsProduct.getString("brand"),
                             null,
                             rsProduct.getInt("quantity"),
                             0.0,
@@ -109,11 +110,12 @@ public class GetOnlineOrderByIdDatabase {
                             null));
                 }
             }
+
         } finally {
+
             if (rs != null) {
                 rs.close();
             }
-
             if (pstmt != null) {
                 pstmt.close();
             }
@@ -121,10 +123,10 @@ public class GetOnlineOrderByIdDatabase {
             if (rsProduct != null) {
                 rsProduct.close();
             }
-
             if (pstmtProduct != null) {
                 pstmtProduct.close();
             }
+
         }
         con.close();
 
