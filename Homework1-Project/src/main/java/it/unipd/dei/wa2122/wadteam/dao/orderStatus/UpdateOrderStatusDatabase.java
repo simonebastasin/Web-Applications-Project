@@ -15,7 +15,7 @@ public class UpdateOrderStatusDatabase {
     /**
      * The SQL statement to be executed
      */
-    private static final String STATEMENT = "UPDATE order_status SET status = ?::orderstatus, description = ?, os_datetime = ? WHERE id_order = ?";
+    private static final String STATEMENT = "UPDATE order_status SET status = ?::orderstatus, description = ?, os_datetime = LOCALTIMESTAMP WHERE id_order = ?";
 
     /**
      * The connection to the database
@@ -48,36 +48,22 @@ public class UpdateOrderStatusDatabase {
      * @throws SQLException
      *             if any error occurs while updating the order status.
      */
-    public OrderStatus updateOrderStatus() throws SQLException {
+    public int updateOrderStatus() throws SQLException {
 
         PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
-
-        OrderStatus resultOrderStatus = null;
+        int result = 0;
 
         try {
             preparedStatement = con.prepareStatement(STATEMENT);
             preparedStatement.setString(1, orderStatus.getStatus().getText());
             preparedStatement.setString(2, orderStatus.getDescription());
-            preparedStatement.setObject(3, orderStatus.getOsDateTime().getLocalDateTime());
-            preparedStatement.setInt(4, orderStatus.getIdOrder());
+            preparedStatement.setInt(3, orderStatus.getIdOrder());
 
-            resultSet = preparedStatement.executeQuery();
+            result = preparedStatement.executeUpdate();
 
-            if (resultSet.next()) {
-                resultOrderStatus = new OrderStatus(
-                        resultSet.getInt("id"),
-                        OrderStatusEnum.fromString(resultSet.getString("status")),
-                        resultSet.getString("description"),
-                        new DateTime(resultSet.getObject("os_datetime", LocalDateTime.class)),
-                        resultSet.getInt("id_order"));
-            }
 
         } finally {
 
-            if (resultSet != null) {
-                resultSet.close();
-            }
             if (preparedStatement != null) {
                 preparedStatement.close();
             }
@@ -85,6 +71,6 @@ public class UpdateOrderStatusDatabase {
         }
         con.close();
 
-        return resultOrderStatus;
+        return result;
     }
 }

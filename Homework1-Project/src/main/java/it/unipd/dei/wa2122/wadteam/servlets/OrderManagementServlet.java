@@ -111,7 +111,7 @@ public class OrderManagementServlet extends AbstractDatabaseServlet {
             try {
                 int intParam = Integer.parseInt(param);
                 orderStatus = new OrderStatus(null, status, description, null, intParam);
-                orderStatus = new UpdateOrderStatusDatabase((getDataSource().getConnection()), orderStatus).updateOrderStatus();
+                int result = new UpdateOrderStatusDatabase((getDataSource().getConnection()), orderStatus).updateOrderStatus();
                 res.sendRedirect(req.getContextPath() +(req.getServletPath().startsWith("/rest/") ? "/rest" : "") + "/management/orderManagement");
             } catch (SQLException e) {
                 logger.error(e.getMessage());
