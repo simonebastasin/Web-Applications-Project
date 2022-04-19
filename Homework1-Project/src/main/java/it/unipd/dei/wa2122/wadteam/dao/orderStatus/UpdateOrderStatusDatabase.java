@@ -11,10 +11,11 @@ import java.sql.SQLException;
 import java.time.LocalDateTime;
 
 public class UpdateOrderStatusDatabase {
+
     /**
      * The SQL statement to be executed
      */
-    private static final String STATEMENT = "UPDATE order_status SET status = ?::orderstatus, description = ?, os_datetime = ?, id_order = ? WHERE id = ?";
+    private static final String STATEMENT = "UPDATE order_status SET status = ?::orderstatus, description = ?, os_datetime = ? WHERE id_order = ?";
 
     /**
      * The connection to the database
@@ -52,7 +53,6 @@ public class UpdateOrderStatusDatabase {
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
 
-        // the read employee
         OrderStatus resultOrderStatus = null;
 
         try {
@@ -61,8 +61,6 @@ public class UpdateOrderStatusDatabase {
             preparedStatement.setString(2, orderStatus.getDescription());
             preparedStatement.setObject(3, orderStatus.getOsDateTime().getLocalDateTime());
             preparedStatement.setInt(4, orderStatus.getIdOrder());
-            preparedStatement.setInt(5, orderStatus.getId());
-
 
             resultSet = preparedStatement.executeQuery();
 
@@ -74,16 +72,19 @@ public class UpdateOrderStatusDatabase {
                         new DateTime(resultSet.getObject("os_datetime", LocalDateTime.class)),
                         resultSet.getInt("id_order"));
             }
+
         } finally {
+
             if (resultSet != null) {
                 resultSet.close();
             }
-
             if (preparedStatement != null) {
                 preparedStatement.close();
             }
+
         }
         con.close();
+
         return resultOrderStatus;
     }
 }
