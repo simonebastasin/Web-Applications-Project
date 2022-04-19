@@ -27,12 +27,21 @@
         <label for="quantity">Quantity:</label><br>
         <input type="number" min="1" step="1" id="quantity" name="quantity" value="${product.quantity}"/><br>
         <label for="category">Category:</label><br>
-        <select  name="category" id="category" selected="${product.category}">
-            <c:forEach var="cat" items="${categories}">
-                <option value="${cat.name}">
-                        ${cat.name}
-                </option>
-            </c:forEach>
+        <select  name="category" id="category"">
+        <c:forEach var="cat" items="${categories}">
+            <c:choose>
+                <c:when test="${cat.name != product.category.name}">
+                    <option value="${cat.name}">
+                            ${cat.name}
+                    </option>
+                </c:when>
+                <c:otherwise>
+                    <option value="${cat.name}" selected>
+                            ${cat.name}
+                    </option>
+                </c:otherwise>
+            </c:choose>
+        </c:forEach>
         </select>
         <a href="<c:url value="/management/productManagement/createCategory"/>">Add a new category</a>
         <div>
