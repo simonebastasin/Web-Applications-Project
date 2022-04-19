@@ -24,16 +24,33 @@ Order you are deleting:<br><br>
         <th>ID</th>
         <th>ID_Customer</th>
         <th>Date</th>
-        <th>Products</th>
         <th>Status</th>
     </tr>
     <tr>
         <td>${onlineOrder.idOrder}</td>
         <td>${onlineOrder.idCustomer}</td>
         <td>${onlineOrder.ooDateTime}</td>
-        <td>${onlineOrder.products}</td>
         <td>${onlineOrder.status}</td>
     </tr>
+</table><br>
+with these products:
+<table>
+    <tr>
+        <th>Alias</th>
+        <th>Brand</th>
+        <th>Name</th>
+        <th>Quantity</th>
+        <th>Sale_Price</th>
+    </tr>
+    <c:forEach var="product" items="${onlineOrder.products}">
+        <tr>
+            <td>${product.alias}</td>
+            <td>${product.brand}</td>
+            <td>${product.name}</td>
+            <td>${product.quantity}</td>
+            <td>${product.salePrice}</td>
+        </tr>
+    </c:forEach>
 </table><br>
 Sure to delete?<br><br>
 

@@ -20,18 +20,34 @@
 
 
 <c:forEach var="onlineOrder" items="${onlineOrderList}">
-    <form method="POST" action="">
-
         <label for="idOrder">ID_Order:</label><br>
         <input type="text" id="idOrder" name="idOrder" value="${onlineOrder.idOrder}" readonly><br>
         <label for="idCustomer">ID_Customer:</label><br>
         <input type="text" id="idCustomer" name="idCustomer" value="${onlineOrder.idCustomer}" readonly><br>
         <label for="orderDate">Order_Date:</label><br>
         <input type="text" id="orderDate" name="orderDate" value="${onlineOrder.ooDateTime}" readonly><br>
-        <label for="products">Products:</label><br>
-        <input type="text" id="products" name="products" value="${onlineOrder.products.toArray()}" readonly><br>
-        <label for="status">Status:</label><br>
 
+        Products:
+        <table>
+            <tr>
+                <th>Alias</th>
+                <th>Brand</th>
+                <th>Name</th>
+                <th>Quantity</th>
+                <th>Sale_Price</th>
+            </tr>
+            <c:forEach var="product" items="${onlineOrder.products}">
+                <tr>
+                    <td>${product.alias}</td>
+                    <td>${product.brand}</td>
+                    <td>${product.name}</td>
+                    <td>${product.quantity}</td>
+                    <td>${product.salePrice}</td>
+                </tr>
+            </c:forEach>
+        </table>
+
+        <label for="status">Status:</label><br>
         <select id="status" name="status">
             <c:choose>
                 <c:when test="${onlineOrder.status != 'Open'}">

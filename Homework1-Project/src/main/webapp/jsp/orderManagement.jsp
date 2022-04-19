@@ -33,7 +33,11 @@
             <td>${order.idOrder}</td>
             <td>${order.idCustomer}</td>
             <td>${order.ooDateTime.getHumanDate()}</td>
-            <td>${order.products}</td>
+            <td><ul>
+                <c:forEach var="product" items="${order.products}">
+                    <li>${product.alias}, ${product.brand}, ${product.name}, ${product.quantity}</li>
+                </c:forEach>
+            </ul></td>
             <td>${order.status}</td>
             <td>
                 <a href="<c:url value="/management/orderManagement/editOrder/${order.idOrder}"/>">Edit</a>

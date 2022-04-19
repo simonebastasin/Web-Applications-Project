@@ -53,7 +53,6 @@ public class OrderManagementServlet extends AbstractDatabaseServlet {
      */
     private void getOrderList(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         List<OnlineOrder> orderList;
-        List<Resource> list = new ArrayList<>();
         try {
             orderList = new GetListOnlineOrderDatabase(getDataSource().getConnection()).getListOnlineOrder();
             writeResource(req, res, "/jsp/orderManagement.jsp", false, orderList.toArray(Resource[]::new));
