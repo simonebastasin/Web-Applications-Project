@@ -6,6 +6,7 @@ import it.unipd.dei.wa2122.wadteam.dao.onlineOrder.DeleteOnlineOrderDatabase;
 import it.unipd.dei.wa2122.wadteam.dao.onlineOrder.GetListOnlineOrderDatabase;
 import it.unipd.dei.wa2122.wadteam.dao.onlineOrder.GetOnlineOrderByIdDatabase;
 import it.unipd.dei.wa2122.wadteam.dao.onlineOrder.UpdateOnlineOrderDatabase;
+import it.unipd.dei.wa2122.wadteam.dao.orderStatus.UpdateOrderStatusDatabase;
 import it.unipd.dei.wa2122.wadteam.dao.role.ListRoleDatabase;
 import it.unipd.dei.wa2122.wadteam.resources.*;
 import jakarta.servlet.ServletException;
@@ -100,17 +101,15 @@ public class OrderManagementServlet extends AbstractDatabaseServlet {
      * @throws ServletException
      */
     private void postEditOrder(HttpServletRequest req, HttpServletResponse res, String param) throws IOException, ServletException {
-        // TODO: get new params
-        /* e.g.:
-        String idOrder = req.getParameter("username");
-        Role role = new Role(req.getParameter("role"));
-        */
-        OnlineOrder order;
+        OrderStatusEnum status = OrderStatusEnum.valueOf(req.getParameter("status"));
+        String description = req.getParameter("description");
+
+        OrderStatus orderStatus;
         if (param.chars().allMatch(Character::isDigit) && !param.equals("")) {
             try {
                 int intParam = Integer.parseInt(param);
-                order = new GetOnlineOrderByIdDatabase(getDataSource().getConnection(), intParam).getOnlineOrderId();
-                int idOrder = new UpdateOnlineOrderDatabase((getDataSource().getConnection()), order).updateOnlineOrder();
+                orderStatus = new OrderStatus(null, status, description, null, intParam);
+                orderStatus = new UpdateOrderStatusDatabase((getDataSource().getConnection()), orderStatus).updateOrderStatus();
                 res.sendRedirect(req.getContextPath() + "/management/orderManagement");
             } catch (SQLException e) {
                 logger.error(e.getMessage());
