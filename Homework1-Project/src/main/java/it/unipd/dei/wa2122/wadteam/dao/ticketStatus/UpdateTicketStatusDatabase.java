@@ -32,10 +32,10 @@ public class UpdateTicketStatusDatabase {
     }
 
 
-    public TicketStatus updateTicketStatus() throws SQLException {
+    public int updateTicketStatus() throws SQLException {
 
         PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
+        int result;
 
         // the update ticket status
         TicketStatus resultTicketStatus = null;
@@ -48,21 +48,11 @@ public class UpdateTicketStatusDatabase {
             preparedStatement.setInt(4, ticketStatus.getIdTicket());
             preparedStatement.setInt(5, ticketStatus.getId());
 
-            resultSet = preparedStatement.executeQuery();
+            result = preparedStatement.executeUpdate();
 
-            if (resultSet.next()) {
-                resultTicketStatus = new TicketStatus(
-                        resultSet.getInt("id"),
-                        TicketStatusEnum.fromString(resultSet.getString("status")),
-                        resultSet.getString("description"),
-                        new DateTime(resultSet.getObject("ts_Date", LocalDateTime.class)),
-                        resultSet.getInt("id_Ticket")
-                );
-            }
+
         } finally {
-            if (resultSet != null) {
-                resultSet.close();
-            }
+
 
             if (preparedStatement != null) {
                 preparedStatement.close();
@@ -70,6 +60,6 @@ public class UpdateTicketStatusDatabase {
         }
         con.close();
 
-        return resultTicketStatus;
+        return result;
     }
 }

@@ -44,11 +44,10 @@ public class UpdateAssistanceTicketDatabase {
      * @throws SQLException
      *             if any error occurs while reading the employee.
      */
-    public AssistanceTicket getAssistaceTicket() throws SQLException {
+    public int getAssistaceTicket() throws SQLException {
 
         PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
-
+        int result;
         // the read employee
         AssistanceTicket resultAssistantTicket = null;
 
@@ -58,25 +57,16 @@ public class UpdateAssistanceTicketDatabase {
             preparedStatement.setInt(3, assistantTicket.getIdCustomer());
             preparedStatement.setString(4, assistantTicket.getProductAlias());
 
-            resultSet = preparedStatement.executeQuery();
+            result = preparedStatement.executeUpdate();
 
-            if (resultSet.next()) {
-                resultAssistantTicket = new AssistanceTicket(resultSet.getInt("ID"),
-                        resultSet.getString("Description"),
-                        resultSet.getInt("ID_Customer"), 
-                        resultSet.getString("Product_Alias"), null);
-            }
+
         } finally {
-            if (resultSet != null) {
-                resultSet.close();
-            }
-
             if (preparedStatement != null) {
                 preparedStatement.close();
             }
         }
         con.close();
 
-        return resultAssistantTicket;
+        return result;
     }
 }

@@ -44,9 +44,9 @@ public class UpdateProductCategoryDatabase {
      * @throws SQLException
      *             if any error occurs while updating the product.
      */
-    public ProductCategory updateProductCategory() throws SQLException {
+    public int updateProductCategory() throws SQLException {
         PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
+        int result;
 
         ProductCategory resultCategory = null;
 
@@ -55,17 +55,9 @@ public class UpdateProductCategoryDatabase {
             preparedStatement.setString(1,category.getDescription());
             preparedStatement.setString(2,category.getName());
 
-            resultSet = preparedStatement.executeQuery();
+            result = preparedStatement.executeUpdate();
 
-            if (resultSet.next()) {
-                resultCategory = new ProductCategory(
-                        resultSet.getString("name"),
-                        resultSet.getString("description"));
-            }
         } finally {
-            if (resultSet != null) {
-                resultSet.close();
-            }
 
             if (preparedStatement != null) {
                 preparedStatement.close();
@@ -73,6 +65,6 @@ public class UpdateProductCategoryDatabase {
         }
         con.close();
 
-        return resultCategory;
+        return result;
     }
 }

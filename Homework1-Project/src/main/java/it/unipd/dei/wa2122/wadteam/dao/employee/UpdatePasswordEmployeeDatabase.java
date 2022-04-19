@@ -42,10 +42,6 @@ public class UpdatePasswordEmployeeDatabase {
 
 
         } finally {
-            if (resultSet != null) {
-                resultSet.close();
-            }
-
             if (preparedStatement != null) {
                 preparedStatement.close();
             }
