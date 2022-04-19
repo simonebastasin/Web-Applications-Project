@@ -61,7 +61,7 @@ public class DeleteOnlineInvoiceDatabase {
                 int idOrder = resultSet.getInt("id_order");
                 resultOnlineInvoice = new OnlineInvoice(
                         resultSet.getInt("id"),
-                        new GetOnlineOrderByIdDatabase(con, idOrder).getOnlineOrderId(),
+                        null,
                         resultSet.getString("transaction_id"),
                         PaymentMethodOnlineEnum.fromString(resultSet.getString("payment_type")),
                         new DateTime(resultSet.getObject("oi_date", LocalDateTime.class)),

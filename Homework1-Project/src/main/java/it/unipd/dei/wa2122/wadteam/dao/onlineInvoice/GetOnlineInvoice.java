@@ -131,12 +131,10 @@ public class GetOnlineInvoice {
                                 null,
                                 null));
                     }
+                    resultOnlineInvoice = new OnlineInvoice(id, onlineOrder, transactionId, paymentType, date, totalPrice);
+                    rsProduct.close();
+                    pstmtProduct.close();
                 }
-                order = new GetOnlineOrderByIdDatabase(con, innerResultSet.getInt("ID_Order"));
-
-                resultOnlineInvoice = new OnlineInvoice(id, order.getOnlineOrderId(), transactionId, paymentType, date, totalPrice);
-                rsProduct.close();
-                pstmtProduct.close();
             }
                 innerResultSet.close();
                 innerPreparedStatement.close();
