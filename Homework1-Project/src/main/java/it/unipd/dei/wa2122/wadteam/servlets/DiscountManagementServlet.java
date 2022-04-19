@@ -58,9 +58,9 @@ public class DiscountManagementServlet extends AbstractDatabaseServlet{
             for(var dis : discounts){
 
                 List<Product> products = new ListProductsFromIdDiscoutDatabase(getDataSource().getConnection(), dis).getListProductsFromIdDiscoutDatabase();
-                DiscountListProduct DiscountListProduct = new DiscountListProduct(dis, products);
+                DiscountListProduct discountListProduct = new DiscountListProduct(dis, products);
 
-                lists.add(DiscountListProduct);
+                lists.add(discountListProduct);
             }
 
             writeResource(req, res, "/jsp/discountManagement.jsp", false, lists.toArray(Resource[]::new));
@@ -106,10 +106,10 @@ public class DiscountManagementServlet extends AbstractDatabaseServlet{
         try {
             discount = new GetDiscountDatabase(getDataSource().getConnection(), Integer.parseInt(param)).getDiscount();
             List<Product> products = new ListProductsFromIdDiscoutDatabase(getDataSource().getConnection(), discount).getListProductsFromIdDiscoutDatabase();
-            DiscountListProduct DiscountListProduct = new DiscountListProduct(discount, products);
+            DiscountListProduct discountListProduct = new DiscountListProduct(discount, products);
 
 
-            writeResource(req, res, "/jsp/deleteDiscount.jsp", true, DiscountListProduct);
+            writeResource(req, res, "/jsp/deleteDiscount.jsp", true, discountListProduct);
         } catch (SQLException e) {
             logger.error(e.getMessage());
             writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
@@ -135,10 +135,10 @@ public class DiscountManagementServlet extends AbstractDatabaseServlet{
 
 
         DateTime startDate = new DateTime(LocalDateTime.of(startDateyear, startDatemonth, startDateday, 0,0,0));
-        //StartDate
-        Integer endDateday = Integer.parseInt(req.getParameter("endDateday"));
-        Integer endDatemonth = Integer.parseInt(req.getParameter("endDatemonth"));
-        Integer endDateyear = Integer.parseInt(req.getParameter("endDateyear"));
+        //EndDate
+        int endDateday = Integer.parseInt(req.getParameter("endDateday"));
+        int endDatemonth = Integer.parseInt(req.getParameter("endDatemonth"));
+        int endDateyear = Integer.parseInt(req.getParameter("endDateyear"));
 
         DateTime endDate = new DateTime(LocalDateTime.of(endDateyear, endDatemonth, endDateday, 0,0,0));
 
