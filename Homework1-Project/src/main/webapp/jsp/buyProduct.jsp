@@ -8,6 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--@elvariable id="product" type="Product"--%>
+<%--@elvariable id="onlineOrder" type="OnlineOrder"--%>
 
 <html>
 <head>
@@ -20,14 +21,14 @@
 
 <h1>Product: ${product.name}</h1>
 
-Quantity selected: <c:out value="${pageContext.request.getParameter('quantity')}"/> <br>
+Quantity selected: ${product.quantity}<br>
 
 <c:choose>
     <c:when test="${not empty product.discount}">
-        Total price: <span  style="text-decoration: line-through;"><c:out value="${product.salePrice*pageContext.request.getParameter('quantity')}"/>€</span> <span style="color: red;"><c:out value="${product.discountSale*pageContext.request.getParameter('quantity')}"/>€</span> <br>
+        Total price: <span  style="text-decoration: line-through;">${product.quantity*product.salePrice}€</span> <span style="color: red;">${product.quantity*product.discountSale}€</span> <br>
     </c:when>
     <c:otherwise>
-        Total price: <c:out value="${product.salePrice*pageContext.request.getParameter('quantity')}€"/> <br>
+        Total price: ${product.quantity*product.salePrice}€ <br>
     </c:otherwise>
 </c:choose>
 
@@ -39,9 +40,10 @@ Quantity selected: <c:out value="${pageContext.request.getParameter('quantity')}
         <option value="Google Pay">Google Pay</option>
     </select>
 
-    <input type="hidden" value="${pageContext.request.getParameter('quantity')}" name="quantity">
+    <input type="hidden" value="${onlineOrder.idOrder}" name="idOrder">
     <input type ="submit" value = "Confirm payment">
 </form>
+
 <%@ include file="/html/include/footer.html"%>
 </body>
 </html>

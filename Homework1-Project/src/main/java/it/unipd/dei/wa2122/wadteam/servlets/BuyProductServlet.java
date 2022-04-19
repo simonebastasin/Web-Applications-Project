@@ -2,6 +2,8 @@ package it.unipd.dei.wa2122.wadteam.servlets;
 
 import it.unipd.dei.wa2122.wadteam.dao.onlineInvoice.CreateOnlineInvoiceDatabase;
 import it.unipd.dei.wa2122.wadteam.dao.onlineOrder.CreateOnlineOrderDatabase;
+import it.unipd.dei.wa2122.wadteam.dao.onlineOrder.GetOnlineOrderByIdDatabase;
+import it.unipd.dei.wa2122.wadteam.dao.onlineOrder.UpdateOnlineOrderDatabase;
 import it.unipd.dei.wa2122.wadteam.dao.product.GetProductDatabase;
 import it.unipd.dei.wa2122.wadteam.resources.*;
 import jakarta.servlet.ServletException;
@@ -48,7 +50,7 @@ public class BuyProductServlet extends AbstractDatabaseServlet {
                 }
             }
             case "confirmed" -> {
-                if(!"".equals(param)) {
+                if(!"".equals(param)) {/*
                         String stringSelected = req.getParameter("quantity");
                     if(stringSelected.chars().allMatch( Character::isDigit ) && !stringSelected.equals("")) {
                         selected = Integer.parseInt(stringSelected);
@@ -56,6 +58,8 @@ public class BuyProductServlet extends AbstractDatabaseServlet {
                     } else {
                         writeError(req, res, new ErrorMessage.IncorrectlyFormattedDataError("quantity"));
                     }
+                    */
+                    confirmPayment(req,res, param, 0);
                 } else {
                     JSONObject cart = readJSON(req);
                     confirmChart(req, res, cart);
@@ -68,16 +72,62 @@ public class BuyProductServlet extends AbstractDatabaseServlet {
 
     private void buyProduct(HttpServletRequest req, HttpServletResponse res, String alias, int quantity) throws  ServletException, IOException {
 
-        Product product;
+        Product product = null;
+        OnlineOrder newOrder = null;
 
         try {
+
             product = new GetProductDatabase((getDataSource().getConnection()), alias).getProduct();
 
+            if(req.getSession(false) != null && req.getSession(false).getAttribute(USER_ATTRIBUTE) != null) {
+
+                HttpSession session = req.getSession(false);
+                int customerId = ((UserCredential) session.getAttribute(USER_ATTRIBUTE)).getId();
+
+                Product purchased = new Product(
+                        product.getAlias(),
+                        product.getName(),
+                        product.getBrand(),
+                        product.getDescription(),
+                        quantity,
+                        product.getPurchasePrice(),
+                        product.getDiscountSale() != null ? product.getDiscountSale() : product.getSalePrice(),
+                        product.getCategory(),
+                        product.getEvidence(),
+                        product.getPictures(),
+                        product.getDiscount());
+
+                List<Product> list = new ArrayList<>();
+                list.add(purchased);
+
+                newOrder = new OnlineOrder(
+                        null,
+                        customerId,
+                        null,
+                        list,
+                        new OrderStatus(
+                                null,
+                                OrderStatusEnum.OPEN,
+                                null,
+                                null,
+                                null));
+
+                OnlineOrder processedOrder = new CreateOnlineOrderDatabase((getDataSource().getConnection()), newOrder).createOnlineOrder();
+
+                writeResource(req,res,"/jsp/buyProduct.jsp",true, product, processedOrder);
+
+            /*
             if(quantity > product.getQuantity() || quantity < 1){
                 writeError(req, res, new ErrorMessage.SqlInternalError("Product quantity out of bounds"));
             }
             else {
                 writeResource(req, res, "/jsp/buyProduct.jsp", true, product);
+            }
+
+             */
+                }
+            else {
+                writeError(req, res, GenericError.UNAUTHORIZED);
             }
 
         } catch (SQLException e) {
@@ -87,14 +137,37 @@ public class BuyProductServlet extends AbstractDatabaseServlet {
 
     private void confirmPayment(HttpServletRequest req, HttpServletResponse res, String alias, int quantity) throws  ServletException, IOException {
 
-        Product product;
-        OnlineOrder newOrder;
+        Product product = null;
+        OnlineOrder newOrder = null;
+        OnlineInvoice invoice = null;
 
         PaymentMethodOnlineEnum paymentMethodOnlineEnum = PaymentMethodOnlineEnum.fromString(req.getParameter("payment"));
 
         try {
             product = new GetProductDatabase((getDataSource().getConnection()), alias).getProduct();
 
+            newOrder = new GetOnlineOrderByIdDatabase((getDataSource().getConnection()), Integer.parseInt(req.getParameter("idOrder"))).getOnlineOrderId();
+
+            invoice = new CreateOnlineInvoiceDatabase(getDataSource().getConnection(), new OnlineInvoice(null, newOrder, UUID.randomUUID().toString().replace("-","").substring(0,30), paymentMethodOnlineEnum, null, newOrder.getTotalPrice())).createOnlineInvoice();
+
+            OnlineOrder processedOrder = new OnlineOrder(
+                    newOrder.getIdOrder(),
+                    newOrder.getIdCustomer(),
+                    newOrder.getOoDateTime(),
+                    newOrder.getProducts(),
+                    new OrderStatus(
+                            null,
+                            OrderStatusEnum.PAYMENT_ACCEPTED,
+                            null,
+                            null,
+                            null)
+            );
+
+            int result = new UpdateOnlineOrderDatabase((getDataSource().getConnection()),processedOrder).updateOnlineOrder();
+
+            writeResource(req, res, "/jsp/confirmedPayment.jsp", false, product, processedOrder, invoice);
+
+            /*
             if(quantity > product.getQuantity() || quantity < 1){
                 writeError(req, res, new ErrorMessage.InternalError("Product quantity out of bounds"));
             }
@@ -136,9 +209,12 @@ public class BuyProductServlet extends AbstractDatabaseServlet {
                 OnlineInvoice invoice = new CreateOnlineInvoiceDatabase(getDataSource().getConnection(), new OnlineInvoice(null, processedOrder, UUID.randomUUID().toString().replace("-","").substring(0,30), paymentMethodOnlineEnum, null, processedOrder.getTotalPrice())).createOnlineInvoice();
 
                 writeResource(req, res, "/jsp/confirmedPayment.jsp", false, purchased, processedOrder, invoice);
+
             } else {
                 writeError(req, res, GenericError.UNAUTHORIZED);
             }
+
+             */
         } catch (SQLException e) {
             writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
         }
@@ -146,7 +222,6 @@ public class BuyProductServlet extends AbstractDatabaseServlet {
 
     private void buyChart(HttpServletRequest req, HttpServletResponse res, JSONObject cart)   throws  ServletException, IOException {
         JSONArray products = cart.getJSONArray("cart");
-
 
         try {
             List<Product> productList = new ArrayList<>();
