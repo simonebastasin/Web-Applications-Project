@@ -4,9 +4,9 @@ import org.json.JSONObject;
 
 public enum PaymentMethodOnlineEnum implements Resource {
 
-    CREDIT_CARD("CreditCard"),
-    GOOGLE_PAY("GooglePay"),
-    APPLE_PAY("ApplePay");
+    CREDIT_CARD("Credit Card"),
+    GOOGLE_PAY("Google Pay"),
+    APPLE_PAY("Apple Pay");
 
     /** user-friendly text */
     private final String text;

@@ -3,13 +3,13 @@ package it.unipd.dei.wa2122.wadteam.resources;
 import org.json.JSONObject;
 
 public class OrderStatus implements Resource {
-    private final int id;
+    private final Integer id;
     private final OrderStatusEnum status;
     private final String description;
     private final DateTime osDateTime;
-    private final int idOrder;
+    private final Integer idOrder;
 
-    public OrderStatus(int id, OrderStatusEnum status, String description, DateTime osDateTime, int idOrder) {
+    public OrderStatus(Integer id, OrderStatusEnum status, String description, DateTime osDateTime, Integer idOrder) {
         this.id = id;
         this.status = status;
         this.description = description;
@@ -17,7 +17,7 @@ public class OrderStatus implements Resource {
         this.idOrder = idOrder;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -33,7 +33,7 @@ public class OrderStatus implements Resource {
         return osDateTime;
     }
 
-    public int getIdOrder() {
+    public Integer getIdOrder() {
         return idOrder;
     }
 

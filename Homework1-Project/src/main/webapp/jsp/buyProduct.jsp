@@ -34,11 +34,9 @@ Quantity selected: <c:out value="${pageContext.request.getParameter('quantity')}
 <form method="post" action="<c:url value="/buy/confirmed/${product.alias}"/>">
     <label for="payment">Select a payment method: </label>
     <select name="payment" id="payment" autofocus required>
-        <option value="Credit card">Credit card</option>
-        <option value="Apple pay">Apple pay</option>
-        <option value="PayPal">PayPal</option>
-        <option value="Postepay">Postepay</option>
-        <option value="Nexi">Nexi</option>
+        <option value="Credit Card">Credit Card</option>
+        <option value="Apple Pay">Apple Pay</option>
+        <option value="Google Pay">Google Pay</option>
     </select>
 
     <input type="hidden" value="${pageContext.request.getParameter('quantity')}" name="quantity">
