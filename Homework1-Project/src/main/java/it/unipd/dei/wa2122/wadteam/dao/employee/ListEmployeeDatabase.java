@@ -15,7 +15,7 @@ public class ListEmployeeDatabase {
     /**
      * The SQL statement to be executed
      */
-    private static final String STATEMENT = "SELECT username, name, surname, role_name FROM Employee";
+    private static final String STATEMENT = "SELECT username, name, surname, role_name FROM Employee ORDER BY username";
 
     /**
      * The connection to the database

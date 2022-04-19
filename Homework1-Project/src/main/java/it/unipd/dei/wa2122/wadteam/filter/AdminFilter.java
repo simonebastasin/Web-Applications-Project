@@ -1,16 +1,15 @@
 package it.unipd.dei.wa2122.wadteam.filter;
 
 import it.unipd.dei.wa2122.wadteam.resources.UserCredential;
-import jakarta.servlet.*;
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.ServletRequest;
+import jakarta.servlet.ServletResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.sql.DataSource;
 import java.io.IOException;
-import java.util.Objects;
 
 public class AdminFilter extends AbstractFilter {
 
@@ -20,12 +19,9 @@ public class AdminFilter extends AbstractFilter {
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
 
-        if(!(servletRequest instanceof HttpServletRequest) || !(servletResponse instanceof HttpServletResponse)){
+        if(!(servletRequest instanceof final HttpServletRequest req) || !(servletResponse instanceof final HttpServletResponse res)){
             throw new ServletException("Only HTTP requests/responses are allowed");
         }
-
-        final HttpServletRequest req = (HttpServletRequest) servletRequest;
-        final HttpServletResponse res = (HttpServletResponse) servletResponse;
 
         HttpSession session = req.getSession(false);
         String loginURI = req.getContextPath() + "/session/login";
