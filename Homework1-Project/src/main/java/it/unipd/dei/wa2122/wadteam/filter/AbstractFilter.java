@@ -1,11 +1,8 @@
 package it.unipd.dei.wa2122.wadteam.filter;
 
-import jakarta.servlet.*;
-
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.sql.DataSource;
-import java.io.IOException;
+import jakarta.servlet.Filter;
+import jakarta.servlet.FilterConfig;
+import jakarta.servlet.ServletException;
 
 abstract class AbstractFilter implements Filter {
 
@@ -18,11 +15,6 @@ abstract class AbstractFilter implements Filter {
             throw new ServletException("Filter configuration cannot be null");
         }
         this.config = config;
-
-    }
-
-    @Override
-    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
 
     }
 
