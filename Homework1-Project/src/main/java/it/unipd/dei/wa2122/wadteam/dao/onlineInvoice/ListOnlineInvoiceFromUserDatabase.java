@@ -1,9 +1,7 @@
 package it.unipd.dei.wa2122.wadteam.dao.onlineInvoice;
 
 import it.unipd.dei.wa2122.wadteam.dao.onlineOrder.GetOnlineOrderByIdDatabase;
-import it.unipd.dei.wa2122.wadteam.resources.DateTime;
-import it.unipd.dei.wa2122.wadteam.resources.OnlineInvoice;
-import it.unipd.dei.wa2122.wadteam.resources.PaymentMethodOnlineEnum;
+import it.unipd.dei.wa2122.wadteam.resources.*;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,6 +15,14 @@ public class ListOnlineInvoiceFromUserDatabase {
     private static final String STATEMENT = "SELECT oi.ID, oi.ID_Order,oi.Transaction_ID,oi.Payment_Type,oi.OI_Date,oi.Total_Price FROM " +
             "Online_Invoice as oi inner join " +
             "online_order as oo on oi.ID_Order = oo.ID where ID_Customer = ?";
+    private static final String STATEMENT_ORDER = "SELECT s.id_order, o.oo_datetime, o.id_customer, s.status, s.description, s.os_datetime, s.id as id_Status " +
+            "FROM Online_Order as o " +
+            "LEFT JOIN Order_Status as s on o.id = s.id_order " +
+            "WHERE s.id_order = ?";
+    private static final String STATEMENT_GET_PRODUCT = "select o.id, p.name, p.product_alias, c.price_applied, c.quantity from online_order as o " +
+            "inner join contains as c on o.id = c.id_order " +
+            "inner join product as p on p.product_alias=c.product_alias " +
+            "where o.id = ?";
 
     /**
      * The connection to the database
@@ -49,6 +55,13 @@ public class ListOnlineInvoiceFromUserDatabase {
         ResultSet resultSet = null;
         List<OnlineInvoice> resultOnlineInvoice = new ArrayList<>();
         PreparedStatement preparedStatement = null;
+        PreparedStatement innerPreparedStatement = null;
+        PreparedStatement pstmtProduct = null;
+        ResultSet rsProduct = null;
+        ResultSet innerResultSet = null;
+
+        OrderStatus orderStatusResult = null;
+        List<Product> products = null;
 
         try {
             preparedStatement = con.prepareStatement(STATEMENT);
@@ -65,9 +78,53 @@ public class ListOnlineInvoiceFromUserDatabase {
                 DateTime date = new DateTime(resultSet.getObject("OI_Date", LocalDateTime.class));
                 Double totalPrice=resultSet.getDouble("Total_Price");
 
-                resultOnlineInvoice.add(new OnlineInvoice(id,new GetOnlineOrderByIdDatabase(con,idOrder).getOnlineOrderId(),transactionId,paymentType,date,totalPrice));
+                innerPreparedStatement = con.prepareStatement(STATEMENT_ORDER);
+                innerPreparedStatement.setInt(1, idOrder);
+                innerResultSet = innerPreparedStatement.executeQuery();
 
+                GetOnlineOrderByIdDatabase order = null;
+                while (innerResultSet.next()) {
+                    orderStatusResult = new OrderStatus(innerResultSet.getInt("id_Status"),
+                            OrderStatusEnum.fromString(innerResultSet.getString("status")),
+                            innerResultSet.getString("description"),
+                            new DateTime(innerResultSet.getObject("oo_datetime", LocalDateTime.class)),
+                            innerResultSet.getInt("id_order"));
+
+                    products = new ArrayList<>();
+
+                    OnlineOrder onlineOrder = new OnlineOrder(
+                            innerResultSet.getInt("id_order"),
+                            innerResultSet.getInt("id_customer"),
+                            new DateTime(innerResultSet.getObject("oo_datetime", LocalDateTime.class)),
+                            products, orderStatusResult
+                    );
+
+                    pstmtProduct = con.prepareStatement(STATEMENT_GET_PRODUCT);
+                    pstmtProduct.setInt(1, onlineOrder.getIdOrder());
+
+                    rsProduct = pstmtProduct.executeQuery();
+                    while (rsProduct.next()) {
+                        products.add(new Product(
+                                rsProduct.getString("product_alias"),
+                                rsProduct.getString("name"),
+                                null,
+                                null,
+                                rsProduct.getInt("quantity"),
+                                0.0,
+                                rsProduct.getDouble("price_applied"),
+                                null,
+                                false,
+                                null,
+                                null));
+                    }
+                }
+                order = new GetOnlineOrderByIdDatabase(con, innerResultSet.getInt("ID_Order"));
+                resultOnlineInvoice.add(new OnlineInvoice(id,order.getOnlineOrderId(),transactionId,paymentType,date,totalPrice));
+                rsProduct.close();
+                pstmtProduct.close();
             }
+            innerResultSet.close();
+            innerPreparedStatement.close();
 
         } finally {
             if (resultSet != null) {
