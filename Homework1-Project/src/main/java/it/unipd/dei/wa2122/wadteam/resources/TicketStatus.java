@@ -8,7 +8,7 @@ public class TicketStatus implements Resource{
     private final TicketStatusEnum status;
     private final String description;
     private final DateTime tsDate;
-    private final int idTicket;
+    private final Integer idTicket;
 
     public TicketStatus(Integer id,TicketStatusEnum status, String description, DateTime tsDate, int idTicket) {
         this.id = id;
@@ -41,11 +41,21 @@ public class TicketStatus implements Resource{
     @Override
     public JSONObject toJSON() {
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("id", id);
-        jsonObject.put("status", status.toJSON());
-        jsonObject.put("description", description);
-        jsonObject.put("tsDate", tsDate.toJSON());
-        jsonObject.put("idTicket", idTicket);
+        if(id!=null) {
+            jsonObject.put("id", id);
+        }
+        if(status !=null) {
+            jsonObject.put("status", status.toJSON());
+        }
+        if(description !=null) {
+            jsonObject.put("description", description);
+        }
+        if(tsDate != null) {
+            jsonObject.put("tsDate", tsDate.toJSON());
+        }
+        if(idTicket != null) {
+            jsonObject.put("idTicket", idTicket);
+        }
         return jsonObject;
     }
 
