@@ -9,7 +9,7 @@ public class AssistanceTicket implements Resource {
 
     private final Integer id;
     private final String description;
-    private final int idCustomer;
+    private final Integer idCustomer;
     private final String productAlias;
     private final List<TicketStatus> ticketStatusList;
 
