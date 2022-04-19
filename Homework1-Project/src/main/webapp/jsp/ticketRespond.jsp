@@ -17,7 +17,8 @@
 <body>
 <c:import url="/jsp/include/header.jsp"/>
 <h1> Ticket List </h1>
-<ul>
+<hr>
+
     <style>
         .ticket-OPEN{color: green;}
         .ticket-PROCESSING{color: blue;}
@@ -26,7 +27,7 @@
     </style>
 
     <c:forEach var="assistanceTicket" items="${assistanceTicketList}">
-        <b>Ticket ID: ${assistanceTicket.id}</b>
+        <h2>Ticket ID: ${assistanceTicket.id}</h2>
             <ul>
                 <li>${assistanceTicket.description}</li>
                 <li>Customer: ${assistanceTicket.idCustomer}</li>
@@ -52,7 +53,7 @@
         </li>
         <br>
     </c:forEach>
-</ul>
+
 <%@ include file="/html/include/footer.html"%>
 </body>
 </html>

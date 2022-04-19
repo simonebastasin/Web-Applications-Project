@@ -14,6 +14,8 @@
 </head>
 <body>
 <c:import url="/jsp/include/header.jsp"/>
+<h1> Create Ticket </h1>
+<hr>
 
 <form method="POST" action="">
   <textarea name ="description" id="description"> </textarea>
