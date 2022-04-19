@@ -32,7 +32,7 @@
         <tr>
             <td>${order.idOrder}</td>
             <td>${order.idCustomer}</td>
-            <td>${order.ooDateTime}</td>
+            <td>${order.ooDateTime.getHumanDate()}</td>
             <td>${order.products}</td>
             <td>${order.status}</td>
             <td>

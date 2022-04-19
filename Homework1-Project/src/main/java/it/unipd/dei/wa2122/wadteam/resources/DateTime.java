@@ -29,6 +29,7 @@ public class DateTime implements Resource{
     }
 
     public String getHumanDate() { return toString("dd/MM/yyyy HH:mm"); }
+    public String getHumanDateTimeless() { return toString("dd/MM/yyyy"); }
 
     @Override
     public JSONObject toJSON() {

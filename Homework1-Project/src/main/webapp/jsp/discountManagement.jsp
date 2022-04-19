@@ -8,6 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--@elvariable id="discountList" type="it.unipd.dei.wa2122.wadteam.resources.Discount"--%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <html>
 <head>
@@ -41,8 +42,8 @@
         <tr>
             <td>${discountListProduct.discount.id}</td>
             <td>${discountListProduct.discount.percentage}</td>
-            <td>${discountListProduct.discount.startDate}</td>
-            <td>${discountListProduct.discount.endDate}</td>
+            <td>${discountListProduct.discount.startDate.getHumanDateTimeless()}</td>
+            <td>${discountListProduct.discount.endDate.getHumanDateTimeless()}</td>
 
             <td>
             <c:forEach var="prod" items="${discountListProduct.productList}">
