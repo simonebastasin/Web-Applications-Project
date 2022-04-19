@@ -10,9 +10,8 @@ import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.time.LocalDateTime;
 
-public class GetOnlineInvoice {
+public class GetOnlineInvoiceDatabase {
 
 
     /**
@@ -46,7 +45,7 @@ public class GetOnlineInvoice {
      * @param id
      *            the id of the Online Invoice.
      */
-    public GetOnlineInvoice(final Connection con, final int id) {
+    public GetOnlineInvoiceDatabase(final Connection con, final int id) {
         this.con = con;
         this.id = id;
     }
@@ -87,8 +86,8 @@ public class GetOnlineInvoice {
                 int id = resultSet.getInt("ID");
                 int idOrder = resultSet.getInt("ID_Order");
                 String transactionId = resultSet.getString("Transaction_ID");
-                PaymentMethodOnlineEnum paymentType = PaymentMethodOnlineEnum.fromString(resultSet.getString("Payment_Type "));
-                DateTime date = resultSet.getObject("OI_Date  ", DateTime.class);
+                PaymentMethodOnlineEnum paymentType = PaymentMethodOnlineEnum.fromString(resultSet.getString("Payment_Type"));
+                DateTime date = new DateTime(resultSet.getObject("OI_Date", LocalDateTime.class));
                 Double totalPrice = resultSet.getDouble("Total_Price");
 
                 innerPreparedStatement = con.prepareStatement(STATEMENT_ORDER);

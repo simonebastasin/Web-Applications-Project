@@ -14,6 +14,8 @@
 </head>
 <body>
     <c:import url="/jsp/include/header.jsp"/>
+    <h1> Invoice List </h1>
+    <hr>
 
         <c:forEach var="invoice" items="${onlineInvoiceList}">
             <li><b>Invoice ID: ${invoice.id}</b></li>
