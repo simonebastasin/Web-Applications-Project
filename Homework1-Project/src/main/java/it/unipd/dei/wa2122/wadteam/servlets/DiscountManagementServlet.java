@@ -157,8 +157,8 @@ public class DiscountManagementServlet extends AbstractDatabaseServlet{
 
             List<Owns> list = new CreateOwnsDiscountFromListProductsDatabase(getDataSource().getConnection(), productAliasList, discount).createOwnsDiscountFromList();
 
-
-            res.sendRedirect(req.getContextPath() + (req.getServletPath().startsWith("/rest/") ? "/rest" : "") + "/management/discountManagement");
+            Message m = new Message("edit ok", discount.getId());
+            writeMessageOrRedirect(req, res, m,  req.getContextPath() + (req.getServletPath().startsWith("/rest/") ? "/rest" : "") + "/management/discountManagement");
         } catch (SQLException e) {
             logger.error(e.getMessage());
             writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
@@ -180,7 +180,8 @@ public class DiscountManagementServlet extends AbstractDatabaseServlet{
         try {
             discount = new DeleteDiscountDatabase((getDataSource().getConnection()), Integer.parseInt(param)).deleteDiscount();
 
-            res.sendRedirect(req.getContextPath() + (req.getServletPath().startsWith("/rest/") ? "/rest" : "") +"/management/discountManagement");
+            Message m = new Message("delete ok");
+            writeMessageOrRedirect(req, res, m, req.getContextPath() + (req.getServletPath().startsWith("/rest/") ? "/rest" : "") +"/management/discountManagement");
         } catch (SQLException e) {
             logger.error(e.getMessage());
             writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));

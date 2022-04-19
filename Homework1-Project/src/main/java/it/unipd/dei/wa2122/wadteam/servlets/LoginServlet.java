@@ -25,22 +25,26 @@ public class LoginServlet extends AbstractDatabaseServlet {
         switch (path){
             case "login" ->  {
                 if(req.getSession(false) != null && req.getSession(false).getAttribute(USER_ATTRIBUTE) != null) {
-                    resp.sendRedirect(req.getContextPath() + "/");
+                    Message m = new Message("User is already logged in");
+                    writeMessageOrRedirect(req, resp, m, req.getContextPath() + "/");
                 } else {
                     writeJsp(req, resp, "/jsp/login.jsp");
                 }
             }
             case "logout" -> {
                 logger.info("User "+((UserCredential)req.getSession(false).getAttribute(USER_ATTRIBUTE)).getIdentification() +" has logout");
+                Message m = new Message("User "+((UserCredential)req.getSession(false).getAttribute(USER_ATTRIBUTE)).getIdentification() +" has logout");
 
                 req.getSession().invalidate();
-                resp.sendRedirect(req.getContextPath() + "/");
+                writeMessageOrRedirect(req, resp, m, req.getContextPath() + "/");
+
 
             }
             case "register" -> {
 
                 if(req.getSession(false) != null && req.getSession(false).getAttribute(USER_ATTRIBUTE) != null) {
-                    resp.sendRedirect(req.getContextPath() + "/");
+                    Message m = new Message("User is already logged in");
+                    writeMessageOrRedirect(req, resp, m, req.getContextPath() + "/");
                 } else {
                     writeJsp(req,resp,"/jsp/register.jsp");
                 }
@@ -70,7 +74,8 @@ public class LoginServlet extends AbstractDatabaseServlet {
                             HttpSession session = req.getSession();
                             session.setAttribute(USER_ATTRIBUTE, userCredential);
                             logger.info("User "+userCredential.getIdentification() +" has logged in");
-                            resp.sendRedirect(req.getContextPath() + "/");
+                            Message m = new Message("User "+userCredential.getIdentification() +" has logged in");
+                            writeMessageOrRedirect(req, resp, m, req.getContextPath() + "/");
                         } else {
                             logger.info("User "+identification+" failed to log in");
 
@@ -113,7 +118,8 @@ public class LoginServlet extends AbstractDatabaseServlet {
                                 session.setAttribute(USER_ATTRIBUTE, userCredentialAttempt);
                                 logger.info("User "+userCredentialAttempt.getIdentification() +" was logged");
 
-                                resp.sendRedirect(req.getContextPath() + "/");
+                                Message m = new Message("User "+userCredentialAttempt.getIdentification() +" was logged");
+                                writeMessageOrRedirect(req, resp, m, req.getContextPath() + "/");
                             }
                         }
                         else if(customer!=null)

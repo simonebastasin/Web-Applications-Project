@@ -112,7 +112,8 @@ public class OrderManagementServlet extends AbstractDatabaseServlet {
                 int intParam = Integer.parseInt(param);
                 orderStatus = new OrderStatus(null, status, description, null, intParam);
                 int result = new UpdateOrderStatusDatabase((getDataSource().getConnection()), orderStatus).updateOrderStatus();
-                res.sendRedirect(req.getContextPath() +(req.getServletPath().startsWith("/rest/") ? "/rest" : "") + "/management/orderManagement");
+                Message m = new Message("edit ok");
+                writeMessageOrRedirect(req, res, m, req.getContextPath() +(req.getServletPath().startsWith("/rest/") ? "/rest" : "") + "/management/orderManagement");
             } catch (SQLException e) {
                 logger.error(e.getMessage());
                 writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
@@ -159,7 +160,8 @@ public class OrderManagementServlet extends AbstractDatabaseServlet {
             try {
                 int intParam = Integer.parseInt(param);
                 int idOrder = new DeleteOnlineOrderDatabase((getDataSource().getConnection()), intParam).deleteOnlineOrder();
-                res.sendRedirect(req.getContextPath() + (req.getServletPath().startsWith("/rest/") ? "/rest" : "") +"/management/orderManagement");
+                Message m = new Message("edit ok");
+                writeMessageOrRedirect(req, res, m, req.getContextPath() + (req.getServletPath().startsWith("/rest/") ? "/rest" : "") +"/management/orderManagement");
             } catch (SQLException e) {
                 logger.error(e.getMessage());
                 writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));

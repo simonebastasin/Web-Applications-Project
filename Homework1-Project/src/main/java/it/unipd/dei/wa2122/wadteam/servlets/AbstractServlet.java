@@ -31,7 +31,13 @@ public abstract class AbstractServlet extends HttpServlet {
 
     protected static final String USER_ATTRIBUTE = "user";
 
-
+    public void writeMessageOrRedirect(HttpServletRequest request, HttpServletResponse response, Message m, String redirect ) throws IOException, ServletException {
+        if (request.getServletPath().startsWith("/rest/") || request.getHeader("Accept").contains("application/json")) {
+            writeJSON(response, m.toJSON());
+        } else {
+            response.sendRedirect(redirect);
+        }
+    }
 
     public void writeError(HttpServletRequest request, HttpServletResponse response, GenericError error) throws IOException, ServletException {
         response.setStatus(error.getHttpErrorCode());
