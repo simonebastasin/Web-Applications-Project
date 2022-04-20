@@ -65,7 +65,7 @@ public class LoginServlet extends AbstractDatabaseServlet {
                 }else {
                     String identification = req.getParameter("identification");
                     String password = req.getParameter("password");
-                    TypeUserEnum type = TypeUserEnum.fromString(req.getParameter("usertype"));
+                    TypeUserEnum type = TypeUserEnum.valueOf(req.getParameter("usertype"));
 
                     UserCredential userCredentialAttempt = new UserCredential(identification, password, type, null, null, null);
                     try {

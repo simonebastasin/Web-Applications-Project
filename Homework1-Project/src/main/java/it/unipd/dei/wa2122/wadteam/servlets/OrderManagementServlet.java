@@ -1,13 +1,9 @@
 package it.unipd.dei.wa2122.wadteam.servlets;
 
-import it.unipd.dei.wa2122.wadteam.dao.employee.GetEmployeeDatabase;
-import it.unipd.dei.wa2122.wadteam.dao.employee.UpdateEmployeeDatabase;
 import it.unipd.dei.wa2122.wadteam.dao.onlineOrder.DeleteOnlineOrderDatabase;
 import it.unipd.dei.wa2122.wadteam.dao.onlineOrder.GetListOnlineOrderDatabase;
 import it.unipd.dei.wa2122.wadteam.dao.onlineOrder.GetOnlineOrderByIdDatabase;
-import it.unipd.dei.wa2122.wadteam.dao.onlineOrder.UpdateOnlineOrderDatabase;
 import it.unipd.dei.wa2122.wadteam.dao.orderStatus.UpdateOrderStatusDatabase;
-import it.unipd.dei.wa2122.wadteam.dao.role.ListRoleDatabase;
 import it.unipd.dei.wa2122.wadteam.resources.*;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -15,7 +11,6 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -78,7 +73,7 @@ public class OrderManagementServlet extends AbstractDatabaseServlet {
         if (param.chars().allMatch(Character::isDigit) && !param.equals("")) {
             int intParam = Integer.parseInt(param);
             try {
-                order = new GetOnlineOrderByIdDatabase(getDataSource().getConnection(), intParam).getOnlineOrderId();
+                order = new GetOnlineOrderByIdDatabase(getDataSource().getConnection(), intParam).getOnlineOrder();
                 if(order != null) {
                     writeResource(req, res, "/jsp/editOrder.jsp", false, order);
                 }
@@ -136,7 +131,7 @@ public class OrderManagementServlet extends AbstractDatabaseServlet {
         if (param.chars().allMatch(Character::isDigit) && !param.equals("")) {
             int intParam = Integer.parseInt(param);
             try {
-                order = new GetOnlineOrderByIdDatabase(getDataSource().getConnection(), intParam).getOnlineOrderId();
+                order = new GetOnlineOrderByIdDatabase(getDataSource().getConnection(), intParam).getOnlineOrder();
                 writeResource(req, res, "/jsp/deleteOrder.jsp", true, order);
             } catch (SQLException e) {
                 logger.error(e.getMessage());

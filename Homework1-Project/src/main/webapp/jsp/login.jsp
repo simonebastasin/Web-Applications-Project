@@ -2,6 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page import="it.unipd.dei.wa2122.wadteam.resources.TypeUserEnum" %>
 <html>
 <head>
     <title>Login</title>
@@ -18,8 +19,8 @@
     <label for = "password">password</label>
     <br>
     <select name="usertype" id="usertype">
-        <option value ="Customer">Customer</option>
-        <option value ="Employee">Employee</option>
+        <option value ="${TypeUserEnum.CUSTOMER}">Customer</option>
+        <option value ="${TypeUserEnum.EMPLOYEE}">Employee</option>
     </select>
     <br>
     <input type ="submit" value = "login">

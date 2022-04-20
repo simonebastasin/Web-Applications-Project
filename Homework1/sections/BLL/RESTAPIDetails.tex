@@ -2,6 +2,79 @@
 
 %List here a few resources retrievable via REST API
 
+\subsubsection*{Buy a product}
+
+This API returns create an order with single product
+
+\begin{itemize}
+    \item URL: \texttt{/buy/product/}
+    \item Method: \texttt{POST}
+    \item URL Parameters: \textit{product alias}
+    \item Data Parameters: \textit{quantity}: the quantity of the product
+    \item Data Parameters encoding: \texttt{x-www-form-urlencoded}
+    \item Success Response: a JSON Object with the order id.
+    \item Error Response: a JSON Object: with a key: \textt{isError}  and value \textt{true}, an error code, a message and details of the error.
+
+\end{itemize}
+
+\subsubsection*{Buy a list product}
+
+This API returns a list of products and a list of categories
+
+\begin{itemize}
+    \item URL: \texttt{/rest/cart/}
+    \item Method: \texttt{POST}
+    \item URL Parameters: Nothing
+    \item Data Parameters: a JSON Object that contains a JSON Array on the \texttt{cart} key. The JSON Array it contains some instances of a JSON Object  containing the alias of the product and the quantity. Like:
+    \texttt{{"cart":[{"quantity":2,"alias":"6465661284410"},{"quantity":3,"alias":"6465661284414"}]}}
+    \item Data Parameters encoding: \texttt{application/json}
+    \item Success Response:  a JSON Object with the order id.
+    \item Error Response: a JSON Object: with a key: \textt{isError}  and value \textt{true}, an error code, a message and details of the error.
+
+\end{itemize}
+
+\subsubsection*{Pay a order}
+
+This API returns a list of products and a list of categories
+
+\begin{itemize}
+    \item URL: \texttt{/rest/pay/}
+    \item Method: \texttt{POST}
+    \item URL Parameters: \textit{order id}
+    \item Data Parameters: \texttt{payment} a value among \texttt{CREDIT\_CARD}, \texttt{GOOGLE\_PAY}, \texttt{APPLE\_PAY}.
+    \item Success Response: a JSON message whit transaction id
+    \item Error Response: a JSON Object: with a key: \textt{isError}  and value \textt{true}, an error code, a message and details of the error.
+
+\end{itemize}
+
+\subsubsection*{Cancel a order}
+
+This API cancel an order
+
+\begin{itemize}
+    \item URL: \texttt{/rest/cancel/}
+    \item Method: \texttt{POST}
+    \item URL Parameters: \textit{order id}
+    \item Data Parameters: NOTHING
+    \item Success Response: a JSON message
+    \item Error Response: a JSON Object: with a key: \textt{isError}  and value \textt{true}, an error code, a message and details of the error.
+
+\end{itemize}
+
+\subsubsection*{List of products and categories}
+
+This API returns a list of products and a list of categories
+
+\begin{itemize}
+    \item URL: \texttt{/rest/}
+    \item Method: \texttt{GET \& POST}
+    \item URL Parameters: Nothing
+    \item Data Parameters: Nothing
+    \item Success Response: a JSON Object with a productCategory list and a product list.
+    \item Error Response: a JSON Object: with a key: \textt{isError}  and value \textt{true}, an error code, a message and details of the error.
+
+\end{itemize}
+
 \subsubsection*{List of products and categories}
 
 This API returns a list of products and a list of categories
@@ -233,7 +306,7 @@ This API respond a ticket with ticket status.
     \item URL Parameters: \textit{ticket id}
     \item Data Parameters:
     \begin{itemize}
-        \item \texttt{status}: a value among \texttt{Open}, \texttt{Processing}, \texttt{Closed}. \texttt{Return}
+        \item \texttt{status}: a value among \texttt{OPEN}, \texttt{PROCESSING}, \texttt{CLOSED}. \texttt{RETURN}
         \item \texttt{description}: the description of ticket
     \end{itemize}
     \item Data Parameters encoding: \texttt{x-www-form-urlencoded}
@@ -262,7 +335,8 @@ This API allows you to modify generic user information.
 \begin{itemize}
     \item URL: \texttt{/rest/user/modify}
     \item Method: \texttt{POST}
-    \item URL Parameters:
+    \item URL Parameters: Nothing
+    \item Data Parameters:
     \begin{itemize}
         \item \texttt{name}: the name
         \item \texttt{surname}: the surname
@@ -283,7 +357,8 @@ This API allows you to modify password of the logged user.
 \begin{itemize}
     \item URL: \texttt{/rest/user/password}
     \item Method: \texttt{POST}
-    \item URL Parameters:
+    \item URL Parameters: Nothing
+    \item Data Parameters:
     \begin{itemize}
         \item \texttt{oldPassword}: the old password
         \item \texttt{newPassword}: the new password

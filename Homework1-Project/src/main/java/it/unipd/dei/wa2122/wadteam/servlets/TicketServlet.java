@@ -143,7 +143,7 @@ public class TicketServlet extends AbstractDatabaseServlet {
                     try {
                         AssistanceTicket assistanceTicket = new GetAssistanceTicketDatabase(getDataSource().getConnection(), id).getAssistanceTicket();
                         if(assistanceTicket.getTicketStatusList().isEmpty() || assistanceTicket.getTicketStatusList().get(0).getStatus() != TicketStatusEnum.CLOSED) {
-                            TicketStatusEnum status = TicketStatusEnum.fromString(req.getParameter("status"));
+                            TicketStatusEnum status = TicketStatusEnum.valueOf(req.getParameter("status"));
                             String description = req.getParameter("description");
 
                             TicketStatus temp = new TicketStatus(null, status, description, null, id);

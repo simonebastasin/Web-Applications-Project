@@ -69,7 +69,8 @@ public class Product implements Resource {
         JSONObject jsonObject = new JSONObject();
 
         jsonObject.put("alias", alias);
-        jsonObject.put("name", name);
+        if(name != null)
+            jsonObject.put("name", name);
         jsonObject.put("brand", brand);
         if(description != null)
             jsonObject.put("description", description);
@@ -90,11 +91,11 @@ public class Product implements Resource {
 
     public static Product fromJSON(JSONObject jsonObject) {
         String alias = jsonObject.getString("alias");
-        String name = jsonObject.getString("name");
-        String brand = jsonObject.getString("brand");
-        String description = jsonObject.has("description") ?   jsonObject.getString("description") : null;
-        double purchase = jsonObject.getDouble("purchase");
-        double sale = jsonObject.getDouble("sale");
+        String name = jsonObject.has("name")  ? jsonObject.getString("name") : null;
+        String brand =  jsonObject.has("brand")  ? jsonObject.getString("brand") : null;
+        String description = jsonObject.has("description") ? jsonObject.getString("description") : null;
+        Double purchase = jsonObject.has("purchase")  ?  jsonObject.getDouble("purchase") : null;
+        Double sale = jsonObject.has("sale") ? jsonObject.getDouble("sale") : null;
         int quantity = jsonObject.getInt("quantity");
         List<Integer> pictures = new ArrayList<>();
         if(jsonObject.has("picture")){
@@ -103,8 +104,8 @@ public class Product implements Resource {
             }
         }
         ProductCategory category =jsonObject.has("category") ? ProductCategory.fromJSON(jsonObject.getJSONObject("category")) : null;
-        boolean evidence = jsonObject.getBoolean("evidence");
-        Discount discount = Discount.fromJSON(jsonObject.getJSONObject("discount"));
+        boolean evidence = jsonObject.has("evidence") && jsonObject.getBoolean("evidence");
+        Discount discount = jsonObject.has("discount") ? Discount.fromJSON(jsonObject.getJSONObject("discount")) : null;
 
         return new Product(alias, name, brand, description, quantity, purchase, sale, category, evidence, pictures, discount);
     }

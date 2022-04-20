@@ -57,7 +57,7 @@ public class OrderListServlet extends AbstractDatabaseServlet{
 
         try{
 
-            order = new GetOnlineOrderByIdDatabase(getDataSource().getConnection(), id).getOnlineOrderId();
+            order = new GetOnlineOrderByIdDatabase(getDataSource().getConnection(), id).getOnlineOrder();
             idCustomer = order.getIdCustomer();
             UserCredential user = (UserCredential) req.getSession(false).getAttribute(USER_ATTRIBUTE);
             if(!Objects.equals(idCustomer, user.getId())){

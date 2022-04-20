@@ -55,6 +55,11 @@
             <input type ="submit" value = "Buy now">
         </form>
     </c:when>
+    <c:otherwise>
+        <hr>
+
+        <a href="<c:url value="/session/login"/>">Login for buy</a>
+    </c:otherwise>
 </c:choose>
 
     <%@ include file="/html/include/footer.html"%>
