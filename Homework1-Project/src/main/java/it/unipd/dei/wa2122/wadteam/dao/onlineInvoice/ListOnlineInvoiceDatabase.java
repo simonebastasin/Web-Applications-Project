@@ -51,8 +51,8 @@ public class ListOnlineInvoiceDatabase {
         List<OnlineInvoice> resultOnlineInvoice = new ArrayList<>();
         PreparedStatement preparedStatement = null;
         PreparedStatement innerPreparedStatement = null;
-        PreparedStatement pstmtProduct;
-        ResultSet rsProduct;
+        PreparedStatement pstmtProduct=null;
+        ResultSet rsProduct=null;
         ResultSet innerResultSet = null;
 
         OrderStatus orderStatusResult;
@@ -113,18 +113,28 @@ public class ListOnlineInvoiceDatabase {
                                 null));
                     }
                     resultOnlineInvoice.add(new OnlineInvoice(id, onlineOrder, transactionId, paymentType, date, totalPrice));
-                    rsProduct.close();
-                    pstmtProduct.close();
+
                 }
             }
-            innerResultSet.close();
-            innerPreparedStatement.close();
 
         } finally {
             if (resultSet != null) {
                 resultSet.close();
             }
+            if(innerResultSet != null){
+                innerResultSet.close();
+            }
 
+            if(innerPreparedStatement != null) {
+                innerPreparedStatement.close();
+            }
+
+            if( rsProduct != null){
+                rsProduct.close();
+            }
+            if(pstmtProduct != null){
+                pstmtProduct.close();
+            }
             if (preparedStatement != null) {
                 preparedStatement.close();
             }

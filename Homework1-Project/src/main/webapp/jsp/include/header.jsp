@@ -26,7 +26,7 @@
 </c:choose>
 
 <form method="GET" action="<c:url value="/products/search"/>" style="display: inline;">
-<input type="text" id="q" name="q" pattern="[A-Za-z0-9]{1,20}" placeholder="Write here for search">
+<input type="text" id="q" name="q" pattern="[A-Za-z0-9 ]{1,20}" placeholder="Write here for search">
 <input type="submit" value="Submit">
 </form>
 

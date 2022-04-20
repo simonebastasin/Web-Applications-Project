@@ -66,8 +66,8 @@ public class GetOnlineInvoiceDatabase {
         ResultSet resultSet = null;
         ResultSet innerResultSet = null;
 
-        PreparedStatement pstmtProduct;
-        ResultSet rsProduct;
+        PreparedStatement pstmtProduct = null;
+        ResultSet rsProduct = null;
 
         OrderStatus orderStatusResult;
         List<Product> products;
@@ -131,14 +131,24 @@ public class GetOnlineInvoiceDatabase {
                                 null));
                     }
                     resultOnlineInvoice = new OnlineInvoice(id, onlineOrder, transactionId, paymentType, date, totalPrice);
-                    rsProduct.close();
-                    pstmtProduct.close();
                 }
             }
-                innerResultSet.close();
-                innerPreparedStatement.close();
 
         } finally {
+            if(innerResultSet != null){
+                innerResultSet.close();
+            }
+
+            if(innerPreparedStatement != null) {
+                innerPreparedStatement.close();
+            }
+
+            if( rsProduct != null){
+                rsProduct.close();
+            }
+            if(pstmtProduct != null){
+                pstmtProduct.close();
+            }
             if (resultSet != null) {
                 resultSet.close();
             }

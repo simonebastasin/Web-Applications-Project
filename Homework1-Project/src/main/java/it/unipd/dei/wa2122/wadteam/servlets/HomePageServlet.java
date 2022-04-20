@@ -30,7 +30,7 @@ public class HomePageServlet extends AbstractDatabaseServlet{
             case "category" -> productCategory(req,res,param);
             case "search" -> {
                 if(query.isBlank() || query.isEmpty()){
-                    homePage(req,res);
+                    res.sendRedirect(req.getContextPath()+"/");
                 }
                 else productSearch(req,res,query);
             }
