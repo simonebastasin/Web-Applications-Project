@@ -170,10 +170,14 @@ public class ProductManagementServlet extends AbstractDatabaseServlet{
         boolean evidence = req.getParameter("evidence").equals("yes");
         //pictures management:
         String[] mediaStringArray = req.getParameterValues("media");   //returns an array of strings to be casted
-        List<Integer> pictures = new ArrayList<>();
-        for (String id: mediaStringArray) {
-            pictures.add(Integer.parseInt(id));
+        List<Integer> pictures = null;
+        if(mediaStringArray != null){
+            pictures = new ArrayList<>();
+            for (String id: mediaStringArray) {
+                pictures.add(Integer.parseInt(id));
+            }
         }
+
         Product temp = new Product(alias,name,brand,description,quantity,purchase,sale,category,evidence,pictures, null);
 
         try {
