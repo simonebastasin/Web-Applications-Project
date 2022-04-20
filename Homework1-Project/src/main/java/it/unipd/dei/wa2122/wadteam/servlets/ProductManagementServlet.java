@@ -54,10 +54,11 @@ public class ProductManagementServlet extends AbstractDatabaseServlet{
 
         try{
             products = new ListProductDatabase(getDataSource().getConnection()).getProduct();
-
+           
             List<Resource> lists = new ArrayList<>();
             for(var prod : products){
-                lists.add(prod);
+                if (prod.getQuantity() > 0)
+                    lists.add(prod);
             }
 
             writeResource(req, res, "/jsp/productManagement.jsp", false, lists.toArray(Resource[]::new));
