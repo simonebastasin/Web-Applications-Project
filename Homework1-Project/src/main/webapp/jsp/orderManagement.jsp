@@ -7,7 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--@elvariable id="order" type="it.unipd.dei.wa2122.wadteam.resources.OnlineOrder"--%>
+<%--@elvariable id="onlineOrder" type="it.unipd.dei.wa2122.wadteam.resources.OnlineOrder"--%>
 
 <html>
 <head>
@@ -28,22 +28,22 @@
         <th>Status</th>
     </tr>
 
-    <c:forEach var="order" items="${onlineOrderList}">
+    <c:forEach var="onlineOrder" items="${onlineOrderList}">
         <tr>
-            <td>${order.idOrder}</td>
-            <td>${order.idCustomer}</td>
-            <td>${order.ooDateTime.getHumanDate()}</td>
+            <td>${onlineOrder.idOrder}</td>
+            <td>${onlineOrder.idCustomer}</td>
+            <td>${onlineOrder.ooDateTime.getHumanDate()}</td>
             <td><ul>
-                <c:forEach var="product" items="${order.products}">
+                <c:forEach var="product" items="${onlineOrder.products}">
                     <li>${product.alias}, ${product.brand}, ${product.name}, ${product.quantity}</li>
                 </c:forEach>
             </ul></td>
-            <td>${order.status}</td>
+            <td>${onlineOrder.status}</td>
             <td>
-                <a href="<c:url value="/management/orderManagement/editOrder/${order.idOrder}"/>">Edit</a>
+                <a href="<c:url value="/management/orderManagement/editOrder/${onlineOrder.idOrder}"/>">Edit</a>
             </td>
             <td>
-                <a href="<c:url value="/management/orderManagement/deleteOrder/${order.idOrder}"/>">Delete</a>
+                <a href="<c:url value="/management/orderManagement/deleteOrder/${onlineOrder.idOrder}"/>">Delete</a>
             </td>
         </tr>
     </c:forEach>

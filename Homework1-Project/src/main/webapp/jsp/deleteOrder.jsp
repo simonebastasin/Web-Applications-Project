@@ -7,7 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--@elvariable id="order" type="it.unipd.dei.wa2122.wadteam.resources.OnlineOrder"--%>
+<%--@elvariable id="onlineOrder" type="it.unipd.dei.wa2122.wadteam.resources.OnlineOrder"--%>
 
 <html>
 <head>
@@ -21,19 +21,21 @@
 Order you are deleting:<br><br>
 <table>
     <tr>
-        <th>ID</th>
+        <th>ID_Order</th>
         <th>ID_Customer</th>
-        <th>Date</th>
+        <th>Order_Date</th>
         <th>Status</th>
+        <th>Description</th>
     </tr>
     <tr>
         <td>${onlineOrder.idOrder}</td>
         <td>${onlineOrder.idCustomer}</td>
-        <td>${onlineOrder.ooDateTime}</td>
+        <td>${onlineOrder.ooDateTime.getHumanDate()}</td>
         <td>${onlineOrder.status}</td>
+        <td>${onlineOrder.status.description}</td>
     </tr>
 </table><br>
-with these products:
+With these products:
 <table>
     <tr>
         <th>Alias</th>
@@ -55,11 +57,12 @@ with these products:
 Sure to delete?<br><br>
 
 <form method="POST" action="">
-    <input type ="submit" value = "Yes">
+    <input type="submit" value="Yes">
 </form>
 <a href="<c:url value="/management/orderManagement"/>">
-    <input type ="submit" value = "No"/>
+    <input type="submit" value="No"/>
 </a>
+
 
 <%@ include file="/html/include/footer.html"%>
 </body>

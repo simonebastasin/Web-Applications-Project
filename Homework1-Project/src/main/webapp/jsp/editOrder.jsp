@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="it.unipd.dei.wa2122.wadteam.resources.OrderStatusEnum" %>
-<%--@elvariable id="onlineOrderList" type="it.unipd.dei.wa2122.wadteam.resources.OnlineOrder"--%>
+<%--@elvariable id="onlineOrder" type="it.unipd.dei.wa2122.wadteam.resources.OnlineOrder"--%>
 
 <html>
 <head>
@@ -28,7 +28,7 @@
         <label for="idCustomer">ID_Customer:</label><br>
         <input type="text" id="idCustomer" name="idCustomer" value="${onlineOrder.idCustomer}" disabled><br>
         <label for="orderDate">Order_Date:</label><br>
-        <input type="text" id="orderDate" name="orderDate" value="${onlineOrder.ooDateTime}" disabled><br>
+        <input type="text" id="orderDate" name="orderDate" value="${onlineOrder.ooDateTime.getHumanDate()}" disabled><br>
 
         Products:
         <table>
@@ -94,7 +94,8 @@
             </c:choose>
         </select><br>
 
-
+        <label for="statusDate">Last_Status_Update:</label><br>
+        <input type="text" id="statusDate" name="statusDate" value="${onlineOrder.status.osDateTime.getHumanDate()}" disabled><br>
         <label for="description">Description:</label><br>
         <input type="text" id="description" name="description" value="${onlineOrder.status.description}"><br>
 
