@@ -1,17 +1,15 @@
 package it.unipd.dei.wa2122.wadteam.dao.onlineOrder;
 
-import it.unipd.dei.wa2122.wadteam.resources.OnlineOrder;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class DeleteOnlineOrderDatabase {
+
     /**
      * The SQL statement to be executed
      */
-    private static final String STATEMENT = "UPDATE Order_Status SET status = 'Cancelled', description = 'Deleted' WHERE id_order = ?";
+    private static final String STATEMENT = "UPDATE Order_Status SET status = 'Cancelled', description = 'Deleted', os_datetime = LOCALTIMESTAMP WHERE id_order = ?";
 
     /**
      * The connection to the database
@@ -60,6 +58,7 @@ public class DeleteOnlineOrderDatabase {
             if (pstmt != null) {
                 pstmt.close();
             }
+
         }
         con.close();
 
