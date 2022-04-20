@@ -139,11 +139,9 @@ public class UserServlet extends AbstractDatabaseServlet {
                             Employee emNew;
                             try {
                                 Employee emOld = new GetEmployeeDatabase(getDataSource().getConnection(), username).getEmployee();
-                                String role = req.getParameter("role");
-                                if ("notchange".equals(role))
+
                                     emNew = new Employee(emOld.getUsername(), req.getParameter("name"), req.getParameter("surname"), emOld.getRole());
-                                else
-                                    emNew = new Employee(emOld.getUsername(), req.getParameter("name"), req.getParameter("surname"), new Role(req.getParameter("role")));
+
                                 Employee em = new UpdateEmployeeDatabase(getDataSource().getConnection(), emNew).updateEmployee();
                                 writeResource(req, resp, "/jsp/user.jsp", true, em);
                             } catch (SQLException e) {

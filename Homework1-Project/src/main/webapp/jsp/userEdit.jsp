@@ -20,14 +20,6 @@
         <li>Name: <input type="text" name="name" value="${employee.name}" required></li>
         <li>Surname: <input type="text" name="surname" value="${employee.surname}" required></li>
 
-        <li>Role: <select name="role" autofocus required>
-            <option value="notchange" selected>not change</option>
-            <option value="Technician" >Technician</option>
-            <option value="Seller" >Seller</option>
-            <option value="Administrator" >Administrator</option>
-            <option value="Accountant" >Accountant</option>
-            <option value="Warehouse Manager" >Warehouse Manager</option>
-        </select></li>
 
         <input type="submit" value="submit">
 

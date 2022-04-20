@@ -17,16 +17,14 @@
 <form method="post" action="<c:url value="/session/register"/>">
 
     <ul>
-        <li>Name: <input type="text" name="name"  required></li>
-        <li>Surname: <input type="text" name="surname"  required></li>
-        <li>Fiscal Code: <input type="text" name="fiscalCode"  required></li>
-        <li>Email: <input type="email" name="email" required></li>
-        <li>Phone Number: <input type="text" name="phoneNumber" ></li>
-        <li>Address :<input type="text" name="address" ></li>
-        <li>Username: <input type="text" name="username"  required></li>
-        <li>Password: <input type="password" name="password"  required></li>
-
-        </li>
+        <li><label for="name">Name: </label> <input id="name" type="text" name="name"  required></li>
+        <li><label for="surname">Surname: </label> <input id="surname" type="text" name="surname"  required></li>
+        <li><label for="fiscalCode">Fiscal Code: </label><input id="fiscalCode" type="text" name="fiscalCode"  required></li>
+        <li><label for="email">Email: </label><input id="email" type="email" name="email" required></li>
+        <li><label for="phoneNumber">Phone Number: </label><input id="phoneNumber" type="text" name="phoneNumber" ></li>
+        <li><label for="address">Address: </label><input id="address" type="text" name="address" ></li>
+        <li><label for="username">Username: </label><input id="username" type="text" name="username"  required></li>
+        <li><label for="password">Password: </label><input id="password" type="password" name="password"  required></li>
 
         <input type="submit" value="submit">
 

@@ -7,10 +7,13 @@
     <title>Change password ${user.identification}</title>
 </head>
 <body>
+
 <c:import url="/jsp/include/header.jsp"/>
+<h1>Change password</h1>
 <form method="post" action="<c:url value="/user/password"/>">
     <ul>
         <li>Old Password: <input type="password" name="oldPassword" required></li>
+        <br>
         <li>newPassword: <input type="password" name="newPassword" required></li>
 
         <input type="submit" value="submit">
