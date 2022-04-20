@@ -21,7 +21,7 @@
   <li>Transaction ID: ${onlineInvoice.transactionId}</li>
   <li>Payment Type: ${onlineInvoice.paymentType.text}</li>
   <li>Date: ${onlineInvoice.oiDate.humanDate}</li>
-  <li>Price: ${onlineInvoice.totalPrice}</li>
+  <li>Total Price: ${onlineInvoice.totalPrice}€</li>
 
   <h2>Product list</h2>
   <b>Order ID: ${onlineInvoice.idOrder.idOrder}</b>
@@ -43,7 +43,7 @@
       <tr>
         <td>Total</td>
         <td></td>
-        <td>${onlineInvoice.totalPrice}</td>
+        <td>${onlineInvoice.totalPrice}€</td>
       </tr>
     </table>
 
