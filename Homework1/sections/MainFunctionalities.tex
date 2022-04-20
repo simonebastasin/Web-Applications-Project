@@ -1,16 +1,18 @@
 \section{Main Functionalities}
 %What are the main functionalities of the web app? what services does it offer and how it is organized?
 
-This web application will be mainly used to allow the not registered users to retrieve information about specific product sold by the shop. Instead the registered user can buy products and ask for assistance. Below we specify better the functionalities of the web application:
+The web application can be used by both registered and unregistered customers. While the first ones can buy products, check their invoices and ask for assistance through the opening of a ticket, the unregistered customers can only navigate its homepage and inspect products features. In addition to registered customers, each employee also has an account to log into.
+\\
+Below we specify better the roles:
 \begin{itemize}
-    \item \textbf{Customers}: can register to our web application using the specific form and then they can buy product and seeing the online invoices related with the orders, request for assistance ticket, modify their account changing the information provided during the registration.
-    \item \textbf{Employee}: they can do different things inside the application according to the role they have inside the shop, their account is provided by the administrator of the web application:
+    \item \textbf{Customers}: they can register to our web application using a specific form. Only once registered, they can buy products, inspect the online invoices related with the orders, request for assistance ticket, modify their account changing the information provided during the registration.
+    \item \textbf{Employee}: their account is provided by the administrator of the web application and they can do different things according to their role.
     \begin{itemize}
-        \item \textbf{Sellers}: can manage the product, adding new products and modify their details (e.g. name, brand, price, discount...), can see the order done by the customer and update the order status.
-        \item \textbf{Technicians}: can manage the request for assistance from the customer (Assistance Ticket) and update the information of the ticket status.
-        \item \textbf{Accountants}: Can manage the payment done by the customer, in practical terms they can manage the online invoice.
-        \item \textbf{Administrators}: are to be considered the "super user" of the web application. They own all the permission of the other user and, in addition, they are the user that create the account for the employee user.
+        \item \textbf{Sellers}: they manage products, adding new ones and modifying  their details (e.g. name, brand, price, discount...). Furthermore, they manage the order placed by customers.
+        \item \textbf{Technicians}: they manage the incoming request for assistance opened by customers (Assistance Tickets). Thus, they update the status of the tickets.
+        \item \textbf{Accountants}: they manage the payments done by customers and generate the invoices.
+        \item \textbf{Administrators}: they are to be considered the "super user" of the web application. They own all the permissions of the other users and, in addition, they are the users that can create a new account for an employee user.
     \end{itemize}
-    In practice, to simplify the development of the project, we implemented only a generic employee (except for the administrator) but, we keep into account that division in order to maintain a logical division between the functionalities.
-    With "manage" we intend the main operation: Insert, Update, Delete, Select. Only for product we decided to not implement the delete operation in order to maintain the history of the other information related with it (i.e. orders and ticket assistance).
+    In practice, to simplify the development of the project, we implemented only a generic employee (except for the administrator), but we kept into account the role subdivision of the employees in order to maintain a logical division between the functionalities.
+    With "manage" we intend the main operations: Insert, Update, Delete, Select. Only for the products  we decided to not implement the delete operation in order to maintain the history of the other information related with it (i.e. orders and tickets).
 \end{itemize}
