@@ -41,9 +41,25 @@
       <td>
         <a href="<c:url value="/management/userManagement/editEmployee/${employee.username}"/>">Edit</a>
       </td>
-      <td>
-        <a href="<c:url value="/management/userManagement/deleteEmployee/${employee.username}"/>">Delete</a>
-      </td>
+
+      <c:choose>
+        <c:when test =  "${employee.role == 'Administrator'}">
+          <td>
+
+          </td>
+        </c:when>
+        <c:otherwise>
+          <td>
+            <a href="<c:url value="/management/userManagement/deleteEmployee/${employee.username}"/>" aria-disabled="false">Delete</a>
+          </td>
+        </c:otherwise>
+      </c:choose>
+
+
+
+
+
+
     </tr>
   </c:forEach>
 

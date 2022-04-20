@@ -54,8 +54,7 @@
                 <option value="<c:url value="/invoice/list"/>">View Invoice List</option>
                 <c:choose>
                     <c:when test="${user.role == 'Administrator'}">
-                        <option value="<c:url value="/management/userManagement"/>">User Management</option>
-                        <option value="<c:url value="/management"/>">Data Export</option>
+                        <option value="<c:url value="/management/userManagement"/>">Employee Management</option>
                     </c:when>
                 </c:choose>
             </select>

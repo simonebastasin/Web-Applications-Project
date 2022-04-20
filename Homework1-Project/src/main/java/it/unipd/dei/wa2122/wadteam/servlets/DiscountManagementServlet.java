@@ -201,6 +201,7 @@ public class DiscountManagementServlet extends AbstractDatabaseServlet{
 
                     List<Owns> list = new CreateOwnsDiscountFromListProductsDatabase(getDataSource().getConnection(), productAliasList, discount).createOwnsDiscountFromList();
 
+                    logger.info("Insert completed successfully for discount "+discount.toString());
                     Message m = new Message("edit ok", discount.getId());
                     writeMessageOrRedirect(req, res, m,  req.getContextPath() + (req.getServletPath().startsWith("/rest/") ? "/rest" : "") + "/management/discountManagement");
                 } catch (SQLException e) {
@@ -278,7 +279,7 @@ public class DiscountManagementServlet extends AbstractDatabaseServlet{
 
 
                     //List<Owns> list = new UpdateOwn(getDataSource().getConnection(), productAliasList, discount).createOwnsDiscountFromList();
-
+                    logger.info("Edit completed successfully for discount "+discount.toString());
                     Message m = new Message("edit ok", discount.getId());
                     writeMessageOrRedirect(req, res, m,  req.getContextPath() + (req.getServletPath().startsWith("/rest/") ? "/rest" : "") + "/management/discountManagement");
                 } catch (SQLException e) {
@@ -302,8 +303,10 @@ public class DiscountManagementServlet extends AbstractDatabaseServlet{
     private void postDeleteDiscount(HttpServletRequest req, HttpServletResponse res, String param) throws  ServletException, IOException {
         Discount discount;
         try {
+            new DeleteOwnsFromDiscountIdDatabase(getDataSource().getConnection(), Integer.parseInt(param)).deleteOwn();
             discount = new DeleteDiscountDatabase((getDataSource().getConnection()), Integer.parseInt(param)).deleteDiscount();
 
+            logger.info("Delete completed successfully for discount "+discount.toString());
             Message m = new Message("delete ok");
             writeMessageOrRedirect(req, res, m, req.getContextPath() + (req.getServletPath().startsWith("/rest/") ? "/rest" : "") +"/management/discountManagement");
         } catch (SQLException e) {
