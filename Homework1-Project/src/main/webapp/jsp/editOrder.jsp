@@ -23,11 +23,11 @@
 <c:forEach var="onlineOrder" items="${onlineOrderList}">
     <form method="POST" action="">
 
-        <label for="idOrder">ID_Order:</label><br>
+        <label for="idOrder">ID Order:</label><br>
         <input type="text" id="idOrder" name="idOrder" value="${onlineOrder.idOrder}" disabled><br>
-        <label for="idCustomer">ID_Customer:</label><br>
+        <label for="idCustomer">ID Customer:</label><br>
         <input type="text" id="idCustomer" name="idCustomer" value="${onlineOrder.idCustomer}" disabled><br>
-        <label for="orderDate">Order_Date:</label><br>
+        <label for="orderDate">Order Date:</label><br>
         <input type="text" id="orderDate" name="orderDate" value="${onlineOrder.ooDateTime.getHumanDate()}" disabled><br>
 
         Products:
@@ -37,7 +37,7 @@
                 <th>Brand</th>
                 <th>Name</th>
                 <th>Quantity</th>
-                <th>Sale_Price</th>
+                <th>Sale Price</th>
             </tr>
             <c:forEach var="product" items="${onlineOrder.products}">
                 <tr>
@@ -94,7 +94,7 @@
             </c:choose>
         </select><br>
 
-        <label for="statusDate">Last_Status_Update:</label><br>
+        <label for="statusDate">Last status Update:</label><br>
         <input type="text" id="statusDate" name="statusDate" value="${onlineOrder.status.osDateTime.humanDate}" disabled><br>
         <label for="description">Description:</label><br>
         <input type="text" id="description" name="description" value="${onlineOrder.status.description}"><br>

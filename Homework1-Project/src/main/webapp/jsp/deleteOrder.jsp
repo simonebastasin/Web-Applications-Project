@@ -21,9 +21,9 @@
 Order you are deleting:<br><br>
 <table>
     <tr>
-        <th>ID_Order</th>
-        <th>ID_Customer</th>
-        <th>Order_Date</th>
+        <th>ID Order</th>
+        <th>ID Customer</th>
+        <th>Order Date</th>
         <th>Status</th>
         <th>Description</th>
     </tr>
@@ -42,7 +42,7 @@ With these products:
         <th>Brand</th>
         <th>Name</th>
         <th>Quantity</th>
-        <th>Sale_Price</th>
+        <th>Sale Price</th>
     </tr>
     <c:forEach var="product" items="${onlineOrder.products}">
         <tr>

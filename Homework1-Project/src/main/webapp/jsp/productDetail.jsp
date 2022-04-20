@@ -44,23 +44,37 @@
         </c:choose>
     </ul>
 
-<c:choose>
-    <c:when test="${not empty user && empty user.role}">
-        <hr>
+    <c:choose>
+        <c:when test="${product.quantity <= 0}">
+            <span style="color: red;font-weight: bold">The product is no longer available.</span>
+        </c:when>
+        <c:otherwise>
+            <c:choose>
+                <c:when test="${not empty user && empty user.role}">
+                    <hr>
 
-        <form method="POST" action="<c:url value="/buy/product/${product.alias}"/>">
-            <label for="quantity">Selected quantity</label>
-            <input type="number" name ="quantity" max="${product.quantity}" min="1" id="quantity" required> <br>
+                    <form method="POST" action="<c:url value="/buy/product/${product.alias}"/>">
+                        <label for="quantity">Selected quantity</label>
+                        <input type="number" name ="quantity" max="${product.quantity}" min="1" id="quantity" required> <br>
 
-            <input type ="submit" value = "Buy now">
-        </form>
-    </c:when>
-    <c:otherwise>
-        <hr>
+                        <input type ="submit" value = "Buy now">
+                    </form>
+                </c:when>
+                <c:otherwise>
+                    <c:choose>
+                        <c:when test="${not empty user && not empty user.role}">
+                            <span style="color: red;font-weight: bold">Employees are not authorized to make purchases.</span>
+                        </c:when>
+                        <c:otherwise>
+                            Please, <a href="<c:url value="/session/login"/>">login</a> to buy the product
+                        </c:otherwise>
+                    </c:choose>
+                </c:otherwise>
+            </c:choose>
+        </c:otherwise>
+    </c:choose>
 
-        <a href="<c:url value="/session/login"/>">Login for buy</a>
-    </c:otherwise>
-</c:choose>
+
 
     <%@ include file="/html/include/footer.html"%>
 </body>
