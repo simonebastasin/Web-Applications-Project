@@ -105,6 +105,10 @@
     </form>
 </c:forEach>
 
+<a href="<c:url value="/management/orderManagement"/>">
+    Cancel changes
+</a>
+
 
 <%@ include file="/html/include/footer.html"%>
 </body>

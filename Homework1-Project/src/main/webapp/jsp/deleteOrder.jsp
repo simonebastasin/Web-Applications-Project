@@ -18,7 +18,8 @@
 <c:import url="/jsp/include/header.jsp"/>
 <h1>Delete order</h1>
 
-Order you are deleting:<br><br>
+Order you are deleting:<br>
+<br>
 <table>
     <tr>
         <th>ID Order</th>
@@ -35,7 +36,8 @@ Order you are deleting:<br><br>
         <td>${onlineOrder.status.description}</td>
     </tr>
 </table><br>
-With these products:
+With these products:<br>
+<br>
 <table>
     <tr>
         <th>Alias</th>
@@ -54,15 +56,15 @@ With these products:
         </tr>
     </c:forEach>
 </table><br>
-Sure to delete?<br><br>
+Sure to delete?<br>
 
+<br>
 <form method="POST" action="">
     <input type="submit" value="Yes">
 </form>
 <a href="<c:url value="/management/orderManagement"/>">
     <input type="submit" value="No"/>
 </a>
-
 
 <%@ include file="/html/include/footer.html"%>
 </body>

@@ -19,7 +19,6 @@
 <h1>Order List</h1>
 
 <table>
-
     <tr>
         <th>ID_Order</th>
         <th>ID_Customer</th>
@@ -47,7 +46,6 @@
             </td>
         </tr>
     </c:forEach>
-
 </table>
 
 <%@ include file="/html/include/footer.html"%>
