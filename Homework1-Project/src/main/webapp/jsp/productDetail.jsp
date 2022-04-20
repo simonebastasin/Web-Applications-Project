@@ -37,7 +37,7 @@
             <c:when test="${not empty product.pictures}">
                 <li>Pictures:
                     <c:forEach var="picture" items="${product.pictures}">
-                        <img src="<c:url value="/viewmedia/${picture.id}"/>" alt="${picture.filename}" width="400px"/>
+                        <img src="<c:url value="/media/view/${picture}"/>" alt="${product.alias}" width="400px"/>
                     </c:forEach>
                 </li>
             </c:when>
