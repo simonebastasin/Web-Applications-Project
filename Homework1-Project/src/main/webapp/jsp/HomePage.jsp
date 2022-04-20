@@ -72,7 +72,7 @@
                         <c:otherwise>
                             <li>Product name: <a href="<c:url value="/products/details/${prod.alias}"/>">${prod.name}</a>  - Brand: ${prod.brand} - Quantity: ${prod.quantity} - Price: ${prod.salePrice}€<br>
                                 <c:forEach var="picture" items="${prod.pictures}">
-                                    <img src="<c:url value="/media/view/${picture}"/>" alt="${product.alias}" width="250px"/>
+                                    <img src="<c:url value="/media/view/${picture}"/>" alt="${prod.alias}" width="250px"/>
                                 </c:forEach>
                             </li>
                         </c:otherwise>
