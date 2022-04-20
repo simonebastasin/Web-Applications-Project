@@ -1,0 +1,255 @@
+@startuml
+participant Actor
+Actor -> LoginServlet : doPost
+activate LoginServlet
+LoginServlet -> AbstractServlet : writeError
+activate AbstractServlet
+AbstractServlet -> GenericError : toJSON
+activate GenericError
+GenericError --> AbstractServlet
+deactivate GenericError
+AbstractServlet -> AbstractServlet : writeJSON
+activate AbstractServlet
+AbstractServlet --> AbstractServlet
+deactivate AbstractServlet
+AbstractServlet --> LoginServlet
+deactivate AbstractServlet
+create UserCredential
+LoginServlet -> UserCredential : new
+activate UserCredential
+UserCredential --> LoginServlet
+deactivate UserCredential
+create CheckUserCredential
+LoginServlet -> CheckUserCredential : new
+activate CheckUserCredential
+CheckUserCredential --> LoginServlet
+deactivate CheckUserCredential
+create Message
+LoginServlet -> Message : new
+activate Message
+Message --> LoginServlet
+deactivate Message
+LoginServlet -> AbstractServlet : writeMessageOrRedirect
+activate AbstractServlet
+AbstractServlet -> Message : toJSON
+activate Message
+Message --> AbstractServlet
+deactivate Message
+AbstractServlet -> AbstractServlet : writeJSON
+activate AbstractServlet
+AbstractServlet --> AbstractServlet
+deactivate AbstractServlet
+AbstractServlet --> LoginServlet
+deactivate AbstractServlet
+create UserCredentialError
+LoginServlet -> UserCredentialError : new
+activate UserCredentialError
+create ErrorMessage
+UserCredentialError -> ErrorMessage : new
+activate ErrorMessage
+create Message
+ErrorMessage -> Message : new
+activate Message
+Message --> ErrorMessage
+deactivate Message
+ErrorMessage --> UserCredentialError
+deactivate ErrorMessage
+UserCredentialError --> LoginServlet
+deactivate UserCredentialError
+LoginServlet -> AbstractServlet : writeError
+activate AbstractServlet
+AbstractServlet -> Message : toJSON
+activate Message
+Message --> AbstractServlet
+deactivate Message
+AbstractServlet -> AbstractServlet : writeJSON
+activate AbstractServlet
+AbstractServlet --> AbstractServlet
+deactivate AbstractServlet
+AbstractServlet --> LoginServlet
+deactivate AbstractServlet
+create SqlInternalError
+LoginServlet -> SqlInternalError : new
+activate SqlInternalError
+create ErrorMessage
+SqlInternalError -> ErrorMessage : new
+activate ErrorMessage
+create Message
+ErrorMessage -> Message : new
+activate Message
+Message --> ErrorMessage
+deactivate Message
+ErrorMessage --> SqlInternalError
+deactivate ErrorMessage
+SqlInternalError --> LoginServlet
+deactivate SqlInternalError
+LoginServlet -> AbstractServlet : writeError
+activate AbstractServlet
+AbstractServlet -> Message : toJSON
+activate Message
+Message --> AbstractServlet
+deactivate Message
+AbstractServlet -> AbstractServlet : writeJSON
+activate AbstractServlet
+AbstractServlet --> AbstractServlet
+deactivate AbstractServlet
+AbstractServlet --> LoginServlet
+deactivate AbstractServlet
+LoginServlet -> AbstractServlet : writeError
+activate AbstractServlet
+AbstractServlet -> GenericError : toJSON
+activate GenericError
+GenericError --> AbstractServlet
+deactivate GenericError
+AbstractServlet -> AbstractServlet : writeJSON
+activate AbstractServlet
+AbstractServlet --> AbstractServlet
+deactivate AbstractServlet
+AbstractServlet --> LoginServlet
+deactivate AbstractServlet
+create GetIdCustomerDatabase
+LoginServlet -> GetIdCustomerDatabase : new
+activate GetIdCustomerDatabase
+GetIdCustomerDatabase --> LoginServlet
+deactivate GetIdCustomerDatabase
+create GetEmailCustomerDatabase
+LoginServlet -> GetEmailCustomerDatabase : new
+activate GetEmailCustomerDatabase
+GetEmailCustomerDatabase --> LoginServlet
+deactivate GetEmailCustomerDatabase
+create Customer
+LoginServlet -> Customer : new
+activate Customer
+Customer --> LoginServlet
+deactivate Customer
+create CreateCustomerDatabase
+LoginServlet -> CreateCustomerDatabase : new
+activate CreateCustomerDatabase
+CreateCustomerDatabase --> LoginServlet
+deactivate CreateCustomerDatabase
+LoginServlet -> CreateCustomerDatabase : createCustomer
+activate CreateCustomerDatabase
+create Customer
+CreateCustomerDatabase -> Customer : new
+activate Customer
+Customer --> CreateCustomerDatabase
+deactivate Customer
+CreateCustomerDatabase --> LoginServlet
+deactivate CreateCustomerDatabase
+create UserCredential
+LoginServlet -> UserCredential : new
+activate UserCredential
+UserCredential --> LoginServlet
+deactivate UserCredential
+create Message
+LoginServlet -> Message : new
+activate Message
+Message --> LoginServlet
+deactivate Message
+LoginServlet -> AbstractServlet : writeMessageOrRedirect
+activate AbstractServlet
+AbstractServlet -> Message : toJSON
+activate Message
+Message --> AbstractServlet
+deactivate Message
+AbstractServlet -> AbstractServlet : writeJSON
+activate AbstractServlet
+AbstractServlet --> AbstractServlet
+deactivate AbstractServlet
+AbstractServlet --> LoginServlet
+deactivate AbstractServlet
+create ElementRedundant
+LoginServlet -> ElementRedundant : new
+activate ElementRedundant
+create ErrorMessage
+ElementRedundant -> ErrorMessage : new
+activate ErrorMessage
+create Message
+ErrorMessage -> Message : new
+activate Message
+Message --> ErrorMessage
+deactivate Message
+ErrorMessage --> ElementRedundant
+deactivate ErrorMessage
+ElementRedundant --> LoginServlet
+deactivate ElementRedundant
+LoginServlet -> AbstractServlet : writeError
+activate AbstractServlet
+AbstractServlet -> Message : toJSON
+activate Message
+Message --> AbstractServlet
+deactivate Message
+AbstractServlet -> AbstractServlet : writeJSON
+activate AbstractServlet
+AbstractServlet --> AbstractServlet
+deactivate AbstractServlet
+AbstractServlet --> LoginServlet
+deactivate AbstractServlet
+create ElementRedundant
+LoginServlet -> ElementRedundant : new
+activate ElementRedundant
+create ErrorMessage
+ElementRedundant -> ErrorMessage : new
+activate ErrorMessage
+create Message
+ErrorMessage -> Message : new
+activate Message
+Message --> ErrorMessage
+deactivate Message
+ErrorMessage --> ElementRedundant
+deactivate ErrorMessage
+ElementRedundant --> LoginServlet
+deactivate ElementRedundant
+LoginServlet -> AbstractServlet : writeError
+activate AbstractServlet
+AbstractServlet -> Message : toJSON
+activate Message
+Message --> AbstractServlet
+deactivate Message
+AbstractServlet -> AbstractServlet : writeJSON
+activate AbstractServlet
+AbstractServlet --> AbstractServlet
+deactivate AbstractServlet
+AbstractServlet --> LoginServlet
+deactivate AbstractServlet
+create SqlInternalError
+LoginServlet -> SqlInternalError : new
+activate SqlInternalError
+create ErrorMessage
+SqlInternalError -> ErrorMessage : new
+activate ErrorMessage
+create Message
+ErrorMessage -> Message : new
+activate Message
+Message --> ErrorMessage
+deactivate Message
+ErrorMessage --> SqlInternalError
+deactivate ErrorMessage
+SqlInternalError --> LoginServlet
+deactivate SqlInternalError
+LoginServlet -> AbstractServlet : writeError
+activate AbstractServlet
+AbstractServlet -> Message : toJSON
+activate Message
+Message --> AbstractServlet
+deactivate Message
+AbstractServlet -> AbstractServlet : writeJSON
+activate AbstractServlet
+AbstractServlet --> AbstractServlet
+deactivate AbstractServlet
+AbstractServlet --> LoginServlet
+deactivate AbstractServlet
+LoginServlet -> AbstractServlet : writeError
+activate AbstractServlet
+AbstractServlet -> GenericError : toJSON
+activate GenericError
+GenericError --> AbstractServlet
+deactivate GenericError
+AbstractServlet -> AbstractServlet : writeJSON
+activate AbstractServlet
+AbstractServlet --> AbstractServlet
+deactivate AbstractServlet
+AbstractServlet --> LoginServlet
+deactivate AbstractServlet
+return
+@enduml

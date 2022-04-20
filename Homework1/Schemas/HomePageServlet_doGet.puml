@@ -1,0 +1,662 @@
+@startuml
+participant Actor
+Actor -> HomePageServlet : doGet
+activate HomePageServlet
+HomePageServlet -> HomePageServlet : homePage
+activate HomePageServlet
+create ListProductDatabase
+HomePageServlet -> ListProductDatabase : new
+activate ListProductDatabase
+ListProductDatabase --> HomePageServlet
+deactivate ListProductDatabase
+create ListProductCategoryDatabase
+HomePageServlet -> ListProductCategoryDatabase : new
+activate ListProductCategoryDatabase
+ListProductCategoryDatabase --> HomePageServlet
+deactivate ListProductCategoryDatabase
+HomePageServlet -> AbstractServlet : writeResource
+activate AbstractServlet
+AbstractServlet -> Resource : toJSON
+activate Resource
+Resource --> AbstractServlet
+deactivate Resource
+AbstractServlet -> AbstractServlet : writeJSON
+activate AbstractServlet
+AbstractServlet --> AbstractServlet
+deactivate AbstractServlet
+AbstractServlet -> AbstractServlet : decapitalize
+activate AbstractServlet
+AbstractServlet --> AbstractServlet
+deactivate AbstractServlet
+AbstractServlet -> Resource : toJSON
+activate Resource
+Resource --> AbstractServlet
+deactivate Resource
+AbstractServlet -> AbstractServlet : decapitalize
+activate AbstractServlet
+AbstractServlet --> AbstractServlet
+deactivate AbstractServlet
+AbstractServlet -> Resource : toJSON
+activate Resource
+Resource --> AbstractServlet
+deactivate Resource
+AbstractServlet -> AbstractServlet : writeJSON
+activate AbstractServlet
+AbstractServlet --> AbstractServlet
+deactivate AbstractServlet
+create ListProductCategoryDatabase
+AbstractServlet -> ListProductCategoryDatabase : new
+activate ListProductCategoryDatabase
+ListProductCategoryDatabase --> AbstractServlet
+deactivate ListProductCategoryDatabase
+AbstractServlet -> AbstractServlet : decapitalize
+activate AbstractServlet
+AbstractServlet --> AbstractServlet
+deactivate AbstractServlet
+AbstractServlet -> AbstractServlet : decapitalize
+activate AbstractServlet
+AbstractServlet --> AbstractServlet
+deactivate AbstractServlet
+create SqlInternalError
+AbstractServlet -> SqlInternalError : new
+activate SqlInternalError
+create ErrorMessage
+SqlInternalError -> ErrorMessage : new
+activate ErrorMessage
+create Message
+ErrorMessage -> Message : new
+activate Message
+Message --> ErrorMessage
+deactivate Message
+ErrorMessage --> SqlInternalError
+deactivate ErrorMessage
+SqlInternalError --> AbstractServlet
+deactivate SqlInternalError
+AbstractServlet -> AbstractServlet : writeError
+activate AbstractServlet
+AbstractServlet -> Message : toJSON
+activate Message
+Message --> AbstractServlet
+deactivate Message
+AbstractServlet -> AbstractServlet : writeJSON
+activate AbstractServlet
+AbstractServlet --> AbstractServlet
+deactivate AbstractServlet
+AbstractServlet --> AbstractServlet
+deactivate AbstractServlet
+AbstractServlet --> HomePageServlet
+deactivate AbstractServlet
+create SqlInternalError
+HomePageServlet -> SqlInternalError : new
+activate SqlInternalError
+create ErrorMessage
+SqlInternalError -> ErrorMessage : new
+activate ErrorMessage
+create Message
+ErrorMessage -> Message : new
+activate Message
+Message --> ErrorMessage
+deactivate Message
+ErrorMessage --> SqlInternalError
+deactivate ErrorMessage
+SqlInternalError --> HomePageServlet
+deactivate SqlInternalError
+HomePageServlet -> AbstractServlet : writeError
+activate AbstractServlet
+AbstractServlet -> Message : toJSON
+activate Message
+Message --> AbstractServlet
+deactivate Message
+AbstractServlet -> AbstractServlet : writeJSON
+activate AbstractServlet
+AbstractServlet --> AbstractServlet
+deactivate AbstractServlet
+AbstractServlet --> HomePageServlet
+deactivate AbstractServlet
+HomePageServlet --> HomePageServlet
+deactivate HomePageServlet
+HomePageServlet -> HomePageServlet : productDetail
+activate HomePageServlet
+create GetProductDatabase
+HomePageServlet -> GetProductDatabase : new
+activate GetProductDatabase
+GetProductDatabase --> HomePageServlet
+deactivate GetProductDatabase
+HomePageServlet -> AbstractServlet : writeResource
+activate AbstractServlet
+AbstractServlet -> Resource : toJSON
+activate Resource
+Resource --> AbstractServlet
+deactivate Resource
+AbstractServlet -> AbstractServlet : writeJSON
+activate AbstractServlet
+AbstractServlet --> AbstractServlet
+deactivate AbstractServlet
+AbstractServlet -> AbstractServlet : decapitalize
+activate AbstractServlet
+AbstractServlet --> AbstractServlet
+deactivate AbstractServlet
+AbstractServlet -> Resource : toJSON
+activate Resource
+Resource --> AbstractServlet
+deactivate Resource
+AbstractServlet -> AbstractServlet : decapitalize
+activate AbstractServlet
+AbstractServlet --> AbstractServlet
+deactivate AbstractServlet
+AbstractServlet -> Resource : toJSON
+activate Resource
+Resource --> AbstractServlet
+deactivate Resource
+AbstractServlet -> AbstractServlet : writeJSON
+activate AbstractServlet
+AbstractServlet --> AbstractServlet
+deactivate AbstractServlet
+create ListProductCategoryDatabase
+AbstractServlet -> ListProductCategoryDatabase : new
+activate ListProductCategoryDatabase
+ListProductCategoryDatabase --> AbstractServlet
+deactivate ListProductCategoryDatabase
+AbstractServlet -> AbstractServlet : decapitalize
+activate AbstractServlet
+AbstractServlet --> AbstractServlet
+deactivate AbstractServlet
+AbstractServlet -> AbstractServlet : decapitalize
+activate AbstractServlet
+AbstractServlet --> AbstractServlet
+deactivate AbstractServlet
+create SqlInternalError
+AbstractServlet -> SqlInternalError : new
+activate SqlInternalError
+create ErrorMessage
+SqlInternalError -> ErrorMessage : new
+activate ErrorMessage
+create Message
+ErrorMessage -> Message : new
+activate Message
+Message --> ErrorMessage
+deactivate Message
+ErrorMessage --> SqlInternalError
+deactivate ErrorMessage
+SqlInternalError --> AbstractServlet
+deactivate SqlInternalError
+AbstractServlet -> AbstractServlet : writeError
+activate AbstractServlet
+AbstractServlet -> Message : toJSON
+activate Message
+Message --> AbstractServlet
+deactivate Message
+AbstractServlet -> AbstractServlet : writeJSON
+activate AbstractServlet
+AbstractServlet --> AbstractServlet
+deactivate AbstractServlet
+AbstractServlet --> AbstractServlet
+deactivate AbstractServlet
+AbstractServlet --> HomePageServlet
+deactivate AbstractServlet
+HomePageServlet -> AbstractServlet : writeError
+activate AbstractServlet
+AbstractServlet -> GenericError : toJSON
+activate GenericError
+GenericError --> AbstractServlet
+deactivate GenericError
+AbstractServlet -> AbstractServlet : writeJSON
+activate AbstractServlet
+AbstractServlet --> AbstractServlet
+deactivate AbstractServlet
+AbstractServlet --> HomePageServlet
+deactivate AbstractServlet
+create SqlInternalError
+HomePageServlet -> SqlInternalError : new
+activate SqlInternalError
+create ErrorMessage
+SqlInternalError -> ErrorMessage : new
+activate ErrorMessage
+create Message
+ErrorMessage -> Message : new
+activate Message
+Message --> ErrorMessage
+deactivate Message
+ErrorMessage --> SqlInternalError
+deactivate ErrorMessage
+SqlInternalError --> HomePageServlet
+deactivate SqlInternalError
+HomePageServlet -> AbstractServlet : writeError
+activate AbstractServlet
+AbstractServlet -> Message : toJSON
+activate Message
+Message --> AbstractServlet
+deactivate Message
+AbstractServlet -> AbstractServlet : writeJSON
+activate AbstractServlet
+AbstractServlet --> AbstractServlet
+deactivate AbstractServlet
+AbstractServlet --> HomePageServlet
+deactivate AbstractServlet
+HomePageServlet --> HomePageServlet
+deactivate HomePageServlet
+HomePageServlet -> HomePageServlet : productCategory
+activate HomePageServlet
+HomePageServlet -> AbstractServlet : writeJsp
+activate AbstractServlet
+create ListProductCategoryDatabase
+AbstractServlet -> ListProductCategoryDatabase : new
+activate ListProductCategoryDatabase
+ListProductCategoryDatabase --> AbstractServlet
+deactivate ListProductCategoryDatabase
+create SqlInternalError
+AbstractServlet -> SqlInternalError : new
+activate SqlInternalError
+create ErrorMessage
+SqlInternalError -> ErrorMessage : new
+activate ErrorMessage
+create Message
+ErrorMessage -> Message : new
+activate Message
+Message --> ErrorMessage
+deactivate Message
+ErrorMessage --> SqlInternalError
+deactivate ErrorMessage
+SqlInternalError --> AbstractServlet
+deactivate SqlInternalError
+AbstractServlet -> AbstractServlet : writeError
+activate AbstractServlet
+AbstractServlet -> Message : toJSON
+activate Message
+Message --> AbstractServlet
+deactivate Message
+AbstractServlet -> AbstractServlet : writeJSON
+activate AbstractServlet
+AbstractServlet --> AbstractServlet
+deactivate AbstractServlet
+AbstractServlet --> AbstractServlet
+deactivate AbstractServlet
+AbstractServlet --> HomePageServlet
+deactivate AbstractServlet
+create GetProductCategoryDatabase
+HomePageServlet -> GetProductCategoryDatabase : new
+activate GetProductCategoryDatabase
+GetProductCategoryDatabase --> HomePageServlet
+deactivate GetProductCategoryDatabase
+create GetListProductByCategoryDatabase
+HomePageServlet -> GetListProductByCategoryDatabase : new
+activate GetListProductByCategoryDatabase
+GetListProductByCategoryDatabase --> HomePageServlet
+deactivate GetListProductByCategoryDatabase
+HomePageServlet -> AbstractServlet : writeResource
+activate AbstractServlet
+AbstractServlet -> Resource : toJSON
+activate Resource
+Resource --> AbstractServlet
+deactivate Resource
+AbstractServlet -> AbstractServlet : writeJSON
+activate AbstractServlet
+AbstractServlet --> AbstractServlet
+deactivate AbstractServlet
+AbstractServlet -> AbstractServlet : decapitalize
+activate AbstractServlet
+AbstractServlet --> AbstractServlet
+deactivate AbstractServlet
+AbstractServlet -> Resource : toJSON
+activate Resource
+Resource --> AbstractServlet
+deactivate Resource
+AbstractServlet -> AbstractServlet : decapitalize
+activate AbstractServlet
+AbstractServlet --> AbstractServlet
+deactivate AbstractServlet
+AbstractServlet -> Resource : toJSON
+activate Resource
+Resource --> AbstractServlet
+deactivate Resource
+AbstractServlet -> AbstractServlet : writeJSON
+activate AbstractServlet
+AbstractServlet --> AbstractServlet
+deactivate AbstractServlet
+create ListProductCategoryDatabase
+AbstractServlet -> ListProductCategoryDatabase : new
+activate ListProductCategoryDatabase
+ListProductCategoryDatabase --> AbstractServlet
+deactivate ListProductCategoryDatabase
+AbstractServlet -> AbstractServlet : decapitalize
+activate AbstractServlet
+AbstractServlet --> AbstractServlet
+deactivate AbstractServlet
+AbstractServlet -> AbstractServlet : decapitalize
+activate AbstractServlet
+AbstractServlet --> AbstractServlet
+deactivate AbstractServlet
+create SqlInternalError
+AbstractServlet -> SqlInternalError : new
+activate SqlInternalError
+create ErrorMessage
+SqlInternalError -> ErrorMessage : new
+activate ErrorMessage
+create Message
+ErrorMessage -> Message : new
+activate Message
+Message --> ErrorMessage
+deactivate Message
+ErrorMessage --> SqlInternalError
+deactivate ErrorMessage
+SqlInternalError --> AbstractServlet
+deactivate SqlInternalError
+AbstractServlet -> AbstractServlet : writeError
+activate AbstractServlet
+AbstractServlet -> Message : toJSON
+activate Message
+Message --> AbstractServlet
+deactivate Message
+AbstractServlet -> AbstractServlet : writeJSON
+activate AbstractServlet
+AbstractServlet --> AbstractServlet
+deactivate AbstractServlet
+AbstractServlet --> AbstractServlet
+deactivate AbstractServlet
+AbstractServlet --> HomePageServlet
+deactivate AbstractServlet
+HomePageServlet -> AbstractServlet : writeError
+activate AbstractServlet
+AbstractServlet -> GenericError : toJSON
+activate GenericError
+GenericError --> AbstractServlet
+deactivate GenericError
+AbstractServlet -> AbstractServlet : writeJSON
+activate AbstractServlet
+AbstractServlet --> AbstractServlet
+deactivate AbstractServlet
+AbstractServlet --> HomePageServlet
+deactivate AbstractServlet
+create SqlInternalError
+HomePageServlet -> SqlInternalError : new
+activate SqlInternalError
+create ErrorMessage
+SqlInternalError -> ErrorMessage : new
+activate ErrorMessage
+create Message
+ErrorMessage -> Message : new
+activate Message
+Message --> ErrorMessage
+deactivate Message
+ErrorMessage --> SqlInternalError
+deactivate ErrorMessage
+SqlInternalError --> HomePageServlet
+deactivate SqlInternalError
+HomePageServlet -> AbstractServlet : writeError
+activate AbstractServlet
+AbstractServlet -> Message : toJSON
+activate Message
+Message --> AbstractServlet
+deactivate Message
+AbstractServlet -> AbstractServlet : writeJSON
+activate AbstractServlet
+AbstractServlet --> AbstractServlet
+deactivate AbstractServlet
+AbstractServlet --> HomePageServlet
+deactivate AbstractServlet
+HomePageServlet --> HomePageServlet
+deactivate HomePageServlet
+HomePageServlet -> HomePageServlet : homePage
+activate HomePageServlet
+create ListProductDatabase
+HomePageServlet -> ListProductDatabase : new
+activate ListProductDatabase
+ListProductDatabase --> HomePageServlet
+deactivate ListProductDatabase
+create ListProductCategoryDatabase
+HomePageServlet -> ListProductCategoryDatabase : new
+activate ListProductCategoryDatabase
+ListProductCategoryDatabase --> HomePageServlet
+deactivate ListProductCategoryDatabase
+HomePageServlet -> AbstractServlet : writeResource
+activate AbstractServlet
+AbstractServlet -> Resource : toJSON
+activate Resource
+Resource --> AbstractServlet
+deactivate Resource
+AbstractServlet -> AbstractServlet : writeJSON
+activate AbstractServlet
+AbstractServlet --> AbstractServlet
+deactivate AbstractServlet
+AbstractServlet -> AbstractServlet : decapitalize
+activate AbstractServlet
+AbstractServlet --> AbstractServlet
+deactivate AbstractServlet
+AbstractServlet -> Resource : toJSON
+activate Resource
+Resource --> AbstractServlet
+deactivate Resource
+AbstractServlet -> AbstractServlet : decapitalize
+activate AbstractServlet
+AbstractServlet --> AbstractServlet
+deactivate AbstractServlet
+AbstractServlet -> Resource : toJSON
+activate Resource
+Resource --> AbstractServlet
+deactivate Resource
+AbstractServlet -> AbstractServlet : writeJSON
+activate AbstractServlet
+AbstractServlet --> AbstractServlet
+deactivate AbstractServlet
+create ListProductCategoryDatabase
+AbstractServlet -> ListProductCategoryDatabase : new
+activate ListProductCategoryDatabase
+ListProductCategoryDatabase --> AbstractServlet
+deactivate ListProductCategoryDatabase
+AbstractServlet -> AbstractServlet : decapitalize
+activate AbstractServlet
+AbstractServlet --> AbstractServlet
+deactivate AbstractServlet
+AbstractServlet -> AbstractServlet : decapitalize
+activate AbstractServlet
+AbstractServlet --> AbstractServlet
+deactivate AbstractServlet
+create SqlInternalError
+AbstractServlet -> SqlInternalError : new
+activate SqlInternalError
+create ErrorMessage
+SqlInternalError -> ErrorMessage : new
+activate ErrorMessage
+create Message
+ErrorMessage -> Message : new
+activate Message
+Message --> ErrorMessage
+deactivate Message
+ErrorMessage --> SqlInternalError
+deactivate ErrorMessage
+SqlInternalError --> AbstractServlet
+deactivate SqlInternalError
+AbstractServlet -> AbstractServlet : writeError
+activate AbstractServlet
+AbstractServlet -> Message : toJSON
+activate Message
+Message --> AbstractServlet
+deactivate Message
+AbstractServlet -> AbstractServlet : writeJSON
+activate AbstractServlet
+AbstractServlet --> AbstractServlet
+deactivate AbstractServlet
+AbstractServlet --> AbstractServlet
+deactivate AbstractServlet
+AbstractServlet --> HomePageServlet
+deactivate AbstractServlet
+create SqlInternalError
+HomePageServlet -> SqlInternalError : new
+activate SqlInternalError
+create ErrorMessage
+SqlInternalError -> ErrorMessage : new
+activate ErrorMessage
+create Message
+ErrorMessage -> Message : new
+activate Message
+Message --> ErrorMessage
+deactivate Message
+ErrorMessage --> SqlInternalError
+deactivate ErrorMessage
+SqlInternalError --> HomePageServlet
+deactivate SqlInternalError
+HomePageServlet -> AbstractServlet : writeError
+activate AbstractServlet
+AbstractServlet -> Message : toJSON
+activate Message
+Message --> AbstractServlet
+deactivate Message
+AbstractServlet -> AbstractServlet : writeJSON
+activate AbstractServlet
+AbstractServlet --> AbstractServlet
+deactivate AbstractServlet
+AbstractServlet --> HomePageServlet
+deactivate AbstractServlet
+HomePageServlet --> HomePageServlet
+deactivate HomePageServlet
+HomePageServlet -> HomePageServlet : productSearch
+activate HomePageServlet
+create SearchProductListDatabase
+HomePageServlet -> SearchProductListDatabase : new
+activate SearchProductListDatabase
+SearchProductListDatabase --> HomePageServlet
+deactivate SearchProductListDatabase
+HomePageServlet -> SearchProductListDatabase : searchProductList
+activate SearchProductListDatabase
+create ProductCategory
+SearchProductListDatabase -> ProductCategory : new
+activate ProductCategory
+ProductCategory --> SearchProductListDatabase
+deactivate ProductCategory
+create DateTime
+SearchProductListDatabase -> DateTime : new
+activate DateTime
+DateTime --> SearchProductListDatabase
+deactivate DateTime
+create DateTime
+SearchProductListDatabase -> DateTime : new
+activate DateTime
+DateTime --> SearchProductListDatabase
+deactivate DateTime
+create Discount
+SearchProductListDatabase -> Discount : new
+activate Discount
+Discount --> SearchProductListDatabase
+deactivate Discount
+create Product
+SearchProductListDatabase -> Product : new
+activate Product
+Product --> SearchProductListDatabase
+deactivate Product
+SearchProductListDatabase --> HomePageServlet
+deactivate SearchProductListDatabase
+HomePageServlet -> AbstractServlet : writeResource
+activate AbstractServlet
+AbstractServlet -> Resource : toJSON
+activate Resource
+Resource --> AbstractServlet
+deactivate Resource
+AbstractServlet -> AbstractServlet : writeJSON
+activate AbstractServlet
+AbstractServlet --> AbstractServlet
+deactivate AbstractServlet
+AbstractServlet -> AbstractServlet : decapitalize
+activate AbstractServlet
+AbstractServlet --> AbstractServlet
+deactivate AbstractServlet
+AbstractServlet -> Resource : toJSON
+activate Resource
+Resource --> AbstractServlet
+deactivate Resource
+AbstractServlet -> AbstractServlet : decapitalize
+activate AbstractServlet
+AbstractServlet --> AbstractServlet
+deactivate AbstractServlet
+AbstractServlet -> Resource : toJSON
+activate Resource
+Resource --> AbstractServlet
+deactivate Resource
+AbstractServlet -> AbstractServlet : writeJSON
+activate AbstractServlet
+AbstractServlet --> AbstractServlet
+deactivate AbstractServlet
+create ListProductCategoryDatabase
+AbstractServlet -> ListProductCategoryDatabase : new
+activate ListProductCategoryDatabase
+ListProductCategoryDatabase --> AbstractServlet
+deactivate ListProductCategoryDatabase
+AbstractServlet -> AbstractServlet : decapitalize
+activate AbstractServlet
+AbstractServlet --> AbstractServlet
+deactivate AbstractServlet
+AbstractServlet -> AbstractServlet : decapitalize
+activate AbstractServlet
+AbstractServlet --> AbstractServlet
+deactivate AbstractServlet
+create SqlInternalError
+AbstractServlet -> SqlInternalError : new
+activate SqlInternalError
+create ErrorMessage
+SqlInternalError -> ErrorMessage : new
+activate ErrorMessage
+create Message
+ErrorMessage -> Message : new
+activate Message
+Message --> ErrorMessage
+deactivate Message
+ErrorMessage --> SqlInternalError
+deactivate ErrorMessage
+SqlInternalError --> AbstractServlet
+deactivate SqlInternalError
+AbstractServlet -> AbstractServlet : writeError
+activate AbstractServlet
+AbstractServlet -> Message : toJSON
+activate Message
+Message --> AbstractServlet
+deactivate Message
+AbstractServlet -> AbstractServlet : writeJSON
+activate AbstractServlet
+AbstractServlet --> AbstractServlet
+deactivate AbstractServlet
+AbstractServlet --> AbstractServlet
+deactivate AbstractServlet
+AbstractServlet --> HomePageServlet
+deactivate AbstractServlet
+create SqlInternalError
+HomePageServlet -> SqlInternalError : new
+activate SqlInternalError
+create ErrorMessage
+SqlInternalError -> ErrorMessage : new
+activate ErrorMessage
+create Message
+ErrorMessage -> Message : new
+activate Message
+Message --> ErrorMessage
+deactivate Message
+ErrorMessage --> SqlInternalError
+deactivate ErrorMessage
+SqlInternalError --> HomePageServlet
+deactivate SqlInternalError
+HomePageServlet -> AbstractServlet : writeError
+activate AbstractServlet
+AbstractServlet -> Message : toJSON
+activate Message
+Message --> AbstractServlet
+deactivate Message
+AbstractServlet -> AbstractServlet : writeJSON
+activate AbstractServlet
+AbstractServlet --> AbstractServlet
+deactivate AbstractServlet
+AbstractServlet --> HomePageServlet
+deactivate AbstractServlet
+HomePageServlet --> HomePageServlet
+deactivate HomePageServlet
+HomePageServlet -> AbstractServlet : writeError
+activate AbstractServlet
+AbstractServlet -> GenericError : toJSON
+activate GenericError
+GenericError --> AbstractServlet
+deactivate GenericError
+AbstractServlet -> AbstractServlet : writeJSON
+activate AbstractServlet
+AbstractServlet --> AbstractServlet
+deactivate AbstractServlet
+AbstractServlet --> HomePageServlet
+deactivate AbstractServlet
+return
+@enduml

@@ -1,0 +1,380 @@
+@startuml
+participant Actor
+Actor -> MediaServlet : doGet
+activate MediaServlet
+create ListMediaDatabase
+MediaServlet -> ListMediaDatabase : new
+activate ListMediaDatabase
+ListMediaDatabase --> MediaServlet
+deactivate ListMediaDatabase
+MediaServlet -> AbstractServlet : writeResource
+activate AbstractServlet
+AbstractServlet -> Resource : toJSON
+activate Resource
+Resource --> AbstractServlet
+deactivate Resource
+AbstractServlet -> AbstractServlet : writeJSON
+activate AbstractServlet
+AbstractServlet --> AbstractServlet
+deactivate AbstractServlet
+AbstractServlet -> AbstractServlet : decapitalize
+activate AbstractServlet
+AbstractServlet --> AbstractServlet
+deactivate AbstractServlet
+AbstractServlet -> Resource : toJSON
+activate Resource
+Resource --> AbstractServlet
+deactivate Resource
+AbstractServlet -> AbstractServlet : decapitalize
+activate AbstractServlet
+AbstractServlet --> AbstractServlet
+deactivate AbstractServlet
+AbstractServlet -> Resource : toJSON
+activate Resource
+Resource --> AbstractServlet
+deactivate Resource
+AbstractServlet -> AbstractServlet : writeJSON
+activate AbstractServlet
+AbstractServlet --> AbstractServlet
+deactivate AbstractServlet
+create ListProductCategoryDatabase
+AbstractServlet -> ListProductCategoryDatabase : new
+activate ListProductCategoryDatabase
+ListProductCategoryDatabase --> AbstractServlet
+deactivate ListProductCategoryDatabase
+AbstractServlet -> AbstractServlet : decapitalize
+activate AbstractServlet
+AbstractServlet --> AbstractServlet
+deactivate AbstractServlet
+AbstractServlet -> AbstractServlet : decapitalize
+activate AbstractServlet
+AbstractServlet --> AbstractServlet
+deactivate AbstractServlet
+create SqlInternalError
+AbstractServlet -> SqlInternalError : new
+activate SqlInternalError
+create ErrorMessage
+SqlInternalError -> ErrorMessage : new
+activate ErrorMessage
+create Message
+ErrorMessage -> Message : new
+activate Message
+Message --> ErrorMessage
+deactivate Message
+ErrorMessage --> SqlInternalError
+deactivate ErrorMessage
+SqlInternalError --> AbstractServlet
+deactivate SqlInternalError
+AbstractServlet -> AbstractServlet : writeError
+activate AbstractServlet
+AbstractServlet -> Message : toJSON
+activate Message
+Message --> AbstractServlet
+deactivate Message
+AbstractServlet -> AbstractServlet : writeJSON
+activate AbstractServlet
+AbstractServlet --> AbstractServlet
+deactivate AbstractServlet
+AbstractServlet --> AbstractServlet
+deactivate AbstractServlet
+AbstractServlet --> MediaServlet
+deactivate AbstractServlet
+create SqlInternalError
+MediaServlet -> SqlInternalError : new
+activate SqlInternalError
+create ErrorMessage
+SqlInternalError -> ErrorMessage : new
+activate ErrorMessage
+create Message
+ErrorMessage -> Message : new
+activate Message
+Message --> ErrorMessage
+deactivate Message
+ErrorMessage --> SqlInternalError
+deactivate ErrorMessage
+SqlInternalError --> MediaServlet
+deactivate SqlInternalError
+MediaServlet -> AbstractServlet : writeError
+activate AbstractServlet
+AbstractServlet -> Message : toJSON
+activate Message
+Message --> AbstractServlet
+deactivate Message
+AbstractServlet -> AbstractServlet : writeJSON
+activate AbstractServlet
+AbstractServlet --> AbstractServlet
+deactivate AbstractServlet
+AbstractServlet --> MediaServlet
+deactivate AbstractServlet
+MediaServlet -> AbstractServlet : writeJsp
+activate AbstractServlet
+create ListProductCategoryDatabase
+AbstractServlet -> ListProductCategoryDatabase : new
+activate ListProductCategoryDatabase
+ListProductCategoryDatabase --> AbstractServlet
+deactivate ListProductCategoryDatabase
+create SqlInternalError
+AbstractServlet -> SqlInternalError : new
+activate SqlInternalError
+create ErrorMessage
+SqlInternalError -> ErrorMessage : new
+activate ErrorMessage
+create Message
+ErrorMessage -> Message : new
+activate Message
+Message --> ErrorMessage
+deactivate Message
+ErrorMessage --> SqlInternalError
+deactivate ErrorMessage
+SqlInternalError --> AbstractServlet
+deactivate SqlInternalError
+AbstractServlet -> AbstractServlet : writeError
+activate AbstractServlet
+AbstractServlet -> Message : toJSON
+activate Message
+Message --> AbstractServlet
+deactivate Message
+AbstractServlet -> AbstractServlet : writeJSON
+activate AbstractServlet
+AbstractServlet --> AbstractServlet
+deactivate AbstractServlet
+AbstractServlet --> AbstractServlet
+deactivate AbstractServlet
+AbstractServlet --> MediaServlet
+deactivate AbstractServlet
+MediaServlet -> MediaServlet : writeImage
+activate MediaServlet
+create GetMediaDatabase
+MediaServlet -> GetMediaDatabase : new
+activate GetMediaDatabase
+GetMediaDatabase --> MediaServlet
+deactivate GetMediaDatabase
+create GetMediaByteFromMediaDatabase
+MediaServlet -> GetMediaByteFromMediaDatabase : new
+activate GetMediaByteFromMediaDatabase
+GetMediaByteFromMediaDatabase --> MediaServlet
+deactivate GetMediaByteFromMediaDatabase
+MediaServlet -> AbstractServlet : writeBlob
+activate AbstractServlet
+AbstractServlet --> MediaServlet
+deactivate AbstractServlet
+create EmptyMediaError
+MediaServlet -> EmptyMediaError : new
+activate EmptyMediaError
+create ErrorMessage
+EmptyMediaError -> ErrorMessage : new
+activate ErrorMessage
+create Message
+ErrorMessage -> Message : new
+activate Message
+Message --> ErrorMessage
+deactivate Message
+ErrorMessage --> EmptyMediaError
+deactivate ErrorMessage
+EmptyMediaError --> MediaServlet
+deactivate EmptyMediaError
+MediaServlet -> AbstractServlet : writeError
+activate AbstractServlet
+AbstractServlet -> Message : toJSON
+activate Message
+Message --> AbstractServlet
+deactivate Message
+AbstractServlet -> AbstractServlet : writeJSON
+activate AbstractServlet
+AbstractServlet --> AbstractServlet
+deactivate AbstractServlet
+AbstractServlet --> MediaServlet
+deactivate AbstractServlet
+create MediaNotFoundError
+MediaServlet -> MediaNotFoundError : new
+activate MediaNotFoundError
+create ErrorMessage
+MediaNotFoundError -> ErrorMessage : new
+activate ErrorMessage
+create Message
+ErrorMessage -> Message : new
+activate Message
+Message --> ErrorMessage
+deactivate Message
+ErrorMessage --> MediaNotFoundError
+deactivate ErrorMessage
+MediaNotFoundError --> MediaServlet
+deactivate MediaNotFoundError
+MediaServlet -> AbstractServlet : writeError
+activate AbstractServlet
+AbstractServlet -> Message : toJSON
+activate Message
+Message --> AbstractServlet
+deactivate Message
+AbstractServlet -> AbstractServlet : writeJSON
+activate AbstractServlet
+AbstractServlet --> AbstractServlet
+deactivate AbstractServlet
+AbstractServlet --> MediaServlet
+deactivate AbstractServlet
+create SqlInternalError
+MediaServlet -> SqlInternalError : new
+activate SqlInternalError
+create ErrorMessage
+SqlInternalError -> ErrorMessage : new
+activate ErrorMessage
+create Message
+ErrorMessage -> Message : new
+activate Message
+Message --> ErrorMessage
+deactivate Message
+ErrorMessage --> SqlInternalError
+deactivate ErrorMessage
+SqlInternalError --> MediaServlet
+deactivate SqlInternalError
+MediaServlet -> AbstractServlet : writeError
+activate AbstractServlet
+AbstractServlet -> Message : toJSON
+activate Message
+Message --> AbstractServlet
+deactivate Message
+AbstractServlet -> AbstractServlet : writeJSON
+activate AbstractServlet
+AbstractServlet --> AbstractServlet
+deactivate AbstractServlet
+AbstractServlet --> MediaServlet
+deactivate AbstractServlet
+MediaServlet -> AbstractServlet : writeError
+activate AbstractServlet
+AbstractServlet -> GenericError : toJSON
+activate GenericError
+GenericError --> AbstractServlet
+deactivate GenericError
+AbstractServlet -> AbstractServlet : writeJSON
+activate AbstractServlet
+AbstractServlet --> AbstractServlet
+deactivate AbstractServlet
+AbstractServlet --> MediaServlet
+deactivate AbstractServlet
+MediaServlet --> MediaServlet
+deactivate MediaServlet
+MediaServlet -> MediaServlet : writeImage
+activate MediaServlet
+create GetMediaDatabase
+MediaServlet -> GetMediaDatabase : new
+activate GetMediaDatabase
+GetMediaDatabase --> MediaServlet
+deactivate GetMediaDatabase
+create GetMediaByteFromMediaDatabase
+MediaServlet -> GetMediaByteFromMediaDatabase : new
+activate GetMediaByteFromMediaDatabase
+GetMediaByteFromMediaDatabase --> MediaServlet
+deactivate GetMediaByteFromMediaDatabase
+MediaServlet -> AbstractServlet : writeBlob
+activate AbstractServlet
+AbstractServlet --> MediaServlet
+deactivate AbstractServlet
+create EmptyMediaError
+MediaServlet -> EmptyMediaError : new
+activate EmptyMediaError
+create ErrorMessage
+EmptyMediaError -> ErrorMessage : new
+activate ErrorMessage
+create Message
+ErrorMessage -> Message : new
+activate Message
+Message --> ErrorMessage
+deactivate Message
+ErrorMessage --> EmptyMediaError
+deactivate ErrorMessage
+EmptyMediaError --> MediaServlet
+deactivate EmptyMediaError
+MediaServlet -> AbstractServlet : writeError
+activate AbstractServlet
+AbstractServlet -> Message : toJSON
+activate Message
+Message --> AbstractServlet
+deactivate Message
+AbstractServlet -> AbstractServlet : writeJSON
+activate AbstractServlet
+AbstractServlet --> AbstractServlet
+deactivate AbstractServlet
+AbstractServlet --> MediaServlet
+deactivate AbstractServlet
+create MediaNotFoundError
+MediaServlet -> MediaNotFoundError : new
+activate MediaNotFoundError
+create ErrorMessage
+MediaNotFoundError -> ErrorMessage : new
+activate ErrorMessage
+create Message
+ErrorMessage -> Message : new
+activate Message
+Message --> ErrorMessage
+deactivate Message
+ErrorMessage --> MediaNotFoundError
+deactivate ErrorMessage
+MediaNotFoundError --> MediaServlet
+deactivate MediaNotFoundError
+MediaServlet -> AbstractServlet : writeError
+activate AbstractServlet
+AbstractServlet -> Message : toJSON
+activate Message
+Message --> AbstractServlet
+deactivate Message
+AbstractServlet -> AbstractServlet : writeJSON
+activate AbstractServlet
+AbstractServlet --> AbstractServlet
+deactivate AbstractServlet
+AbstractServlet --> MediaServlet
+deactivate AbstractServlet
+create SqlInternalError
+MediaServlet -> SqlInternalError : new
+activate SqlInternalError
+create ErrorMessage
+SqlInternalError -> ErrorMessage : new
+activate ErrorMessage
+create Message
+ErrorMessage -> Message : new
+activate Message
+Message --> ErrorMessage
+deactivate Message
+ErrorMessage --> SqlInternalError
+deactivate ErrorMessage
+SqlInternalError --> MediaServlet
+deactivate SqlInternalError
+MediaServlet -> AbstractServlet : writeError
+activate AbstractServlet
+AbstractServlet -> Message : toJSON
+activate Message
+Message --> AbstractServlet
+deactivate Message
+AbstractServlet -> AbstractServlet : writeJSON
+activate AbstractServlet
+AbstractServlet --> AbstractServlet
+deactivate AbstractServlet
+AbstractServlet --> MediaServlet
+deactivate AbstractServlet
+MediaServlet -> AbstractServlet : writeError
+activate AbstractServlet
+AbstractServlet -> GenericError : toJSON
+activate GenericError
+GenericError --> AbstractServlet
+deactivate GenericError
+AbstractServlet -> AbstractServlet : writeJSON
+activate AbstractServlet
+AbstractServlet --> AbstractServlet
+deactivate AbstractServlet
+AbstractServlet --> MediaServlet
+deactivate AbstractServlet
+MediaServlet --> MediaServlet
+deactivate MediaServlet
+MediaServlet -> AbstractServlet : writeError
+activate AbstractServlet
+AbstractServlet -> GenericError : toJSON
+activate GenericError
+GenericError --> AbstractServlet
+deactivate GenericError
+AbstractServlet -> AbstractServlet : writeJSON
+activate AbstractServlet
+AbstractServlet --> AbstractServlet
+deactivate AbstractServlet
+AbstractServlet --> MediaServlet
+deactivate AbstractServlet
+return
+@enduml
