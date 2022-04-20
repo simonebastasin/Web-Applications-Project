@@ -27,6 +27,7 @@ public class DiscountManagementServlet extends AbstractDatabaseServlet{
         switch (path) {
             case "" -> getListDiscount(req, res);
             case "createDiscount" -> getCreateDiscount(req, res);
+            case "editDiscount" -> getEditDiscount(req, res, param);
             case "deleteDiscount" -> getDeleteEmployee(req, res, param);
             default -> writeError(req, res, new ErrorMessage.IncorrectlyFormattedPathError("page not found"));
         }
@@ -93,6 +94,23 @@ public class DiscountManagementServlet extends AbstractDatabaseServlet{
 
     }
 
+
+    private void getEditDiscount(HttpServletRequest req, HttpServletResponse res, String param) throws ServletException, IOException{
+        Discount discount;
+        try {
+            discount = new GetDiscountDatabase(getDataSource().getConnection(), Integer.parseInt(param)).getDiscount();
+            List<Product> products = new ListProductsFromIdDiscoutDatabase(getDataSource().getConnection(), discount).getListProductsFromIdDiscoutDatabase();
+            DiscountListProduct discountListProduct = new DiscountListProduct(discount, products);
+
+
+            writeResource(req, res, "/jsp/editDiscount.jsp", true, discountListProduct);
+        } catch (SQLException e) {
+            logger.error(e.getMessage());
+            writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
+        }
+
+    }
+
     /**
      * get deleteDiscount.jsp page to confirm deletion of selected discount
      * @param req
@@ -127,43 +145,59 @@ public class DiscountManagementServlet extends AbstractDatabaseServlet{
 
         int percentage = Integer.parseInt(req.getParameter("percentage"));
 
+        String startDateString = req.getParameter("start");
+        String[] date1 = startDateString.split("-");
 
         //StartDate
-        int startDateday = Integer.parseInt(req.getParameter("startDateday"));
-        int startDatemonth = Integer.parseInt(req.getParameter("startDatemonth"));
-        int startDateyear = Integer.parseInt(req.getParameter("startDateyear"));
+        int startDateday = Integer.parseInt(date1[2]);
+        int startDatemonth = Integer.parseInt(date1[1]);
+        int startDateyear = Integer.parseInt(date1[0]);
+
 
 
         DateTime startDate = new DateTime(LocalDateTime.of(startDateyear, startDatemonth, startDateday, 0,0,0));
         //EndDate
-        int endDateday = Integer.parseInt(req.getParameter("endDateday"));
-        int endDatemonth = Integer.parseInt(req.getParameter("endDatemonth"));
-        int endDateyear = Integer.parseInt(req.getParameter("endDateyear"));
+        String endDateString = req.getParameter("end");
+        String[] date2 = endDateString.split("-");
+
+        int endDateday = Integer.parseInt(date2[2]);
+        int endDatemonth = Integer.parseInt(date2[1]);
+        int endDateyear = Integer.parseInt(date2[0]);
 
         DateTime endDate = new DateTime(LocalDateTime.of(endDateyear, endDatemonth, endDateday, 0,0,0));
 
-        String[] productList = req.getParameterValues("productList");
-        List<Product> productAliasList = new ArrayList<Product>();
-        for(var pr : productList){
-            productAliasList.add(new Product(pr, null, null, null, 0, 0.0, 0.0, null, false, null, null));
+        if(startDate.compareTo0(endDate) > 1 ){
+            writeError(req,res,new ErrorMessage.startDateAfterDndDate("error in date format"));
+        }else {
+
+
+            String[] productList = req.getParameterValues("productList");
+
+            if(productList == null){
+                writeError(req,res,new ErrorMessage.emptyProductList("product List Empty"));
+            }else {
+                List<Product> productAliasList = new ArrayList<Product>();
+                for (var pr : productList) {
+                    productAliasList.add(new Product(pr, null, null, null, 0, 0.0, 0.0, null, false, null, null));
+                }
+
+
+                Discount temp = new Discount(55, percentage, startDate, endDate);
+
+                try {
+                    Discount discount = new CreateDiscountDatabase(getDataSource().getConnection(), temp).createDiscount();
+
+                    List<Owns> list = new CreateOwnsDiscountFromListProductsDatabase(getDataSource().getConnection(), productAliasList, discount).createOwnsDiscountFromList();
+
+                    Message m = new Message("edit ok", discount.getId());
+                    writeMessageOrRedirect(req, res, m,  req.getContextPath() + (req.getServletPath().startsWith("/rest/") ? "/rest" : "") + "/management/discountManagement");
+                } catch (SQLException e) {
+                    logger.error(e.getMessage());
+                    writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
+                }
+            }
+            
         }
-
-
-        Discount temp = new Discount(55, percentage, startDate, endDate );
-
-
-        try {
-            Discount discount = new CreateDiscountDatabase(getDataSource().getConnection(), temp).createDiscount();
-
-            List<Owns> list = new CreateOwnsDiscountFromListProductsDatabase(getDataSource().getConnection(), productAliasList, discount).createOwnsDiscountFromList();
-
-            Message m = new Message("edit ok", discount.getId());
-            writeMessageOrRedirect(req, res, m,  req.getContextPath() + (req.getServletPath().startsWith("/rest/") ? "/rest" : "") + "/management/discountManagement");
-        } catch (SQLException e) {
-            logger.error(e.getMessage());
-            writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
-        }
-
 
 
     }

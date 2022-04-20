@@ -98,4 +98,20 @@ public abstract sealed class ErrorMessage extends Message  {
             super("Data element already present", "280", errorDetails, HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         }
     }
+
+
+    // Error code from 290
+
+    public static final class startDateAfterDndDate extends ErrorMessage {
+        public startDateAfterDndDate(String errorDetails) {
+            super("The entered start date is later than the end date ", "290", errorDetails, HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    public static final class emptyProductList extends ErrorMessage {
+        public emptyProductList(String errorDetails) {
+            super("The product list cannot be empty  ", "291", errorDetails, HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+        }
+    }
+
 }
