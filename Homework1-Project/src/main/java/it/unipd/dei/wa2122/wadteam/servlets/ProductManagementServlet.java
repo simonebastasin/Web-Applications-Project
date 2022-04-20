@@ -1,6 +1,7 @@
 package it.unipd.dei.wa2122.wadteam.servlets;
 
 import it.unipd.dei.wa2122.wadteam.dao.employee.DeleteEmployeeDatabase;
+import it.unipd.dei.wa2122.wadteam.dao.media.ListMediaDatabase;
 import it.unipd.dei.wa2122.wadteam.dao.product.*;
 import it.unipd.dei.wa2122.wadteam.dao.productCategory.CreateProductCategoryDatabase;
 import it.unipd.dei.wa2122.wadteam.dao.productCategory.ListProductCategoryDatabase;
@@ -78,10 +79,15 @@ public class ProductManagementServlet extends AbstractDatabaseServlet{
      */
     private void getCreateProduct(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
         List<ProductCategory> categories;
+        List<Media> media;
+        List<Resource> resourcesList = new ArrayList<>();
 
        try{
             categories = new ListProductCategoryDatabase(getDataSource().getConnection()).getProductCategory();
-            writeResource(req, res, "/jsp/createProduct.jsp", false, categories.toArray(Resource[]::new));
+            media = new ListMediaDatabase(getDataSource().getConnection()).getMedia();
+            resourcesList.addAll(categories);
+            resourcesList.addAll(media);
+            writeResource(req, res, "/jsp/createProduct.jsp", false, resourcesList.toArray(Resource[]::new));
 
         }catch (SQLException e) {
            logger.error(e.getMessage());
@@ -162,9 +168,13 @@ public class ProductManagementServlet extends AbstractDatabaseServlet{
         int quantity = Integer.parseInt(req.getParameter("quantity"));
         ProductCategory category = new ProductCategory(req.getParameter("category"),req.getParameter("category"));
         boolean evidence = req.getParameter("evidence").equals("yes");
-        //private final List<Integer> pictures;   // todo
-
-        Product temp = new Product(alias,name,brand,description,quantity,purchase,sale,category,evidence,null, null);
+        //pictures management:
+        String[] mediaStringArray = req.getParameterValues("media");   //returns an array of strings to be casted
+        List<Integer> pictures = new ArrayList<>();
+        for (String id: mediaStringArray) {
+            pictures.add(Integer.parseInt(id));
+        }
+        Product temp = new Product(alias,name,brand,description,quantity,purchase,sale,category,evidence,pictures, null);
 
         try {
             Product product = new CreateProductDatabase(getDataSource().getConnection(), temp).createProduct();

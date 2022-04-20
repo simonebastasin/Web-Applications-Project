@@ -49,10 +49,9 @@
         <div>
             <label for="media">Select one or more media (hold down ctrl/cmd to select multiple media):</label><br>
             <select name="media" id="media" multiple>
-                <option value="volvo">media1</option>
-                <option value="saab">media2</option>
-                <option value="opel">media2</option>
-                <option value="audi">media2</option>
+                <c:forEach var="media" items="${mediaList}">
+                    <option value="${media.id}">${media.id}</option>
+                </c:forEach>
             </select>
             <br><br>
         </div>
