@@ -142,14 +142,14 @@ public class EmployeeManagementServlet extends AbstractDatabaseServlet {
      * @throws ServletException
      */
     private void postEditEmployee(HttpServletRequest req, HttpServletResponse res, String param) throws IOException, ServletException {
-        String username = req.getParameter("username");
         String name = req.getParameter("name");
         String surname = req.getParameter("surname");
         Role role = new Role(req.getParameter("role"));
-System.out.println("boia disco");
-        Employee ee, employee = new Employee(username, name, surname, role, null);
+
+        Employee employee;
         try {
-            ee = new UpdateEmployeeDatabase(getDataSource().getConnection(), employee).updateEmployee();
+            employee = new Employee(param, name, surname, role, null);
+            employee = new UpdateEmployeeDatabase(getDataSource().getConnection(), employee).updateEmployee();
             //writeResource(req, res, "/jsp/employeeDetail.jsp", true , product); //view result
             Message m = new Message("edit ok");
             writeMessageOrRedirect(req, res, m, req.getContextPath() + (req.getServletPath().startsWith("/rest/") ? "/rest" : "") + "/management/employeeManagement");
