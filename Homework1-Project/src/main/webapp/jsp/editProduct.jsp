@@ -46,13 +46,25 @@
         <a href="<c:url value="/management/productManagement/createCategory"/>">Add a new category</a>
         <div>
             Evidence:
-            <input type="radio" id="yes"
-                   name="evidence" value="yes">
-            <label for="yes">Yes</label>
 
-            <input type="radio" id="no"
-                   name="evidence" value="no" checked>
-            <label for="no">No</label>
+            <c:choose>
+                <c:when test="${product.evidence == true}">
+                    <input type="radio" id="yes"
+                           name="evidence" value="yes" checked>
+                    <label for="yes">Yes</label>
+                    <input type="radio" id="no"
+                           name="evidence" value="no">
+                    <label for="no">No</label>
+                </c:when>
+                <c:otherwise>
+                    <input type="radio" id="yes"
+                           name="evidence" value="yes">
+                    <label for="yes">Yes</label>
+                    <input type="radio" id="no"
+                           name="evidence" value="no" checked>
+                    <label for="no">No</label>
+                </c:otherwise>
+            </c:choose>
         </div>
         <input type="submit" value="Submit">
     </form>
