@@ -85,33 +85,39 @@ public class HomePageServlet extends AbstractDatabaseServlet{
 
     private void productCategory(HttpServletRequest req, HttpServletResponse res, String param) throws ServletException, IOException{
 
-        ProductCategory category;
-        List<Product> products;
-
-        try {
-            category = new GetProductCategoryDatabase((getDataSource().getConnection()), param).getProductCategory();
-
-
-            if(category != null){
-                products = new GetListProductByCategoryDatabase(getDataSource().getConnection(), param).getListProductByCategory();
-                List<Resource> list = new ArrayList<>();
-                list.add(category);
-                for(var prod : products){
-                    if (prod.getQuantity() > 0)
-                        list.add(prod);
-                }
-
-                logger.info("The category "+ category.getName() + " is loaded");
-                writeResource(req, res, "/jsp/categoryDetail.jsp", false, list.toArray(products.toArray(Resource[]::new)));
-            }
-            else writeError(req, res, GenericError.PAGE_NOT_FOUND);
-
-
-
-        } catch (SQLException e) {
-            logger.error(e.getMessage());
-            writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
+        if(param.isEmpty()) {
+            writeJsp(req,res,"/jsp/categoryList.jsp");
         }
+        else{
+            ProductCategory category;
+            List<Product> products;
+
+            try {
+                category = new GetProductCategoryDatabase((getDataSource().getConnection()), param).getProductCategory();
+
+
+                if(category != null){
+                    products = new GetListProductByCategoryDatabase(getDataSource().getConnection(), param).getListProductByCategory();
+                    List<Resource> list = new ArrayList<>();
+                    list.add(category);
+                    for(var prod : products){
+                        if (prod.getQuantity() > 0)
+                            list.add(prod);
+                    }
+
+                    logger.info("The category "+ category.getName() + " is loaded");
+                    writeResource(req, res, "/jsp/categoryDetail.jsp", false, list.toArray(products.toArray(Resource[]::new)));
+                }
+                else writeError(req, res, GenericError.PAGE_NOT_FOUND);
+
+
+
+            } catch (SQLException e) {
+                logger.error(e.getMessage());
+                writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
+            }
+        }
+
     }
 
     private void productDetail(HttpServletRequest req, HttpServletResponse res, String param) throws ServletException, IOException{

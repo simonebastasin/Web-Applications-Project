@@ -32,13 +32,15 @@ public class LoginServlet extends AbstractDatabaseServlet {
                 }
             }
             case "logout" -> {
-                logger.info("User "+((UserCredential)req.getSession(false).getAttribute(USER_ATTRIBUTE)).getIdentification() +" has logout");
-                Message m = new Message("User "+((UserCredential)req.getSession(false).getAttribute(USER_ATTRIBUTE)).getIdentification() +" has logout");
-
-                req.getSession().invalidate();
+                HttpSession session = req.getSession(false);
+                Message m = null;
+                if(session != null && session.getAttribute(USER_ATTRIBUTE) != null){
+                    logger.info("User "+((UserCredential)session.getAttribute(USER_ATTRIBUTE)).getIdentification() +" has logout");
+                    m = new Message("User "+((UserCredential)session.getAttribute(USER_ATTRIBUTE)).getIdentification() +" has logout");
+                    req.getSession().invalidate();
+                }
+                else logger.info("Somebody tried logging out without logging in first");
                 writeMessageOrRedirect(req, resp, m, req.getContextPath() + "/");
-
-
             }
             case "register" -> {
 
