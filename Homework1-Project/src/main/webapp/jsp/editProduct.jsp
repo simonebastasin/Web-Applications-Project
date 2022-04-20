@@ -66,6 +66,18 @@
                 </c:otherwise>
             </c:choose>
         </div>
+
+        <div>
+            <label for="media">Select one or more media (hold down ctrl/cmd to select multiple media):</label><br>
+            <select name="media" id="media" multiple>
+                <c:forEach var="media" items="${mediaList}">
+                    <option value="${media.id}">${media.id}</option>
+                </c:forEach>
+            </select>
+            <br><br>
+        </div>
+
+
         <input type="submit" value="Submit">
     </form>
     <%@ include file="/html/include/footer.html"%>

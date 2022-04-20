@@ -15,7 +15,7 @@ public class UpdateProductDatabase {
      */
     private static final String STATEMENT_UPDATE_PRODUCT = "UPDATE product SET name = ?, brand = ?, description = ?, quantity = ?, purchase_price = ?, sale_price = ?, category_name = ?, evidence = ? WHERE product_alias = ?";
 
-    private static final String STATEMENT_DELETE_PICTURE = "DELETE FROM Represented_by WHERE product_alias = ?";
+    private static final String STATEMENT_DELETE_PICTURE = "DELETE FROM Represented_by WHERE product_alias = ? RETURNING product_alias";
 
     private static final String STATEMENT_UPDATE_PICTURE = "INSERT INTO Represented_by (product_alias, id_media) VALUES (? , ?)";
 
@@ -94,7 +94,7 @@ public class UpdateProductDatabase {
                     preparedStatement.setString(1, product.getAlias());
                     preparedStatement.setInt(2, item);
 
-                    preparedStatement.executeQuery();
+                    preparedStatement.executeUpdate();
 
                 } finally {
 

@@ -54,7 +54,7 @@ public class ProductManagementServlet extends AbstractDatabaseServlet{
 
         try{
             products = new ListProductDatabase(getDataSource().getConnection()).getProduct();
-           
+
             List<Resource> lists = new ArrayList<>();
             for(var prod : products){
                 if (prod.getQuantity() > 0)
@@ -117,10 +117,17 @@ public class ProductManagementServlet extends AbstractDatabaseServlet{
      */
     private void getEditProduct(HttpServletRequest req, HttpServletResponse res, String param) throws IOException, ServletException {
         Product product;
+        List<Media> media;
+        List<Resource> resourcesList = new ArrayList<>();
+
         try {
             product = new GetProductDatabase(getDataSource().getConnection(), param).getProduct();
+            media = new ListMediaDatabase(getDataSource().getConnection()).getMedia();
 
-            if(product != null) writeResource(req, res, "/jsp/editProduct.jsp", true, product);
+            resourcesList.add(product);
+            resourcesList.addAll(media);
+
+            if(product != null) writeResource(req, res, "/jsp/editProduct.jsp", true, resourcesList.toArray(Resource[]::new));
             else writeError(req,res,GenericError.PAGE_NOT_FOUND);
 
         } catch (SQLException e) {
@@ -236,9 +243,17 @@ public class ProductManagementServlet extends AbstractDatabaseServlet{
         int quantity = Integer.parseInt(req.getParameter("quantity"));
         ProductCategory category = new ProductCategory(req.getParameter("category"),req.getParameter("category"));
         boolean evidence = req.getParameter("evidence").equals("yes");
-        //private final List<Integer> pictures;   // todo
+        //pictures management:
+        String[] mediaStringArray = req.getParameterValues("media");   //returns an array of strings to be casted
+        List<Integer> pictures = null;
+        if(mediaStringArray != null){
+            pictures = new ArrayList<>();
+            for (String id: mediaStringArray) {
+                pictures.add(Integer.parseInt(id));
+            }
+        }
 
-        Product temp = new Product(alias,name,brand,description,quantity,purchase,sale,category,evidence,null, null);
+        Product temp = new Product(alias,name,brand,description,quantity,purchase,sale,category,evidence,pictures, null);
 
         try {
             int edit = new UpdateProductDatabase(getDataSource().getConnection(), temp).updateProduct();
