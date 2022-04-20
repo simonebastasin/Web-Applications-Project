@@ -1,22 +1,67 @@
 \subsection{Sequence Diagram}
 
-\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{Schemas/BuyProductServlet_doGet.svg.pdf}
+In the next figures they are illustrated some sequence diagram of the main methods 
+\texttt{GET} (figures  \ref{HomePageServlet_doGet}  \ref{BuyProductServlet_doGet}
+\ref{InvoiceServlet_doGet} \ref{InvoiceServlet_doGet} \ref{MediaServlet_doGet} \ref{UserServlet_doGet}
+) and  \texttt{POST}  (figures \ref{LoginServlet_doPost} \ref{MediaServlet_doPost} \ref{UserServlet_doPost}) of the main servlet.
 
-\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{Schemas/HomePageServlet_doGet.svg.pdf}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth,height=0.8\textheight,keepaspectratio]{Schemas/HomePageServlet_doGet.svg.pdf}
+    \caption{Sequence diagram of \texttt{GET} method of HomePageServlet}
+    \label{fig:HomePageServlet_doGet}
+\end{figure}
 
-\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{Schemas/InvoiceServlet_doGet.svg.pdf}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth,height=0.9\textheight,keepaspectratio]{Schemas/BuyProductServlet_doGet.svg.pdf}
+    \caption{Sequence diagram of \texttt{GET} method of BuyProductServlet}
+    \label{fig:BuyProductServlet_doGet}
+\end{figure}
 
-\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{Schemas/LoginServlet_doGet.svg.pdf}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth,height=0.9\textheight,keepaspectratio]{Schemas/InvoiceServlet_doGet.svg.pdf}
+    \caption{Sequence diagram of \texttt{GET} method of InvoiceServlet}
+    \label{fig:InvoiceServlet_doGet}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth,height=0.9\textheight,keepaspectratio]{Schemas/LoginServlet_doGet.svg.pdf}
+    \caption{Sequence diagram of \texttt{GET} method of LoginServlet}
+    \label{fig:LoginServlet_doGet}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth,height=0.9\textheight,keepaspectratio]{Schemas/LoginServlet_doPost.svg.pdf}
+    \caption{Sequence diagram of \texttt{POST} method of LoginServlet}
+    \label{fig:LoginServlet_doPost}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth,height=0.9\textheight,keepaspectratio]{Schemas/MediaServlet_doGet.svg.pdf}
+    \caption{Sequence diagram of \texttt{GET} method of MediaServlet}
+    \label{fig:MediaServlet_doGet}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth,height=0.9\textheight,keepaspectratio]{Schemas/MediaServlet_doPost.svg.pdf}
+    \caption{Sequence diagram of \texttt{POST} method of MediaServlet}
+    \label{fig:MediaServlet_doPost}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth,height=0.9\textheight,keepaspectratio]{Schemas/UserServlet_doGet.svg.pdf}
+    \caption{Sequence diagram of \texttt{GET} method of UserServlet}
+    \label{fig:UserServlet_doGet}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth,height=0.9\textheight,keepaspectratio]{Schemas/UserServlet_doPost.svg.pdf}
+    \caption{Sequence diagram of \texttt{POST} method of UserServlet}
+    \label{fig:UserServlet_doPost}
+\end{figure}
 
-\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{Schemas/LoginServlet_doPost.svg.pdf}
-
-\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{Schemas/MediaServlet_doGet.svg.pdf}
-
-\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{Schemas/MediaServlet_doPost.svg.pdf}
-
-\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{Schemas/UserServlet_doGet.svg.pdf}
-
-\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{Schemas/UserServlet_doPost.svg.pdf}
-
-
-%describe here the sequence diagram
+In all the sequence diagrams it is noticed the common characteristic
+of the operation of \texttt{writeResource} and \texttt{writeJsp} 
+that take care to handle in way uniforms the output.
