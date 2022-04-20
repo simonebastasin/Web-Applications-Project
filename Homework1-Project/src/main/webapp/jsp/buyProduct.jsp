@@ -41,7 +41,6 @@ Quantity selected: ${product.quantity}<br>
         <option value="${PaymentMethodOnlineEnum.GOOGLE_PAY}">Google Pay</option>
     </select>
 
-    <input type="hidden" value="${onlineOrder.idOrder}" name="idOrder">
     <input type ="submit" value = "Confirm payment">
 </form>
 
