@@ -55,7 +55,7 @@ public class DeleteOrderStatusDatabase {
                         resultSet.getInt("id"),
                         OrderStatusEnum.fromString(resultSet.getString("status")),
                         resultSet.getString("description"),
-                        new DateTime(resultSet.getObject("oo_datetime", LocalDateTime.class)),
+                        new DateTime(resultSet.getObject("os_datetime", LocalDateTime.class)),
                         resultSet.getInt("id_order")
                 );
             }
