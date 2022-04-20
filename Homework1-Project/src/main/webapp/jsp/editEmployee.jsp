@@ -19,7 +19,6 @@
 <c:import url="/jsp/include/header.jsp"/>
 <h1>Edit employee</h1>
 
-
 <c:forEach var="employee" items="${employeeList}">
     <form method="POST" action="">
 
@@ -54,6 +53,9 @@
     </form>
 </c:forEach>
 
+<a href="<c:url value="/management/employeeManagement"/>">
+    Cancel changes
+</a>
 
 <%@ include file="/html/include/footer.html"%>
 </body>

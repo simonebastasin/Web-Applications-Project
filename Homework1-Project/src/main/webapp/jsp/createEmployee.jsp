@@ -34,8 +34,14 @@
     </select><br>
     <label for="password">Password:</label><br>
     <input type="text" id="password" name="password"><br>
+    <br>
     <input type="submit" value="Submit">
 </form>
+
+<a href="<c:url value="/management/employeeManagement"/>">
+    Cancel changes
+</a>
+
 <%@ include file="/html/include/footer.html"%>
 </body>
 </html>

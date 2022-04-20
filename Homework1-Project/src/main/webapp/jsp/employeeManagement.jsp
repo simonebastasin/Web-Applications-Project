@@ -19,13 +19,12 @@
 <h1>Employee List</h1>
 
 <div>
-    <a href="<c:url value="/management/userManagement/createEmployee"/>">
-        <input type="submit" value="Add new employee">
+    <a href="<c:url value="/management/employeeManagement/createEmployee"/>">
+        Add new employee
     </a>
 </div><br>
 
 <table>
-
     <tr>
         <th>Username</th>
         <th>Name</th>
@@ -42,18 +41,26 @@
             <td>${employee.surname}</td>
             <td>${employee.role}</td>
             <td>
-                <a href="<c:url value="/management/userManagement/editEmployee/${employee.username}"/>">
+                <a href="<c:url value="/management/employeeManagement/editEmployee/${employee.username}"/>">
                     Edit
                 </a>
             </td>
-            <td>
-                <a href="<c:url value="/management/userManagement/deleteEmployee/${employee.username}"/>">
-                    Delete
-                </a>
-            </td>
+
+            <c:choose>
+                <c:when test =  "${employee.role == 'Administrator'}">
+                    <td>
+                    </td>
+                </c:when>
+                <c:otherwise>
+                    <td>
+                        <a href="<c:url value="/management/employeeManagement/deleteEmployee/${employee.username}"/>" aria-disabled="false">
+                            Delete
+                        </a>
+                    </td>
+                </c:otherwise>
+            </c:choose>
         </tr>
     </c:forEach>
-
 </table>
 
 <%@ include file="/html/include/footer.html"%>

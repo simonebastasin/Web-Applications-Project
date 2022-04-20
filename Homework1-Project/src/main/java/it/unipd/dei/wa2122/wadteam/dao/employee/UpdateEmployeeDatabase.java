@@ -69,14 +69,16 @@ public class UpdateEmployeeDatabase {
                         new Role(resultSet.getString("role_name"))
                 );
             }
+
         } finally {
+
             if (resultSet != null) {
                 resultSet.close();
             }
-
             if (preparedStatement != null) {
                 preparedStatement.close();
             }
+
         }
         con.close();
 

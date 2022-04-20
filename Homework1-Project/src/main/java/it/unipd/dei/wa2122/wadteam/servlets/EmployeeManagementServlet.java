@@ -12,7 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserManagementServlet extends AbstractDatabaseServlet {
+public class EmployeeManagementServlet extends AbstractDatabaseServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
@@ -52,7 +52,7 @@ public class UserManagementServlet extends AbstractDatabaseServlet {
         List<Employee> employeeList;
         try {
             employeeList = new ListEmployeeDatabase(getDataSource().getConnection()).getEmployee();
-            writeResource(req, res, "/jsp/userManagement.jsp", false, employeeList.toArray(Resource[]::new));
+            writeResource(req, res, "/jsp/employeeManagement.jsp", false, employeeList.toArray(Resource[]::new));
         } catch (SQLException e) {
             logger.error(e.getMessage());
             writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
@@ -96,8 +96,8 @@ public class UserManagementServlet extends AbstractDatabaseServlet {
         try {
             employee = new CreateEmployeeDatabase(getDataSource().getConnection(), employee).createEmployee();
             //writeResource(req, res, "/jsp/employeeDetail.jsp", true , product); //view result
-            Message m = new Message("edit ok");
-            writeMessageOrRedirect(req, res, m, req.getContextPath() +(req.getServletPath().startsWith("/rest/") ? "/rest" : "") + "/management/userManagement");
+            Message m = new Message("create ok");
+            writeMessageOrRedirect(req, res, m, req.getContextPath() + (req.getServletPath().startsWith("/rest/") ? "/rest" : "") + "/management/employeeManagement");
         } catch (SQLException e) {
             logger.error(e.getMessage());
             writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
@@ -146,13 +146,13 @@ public class UserManagementServlet extends AbstractDatabaseServlet {
         String name = req.getParameter("name");
         String surname = req.getParameter("surname");
         Role role = new Role(req.getParameter("role"));
-
-        Employee employee = new Employee(username, name, surname, role, null);
+System.out.println("boia disco");
+        Employee ee, employee = new Employee(username, name, surname, role, null);
         try {
-            employee = new UpdateEmployeeDatabase(getDataSource().getConnection(), employee).updateEmployee();
+            ee = new UpdateEmployeeDatabase(getDataSource().getConnection(), employee).updateEmployee();
             //writeResource(req, res, "/jsp/employeeDetail.jsp", true , product); //view result
             Message m = new Message("edit ok");
-            writeMessageOrRedirect(req, res, m, req.getContextPath() + (req.getServletPath().startsWith("/rest/") ? "/rest" : "") +"/management/userManagement");
+            writeMessageOrRedirect(req, res, m, req.getContextPath() + (req.getServletPath().startsWith("/rest/") ? "/rest" : "") + "/management/employeeManagement");
         } catch (SQLException e) {
             logger.error(e.getMessage());
             writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
@@ -195,8 +195,8 @@ public class UserManagementServlet extends AbstractDatabaseServlet {
         Employee employee;
         try {
             employee = new DeleteEmployeeDatabase((getDataSource().getConnection()), param).deleteEmployee();
-            Message m = new Message("edit ok");
-            writeMessageOrRedirect(req, res, m, req.getContextPath() + (req.getServletPath().startsWith("/rest/") ? "/rest" : "") +"/management/userManagement");
+            Message m = new Message("delete ok");
+            writeMessageOrRedirect(req, res, m, req.getContextPath() + (req.getServletPath().startsWith("/rest/") ? "/rest" : "") + "/management/employeeManagement");
         } catch (SQLException e) {
             logger.error(e.getMessage());
             writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));

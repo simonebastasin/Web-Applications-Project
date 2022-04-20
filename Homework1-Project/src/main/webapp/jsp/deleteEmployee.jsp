@@ -18,7 +18,8 @@
 <c:import url="/jsp/include/header.jsp"/>
 <h1>Delete employee</h1>
 
-Employee you are deleting:<br><br>
+Employee you are deleting:<br>
+<br>
 <table>
     <tr>
         <th>Username</th>
@@ -33,12 +34,13 @@ Employee you are deleting:<br><br>
         <td>${employee.role}</td>
     </tr>
 </table><br>
-Sure to delete?<br><br>
+Sure to delete?<br>
 
+<br>
 <form method="POST" action="">
     <input type ="submit" value = "Yes">
 </form>
-<a href="<c:url value="/management/userManagement"/>">
+<a href="<c:url value="/management/employeeManagement"/>">
     <input type ="submit" value = "No"/>
 </a>
 

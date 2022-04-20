@@ -117,13 +117,13 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>UserManagementServlet</servlet-name>
-        <servlet-class>it.unipd.dei.wa2122.wadteam.servlets.UserManagementServlet</servlet-class>
+        <servlet-name>EmployeeManagementServlet</servlet-name>
+        <servlet-class>it.unipd.dei.wa2122.wadteam.servlets.EmployeeManagementServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>UserManagementServlet</servlet-name>
-        <url-pattern>/management/userManagement/*</url-pattern>
-        <url-pattern>/rest/management/userManagement/*</url-pattern>
+        <servlet-name>EmployeeManagementServlet</servlet-name>
+        <url-pattern>/management/employeeManagement/*</url-pattern>
+        <url-pattern>/rest/management/employeeManagement/*</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -166,10 +166,10 @@
     </filter>
     <filter-mapping>
         <filter-name>AdminFilter</filter-name>
-        <url-pattern>/management/userManagement</url-pattern>
+        <url-pattern>/management/employeeManagement</url-pattern>
         <url-pattern>/media/list</url-pattern>
         <url-pattern>/media/upload</url-pattern>
-        <url-pattern>/rest/management/userManagement</url-pattern>
+        <url-pattern>/rest/management/employeeManagement</url-pattern>
         <url-pattern>/rest/media/list</url-pattern>
         <url-pattern>/rest/media/upload</url-pattern>
     </filter-mapping>
