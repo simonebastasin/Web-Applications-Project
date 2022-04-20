@@ -45,6 +45,19 @@
                    name="evidence" value="no" checked>
             <label for="no">No</label>
         </div>
+
+        <div>
+            <label for="media">Select one or more media (hold down ctrl/cmd to select multiple media):</label><br>
+            <select name="media" id="media" multiple>
+                <option value="volvo">media1</option>
+                <option value="saab">media2</option>
+                <option value="opel">media2</option>
+                <option value="audi">media2</option>
+            </select>
+            <br><br>
+        </div>
+
+
         <input type="submit" value="Submit">
     </form>
     <%@ include file="/html/include/footer.html"%>
