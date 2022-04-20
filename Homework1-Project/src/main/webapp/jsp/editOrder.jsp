@@ -57,7 +57,7 @@
                     <option value="${OrderStatusEnum.OPEN}">Open</option>
                 </c:when>
                 <c:otherwise>
-                    <option value=${OrderStatusEnum.OPEN} selected>Open</option>
+                    <option value="${OrderStatusEnum.OPEN}" selected>Open</option>
                 </c:otherwise>
             </c:choose>
             <c:choose>
@@ -95,7 +95,7 @@
         </select><br>
 
         <label for="statusDate">Last_Status_Update:</label><br>
-        <input type="text" id="statusDate" name="statusDate" value="${onlineOrder.status.osDateTime.getHumanDate()}" disabled><br>
+        <input type="text" id="statusDate" name="statusDate" value="${onlineOrder.status.osDateTime.humanDate}" disabled><br>
         <label for="description">Description:</label><br>
         <input type="text" id="description" name="description" value="${onlineOrder.status.description}"><br>
 

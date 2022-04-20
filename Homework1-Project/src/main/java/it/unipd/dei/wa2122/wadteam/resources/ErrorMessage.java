@@ -114,4 +114,24 @@ public abstract sealed class ErrorMessage extends Message  {
         }
     }
 
+
+    public static final class OrderError extends ErrorMessage {
+        public OrderError(String errorDetails) {
+            super("Order error", "300", errorDetails, HttpServletResponse.SC_NOT_ACCEPTABLE);
+        }
+    }
+
+    public static final class OutOfStock extends ErrorMessage {
+        public OutOfStock(String errorDetails) {
+            super("Product are out of stock", "301", errorDetails, HttpServletResponse.SC_NOT_ACCEPTABLE);
+        }
+    }
+
+
+    public static final class CancelOrderError extends ErrorMessage {
+        public CancelOrderError(String errorDetails) {
+            super("Unable to delete order", "302", errorDetails, HttpServletResponse.SC_NOT_ACCEPTABLE);
+        }
+    }
+
 }

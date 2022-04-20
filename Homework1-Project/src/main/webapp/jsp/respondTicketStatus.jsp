@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="it.unipd.dei.wa2122.wadteam.resources.TicketStatusEnum" %>
 <html>
 <head>
     <title>Respond Ticket Status</title>
@@ -18,10 +19,10 @@
 
 <form method="POST" action="">
     <select name="status" id="status">
-        <option value ="Open">Open</option>
-        <option value ="Processing">Processing</option>
-        <option value ="Closed">Closed</option>
-        <option value ="Return">Return</option>
+        <option value ="${TicketStatusEnum.OPEN}">Open</option>
+        <option value ="${TicketStatusEnum.PROCESSING}">Processing</option>
+        <option value ="${TicketStatusEnum.CLOSED}">Closed</option>
+        <option value ="${TicketStatusEnum.RETURN}">Return</option>
     </select>
     <br>
     <textarea name ="description" id="description"> </textarea>

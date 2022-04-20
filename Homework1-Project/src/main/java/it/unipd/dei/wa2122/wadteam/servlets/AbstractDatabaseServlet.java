@@ -42,6 +42,8 @@ public abstract class AbstractDatabaseServlet extends AbstractLoggerServlet {
         } catch (NamingException e) {
             ds = null;
 
+
+
             throw new ServletException(
                     String.format("Impossible to access the connection pool to the database: %s",
                             e.getMessage()));

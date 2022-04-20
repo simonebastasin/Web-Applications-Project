@@ -6,9 +6,10 @@
 \hline
 \textbf{URI} & \textbf{Method} & \textbf{Description} & \textbf{Filter} \\\hline
 \texttt{/rest/} & GET \& POST & return a list of category and a list of product  &  \\\hline
-%\texttt{/rest/buy/product} ? & GET \& POST & performs a check on the product order if it is eligible or not & C\\\hline
-%\texttt{/rest/buy/confirmed} ? & GET \& POST & finalize an order & C\\\hline
-%\texttt{/rest/buy/} & & & C\\\hline
+\texttt{/rest/buy/product/}\textit{product aliad} ? & GET \& POST & create an order with single product & C\\\hline
+\texttt{/rest/buy/cart/} ? & POST & create an order with a JSON of product & C\\\hline
+\texttt{/rest/buy/pay/}\textit{order id} ? & POST & pay an order & C\\\hline
+\texttt{/rest/buy/cancel/}\textit{order id} ? & POST & delete an order & C\\\hline
 \texttt{/rest/products/details/}\textit{product alias} & GET \& POST & return product details & \\\hline
 %\texttt{/rest/products/list/} & GET \& POST & return list of product & \\\hline
 \texttt{/rest/products/category/}\textit{category name} & GET \& POST & returns a list of products belonging to a category & \\\hline

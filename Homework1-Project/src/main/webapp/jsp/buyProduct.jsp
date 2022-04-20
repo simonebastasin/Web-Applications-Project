@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="it.unipd.dei.wa2122.wadteam.resources.PaymentMethodOnlineEnum" %>
 <%--@elvariable id="product" type="Product"--%>
 <%--@elvariable id="onlineOrder" type="OnlineOrder"--%>
 
@@ -35,9 +36,9 @@ Quantity selected: ${product.quantity}<br>
 <form method="post" action="<c:url value="/buy/confirmed/${product.alias}"/>">
     <label for="payment">Select a payment method: </label>
     <select name="payment" id="payment" autofocus required>
-        <option value="Credit Card">Credit Card</option>
-        <option value="Apple Pay">Apple Pay</option>
-        <option value="Google Pay">Google Pay</option>
+        <option value="${PaymentMethodOnlineEnum.CREDIT_CARD}">Credit Card</option>
+        <option value="${PaymentMethodOnlineEnum.APPLE_PAY}">Apple Pay</option>
+        <option value="${PaymentMethodOnlineEnum.GOOGLE_PAY}">Google Pay</option>
     </select>
 
     <input type="hidden" value="${onlineOrder.idOrder}" name="idOrder">
