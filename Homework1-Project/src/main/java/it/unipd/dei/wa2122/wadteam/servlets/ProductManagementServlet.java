@@ -252,7 +252,7 @@ public class ProductManagementServlet extends AbstractDatabaseServlet{
     }
 
     /**
-     * delete selected product from the database
+     * "delete" selected product from the database by simply setting its quantity to 0
      * @param req
      * @param res
      * @param param     alias of selected product to delete
@@ -262,7 +262,8 @@ public class ProductManagementServlet extends AbstractDatabaseServlet{
     private void postDeleteProduct(HttpServletRequest req, HttpServletResponse res, String param) throws ServletException, IOException {
         Product product;
         try {
-            product = new DeleteProductDatabase((getDataSource().getConnection()), param).deleteProduct();
+            //set quantity = 0
+            product = new UpdateProductQuantityByAliasDatabase((getDataSource().getConnection()), param,0).updateProductQuantity();
             Message m = new Message("delete product ok");
             writeMessageOrRedirect(req, res, m, req.getContextPath() + (req.getServletPath().startsWith("/rest/") ? "/rest" : "") +"/management/productManagement");
         } catch (SQLException e) {
