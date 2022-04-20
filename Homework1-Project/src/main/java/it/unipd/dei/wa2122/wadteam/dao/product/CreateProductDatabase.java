@@ -79,7 +79,8 @@ public class CreateProductDatabase {
                         resultSet.getDouble("sale_price"),
                         new ProductCategory(resultSet.getString("category_name"),null),
                         resultSet.getBoolean("evidence"),
-                        new ArrayList<>(), null);
+                        new ArrayList<>(),
+                        null);
             }
         } finally {
             if (resultSet != null) {

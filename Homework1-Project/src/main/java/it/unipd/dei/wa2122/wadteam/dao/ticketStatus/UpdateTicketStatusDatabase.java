@@ -37,9 +37,6 @@ public class UpdateTicketStatusDatabase {
         PreparedStatement preparedStatement = null;
         int result;
 
-        // the update ticket status
-        TicketStatus resultTicketStatus = null;
-
         try {
             preparedStatement = con.prepareStatement(STATEMENT);
             preparedStatement.setString(1, ticketStatus.getStatus().toString());
