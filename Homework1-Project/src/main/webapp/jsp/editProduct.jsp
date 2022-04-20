@@ -25,7 +25,7 @@
         <label for="sale">Sale price:</label><br>
         €<input type="number" min="0.01" step="0.01" max="2500" id="sale" name="sale" value="${product.salePrice}"/><br>
         <label for="quantity">Quantity:</label><br>
-        <input type="number" min="1" step="1" id="quantity" name="quantity" value="${product.quantity}"/><br>
+        <input type="number" min="0" step="1" id="quantity" name="quantity" value="${product.quantity}"/><br>
         <label for="category">Category:</label><br>
         <select  name="category" id="category"">
         <c:forEach var="cat" items="${categories}">
