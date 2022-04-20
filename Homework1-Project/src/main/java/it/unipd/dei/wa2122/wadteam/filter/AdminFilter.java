@@ -25,7 +25,6 @@ public class AdminFilter extends AbstractFilter {
 
         HttpSession session = req.getSession(false);
         String loginURI = req.getContextPath() + "/session/login";
-        String unauthorizedUri = "/jsp/unauthorized.jsp";
 
         if(session == null){
             res.sendRedirect(loginURI);
@@ -39,7 +38,7 @@ public class AdminFilter extends AbstractFilter {
             }
             else{
                 if(!"Administrator".equals(user.getRole())){
-                    req.getRequestDispatcher(unauthorizedUri).forward(req, res);
+                    unauthorized(req,res);
                 }
                 else{
                     res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.

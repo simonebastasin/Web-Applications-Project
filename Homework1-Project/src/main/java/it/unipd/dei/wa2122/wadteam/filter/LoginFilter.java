@@ -19,16 +19,12 @@ public class LoginFilter extends AbstractFilter{
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
 
-        if(!(servletRequest instanceof HttpServletRequest) || !(servletResponse instanceof HttpServletResponse)){
+        if(!(servletRequest instanceof final HttpServletRequest req) || !(servletResponse instanceof final HttpServletResponse res)){
             throw new ServletException("Only HTTP requests/responses are allowed");
         }
 
-        final HttpServletRequest req = (HttpServletRequest) servletRequest;
-        final HttpServletResponse res = (HttpServletResponse) servletResponse;
-
         HttpSession session = req.getSession(false);
         String loginURI = req.getContextPath() + "/session/login";
-        String unauthorizedUri = "/jsp/unauthorized.jsp";
 
         if(session == null){
             res.sendRedirect(loginURI);
@@ -46,8 +42,7 @@ public class LoginFilter extends AbstractFilter{
                     res.setHeader("Pragma", "no-cache"); // HTTP 1.0.
                     filterChain.doFilter(servletRequest, servletResponse);
                 } else {
-                    res.setStatus(401);
-                    req.getRequestDispatcher(unauthorizedUri).forward(req, res);
+                    unauthorized(req,res);
                 }
             }
         }

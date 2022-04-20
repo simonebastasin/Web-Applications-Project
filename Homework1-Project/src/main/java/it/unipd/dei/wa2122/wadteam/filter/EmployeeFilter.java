@@ -28,7 +28,6 @@ public class EmployeeFilter extends AbstractFilter {
 
         HttpSession session = req.getSession(false);
         String loginURI = req.getContextPath() + "/session/login";
-        String unauthorizedUri = "/jsp/unauthorized.jsp";
 
         if(session == null){
             res.sendRedirect(loginURI);
@@ -46,8 +45,7 @@ public class EmployeeFilter extends AbstractFilter {
                     res.setHeader("Pragma", "no-cache"); // HTTP 1.0.
                     filterChain.doFilter(servletRequest, servletResponse);
                 } else {
-                    res.setStatus(401);
-                    req.getRequestDispatcher(unauthorizedUri).forward(req, res);
+                    unauthorized(req,res);
                 }
             }
         }
