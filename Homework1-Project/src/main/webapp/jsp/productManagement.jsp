@@ -44,6 +44,7 @@
             <td>${prod.quantity}</td>
             <td>${prod.evidence}</td>
             <td><a href="<c:url value="/management/productManagement/editProduct/${prod.alias}"/>">Edit</a></td>
+            <td><a href="<c:url value="/management/productManagement/deleteProduct/${prod.alias}"/>">Delete</a></td>
         </tr>
 
     </c:forEach>

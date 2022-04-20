@@ -26,7 +26,7 @@ public class DeleteProductDatabase {
     /**
      * The product to be deleted
      */
-    private final Product product;
+    private final String product_alias;
 
     /**
      * Creates a new object for deleting a product.
@@ -36,9 +36,9 @@ public class DeleteProductDatabase {
      * @param product
      *            the product.
      */
-    public DeleteProductDatabase(final Connection con, final Product product){
+    public DeleteProductDatabase(final Connection con, final String product_alias){
         this.con = con;
-        this.product = product;
+        this.product_alias = product_alias;
     }
 
     /**
@@ -58,7 +58,7 @@ public class DeleteProductDatabase {
 
         try {
             preparedStatement = con.prepareStatement(STATEMENT_DELETE_PICTURE);
-            preparedStatement.setString(1,product.getAlias());
+            preparedStatement.setString(1,product_alias);
 
             resultSet = preparedStatement.executeQuery();
 
@@ -77,7 +77,7 @@ public class DeleteProductDatabase {
 
         try {
             preparedStatement = con.prepareStatement(STATEMENT_DELETE_PRODUCT);
-            preparedStatement.setString(1,product.getAlias());
+            preparedStatement.setString(1,product_alias);
 
             resultSet = preparedStatement.executeQuery();
 

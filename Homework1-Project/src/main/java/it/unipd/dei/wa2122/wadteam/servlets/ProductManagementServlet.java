@@ -1,9 +1,7 @@
 package it.unipd.dei.wa2122.wadteam.servlets;
 
-import it.unipd.dei.wa2122.wadteam.dao.product.CreateProductDatabase;
-import it.unipd.dei.wa2122.wadteam.dao.product.GetProductDatabase;
-import it.unipd.dei.wa2122.wadteam.dao.product.ListProductDatabase;
-import it.unipd.dei.wa2122.wadteam.dao.product.UpdateProductDatabase;
+import it.unipd.dei.wa2122.wadteam.dao.employee.DeleteEmployeeDatabase;
+import it.unipd.dei.wa2122.wadteam.dao.product.*;
 import it.unipd.dei.wa2122.wadteam.dao.productCategory.CreateProductCategoryDatabase;
 import it.unipd.dei.wa2122.wadteam.dao.productCategory.ListProductCategoryDatabase;
 import it.unipd.dei.wa2122.wadteam.resources.*;
@@ -29,6 +27,7 @@ public class ProductManagementServlet extends AbstractDatabaseServlet{
             case "createProduct" -> getCreateProduct(req, res);
             case "createCategory" -> getCreateCategory(req,res);
             case "editProduct" -> getEditProduct(req,res,param);
+            case "deleteProduct" -> getDeleteProduct(req,res,param);
             default -> writeError(req, res, new ErrorMessage.IncorrectlyFormattedPathError("page not found"));
         }
 
@@ -42,6 +41,7 @@ public class ProductManagementServlet extends AbstractDatabaseServlet{
             case "createProduct" -> postCreateProduct(req,res,param);
             case "createCategory" -> postCreateCategory(req,res,param);
             case "editProduct" -> postEditProduct(req,res,param);
+            case "deleteProduct" -> postDeleteProduct(req,res,param);
             default -> writeError(req, res, new ErrorMessage.IncorrectlyFormattedPathError("page not found"));
         }
 
@@ -123,7 +123,27 @@ public class ProductManagementServlet extends AbstractDatabaseServlet{
 
     }
 
+    /**
+     * get the jsp page deleteProduct.jsp for deleting an existing product
+     * @param req
+     * @param res
+     * @throws IOException
+     * @throws ServletException
+     */
+    private void getDeleteProduct(HttpServletRequest req, HttpServletResponse res, String param) throws IOException, ServletException {
+        Product product;
+        try {
+            product = new GetProductDatabase(getDataSource().getConnection(), param).getProduct();
 
+            if(product != null) writeResource(req, res, "/jsp/deleteProduct.jsp", true, product);
+            else writeError(req,res,GenericError.PAGE_NOT_FOUND);
+
+        } catch (SQLException e) {
+            logger.error(e.getMessage());
+            writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
+        }
+
+    }
 
     /**
      * creates a new product in the database
@@ -215,7 +235,26 @@ public class ProductManagementServlet extends AbstractDatabaseServlet{
             e.printStackTrace();
             writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
         }
+    }
 
+    /**
+     * delete selected product from the database
+     * @param req
+     * @param res
+     * @param param     alias of selected product to delete
+     * @throws ServletException,
+            * @throws IOException
+     */
+    private void postDeleteProduct(HttpServletRequest req, HttpServletResponse res, String param) throws ServletException, IOException {
+        Product product;
+        try {
+            product = new DeleteProductDatabase((getDataSource().getConnection()), param).deleteProduct();
+            Message m = new Message("delete product ok");
+            writeMessageOrRedirect(req, res, m, req.getContextPath() + (req.getServletPath().startsWith("/rest/") ? "/rest" : "") +"/management/productManagement");
+        } catch (SQLException e) {
+            logger.error(e.getMessage());
+            writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
+        }
     }
 
 }
