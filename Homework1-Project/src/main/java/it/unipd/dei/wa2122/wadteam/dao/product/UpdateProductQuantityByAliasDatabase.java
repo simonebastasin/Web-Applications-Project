@@ -15,8 +15,6 @@ public class UpdateProductQuantityByAliasDatabase {
      */
     private static final String STATEMENT_UPDATE_QUANTITY = "UPDATE product SET quantity = ? WHERE product_alias = ?";
 
-    private static final String STATEMENT_GET_PICTURES = "SELECT id_media FROM Represented_by WHERE product_alias = ?";
-
     /**
      * The connection to the database
      */
@@ -59,9 +57,7 @@ public class UpdateProductQuantityByAliasDatabase {
      */
     public int updateProductQuantity() throws SQLException {
         PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
 
-        //Product resultProduct = null;
         int affectedRows = 0;
         try {
             preparedStatement = con.prepareStatement(STATEMENT_UPDATE_QUANTITY);
@@ -71,52 +67,12 @@ public class UpdateProductQuantityByAliasDatabase {
 
             affectedRows = preparedStatement.executeUpdate();
 
-            /*
-            if(resultSet.next()){
-                resultProduct = new Product(resultSet.getString("product_alias"),
-                        resultSet.getString("name"),
-                        resultSet.getString("brand"),
-                        resultSet.getString("description"),
-                        resultSet.getInt("quantity"),
-                        resultSet.getDouble("purchase_price"),
-                        resultSet.getDouble("sale_price"),
-                        new ProductCategory(resultSet.getString("category_name"),null),
-                        resultSet.getBoolean("evidence"),
-                        new ArrayList<>(), null);
-            }*/
         } finally {
-            if (resultSet != null) {
-                resultSet.close();
-            }
 
             if (preparedStatement != null) {
                 preparedStatement.close();
             }
         }
-
-
-        /*
-        try {
-            preparedStatement = con.prepareStatement(STATEMENT_GET_PICTURES);
-            preparedStatement.setString(1, alias);
-
-            resultSet = preparedStatement.executeQuery();
-
-            while (resultSet.next()) {
-                assert resultProduct != null;
-                resultProduct.getPictures().add(resultSet.getInt("id_media"));
-            }
-        } finally {
-            if (resultSet != null) {
-                resultSet.close();
-            }
-
-            if (preparedStatement != null) {
-                preparedStatement.close();
-            }
-        }
-
-         */
         con.close();
 
         return affectedRows;

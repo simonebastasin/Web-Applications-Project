@@ -8,14 +8,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class CreateProductDatabase {
     /**
      * The SQL statements to be executed
      */
-    private static final String STATEMENT_INSERT_PRODUCT = "INSERT INTO product (product_alias, name, brand, description, quantity, purchase_price, sale_price, category_name, evidence) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING product_alias, name, brand, description, quantity, purchase_price, sale_price, category_name, evidence";
+    private static final String STATEMENT_INSERT_PRODUCT = "INSERT INTO product (product_alias, name, brand, description, quantity, purchase_price, sale_price, category_name, evidence) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-    private static final String STATEMENT_INSERT_PICTURE = "INSERT INTO Represented_by (product_alias, id_media) VALUES (? , ?) RETURNING product_alias, id_media";
+    private static final String STATEMENT_INSERT_PICTURE = "INSERT INTO Represented_by (product_alias, id_media) VALUES (? , ?)";
     /**
      * The connection to the database
      */
@@ -47,12 +48,11 @@ public class CreateProductDatabase {
      * @throws SQLException
      *             if any error occurs while reading the product.
      */
-    public Product createProduct() throws SQLException {
+    public int createProduct() throws SQLException {
 
         PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
 
-        Product resultProduct = null;
+        int result = 0;
 
         try {
             preparedStatement = con.prepareStatement(STATEMENT_INSERT_PRODUCT);
@@ -66,59 +66,34 @@ public class CreateProductDatabase {
             preparedStatement.setString(8, product.getCategory().getName());
             preparedStatement.setBoolean(9, product.getEvidence());
 
-            resultSet = preparedStatement.executeQuery();
+            result += preparedStatement.executeUpdate();
 
-            if (resultSet.next()) {
-                resultProduct = new Product(
-                        resultSet.getString("product_alias"),
-                        resultSet.getString("name"),
-                        resultSet.getString("brand"),
-                        resultSet.getString("description"),
-                        resultSet.getInt("quantity"),
-                        resultSet.getDouble("purchase_price"),
-                        resultSet.getDouble("sale_price"),
-                        new ProductCategory(resultSet.getString("category_name"),null),
-                        resultSet.getBoolean("evidence"),
-                        new ArrayList<>(),
-                        null);
-            }
         } finally {
-            if (resultSet != null) {
-                resultSet.close();
-            }
-
             if (preparedStatement != null) {
                 preparedStatement.close();
             }
         }
 
         if(product.getPictures()!=null){ //if there are images associated to the product to be created
-            for(var item : product.getPictures()) {
-                try {
-                    preparedStatement = con.prepareStatement(STATEMENT_INSERT_PICTURE);
+            try {
+                preparedStatement = con.prepareStatement(STATEMENT_INSERT_PICTURE);
+
+                for(var item : product.getPictures()) {
                     preparedStatement.setString(1, product.getAlias());
                     preparedStatement.setInt(2, item);
 
-                    resultSet = preparedStatement.executeQuery();
-
-                    if (resultSet.next()) {
-                        assert resultProduct != null;
-                        resultProduct.getPictures().add(resultSet.getInt("id_media"));
-                    }
-                } finally {
-                    if (resultSet != null) {
-                        resultSet.close();
-                    }
-
-                    if (preparedStatement != null) {
-                        preparedStatement.close();
-                    }
+                    preparedStatement.addBatch();
+                }
+                result += Arrays.stream(preparedStatement.executeBatch()).sum();
+            } finally {
+                if (preparedStatement != null) {
+                    preparedStatement.close();
                 }
             }
         }
 
         con.close();
 
-        return resultProduct;
+        return result;
     }
 }

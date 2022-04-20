@@ -189,9 +189,8 @@ public class ProductManagementServlet extends AbstractDatabaseServlet{
         Product temp = new Product(alias,name,brand,description,quantity,purchase,sale,category,evidence,pictures, null);
 
         try {
-            Product product = new CreateProductDatabase(getDataSource().getConnection(), temp).createProduct();
-            //writeResource(req, res, "/jsp/productDetail.jsp", true , product); //view result
-            Message m = new Message("edit ok");
+            int product = new CreateProductDatabase(getDataSource().getConnection(), temp).createProduct();
+            Message m = new Message("creat ok");
             writeMessageOrRedirect(req, res, m, req.getContextPath() + (req.getServletPath().startsWith("/rest/") ? "/rest" : "") +"/management/productManagement");
         } catch (SQLException e) {
             logger.error(e.getMessage());

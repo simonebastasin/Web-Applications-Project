@@ -48,8 +48,6 @@ public class UpdateAssistanceTicketDatabase {
 
         PreparedStatement preparedStatement = null;
         int result;
-        // the read employee
-        AssistanceTicket resultAssistantTicket = null;
 
         try {
             preparedStatement = con.prepareStatement(STATEMENT);

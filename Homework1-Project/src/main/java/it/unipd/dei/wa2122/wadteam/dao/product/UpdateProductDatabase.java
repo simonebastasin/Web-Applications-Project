@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class UpdateProductDatabase {
     /**
@@ -15,7 +16,7 @@ public class UpdateProductDatabase {
      */
     private static final String STATEMENT_UPDATE_PRODUCT = "UPDATE product SET name = ?, brand = ?, description = ?, quantity = ?, purchase_price = ?, sale_price = ?, category_name = ?, evidence = ? WHERE product_alias = ?";
 
-    private static final String STATEMENT_DELETE_PICTURE = "DELETE FROM Represented_by WHERE product_alias = ? RETURNING product_alias";
+    private static final String STATEMENT_DELETE_PICTURE = "DELETE FROM Represented_by WHERE product_alias = ?";
 
     private static final String STATEMENT_UPDATE_PICTURE = "INSERT INTO Represented_by (product_alias, id_media) VALUES (? , ?)";
 
@@ -78,7 +79,7 @@ public class UpdateProductDatabase {
             preparedStatement = con.prepareStatement(STATEMENT_DELETE_PICTURE);
             preparedStatement.setString(1,product.getAlias());
 
-            preparedStatement.executeQuery();
+            result += preparedStatement.executeUpdate();
 
         } finally {
             if (preparedStatement != null) {
@@ -86,23 +87,21 @@ public class UpdateProductDatabase {
             }
         }
 
-        if(product.getPictures() != null)
-            for(var item : product.getPictures()) {
-                try {
-
-                    preparedStatement = con.prepareStatement(STATEMENT_UPDATE_PICTURE);
+        if(product.getPictures() != null) {
+            try {
+                preparedStatement = con.prepareStatement(STATEMENT_UPDATE_PICTURE);
+                for (var item : product.getPictures()) {
                     preparedStatement.setString(1, product.getAlias());
                     preparedStatement.setInt(2, item);
-
-                    preparedStatement.executeUpdate();
-
-                } finally {
-
-                    if (preparedStatement != null) {
-                        preparedStatement.close();
-                    }
+                    preparedStatement.addBatch();
+                }
+                result += Arrays.stream(preparedStatement.executeBatch()).sum();
+            } finally {
+                if (preparedStatement != null) {
+                    preparedStatement.close();
                 }
             }
+        }
 
         con.close();
 

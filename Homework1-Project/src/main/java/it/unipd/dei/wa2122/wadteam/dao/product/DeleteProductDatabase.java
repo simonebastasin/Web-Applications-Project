@@ -14,9 +14,9 @@ public class DeleteProductDatabase {
     /**
      * The SQL statements to be executed
      */
-    private static final String STATEMENT_DELETE_PRODUCT = "DELETE FROM product WHERE product_alias = ? RETURNING product_alias, name, brand, description, quantity, purchase_price, sale_price, category_name, evidence";
+    private static final String STATEMENT_DELETE_PRODUCT = "DELETE FROM product WHERE product_alias = ?";
 
-    private static final String STATEMENT_DELETE_PICTURE = "DELETE FROM Represented_by WHERE product_alias = ? RETURNING product_alias, id_media";
+    private static final String STATEMENT_DELETE_PICTURE = "DELETE FROM Represented_by WHERE product_alias = ? ";
 
     /**
      * The connection to the database
@@ -49,26 +49,16 @@ public class DeleteProductDatabase {
      * @throws SQLException
      *             if any error occurs while deleting the media.
      */
-    public Product deleteProduct() throws SQLException {
+    public int deleteProduct() throws SQLException {
         PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
-
-        List<Integer> resultPicture = new ArrayList<>();
-        Product resultProduct = null;
-
+        int result = 0;
         try {
             preparedStatement = con.prepareStatement(STATEMENT_DELETE_PICTURE);
             preparedStatement.setString(1,product_alias);
 
-            resultSet = preparedStatement.executeQuery();
+            result += preparedStatement.executeUpdate();
 
-            while (resultSet.next()){
-                resultPicture.add(resultSet.getInt("id_media"));
-            }
         } finally {
-            if (resultSet != null) {
-                resultSet.close();
-            }
 
             if (preparedStatement != null) {
                 preparedStatement.close();
@@ -79,25 +69,9 @@ public class DeleteProductDatabase {
             preparedStatement = con.prepareStatement(STATEMENT_DELETE_PRODUCT);
             preparedStatement.setString(1,product_alias);
 
-            resultSet = preparedStatement.executeQuery();
+            result += preparedStatement.executeUpdate();
 
-            if (resultSet.next()){
-                resultProduct = new Product(
-                        resultSet.getString("product_alias"),
-                        resultSet.getString("name"),
-                        resultSet.getString("brand"),
-                        resultSet.getString("description"),
-                        resultSet.getInt("quantity"),
-                        resultSet.getDouble("purchase_price"),
-                        resultSet.getDouble("sale_price"),
-                        new ProductCategory(resultSet.getString("category_name"),null),
-                        resultSet.getBoolean("evidence"),
-                        resultPicture, null);
-            }
         } finally {
-            if (resultSet != null) {
-                resultSet.close();
-            }
 
             if (preparedStatement != null) {
                 preparedStatement.close();
@@ -105,6 +79,6 @@ public class DeleteProductDatabase {
         }
         con.close();
 
-        return resultProduct;
+        return result;
     }
 }

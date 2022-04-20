@@ -74,8 +74,6 @@ public class CheckUserCredential {
                 preparedStatement.setString(4, userCredential.getPassword());
             }
 
-            String debug = preparedStatement.toString();
-
             resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) {

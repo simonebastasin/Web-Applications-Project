@@ -65,9 +65,6 @@ public class CreateDiscountDatabase {
             resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) {
-
-
-                /*************/
                 resultDiscount = new Discount(resultSet.getInt("ID"),
                         resultSet.getInt("Percentage"),
                         new DateTime(resultSet.getObject("Start_Date", LocalDateTime.class)),
