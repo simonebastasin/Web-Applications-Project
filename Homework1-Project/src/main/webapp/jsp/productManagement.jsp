@@ -26,7 +26,8 @@
         <th>Name</th>
         <th>Alias</th>
         <th>Brand</th>
-        <th>Price</th>
+        <th>Category</th>
+        <th>Sale Price</th>
         <th>Quantity</th>
         <th>Evidence</th>
     </tr>
@@ -38,6 +39,7 @@
             <td><a href="<c:url value="/products/details/${prod.alias}"/>">${prod.name}</a></td>
             <td>${prod.alias}</td>
             <td>${prod.brand}</td>
+            <td>${prod.category.name}</td>
             <td>${prod.salePrice}</td>
             <td>${prod.quantity}</td>
             <td>${prod.evidence}</td>
