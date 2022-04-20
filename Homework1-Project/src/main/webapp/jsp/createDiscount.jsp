@@ -73,7 +73,7 @@
         ${prod.brand}&nbsp
         ${prod.salePrice}&nbsp
         ${prod.quantity}&nbsp
-        ${prod.category}&nbsp
+        ${prod.category.name}&nbsp
         ${prod.evidence}<br>
 
     </c:forEach>

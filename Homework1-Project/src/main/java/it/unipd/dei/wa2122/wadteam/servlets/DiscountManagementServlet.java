@@ -1,10 +1,8 @@
 package it.unipd.dei.wa2122.wadteam.servlets;
 
-import it.unipd.dei.wa2122.wadteam.dao.discount.CreateDiscountDatabase;
-import it.unipd.dei.wa2122.wadteam.dao.discount.DeleteDiscountDatabase;
-import it.unipd.dei.wa2122.wadteam.dao.discount.GetDiscountDatabase;
-import it.unipd.dei.wa2122.wadteam.dao.discount.ListDiscountDatabase;
+import it.unipd.dei.wa2122.wadteam.dao.discount.*;
 import it.unipd.dei.wa2122.wadteam.dao.owns.CreateOwnsDiscountFromListProductsDatabase;
+import it.unipd.dei.wa2122.wadteam.dao.owns.DeleteOwnsFromDiscountIdDatabase;
 import it.unipd.dei.wa2122.wadteam.dao.owns.ListProductsFromIdDiscoutDatabase;
 import it.unipd.dei.wa2122.wadteam.dao.product.ListProductDatabase;
 import it.unipd.dei.wa2122.wadteam.resources.*;
@@ -42,6 +40,9 @@ public class DiscountManagementServlet extends AbstractDatabaseServlet{
         switch (path) {
             case "createDiscount" -> postCreateDiscount(req,res);
             case "deleteDiscount" -> postDeleteDiscount(req, res, param);
+            case "editDiscount" -> postEditDiscount(req, res, param);
+
+
             default -> writeError(req, res, new ErrorMessage.IncorrectlyFormattedPathError("page not found"));
         }
 
@@ -77,7 +78,7 @@ public class DiscountManagementServlet extends AbstractDatabaseServlet{
         List<Product> products;
 
         try{
-            //TODO: Implement control in date input
+
             products = new ListProductDatabase(getDataSource().getConnection()).getProduct();
 
             List<Resource> lists = new ArrayList<>();
@@ -97,13 +98,24 @@ public class DiscountManagementServlet extends AbstractDatabaseServlet{
 
     private void getEditDiscount(HttpServletRequest req, HttpServletResponse res, String param) throws ServletException, IOException{
         Discount discount;
+        List<Product> products;
         try {
+
+            products = new ListProductDatabase(getDataSource().getConnection()).getProduct();
+
+            List<Resource> list = new ArrayList<>();
+            for(var prod : products){
+                list.add(prod);
+            }
+
+
             discount = new GetDiscountDatabase(getDataSource().getConnection(), Integer.parseInt(param)).getDiscount();
-            List<Product> products = new ListProductsFromIdDiscoutDatabase(getDataSource().getConnection(), discount).getListProductsFromIdDiscoutDatabase();
-            DiscountListProduct discountListProduct = new DiscountListProduct(discount, products);
+            List<Product> productsDiscounted = new ListProductsFromIdDiscoutDatabase(getDataSource().getConnection(), discount).getListProductsFromIdDiscoutDatabase();
+            DiscountListProduct discountListProduct = new DiscountListProduct(discount, productsDiscounted);
+            list.add(discountListProduct);
 
 
-            writeResource(req, res, "/jsp/editDiscount.jsp", true, discountListProduct);
+            writeResource(req, res, "/jsp/editDiscount.jsp", true, list.toArray(products.toArray(Resource[]::new)));
         } catch (SQLException e) {
             logger.error(e.getMessage());
             writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
@@ -167,14 +179,14 @@ public class DiscountManagementServlet extends AbstractDatabaseServlet{
         DateTime endDate = new DateTime(LocalDateTime.of(endDateyear, endDatemonth, endDateday, 0,0,0));
 
         if(startDate.compareTo0(endDate) > 1 ){
-            writeError(req,res,new ErrorMessage.startDateAfterDndDate("error in date format"));
+            writeError(req,res,new ErrorMessage.StartDateAfterDndDate("error in date format"));
         }else {
 
 
             String[] productList = req.getParameterValues("productList");
 
             if(productList == null){
-                writeError(req,res,new ErrorMessage.emptyProductList("product List Empty"));
+                writeError(req,res,new ErrorMessage.EmptyProductList("product List Empty"));
             }else {
                 List<Product> productAliasList = new ArrayList<Product>();
                 for (var pr : productList) {
@@ -197,6 +209,84 @@ public class DiscountManagementServlet extends AbstractDatabaseServlet{
                 }
             }
             
+        }
+
+
+    }
+
+    /**
+     * creates a new discount in the database
+     * @param req
+     * @param res
+     * @throws IOException
+     * @throws ServletException
+     */
+    private void postEditDiscount(HttpServletRequest req, HttpServletResponse res, String param) throws IOException, ServletException {
+
+        int id = Integer.parseInt(param);
+        int percentage = Integer.parseInt(req.getParameter("percentage"));
+
+        String startDateString = req.getParameter("start");
+        String[] date1 = startDateString.split("-");
+
+        //StartDate
+        int startDateday = Integer.parseInt(date1[2]);
+        int startDatemonth = Integer.parseInt(date1[1]);
+        int startDateyear = Integer.parseInt(date1[0]);
+
+
+
+        DateTime startDate = new DateTime(LocalDateTime.of(startDateyear, startDatemonth, startDateday, 0,0,0));
+        //EndDate
+        String endDateString = req.getParameter("end");
+        String[] date2 = endDateString.split("-");
+
+        int endDateday = Integer.parseInt(date2[2]);
+        int endDatemonth = Integer.parseInt(date2[1]);
+        int endDateyear = Integer.parseInt(date2[0]);
+
+        DateTime endDate = new DateTime(LocalDateTime.of(endDateyear, endDatemonth, endDateday, 0,0,0));
+
+        if(startDate.compareTo0(endDate) > 1 ){
+            writeError(req,res,new ErrorMessage.StartDateAfterDndDate("error in date format"));
+        }else {
+
+
+            String[] productList = req.getParameterValues("productList");
+
+            if(productList == null){
+                writeError(req,res,new ErrorMessage.EmptyProductList("product List Empty"));
+            }else {
+                List<Product> productAliasList = new ArrayList<Product>();
+                for (var pr : productList) {
+                    productAliasList.add(new Product(pr, null, null, null, 0, 0.0, 0.0, null, false, null, null));
+                }
+
+
+                Discount temp = new Discount(id, percentage, startDate, endDate);
+
+                try {
+                    Discount discount = new UpdateDiscountDatabase(getDataSource().getConnection(), temp).updateDiscount();
+
+
+
+                    //Delete from OWNS table
+                    new DeleteOwnsFromDiscountIdDatabase(getDataSource().getConnection(), id).deleteOwn();
+
+                    //Create new OWNS relationships
+                    List<Owns> list = new CreateOwnsDiscountFromListProductsDatabase(getDataSource().getConnection(), productAliasList, discount).createOwnsDiscountFromList();
+
+
+                    //List<Owns> list = new UpdateOwn(getDataSource().getConnection(), productAliasList, discount).createOwnsDiscountFromList();
+
+                    Message m = new Message("edit ok", discount.getId());
+                    writeMessageOrRedirect(req, res, m,  req.getContextPath() + (req.getServletPath().startsWith("/rest/") ? "/rest" : "") + "/management/discountManagement");
+                } catch (SQLException e) {
+                    logger.error(e.getMessage());
+                    writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
+                }
+            }
+
         }
 
 

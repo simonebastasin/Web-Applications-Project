@@ -16,7 +16,7 @@ public final class ListDiscountDatabase {
     /**
      * The SQL statement to be executed
      */
-    private static final String STATEMENT = "SELECT ID, Percentage, Start_Date, End_Date FROM Discount";
+    private static final String STATEMENT = "SELECT ID, Percentage, Start_Date, End_Date FROM Discount ORDER BY ID DESC";
 
     /**
      * The connection to the database

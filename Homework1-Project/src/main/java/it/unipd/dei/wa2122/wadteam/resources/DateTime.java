@@ -32,6 +32,28 @@ public class DateTime implements Resource{
 
     public String getHumanDate() { return toString("dd/MM/yyyy HH:mm"); }
     public String getHumanDateTimeless() { return toString("dd/MM/yyyy"); }
+    public String getInputDateFormat(){
+        String aux = "";
+
+
+        String day = "";
+        String month = "";
+        if(localDateTime.getDayOfMonth()<10) {
+            day = "0" + localDateTime.getDayOfMonth();
+        } else {
+            day = ""+localDateTime.getDayOfMonth();
+        }
+
+        if(localDateTime.getMonthValue()<10) {
+            month = "0" + localDateTime.getMonthValue();
+        } else {
+            month = ""+localDateTime.getMonthValue();
+        }
+        aux = localDateTime.getYear() + "-"+month + "-" + day;
+
+
+        return aux;
+    }
 
 
     private int getYear(){

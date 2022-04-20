@@ -14,7 +14,7 @@ public class UpdateDiscountDatabase {
     /**
      * The SQL statement to be executed
      */
-    private static final String STATEMENT = "UPDATE Discount SET Percentage = ?, Start_Date = ?, End_Date = ? WHERE ID = ?";
+    private static final String STATEMENT = "UPDATE Discount SET Percentage = ?, Start_Date = ?, End_Date = ? WHERE ID = ? RETURNING ID, Percentage, Start_Date, End_Date ";
 
     /**
      * The connection to the database
@@ -57,9 +57,10 @@ public class UpdateDiscountDatabase {
 
         try {
             preparedStatement = con.prepareStatement(STATEMENT);
-            preparedStatement.setInt(2, discount.getPercentage());
+            preparedStatement.setInt(1, discount.getPercentage());
+            preparedStatement.setObject(2, discount.getStartDate().getLocalDateTime());
             preparedStatement.setObject(3, discount.getEndDate().getLocalDateTime());
-            preparedStatement.setObject(4, discount.getEndDate().getLocalDateTime());
+            preparedStatement.setInt(4, discount.getId());
 
             resultSet = preparedStatement.executeQuery();
 

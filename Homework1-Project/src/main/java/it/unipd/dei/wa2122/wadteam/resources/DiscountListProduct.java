@@ -4,6 +4,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class DiscountListProduct implements Resource{
     final Discount discount;
@@ -20,6 +21,16 @@ public class DiscountListProduct implements Resource{
 
     public List<Product> getProductList() {
         return productList;
+    }
+
+    public boolean cointainsProduct(String product){
+        boolean found = false;
+        for(int i = 0; i<productList.size(); i++){
+            if(Objects.equals(productList.get(i).getAlias(), product))
+                return true;
+        }
+        return found;
+
     }
 
     /**

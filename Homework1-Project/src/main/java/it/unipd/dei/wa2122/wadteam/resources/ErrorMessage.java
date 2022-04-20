@@ -102,14 +102,14 @@ public abstract sealed class ErrorMessage extends Message  {
 
     // Error code from 290
 
-    public static final class startDateAfterDndDate extends ErrorMessage {
-        public startDateAfterDndDate(String errorDetails) {
+    public static final class StartDateAfterDndDate extends ErrorMessage {
+        public StartDateAfterDndDate(String errorDetails) {
             super("The entered start date is later than the end date ", "290", errorDetails, HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         }
     }
 
-    public static final class emptyProductList extends ErrorMessage {
-        public emptyProductList(String errorDetails) {
+    public static final class EmptyProductList extends ErrorMessage {
+        public EmptyProductList(String errorDetails) {
             super("The product list cannot be empty  ", "291", errorDetails, HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         }
     }
