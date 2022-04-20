@@ -10,7 +10,7 @@ The architecture of our webapp is based on four principal items:
 
 \subsection*{Resource}
 
-In the figure \ref{ResouceClassDiagram} it is possible to observe the 
+In the figure \ref{fig:ResouceClassDiagram} it is possible to observe the 
 architecture of the resources, that all implement the Resource interface 
 that contains the \texttt{toJSON()} method. 
 The reason for which it has been realized an interface and not an abstract 
@@ -40,7 +40,7 @@ operate on, although they are an important part of the project.
 
 \subsection*{Servlet}
 
-In the figure \ref{ServletClassDiagram} it is possible to observe the 
+In the figure \ref{fig:ServletClassDiagram} it is possible to observe the 
 architecture of the servlet. 
 We defined this structure in order to maintain a functional separation 
 between the web pages and the ones dedicated for the login or the database.
@@ -105,10 +105,10 @@ The filter package also contains an abstract class that takes care of
 initializing the common filter information, and the 4 classes that 
 extend it take care of filtering the data by session.
 
-In the figure \ref{FilterClassDiagram} you can see the architecture 
+In the figure \ref{fig:FilterClassDiagram} you can see the architecture 
 of the filters. In the next pages we would use
 the first letter of the filter class name to indicate the filter.
-in particular \textbf{L} for \texttt{LoginFilter}, 
+In particular \textbf{L} for \texttt{LoginFilter}, 
 \textbf{A} for \texttt{AdminFilter}, \textbf{E} for 
 \texttt{EmployeeFilter} and \textbf{C} for \texttt{CustomerFilter}.
 

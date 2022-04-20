@@ -12,7 +12,7 @@ This API returns create an order with single product
     \item URL Parameters: \textit{product alias}
     \item Data Parameters: \textit{quantity}: the quantity of the product
     \item Data Parameters encoding: \texttt{x-www-form-urlencoded}
-    \item Success Response: a JSON Object with the order id.
+    \item Success Response: a JSON Object with the order ID.
     \item Error Response: a JSON Object: with a key: \texttt{isError}  and value \texttt{true}, an error code, a message and details of the error.
 
 \end{itemize}
@@ -28,33 +28,33 @@ This API returns a list of products and a list of categories
     \item Data Parameters: a JSON Object that contains a JSON Array on the \texttt{cart} key. The JSON Array it contains some instances of a JSON Object  containing the alias of the product and the quantity. Like:
     \texttt{{"cart":[{"quantity":2,"alias":"6465661284410"},{"quantity":3,"alias":"6465661284414"}]}}
     \item Data Parameters encoding: \texttt{application/json}
-    \item Success Response:  a JSON Object with the order id.
+    \item Success Response:  a JSON Object with the order ID.
     \item Error Response: a JSON Object: with a key: \texttt{isError}  and value \texttt{true}, an error code, a message and details of the error.
 
 \end{itemize}
 
-\subsubsection*{Pay a order}
+\subsubsection*{Pay an order}
 
 This API returns a list of products and a list of categories
 
 \begin{itemize}
     \item URL: \texttt{/rest/pay/}
     \item Method: \texttt{POST}
-    \item URL Parameters: \textit{order id}
+    \item URL Parameters: \textit{order ID}
     \item Data Parameters: \texttt{payment} a value among \texttt{CREDIT\_CARD}, \texttt{GOOGLE\_PAY}, \texttt{APPLE\_PAY}.
-    \item Success Response: a JSON message whit transaction id
+    \item Success Response: a JSON message whit transaction ID
     \item Error Response: a JSON Object: with a key: \texttt{isError}  and value \texttt{true}, an error code, a message and details of the error.
 
 \end{itemize}
 
-\subsubsection*{Cancel a order}
+\subsubsection*{Cancel an order}
 
 This API cancel an order
 
 \begin{itemize}
     \item URL: \texttt{/rest/cancel/}
     \item Method: \texttt{POST}
-    \item URL Parameters: \textit{order id}
+    \item URL Parameters: \textit{order ID}
     \item Data Parameters: NOTHING
     \item Success Response: a JSON message
     \item Error Response: a JSON Object: with a key: \texttt{isError}  and value \texttt{true}, an error code, a message and details of the error.
@@ -91,7 +91,7 @@ This API returns a list of products and a list of categories
 
 \subsubsection*{Product detail}
 
-This API returns an the product detail
+This API returns the product detail
 
 \begin{itemize}
     \item URL: \texttt{/rest/products/details/}
@@ -165,7 +165,7 @@ This API is used to load a media in the database
     \item URL Parameters: Nothing
     \item Data Parameters: \texttt{file}: the file to be upload
     \item Data Parameters encoding: \texttt{multipart/form-data}
-    \item Success Response: a JSON Object with the media id
+    \item Success Response: a JSON Object with the media ID
     \item Error Response: a JSON Object: with a key: \texttt{isError}  and value \texttt{true}, an error code, a message and details of the error.
 \end{itemize}
 
@@ -176,7 +176,7 @@ This API returns a media
 \begin{itemize}
     \item URL: \texttt{/rest/media/view/}
     \item Method: \texttt{GET \& POST}
-    \item URL Parameters: \textit{media id}
+    \item URL Parameters: \textit{media ID}
     \item Data Parameters: Nothing
     \item Success Response: a blob with media
     \item Error Response: a JSON Object: with a key: \texttt{isError}  and value \texttt{true}, an error code, a message and details of the error.
@@ -189,7 +189,7 @@ This API returns a thumb of a media
 \begin{itemize}
     \item URL: \texttt{/rest/media/thumb/}
     \item Method: \texttt{GET \& POST}
-    \item URL Parameters: \textit{media id}
+    \item URL Parameters: \textit{media ID}
     \item Data Parameters: Nothing
     \item Success Response: a blob with thumb of the media
     \item Error Response: a JSON Object: with a key: \texttt{isError}  and value \texttt{true}, an error code, a message and details of the error.
@@ -199,7 +199,7 @@ This API returns a thumb of a media
 \subsubsection*{Order list}
 
 This API returns a list of the orders.
-If the logged in user is a customer, it can only see their own order, if employee all of them.
+If the logged-in user is a customer, it can only see their own order, if employee all of them.
 
 \begin{itemize}
     \item URL: \texttt{/rest/order/list/}
@@ -213,12 +213,12 @@ If the logged in user is a customer, it can only see their own order, if employe
 \subsubsection*{Order detail}
 
 This API returns a detail of the order.
-If the logged in user is a customer, it can only see their own order, if employee all of them.
+If the logged-in user is a customer, it can only see their own order, if employee all of them.
 
 \begin{itemize}
     \item URL: \texttt{/rest/order/detail/}
     \item Method: \texttt{GET}
-    \item URL Parameters: \textit{order id}
+    \item URL Parameters: \textit{order ID}
     \item Data Parameters: Nothing
     \item Success Response: a JSON Object that contains the order detail
     \item Error Response: a JSON Object: with a key: \texttt{isError}  and value \texttt{true}, an error code, a message and details of the error.
@@ -228,7 +228,7 @@ If the logged in user is a customer, it can only see their own order, if employe
 \subsubsection*{Invoice list}
 
 This API returns a list of the invoice.
-If the logged in user is a customer, it can only see their own order, if employee all of them.
+If the logged-in user is a customer, it can only see their own order, if employee all of them.
 
 \begin{itemize}
     \item URL: \texttt{/rest/invoice/list/}
@@ -242,12 +242,12 @@ If the logged in user is a customer, it can only see their own order, if employe
 \subsubsection*{Invoice detail}
 
 This API returns a detail of the invoice.
-If the logged in user is a customer, it can only see their own order, if employee all of them.
+If the logged-in user is a customer, it can only see their own order, if employee all of them.
 
 \begin{itemize}
-    \item URL: if you want to access it with the invoice id \texttt{/rest/invoice/detail/} or if you want to access it with the order id \texttt{/rest/invoice/order/}
+    \item URL: if you want to access it with the invoice ID \texttt{/rest/invoice/detail/} or if you want to access it with the order ID \texttt{/rest/invoice/order/}
     \item Method: \texttt{GET}
-    \item URL Parameters: if you want to access it with the invoice id \textit{invoice id} or if you want to access it with the order id \textit{order id}
+    \item URL Parameters: if you want to access it with the invoice ID \textit{invoice ID} or if you want to access it with the order ID \textit{order ID}
     \item Data Parameters: Nothing
     \item Success Response: a JSON Object that contains the invoice detail
     \item Error Response: a JSON Object: with a key: \texttt{isError}  and value \texttt{true}, an error code, a message and details of the error.
@@ -255,7 +255,7 @@ If the logged in user is a customer, it can only see their own order, if employe
 
 \subsubsection*{Create ticket}
 
-This API create a ticket.
+This API creates a ticket.
 
 \begin{itemize}
     \item URL: \texttt{/rest/ticket/create/}
@@ -270,7 +270,7 @@ This API create a ticket.
 \subsubsection*{Ticket list}
 
 This API returns a list of the ticket.
-If the logged in user is a customer, it can only see their own order, if employee all of them.
+If the logged-in user is a customer, it can only see their own order, if employee all of them.
 
 \begin{itemize}
     \item URL: \texttt{/rest/ticket/list/}
@@ -284,12 +284,12 @@ If the logged in user is a customer, it can only see their own order, if employe
 \subsubsection*{Ticket detail}
 
 This API returns a detail of the ticket.
-If the logged in user is a customer, it can only see their own order, if employee all of them.
+If the logged-in user is a customer, it can only see their own order, if employee all of them.
 
 \begin{itemize}
     \item URL: \texttt{/rest/ticket/detail/}
     \item Method: \texttt{GET}
-    \item URL Parameters: \textit{invoice id}
+    \item URL Parameters: \textit{invoice ID}
     \item Data Parameters: Nothing
     \item Success Response: a JSON Object that contains the ticket detail
     \item Error Response: a JSON Object: with a key: \texttt{isError}  and value \texttt{true}, an error code, a message and details of the error.
@@ -298,12 +298,12 @@ If the logged in user is a customer, it can only see their own order, if employe
 
 \subsubsection*{Respond ticket}
 
-This API respond a ticket with ticket status.
+This API responds a ticket with ticket status.
 
 \begin{itemize}
     \item URL: \texttt{/rest/ticket/respond/}
     \item Method: \texttt{POST}
-    \item URL Parameters: \textit{ticket id}
+    \item URL Parameters: \textit{ticket ID}
     \item Data Parameters:
     \begin{itemize}
         \item \texttt{status}: a value among \texttt{OPEN}, \texttt{PROCESSING}, \texttt{CLOSED}. \texttt{RETURN}
