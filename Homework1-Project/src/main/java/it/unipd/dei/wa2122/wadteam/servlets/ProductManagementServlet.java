@@ -263,7 +263,7 @@ public class ProductManagementServlet extends AbstractDatabaseServlet{
         Product product;
         try {
             //set quantity = 0
-            product = new UpdateProductQuantityByAliasDatabase((getDataSource().getConnection()), param,0).updateProductQuantity();
+            int affectedRows = new UpdateProductQuantityByAliasDatabase((getDataSource().getConnection()), param,0).updateProductQuantity();
             Message m = new Message("delete product ok");
             writeMessageOrRedirect(req, res, m, req.getContextPath() + (req.getServletPath().startsWith("/rest/") ? "/rest" : "") +"/management/productManagement");
         } catch (SQLException e) {

@@ -57,20 +57,21 @@ public class UpdateProductQuantityByAliasDatabase {
      * @throws SQLException
      *             if any error occurs while updating the product.
      */
-    public Product updateProductQuantity() throws SQLException {
+    public int updateProductQuantity() throws SQLException {
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
 
-        Product resultProduct = null;
-
+        //Product resultProduct = null;
+        int affectedRows = 0;
         try {
             preparedStatement = con.prepareStatement(STATEMENT_UPDATE_QUANTITY);
             preparedStatement.setInt(1,quantity);
             preparedStatement.setString(2,alias);
 
 
-            resultSet = preparedStatement.executeQuery();
+            affectedRows = preparedStatement.executeUpdate();
 
+            /*
             if(resultSet.next()){
                 resultProduct = new Product(resultSet.getString("product_alias"),
                         resultSet.getString("name"),
@@ -82,7 +83,7 @@ public class UpdateProductQuantityByAliasDatabase {
                         new ProductCategory(resultSet.getString("category_name"),null),
                         resultSet.getBoolean("evidence"),
                         new ArrayList<>(), null);
-            }
+            }*/
         } finally {
             if (resultSet != null) {
                 resultSet.close();
@@ -94,6 +95,7 @@ public class UpdateProductQuantityByAliasDatabase {
         }
 
 
+        /*
         try {
             preparedStatement = con.prepareStatement(STATEMENT_GET_PICTURES);
             preparedStatement.setString(1, alias);
@@ -113,8 +115,10 @@ public class UpdateProductQuantityByAliasDatabase {
                 preparedStatement.close();
             }
         }
+
+         */
         con.close();
 
-        return resultProduct;
+        return affectedRows;
     }
 }
