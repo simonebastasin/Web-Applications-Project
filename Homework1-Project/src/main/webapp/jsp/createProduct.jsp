@@ -1,6 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--@elvariable id="product" type="Product"--%>
+<%--@elvariable id="product" type="it.unipd.dei.wa2122.wadteam.resources.Product"--%>
+<%--@elvariable id="media" type="it.unipd.dei.wa2122.wadteam.resources.Media"--%>
+<%--@elvariable id="mediaList" type="java.util.List<it.unipd.dei.wa2122.wadteam.resources.Media>"--%>
 
 <html>
 <head>
@@ -49,6 +51,9 @@
         <div>
             <label for="media">Select one or more media (hold down ctrl/cmd to select multiple media):</label><br>
             <select name="media" id="media" multiple>
+                <c:if test="${not empty media}">
+                    <option value="${media.id}">${media.id}</option>
+                </c:if>
                 <c:forEach var="media" items="${mediaList}">
                     <option value="${media.id}">${media.id}</option>
                 </c:forEach>
