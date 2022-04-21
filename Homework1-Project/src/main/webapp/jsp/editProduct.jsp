@@ -17,21 +17,21 @@
 
     <form method="POST" action="">
         <label for="alias">Alias:</label><br>
-        <input type="text" id="alias" name="alias" value="${product.alias}" disabled/><br>
+        <input type="text" id="alias" name="alias" value="${product.alias}" disabled required/><br>
         <label for="name">Name:</label><br>
-        <input type="text" id="name" name="name" value="${product.name}"/><br>
+        <input type="text" id="name" name="name" value="${product.name}" required/><br>
         <label for="brand">Brand:</label><br>
-        <input type="text" id="brand" name="brand" value="${product.brand}"/><br>
+        <input type="text" id="brand" name="brand" value="${product.brand}" required/><br>
         <label for="description">Description:</label><br>
         <input type="text" id="description" name="description" value="${product.description}"/><br>
         <label for="purchase">Purchase price:</label><br>
-        €<input type="number" min="0.01" step="0.01" max="2500" id="purchase" name="purchase" value="${product.purchasePrice}"/><br>
+        €<input type="number" min="0.01" step="0.01" max="2500" id="purchase" name="purchase" value="${product.purchasePrice}" required/><br>
         <label for="sale">Sale price:</label><br>
-        €<input type="number" min="0.01" step="0.01" max="2500" id="sale" name="sale" value="${product.salePrice}"/><br>
+        €<input type="number" min="0.01" step="0.01" max="2500" id="sale" name="sale" value="${product.salePrice}" required/><br>
         <label for="quantity">Quantity:</label><br>
-        <input type="number" min="0" step="1" id="quantity" name="quantity" value="${product.quantity}"/><br>
+        <input type="number" min="0" step="1" id="quantity" name="quantity" value="${product.quantity}" required/><br>
         <label for="category">Category:</label><br>
-        <select  name="category" id="category"">
+        <select  name="category" id="category" required>
         <c:forEach var="cat" items="${categories}">
             <c:choose>
                 <c:when test="${cat.name != product.category.name}">
