@@ -47,7 +47,7 @@
 
             <td>
             <c:forEach var="prod" items="${discountListProduct.productList}">
-                <a href="<c:url value="/products/details/${prod.alias}"/>">${prod.name}</a>&nbsp
+                <a href="<c:url value="/products/details/${prod.alias}"/>">${prod.name}, </a>&nbsp
             </c:forEach>
             </td>
 

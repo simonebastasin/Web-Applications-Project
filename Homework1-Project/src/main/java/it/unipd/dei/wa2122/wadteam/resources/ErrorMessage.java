@@ -120,6 +120,7 @@ public abstract sealed class ErrorMessage extends Message  {
         }
     }
 
+
     public static final class EmptyProductListError extends ErrorMessage {
         public EmptyProductListError(String errorDetails) {
             super("Product list cannot be empty", "206", errorDetails, HttpServletResponse.SC_NOT_ACCEPTABLE);
@@ -147,6 +148,12 @@ public abstract sealed class ErrorMessage extends Message  {
     public static final class CategoryRedundantError extends ErrorMessage {
         public CategoryRedundantError(String errorDetails) {
             super("Category name already present", "210", errorDetails, HttpServletResponse.SC_CONFLICT);
+        }
+    }
+
+    public static final class DeleteEmployeeError extends ErrorMessage {
+        public DeleteEmployeeError(String errorDetails) {
+            super("Unable to delete Employee", "211", errorDetails, HttpServletResponse.SC_NOT_ACCEPTABLE);
         }
     }
 

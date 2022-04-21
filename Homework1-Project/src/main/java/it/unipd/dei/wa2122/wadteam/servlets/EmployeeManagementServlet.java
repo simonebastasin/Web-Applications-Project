@@ -202,9 +202,17 @@ public class EmployeeManagementServlet extends AbstractDatabaseServlet {
     private void postDeleteEmployee(HttpServletRequest req, HttpServletResponse res, String param) throws ServletException, IOException {
         Employee employee;
         try {
-            employee = new DeleteEmployeeDatabase((getDataSource().getConnection()), param).deleteEmployee();
-            Message m = new Message("delete ok");
-            writeMessageOrRedirect(req, res, m, req.getContextPath() + (req.getServletPath().startsWith("/rest/") ? "/rest" : "") + "/management/employeeManagement");
+            UserCredential us = (UserCredential) req.getSession(false).getAttribute(USER_ATTRIBUTE);
+            if (param != us.getIdentification() ){
+                employee = new DeleteEmployeeDatabase((getDataSource().getConnection()), param).deleteEmployee();
+                logger.info("Delete completed successfully for employee "+employee.toString());
+                Message m = new Message("delete ok");
+                writeMessageOrRedirect(req, res, m, req.getContextPath() + (req.getServletPath().startsWith("/rest/") ? "/rest" : "") + "/management/employeeManagement");
+            }else{
+                writeError(req, res, new ErrorMessage.DeleteEmployeeError("You are trying to eliminate yourself"));
+
+            }
+
         } catch (SQLException e) {
             logger.error(e.getMessage());
             writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
