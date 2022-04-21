@@ -14,7 +14,9 @@ public class ListRoleDatabase {
     /**
      * The SQL statements to be executed
      */
-    private static final String STATEMENT = "SELECT name, description FROM role";
+    private static final String STATEMENT = "SELECT name, description " +
+            "FROM role " +
+            "ORDER BY name";
 
     /**
      * connection to the database
@@ -62,6 +64,7 @@ public class ListRoleDatabase {
             if (preparedStatement != null) {
                 preparedStatement.close();
             }
+
         }
         con.close();
 

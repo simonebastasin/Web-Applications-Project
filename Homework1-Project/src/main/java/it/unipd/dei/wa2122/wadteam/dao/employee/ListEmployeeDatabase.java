@@ -15,7 +15,9 @@ public class ListEmployeeDatabase {
     /**
      * The SQL statement to be executed
      */
-    private static final String STATEMENT = "SELECT username, name, surname, role_name FROM Employee ORDER BY username";
+    private static final String STATEMENT = "SELECT username, name, surname, role_name " +
+            "FROM Employee " +
+            "ORDER BY role_name, username";
 
     /**
      * The connection to the database
@@ -49,9 +51,9 @@ public class ListEmployeeDatabase {
         Employee resultEmployeeItem;
 
         List<Employee> resultEmployee = new ArrayList<>();
+
         try {
             preparedStatement = con.prepareStatement(STATEMENT);
-
             resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
@@ -63,14 +65,16 @@ public class ListEmployeeDatabase {
                 );
                 resultEmployee.add(resultEmployeeItem);
             }
+
         } finally {
+
             if (resultSet != null) {
                 resultSet.close();
             }
-
             if (preparedStatement != null) {
                 preparedStatement.close();
             }
+
         }
         con.close();
 
