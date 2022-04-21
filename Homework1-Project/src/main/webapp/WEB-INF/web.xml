@@ -127,6 +127,16 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>CustomerManagementServlet</servlet-name>
+        <servlet-class>it.unipd.dei.wa2122.wadteam.servlets.CustomerManagementServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CustomerManagementServlet</servlet-name>
+        <url-pattern>/management/customerManagement/*</url-pattern>
+        <url-pattern>/rest/management/customerManagement/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>DiscountManagementServlet</servlet-name>
         <servlet-class>it.unipd.dei.wa2122.wadteam.servlets.DiscountManagementServlet</servlet-class>
     </servlet>

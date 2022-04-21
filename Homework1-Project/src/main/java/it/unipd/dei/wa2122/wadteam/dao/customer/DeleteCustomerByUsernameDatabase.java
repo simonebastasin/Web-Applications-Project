@@ -1,43 +1,43 @@
 package it.unipd.dei.wa2122.wadteam.dao.customer;
 
 import it.unipd.dei.wa2122.wadteam.resources.Customer;
-import it.unipd.dei.wa2122.wadteam.resources.Employee;
-
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
-public class ListCustomerDatabase {
+public class DeleteCustomerByUsernameDatabase {
 
-    private static final String STATEMENT = "SELECT id,name,surname,fiscal_code,address,email,phone_number,username " +
-            "FROM Customer " +
-            "ORDER BY id";
+    private static final String STATEMENT = "DELETE FROM Customer " +
+            "WHERE username = ? " +
+            "RETURNING id, name, surname, fiscal_code, address, email, phone_number, username";
 
     private final Connection con;
 
-    public ListCustomerDatabase(final Connection con) {
+    private final String username;
+
+    public DeleteCustomerByUsernameDatabase(final Connection con, final String username) {
         this.con = con;
+        this.username = username;
     }
 
-    public List<Customer> getCustomer() throws SQLException {
+    public Customer deleteCustomer() throws SQLException {
 
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
 
-        Customer resultCustomerItem;
-        List<Customer> resultCustomer = new ArrayList<>();
+        // the deleted employee
+        Customer resultCustomer = null;
 
         try {
             preparedStatement = con.prepareStatement(STATEMENT);
+            preparedStatement.setString(1, username);
 
             resultSet = preparedStatement.executeQuery();
 
-            while (resultSet.next()) {
-                resultCustomerItem = new Customer(
+            if (resultSet.next()) {
+                resultCustomer = new Customer(
                         resultSet.getInt("id"),
                         resultSet.getString("name"),
                         resultSet.getString("surname"),
@@ -48,7 +48,6 @@ public class ListCustomerDatabase {
                         resultSet.getString("username"),
                         null
                 );
-                resultCustomer.add(resultCustomerItem);
             }
 
         } finally {
@@ -59,10 +58,11 @@ public class ListCustomerDatabase {
             if (preparedStatement != null) {
                 preparedStatement.close();
             }
-
         }
+
         con.close();
 
         return resultCustomer;
     }
 }
+
