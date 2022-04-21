@@ -26,15 +26,13 @@
 </c:choose>
 
 <form method="GET" action="<c:url value="/products/search"/>" style="display: inline;">
-<input type="text" id="q" name="q" pattern="[A-Za-z0-9 ]{1,20}" placeholder="Write here for search">
-<input type="submit" value="Submit">
+<input type="text" id="q" name="q" pattern="[A-Za-z0-9 ]{1,20}" placeholder="Write here to search">
+<input type="submit" value="Go">
 </form>
 
 
 <c:choose>
     <c:when test="${not empty user}">
-        <a href="<c:url value="/ticket/list"/>">View Ticket</a>
-        <a href="<c:url value="/invoice/list"/>">View Invoice</a>
         <c:choose>
             <c:when test="${empty user.role}">
                 <a href="<c:url value="/order/list"/>">Your orders</a>
@@ -46,6 +44,8 @@
             <c:when test="${not empty user.role}">
             <select  name="management" id="management" onchange="location = this.value;">
                 <option value="" disabled selected>-- infos --</option>
+                <option value="<c:url value="/ticket/list"/>">View Tickets</option>
+                <option value="<c:url value="/invoice/list"/>">View Invoices</option>
                 <option value="<c:url value="/management/productManagement"/>">Product Management</option>
                 <option value="<c:url value="/management/discountManagement"/>">Discount Management</option>
                 <option value="<c:url value="/media/list"/>">View Media</option>
