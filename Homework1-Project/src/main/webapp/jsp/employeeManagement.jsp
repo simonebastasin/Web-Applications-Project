@@ -30,8 +30,6 @@
         <th>Name</th>
         <th>Surname</th>
         <th>Role</th>
-        <th>Edit</th>
-        <th>Delete</th>
     </tr>
 
     <c:forEach var="employee" items="${employeeList}">

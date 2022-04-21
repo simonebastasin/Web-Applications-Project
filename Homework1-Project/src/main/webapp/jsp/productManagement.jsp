@@ -18,7 +18,7 @@
 <h1>Product List</h1>
 
 <div>
-    <a href="<c:url value="/management/productManagement/createProduct"/>">Add a new product</a>
+    <a href="<c:url value="/management/productManagement/createProduct"/>">Add new product</a>
 </div><br>
 
 <table>

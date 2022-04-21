@@ -14,8 +14,10 @@
 </head>
 <body>
 <c:import url="/jsp/include/header.jsp"/>
-<form method="post" action="<c:url value="/session/register"/>">
+<h1>Register</h1>
 
+<hr/>
+<form method="post" action="<c:url value="/session/register"/>">
     <ul>
         <li><label for="name">Name: </label> <input id="name" type="text" name="name"  required></li>
         <li><label for="surname">Surname: </label> <input id="surname" type="text" name="surname"  required></li>
@@ -25,12 +27,10 @@
         <li><label for="address">Address: </label><input id="address" type="text" name="address" ></li>
         <li><label for="username">Username: </label><input id="username" type="text" name="username"  required></li>
         <li><label for="password">Password: </label><input id="password" type="password" name="password"  required></li>
-
-        <input type="submit" value="submit">
-
     </ul>
-
+    <input type="submit" value="Sign Up">
 </form>
+
 <%@ include file="/html/include/footer.html"%>
 </body>
 </html>

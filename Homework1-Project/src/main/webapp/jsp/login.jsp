@@ -10,6 +10,7 @@
 <body>
 <c:import url="/jsp/include/header.jsp"/>
 <h1>Login</h1>
+
 <hr/>
 <form method="POST" action="<c:url value="/session/login"/>">
     <input type="text" name ="identification" id="identification">
@@ -22,9 +23,10 @@
         <option value ="${TypeUserEnum.CUSTOMER}">Customer</option>
         <option value ="${TypeUserEnum.EMPLOYEE}">Employee</option>
     </select>
-    <br>
-    <input type ="submit" value = "login">
+    <br><br>
+    <input type ="submit" value = "Login">
 </form>
+
 <%@ include file="/html/include/footer.html"%>
 </body>
 </html>

@@ -34,7 +34,7 @@
                 </option>
             </c:forEach>
         </select>
-        <a href="<c:url value="/management/productManagement/createCategory"/>">Add a new category</a>
+        <a href="<c:url value="/management/productManagement/createCategory"/>">Add new category</a>
         <div>
             Evidence:
             <input type="radio" id="yes"
