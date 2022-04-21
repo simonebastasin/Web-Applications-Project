@@ -4,7 +4,7 @@
 
 \subsubsection*{Buy a product}
 
-This API returns create an order with single product
+This API returns a new order with a single product
 
 \begin{itemize}
     \item URL: \texttt{/buy/product/}
@@ -13,7 +13,7 @@ This API returns create an order with single product
     \item Data Parameters: \textit{quantity}: the quantity of the product
     \item Data Parameters encoding: \texttt{x-www-form-urlencoded}
     \item Success Response: a JSON Object with the order ID.
-    \item Error Response: a JSON Object: with a key: \texttt{isError}  and value \texttt{true}, an error code, a message and details of the error.
+    \item Error Response: a JSON Object with a key: \texttt{isError}  and value \texttt{true}, an error code, a message and details of the error.
 
 \end{itemize}
 
@@ -25,11 +25,11 @@ This API returns a list of products and a list of categories
     \item URL: \texttt{/rest/cart/}
     \item Method: \texttt{POST}
     \item URL Parameters: Nothing
-    \item Data Parameters: a JSON Object that contains a JSON Array on the \texttt{cart} key. The JSON Array it contains some instances of a JSON Object  containing the alias of the product and the quantity. Like:
+    \item Data Parameters: a JSON Object that contains a JSON Array on the \texttt{cart} key. The JSON Array contains some instances of a JSON Object  containing the alias of the product and the quantity. Like:
     \texttt{{"cart":[{"quantity":2,"alias":"6465661284410"},{"quantity":3,"alias":"6465661284414"}]}}
     \item Data Parameters encoding: \texttt{application/json}
     \item Success Response:  a JSON Object with the order ID.
-    \item Error Response: a JSON Object: with a key: \texttt{isError}  and value \texttt{true}, an error code, a message and details of the error.
+    \item Error Response: a JSON Object with a key: \texttt{isError}  and value \texttt{true}, an error code, a message and details of the error.
 
 \end{itemize}
 
@@ -41,15 +41,15 @@ This API returns a list of products and a list of categories
     \item URL: \texttt{/rest/pay/}
     \item Method: \texttt{POST}
     \item URL Parameters: \textit{order ID}
-    \item Data Parameters: \texttt{payment} a value among \texttt{CREDIT\_CARD}, \texttt{GOOGLE\_PAY}, \texttt{APPLE\_PAY}.
+    \item Data Parameters: \texttt{payment} with a value among \texttt{CREDIT\_CARD}, \texttt{GOOGLE\_PAY}, \texttt{APPLE\_PAY}.
     \item Success Response: a JSON message whit transaction ID
-    \item Error Response: a JSON Object: with a key: \texttt{isError}  and value \texttt{true}, an error code, a message and details of the error.
+    \item Error Response: a JSON Object with a key: \texttt{isError}  and value \texttt{true}, an error code, a message and details of the error.
 
 \end{itemize}
 
 \subsubsection*{Cancel an order}
 
-This API cancel an order
+This API cancels an order
 
 \begin{itemize}
     \item URL: \texttt{/rest/cancel/}
@@ -57,7 +57,7 @@ This API cancel an order
     \item URL Parameters: \textit{order ID}
     \item Data Parameters: NOTHING
     \item Success Response: a JSON message
-    \item Error Response: a JSON Object: with a key: \texttt{isError}  and value \texttt{true}, an error code, a message and details of the error.
+    \item Error Response: a JSON Object with a key: \texttt{isError}  and value \texttt{true}, an error code, a message and details of the error.
 
 \end{itemize}
 
@@ -71,7 +71,7 @@ This API returns a list of products and a list of categories
     \item URL Parameters: Nothing
     \item Data Parameters: Nothing
     \item Success Response: a JSON Object with a productCategory list and a product list.
-    \item Error Response: a JSON Object: with a key: \texttt{isError}  and value \texttt{true}, an error code, a message and details of the error.
+    \item Error Response: a JSON Object with a key: \texttt{isError}  and value \texttt{true}, an error code, a message and details of the error.
 
 \end{itemize}
 
@@ -85,7 +85,7 @@ This API returns a list of products and a list of categories
     \item URL Parameters: Nothing
     \item Data Parameters: Nothing
     \item Success Response: a JSON Object with a productCategory list and a product list.
-    \item Error Response: a JSON Object: with a key: \texttt{isError}  and value \texttt{true}, an error code, a message and details of the error.
+    \item Error Response: a JSON Object with a key: \texttt{isError}  and value \texttt{true}, an error code, a message and details of the error.
     
 \end{itemize}
 
@@ -99,7 +99,7 @@ This API returns the product detail
     \item URL Parameters: \textit{product alias}
     \item Data Parameters: Nothing
     \item Success Response: a JSON Object with the product
-    \item Error Response: a JSON Object: with a key: \texttt{isError}  and value \texttt{true}, an error code, a message and details of the error.
+    \item Error Response: a JSON Object with a key: \texttt{isError}  and value \texttt{true}, an error code, a message and details of the error.
 \end{itemize}
 
 \subsubsection*{Products of a category}
@@ -112,7 +112,7 @@ This API returns a list of product belonging to a category
     \item URL Parameters: \textit{category name}
     \item Data Parameters: Nothing
     \item Success Response: a JSON Array with the product list  belonging to the category
-    \item Error Response: a JSON Object: with a key: \texttt{isError}  and value \texttt{true}, an error code, a message and details of the error.
+    \item Error Response: a JSON Object with a key: \texttt{isError}  and value \texttt{true}, an error code, a message and details of the error.
 \end{itemize}
 
 \subsubsection*{Search product}
@@ -126,7 +126,7 @@ This API returns a list of products that match the search keyword
     \item Data Parameters: \texttt{q}: a query keyword
     \item Data Parameters encoding: \texttt{x-www-form-urlencoded}
     \item Success Response: a JSON Array with the product list  that match the search keyword
-    \item Error Response: a JSON Object: with a key: \texttt{isError}  and value \texttt{true}, an error code, a message and details of the error.
+    \item Error Response: a JSON Object with a key: \texttt{isError}  and value \texttt{true}, an error code, a message and details of the error.
 \end{itemize}
 
 \subsubsection*{Media list}
@@ -139,7 +139,7 @@ This API returns a list of media
     \item URL Parameters: Nothing
     \item Data Parameters: Nothing
     \item Success Response: a JSON Array with the media list
-    \item Error Response: a JSON Object: with a key: \texttt{isError}  and value \texttt{true}, an error code, a message and details of the error.
+    \item Error Response: a JSON Object with a key: \texttt{isError}  and value \texttt{true}, an error code, a message and details of the error.
 \end{itemize}
 
 \subsubsection*{Media list}
@@ -152,7 +152,7 @@ This API returns a list of media
     \item URL Parameters: Nothing
     \item Data Parameters: Nothing
     \item Success Response: a JSON Array with the media list
-    \item Error Response: a JSON Object: with a key: \texttt{isError}  and value \texttt{true}, an error code, a message and details of the error.
+    \item Error Response: a JSON Object with a key: \texttt{isError}  and value \texttt{true}, an error code, a message and details of the error.
 \end{itemize}
 
 \subsubsection*{Upload media}
@@ -166,7 +166,7 @@ This API is used to load a media in the database
     \item Data Parameters: \texttt{file}: the file to be upload
     \item Data Parameters encoding: \texttt{multipart/form-data}
     \item Success Response: a JSON Object with the media ID
-    \item Error Response: a JSON Object: with a key: \texttt{isError}  and value \texttt{true}, an error code, a message and details of the error.
+    \item Error Response: a JSON Object with a key: \texttt{isError}  and value \texttt{true}, an error code, a message and details of the error.
 \end{itemize}
 
 \subsubsection*{Media view}
@@ -179,7 +179,7 @@ This API returns a media
     \item URL Parameters: \textit{media ID}
     \item Data Parameters: Nothing
     \item Success Response: a blob with media
-    \item Error Response: a JSON Object: with a key: \texttt{isError}  and value \texttt{true}, an error code, a message and details of the error.
+    \item Error Response: a JSON Object with a key: \texttt{isError}  and value \texttt{true}, an error code, a message and details of the error.
 \end{itemize}
 
 \subsubsection*{Media thumb view}
@@ -192,14 +192,14 @@ This API returns a thumb of a media
     \item URL Parameters: \textit{media ID}
     \item Data Parameters: Nothing
     \item Success Response: a blob with thumb of the media
-    \item Error Response: a JSON Object: with a key: \texttt{isError}  and value \texttt{true}, an error code, a message and details of the error.
+    \item Error Response: a JSON Objec: with a key: \texttt{isError}  and value \texttt{true}, an error code, a message and details of the error.
 \end{itemize}
 
 
 \subsubsection*{Order list}
 
 This API returns a list of the orders.
-If the logged-in user is a customer, it can only see their own order, if employee all of them.
+If the logged-in user is a customer, it is only possible to see their own orders, if employee all of them.
 
 \begin{itemize}
     \item URL: \texttt{/rest/order/list/}
@@ -207,13 +207,13 @@ If the logged-in user is a customer, it can only see their own order, if employe
     \item URL Parameters: Nothing
     \item Data Parameters: Nothing
     \item Success Response: a JSON Array that contains the order list
-    \item Error Response: a JSON Object: with a key: \texttt{isError}  and value \texttt{true}, an error code, a message and details of the error.
+    \item Error Response: a JSON Object with a key: \texttt{isError}  and value \texttt{true}, an error code, a message and details of the error.
 \end{itemize}
 
 \subsubsection*{Order detail}
 
-This API returns a detail of the order.
-If the logged-in user is a customer, it can only see their own order, if employee all of them.
+This API returns the details of an order.
+If the logged-in user is a customer, it is only possible to see their own orders, if employee all of them.
 
 \begin{itemize}
     \item URL: \texttt{/rest/order/detail/}
@@ -221,14 +221,14 @@ If the logged-in user is a customer, it can only see their own order, if employe
     \item URL Parameters: \textit{order ID}
     \item Data Parameters: Nothing
     \item Success Response: a JSON Object that contains the order detail
-    \item Error Response: a JSON Object: with a key: \texttt{isError}  and value \texttt{true}, an error code, a message and details of the error.
+    \item Error Response: a JSON Object with a key: \texttt{isError}  and value \texttt{true}, an error code, a message and details of the error.
 \end{itemize}
 
 
 \subsubsection*{Invoice list}
 
-This API returns a list of the invoice.
-If the logged-in user is a customer, it can only see their own order, if employee all of them.
+This API returns a list of the invoices.
+If the logged-in user is a customer, it is only possible to see their own invoices, if employee all of them.
 
 \begin{itemize}
     \item URL: \texttt{/rest/invoice/list/}
@@ -236,13 +236,13 @@ If the logged-in user is a customer, it can only see their own order, if employe
     \item URL Parameters: Nothing
     \item Data Parameters: Nothing
     \item Success Response:  a JSON Array that contains the invoice list
-    \item Error Response: a JSON Object: with a key: \texttt{isError}  and value \texttt{true}, an error code, a message and details of the error.
+    \item Error Response: a JSON Object with a key: \texttt{isError}  and value \texttt{true}, an error code, a message and details of the error.
 \end{itemize}
 
 \subsubsection*{Invoice detail}
 
-This API returns a detail of the invoice.
-If the logged-in user is a customer, it can only see their own order, if employee all of them.
+This API returns the details of an invoice.
+If the logged-in user is a customer, it is only possible to see their own invoices, if employee all of them.
 
 \begin{itemize}
     \item URL: if you want to access it with the invoice ID \texttt{/rest/invoice/detail/} or if you want to access it with the order ID \texttt{/rest/invoice/order/}
@@ -250,7 +250,7 @@ If the logged-in user is a customer, it can only see their own order, if employe
     \item URL Parameters: if you want to access it with the invoice ID \textit{invoice ID} or if you want to access it with the order ID \textit{order ID}
     \item Data Parameters: Nothing
     \item Success Response: a JSON Object that contains the invoice detail
-    \item Error Response: a JSON Object: with a key: \texttt{isError}  and value \texttt{true}, an error code, a message and details of the error.
+    \item Error Response: a JSON Object with a key: \texttt{isError}  and value \texttt{true}, an error code, a message and details of the error.
 \end{itemize}
 
 \subsubsection*{Create ticket}
@@ -264,13 +264,13 @@ This API creates a ticket.
     \item Data Parameters: \texttt{description}: the description of ticket
     \item Data Parameters encoding: \texttt{x-www-form-urlencoded}
     \item Success Response: a JSON Object that contains the newly created ticket
-    \item Error Response: a JSON Object: with a key: \texttt{isError}  and value \texttt{true}, an error code, a message and details of the error.
+    \item Error Response: a JSON Object with a key: \texttt{isError}  and value \texttt{true}, an error code, a message and details of the error.
 \end{itemize}
 
 \subsubsection*{Ticket list}
 
-This API returns a list of the ticket.
-If the logged-in user is a customer, it can only see their own order, if employee all of them.
+This API returns a list of the tickets.
+If the logged-in user is a customer, it is only possible to see their own tickets, if employee all of them.
 
 \begin{itemize}
     \item URL: \texttt{/rest/ticket/list/}
@@ -278,13 +278,13 @@ If the logged-in user is a customer, it can only see their own order, if employe
     \item URL Parameters: Nothing
     \item Data Parameters: Nothing
     \item Success Response:  a JSON Array that contains the ticket list
-    \item Error Response: a JSON Object: with a key: \texttt{isError}  and value \texttt{true}, an error code, a message and details of the error.
+    \item Error Response: a JSON Object with a key: \texttt{isError}  and value \texttt{true}, an error code, a message and details of the error.
 \end{itemize}
 
 \subsubsection*{Ticket detail}
 
-This API returns a detail of the ticket.
-If the logged-in user is a customer, it can only see their own order, if employee all of them.
+This API returns the details of a ticket.
+If the logged-in user is a customer, it is only possible to see their own tickets, if employee all of them.
 
 \begin{itemize}
     \item URL: \texttt{/rest/ticket/detail/}
@@ -292,13 +292,13 @@ If the logged-in user is a customer, it can only see their own order, if employe
     \item URL Parameters: \textit{invoice ID}
     \item Data Parameters: Nothing
     \item Success Response: a JSON Object that contains the ticket detail
-    \item Error Response: a JSON Object: with a key: \texttt{isError}  and value \texttt{true}, an error code, a message and details of the error.
+    \item Error Response: a JSON Object with a key: \texttt{isError}  and value \texttt{true}, an error code, a message and details of the error.
 \end{itemize}
 
 
 \subsubsection*{Respond ticket}
 
-This API responds a ticket with ticket status.
+This API lets respond to ticket with a new ticket status.
 
 \begin{itemize}
     \item URL: \texttt{/rest/ticket/respond/}
@@ -310,13 +310,13 @@ This API responds a ticket with ticket status.
         \item \texttt{description}: the description of ticket
     \end{itemize}
     \item Data Parameters encoding: \texttt{x-www-form-urlencoded}
-    \item Success Response: a JSON Object that contains the newly created ticket respond
-    \item Error Response: a JSON Object: with a key: \texttt{isError}  and value \texttt{true}, an error code, a message and details of the error.
+    \item Success Response: a JSON Object that contains the new ticket response
+    \item Error Response: a JSON Object with a key: \texttt{isError}  and value \texttt{true}, an error code, a message and details of the error.
 \end{itemize}
 
 \subsubsection*{User info}
 
-This API returns the info of current loggated user.
+This API returns the info of current logged user.
 
 \begin{itemize}
     \item URL: \texttt{/rest/user/info}
@@ -324,13 +324,13 @@ This API returns the info of current loggated user.
     \item URL Parameters: Nothing
     \item Data Parameters: Nothing
     \item Success Response: a JSON Object that contains the user info
-    \item Error Response: a JSON Object: with a key: \texttt{isError}  and value \texttt{true}, an error code, a message and details of the error.
+    \item Error Response: a JSON Object with a key: \texttt{isError}  and value \texttt{true}, an error code, a message and details of the error.
 \end{itemize}
 
 
 \subsubsection*{User modify}
 
-This API allows you to modify generic user information.
+This API allows to modify a generic user informations.
 
 \begin{itemize}
     \item URL: \texttt{/rest/user/modify}
@@ -347,12 +347,12 @@ This API allows you to modify generic user information.
     \end{itemize}
     \item Data Parameters encoding: \texttt{x-www-form-urlencoded}
     \item Success Response: a JSON Object that contains the new user info
-    \item Error Response: a JSON Object: with a key: \texttt{isError}  and value \texttt{true}, an error code, a message and details of the error.
+    \item Error Response: a JSON Object with a key: \texttt{isError}  and value \texttt{true}, an error code, a message and details of the error.
 \end{itemize}
 
 \subsubsection*{User modify password}
 
-This API allows you to modify password of the logged user.
+This API allows to modify the password of the logged user.
 
 \begin{itemize}
     \item URL: \texttt{/rest/user/password}
@@ -365,13 +365,13 @@ This API allows you to modify password of the logged user.
     \end{itemize}
     \item Data Parameters encoding: \texttt{x-www-form-urlencoded}
     \item Success Response: a JSON Object that contains password changed
-    \item Error Response: a JSON Object: with a key: \texttt{isError}  and value \texttt{true}, an error code, a message and details of the error.
+    \item Error Response: a JSON Object with a key: \texttt{isError}  and value \texttt{true}, an error code, a message and details of the error.
 \end{itemize}
 
 
 
 \subsubsection*{Product list}
-This API return the list of products.
+This API returns the list of products.
 
 \begin{itemize}
     \item URL: \texttt{/rest/management/productManagement}
@@ -379,41 +379,64 @@ This API return the list of products.
     \item URL Parameters: Nothing
     \item Data Parameters: Nothing
     \item Success Response: e: a JSON Array that contains product list 
-    \item Error Response: a JSON Object: with a key: \texttt{isError}  and value \texttt{true}, an error code, a message and details of the error.
+    \item Error Response: a JSON Object with a key: \texttt{isError}  and value \texttt{true}, an error code, a message and details of the error.
 \end{itemize}
 
 \subsubsection*{Create product}
-This API returns a list of category and media used for create a new product.
+This API returns the category and the list of media used to create a new product.
 
 \begin{itemize}
     \item URL: \texttt{/rest/management/productManagement/createProduct}
     \item Method: \texttt{{GET \& POST}}
     \item URL Parameters: Nothing
     \item Data Parameters: 
-    alias: set the alias, name: set the name, brand: set the brand of product, description: set the description of product, purchase: set the purchase sale, sale: set the sale price, quantity: set the initial quantity, category: set the category of product, evidence: set if the product is in evidence, media: list of media to associate with the product.
+    \begin{itemize}
+        \item alias: set the alias
+        \item name: set the name
+        \item brand: set the brand of the product
+        \item description: set the description of the product
+        \item purchase: set the purchase sale
+        \item sale: set the sale price
+        \item quantity: set the initial quantity
+        \item category: set the category of the product
+        \item evidence: set if the product should be in evidence
+        \item media: list of media that must be associated with the product
+    \end{itemize}
     
     a JSON Object containing information of the new product
     \item Success Response: e: a JSON Object with a productCategoryList end mediaList
-    \item Error Response: a JSON Object: with a key: \texttt{isError}  and value \texttt{true}, an error code, a message and details of the error.
+    \item Error Response: a JSON Object with a key: \texttt{isError}  and value \texttt{true}, an error code, a message and details of the error.
 \end{itemize}
 
 
 \subsubsection*{Edit product}
-This API returns an object product whit the attribute and a list of all media.
+This API returns an Object Product with the new attributes and its list of all media associated to it.
 
 \begin{itemize}
     \item URL: \texttt{/rest/management/productManagement/editProduct}
     \item Method: \texttt{{GET \& POST}}
     \item URL Parameters: productAlias
-    \item Data Parameters: alias: set the alias, name: set the name, brand: set the brand of product, description: set the description of product, purchase: set the purchase sale, sale: set the sale price, quantity: set the initial quantity, category: set the category of product, evidence: set if the product is in evidence, media: list of media to associate with the product.
+    \item Data Parameters: 
+    \begin{itemize}
+        \item alias: set the alias
+        \item name: set the name
+        \item brand: set the brand of the product
+        \item description: set the description of the product
+        \item purchase: set the purchase sale
+        \item sale: set the sale price
+        \item quantity: set the initial quantity
+        \item category: set the category of the product
+        \item evidence: set if the product should be in evidence
+        \item media: list of media that must be associated with the product
+    \end{itemize}
     \item Success Response: e: a JSON Object product end media list
-    \item Error Response: a JSON Object: with a key: \texttt{isError}  and value \texttt{true}, an error code, a message and details of the error.
+    \item Error Response: a JSON Object with a key: \texttt{isError}  and value \texttt{true}, an error code, a message and details of the error.
 \end{itemize}
 
 
 
 \subsubsection*{Delete product}
-This API returns an object product.
+This API returns an Object Product.
 
 \begin{itemize}
     \item URL: \texttt{/rest/management/productManagement/deleteProduct}
@@ -421,12 +444,12 @@ This API returns an object product.
     \item URL Parameters: productAlias
     \item Data Parameters: Nothing
     \item Success Response: e: a JSON Object product
-    \item Error Response: a JSON Object: with a key: \texttt{isError}  and value \texttt{true}, an error code, a message and details of the error.
+    \item Error Response: a JSON Object with a key: \texttt{isError}  and value \texttt{true}, an error code, a message and details of the error.
 \end{itemize}
 
 
 \subsubsection*{Discounts list}
-This API returns a list of object discount.
+This API returns a list of Object Discount.
 
 \begin{itemize}
     \item URL: \texttt{/rest/management/productManagement/discountManagement}
@@ -434,35 +457,47 @@ This API returns a list of object discount.
     \item URL Parameters: Nothing
     \item Data Parameters: Nothing
     \item Success Response: e: a JSON Array that contains discounts and for each discount we have a vector of associated products
-    \item Error Response: a JSON Object: with a key: \texttt{isError}  and value \texttt{true}, an error code, a message and details of the error.
+    \item Error Response: a JSON Object with a key: \texttt{isError}  and value \texttt{true}, an error code, a message and details of the error.
 \end{itemize}
 
 \subsubsection*{Create discount}
-This API returns a list of object products used for creating new discount.
+This API returns a list of Object Products used for creating new discount.
 
 \begin{itemize}
     \item URL: \texttt{/rest/management/productManagement/discountManagement/createDiscount}
     \item Method: \texttt{{GET \& POST}}
     \item URL Parameters: Nothing
-    \item Data Parameters: percentage: percentage of new discount, start: discount start date, end: discount end date, productList: list of products to be discounted
+    \item Data Parameters: 
+    \begin{itemize}
+        \item percentage: percentage of new discount
+        \item start: discount start date
+        \item end: discount end date
+        \item productList: list of the products to discount
+    \end{itemize} 
     \item Success Response: e: a JSON Array that contains products that will be chosen
-    \item Error Response: a JSON Object: with a key: \texttt{isError}  and value \texttt{true}, an error code, a message and details of the error.
+    \item Error Response: a JSON Object with a key: \texttt{isError}  and value \texttt{true}, an error code, a message and details of the error.
 \end{itemize}
 
 \subsubsection*{Edit discount}
-This API returns a Object discount and a list of all products.
+This API returns an Object Discount and a list of all products.
 
 \begin{itemize}
     \item URL: \texttt{/rest/management/productManagement/discountManagement/updateDiscount}
     \item Method: \texttt{{GET \& POST}}
     \item URL Parameters: idDiscount
-    \item Data Parameters: percentage: percentage of new discount, start: discount start date, end: discount end date, productList: list of products to be discounted
+    \item Data Parameters: 
+    \begin{itemize}
+        \item percentage: percentage of new discount
+        \item start: discount start date
+        \item end: discount end date
+        \item productList: list of the products to discount
+    \end{itemize}
     \item Success Response: e: a JSON Object of discount with associated products, and an Array of all products 
-    \item Error Response: a JSON Object: with a key: \texttt{isError}  and value \texttt{true}, an error code, a message and details of the error.
+    \item Error Response: a JSON Object with a key: \texttt{isError}  and value \texttt{true}, an error code, a message and details of the error.
 \end{itemize}
 
 \subsubsection*{Delete discount}
-This API returns a Object discount
+This API returns an Object Discount
 
 \begin{itemize}
     \item URL: \texttt{/rest/management/productManagement/discountManagement/deleteDiscount}
@@ -470,7 +505,7 @@ This API returns a Object discount
     \item URL Parameters: idDiscount
     \item Data Parameters: Nothing
     \item Success Response: e: a JSON Object of discount and an Array of associated products. 
-    \item Error Response: a JSON Object: with a key: \texttt{isError}  and value \texttt{true}, an error code, a message and details of the error.
+    \item Error Response: a JSON Object with a key: \texttt{isError}  and value \texttt{true}, an error code, a message and details of the error.
 \end{itemize}
 
 \subsubsection*{Customer list}
@@ -482,11 +517,11 @@ This API returns an Array of customer
     \item URL Parameters: Nothing
     \item Data Parameters: Nothing
     \item Success Response: e: a JSON Array of customer.
-    \item Error Response: a JSON Object: with a key: \texttt{isError}  and value \texttt{true}, an error code, a message and details of the error.
+    \item Error Response: a JSON Object with a key: \texttt{isError}  and value \texttt{true}, an error code, a message and details of the error.
 \end{itemize}
 
 \subsubsection*{Edit customer}
-This API return the customer
+This API returns the customer
 \begin{itemize}
     \item URL: \texttt{/rest/management/customerManagement/editCustomer
 }
@@ -494,10 +529,11 @@ This API return the customer
     \item URL Parameters: idCustomer
     \item Data Parameters: name, surname, fiscalCode, address, email, phoneNumber.
     \item Success Response: e: a JSON Object of customer.
-    \item Error Response: a JSON Object: with a key: \texttt{isError}  and value \texttt{true}, an error code, a message and details of the error.
+    \item Error Response: a JSON Object with a key: \texttt{isError}  and value \texttt{true}, an error code, a message and details of the error.
 \end{itemize}
+
 \subsubsection*{Delete customer}
-This rest return the Customer object to delete
+This API returns the Object Customer to delete
 \begin{itemize}
     \item URL: \texttt{/rest/management/customerManagement/deleteCustomer
 }
@@ -505,11 +541,11 @@ This rest return the Customer object to delete
     \item URL Parameters: idCustomer
     \item Data Parameters: Nothing.
     \item Success Response: e: a JSON Object of customer.
-    \item Error Response: a JSON Object: with a key: \texttt{isError}  and value \texttt{true}, an error code, a message and details of the error.
+    \item Error Response: a JSON Object with a key: \texttt{isError}  and value \texttt{true}, an error code, a message and details of the error.
 \end{itemize}
 
 \subsubsection*{Employee list}
-This API return the list of employee. 
+This API returns the list of all employees. 
 
 \begin{itemize}
     \item URL: \texttt{/rest/management/employeeManagement}
@@ -517,10 +553,11 @@ This API return the list of employee.
     \item URL Parameters: Nothing
     \item Data Parameters: Nothing
     \item Success Response: e: a JSON Array of employee.
-    \item Error Response: a JSON Object: with a key: \texttt{isError}  and value \texttt{true}, an error code, a message and details of the error.
+    \item Error Response: a JSON Object with a key: \texttt{isError}  and value \texttt{true}, an error code, a message and details of the error.
 \end{itemize}
+
 \subsubsection*{Create employee}
-This API return list of roles.
+This API return the list of all roles.
 
 \begin{itemize}
     \item URL: \texttt{/rest/management/employeeManagement/createEmployee}
@@ -528,27 +565,27 @@ This API return list of roles.
     \item URL Parameters: Nothing
     \item Data Parameters: name, surname, role.
     \item Success Response: e: a JSON Array of roles.
-    \item Error Response: a JSON Object: with a key: \texttt{isError}  and value \texttt{true}, an error code, a message and details of the error.
+    \item Error Response: a JSON Object with a key: \texttt{isError}  and value \texttt{true}, an error code, a message and details of the error.
 \end{itemize}
 
 \subsubsection*{Edit employee}
-This API return object of employee and a list of roles.
+This API returns an Object Employee and a list of roles.
 \begin{itemize}
     \item URL: \texttt{/rest/management/employeeManagement/editEmployee}
     \item Method: \texttt{{GET \& POST}}
     \item URL Parameters: username
     \item Data Parameters: name, surname, role.
     \item Success Response: e: a JSON object of employee and an Array of roles.
-    \item Error Response: a JSON Object: with a key: \texttt{isError}  and value \texttt{true}, an error code, a message and details of the error.
+    \item Error Response: a JSON Object with a key: \texttt{isError}  and value \texttt{true}, an error code, a message and details of the error.
 \end{itemize}
 
 \subsubsection*{Delete employee}
-This rest return the Employee object to delete.
+This API returns the Object Employee that has deleted
 \begin{itemize}
     \item URL: \texttt{/rest/management/employeeManagement/deleteEmployee}
     \item Method: \texttt{{GET \& POST}}
     \item URL Parameters: username
     \item Data Parameters: Nothing.
     \item Success Response: e: a JSON object of employee to delete.
-    \item Error Response: a JSON Object: with a key: \texttt{isError}  and value \texttt{true}, an error code, a message and details of the error.
+    \item Error Response: a JSON Object with a key: \texttt{isError}  and value \texttt{true}, an error code, a message and details of the error.
 \end{itemize}
