@@ -85,7 +85,7 @@ public class OrderManagementServlet extends AbstractDatabaseServlet {
                 writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
             }
         } else {
-            writeError(req, res, new ErrorMessage.IncorrectlyFormattedPathError("path aren't a number"));
+            writeError(req, res, new ErrorMessage.IncorrectlyFormattedPathError("last path parameter must be a number"));
         }
     }
 
@@ -114,7 +114,7 @@ public class OrderManagementServlet extends AbstractDatabaseServlet {
                 writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
             }
         } else {
-            writeError(req, res, new ErrorMessage.IncorrectlyFormattedPathError("path aren't a number"));
+            writeError(req, res, new ErrorMessage.IncorrectlyFormattedPathError("last path parameter must be a number"));
         }
     }
 
@@ -138,7 +138,7 @@ public class OrderManagementServlet extends AbstractDatabaseServlet {
                 writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
             }
         } else {
-            writeError(req, res, new ErrorMessage.IncorrectlyFormattedPathError("path aren't a number"));
+            writeError(req, res, new ErrorMessage.IncorrectlyFormattedPathError("last path parameter must be a number"));
         }
     }
 
@@ -162,7 +162,7 @@ public class OrderManagementServlet extends AbstractDatabaseServlet {
                 writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
             }
         } else {
-            writeError(req, res, new ErrorMessage.IncorrectlyFormattedPathError("path aren't a number"));
+            writeError(req, res, new ErrorMessage.IncorrectlyFormattedPathError("last path parameter must be a number"));
         }
     }
 }

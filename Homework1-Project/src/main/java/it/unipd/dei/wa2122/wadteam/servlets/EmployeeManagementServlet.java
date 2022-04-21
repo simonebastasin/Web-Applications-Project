@@ -116,20 +116,24 @@ public class EmployeeManagementServlet extends AbstractDatabaseServlet {
         Employee employee;
         List<Role> roleList;
         List<Resource> lists = new ArrayList<>();
-        try {
-            roleList = new ListRoleDatabase(getDataSource().getConnection()).getRole();
-            employee = new GetEmployeeDatabase(getDataSource().getConnection(), param).getEmployee();
-            if(employee != null) {
-                lists.add(employee);
-                lists.addAll(roleList);
-                writeResource(req, res, "/jsp/editEmployee.jsp", false, lists.toArray(roleList.toArray(Resource[]::new)));
+        if (!param.equals("")) {
+            try {
+                roleList = new ListRoleDatabase(getDataSource().getConnection()).getRole();
+                employee = new GetEmployeeDatabase(getDataSource().getConnection(), param).getEmployee();
+                if(employee != null) {
+                    lists.add(employee);
+                    lists.addAll(roleList);
+                    writeResource(req, res, "/jsp/editEmployee.jsp", false, lists.toArray(roleList.toArray(Resource[]::new)));
+                }
+                else {
+                    writeError(req, res, GenericError.PAGE_NOT_FOUND);
+                }
+            } catch (SQLException e) {
+                logger.error(e.getMessage());
+                writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
             }
-            else {
-                writeError(req, res, GenericError.PAGE_NOT_FOUND);
-            }
-        } catch (SQLException e) {
-            logger.error(e.getMessage());
-            writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
+        } else {
+            writeError(req, res, new ErrorMessage.IncorrectlyFormattedPathError("last path parameter cannot be empty"));
         }
     }
 
@@ -169,17 +173,21 @@ public class EmployeeManagementServlet extends AbstractDatabaseServlet {
      */
     private void getDeleteEmployee(HttpServletRequest req, HttpServletResponse res, String param) throws ServletException, IOException {
         Employee employee;
-        try {
-            employee = new GetEmployeeDatabase(getDataSource().getConnection(), param).getEmployee();
-            if(employee != null) {
-                writeResource(req, res, "/jsp/deleteEmployee.jsp", true, employee);
+        if (!param.equals("")) {
+            try {
+                employee = new GetEmployeeDatabase(getDataSource().getConnection(), param).getEmployee();
+                if(employee != null) {
+                    writeResource(req, res, "/jsp/deleteEmployee.jsp", true, employee);
+                }
+                else {
+                    writeError(req, res, GenericError.PAGE_NOT_FOUND);
+                }
+            } catch (SQLException e) {
+                logger.error(e.getMessage());
+                writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
             }
-            else {
-                writeError(req, res, GenericError.PAGE_NOT_FOUND);
-            }
-        } catch (SQLException e) {
-            logger.error(e.getMessage());
-            writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
+        } else {
+            writeError(req, res, new ErrorMessage.IncorrectlyFormattedPathError("last path parameter cannot be empty"));
         }
     }
 

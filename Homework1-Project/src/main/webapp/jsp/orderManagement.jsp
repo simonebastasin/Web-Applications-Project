@@ -25,6 +25,7 @@
         <th>Order_Date</th>
         <th>Products</th>
         <th>Status</th>
+        <th>Last_Status_Update</th>
     </tr>
 
     <c:forEach var="onlineOrder" items="${onlineOrderList}">
@@ -38,6 +39,7 @@
                 </c:forEach>
             </ul></td>
             <td>${onlineOrder.status}</td>
+            <td>${onlineOrder.status.osDateTime.getHumanDate()}</td>
             <td>
                 <a href="<c:url value="/management/orderManagement/editOrder/${onlineOrder.idOrder}"/>">Edit</a>
             </td>
