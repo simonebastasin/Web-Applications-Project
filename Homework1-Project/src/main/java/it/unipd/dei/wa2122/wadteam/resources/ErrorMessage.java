@@ -153,7 +153,7 @@ public abstract sealed class ErrorMessage extends Message  {
 
     public static final class DeleteEmployeeError extends ErrorMessage {
         public DeleteEmployeeError(String errorDetails) {
-            super("Unable to delete Employee", "211", errorDetails, HttpServletResponse.SC_NOT_ACCEPTABLE);
+            super("Unable to delete Employee", "211", errorDetails, HttpServletResponse.SC_CONFLICT);
         }
     }
 

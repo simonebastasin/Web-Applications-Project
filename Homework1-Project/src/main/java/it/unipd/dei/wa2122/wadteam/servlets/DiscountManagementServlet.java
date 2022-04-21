@@ -16,6 +16,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+
+
 public class DiscountManagementServlet extends AbstractDatabaseServlet{
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
@@ -31,6 +33,7 @@ public class DiscountManagementServlet extends AbstractDatabaseServlet{
         }
 
     }
+
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse res) throws  ServletException, IOException {
