@@ -63,15 +63,15 @@ public abstract sealed class ErrorMessage extends Message  {
         }
     }
 
-    public static final class SqlInternalError extends ErrorMessage {
-        public SqlInternalError(String errorDetails) {
-            super("Internal error", "210", errorDetails, HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-        }
-    }
-
     public static final class InternalError extends ErrorMessage {
         public InternalError(String errorDetails) {
             super("Internal error", "200", errorDetails, HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    public static final class SqlInternalError extends ErrorMessage {
+        public SqlInternalError(String errorDetails) {
+            super("SQL Internal error", "210", errorDetails, HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -99,18 +99,17 @@ public abstract sealed class ErrorMessage extends Message  {
         }
     }
 
-
     // Error code from 290
 
     public static final class StartDateAfterDndDate extends ErrorMessage {
         public StartDateAfterDndDate(String errorDetails) {
-            super("The entered start date is later than the end date ", "290", errorDetails, HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            super("The entered start date is later than the end date", "290", errorDetails, HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         }
     }
 
     public static final class EmptyProductList extends ErrorMessage {
         public EmptyProductList(String errorDetails) {
-            super("The product list cannot be empty  ", "291", errorDetails, HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            super("The product list cannot be empty", "291", errorDetails, HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -127,10 +126,15 @@ public abstract sealed class ErrorMessage extends Message  {
         }
     }
 
-
     public static final class CancelOrderError extends ErrorMessage {
         public CancelOrderError(String errorDetails) {
             super("Unable to delete order", "302", errorDetails, HttpServletResponse.SC_NOT_ACCEPTABLE);
+        }
+    }
+
+    public static final class DeleteCustomerError extends ErrorMessage {
+        public DeleteCustomerError(String errorDetails) {
+            super("Unable to delete this customer, he is involved in at least one assistance ticket", "303", errorDetails, HttpServletResponse.SC_NOT_ACCEPTABLE);
         }
     }
 
