@@ -32,11 +32,11 @@ abstract class AbstractFilter implements Filter {
 
     public void unauthorized(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         String unauthorizedUri = "/jsp/unauthorized.jsp";
+        res.setStatus(401);
         if (req.getServletPath().startsWith("/rest/") || req.getHeader("Accept").contains("application/json")) {
             res.setContentType(JSON_UTF_8_MEDIA_TYPE);
             res.getWriter().write(GenericError.UNAUTHORIZED.toJSON().toString(2));
         } else {
-            res.setStatus(401);
             req.getRequestDispatcher(unauthorizedUri).forward(req, res);
         }
     }

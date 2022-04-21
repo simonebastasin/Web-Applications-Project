@@ -20,7 +20,7 @@
         <ul>
             <li>message: <c:out value="${message.message}"/></li>
             <c:choose>
-                <c:when test="not empty ${message.resourceId}">
+                <c:when test="${not empty message.resourceId}">
                     <li>resource id: <c:out value="${message.resourceId}"/></li>
                 </c:when>
             </c:choose>

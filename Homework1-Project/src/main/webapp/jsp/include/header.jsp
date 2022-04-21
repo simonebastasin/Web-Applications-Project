@@ -52,10 +52,10 @@
                 <option value="<c:url value="/media/upload"/>">Upload Media</option>
                 <option value="<c:url value="/invoice/list"/>">View Invoice List</option>
                 <option value="<c:url value="/management/orderManagement"/>">Order Management</option>
-                <option value="<c:url value="/management/customerManagement"/>">Customer Management</option>
                 <c:choose>
                     <c:when test="${user.role == 'Administrator'}">
                         <option value="<c:url value="/management/employeeManagement"/>">Employee Management</option>
+                        <option value="<c:url value="/management/customerManagement"/>">Customer Management</option>
                     </c:when>
                 </c:choose>
             </select>

@@ -177,9 +177,11 @@
     <filter-mapping>
         <filter-name>AdminFilter</filter-name>
         <url-pattern>/management/employeeManagement</url-pattern>
+        <url-pattern>/management/customerManagement</url-pattern>
         <url-pattern>/media/list</url-pattern>
         <url-pattern>/media/upload</url-pattern>
         <url-pattern>/rest/management/employeeManagement</url-pattern>
+        <url-pattern>/rest/management/customerManagement</url-pattern>
         <url-pattern>/rest/media/list</url-pattern>
         <url-pattern>/rest/media/upload</url-pattern>
     </filter-mapping>
