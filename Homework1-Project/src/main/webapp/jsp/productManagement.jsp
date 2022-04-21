@@ -46,7 +46,7 @@
             <td>${prod.evidence}</td>
             <td>
                 <c:forEach var="picture" items="${prod.pictures}">
-                    ${picture.id}
+                    ${picture},
                 </c:forEach>
             </td>
             <td><a href="<c:url value="/management/productManagement/editProduct/${prod.alias}"/>">Edit</a></td>
