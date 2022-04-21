@@ -30,6 +30,7 @@
         <th>Sale Price</th>
         <th>Quantity</th>
         <th>Evidence</th>
+        <th>Media</th>
     </tr>
 
 
@@ -43,6 +44,11 @@
             <td>${prod.salePrice}</td>
             <td>${prod.quantity}</td>
             <td>${prod.evidence}</td>
+            <td>
+                <c:forEach var="picture" items="${prod.pictures}">
+                    ${picture.id}
+                </c:forEach>
+            </td>
             <td><a href="<c:url value="/management/productManagement/editProduct/${prod.alias}"/>">Edit</a></td>
             <td><a href="<c:url value="/management/productManagement/deleteProduct/${prod.alias}"/>">Delete</a></td>
         </tr>

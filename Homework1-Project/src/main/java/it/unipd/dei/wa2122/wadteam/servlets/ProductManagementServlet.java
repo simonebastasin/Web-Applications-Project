@@ -57,7 +57,6 @@ public class ProductManagementServlet extends AbstractDatabaseServlet{
 
             List<Resource> lists = new ArrayList<>();
             for(var prod : products){
-                if (prod.getQuantity() > 0)
                     lists.add(prod);
             }
 
