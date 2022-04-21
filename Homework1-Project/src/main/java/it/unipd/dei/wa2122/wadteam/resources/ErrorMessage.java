@@ -15,127 +15,154 @@ public abstract sealed class ErrorMessage extends Message  {
         return httpErrorCode;
     }
 
-    public static final class MediaNotFoundError extends ErrorMessage {
-        public MediaNotFoundError(String errorDetails) {
-            super("Media not found", "10", errorDetails, HttpServletResponse.SC_NOT_FOUND);
-        }
-    }
-
-    public static final class IncorrectlyFormattedPathError extends ErrorMessage {
-        public IncorrectlyFormattedPathError(String errorDetails) {
-            super("Path incorrectly formatted", "20", errorDetails, HttpServletResponse.SC_BAD_REQUEST);
-        }
-    }
-
-    public static final class IncorrectlyFormattedDataError extends ErrorMessage {
-        public IncorrectlyFormattedDataError(String errorDetails) {
-            super("Data incorrectly formatted", "21", errorDetails, HttpServletResponse.SC_BAD_REQUEST);
-        }
-    }
-
-    public static final class EmptyMediaError extends ErrorMessage {
-        public EmptyMediaError(String errorDetails) {
-            super("Empty media", "30", errorDetails, HttpServletResponse.SC_NO_CONTENT);
-        }
-    }
-
-    public static final class ProductNotFoundError extends ErrorMessage {
-        public ProductNotFoundError(String errorDetails) {
-            super("Product not found", "40", errorDetails, HttpServletResponse.SC_NOT_FOUND);
-        }
-    }
-
-    public static final class UserCredentialNotCorrectError extends ErrorMessage {
-        public UserCredentialNotCorrectError(String errorDetails) {
-            super("Username or password not correct", "50", errorDetails, HttpServletResponse.SC_UNAUTHORIZED);
-        }
-    }
+    /**
+     * Application specific errors
+     */
 
     public static final class UserCredentialError extends ErrorMessage {
         public UserCredentialError(String errorDetails) {
-            super("Username error", "51", errorDetails, HttpServletResponse.SC_UNAUTHORIZED);
-        }
-    }
-
-    public static final class OrderNotFoundError extends ErrorMessage {
-        public OrderNotFoundError(String errorDetails) {
-            super("Product not found", "60", errorDetails, HttpServletResponse.SC_NOT_FOUND);
-        }
-    }
-
-    public static final class InternalError extends ErrorMessage {
-        public InternalError(String errorDetails) {
-            super("Internal error", "200", errorDetails, HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-        }
-    }
-
-    public static final class SqlInternalError extends ErrorMessage {
-        public SqlInternalError(String errorDetails) {
-            super("SQL Internal error", "210", errorDetails, HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-        }
-    }
-
-    public static final class UploadError extends ErrorMessage {
-        public UploadError(String errorDetails) {
-            super("Upload error", "220", errorDetails, HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            super("Login credentials are not correct", "100", errorDetails, HttpServletResponse.SC_UNAUTHORIZED);
         }
     }
 
     public static final class ChangePasswordError extends ErrorMessage {
         public ChangePasswordError(String errorDetails) {
-            super("Password not changed", "240", errorDetails, HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            super("Unable to change password", "101", errorDetails, HttpServletResponse.SC_BAD_REQUEST);
         }
     }
 
-    public static final class NotLogin extends ErrorMessage {
-        public NotLogin(String errorDetails) {
-            super("Login required to see this page", "260", errorDetails, HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+    public static final class NotLoggedInError extends ErrorMessage {
+        public NotLoggedInError(String errorDetails) {
+            super("Login required to see this page", "102", errorDetails, HttpServletResponse.SC_UNAUTHORIZED);
         }
     }
 
-    public static final class ElementRedundant extends ErrorMessage {
-        public ElementRedundant(String errorDetails) {
-            super("Data element already present", "280", errorDetails, HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+    public static final class AlreadyLoggedInError extends ErrorMessage {
+        public AlreadyLoggedInError(String errorDetails) {
+            super("User already logged in", "103", errorDetails, HttpServletResponse.SC_CONFLICT);
         }
     }
 
-    // Error code from 290
-
-    public static final class StartDateAfterDndDate extends ErrorMessage {
-        public StartDateAfterDndDate(String errorDetails) {
-            super("The entered start date is later than the end date", "290", errorDetails, HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+    public static final class IncorrectlyFormattedPathError extends ErrorMessage {
+        public IncorrectlyFormattedPathError(String errorDetails) {
+            super("Path incorrectly formatted", "104", errorDetails, HttpServletResponse.SC_BAD_REQUEST);
         }
     }
 
-    public static final class EmptyProductList extends ErrorMessage {
-        public EmptyProductList(String errorDetails) {
-            super("The product list cannot be empty", "291", errorDetails, HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+    public static final class IncorrectlyFormattedDataError extends ErrorMessage {
+        public IncorrectlyFormattedDataError(String errorDetails) {
+            super("Data incorrectly formatted", "105", errorDetails, HttpServletResponse.SC_BAD_REQUEST);
         }
     }
-
 
     public static final class OrderError extends ErrorMessage {
         public OrderError(String errorDetails) {
-            super("Order error", "300", errorDetails, HttpServletResponse.SC_NOT_ACCEPTABLE);
+            super("Order error", "106", errorDetails, HttpServletResponse.SC_NOT_ACCEPTABLE);
         }
     }
 
-    public static final class OutOfStock extends ErrorMessage {
-        public OutOfStock(String errorDetails) {
-            super("Product are out of stock", "301", errorDetails, HttpServletResponse.SC_NOT_ACCEPTABLE);
+    public static final class ProductOutOfStockError extends ErrorMessage {
+        public ProductOutOfStockError(String errorDetails) {
+            super("Product are out of stock", "107", errorDetails, HttpServletResponse.SC_NOT_ACCEPTABLE);
         }
     }
 
     public static final class CancelOrderError extends ErrorMessage {
         public CancelOrderError(String errorDetails) {
-            super("Unable to delete order", "302", errorDetails, HttpServletResponse.SC_NOT_ACCEPTABLE);
+            super("Unable to delete order", "108", errorDetails, HttpServletResponse.SC_NOT_ACCEPTABLE);
         }
     }
+
+    public static final class CustomerRedundantError extends ErrorMessage {
+        public CustomerRedundantError(String errorDetails) {
+            super("Customer data already present", "109", errorDetails, HttpServletResponse.SC_CONFLICT);
+        }
+    }
+
+    /**
+     * Employee specific errors
+     */
+
+    public static final class EmptyMediaError extends ErrorMessage {
+        public EmptyMediaError(String errorDetails) {
+            super("Media cannot be empty", "200", errorDetails, HttpServletResponse.SC_NO_CONTENT);
+        }
+    }
+
+    public static final class MediaNotFoundError extends ErrorMessage {
+        public MediaNotFoundError(String errorDetails) {
+            super("Media not found", "201", errorDetails, HttpServletResponse.SC_NOT_FOUND);
+        }
+    }
+
+    public static final class ProductNotFoundError extends ErrorMessage {
+        public ProductNotFoundError(String errorDetails) {
+            super("Product not found", "202", errorDetails, HttpServletResponse.SC_NOT_FOUND);
+        }
+    }
+
+    public static final class OrderNotFoundError extends ErrorMessage {
+        public OrderNotFoundError(String errorDetails) {
+            super("Order not found", "203", errorDetails, HttpServletResponse.SC_NOT_FOUND);
+        }
+    }
+
+    public static final class UploadError extends ErrorMessage {
+        public UploadError(String errorDetails) {
+            super("Upload error", "204", errorDetails, HttpServletResponse.SC_NOT_ACCEPTABLE);
+        }
+    }
+
 
     public static final class DeleteCustomerError extends ErrorMessage {
         public DeleteCustomerError(String errorDetails) {
-            super("Unable to delete this customer, he is involved in at least one assistance ticket", "303", errorDetails, HttpServletResponse.SC_NOT_ACCEPTABLE);
+            super("Unable to delete customer", "205", errorDetails, HttpServletResponse.SC_NOT_ACCEPTABLE);
         }
     }
 
+    public static final class EmptyProductListError extends ErrorMessage {
+        public EmptyProductListError(String errorDetails) {
+            super("Product list cannot be empty", "206", errorDetails, HttpServletResponse.SC_NOT_ACCEPTABLE);
+        }
+    }
+
+    public static final class DatesTimelineError extends ErrorMessage {
+        public DatesTimelineError(String errorDetails) {
+            super("Start date cannot be later than end date", "207", errorDetails, HttpServletResponse.SC_NOT_ACCEPTABLE);
+        }
+    }
+
+    public static final class EmployeeRedundantError extends ErrorMessage {
+        public EmployeeRedundantError(String errorDetails) {
+            super("Employee username already present", "208", errorDetails, HttpServletResponse.SC_CONFLICT);
+        }
+    }
+
+    public static final class ProductRedundantError extends ErrorMessage {
+        public ProductRedundantError(String errorDetails) {
+            super("Product alias already present", "209", errorDetails, HttpServletResponse.SC_CONFLICT);
+        }
+    }
+
+    public static final class CategoryRedundantError extends ErrorMessage {
+        public CategoryRedundantError(String errorDetails) {
+            super("Category name already present", "210", errorDetails, HttpServletResponse.SC_CONFLICT);
+        }
+    }
+
+    /**
+     * Internal errors
+     */
+
+    public static final class SqlInternalError extends ErrorMessage {
+        public SqlInternalError(String errorDetails) {
+            super("SQL Internal error", "998", errorDetails, HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    public static final class InternalError extends ErrorMessage {
+        public InternalError(String errorDetails) {
+            super("Internal error", "999", errorDetails, HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+        }
+    }
 }

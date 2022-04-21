@@ -47,7 +47,7 @@ public class UserServlet extends AbstractDatabaseServlet {
                                 writeError(req, resp, new ErrorMessage.SqlInternalError(e.getMessage()));
                             }
                         }
-                        default -> writeError(req, resp, new ErrorMessage.NotLogin("not allowed"));
+                        default -> writeError(req, resp, new ErrorMessage.NotLoggedInError("not allowed"));
                     }
                 }
                 case "modify" -> {

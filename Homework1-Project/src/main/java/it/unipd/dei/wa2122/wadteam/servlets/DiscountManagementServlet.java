@@ -179,14 +179,14 @@ public class DiscountManagementServlet extends AbstractDatabaseServlet{
         DateTime endDate = new DateTime(LocalDateTime.of(endDateyear, endDatemonth, endDateday, 0,0,0));
 
         if(startDate.compareTo0(endDate) > 1 ){
-            writeError(req,res,new ErrorMessage.StartDateAfterDndDate("error in date format"));
+            writeError(req,res,new ErrorMessage.DatesTimelineError("error in date format"));
         }else {
 
 
             String[] productList = req.getParameterValues("productList");
 
             if(productList == null){
-                writeError(req,res,new ErrorMessage.EmptyProductList("product List Empty"));
+                writeError(req,res,new ErrorMessage.EmptyProductListError("product list is empty"));
             }else {
                 List<Product> productAliasList = new ArrayList<Product>();
                 for (var pr : productList) {
@@ -249,14 +249,14 @@ public class DiscountManagementServlet extends AbstractDatabaseServlet{
         DateTime endDate = new DateTime(LocalDateTime.of(endDateyear, endDatemonth, endDateday, 0,0,0));
 
         if(startDate.compareTo0(endDate) > 1 ){
-            writeError(req,res,new ErrorMessage.StartDateAfterDndDate("error in date format"));
+            writeError(req,res,new ErrorMessage.DatesTimelineError("error in date format"));
         }else {
 
 
             String[] productList = req.getParameterValues("productList");
 
             if(productList == null){
-                writeError(req,res,new ErrorMessage.EmptyProductList("product List Empty"));
+                writeError(req,res,new ErrorMessage.EmptyProductListError("product list is empty"));
             }else {
                 List<Product> productAliasList = new ArrayList<Product>();
                 for (var pr : productList) {

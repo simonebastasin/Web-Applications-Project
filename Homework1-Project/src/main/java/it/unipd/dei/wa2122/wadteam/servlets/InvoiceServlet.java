@@ -74,7 +74,7 @@ public class InvoiceServlet extends AbstractDatabaseServlet{
         var ut = ((UserCredential) req.getSession(false).getAttribute(USER_ATTRIBUTE)).getType();
         switch (ut) {
             case EMPLOYEE -> writeJsp(req, resp, "/jsp/createInvoice.jsp");
-            default ->  writeError(req, resp, new ErrorMessage.NotLogin("not allowed"));
+            default ->  writeError(req, resp, new ErrorMessage.NotLoggedInError("not allowed"));
         }
     }
 

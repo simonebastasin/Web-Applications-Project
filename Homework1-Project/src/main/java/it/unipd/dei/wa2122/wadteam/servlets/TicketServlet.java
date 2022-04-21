@@ -41,7 +41,7 @@ public class TicketServlet extends AbstractDatabaseServlet {
         var ut = ((UserCredential) req.getSession(false).getAttribute(USER_ATTRIBUTE)).getType();
         switch (ut) {
             case CUSTOMER -> writeJsp(req, resp, "/jsp/createTicket.jsp");
-            default ->  writeError(req, resp, new ErrorMessage.NotLogin("not allowed"));
+            default ->  writeError(req, resp, new ErrorMessage.NotLoggedInError("not allowed"));
         }
     }
 

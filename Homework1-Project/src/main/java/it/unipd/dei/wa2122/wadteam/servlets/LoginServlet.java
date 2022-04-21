@@ -81,7 +81,7 @@ public class LoginServlet extends AbstractDatabaseServlet {
                         } else {
                             logger.info("User "+identification+" failed to log in");
 
-                            writeError(req, resp, new ErrorMessage.UserCredentialError("Username or password aren't correct"));
+                            writeError(req, resp, new ErrorMessage.UserCredentialError("Username/email or password are not correct"));
                         }
 
                     } catch (SQLException e) {
@@ -128,12 +128,12 @@ public class LoginServlet extends AbstractDatabaseServlet {
                         {
                             logger.info("User "+username +" is attempting to re-register");
 
-                            writeError(req,resp,new ErrorMessage.ElementRedundant("username already present"));
+                            writeError(req,resp,new ErrorMessage.CustomerRedundantError("username already present"));
                         }
                         else {
                             logger.info("User "+email +" is attempting to re-register");
 
-                            writeError(req, resp, new ErrorMessage.ElementRedundant("email already present"));
+                            writeError(req, resp, new ErrorMessage.CustomerRedundantError("email already present"));
                         }
                     } catch (SQLException e) {
                         logger.error(e.getMessage());

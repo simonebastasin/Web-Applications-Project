@@ -43,7 +43,7 @@ public class BuyProductServlet extends AbstractDatabaseServlet {
                                 writeResource(req,res,"/jsp/buyChart.jsp",true, processedOrder);
                             } else {
                                 logger.error("out of stock");
-                                writeError(req, res, new ErrorMessage.OutOfStock("out of stock"));
+                                writeError(req, res, new ErrorMessage.ProductOutOfStockError("out of stock"));
                             }
                         }
                         else
@@ -72,7 +72,7 @@ public class BuyProductServlet extends AbstractDatabaseServlet {
                                 writeResource(req,res,"/jsp/buyChart.jsp",true, onlineOrder);
                             } else {
                                 logger.error("out of stock");
-                                writeError(req, res, new ErrorMessage.OutOfStock("out of stock"));
+                                writeError(req, res, new ErrorMessage.ProductOutOfStockError("out of stock"));
                             }
                         }
                     } catch (SQLException e) {
@@ -101,7 +101,7 @@ public class BuyProductServlet extends AbstractDatabaseServlet {
                         writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
                     }
                 } else {
-                    writeError(req, res, new ErrorMessage.IncorrectlyFormattedPathError("path aren't a number"));
+                    writeError(req, res, new ErrorMessage.IncorrectlyFormattedPathError("last path parameter must be a number"));
                 }
             }
             default -> writeError(req, res, GenericError.PAGE_NOT_FOUND);
@@ -147,7 +147,7 @@ public class BuyProductServlet extends AbstractDatabaseServlet {
             product = new GetProductDatabase(getDataSource().getConnection(), alias).getProduct();
 
             if(quantity > product.getQuantity() || quantity < 1){
-                writeError(req, res, new ErrorMessage.OutOfStock("Product quantity out of bounds"));
+                writeError(req, res, new ErrorMessage.ProductOutOfStockError("Product quantity out of bounds"));
             } else if (req.getSession(false) != null && req.getSession(false).getAttribute(USER_ATTRIBUTE) != null) {
 
                 HttpSession session = req.getSession(false);
@@ -294,7 +294,7 @@ public class BuyProductServlet extends AbstractDatabaseServlet {
                             writeError(req, res, new ErrorMessage.InternalError("Error on update"));
                         }
                     } else {
-                        writeError(req, res, new ErrorMessage.OutOfStock("Product quantity out of bounds"));
+                        writeError(req, res, new ErrorMessage.ProductOutOfStockError("Product quantity out of bounds"));
                     }
                 } else {
                     writeError(req, res, new ErrorMessage.OrderNotFoundError("Order not found"));
@@ -304,7 +304,7 @@ public class BuyProductServlet extends AbstractDatabaseServlet {
                 writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
             }
         } else {
-            writeError(req, res, new ErrorMessage.IncorrectlyFormattedPathError("Order id incorrect"));
+            writeError(req, res, new ErrorMessage.IncorrectlyFormattedPathError("last path parameter must be a number"));
         }
     }
 
@@ -325,7 +325,7 @@ public class BuyProductServlet extends AbstractDatabaseServlet {
                 writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
             }
         } else {
-            writeError(req, res, new ErrorMessage.IncorrectlyFormattedPathError("path aren't a number"));
+            writeError(req, res, new ErrorMessage.IncorrectlyFormattedPathError("last path parameter must be a number"));
         }
     }
 }
