@@ -1,15 +1,37 @@
 \subsection{REST Error Codes}
 
-%If needed, add few lines of text, describing the error codes table
+Here the list of errors defined in the application. Application specific errors have the application error which follows a progressive numeration starting from 100. Employees specific management errors are identified starting from 200. Internal errors, which correspond to crashes, servlet exceptions, or problems with the input/output streams are identified with the Error Code 999 and 998 (specific for SQL errors).
 
-In our webapp there are two types of errors: generic errors, 
-like page not found or not authorized and specific errors, 
-which are listed in the table \ref{tab:ErrorRest}.
-
-\begin{longtable}{|p{.15\columnwidth}|p{.2\columnwidth} |p{.6\columnwidth}|} 
+\begin{longtable}{|p{.15\columnwidth}|p{.35\columnwidth} |p{.6\columnwidth}|}
 \hline
 \textbf{Error Code} & \textbf{HTTP Status Code} & \textbf{Description} \\\hline
-Error Code Identifier & Corresponding HTTP Status Code &  Description of the error \\\hline
-\caption{Describe in this table your REST API}
+
+100 & UNAUTHORIZED & Login credentials are not correct \\\hline
+101 & BAD\_REQUEST & Unable to change password \\\hline
+102 & UNAUTHORIZED & Login required to see this page \\\hline
+103 & CONFLICT & User already logged in \\\hline
+104 & BAD\_REQUEST & Path incorrectly formatted \\\hline
+105 & BAD\_REQUEST & Data incorrectly formatted \\\hline
+106 & NOT\_ACCEPTABLE & Order error \\\hline
+107 & NOT\_ACCEPTABLE & Product are out of stock \\\hline
+108 & NOT\_ACCEPTABLE & Unable to delete order \\\hline
+109 & CONFLICT & Data element already present \\\hline
+
+200 & NO\_CONTENT & Media cannot be empty \\\hline
+201 & NOT\_FOUND & Media not found \\\hline
+202 & NOT\_FOUND & Product not found \\\hline
+203 & NOT\_FOUND & Order not found \\\hline
+204 & NOT\_ACCEPTABLE & Upload error \\\hline
+205 & NOT\_ACCEPTABLE & Unable to delete customer \\\hline
+206 & NOT\_ACCEPTABLE & Product list cannot be empty \\\hline
+207 & NOT\_ACCEPTABLE & Start date cannot be later than end date \\\hline
+208 & CONFLICT & Employee username already present \\\hline
+209 & CONFLICT & Product alias already present \\\hline
+210 & CONFLICT & Category name already present \\\hline
+
+998 & INTERNAL\_SERVER\_ERROR & SQL Internal error \\\hline
+999 & INTERNAL\_SERVER\_ERROR & Internal error \\\hline
+
+\caption{Error codes for the REST interface of the Electromechanics Shop application back-end}
 \label{tab:ErrorRest}
 \end{longtable}
