@@ -5,13 +5,13 @@
 The website is divided into the following pages:
 \begin{itemize}
     \item \textbf{Homepage}: contains the showcase of the featured products and the available products.
-    \item \textbf{Product page}: allows the customer to inspect all the information about the given product. To buy the product the customer has to be logged in.
+    \item \textbf{Product page}: allows the customer to inspect all the information about a given product. To buy the product the customer has to be logged in.
     \item \textbf{Login page}: allows both customers and employees to login. 
-    \item \textbf{Order list and Order details page}: allow each customer to look at their order history to open a ticket, cancel the order or get the invoice.
+    \item \textbf{Order list and Order details page}: allow each customer to look at their order history, to open a ticket, cancel the order or get the invoice.
     \item \textbf{Tickets page}: allows each customer to look at their ticket history. There exists an employee version of the page to manage each ticket.
-    \item \textbf{Product management pages}: both simple employees and administrators are able to look at all the products and edit/delete them. Through a second page (Discount management) it is also possible to add some discounts.
+    \item \textbf{Product management pages}: both simple employees and administrators are able to look at all the products and create/edit/delete them. Through a second page (Discount management) it is also possible to add some discounts to the products.
     \item \textbf{Orders management page}: both simple employees and administrators are able to look at all the orders and edit/cancel them. It's also possible to look at the existing invoices for each product.
-    \item \textbf{User edit page}: allows both customers and employees to modify their personal data using a simple form. 
+    \item \textbf{User edit page}: allows both customers and employees to modify their personal data. 
     \item \textbf{Administration page}: allows the administrators to edit the name, surname, role of all the users and even delete their account.
 \end{itemize}
 
@@ -23,9 +23,9 @@ The website is divided into the following pages:
             \label{fig:Homepage}
     \end{figure}
 
-The homepage contains the main informations regarding the various products available.
-The products are divided into subsets according to their category.This subdivision will be done by means of a scrollable list. Moreover, the homepage contains a search bar that allows a user to search by name a product element.
-Like most of the top pages, the homepage contains a status bar that allows the user to register, log in or log out once logged in.
+The homepage contains the main information regarding the various products available.
+The products are divided into subsets according to their category. This subdivision will be done by using a scrollable list. Moreover, the homepage contains a search bar that allows a user to search a product by its name.
+The homepage contains a status bar that allows the user to register, log in or log out once logged in.
 Finally, this status bar allows customers to show the history of the products purchased.
 
 \subsection{Product page}
@@ -36,10 +36,10 @@ Finally, this status bar allows customers to show the history of the products pu
             \label{fig:ProductPage}
     \end{figure}
 
-The product page shows in detail the informations regarding the individual product.
-This page shows all the pictures available for a given product, the description and its price.
+The product page shows in detail the information regarding a specific product.
+This page shows all the pictures available for the product, the description and its price.
 In addition, it also shows any discount applied to the product at the moment.
-If the customer is logged in, it will be possible for him to purchase the product within the maximum quantity available. It is possible to enter these particular pages by clicking on the product on the homepage, on its specific category page or by searching it by name using the search bar.
+If the customer is logged in, it will be possible for him to purchase the product within the maximum quantity available. It is possible to enter these particular pages by clicking on a product from the homepage, from the specific category page or by searching it by name using the search bar.
 
 \subsection{OrderList and OrderDetails}
     \begin{figure}[H]
@@ -49,8 +49,8 @@ If the customer is logged in, it will be possible for him to purchase the produc
             \label{fig:OrderPage}
     \end{figure}
 
-This page shows in detail all the orders placed by the given customer user logged at the moment. It shows the history of all orders placed since the user's registration up till the present. For each order it shows the date, the total price and the status of the order.
-Furthermore, it shows the list of all the products purchased in the given order, the quantity of each and the unit price at the time of purchase.
+This page shows in detail all the orders placed by the customer which is currently logged in. It shows the history of all orders placed since the user's registration till now. For each order, it shows the date, the total price and the status.
+Furthermore, for each order, there is a list of all the products purchased, their quantity and their unit price at the time of purchase.
 
 \subsection{Ticket list management}
     \begin{figure}[H]
@@ -70,8 +70,8 @@ The ticket list page can be accessed by both customers and employees. In the cus
             \label{fig:UserEdit}
     \end{figure}
 
-The user edit page allows the customer type user to change their personal data.The page will consist of text boxes with default values corresponding to the values previously entered by the user. The page allows you to change data such as telephone number, name, surname but not unique / primary key data. This is because these particular data are used for login, and to avoid conflicts it was decided to do so.
-Obviously this page will be available only after the user login.
+The user edit page allows the customer type user to change its personal data. The page consist of text boxes with default values corresponding to the values previously entered by the user. The page allows you to change data such as telephone number, name, surname but not unique / primary key, because this particular data is used for the login.
+Obviously, this page will be available only if the user is logged in.
 
     
 \subsection{Admin: product management} 
@@ -82,11 +82,11 @@ Obviously this page will be available only after the user login.
             \label{fig:ProductManagement}
     \end{figure}
 Only the employees have access to the product management pages (as well as administrators). 
-The page, which refers to the management of products, allows the employees to view a table, which has got the products of the shop for each line, with all the additional information such as the name of the brand, the selling price and the quantity. 
-In addition, it gives the possibility to edit the products. However, let's reiterate that products can't be deleted in any case: the only way to "logically delete" a product is by setting its quantity to zero. In this manner, products with a quantity equal to zero are unseen, therefore unavailable for the purchase. 
-Finally there's an "add a new product" button for the creation and addition of a new product to the list (see fig.\ref{fig:ProductManagementAdd}). Since every product belongs to a specific category, it is also possible to add a new category when adding a new product.
+The page, which refers to the management of products, allows the employees to view a table, which lists all the products of the e-shop, with their information, such as name, the brand, the selling price and the quantity. 
+In addition, the page gives the possibility to edit the products. However, let's reiterate that products can't be deleted in any case: the only way to "logically delete" a product is by setting its quantity to zero. In this manner, products with a quantity equal to zero are unseen, therefore unavailable for the purchase. 
+Finally there's an "add a new product" button for the creation of a new product to the list (see fig.\ref{fig:ProductManagementAdd}). Since every product belongs to a specific category, it is also possible to create a new category when adding a new product, or just use an existing one.
 
-At the end the employee will be able to upgrade his selling activity and offer more products in his catalogue. 
+Thanks to this page, the owner of the e-shop will be able to upgrade his selling activity and offer more products in his catalogue. 
     
     \begin{figure}[H]
         \centering
@@ -104,6 +104,6 @@ At the end the employee will be able to upgrade his selling activity and offer m
             \caption{User management page: page that shows all users}
             \label{fig:UserManagement}
     \end{figure}
-    The user management page can be reached only by administrators. The page displays the username, name, surname and role of any employee registered in the website. It is also possible to edit these information, as well as add a new user and delete any user account.
-    There exists two types of pages of "user management": one for the employees only and one for all the customers registered to the website.
+    The user management page can be reached only by administrators. The page displays the username, name, surname and role of any employee registered in the website. It is also possible to edit, add, or delete a user.
+    There exist two types of pages about "user management": one only for the employees and another for all the customers registered to the website.
 
