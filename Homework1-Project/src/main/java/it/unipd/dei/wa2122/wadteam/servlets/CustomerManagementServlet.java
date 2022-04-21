@@ -60,11 +60,11 @@ public class CustomerManagementServlet extends AbstractDatabaseServlet {
     }
 
     /**
-     * get editEmployee.jsp page to edit an existing employee
+     * get editCustomer.jsp page to edit an existing customer
      *
      * @param req
      * @param res
-     * @param param username of selected employee to confirm editing
+     * @param param username of selected customer to confirm editing
      * @throws IOException
      * @throws ServletException
      */
@@ -84,11 +84,11 @@ public class CustomerManagementServlet extends AbstractDatabaseServlet {
     }
 
     /**
-     * edit an existing employee to the database
+     * edit an existing customer to the database
      *
      * @param req
      * @param res
-     * @param param username of selected employee to edit
+     * @param param username of selected customer to edit
      * @throws IOException
      * @throws ServletException
      */
@@ -114,11 +114,11 @@ public class CustomerManagementServlet extends AbstractDatabaseServlet {
     }
 
     /**
-     * get deleteEmployee.jsp page to confirm deletion of selected employee
+     * get deleteCustomer.jsp page to confirm deletion of selected customer
      *
      * @param req
      * @param res
-     * @param param username of selected employee to confirm deletion
+     * @param param username of selected customer to confirm deletion
      * @throws ServletException
      * @throws IOException
      */
@@ -142,11 +142,11 @@ public class CustomerManagementServlet extends AbstractDatabaseServlet {
     }
 
     /**
-     * delete selected employee from the database
+     * delete selected customer from the database
      *
      * @param req
      * @param res
-     * @param param username of selected employee to delete
+     * @param param username of selected customer to delete
      * @throws ServletException,
      * @throws IOException
      */
