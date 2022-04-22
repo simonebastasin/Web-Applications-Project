@@ -13,13 +13,11 @@
 
 <html>
 <head>
-    <title>Electromechanics shop</title>
+    <title>Product: ${product.name} | Electromechanics Shop</title>
 </head>
 
 <body>
-
 <c:import url="/jsp/include/header.jsp"/>
-
 <h1>Product: ${product.name}</h1>
 
 Quantity selected: ${product.quantity}<br>

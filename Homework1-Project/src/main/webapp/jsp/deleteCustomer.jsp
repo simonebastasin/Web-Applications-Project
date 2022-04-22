@@ -11,7 +11,7 @@
 
 <html>
 <head>
-    <title>Delete customer</title>
+    <title>Delete customer | Electromechanics Shop</title>
 </head>
 
 <body>

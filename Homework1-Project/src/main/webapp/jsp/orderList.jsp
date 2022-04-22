@@ -11,12 +11,12 @@
 
 <html>
 <head>
-    <title>Order list</title>
+    <title>Order list | Electromechanics Shop</title>
 </head>
 <body>
     <c:import url="/jsp/include/header.jsp"/>
     <h1>Your orders</h1>
-    <hr>
+
 
         <c:forEach var="order" items="${onlineOrderList}">
             <h2>Order ID: ${order.idOrder}</h2>

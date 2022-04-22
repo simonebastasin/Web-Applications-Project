@@ -12,7 +12,7 @@
 
 <html>
 <head>
-    <title>Categories</title>
+    <title>Categories | Electromechanics Shop</title>
 </head>
 <body>
     <c:import url="/jsp/include/header.jsp"/>

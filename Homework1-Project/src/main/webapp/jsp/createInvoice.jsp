@@ -10,10 +10,11 @@
 
 <html>
 <head>
-    <title>Create Ticket</title>
+    <title>Add new ticket | Electromechanics Shop</title>
 </head>
 <body>
 <c:import url="/jsp/include/header.jsp"/>
+<h1>Add new ticket</h1>
 
 <form method="POST" action="">
     <label for="transactionId">Transaction ID:</label><br>

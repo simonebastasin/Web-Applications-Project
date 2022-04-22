@@ -11,12 +11,12 @@
 
 <html>
 <head>
-    <title>Customer List</title>
+    <title>Customer list | Electromechanics Shop</title>
 </head>
 
 <body>
 <c:import url="/jsp/include/header.jsp"/>
-<h1>Customer List</h1>
+<h1>Customer list</h1>
 
 <table>
     <tr>

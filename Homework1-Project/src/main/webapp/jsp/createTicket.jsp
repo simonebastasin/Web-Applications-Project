@@ -10,12 +10,11 @@
 
 <html>
 <head>
-    <title>Create Ticket</title>
+    <title>Add new Ticket | Electromechanics Shop</title>
 </head>
 <body>
 <c:import url="/jsp/include/header.jsp"/>
-<h1> Create Ticket </h1>
-<hr>
+<h1>Add new Ticket</h1>
 
 <form method="POST" action="">
   <textarea name ="description" id="description"> </textarea>

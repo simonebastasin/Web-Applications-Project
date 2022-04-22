@@ -11,7 +11,7 @@
 
 <html>
 <head>
-    <title>Delete Order</title>
+    <title>Delete order | Electromechanics Shop</title>
 </head>
 
 <body>

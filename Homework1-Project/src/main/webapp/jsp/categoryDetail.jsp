@@ -12,17 +12,16 @@
 
 <html>
 <head>
-    <title>Electromechanics shop</title>
+    <title>Category: ${category.name} | Electromechanics Shop</title>
 </head>
 
 <body>
 <c:import url="/jsp/include/header.jsp"/>
-
 <c:forEach var="category" items="${productCategoryList}">
 <h1>Category: ${category.name}</h1>
 
 ${category.description}
-<hr />
+
 <c:choose>
     <c:when test="${productList.size() > 0}">
         <c:forEach var="prod" items="${productList}">

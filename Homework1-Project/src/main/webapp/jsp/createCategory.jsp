@@ -4,12 +4,12 @@
 
 <html>
 <head>
-    <title>Electromechanics shop</title>
+    <title>Add new category | Electromechanics Shop</title>
 </head>
 <body>
 
     <c:import url="/jsp/include/header.jsp"/>
-    <h1>Add a category</h1>
+    <h1>Add new category</h1>
 
     <form method="POST" action="">
         <label for="name">Name:</label><br>

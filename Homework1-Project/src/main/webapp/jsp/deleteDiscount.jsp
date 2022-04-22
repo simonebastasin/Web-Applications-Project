@@ -10,7 +10,7 @@
 
 <html>
 <head>
-    <title>Delete Discount</title>
+    <title>Delete discount | Electromechanics Shop</title>
 </head>
 <body>
 <c:import url="/jsp/include/header.jsp"/>

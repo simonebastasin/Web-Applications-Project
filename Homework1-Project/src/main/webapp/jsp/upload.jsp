@@ -11,14 +11,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Upload Media</title>
+    <title>Upload media | Electromechanics Shop</title>
 </head>
 <body>
 
 <c:import url="/jsp/include/header.jsp"/>
+<h1>Upload media</h1>
 
-<h1> Upload Media </h1>
-<hr/>
 <form method="post" action="<c:url value="/media/upload"/>" enctype="multipart/form-data">
     <input type="file" name="file" />
     <input type="submit" value="Upload" />

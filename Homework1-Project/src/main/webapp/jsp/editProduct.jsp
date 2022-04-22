@@ -8,7 +8,7 @@
 
 <html>
 <head>
-    <title>Electromechanics shop</title>
+    <title>Edit product | Electromechanics Shop</title>
 </head>
 <body>
 

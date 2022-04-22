@@ -10,13 +10,12 @@
 <%--@elvariable id="customer" type="it.unipd.dei.wa2122.wadteam.resources.Customer"--%>
 <html>
 <head>
-    <title>Register</title>
+    <title>Register | Electromechanics Shop</title>
 </head>
 <body>
 <c:import url="/jsp/include/header.jsp"/>
 <h1>Register</h1>
 
-<hr/>
 <form method="post" action="<c:url value="/session/register"/>">
     <ul>
         <li><label for="name">Name: </label> <input id="name" type="text" name="name"  required></li>

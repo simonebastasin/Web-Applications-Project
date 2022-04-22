@@ -10,12 +10,11 @@
 <%--@elvariable id="onlineInvoiceList" type="List<it.unipd.dei.wa2122.wadteam.resources.OnlineInvoice>"--%>
 <html>
 <head>
-    <title>Invoice List</title>
+    <title>Invoice List | Electromechanics Shop</title>
 </head>
 <body>
     <c:import url="/jsp/include/header.jsp"/>
-    <h1> Invoice List </h1>
-    <hr>
+    <h1>Invoice List</h1>
 
     <c:forEach var="invoice" items="${onlineInvoiceList}">
         <h2>Invoice ID: ${invoice.id}</h2>

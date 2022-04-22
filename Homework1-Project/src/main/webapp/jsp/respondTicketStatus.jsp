@@ -10,12 +10,11 @@
 <%@ page import="it.unipd.dei.wa2122.wadteam.resources.TicketStatusEnum" %>
 <html>
 <head>
-    <title>Respond Ticket Status</title>
+    <title>Respond ticket status | Electromechanics Shop</title>
 </head>
 <body>
 <c:import url="/jsp/include/header.jsp"/>
-<h1> Respond Ticket Status </h1>
-<hr>
+<h1>Respond ticket status</h1>
 
 <form method="POST" action="">
     <select name="status" id="status">

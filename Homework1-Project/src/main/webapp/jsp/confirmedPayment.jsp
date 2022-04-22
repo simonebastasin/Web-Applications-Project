@@ -12,7 +12,7 @@
 
 <html>
 <head>
-    <title>Electromechanics Shop</title>
+    <title>Product purchased: ${prod.name} | Electromechanics Shop</title>
 </head>
 
 <body>

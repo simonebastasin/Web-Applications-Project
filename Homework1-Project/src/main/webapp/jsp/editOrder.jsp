@@ -12,7 +12,7 @@
 
 <html>
 <head>
-    <title>Edit Order</title>
+    <title>Edit order | Electromechanics Shop</title>
 </head>
 
 <body>

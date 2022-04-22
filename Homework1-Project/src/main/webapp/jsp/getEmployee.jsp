@@ -9,12 +9,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <title>Ticket</title>
+    <title>Ticket | Electromechanics Shop</title>
 </head>
 <body>
 <c:import url="/jsp/include/header.jsp"/>
-<h1> Ticket </h1>
-<hr>
+<h1>Ticket</h1>
 
 <form method="POST" action="<c:url value="/ticket"/>">
     <input type="text" name ="identification" id="identification">

@@ -11,12 +11,12 @@
 
 <html>
 <head>
-    <title>Delete Product</title>
+    <title>Delete product | Electromechanics Shop</title>
 </head>
 
 <body>
 <c:import url="/jsp/include/header.jsp"/>
-<h1>Delete Product</h1>
+<h1>Delete product</h1>
 
 Product you are deleting:<br><br>
 <table>

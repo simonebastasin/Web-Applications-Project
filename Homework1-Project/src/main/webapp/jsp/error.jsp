@@ -10,7 +10,7 @@
 <%--@elvariable id="errorCode" type="Integer"--%>
 <html>
 <head>
-    <title>Error <c:out value="${errorCode}"/></title>
+    <title>Error <c:out value="${errorCode}"/> | Electromechanics Shop</title>
 </head>
 <body>
 <c:import url="/jsp/include/header.jsp"/>

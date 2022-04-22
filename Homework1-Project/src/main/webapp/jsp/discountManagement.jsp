@@ -12,13 +12,13 @@
 
 <html>
 <head>
-    <title>Discount List</title>
+    <title>Discount list | Electromechanics Shop</title>
 </head>
 
 <body>
 
 <c:import url="/jsp/include/header.jsp"/>
-<h1>Discount List</h1>
+<h1>Discount list</h1>
 
 <div>
     <a href="<c:url value="/management/discountManagement/createDiscount"/>">Add new discount</a>

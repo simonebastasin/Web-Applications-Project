@@ -11,7 +11,7 @@
 <%--@elvariable id="user" type="it.unipd.dei.wa2122.wadteam.resources.UserCredential"--%>
 <html>
 <head>
-    <title>Customer ${customer.username}</title>
+    <title>Customer ${customer.username} | Electromechanics Shop</title>
 </head>
 <body>
     <c:import url="/jsp/include/header.jsp"/>

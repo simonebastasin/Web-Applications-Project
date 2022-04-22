@@ -14,14 +14,13 @@
 
 <html>
 <head>
-    <title>Order ID: ${onlineOrder.idOrder}</title>
+    <title>Order ID: ${onlineOrder.idOrder} | Electromechanics Shop</title>
 </head>
 
 <body>
-
 <c:import url="/jsp/include/header.jsp"/>
 <h1>Order ID: ${onlineOrder.idOrder}</h1>
-<hr>
+
 <table>
     <tr>
         <th>Product name</th>

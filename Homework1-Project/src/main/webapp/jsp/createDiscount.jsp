@@ -12,12 +12,11 @@
 
 <html>
 <head>
-    <title>Title</title>
+    <title>Add new discount | Electromechanics Shop</title>
 </head>
 <body>
 <c:import url="/jsp/include/header.jsp"/>
-
-<h2>Create new discount</h2>
+<h1>Add new discount</h1>
 
 <%
     LocalDateTime now = LocalDateTime.now();

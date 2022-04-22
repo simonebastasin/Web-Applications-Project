@@ -10,12 +10,12 @@
 
 <html>
 <head>
-    <title>Error 404 - Not found</title>
+    <title>Error 404 - Not found | Electromechanics Shop</title>
 </head>
 <body>
 <c:import url="/jsp/include/header.jsp"/>
-
 <h1>Error 404 - Not found</h1>
+
 <p>This page dosen't exists. Are you hacking us?</p>
 <%@ include file="/html/include/footer.html"%>
 </body>

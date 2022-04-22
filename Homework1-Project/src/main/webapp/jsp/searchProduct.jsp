@@ -10,7 +10,7 @@
 <%--@elvariable id="productList" type="java.util.List<Product>"--%>
 <html>
 <head>
-    <title>Shop Search</title>
+    <title>Shop search | Electromechanics Shop</title>
 </head>
 <body>
     <c:import url="/jsp/include/header.jsp"/>

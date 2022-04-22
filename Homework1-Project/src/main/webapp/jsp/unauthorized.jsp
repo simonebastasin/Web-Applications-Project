@@ -10,12 +10,12 @@
 
 <html>
 <head>
-    <title>Error 401 - Unauthorized access</title>
+    <title>Error 401 - Unauthorized access | Electromechanics Shop</title>
 </head>
 <body>
 <c:import url="/jsp/include/header.jsp"/>
-
 <h1>Error 401 - Unauthorized access</h1>
+
 <p>You do not have the permits to access the requested page. Are you hacking us?</p>
 <%@ include file="/html/include/footer.html"%>
 </body>

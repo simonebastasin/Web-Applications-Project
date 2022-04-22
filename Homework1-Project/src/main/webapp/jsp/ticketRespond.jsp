@@ -12,12 +12,11 @@
 
 <html>
 <head>
-    <title>Ticket Respond</title>
+    <title>Ticket respond | Electromechanics Shop</title>
 </head>
 <body>
 <c:import url="/jsp/include/header.jsp"/>
-<h1> Ticket List </h1>
-<hr>
+<h1>Ticket list</h1>
 
     <style>
         .ticket-OPEN{color: green;}

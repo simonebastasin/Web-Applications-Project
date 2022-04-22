@@ -10,12 +10,12 @@
 
 <html>
 <head>
-    <title>Error 500 - Server error</title>
+    <title>Error 500 - Server error | Electromechanics Shop</title>
 </head>
 <body>
 <c:import url="/jsp/include/header.jsp"/>
-
 <h1>Error 500 - Server error</h1>
+
 <p>There is a problem processing the request. Are you hacking us?</p>
 <%@ include file="/html/include/footer.html"%>
 </body>

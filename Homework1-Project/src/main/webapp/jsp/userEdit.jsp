@@ -11,8 +11,9 @@
 
 <html>
 <head>
-    <title>Employee ${employee.username}</title>
+    <title>Employee ${employee.username} | Electromechanics Shop</title>
 </head>
+
 <body>
 <c:import url="/jsp/include/header.jsp"/>
 <form method="post" action="<c:url value="/user/modify"/>">

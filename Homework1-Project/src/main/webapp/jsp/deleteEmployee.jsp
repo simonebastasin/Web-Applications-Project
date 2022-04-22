@@ -11,7 +11,7 @@
 
 <html>
 <head>
-    <title>Delete Employee</title>
+    <title>Delete employee | Electromechanics Shop</title>
 </head>
 
 <body>

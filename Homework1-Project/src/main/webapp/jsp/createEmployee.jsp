@@ -10,12 +10,12 @@
 
 <html>
 <head>
-    <title>Create Employee</title>
+    <title>Add new employee | Electromechanics Shop</title>
 </head>
 
 <body>
 <c:import url="/jsp/include/header.jsp"/>
-<h1>Add employee</h1>
+<h1>Add new employee</h1>
 
 <form method="POST" action="">
     <label for="username">Username:</label><br>

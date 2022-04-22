@@ -11,9 +11,9 @@
 <%--@elvariable id="employee" type="it.unipd.dei.wa2122.wadteam.resources.Employee"--%>
 <html>
 <head>
-    <title>User
-        <c:out value="${employee.username}"/></title>
+    <title>User <c:out value="${employee.username}"/> | Electromechanics Shop</title>
 </head>
+
 <body>
 <c:import url="/jsp/include/header.jsp"/>
     <ul>

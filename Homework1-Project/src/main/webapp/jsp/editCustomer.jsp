@@ -11,7 +11,7 @@
 
 <html>
 <head>
-    <title>Edit customer</title>
+    <title>Edit customer | Electromechanics Shop</title>
 </head>
 
 <body>

@@ -9,13 +9,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <title>Product List</title>
+    <title>Product list | Electromechanics Shop</title>
 </head>
 
 <body>
-
 <c:import url="/jsp/include/header.jsp"/>
-<h1>Product List</h1>
+<h1>Product list</h1>
 
 <div>
     <a href="<c:url value="/management/productManagement/createProduct"/>">Add new product</a>

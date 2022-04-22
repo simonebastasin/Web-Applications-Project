@@ -11,15 +11,12 @@
 <%@ page import="java.lang.*" %>
 <html>
 <head>
-    <title>Edit Discount</title>
+    <title>Edit discount | Electromechanics Shop</title>
 </head>
+
 <body>
 <c:import url="/jsp/include/header.jsp"/>
-
-
-<h2>Edit discount</h2>
-
-
+<h1>Edit discount</h1>
 
 <form method="POST" action="">
 

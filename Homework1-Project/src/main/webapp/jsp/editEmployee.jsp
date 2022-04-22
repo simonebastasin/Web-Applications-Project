@@ -12,7 +12,7 @@
 
 <html>
 <head>
-    <title>Edit Employee</title>
+    <title>Edit employee | Electromechanics Shop</title>
 </head>
 
 <body>

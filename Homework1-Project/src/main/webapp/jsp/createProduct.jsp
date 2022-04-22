@@ -6,12 +6,12 @@
 
 <html>
 <head>
-    <title>Electromechanics shop</title>
+    <title>Add new product | Electromechanics Shop</title>
 </head>
 <body>
 
     <c:import url="/jsp/include/header.jsp"/>
-    <h1>Add product</h1>
+    <h1>Add new product</h1>
 
     <form method="POST" action="">
         <label for="alias">Alias:</label><br>

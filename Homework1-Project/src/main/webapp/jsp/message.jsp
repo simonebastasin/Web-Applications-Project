@@ -9,12 +9,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <title>Message</title>
+    <title>Message | Electromechanics Shop</title>
 </head>
 <body>
 <c:import url="/jsp/include/header.jsp"/>
 <h1>Message</h1>
-<hr />
+
 <br />
     <c:import url="/jsp/include/message.jsp"/>
     <%@ include file="/html/include/footer.html"%>

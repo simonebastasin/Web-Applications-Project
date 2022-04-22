@@ -12,7 +12,7 @@
 
 <html>
 <head>
-    <title>Electromechanics shop</title>
+    <title>Product: ${product.name} | Electromechanics Shop</title>
 </head>
 
 <body>
