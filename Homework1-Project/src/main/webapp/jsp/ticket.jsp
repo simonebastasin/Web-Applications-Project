@@ -9,13 +9,19 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--@elvariable id="assistanceTicketList" type="List<it.unipd.dei.wa2122.wadteam.resources.AssistanceTicket>"--%>
 
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Ticket | Electromechanics Shop</title>
+    <meta charset="utf-8">
+    <meta name="description" content="Electromechanics Shop">
+    <meta name="author" content="WAD Team">
+
+    <title>Ticket List | Electromechanics Shop</title>
 </head>
+
 <body>
 <c:import url="/jsp/include/header.jsp"/>
-<h1>Ticket list</h1>
+<h1>Ticket List</h1>
 
 <ul>
     <style>
@@ -41,6 +47,7 @@
         <br>
     </c:forEach>
 </ul>
+
 <%@ include file="/html/include/footer.html"%>
 </body>
 </html>

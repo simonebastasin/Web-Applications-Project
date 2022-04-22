@@ -9,14 +9,20 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="java.time.LocalDateTime" %>
 <%@ page import="java.lang.*" %>
-<html>
+
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Edit discount | Electromechanics Shop</title>
+    <meta charset="utf-8">
+    <meta name="description" content="Electromechanics Shop">
+    <meta name="author" content="WAD Team">
+
+    <title>Edit Discount | Electromechanics Shop</title>
 </head>
 
 <body>
 <c:import url="/jsp/include/header.jsp"/>
-<h1>Edit discount</h1>
+<h1>Edit Discount</h1>
 
 <form method="POST" action="">
 
@@ -53,14 +59,11 @@
            max="<%=(LocalDateTime.now()).getYear() + 1%>-<%= month %>-<%= day %>">
     <br>
 
-
-
     <label for="end">Enter end Day:</label>
     <input type="date" id="end" name="end"
            value="${discountListProduct.discount.endDate.getInputDateFormat()}"
            min="${discountListProduct.discount.endDate.getInputDateFormat()}"
            max="<%=(LocalDateTime.now()).getYear() + 1%>-<%= month %>-<%= day %>">
-
 
     <br>
     <p>Select the products to be discounted</p>
@@ -88,12 +91,9 @@
             </c:otherwise>
         </c:choose>
 
-
     </c:forEach>
     <input type="submit" value="Submit">
-
 </form>
-
 
 <%@ include file="/html/include/footer.html"%>
 </body>

@@ -7,25 +7,28 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--@elvariable id="discountList" type="it.unipd.dei.wa2122.wadteam.resources.Discount"--%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%--@elvariable id="discountList" type="it.unipd.dei.wa2122.wadteam.resources.Discount"--%>
 
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Discount list | Electromechanics Shop</title>
+    <meta charset="utf-8">
+    <meta name="description" content="Electromechanics Shop">
+    <meta name="author" content="WAD Team">
+
+    <title>Discount List | Electromechanics Shop</title>
 </head>
 
 <body>
-
 <c:import url="/jsp/include/header.jsp"/>
-<h1>Discount list</h1>
+<h1>Discount List</h1>
 
 <div>
     <a href="<c:url value="/management/discountManagement/createDiscount"/>">Add new discount</a>
 </div><br>
 
 <table>
-
     <tr>
         <th>Id</th>
         <th>Percentage</th>
@@ -38,7 +41,6 @@
 
 
     <c:forEach var="discountListProduct" items="${discountListProductList}">
-
         <tr>
             <td>${discountListProduct.discount.id}</td>
             <td>${discountListProduct.discount.percentage}%</td>
@@ -62,9 +64,7 @@
                 </a>
 
             </td>
-
         </tr>
-
     </c:forEach>
 
 </table>

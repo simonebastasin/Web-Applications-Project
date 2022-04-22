@@ -9,14 +9,19 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--@elvariable id="customer" type="it.unipd.dei.wa2122.wadteam.resources.Customer"--%>
 
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Delete customer | Electromechanics Shop</title>
+    <meta charset="utf-8">
+    <meta name="description" content="Electromechanics Shop">
+    <meta name="author" content="WAD Team">
+
+    <title>Delete Customer | Electromechanics Shop</title>
 </head>
 
 <body>
 <c:import url="/jsp/include/header.jsp"/>
-<h1>Delete customer</h1>
+<h1>Delete Customer</h1>
 
 Customer you are deleting:<br>
 <br>

@@ -7,10 +7,17 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<html>
+
+<!DOCTYPE html>
+<html lang="en">
 <head>
+    <meta charset="utf-8">
+    <meta name="description" content="Electromechanics Shop">
+    <meta name="author" content="WAD Team">
+
     <title>Ticket | Electromechanics Shop</title>
 </head>
+
 <body>
 <c:import url="/jsp/include/header.jsp"/>
 <h1>Ticket</h1>
@@ -20,7 +27,7 @@
     <label for = "identification">employee id</label>
     <br>
     <br>
-    <input type ="submit" value = "login">
+    <input type ="submit" value = "Login">
 </form>
 <%@ include file="/html/include/footer.html"%>
 </body>

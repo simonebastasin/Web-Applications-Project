@@ -10,13 +10,19 @@
 <%@ page import="it.unipd.dei.wa2122.wadteam.resources.TicketStatusEnum" %>
 <%--@elvariable id="assistanceTicketList" type="List<it.unipd.dei.wa2122.wadteam.resources.AssistanceTicket>"--%>
 
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Ticket list | Electromechanics Shop</title>
+    <meta charset="utf-8">
+    <meta name="description" content="Electromechanics Shop">
+    <meta name="author" content="WAD Team">
+
+    <title>Ticket List | Electromechanics Shop</title>
 </head>
+
 <body>
 <c:import url="/jsp/include/header.jsp"/>
-<h1>Ticket list</h1>
+<h1>Ticket List</h1>
 
     <style>
         .ticket-OPEN{color: green;}

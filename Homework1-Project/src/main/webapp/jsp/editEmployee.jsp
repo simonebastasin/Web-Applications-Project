@@ -10,14 +10,19 @@
 <%--@elvariable id="employeeList" type="it.unipd.dei.wa2122.wadteam.resources.EmployeeList"--%>
 <%--@elvariable id="role" type="it.unipd.dei.wa2122.wadteam.resources.Role"--%>
 
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Edit employee | Electromechanics Shop</title>
+    <meta charset="utf-8">
+    <meta name="description" content="Electromechanics Shop">
+    <meta name="author" content="WAD Team">
+
+    <title>Edit Employee | Electromechanics Shop</title>
 </head>
 
 <body>
 <c:import url="/jsp/include/header.jsp"/>
-<h1>Edit employee</h1>
+<h1>Edit Employee</h1>
 
 <c:forEach var="employee" items="${employeeList}">
     <form method="POST" action="">

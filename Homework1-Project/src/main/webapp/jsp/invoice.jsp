@@ -8,23 +8,27 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--@elvariable id="onlineInvoiceList" type="List<it.unipd.dei.wa2122.wadteam.resources.OnlineInvoice>"--%>
-<html>
+
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Invoice list | Electromechanics Shop</title>
+    <meta charset="utf-8">
+    <meta name="description" content="Electromechanics Shop">
+    <meta name="author" content="WAD Team">
+
+    <title>Invoice List | Electromechanics Shop</title>
 </head>
+
 <body>
-    <c:import url="/jsp/include/header.jsp"/>
-    <h1>Invoice list</h1>
+<c:import url="/jsp/include/header.jsp"/>
+<h1>Invoice List</h1>
 
-    <c:forEach var="invoice" items="${onlineInvoiceList}">
-        <h2>Invoice ID: ${invoice.id}</h2>
-        <li>Date: ${invoice.oiDate.humanDateTimeless}</li>
-        <li>Price: ${invoice.totalPrice}€</li>
-
-            <li><a href="<c:url value="/invoice/detail/${invoice.id}"/>">Detail Invoice</a></li>
-
-        </c:forEach>
-
+<c:forEach var="invoice" items="${onlineInvoiceList}">
+    <h2>Invoice ID: ${invoice.id}</h2>
+    <li>Date: ${invoice.oiDate.humanDateTimeless}</li>
+    <li>Price: ${invoice.totalPrice}€</li>
+    <li><a href="<c:url value="/invoice/detail/${invoice.id}"/>">Detail Invoice</a></li>
+</c:forEach>
 
 <%@ include file="/html/include/footer.html"%>
 </body>

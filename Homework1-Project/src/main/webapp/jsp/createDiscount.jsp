@@ -10,13 +10,19 @@
 <%@ page import="java.time.LocalDateTime" %>
 <%@ page import="java.lang.*" %>
 
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Add new discount | Electromechanics Shop</title>
+    <meta charset="utf-8">
+    <meta name="description" content="Electromechanics Shop">
+    <meta name="author" content="WAD Team">
+
+    <title>Add new Discount | Electromechanics Shop</title>
 </head>
+
 <body>
 <c:import url="/jsp/include/header.jsp"/>
-<h1>Add new discount</h1>
+<h1>Add new Discount</h1>
 
 <%
     LocalDateTime now = LocalDateTime.now();
@@ -33,16 +39,12 @@
     } else {
         month = ""+(LocalDateTime.now()).getMonthValue();
     }
-
-
 %>
 
 <form method="POST" action="">
 
-
     <label for="percentage" >percentage:</label>
     <input type="number" id="percentage" name="percentage" min="1" max="100" value="1">
-
 
     <label for="start">Enter start Day:</label>
     <input type="date" id="start" name="start"
@@ -50,8 +52,6 @@
            min="<%=(LocalDateTime.now()).getYear()%>-<%= month %>-<%= day %>"
            max="<%=(LocalDateTime.now()).getYear() + 1%>-<%= month %>-<%= day %>">
     <br>
-
-
 
     <label for="end">Enter end Day:</label>
     <input type="date" id="end" name="end"
@@ -61,8 +61,6 @@
 
 
     <br>
-
-
 
     <p>Select the products to be discounted</p>
     <c:forEach var="prod" items="${productList}">
@@ -79,8 +77,6 @@
     <input type="submit" value="Submit">
 
 </form>
-
-
 
 <%@ include file="/html/include/footer.html"%>
 </body>

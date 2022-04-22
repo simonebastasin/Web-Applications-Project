@@ -10,15 +10,19 @@
 <%@ page import="it.unipd.dei.wa2122.wadteam.resources.OrderStatusEnum" %>
 <%--@elvariable id="onlineOrder" type="it.unipd.dei.wa2122.wadteam.resources.OnlineOrder"--%>
 
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Edit order | Electromechanics Shop</title>
+    <meta charset="utf-8">
+    <meta name="description" content="Electromechanics Shop">
+    <meta name="author" content="WAD Team">
+
+    <title>Edit Order | Electromechanics Shop</title>
 </head>
 
 <body>
 <c:import url="/jsp/include/header.jsp"/>
-<h1>Edit order</h1>
-
+<h1>Edit Order</h1>
 
 <c:forEach var="onlineOrder" items="${onlineOrderList}">
     <form method="POST" action="">
@@ -108,7 +112,6 @@
 <a href="<c:url value="/management/orderManagement"/>">
     Cancel changes
 </a>
-
 
 <%@ include file="/html/include/footer.html"%>
 </body>

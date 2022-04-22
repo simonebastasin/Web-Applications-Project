@@ -10,13 +10,17 @@
 <%--@elvariable id="productList" type="java.util.List<Product>"--%>
 <%--@elvariable id="onlineOrderList" type="java.util.List<OnlineOrder>"--%>
 
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
+    <meta charset="utf-8">
+    <meta name="description" content="Electromechanics Shop">
+    <meta name="author" content="WAD Team">
+
     <title>Product purchased: ${prod.name} | Electromechanics Shop</title>
 </head>
 
 <body>
-
 <c:import url="/jsp/include/header.jsp"/>
 
 <c:forEach var="prod" items="${productList}">
@@ -29,6 +33,7 @@
 
     </c:forEach>
 </c:forEach>
+
 <%@ include file="/html/include/footer.html"%>
 </body>
 </html>

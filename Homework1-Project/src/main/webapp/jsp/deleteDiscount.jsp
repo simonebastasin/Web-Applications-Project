@@ -8,13 +8,18 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Delete discount | Electromechanics Shop</title>
+    <meta charset="utf-8">
+    <meta name="description" content="Electromechanics Shop">
+    <meta name="author" content="WAD Team">
+
+    <title>Delete Discount | Electromechanics Shop</title>
 </head>
 <body>
 <c:import url="/jsp/include/header.jsp"/>
-<h1>Delete discount</h1>
+<h1>Delete Discount</h1>
 
 Discount you are deleting:<br><br>
 <table>
@@ -48,7 +53,6 @@ Sure to delete?<br><br>
 </a>
 
 <%@ include file="/html/include/footer.html"%>
-
 </body>
 </html>
 

@@ -11,8 +11,13 @@
 <%--@elvariable id="product" type="Product"--%>
 <%--@elvariable id="onlineOrder" type="OnlineOrder"--%>
 
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
+    <meta charset="utf-8">
+    <meta name="description" content="Electromechanics Shop">
+    <meta name="author" content="WAD Team">
+
     <title>Product: ${product.name} | Electromechanics Shop</title>
 </head>
 

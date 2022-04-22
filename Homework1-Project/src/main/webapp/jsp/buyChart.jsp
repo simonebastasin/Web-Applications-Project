@@ -12,8 +12,13 @@
 <%--@elvariable id="onlineOrder" type="it.unipd.dei.wa2122.wadteam.resources.OnlineOrder"--%>
 <%--@elvariable id="onlineInvoice" type="it.unipd.dei.wa2122.wadteam.resources.OnlineInvoice"--%>
 
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
+    <meta charset="utf-8">
+    <meta name="description" content="Electromechanics Shop">
+    <meta name="author" content="WAD Team">
+
     <title>Order ID: ${onlineOrder.idOrder} | Electromechanics Shop</title>
 </head>
 

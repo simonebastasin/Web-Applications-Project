@@ -71,4 +71,4 @@
     </c:otherwise>
 </c:choose>
 
-<hr />
+<hr>

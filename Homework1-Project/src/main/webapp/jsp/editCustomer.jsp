@@ -9,14 +9,19 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--@elvariable id="customer" type="it.unipd.dei.wa2122.wadteam.resources.Customer"--%>
 
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Edit customer | Electromechanics Shop</title>
+    <meta charset="utf-8">
+    <meta name="description" content="Electromechanics Shop">
+    <meta name="author" content="WAD Team">
+
+    <title>Edit Customer | Electromechanics Shop</title>
 </head>
 
 <body>
 <c:import url="/jsp/include/header.jsp"/>
-<h1>Edit customer</h1>
+<h1>Edit Customer</h1>
 
 <c:forEach var="customer" items="${customerList}">
     <form method="POST" action="">

@@ -10,72 +10,74 @@
 <%--@elvariable id="product" type="Product"--%>
 <%--@elvariable id="user" type="it.unipd.dei.wa2122.wadteam.resources.UserCredential"--%>
 
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
+    <meta charset="utf-8">
+    <meta name="description" content="Electromechanics Shop">
+    <meta name="author" content="WAD Team">
+
     <title>Product: ${product.name} | Electromechanics Shop</title>
 </head>
 
 <body>
+<c:import url="/jsp/include/header.jsp"/>
+<h1>Product: ${product.name}</h1>
 
-    <c:import url="/jsp/include/header.jsp"/>
-    <h1>Product: ${product.name}</h1>
-
-    <ul>
-        <li>Brand: ${product.brand}</li>
-        <li>Description: ${product.description}</li>
-        <li>Quantity: ${product.quantity}</li>
-        <c:choose>
-            <c:when test="${not empty product.discount}">
-                <li>Price: <span  style="text-decoration: line-through;">${product.salePrice}€</span> <span style="color: red;">${product.discountSale}€</span></li>
-                <li>Discount: ${product.discount.percentage}% (until ${product.discount.endDate.humanDate})</li>
-            </c:when>
-            <c:otherwise>
-                <li>Price: ${product.salePrice}€</li>
-            </c:otherwise>
-        </c:choose>
-        <c:choose>
-            <c:when test="${not empty product.pictures}">
-                <li>Pictures:
-                    <c:forEach var="picture" items="${product.pictures}">
-                        <img src="<c:url value="/media/view/${picture}"/>" alt="${product.alias}" width="400px"/>
-                    </c:forEach>
-                </li>
-            </c:when>
-        </c:choose>
-    </ul>
-
+<ul>
+    <li>Brand: ${product.brand}</li>
+    <li>Description: ${product.description}</li>
+    <li>Quantity: ${product.quantity}</li>
     <c:choose>
-        <c:when test="${product.quantity <= 0}">
-            <span style="color: red;font-weight: bold">The product is no longer available.</span>
+        <c:when test="${not empty product.discount}">
+            <li>Price: <span  style="text-decoration: line-through;">${product.salePrice}€</span> <span style="color: red;">${product.discountSale}€</span></li>
+            <li>Discount: ${product.discount.percentage}% (until ${product.discount.endDate.humanDate})</li>
         </c:when>
         <c:otherwise>
-            <c:choose>
-                <c:when test="${not empty user && empty user.role}">
-                    <hr>
-
-                    <form method="POST" action="<c:url value="/buy/product/${product.alias}"/>">
-                        <label for="quantity">Selected quantity</label>
-                        <input type="number" name ="quantity" max="${product.quantity}" min="1" id="quantity" required> <br>
-
-                        <input type ="submit" value = "Buy now">
-                    </form>
-                </c:when>
-                <c:otherwise>
-                    <c:choose>
-                        <c:when test="${not empty user && not empty user.role}">
-                            <span style="color: red;font-weight: bold">Employees are not authorized to make purchases.</span>
-                        </c:when>
-                        <c:otherwise>
-                            Please, <a href="<c:url value="/session/login"/>">login</a> to buy the product
-                        </c:otherwise>
-                    </c:choose>
-                </c:otherwise>
-            </c:choose>
+            <li>Price: ${product.salePrice}€</li>
         </c:otherwise>
     </c:choose>
+    <c:choose>
+        <c:when test="${not empty product.pictures}">
+            <li>Pictures:
+                <c:forEach var="picture" items="${product.pictures}">
+                    <img src="<c:url value="/media/view/${picture}"/>" alt="${product.alias}" width="400px"/>
+                </c:forEach>
+            </li>
+        </c:when>
+    </c:choose>
+</ul>
 
+<c:choose>
+    <c:when test="${product.quantity <= 0}">
+        <span style="color: red;font-weight: bold">The product is no longer available.</span>
+    </c:when>
+    <c:otherwise>
+        <c:choose>
+            <c:when test="${not empty user && empty user.role}">
+                <hr>
 
+                <form method="POST" action="<c:url value="/buy/product/${product.alias}"/>">
+                    <label for="quantity">Selected quantity</label>
+                    <input type="number" name ="quantity" max="${product.quantity}" min="1" id="quantity" required> <br>
 
-    <%@ include file="/html/include/footer.html"%>
+                    <input type ="submit" value = "Buy now">
+                </form>
+            </c:when>
+            <c:otherwise>
+                <c:choose>
+                    <c:when test="${not empty user && not empty user.role}">
+                        <span style="color: red;font-weight: bold">Employees are not authorized to make purchases.</span>
+                    </c:when>
+                    <c:otherwise>
+                        Please, <a href="<c:url value="/session/login"/>">login</a> to buy the product
+                    </c:otherwise>
+                </c:choose>
+            </c:otherwise>
+        </c:choose>
+    </c:otherwise>
+</c:choose>
+
+<%@ include file="/html/include/footer.html"%>
 </body>
 </html>

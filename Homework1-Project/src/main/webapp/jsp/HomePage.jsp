@@ -10,15 +10,19 @@
 <%--@elvariable id="productList" type="java.util.List<Product>"--%>
 <%--@elvariable id="productCategoryList" type="java.util.List<ProductCategory>"--%>
 
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
+    <meta charset="utf-8">
+    <meta name="description" content="Electromechanics Shop">
+    <meta name="author" content="WAD Team">
+
     <title>Electromechanics Shop</title>
 </head>
 
 <body>
-
 <c:import url="/jsp/include/header.jsp"/>
-<h1>Electromechanics shop</h1>
+<h1>Electromechanics Shop</h1>
 
 <c:set value="${false}" var="showcase"/>
 <c:forEach var="prod" items="${productList}">

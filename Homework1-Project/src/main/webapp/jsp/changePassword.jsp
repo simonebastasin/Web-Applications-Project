@@ -2,8 +2,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--@elvariable id="customer" type="it.unipd.dei.wa2122.wadteam.resources.Customer"--%>
 <%--@elvariable id="user" type="it.unipd.dei.wa2122.wadteam.resources.UserCredential"--%>
-<html>
+
+<!DOCTYPE html>
+<html lang="en">
 <head>
+    <meta charset="utf-8">
+    <meta name="description" content="Electromechanics Shop">
+    <meta name="author" content="WAD Team">
+
     <title>Change password ${user.identification} | Electromechanics Shop</title>
 </head>
 
@@ -18,10 +24,9 @@
         <li>newPassword: <input type="password" name="newPassword" required></li>
 
         <input type="submit" value="submit">
-
     </ul>
-
 </form>
+
 <%@ include file="/html/include/footer.html"%>
 </body>
 </html>

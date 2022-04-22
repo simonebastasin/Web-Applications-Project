@@ -7,14 +7,20 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<html>
+
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Product list | Electromechanics Shop</title>
+    <meta charset="utf-8">
+    <meta name="description" content="Electromechanics Shop">
+    <meta name="author" content="WAD Team">
+
+    <title>Product List | Electromechanics Shop</title>
 </head>
 
 <body>
 <c:import url="/jsp/include/header.jsp"/>
-<h1>Product list</h1>
+<h1>Product List</h1>
 
 <div>
     <a href="<c:url value="/management/productManagement/createProduct"/>">Add new product</a>
@@ -31,7 +37,6 @@
         <th>Evidence</th>
         <th>Media</th>
     </tr>
-
 
     <c:forEach var="prod" items="${productList}">
 
@@ -53,8 +58,8 @@
         </tr>
 
     </c:forEach>
-
 </table>
+
 <%@ include file="/html/include/footer.html"%>
 </body>
 </html>

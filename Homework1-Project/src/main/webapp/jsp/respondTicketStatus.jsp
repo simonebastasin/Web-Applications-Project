@@ -8,13 +8,20 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="it.unipd.dei.wa2122.wadteam.resources.TicketStatusEnum" %>
-<html>
+
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Respond ticket status | Electromechanics Shop</title>
+    <meta charset="utf-8">
+    <meta name="description" content="Electromechanics Shop">
+    <meta name="author" content="WAD Team">
+
+    <title>Respond to Ticket | Electromechanics Shop</title>
 </head>
+
 <body>
 <c:import url="/jsp/include/header.jsp"/>
-<h1>Respond ticket status</h1>
+<h1>Respond to Ticket</h1>
 
 <form method="POST" action="">
     <select name="status" id="status">
@@ -27,10 +34,10 @@
     <textarea name ="description" id="description"> </textarea>
     <label for = "description"><b> Description </b></label>
     <br>
-
     <br>
-    <input type ="submit" value = "respond ticket status">
+    <input type ="submit" value = "Respond">
 </form>
+
 <%@ include file="/html/include/footer.html"%>
 </body>
 </html>
