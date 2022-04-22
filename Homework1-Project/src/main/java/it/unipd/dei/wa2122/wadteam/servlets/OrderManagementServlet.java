@@ -152,7 +152,7 @@ public class OrderManagementServlet extends AbstractDatabaseServlet {
             try {
                 int idOrder = new DeleteOnlineOrderDatabase((getDataSource().getConnection()), intParam).deleteOnlineOrder();
                 logger.info("Delete completed successfully for order " + idOrder);
-                Message m = new Message("delete order status ok");
+                Message m = new Message("order status set to cancelled");
                 writeMessageOrRedirect(req, res, m, req.getContextPath() + (req.getServletPath().startsWith("/rest/") ? "/rest" : "") + "/management/orderManagement");
             } catch (SQLException e) {
                 logger.error(e.getMessage());

@@ -14,56 +14,90 @@ In particular \textbf{L} for \texttt{LoginFilter},
 \begin{longtable}{|p{.375\columnwidth}|p{.1\columnwidth} |p{.35\columnwidth}|p{.1\columnwidth}|} 
 \hline
 \textbf{URI} & \textbf{Method} & \textbf{Description} & \textbf{Filter} \\\hline
+% Homepage
 \texttt{/rest/} & GET \& POST & return a list of categories and a list of products  &  \\\hline
+\texttt{/rest/products/details/}\textit{product alias} & GET \& POST & return product details & \\\hline
+%\texttt{/rest/products/list/} & GET \& POST & return list of product & \\\hline
+\texttt{/rest/products/category/}\textit{category name} & GET \& POST & returns a list of products belonging to a category & \\\hline
+\texttt{/rest/products/category/} & GET \& POST & returns a list of all category & \\\hline
+\texttt{/rest/products/search/} & GET \& POST & returns a list of products matching your search text & \\\hline
+
+% Buy
+
 \texttt{/rest/buy/product/}\textit{product alias} ? & GET \& POST & create an order with single product & C\\\hline
 \texttt{/rest/buy/cart/} ? & POST & creates an order with a JSON of product & C\\\hline
 \texttt{/rest/buy/pay/}\textit{order ID} ? & POST & pays an order & C\\\hline
 \texttt{/rest/buy/cancel/}\textit{order ID} ? & POST & deletes an order & C\\\hline
-\texttt{/rest/products/details/}\textit{product alias} & GET \& POST & return product details & \\\hline
-%\texttt{/rest/products/list/} & GET \& POST & return list of product & \\\hline
-\texttt{/rest/products/category/}\textit{category name} & GET \& POST & returns a list of products belonging to a category & \\\hline
-%\texttt{/rest/products/category/} & GET \& POST & returns a list of all category & \\\hline
-\texttt{/rest/products/search/} & GET \& POST & returns a list of products matching your search text & \\\hline
+
+% Session
+
 \texttt{/rest/session/login/} & POST & login via a session &  \\\hline
 \texttt{/rest/session/logout/} & GET & logout via a session &  \\\hline
+
+% Media
+
 \texttt{/rest/session/register/} & POST & register customer amd login via session &  \\\hline
 \texttt{/rest/media/list/} & GET & returns a list containing ID, mimetype and name of uploaded media & E\\\hline
 \texttt{/rest/media/upload/} & POST &  api for the upload of an image & E\\\hline
 \texttt{/rest/media/view/}\textit{image ID} & GET \& POST &  view media &  \\\hline
 \texttt{/rest/media/thumb/}\textit{image ID} & GET \& POST & view thumb of media &  \\\hline
+
+% Order
+
 \texttt{/rest/order/list/} & GET \& POST & view order list (if customer can only see their own order, if employee all of them) & L\\\hline
 \texttt{/rest/order/detail/}\textit{order ID} & GET \& POST & view order detail (if customer can only see their own order, if employee all of them) & L\\\hline
+
+% Invoice
+
 \texttt{/rest/invoice/list/} & GET \& POST & view invoice list (if customer can only see their own invoices, if employee all of them) & L\\\hline
 \texttt{/rest/invoice/detail/}\textit{invoice ID} & GET \& POST & view invoice detail from invoice ID (if customer can only see their own invoices, if employee all of them) & L\\\hline
 \texttt{/rest/invoice/order/}\textit{order ID} & GET \& POST & view invoice detail from order ID (if customer can only see their own invoices, if employee all of them) & L\\\hline
+
+% Ticket
+
 \texttt{/rest/ticket/create/} & POST  & create a ticket & C \\\hline
 \texttt{/rest/ticket/list/} & GET \& POST  & list of ticket (if customer can only see their own invoices, if employee all of them) & L \\\hline
 \texttt{/rest/ticket/detail/}\textit{ticket ID} & GET \& POST & detail of a ticket from ticket ID (if customer can only see their own invoices, if employee all of them) & L \\\hline
 \texttt{/rest/ticket/respond/}\textit{ticket ID} & GET \& POST & respond a ticket: create ticket status & E \\\hline
+
+% User
+
 \texttt{/rest/user/info} & GET & view personal data & L \\\hline
 \texttt{/rest/user/modify} & POST & update personal data & L\\\hline
 \texttt{/rest/user/password} & POST & edit password & L\\\hline
 
-%Admin section
+% Order management
+
+\texttt{/rest/management/orderManagement} & GET & show order list & E\\\hline
+\texttt{/rest/management/orderManagement/} \texttt{editOrder/} & POST & Edit a order & E\\\hline
+\texttt{/rest/management/orderManagement/} \texttt{deleteOrder/} &  POST & Delete a order & E\\\hline
+
+% Product management
 
 \texttt{/rest/management/productManagement} & GET & show products list & E\\\hline
-\texttt{/rest/management/productManagement} \texttt{/createProduct} & GET \& POST & Create a new product & E\\\hline
-\texttt{/rest/management/productManagement} \texttt{/editProduct} & GET \& POST & Edit a product & E\\\hline
-\texttt{/rest/management/productManagement} \texttt{/deleteProduct} & GET \& POST & Delete a product & E\\\hline
+\texttt{/rest/management/productManagement/} \texttt{createProduct} & POST & Create a new product & E\\\hline
+\texttt{/rest/management/productManagement/} \texttt{editProduct/} & POST & Edit a product & E\\\hline
+\texttt{/rest/management/productManagement/} \texttt{deleteProduct/} & POST & Delete a product & E\\\hline
+
+% Discount Management
 
 \texttt{/rest/management/discountManagement} & GET & show discounts list & E\\\hline
-\texttt{/rest/management/discountManagement} \texttt{/createDiscount} & GET \& POST & Create a new discount & E\\\hline
-\texttt{/rest/management/discountManagement} \texttt{/updateDiscount}& GET \& POST & Edit a discount & E\\\hline
-\texttt{/rest/management/discountManagement} \texttt{/deleteDiscount} & GET \& POST & Delete a discount & E\\\hline
+\texttt{/rest/management/discountManagement/} \texttt{createDiscount} & POST & Create a new discount & E\\\hline
+\texttt{/rest/management/discountManagement/} \texttt{updateDiscount/}& POST & Edit a discount & E\\\hline
+\texttt{/rest/management/discountManagement/} \texttt{deleteDiscount/} & POST & Delete a discount & E\\\hline
+
+% Customer Management
 
 \texttt{/rest/management/customerManagement} & GET & show customers list & E\\\hline
-\texttt{/rest/management/customerManagement} \texttt{/editCustomer}& GET \& POST & Edit a customer & E\\\hline
-\texttt{/rest/management/customerManagement} \texttt{/deleteCustomer}& GET \& POST & Delete a customer & E\\\hline
+\texttt{/rest/management/customerManagement/} \texttt{editCustomer/}& POST & Edit a customer & E\\\hline
+\texttt{/rest/management/customerManagement/} \texttt{deleteCustomer/}& POST & Delete a customer & E\\\hline
+
+% Employee Management
 
 \texttt{/rest/management/employeeManagement} & GET & show discounts list & A\\\hline
-\texttt{/rest/management/employeeManagement} \texttt{/createEmployee}& GET \& POST & Create a new employee & A\\\hline
-\texttt{/rest/management/employeeManagement} \texttt{/editEmployee} & GET \& POST & Edit an employee & A\\\hline
-\texttt{/rest/management/employeeManagement} \texttt{/deleteEmployee} & GET \& POST & Delete an employee & A\\\hline
+\texttt{/rest/management/employeeManagement/} \texttt{createEmployee/}& POST & Create a new employee & A\\\hline
+\texttt{/rest/management/employeeManagement/} \texttt{editEmployee/} & POST & Edit an employee & A\\\hline
+\texttt{/rest/management/employeeManagement/} \texttt{deleteEmployee/} & POST & Delete an employee & A\\\hline
 
 
 
