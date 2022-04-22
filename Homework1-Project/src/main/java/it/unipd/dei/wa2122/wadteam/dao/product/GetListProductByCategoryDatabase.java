@@ -14,6 +14,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GetListProductByCategoryDatabase {
+    /**
+     * The SQL statements to be executed
+     */
     private static final String STATEMENT = "SELECT p.product_alias, p.name, p.brand, p.description, p.quantity, p.purchase_price, p.sale_price, p.category_name, p.evidence, d.*  FROM product AS p LEFT JOIN (SELECT DISTINCT ON (o.product_alias) o.product_alias, d.* FROM owns o LEFT JOIN discount d on o.id_discount = d.id WHERE d.start_date <= CURRENT_DATE AND d.end_date >= CURRENT_DATE ORDER BY o.product_alias, d.percentage DESC) as d ON d.product_alias = p.product_alias WHERE p.category_name = ?";
 
     private static final String STATEMENT_GET_PICTURE = "SELECT id_media FROM Represented_by WHERE product_alias = ?";
@@ -24,12 +27,12 @@ public class GetListProductByCategoryDatabase {
     private final Connection con;
 
     /**
-     * The product_alias of the product to be retrieved
+     * The category
      */
     private final String category;
 
     /**
-     * Creates a new object for getting a product.
+     * Creates a new object for getting a list of products.
      *
      * @param con     the connection to the database.
      * @param category the product.
@@ -40,7 +43,7 @@ public class GetListProductByCategoryDatabase {
     }
 
     /**
-     * Gets a product from the database.
+     * Gets a list of products from the database.
      *
      * @return the {@code Product} object matching the product_alias.
      * @throws SQLException if any error occurs while retrieving the product.

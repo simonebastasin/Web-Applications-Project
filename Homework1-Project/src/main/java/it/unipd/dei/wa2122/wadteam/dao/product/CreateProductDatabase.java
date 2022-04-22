@@ -17,6 +17,7 @@ public class CreateProductDatabase {
     private static final String STATEMENT_INSERT_PRODUCT = "INSERT INTO product (product_alias, name, brand, description, quantity, purchase_price, sale_price, category_name, evidence) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     private static final String STATEMENT_INSERT_PICTURE = "INSERT INTO Represented_by (product_alias, id_media) VALUES (? , ?)";
+
     /**
      * The connection to the database
      */
@@ -46,7 +47,7 @@ public class CreateProductDatabase {
      * @return the {@code Product} object matching the alias.
      *
      * @throws SQLException
-     *             if any error occurs while reading the product.
+     *             if any error occurs while inserting the product.
      */
     public int createProduct() throws SQLException {
 

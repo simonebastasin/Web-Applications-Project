@@ -33,7 +33,7 @@ public class DeleteProductDatabase {
      *
      * @param con
      *            the connection to the database.
-     * @param product
+     * @param product_alias
      *            the product.
      */
     public DeleteProductDatabase(final Connection con, final String product_alias){
@@ -47,7 +47,7 @@ public class DeleteProductDatabase {
      * @return the {@code Product} object matching the alias.
      *
      * @throws SQLException
-     *             if any error occurs while deleting the media.
+     *             if any error occurs while deleting the product.
      */
     public int deleteProduct() throws SQLException {
         PreparedStatement preparedStatement = null;
