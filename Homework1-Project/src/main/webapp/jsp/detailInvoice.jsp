@@ -31,25 +31,28 @@
         <th>Product name</th>
         <th>Price</th>
         <th>Quantity</th>
+        <th>Total price</th>
       </tr>
       <c:forEach var="prod" items="${onlineInvoice.idOrder.products}">
         <tr>
           <td> ${prod.name} </td>
           <td>${prod.salePrice}€ </td>
           <td>${prod.quantity} </td>
+          <td>${prod.quantity * prod.salePrice}</td>
         </tr>
       </c:forEach>
 
       <tr>
         <td>Total</td>
         <td></td>
-        <td>${onlineInvoice.totalPrice}€</td>
+        <td></td>
+        <td>${onlineInvoice.idOrder.getTotalPrice()}€</td>
       </tr>
     </table>
 
     Date: ${onlineInvoice.idOrder.ooDateTime.getHumanDate()} <br>
     Status: ${onlineInvoice.idOrder.status.status.text} <br>
-    Total price: ${onlineInvoice.idOrder.getTotalPrice()}€ <br>
+    Total price: ${onlineInvoice.totalPrice}€ <br>
 
 <%@ include file="/html/include/footer.html"%>
 </body>
