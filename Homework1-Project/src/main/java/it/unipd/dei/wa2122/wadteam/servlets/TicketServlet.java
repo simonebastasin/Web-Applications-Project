@@ -36,7 +36,13 @@ public class TicketServlet extends AbstractDatabaseServlet {
             writeError(req, resp, GenericError.UNAUTHORIZED);
 
     }
-
+    /**
+     * get createTicket.jsp page
+     * @param req
+     * @param resp
+     * @throws ServletException
+     * @throws IOException
+     */
     private void getCreateTicket(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         var ut = ((UserCredential) req.getSession(false).getAttribute(USER_ATTRIBUTE)).getType();
         switch (ut) {
@@ -45,6 +51,13 @@ public class TicketServlet extends AbstractDatabaseServlet {
         }
     }
 
+    /**
+     * get respondTicketStatus.jsp page
+     * @param req
+     * @param resp
+     * @throws ServletException
+     * @throws IOException
+     */
     private void getRespondTicket(HttpServletRequest req, HttpServletResponse resp, String param) throws IOException, ServletException {
         if(param.chars().allMatch( Character::isDigit ) && !param.equals("")) {
             var ut = ((UserCredential) req.getSession(false).getAttribute(USER_ATTRIBUTE)).getType();
@@ -55,6 +68,13 @@ public class TicketServlet extends AbstractDatabaseServlet {
         }
     }
 
+    /**
+     * get ticket.jsp page
+     * @param req
+     * @param resp
+     * @throws ServletException
+     * @throws IOException
+     */
     private void getDetailTicket(HttpServletRequest req, HttpServletResponse resp, String path, String param) throws IOException, ServletException {
         if(param.chars().allMatch( Character::isDigit ) && !param.equals("")) {
             var ut = ((UserCredential) req.getSession(false).getAttribute(USER_ATTRIBUTE)).getType();
@@ -91,6 +111,13 @@ public class TicketServlet extends AbstractDatabaseServlet {
         }
     }
 
+    /**
+     * get ticket.jsp page if you are a customer or ticketRespond.jsp if you are an employee
+     * @param req
+     * @param resp
+     * @throws ServletException
+     * @throws IOException
+     */
     private void getListTicket(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         try {
             if (req.getSession(false) != null && req.getSession(false).getAttribute(USER_ATTRIBUTE) != null) {
@@ -134,6 +161,14 @@ public class TicketServlet extends AbstractDatabaseServlet {
             writeError(req, resp, GenericError.UNAUTHORIZED);
     }
 
+    /**
+     * respond to a ticket
+     * @param req
+     * @param resp
+     * @param param
+     * @throws ServletException
+     * @throws IOException
+     */
     private void postRespondTicket(HttpServletRequest req, HttpServletResponse resp, String param) throws IOException, ServletException {
         if (param.chars().allMatch(Character::isDigit) && !param.equals("")) {
             var ut = ((UserCredential) req.getSession(false).getAttribute(USER_ATTRIBUTE)).getType();
@@ -167,6 +202,14 @@ public class TicketServlet extends AbstractDatabaseServlet {
         }
     }
 
+    /**
+     * create a ticket
+     * @param req
+     * @param resp
+     * @param param
+     * @throws ServletException
+     * @throws IOException
+     */
     private void postCreateTicket(HttpServletRequest req, HttpServletResponse resp, String param) throws IOException, ServletException {
         int username = ((UserCredential) req.getSession(false).getAttribute(USER_ATTRIBUTE)).getId();
         String description = req.getParameter("description");

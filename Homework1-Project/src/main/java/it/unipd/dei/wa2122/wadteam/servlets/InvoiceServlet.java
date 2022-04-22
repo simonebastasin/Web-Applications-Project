@@ -26,6 +26,14 @@ public class InvoiceServlet extends AbstractDatabaseServlet{
 
     }
 
+    /**
+     * get detailInvoice.jsp page given an order id
+     * @param req
+     * @param resp
+     * @param param
+     * @throws ServletException
+     * @throws IOException
+     */
     private void getDetailInvoiceFromOrderId(HttpServletRequest req, HttpServletResponse resp, String param) throws IOException, ServletException {
         if(param.chars().allMatch( Character::isDigit ) && !param.equals("")) {
             var ut = ((UserCredential) req.getSession(false).getAttribute(USER_ATTRIBUTE)).getType();
@@ -78,6 +86,14 @@ public class InvoiceServlet extends AbstractDatabaseServlet{
         }
     }
 
+    /**
+     * get detailInvoice.jsp page
+     * @param req
+     * @param resp
+     * @param param
+     * @throws ServletException
+     * @throws IOException
+     */
     private void getDetailInvoice(HttpServletRequest req, HttpServletResponse resp, String param) throws IOException, ServletException {
         if(param.chars().allMatch( Character::isDigit ) && !param.equals("")) {
             var ut = ((UserCredential) req.getSession(false).getAttribute(USER_ATTRIBUTE)).getType();
@@ -122,6 +138,13 @@ public class InvoiceServlet extends AbstractDatabaseServlet{
         }
     }
 
+    /**
+     * get invoice.jsp page
+     * @param req
+     * @param resp
+     * @throws ServletException
+     * @throws IOException
+     */
     private void getListInvoice(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         try {
             if (req.getSession(false) != null && req.getSession(false).getAttribute(USER_ATTRIBUTE) != null) {

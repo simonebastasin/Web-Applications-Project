@@ -58,6 +58,13 @@ public class HomePageServlet extends AbstractDatabaseServlet{
         }
     }
 
+    /**
+     * get HomePage.jsp page
+     * @param req
+     * @param res
+     * @throws ServletException
+     * @throws IOException
+     */
     private void homePage(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
         List<Product> products;
         List<ProductCategory> categories;
@@ -83,6 +90,14 @@ public class HomePageServlet extends AbstractDatabaseServlet{
         }
     }
 
+    /**
+     * get categoryDetail.jsp page
+     * @param req
+     * @param res
+     * @param param
+     * @throws ServletException
+     * @throws IOException
+     */
     private void productCategory(HttpServletRequest req, HttpServletResponse res, String param) throws ServletException, IOException{
 
         if(param.isEmpty()) {
@@ -120,6 +135,14 @@ public class HomePageServlet extends AbstractDatabaseServlet{
 
     }
 
+    /**
+     * get productDetail.jsp page
+     * @param req
+     * @param res
+     * @param param
+     * @throws ServletException
+     * @throws IOException
+     */
     private void productDetail(HttpServletRequest req, HttpServletResponse res, String param) throws ServletException, IOException{
 
         Product product;

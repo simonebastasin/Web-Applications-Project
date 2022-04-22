@@ -52,6 +52,13 @@ public class DiscountManagementServlet extends AbstractDatabaseServlet{
 
     }
 
+    /**
+     * get discountManagement.jsp page to list all the discounts of the database
+     * @param req
+     * @param res
+     * @throws ServletException
+     * @throws IOException
+     */
     private void getListDiscount(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
         List<Discount> discounts;
 
@@ -98,7 +105,14 @@ public class DiscountManagementServlet extends AbstractDatabaseServlet{
 
     }
 
-
+    /**
+     * get editDioscount.jsp page to edit a discount of the database
+     * @param req
+     * @param res
+     * @param param     id of selected discount to confirm deletion
+     * @throws ServletException
+     * @throws IOException
+     */
     private void getEditDiscount(HttpServletRequest req, HttpServletResponse res, String param) throws ServletException, IOException{
         Discount discount;
         List<Product> products;
@@ -219,7 +233,7 @@ public class DiscountManagementServlet extends AbstractDatabaseServlet{
     }
 
     /**
-     * creates a new discount in the database
+     * edit an already existing discount in the database
      * @param req
      * @param res
      * @throws IOException
