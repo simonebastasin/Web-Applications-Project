@@ -39,10 +39,29 @@ with value \texttt{application/json}.
 \texttt{/rest/user/info} & GET & view personal data & L \\\hline
 \texttt{/rest/user/modify} & POST & update personal data & L\\\hline
 \texttt{/rest/user/password} & POST & edit password & L\\\hline
-\texttt{/rest/management/discount/} & & &\\\hline
-\texttt{/rest/management/order/} & & &\\\hline
-\texttt{/rest/management/product/} & & &\\\hline
-\texttt{/rest/management/user/} & & &\\\hline
+
+%Admin section
+
+\texttt{/rest/management/productManagement} & GET & show products list & E\\\hline
+\texttt{/rest/management/productManagement/createProduct} & GET \& POST & Create a new product & E\\\hline
+\texttt{/rest/management/productManagement/editProduct} & GET \& POST & Edit a product & E\\\hline
+\texttt{/rest/management/productManagement/deleteProduct} & GET \& POST & Delete a product & E\\\hline
+
+\texttt{/rest/management/discountManagement} & GET & show discounts list & E\\\hline
+\texttt{/rest/management/discountManagement/createDiscount} & GET \& POST & Create a new discount & E\\\hline
+\texttt{/rest/management/discountManagement/updateDiscount} & GET \& POST & Edit a discount & E\\\hline
+\texttt{/rest/management/discountManagement/deleteDiscount} & GET \& POST & Delete a discount & E\\\hline
+
+\texttt{/rest/management/customerManagement} & GET & show customers list & E\\\hline
+\texttt{/rest/management/customerManagement/editCustomer} & GET \& POST & Edit a customer & E\\\hline
+\texttt{/rest/management/customerManagement/deleteCustomer} & GET \& POST & Delete a customer & E\\\hline
+
+\texttt{/rest/management/employeeManagement} & GET & show discounts list & A\\\hline
+\texttt{/rest/management/employeeManagement/createEmployee} & GET \& POST & Create a new employee & A\\\hline
+\texttt{/rest/management/employeeManagement/editEmployee} & GET \& POST & Edit an employee & A\\\hline
+\texttt{/rest/management/employeeManagement/deleteEmployee} & GET \& POST & Delete an employee & A\\\hline
+
+
 
 \caption{API for the REST interface of the Electromechanics
 Shop application back-end}
