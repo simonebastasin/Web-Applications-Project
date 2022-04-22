@@ -2,7 +2,7 @@
 
 The architecture of our webapp is based on four principal items:
 \begin{itemize}
-    \item \textbf{Resource}: also called POJO (Plain Old Java Object) classes are the classes that deal with the object representation of data in the database using a tree hierarchy.
+    \item \textbf{Resource}: also called POJO (Plain Old Java Object) classes, are the classes used for the Java object representation of each tables in the database. They are implemented using a tree hierarchy.
     \item \textbf{DAO} (Data Access Object): are the classes that communicate with the database, taking care of the queries and saving their results in the resource classes.
     \item \textbf{Servlet}: are the classes that manage the interaction with the rest APIs and hypertext.
     \item \textbf{Filter}: are the classes that protect the servlet access allowing only those who really are entitled to it to use their functionalities.
