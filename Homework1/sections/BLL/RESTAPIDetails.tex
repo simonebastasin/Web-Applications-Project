@@ -369,7 +369,9 @@ This API allows to modify the password of the logged user.
 \end{itemize}
 
 
+Management section
 
+\subsubsection{Management section}
 \subsubsection*{Product list}
 This API returns the list of products.
 
@@ -391,20 +393,20 @@ This API returns the category and the list of media used to create a new product
     \item URL Parameters: Nothing
     \item Data Parameters: 
     \begin{itemize}
-        \item alias: set the alias
-        \item name: set the name
-        \item brand: set the brand of the product
-        \item description: set the description of the product
-        \item purchase: set the purchase sale
-        \item sale: set the sale price
-        \item quantity: set the initial quantity
-        \item category: set the category of the product
-        \item evidence: set if the product should be in evidence
-        \item media: list of media that must be associated with the product
+        \item \texttt{alias}: set the alias
+        \item \texttt{name}: set the name
+        \item \texttt{brand}: set the brand of the product
+        \item \texttt{description}: set the description of the product
+        \item \texttt{purchase}: set the purchase sale
+        \item \texttt{sale}: set the sale price
+        \item \texttt{quantity}: set the initial quantity
+        \item \texttt{category}: set the category of the product
+        \item \texttt{evidence}: set if the product should be in evidence
+        \item \texttt{media}: list of media that must be associated with the product
     \end{itemize}
-    
-    a JSON Object containing information of the new product
+    \item Data Parameters encoding: \texttt{x-www-form-urlencoded}
     \item Success Response: e: a JSON Object with a productCategoryList end mediaList
+    
     \item Error Response: a JSON Object with a key: \texttt{isError}  and value \texttt{true}, an error code, a message and details of the error.
 \end{itemize}
 
@@ -415,20 +417,21 @@ This API returns an Object Product with the new attributes and its list of all m
 \begin{itemize}
     \item URL: \texttt{/rest/management/productManagement/editProduct}
     \item Method: \texttt{{GET \& POST}}
-    \item URL Parameters: productAlias
+    \item URL Parameters: \texttt{productAlias}
     \item Data Parameters: 
     \begin{itemize}
-        \item alias: set the alias
-        \item name: set the name
-        \item brand: set the brand of the product
-        \item description: set the description of the product
-        \item purchase: set the purchase sale
-        \item sale: set the sale price
-        \item quantity: set the initial quantity
-        \item category: set the category of the product
-        \item evidence: set if the product should be in evidence
-        \item media: list of media that must be associated with the product
+        \item \texttt{alias}: set the alias
+        \item \texttt{name}: set the name
+        \item \texttt{brand}: set the brand of the product
+        \item \texttt{description}: set the description of the product
+        \item \texttt{purchase}: set the purchase sale
+        \item \texttt{sale}: set the sale price
+        \item \texttt{quantity}: set the initial quantity
+        \item \texttt{category}: set the category of the product
+        \item \texttt{evidence}: set if the product should be in evidence
+        \item \texttt{media}: list of media that must be associated with the product
     \end{itemize}
+    \item Data Parameters encoding: \texttt{x-www-form-urlencoded}
     \item Success Response: e: a JSON Object product end media list
     \item Error Response: a JSON Object with a key: \texttt{isError}  and value \texttt{true}, an error code, a message and details of the error.
 \end{itemize}
@@ -441,7 +444,7 @@ This API returns an Object Product.
 \begin{itemize}
     \item URL: \texttt{/rest/management/productManagement/deleteProduct}
     \item Method: \texttt{{GET \& POST}}
-    \item URL Parameters: productAlias
+    \item URL Parameters: \texttt{productAlias}
     \item Data Parameters: Nothing
     \item Success Response: e: a JSON Object product
     \item Error Response: a JSON Object with a key: \texttt{isError}  and value \texttt{true}, an error code, a message and details of the error.
@@ -469,11 +472,12 @@ This API returns a list of Object Products used for creating new discount.
     \item URL Parameters: Nothing
     \item Data Parameters: 
     \begin{itemize}
-        \item percentage: percentage of new discount
-        \item start: discount start date
-        \item end: discount end date
-        \item productList: list of the products to discount
-    \end{itemize} 
+        \item \texttt{percentage}: percentage of new discount
+        \item \texttt{start}: discount start date
+        \item \texttt{end}: discount end date
+        \item \texttt{productList}: list of the products to discount
+    \end{itemize}
+    \item Data Parameters encoding: \texttt{x-www-form-urlencoded}
     \item Success Response: e: a JSON Array that contains products that will be chosen
     \item Error Response: a JSON Object with a key: \texttt{isError}  and value \texttt{true}, an error code, a message and details of the error.
 \end{itemize}
@@ -484,14 +488,15 @@ This API returns an Object Discount and a list of all products.
 \begin{itemize}
     \item URL: \texttt{/rest/management/discountManagement/updateDiscount}
     \item Method: \texttt{{GET \& POST}}
-    \item URL Parameters: idDiscount
+    \item URL Parameters: \texttt{idDiscount}
     \item Data Parameters: 
     \begin{itemize}
-        \item percentage: percentage of new discount
-        \item start: discount start date
-        \item end: discount end date
-        \item productList: list of the products to discount
+        \item \texttt{percentage}: percentage of new discount
+        \item \texttt{start}: discount start date
+        \item \texttt{end}: discount end date
+        \item \texttt{productList}: list of the products to discount
     \end{itemize}
+    \item Data Parameters encoding: \texttt{x-www-form-urlencoded}
     \item Success Response: e: a JSON Object of discount with associated products, and an Array of all products 
     \item Error Response: a JSON Object with a key: \texttt{isError}  and value \texttt{true}, an error code, a message and details of the error.
 \end{itemize}
@@ -502,7 +507,7 @@ This API returns an Object Discount
 \begin{itemize}
     \item URL: \texttt{/rest/management/discountManagement/deleteDiscount}
     \item Method: \texttt{{GET \& POST}}
-    \item URL Parameters: idDiscount
+    \item URL Parameters: \texttt{idDiscount}
     \item Data Parameters: Nothing
     \item Success Response: e: a JSON Object of discount and an Array of associated products. 
     \item Error Response: a JSON Object with a key: \texttt{isError}  and value \texttt{true}, an error code, a message and details of the error.
@@ -525,8 +530,9 @@ This API returns the customer
 \begin{itemize}
     \item URL: \texttt{/rest/management/customerManagement/editCustomer}
     \item Method: \texttt{{GET \& POST}}
-    \item URL Parameters: idCustomer
-    \item Data Parameters: name, surname, fiscalCode, address, email, phoneNumber.
+    \item URL Parameters: \texttt{idCustomer}
+    \item Data Parameters: \texttt{name}, \texttt{surname}, \texttt{fiscalCode}, \texttt{address}, \texttt{email}, \texttt{phoneNumber}.
+    \item Data Parameters encoding: \texttt{x-www-form-urlencoded}
     \item Success Response: e: a JSON Object of customer.
     \item Error Response: a JSON Object with a key: \texttt{isError}  and value \texttt{true}, an error code, a message and details of the error.
 \end{itemize}
@@ -536,7 +542,7 @@ This API returns the Object Customer to delete
 \begin{itemize}
     \item URL: \texttt{/rest/management/customerManagement/deleteCustomer}
     \item Method: \texttt{{GET \& POST}}
-    \item URL Parameters: idCustomer
+    \item URL Parameters: \texttt{idCustomer}
     \item Data Parameters: Nothing.
     \item Success Response: e: a JSON Object of customer.
     \item Error Response: a JSON Object with a key: \texttt{isError}  and value \texttt{true}, an error code, a message and details of the error.
@@ -561,7 +567,8 @@ This API return the list of all roles.
     \item URL: \texttt{/rest/management/employeeManagement/createEmployee}
     \item Method: \texttt{{GET \& POST}}
     \item URL Parameters: Nothing
-    \item Data Parameters: name, surname, role.
+    \item Data Parameters: \texttt{name}, \texttt{surname}, \texttt{role}.
+    \item Data Parameters encoding: \texttt{x-www-form-urlencoded}
     \item Success Response: e: a JSON Array of roles.
     \item Error Response: a JSON Object with a key: \texttt{isError}  and value \texttt{true}, an error code, a message and details of the error.
 \end{itemize}
@@ -571,8 +578,9 @@ This API returns an Object Employee and a list of roles.
 \begin{itemize}
     \item URL: \texttt{/rest/management/employeeManagement/editEmployee}
     \item Method: \texttt{{GET \& POST}}
-    \item URL Parameters: username
-    \item Data Parameters: name, surname, role.
+    \item URL Parameters: \texttt{username}
+    \item Data Parameters: \texttt{name}, \texttt{surname}, \texttt{role}.
+    \item Data Parameters encoding: \texttt{x-www-form-urlencoded}
     \item Success Response: e: a JSON object of employee and an Array of roles.
     \item Error Response: a JSON Object with a key: \texttt{isError}  and value \texttt{true}, an error code, a message and details of the error.
 \end{itemize}
@@ -582,7 +590,7 @@ This API returns the Object Employee that has deleted
 \begin{itemize}
     \item URL: \texttt{/rest/management/employeeManagement/deleteEmployee}
     \item Method: \texttt{{GET \& POST}}
-    \item URL Parameters: username
+    \item URL Parameters: \texttt{username}
     \item Data Parameters: Nothing.
     \item Success Response: e: a JSON object of employee to delete.
     \item Error Response: a JSON Object with a key: \texttt{isError}  and value \texttt{true}, an error code, a message and details of the error.
