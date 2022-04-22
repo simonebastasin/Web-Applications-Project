@@ -62,7 +62,9 @@ public class TicketStatus implements Resource{
     public static TicketStatus fromJSON(JSONObject jsonObject) {
         int id = jsonObject.getInt("id");
         TicketStatusEnum status = TicketStatusEnum.fromJSON(jsonObject.getJSONObject("status"));
-        String description = jsonObject.getString("status");
+        String description = null;
+        if(jsonObject.has("description"))
+            description = jsonObject.getString("description");
         DateTime tsDate = DateTime.fromJSON(jsonObject.getJSONObject("tsDate"));
         int idTicket = jsonObject.getInt("idTicket");
 
