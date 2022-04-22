@@ -10,11 +10,11 @@
 <%--@elvariable id="mediaList" type="java.util.List<Media>"--%>
 <html>
 <head>
-    <title>View media | Electromechanics Shop</title>
+    <title>Media list | Electromechanics Shop</title>
 </head>
 <body>
     <c:import url="/jsp/include/header.jsp"/>
-    <h1>List media</h1>
+    <h1>Media list</h1>
 
     <ul>
     <c:forEach var="item" items="${mediaList}">

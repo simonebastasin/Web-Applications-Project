@@ -12,7 +12,7 @@
 
 <html>
 <head>
-    <title>Ticket respond | Electromechanics Shop</title>
+    <title>Ticket list | Electromechanics Shop</title>
 </head>
 <body>
 <c:import url="/jsp/include/header.jsp"/>
