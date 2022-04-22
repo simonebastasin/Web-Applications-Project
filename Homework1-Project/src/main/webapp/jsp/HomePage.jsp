@@ -20,6 +20,15 @@
 <c:import url="/jsp/include/header.jsp"/>
 <h1>Electromechanics shop</h1>
 
+<c:set value="${false}" var="showcase"/>
+<c:forEach var="prod" items="${productList}">
+    <c:if test="${prod.evidence == true}">
+        <c:set value="${true}" var="showcase"/>
+    </c:if>
+</c:forEach>
+
+<c:if test="${showcase == true}">
+
 <hr>
 
 <h3>Featured products</h3>
@@ -45,6 +54,7 @@
         </c:if>
     </c:forEach>
 </ul>
+</c:if>
 
 <hr>
 
