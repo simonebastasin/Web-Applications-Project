@@ -26,7 +26,7 @@ public class LoginServlet extends AbstractDatabaseServlet {
             case "login" ->  {
                 if(req.getSession(false) != null && req.getSession(false).getAttribute(USER_ATTRIBUTE) != null) {
                     Message m = new Message("User is already logged in");
-                    //Message m = new ErrorMessage.AlreadyLoggedInError("");
+                    //ErrorMessage m = new ErrorMessage.AlreadyLoggedInError("");
                     writeMessageOrRedirect(req, resp, m, req.getContextPath() + "/");
                 } else {
                     writeJsp(req, resp, "/jsp/login.jsp");
@@ -46,7 +46,7 @@ public class LoginServlet extends AbstractDatabaseServlet {
             case "register" -> {
 
                 if(req.getSession(false) != null && req.getSession(false).getAttribute(USER_ATTRIBUTE) != null) {
-                    //Message m = new ErrorMessage.AlreadyLoggedInError("");
+                    //ErrorMessage m = new ErrorMessage.AlreadyLoggedInError("");
                     Message m = new Message("User is already logged in");
                     writeMessageOrRedirect(req, resp, m, req.getContextPath() + "/");
                 } else {

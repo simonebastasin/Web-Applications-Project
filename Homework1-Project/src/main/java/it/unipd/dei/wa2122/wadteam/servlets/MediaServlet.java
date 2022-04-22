@@ -151,7 +151,7 @@ public class MediaServlet extends AbstractDatabaseServlet {
             } else {
                 logger.error("There was a problem with upload");
 
-                writeError(request, response, new ErrorMessage.UploadError("There was a problem with upload"));
+                writeError(request, response, new ErrorMessage.UploadMediaError("There was a problem with upload"));
             }
 
         } catch (SQLException e) {

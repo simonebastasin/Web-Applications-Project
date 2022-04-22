@@ -107,9 +107,9 @@ public abstract sealed class ErrorMessage extends Message  {
         }
     }
 
-    public static final class UploadError extends ErrorMessage {
-        public UploadError(String errorDetails) {
-            super("Upload error", "204", errorDetails, HttpServletResponse.SC_NOT_ACCEPTABLE);
+    public static final class UploadMediaError extends ErrorMessage {
+        public UploadMediaError(String errorDetails) {
+            super("Upload media error", "204", errorDetails, HttpServletResponse.SC_NOT_ACCEPTABLE);
         }
     }
 
@@ -151,7 +151,7 @@ public abstract sealed class ErrorMessage extends Message  {
 
     public static final class DeleteEmployeeError extends ErrorMessage {
         public DeleteEmployeeError(String errorDetails) {
-            super("Unable to delete employee", "211", errorDetails, HttpServletResponse.SC_CONFLICT);
+            super("Unable to delete employee", "211", errorDetails, HttpServletResponse.SC_NOT_ACCEPTABLE);
         }
     }
 
@@ -163,13 +163,13 @@ public abstract sealed class ErrorMessage extends Message  {
 
     public static final class DeleteProductError extends ErrorMessage {
         public DeleteProductError(String errorDetails) {
-            super("Unable to delete customer", "213", errorDetails, HttpServletResponse.SC_NOT_ACCEPTABLE);
+            super("Unable to delete product", "213", errorDetails, HttpServletResponse.SC_NOT_ACCEPTABLE);
         }
     }
 
     public static final class DeleteDiscountError extends ErrorMessage {
         public DeleteDiscountError(String errorDetails) {
-            super("Unable to delete customer", "214", errorDetails, HttpServletResponse.SC_NOT_ACCEPTABLE);
+            super("Unable to delete discount", "214", errorDetails, HttpServletResponse.SC_NOT_ACCEPTABLE);
         }
     }
 
