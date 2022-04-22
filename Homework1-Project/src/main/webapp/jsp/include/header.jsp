@@ -36,6 +36,8 @@
         <c:choose>
             <c:when test="${empty user.role}">
                 <a href="<c:url value="/order/list"/>">Your orders</a>
+                <a href="<c:url value="/invoice/list"/>">View Invoices</a>
+                <a href="<c:url value="/ticket/list"/>">View Tickets</a>
             </c:when>
         </c:choose>
         &nbsp | &nbsp
