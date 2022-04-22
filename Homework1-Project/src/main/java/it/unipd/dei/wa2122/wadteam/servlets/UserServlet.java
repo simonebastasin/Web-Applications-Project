@@ -41,7 +41,7 @@ public class UserServlet extends AbstractDatabaseServlet {
                             Customer cu;
                             try {
                                 cu = new GetIdCustomerDatabase(getDataSource().getConnection(), username).getIdCustomer();
-                                writeResource(req, resp, "/jsp/CustomerDetail.jsp", true, cu);
+                                writeResource(req, resp, "/jsp/customerDetail.jsp", true, cu);
                             } catch (SQLException e) {
                                 logger.error(e.getMessage());
                                 writeError(req, resp, new ErrorMessage.SqlInternalError(e.getMessage()));
@@ -133,7 +133,7 @@ public class UserServlet extends AbstractDatabaseServlet {
                             }
                             if (cu == null)
                                 writeError(req,resp,GenericError.SERVER_ERROR);
-                            else writeResource(req, resp, "/jsp/CustomerDetail.jsp", true, cu);
+                            else writeResource(req, resp, "/jsp/customerDetail.jsp", true, cu);
                         }
                         case EMPLOYEE -> {
                             Employee emNew;

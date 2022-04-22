@@ -16,12 +16,12 @@
     <meta name="description" content="Electromechanics Shop">
     <meta name="author" content="WAD Team">
 
-    <title>Ticket List | Electromechanics Shop</title>
+    <title>Your Ticket List | Electromechanics Shop</title>
 </head>
 
 <body>
 <c:import url="/jsp/include/header.jsp"/>
-<h1>Ticket List</h1>
+<h1>Your Ticket List</h1>
 
 <ul>
     <style>

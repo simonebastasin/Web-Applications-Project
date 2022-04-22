@@ -16,12 +16,12 @@
     <meta name="description" content="Electromechanics Shop">
     <meta name="author" content="WAD Team">
 
-    <title>Invoice List | Electromechanics Shop</title>
+    <title>Your Invoice List | Electromechanics Shop</title>
 </head>
 
 <body>
 <c:import url="/jsp/include/header.jsp"/>
-<h1>Invoice List</h1>
+<h1>Your Invoice List</h1>
 
 <c:forEach var="invoice" items="${onlineInvoiceList}">
     <h2>Invoice ID: ${invoice.id}</h2>
