@@ -49,9 +49,8 @@ public class CustomerManagementServlet extends AbstractDatabaseServlet {
      * @throws IOException
      */
     private void getCustomerList(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-        List<Customer> customerList;
         try {
-            customerList = new ListCustomerDatabase(getDataSource().getConnection()).getCustomer();
+            List<Customer> customerList = new ListCustomerDatabase(getDataSource().getConnection()).getCustomer();
             writeResource(req, res, "/jsp/customerManagement.jsp", false, customerList.toArray(Resource[]::new));
         } catch (SQLException e) {
             logger.error(e.getMessage());
@@ -69,10 +68,9 @@ public class CustomerManagementServlet extends AbstractDatabaseServlet {
      * @throws ServletException
      */
     private void getEditCustomer(HttpServletRequest req, HttpServletResponse res, String param) throws IOException, ServletException {
-        Customer customer;
         if (!param.equals("")) {
             try {
-                customer = new GetIdCustomerDatabase(getDataSource().getConnection(), param).getIdCustomer();
+                Customer customer = new GetIdCustomerDatabase(getDataSource().getConnection(), param).getIdCustomer();
                 writeResource(req, res, "/jsp/editCustomer.jsp", false, customer);
             } catch (SQLException e) {
                 logger.error(e.getMessage());
@@ -93,23 +91,25 @@ public class CustomerManagementServlet extends AbstractDatabaseServlet {
      * @throws ServletException
      */
     private void postEditCustomer(HttpServletRequest req, HttpServletResponse res, String param) throws IOException, ServletException {
-        String name = req.getParameter("name");
-        String surname = req.getParameter("surname");
-        String fiscalCode = req.getParameter("fiscalCode");
-        String address = req.getParameter("address");
-        String email = req.getParameter("email");
-        String phoneNumber = req.getParameter("phoneNumber");
-
-        Customer customer;
-        try {
-            customer = new Customer(null, name, surname, fiscalCode, address, email, phoneNumber, param, null);
-            customer = new UpdateCustomerDatabase(getDataSource().getConnection(), customer).updateCustomer();
-            //writeResource(req, res, "/jsp/employeeDetail.jsp", true , product); //view result
-            Message m = new Message("edit ok");
-            writeMessageOrRedirect(req, res, m, req.getContextPath() + (req.getServletPath().startsWith("/rest/") ? "/rest" : "") + "/management/customerManagement");
-        } catch (SQLException e) {
-            logger.error(e.getMessage());
-            writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
+        if (!param.equals("")) {
+            String name = req.getParameter("name");
+            String surname = req.getParameter("surname");
+            String fiscalCode = req.getParameter("fiscalCode");
+            String address = req.getParameter("address");
+            String email = req.getParameter("email");
+            String phoneNumber = req.getParameter("phoneNumber");
+            try {
+                Customer customer = new Customer(null, name, surname, fiscalCode, address, email, phoneNumber, param, null);
+                customer = new UpdateCustomerDatabase(getDataSource().getConnection(), customer).updateCustomer();
+                logger.info("Edit completed successfully for customer " + customer.toString());
+                Message m = new Message("edit customer ok");
+                writeMessageOrRedirect(req, res, m, req.getContextPath() + (req.getServletPath().startsWith("/rest/") ? "/rest" : "") + "/management/customerManagement");
+            } catch (SQLException e) {
+                logger.error(e.getMessage());
+                writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
+            }
+        } else {
+            writeError(req, res, new ErrorMessage.IncorrectlyFormattedPathError("last path parameter cannot be empty"));
         }
     }
 
@@ -123,10 +123,9 @@ public class CustomerManagementServlet extends AbstractDatabaseServlet {
      * @throws IOException
      */
     private void getDeleteCustomer(HttpServletRequest req, HttpServletResponse res, String param) throws ServletException, IOException {
-        Customer customer;
         if (!param.equals("")) {
             try {
-                customer = new GetIdCustomerDatabase(getDataSource().getConnection(), param).getIdCustomer();
+                Customer customer = new GetIdCustomerDatabase(getDataSource().getConnection(), param).getIdCustomer();
                 if (customer != null) {
                     writeResource(req, res, "/jsp/deleteCustomer.jsp", true, customer);
                 } else {
@@ -151,14 +150,18 @@ public class CustomerManagementServlet extends AbstractDatabaseServlet {
      * @throws IOException
      */
     private void postDeleteCustomer(HttpServletRequest req, HttpServletResponse res, String param) throws ServletException, IOException {
-        Customer customer;
-        try {
-            customer = new DeleteCustomerByUsernameDatabase((getDataSource().getConnection()), param).deleteCustomer();
-            Message m = new Message("delete ok");
-            writeMessageOrRedirect(req, res, m, req.getContextPath() + (req.getServletPath().startsWith("/rest/") ? "/rest" : "") + "/management/customerManagement");
-        } catch (SQLException e) {
-            logger.error(e.getMessage());
-            writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
+        if (!param.equals("")) {
+            try {
+                Customer customer = new DeleteCustomerByUsernameDatabase((getDataSource().getConnection()), param).deleteCustomer();
+                logger.info("Delete completed successfully for customer " + customer.toString());
+                Message m = new Message("delete customer ok");
+                writeMessageOrRedirect(req, res, m, req.getContextPath() + (req.getServletPath().startsWith("/rest/") ? "/rest" : "") + "/management/customerManagement");
+            } catch (SQLException e) {
+                logger.error(e.getMessage());
+                writeError(req, res, new ErrorMessage.DeleteCustomerError(e.getMessage()));
+            }
+        } else {
+            writeError(req, res, new ErrorMessage.IncorrectlyFormattedPathError("last path parameter cannot be empty"));
         }
     }
 }

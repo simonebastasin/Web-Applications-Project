@@ -205,11 +205,11 @@ public class DiscountManagementServlet extends AbstractDatabaseServlet{
                     List<Owns> list = new CreateOwnsDiscountFromListProductsDatabase(getDataSource().getConnection(), productAliasList, discount).createOwnsDiscountFromList();
 
                     logger.info("Insert completed successfully for discount "+discount.toString());
-                    Message m = new Message("edit ok", discount.getId());
+                    Message m = new Message("create discount ok", discount.getId());
                     writeMessageOrRedirect(req, res, m,  req.getContextPath() + (req.getServletPath().startsWith("/rest/") ? "/rest" : "") + "/management/discountManagement");
                 } catch (SQLException e) {
                     logger.error(e.getMessage());
-                    writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
+                    writeError(req, res, new ErrorMessage.CreateDiscountError(e.getMessage()));
                 }
             }
             
@@ -283,7 +283,7 @@ public class DiscountManagementServlet extends AbstractDatabaseServlet{
 
                     //List<Owns> list = new UpdateOwn(getDataSource().getConnection(), productAliasList, discount).createOwnsDiscountFromList();
                     logger.info("Edit completed successfully for discount "+discount.toString());
-                    Message m = new Message("edit ok", discount.getId());
+                    Message m = new Message("edit discount ok", discount.getId());
                     writeMessageOrRedirect(req, res, m,  req.getContextPath() + (req.getServletPath().startsWith("/rest/") ? "/rest" : "") + "/management/discountManagement");
                 } catch (SQLException e) {
                     logger.error(e.getMessage());
@@ -310,11 +310,11 @@ public class DiscountManagementServlet extends AbstractDatabaseServlet{
             discount = new DeleteDiscountDatabase((getDataSource().getConnection()), Integer.parseInt(param)).deleteDiscount();
 
             logger.info("Delete completed successfully for discount "+discount.toString());
-            Message m = new Message("delete ok");
+            Message m = new Message("delete discount ok");
             writeMessageOrRedirect(req, res, m, req.getContextPath() + (req.getServletPath().startsWith("/rest/") ? "/rest" : "") +"/management/discountManagement");
         } catch (SQLException e) {
             logger.error(e.getMessage());
-            writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
+            writeError(req, res, new ErrorMessage.DeleteDiscountError(e.getMessage()));
         }
     }
 }

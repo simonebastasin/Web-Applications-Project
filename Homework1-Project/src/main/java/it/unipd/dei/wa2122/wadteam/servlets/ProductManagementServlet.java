@@ -189,11 +189,11 @@ public class ProductManagementServlet extends AbstractDatabaseServlet{
 
         try {
             int product = new CreateProductDatabase(getDataSource().getConnection(), temp).createProduct();
-            Message m = new Message("creat ok");
+            Message m = new Message("create product ok");
             writeMessageOrRedirect(req, res, m, req.getContextPath() + (req.getServletPath().startsWith("/rest/") ? "/rest" : "") +"/management/productManagement");
         } catch (SQLException e) {
             logger.error(e.getMessage());
-            writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
+            writeError(req, res, new ErrorMessage.ProductRedundantError(e.getMessage()));
         }
 
     }
@@ -214,11 +214,11 @@ public class ProductManagementServlet extends AbstractDatabaseServlet{
 
         try {
             ProductCategory resultProductCategory = new CreateProductCategoryDatabase(getDataSource().getConnection(), temp).createProductCategory();
-            Message m = new Message("edit ok");
+            Message m = new Message("create category ok");
             writeMessageOrRedirect(req, res, m, req.getContextPath() + (req.getServletPath().startsWith("/rest/") ? "/rest" : "") +"/management/productManagement/createProduct");
         } catch (SQLException e) {
             logger.error(e.getMessage());
-            writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
+            writeError(req, res, new ErrorMessage.CategoryRedundantError(e.getMessage()));
         }
 
     }
@@ -256,7 +256,7 @@ public class ProductManagementServlet extends AbstractDatabaseServlet{
         try {
             int edit = new UpdateProductDatabase(getDataSource().getConnection(), temp).updateProduct();
             //writeResource(req, res, "/jsp/productDetail.jsp", true , product); //view result
-            Message m = new Message("edit ok");
+            Message m = new Message("edit product ok");
             writeMessageOrRedirect(req, res, m, req.getContextPath() + (req.getServletPath().startsWith("/rest/") ? "/rest" : "") +"/management/productManagement");
         } catch (SQLException e) {
             logger.error(e.getMessage());
@@ -282,7 +282,7 @@ public class ProductManagementServlet extends AbstractDatabaseServlet{
             writeMessageOrRedirect(req, res, m, req.getContextPath() + (req.getServletPath().startsWith("/rest/") ? "/rest" : "") +"/management/productManagement");
         } catch (SQLException e) {
             logger.error(e.getMessage());
-            writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
+            writeError(req, res, new ErrorMessage.DeleteProductError(e.getMessage()));
         }
     }
 

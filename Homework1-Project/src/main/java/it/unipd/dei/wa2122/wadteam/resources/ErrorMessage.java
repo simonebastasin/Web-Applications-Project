@@ -75,7 +75,7 @@ public abstract sealed class ErrorMessage extends Message  {
 
     public static final class CustomerRedundantError extends ErrorMessage {
         public CustomerRedundantError(String errorDetails) {
-            super("Customer data already present", "109", errorDetails, HttpServletResponse.SC_CONFLICT);
+            super("Customer unique data already present", "109", errorDetails, HttpServletResponse.SC_CONFLICT);
         }
     }
 
@@ -113,47 +113,63 @@ public abstract sealed class ErrorMessage extends Message  {
         }
     }
 
-
-    public static final class DeleteCustomerError extends ErrorMessage {
-        public DeleteCustomerError(String errorDetails) {
-            super("Unable to delete customer", "205", errorDetails, HttpServletResponse.SC_NOT_ACCEPTABLE);
-        }
-    }
-
-
     public static final class EmptyProductListError extends ErrorMessage {
         public EmptyProductListError(String errorDetails) {
-            super("Product list cannot be empty", "206", errorDetails, HttpServletResponse.SC_NOT_ACCEPTABLE);
+            super("Product list cannot be empty", "205", errorDetails, HttpServletResponse.SC_NOT_ACCEPTABLE);
         }
     }
 
     public static final class DatesTimelineError extends ErrorMessage {
         public DatesTimelineError(String errorDetails) {
-            super("Start date cannot be later than end date", "207", errorDetails, HttpServletResponse.SC_NOT_ACCEPTABLE);
+            super("Start date cannot be later than end date", "206", errorDetails, HttpServletResponse.SC_NOT_ACCEPTABLE);
         }
     }
 
     public static final class EmployeeRedundantError extends ErrorMessage {
         public EmployeeRedundantError(String errorDetails) {
-            super("Employee username already present", "208", errorDetails, HttpServletResponse.SC_CONFLICT);
+            super("Employee username already present", "207", errorDetails, HttpServletResponse.SC_CONFLICT);
         }
     }
 
     public static final class ProductRedundantError extends ErrorMessage {
         public ProductRedundantError(String errorDetails) {
-            super("Product alias already present", "209", errorDetails, HttpServletResponse.SC_CONFLICT);
+            super("Product alias already present", "208", errorDetails, HttpServletResponse.SC_CONFLICT);
         }
     }
 
     public static final class CategoryRedundantError extends ErrorMessage {
         public CategoryRedundantError(String errorDetails) {
-            super("Category name already present", "210", errorDetails, HttpServletResponse.SC_CONFLICT);
+            super("Category name already present", "209", errorDetails, HttpServletResponse.SC_CONFLICT);
+        }
+    }
+
+    public static final class CreateDiscountError extends ErrorMessage {
+        public CreateDiscountError(String errorDetails) {
+            super("Unable to create discount", "210", errorDetails, HttpServletResponse.SC_CONFLICT);
         }
     }
 
     public static final class DeleteEmployeeError extends ErrorMessage {
         public DeleteEmployeeError(String errorDetails) {
-            super("Unable to delete Employee", "211", errorDetails, HttpServletResponse.SC_CONFLICT);
+            super("Unable to delete employee", "211", errorDetails, HttpServletResponse.SC_CONFLICT);
+        }
+    }
+
+    public static final class DeleteCustomerError extends ErrorMessage {
+        public DeleteCustomerError(String errorDetails) {
+            super("Unable to delete customer", "212", errorDetails, HttpServletResponse.SC_NOT_ACCEPTABLE);
+        }
+    }
+
+    public static final class DeleteProductError extends ErrorMessage {
+        public DeleteProductError(String errorDetails) {
+            super("Unable to delete customer", "213", errorDetails, HttpServletResponse.SC_NOT_ACCEPTABLE);
+        }
+    }
+
+    public static final class DeleteDiscountError extends ErrorMessage {
+        public DeleteDiscountError(String errorDetails) {
+            super("Unable to delete customer", "214", errorDetails, HttpServletResponse.SC_NOT_ACCEPTABLE);
         }
     }
 

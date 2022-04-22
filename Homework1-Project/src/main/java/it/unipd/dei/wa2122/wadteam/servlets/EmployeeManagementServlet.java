@@ -49,9 +49,8 @@ public class EmployeeManagementServlet extends AbstractDatabaseServlet {
      * @throws IOException
      */
     private void getEmployeeList(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-        List<Employee> employeeList;
         try {
-            employeeList = new ListEmployeeDatabase(getDataSource().getConnection()).getEmployee();
+            List<Employee> employeeList = new ListEmployeeDatabase(getDataSource().getConnection()).getEmployee();
             writeResource(req, res, "/jsp/employeeManagement.jsp", false, employeeList.toArray(Resource[]::new));
         } catch (SQLException e) {
             logger.error(e.getMessage());
@@ -67,15 +66,13 @@ public class EmployeeManagementServlet extends AbstractDatabaseServlet {
      * @throws ServletException
      */
     private void getCreateEmployee(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
-        List<Role> roleList;
         try {
-            roleList = new ListRoleDatabase(getDataSource().getConnection()).getRole();
+            List<Role> roleList = new ListRoleDatabase(getDataSource().getConnection()).getRole();
             writeResource(req, res, "/jsp/createEmployee.jsp", false, roleList.toArray(Resource[]::new));
         } catch (SQLException e) {
             logger.error(e.getMessage());
             writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
         }
-        //writeJsp(req, res,"/jsp/createEmployee.jsp");
     }
 
     /**
@@ -91,16 +88,15 @@ public class EmployeeManagementServlet extends AbstractDatabaseServlet {
         String surname = req.getParameter("surname");
         Role role = new Role(req.getParameter("role"));
         String password = req.getParameter("password");
-
         Employee employee = new Employee(username, name, surname, role, password);
         try {
             employee = new CreateEmployeeDatabase(getDataSource().getConnection(), employee).createEmployee();
-            //writeResource(req, res, "/jsp/employeeDetail.jsp", true , product); //view result
-            Message m = new Message("create ok");
+            logger.info("Create completed successfully for employee " + employee.toString());
+            Message m = new Message("create employee ok");
             writeMessageOrRedirect(req, res, m, req.getContextPath() + (req.getServletPath().startsWith("/rest/") ? "/rest" : "") + "/management/employeeManagement");
         } catch (SQLException e) {
             logger.error(e.getMessage());
-            writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
+            writeError(req, res, new ErrorMessage.EmployeeRedundantError(e.getMessage()));
         }
     }
 
@@ -113,13 +109,11 @@ public class EmployeeManagementServlet extends AbstractDatabaseServlet {
      * @throws ServletException
      */
     private void getEditEmployee(HttpServletRequest req, HttpServletResponse res, String param) throws IOException, ServletException {
-        Employee employee;
-        List<Role> roleList;
-        List<Resource> lists = new ArrayList<>();
         if (!param.equals("")) {
+            List<Resource> lists = new ArrayList<>();
             try {
-                roleList = new ListRoleDatabase(getDataSource().getConnection()).getRole();
-                employee = new GetEmployeeDatabase(getDataSource().getConnection(), param).getEmployee();
+                List<Role> roleList = new ListRoleDatabase(getDataSource().getConnection()).getRole();
+                Employee employee = new GetEmployeeDatabase(getDataSource().getConnection(), param).getEmployee();
                 if(employee != null) {
                     lists.add(employee);
                     lists.addAll(roleList);
@@ -146,20 +140,22 @@ public class EmployeeManagementServlet extends AbstractDatabaseServlet {
      * @throws ServletException
      */
     private void postEditEmployee(HttpServletRequest req, HttpServletResponse res, String param) throws IOException, ServletException {
-        String name = req.getParameter("name");
-        String surname = req.getParameter("surname");
-        Role role = new Role(req.getParameter("role"));
-
-        Employee employee;
-        try {
-            employee = new Employee(param, name, surname, role, null);
-            employee = new UpdateEmployeeDatabase(getDataSource().getConnection(), employee).updateEmployee();
-            //writeResource(req, res, "/jsp/employeeDetail.jsp", true , product); //view result
-            Message m = new Message("edit ok");
-            writeMessageOrRedirect(req, res, m, req.getContextPath() + (req.getServletPath().startsWith("/rest/") ? "/rest" : "") + "/management/employeeManagement");
-        } catch (SQLException e) {
-            logger.error(e.getMessage());
-            writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
+        if (!param.equals("")) {
+            String name = req.getParameter("name");
+            String surname = req.getParameter("surname");
+            Role role = new Role(req.getParameter("role"));
+            try {
+                Employee employee = new Employee(param, name, surname, role, null);
+                employee = new UpdateEmployeeDatabase(getDataSource().getConnection(), employee).updateEmployee();
+                logger.info("Edit completed successfully for employee " + employee.toString());
+                Message m = new Message("edit employee ok");
+                writeMessageOrRedirect(req, res, m, req.getContextPath() + (req.getServletPath().startsWith("/rest/") ? "/rest" : "") + "/management/employeeManagement");
+            } catch (SQLException e) {
+                logger.error(e.getMessage());
+                writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
+            }
+        } else {
+            writeError(req, res, new ErrorMessage.IncorrectlyFormattedPathError("last path parameter cannot be empty"));
         }
     }
 
@@ -172,10 +168,9 @@ public class EmployeeManagementServlet extends AbstractDatabaseServlet {
      * @throws IOException
      */
     private void getDeleteEmployee(HttpServletRequest req, HttpServletResponse res, String param) throws ServletException, IOException {
-        Employee employee;
         if (!param.equals("")) {
             try {
-                employee = new GetEmployeeDatabase(getDataSource().getConnection(), param).getEmployee();
+                Employee employee = new GetEmployeeDatabase(getDataSource().getConnection(), param).getEmployee();
                 if(employee != null) {
                     writeResource(req, res, "/jsp/deleteEmployee.jsp", true, employee);
                 }
@@ -200,22 +195,23 @@ public class EmployeeManagementServlet extends AbstractDatabaseServlet {
      * @throws IOException
      */
     private void postDeleteEmployee(HttpServletRequest req, HttpServletResponse res, String param) throws ServletException, IOException {
-        Employee employee;
-        try {
-            UserCredential us = (UserCredential) req.getSession(false).getAttribute(USER_ATTRIBUTE);
-            if (param != us.getIdentification() ){
-                employee = new DeleteEmployeeDatabase((getDataSource().getConnection()), param).deleteEmployee();
-                logger.info("Delete completed successfully for employee "+employee.toString());
-                Message m = new Message("delete ok");
-                writeMessageOrRedirect(req, res, m, req.getContextPath() + (req.getServletPath().startsWith("/rest/") ? "/rest" : "") + "/management/employeeManagement");
-            }else{
-                writeError(req, res, new ErrorMessage.DeleteEmployeeError("You are trying to eliminate yourself"));
-
+        if (!param.equals("")) {
+            try {
+                UserCredential us = (UserCredential) req.getSession(false).getAttribute(USER_ATTRIBUTE);
+                if (param != us.getIdentification() ){
+                    Employee employee = new DeleteEmployeeDatabase((getDataSource().getConnection()), param).deleteEmployee();
+                    logger.info("Delete completed successfully for employee " + employee.toString());
+                    Message m = new Message("delete employee ok");
+                    writeMessageOrRedirect(req, res, m, req.getContextPath() + (req.getServletPath().startsWith("/rest/") ? "/rest" : "") + "/management/employeeManagement");
+                } else {
+                    writeError(req, res, new ErrorMessage.DeleteEmployeeError("You are trying to eliminate yourself"));
+                }
+            } catch (SQLException e) {
+                logger.error(e.getMessage());
+                writeError(req, res, new ErrorMessage.DeleteEmployeeError(e.getMessage()));
             }
-
-        } catch (SQLException e) {
-            logger.error(e.getMessage());
-            writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
+        } else {
+            writeError(req, res, new ErrorMessage.IncorrectlyFormattedPathError("last path parameter cannot be empty"));
         }
     }
 }

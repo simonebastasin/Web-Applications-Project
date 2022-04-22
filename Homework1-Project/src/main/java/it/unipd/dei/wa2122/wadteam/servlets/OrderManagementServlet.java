@@ -49,9 +49,8 @@ public class OrderManagementServlet extends AbstractDatabaseServlet {
      * @throws IOException
      */
     private void getOrderList(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-        List<OnlineOrder> orderList;
         try {
-            orderList = new GetListOnlineOrderDatabase(getDataSource().getConnection()).getListOnlineOrder();
+            List<OnlineOrder> orderList = new GetListOnlineOrderDatabase(getDataSource().getConnection()).getListOnlineOrder();
             Collections.reverse(orderList);
             writeResource(req, res, "/jsp/orderManagement.jsp", false, orderList.toArray(Resource[]::new));
         } catch (SQLException e) {
@@ -69,11 +68,10 @@ public class OrderManagementServlet extends AbstractDatabaseServlet {
      * @throws ServletException
      */
     private void getEditOrder(HttpServletRequest req, HttpServletResponse res, String param) throws IOException, ServletException {
-        OnlineOrder order;
         if (param.chars().allMatch(Character::isDigit) && !param.equals("")) {
             int intParam = Integer.parseInt(param);
             try {
-                order = new GetOnlineOrderByIdDatabase(getDataSource().getConnection(), intParam).getOnlineOrder();
+                OnlineOrder order = new GetOnlineOrderByIdDatabase(getDataSource().getConnection(), intParam).getOnlineOrder();
                 if(order != null) {
                     writeResource(req, res, "/jsp/editOrder.jsp", false, order);
                 }
@@ -98,16 +96,15 @@ public class OrderManagementServlet extends AbstractDatabaseServlet {
      * @throws ServletException
      */
     private void postEditOrder(HttpServletRequest req, HttpServletResponse res, String param) throws IOException, ServletException {
-        OrderStatusEnum status = OrderStatusEnum.valueOf(req.getParameter("status"));
-        String description = req.getParameter("description");
-
-        OrderStatus orderStatus;
         if (param.chars().allMatch(Character::isDigit) && !param.equals("")) {
+            OrderStatusEnum status = OrderStatusEnum.valueOf(req.getParameter("status"));
+            String description = req.getParameter("description");
+            int intParam = Integer.parseInt(param);
+            OrderStatus orderStatus = new OrderStatus(null, status, description, null, intParam);
             try {
-                int intParam = Integer.parseInt(param);
-                orderStatus = new OrderStatus(null, status, description, null, intParam);
-                int result = new UpdateOrderStatusDatabase((getDataSource().getConnection()), orderStatus).updateOrderStatus();
-                Message m = new Message("edit ok");
+                int idOrder = new UpdateOrderStatusDatabase((getDataSource().getConnection()), orderStatus).updateOrderStatus();
+                logger.info("Edit completed successfully for order " + idOrder);
+                Message m = new Message("edit order status ok");
                 writeMessageOrRedirect(req, res, m, req.getContextPath() + (req.getServletPath().startsWith("/rest/") ? "/rest" : "") + "/management/orderManagement");
             } catch (SQLException e) {
                 logger.error(e.getMessage());
@@ -127,11 +124,10 @@ public class OrderManagementServlet extends AbstractDatabaseServlet {
      * @throws IOException
      */
     private void getDeleteOrder(HttpServletRequest req, HttpServletResponse res, String param) throws ServletException, IOException {
-        OnlineOrder order;
         if (param.chars().allMatch(Character::isDigit) && !param.equals("")) {
             int intParam = Integer.parseInt(param);
             try {
-                order = new GetOnlineOrderByIdDatabase(getDataSource().getConnection(), intParam).getOnlineOrder();
+                OnlineOrder order = new GetOnlineOrderByIdDatabase(getDataSource().getConnection(), intParam).getOnlineOrder();
                 writeResource(req, res, "/jsp/deleteOrder.jsp", true, order);
             } catch (SQLException e) {
                 logger.error(e.getMessage());
@@ -152,10 +148,11 @@ public class OrderManagementServlet extends AbstractDatabaseServlet {
      */
     private void postDeleteOrder(HttpServletRequest req, HttpServletResponse res, String param) throws  ServletException, IOException {
         if (param.chars().allMatch(Character::isDigit) && !param.equals("")) {
+            int intParam = Integer.parseInt(param);
             try {
-                int intParam = Integer.parseInt(param);
                 int idOrder = new DeleteOnlineOrderDatabase((getDataSource().getConnection()), intParam).deleteOnlineOrder();
-                Message m = new Message("delete ok");
+                logger.info("Delete completed successfully for order " + idOrder);
+                Message m = new Message("delete order status ok");
                 writeMessageOrRedirect(req, res, m, req.getContextPath() + (req.getServletPath().startsWith("/rest/") ? "/rest" : "") + "/management/orderManagement");
             } catch (SQLException e) {
                 logger.error(e.getMessage());
