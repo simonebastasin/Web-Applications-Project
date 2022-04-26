@@ -1,0 +1,19 @@
+"SCORE: 10
+
+
+COMMENTS ABOUT THE HOMEWORK:
+
+- maven and compilation ok
+- Good organization of the DAO classes
+- documentation on classes OK
+- Clear description of the objective
+- ER schema (snd its evolution) are OK, some more documentation in the report could have been useful
+- Very good mockups
+- Very detailed Business logic layer section
+-REST API description OK
+- Good use of filters to separate the roles
+- A very well-thought and organized project
+
+CONTRIBUTION TO THE HOMEWORK:
+
+- Everyone contributed to the homework. Good organization of the workload."
