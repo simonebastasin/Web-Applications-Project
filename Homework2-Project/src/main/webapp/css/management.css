@@ -1,0 +1,5 @@
+@import "custom.css";
+
+.main-container {
+    min-height: calc(100vh - 112px);
+}
