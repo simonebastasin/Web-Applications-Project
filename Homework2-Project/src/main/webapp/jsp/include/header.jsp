@@ -54,18 +54,9 @@
                                 <a class="nav-link" href="<c:url value="/ticket/list"/>">View Tickets</a>
                             </li>
                         </c:when>
-                    </c:choose>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownUser" role="button" data-bs-toggle="dropdown" aria-expanded="false"  href="#">Hello, ${user.identification}</a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownUser">
-                            <li><a class="dropdown-item" href="<c:url value="/user/info"/>">Info</a></li>
-                            <li><a class="dropdown-item" href="<c:url value="/session/logout"/>">Logout</a></li>
-                        </ul>
-                    </li>
-                    <c:choose>
                         <c:when test="${not empty user.role}">
-                            <li class="nav-item">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownManagement" role="button" data-bs-toggle="dropdown" aria-expanded="false"  href="#">Hello, ${user.identification}</a>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownManagement" role="button" data-bs-toggle="dropdown" aria-expanded="false"  href="#">Management</a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdownManagement">
                                     <li><a class="dropdown-item" href="<c:url value="/ticket/list"/>">View Tickets</a></li>
                                     <li><a class="dropdown-item" href="<c:url value="/invoice/list"/>">View Invoices</a></li>
@@ -84,6 +75,13 @@
                             </li>
                         </c:when>
                     </c:choose>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownUser" role="button" data-bs-toggle="dropdown" aria-expanded="false"  href="#">Hello, ${user.identification}</a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownUser">
+                            <li><a class="dropdown-item" href="<c:url value="/user/info"/>">Info</a></li>
+                            <li><a class="dropdown-item" href="<c:url value="/session/logout"/>">Logout</a></li>
+                        </ul>
+                    </li>
                 </c:when>
                 <c:otherwise>
                     <li class="nav-item">
