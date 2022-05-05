@@ -41,13 +41,72 @@
             <li>Price: ${product.salePrice}€</li>
         </c:otherwise>
     </c:choose>
+
     <c:choose>
         <c:when test="${not empty product.pictures}">
-            <li>Pictures:
-                <c:forEach var="picture" items="${product.pictures}">
-                    <img src="<c:url value="/media/view/${picture}"/>" alt="${product.alias}" width="400px"/>
-                </c:forEach>
-            </li>
+
+            <c:set var="pic_number" value="${0}"/>
+            <c:forEach var="picture" items="${product.pictures}">
+                <c:set var="pic_number" value="${pic_number + 1}"/>
+            </c:forEach>
+
+            <c:choose>
+                <c:when test="${pic_number > 1}">
+                    <div class="container">
+                    <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+
+                        <c:set var="i" value="${0}"/>
+                        <div class="carousel-indicators">
+                        <c:forEach var="picture" items="${product.pictures}">
+                                <c:choose>
+                                    <c:when test="${i == 0}">
+                                        <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="${i}" aria-label="Slide ${i+1}"></button>
+                                    </c:otherwise>
+                                </c:choose>
+                            <c:set var="i" value="${i+1}"/>
+                        </c:forEach>
+                        </div>
+
+                        <c:set var="j" value="${0}"/>
+                        <div class="carousel-inner" role="listbox">
+                            <c:forEach var="picture" items="${product.pictures}">
+                                <c:choose>
+                                    <c:when test="${j == 0}">
+                                        <div class="carousel-item active">
+                                            <img src="<c:url value="/media/view/${picture}"/>" alt="${product.alias}" class="d-block w-100"/>
+                                        </div>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <div class="carousel-item">
+                                            <img src="<c:url value="/media/view/${picture}"/>" alt="${product.alias}" class="d-block w-100"/>
+                                        </div>
+                                    </c:otherwise>
+                                </c:choose>
+                                <c:set var="j" value="${1}"/>
+                            </c:forEach>
+                        </div>
+
+                        <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+
+                    </div>
+                    </div>
+                </c:when>
+                <c:otherwise>
+                    <c:forEach var="picture" items="${product.pictures}">
+                            <img src="<c:url value="/media/view/${picture}"/>" alt="${product.alias}" width="400px"/>
+                    </c:forEach>
+                </c:otherwise>
+            </c:choose>
         </c:when>
     </c:choose>
 </ul>
