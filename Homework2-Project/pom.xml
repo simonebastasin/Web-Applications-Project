@@ -79,7 +79,7 @@
             <!-- copy images resources to the target directory -->
             <resource>
                 <targetPath>${basedir}/target/${project.artifactId}-${project.version}/images</targetPath>
-                <directory>${basedir}/images</directory>
+                <directory>${basedir}/src/main/webapp/images</directory>
                 <includes>
                     <include>**/*.*</include>
                 </includes>
