@@ -62,26 +62,26 @@
         <c:choose>
             <c:when test="${product.evidence == true}">
                 <input type="radio" id="yes"
-                       name="evidence" value="yes" checked>
+                       name="evidence" value="true" checked>
                 <label for="yes">Yes</label>
                 <input type="radio" id="no"
-                       name="evidence" value="no">
+                       name="evidence" value="false">
                 <label for="no">No</label>
             </c:when>
             <c:otherwise>
                 <input type="radio" id="yes"
-                       name="evidence" value="yes">
+                       name="evidence" value="true">
                 <label for="yes">Yes</label>
                 <input type="radio" id="no"
-                       name="evidence" value="no" checked>
+                       name="evidence" value="false" checked>
                 <label for="no">No</label>
             </c:otherwise>
         </c:choose>
     </div>
 
     <div>
-        <label for="media">Select one or more media (hold down ctrl/cmd to select multiple media):</label><br>
-        <select name="media" id="media" multiple>
+        <label for="pictures">Select one or more media (hold down ctrl/cmd to select multiple media):</label><br>
+        <select name="pictures" id="pictures" multiple>
             <c:if test="${not empty media}">
                 <c:choose>
                     <c:when test="${fn:contains(product.pictures, media.id)}">

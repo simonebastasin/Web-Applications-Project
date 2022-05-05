@@ -50,17 +50,17 @@ public class ProductManagementServlet extends AbstractDatabaseServlet{
 
     private void getListProduct(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 
-        List<Product> products;
 
         try{
-            products = new ListProductDatabase(getDataSource().getConnection()).getProduct();
+            List<Resource> resourcesList = new ArrayList<>();
+            List<Product> products = new ListProductDatabase(getDataSource().getConnection()).getProduct();
+            List<ProductCategory> categories = new ListProductCategoryDatabase(getDataSource().getConnection()).getProductCategory();
+            List<Media> media = new ListMediaDatabase(getDataSource().getConnection()).getMedia();
+            resourcesList.addAll(products);
+            resourcesList.addAll(categories);
+            resourcesList.addAll(media);
 
-            List<Resource> lists = new ArrayList<>();
-            for(var prod : products){
-                    lists.add(prod);
-            }
-
-            writeResource(req, res, "/jsp/productManagement.jsp", false, lists.toArray(Resource[]::new));
+            writeResource(req, res, "/jsp/productManagement.jsp", false, resourcesList.toArray(Resource[]::new));
 
         }catch (SQLException e) {
             logger.error(e.getMessage());
@@ -174,9 +174,9 @@ public class ProductManagementServlet extends AbstractDatabaseServlet{
         double sale = Double.parseDouble(req.getParameter("sale"));
         int quantity = Integer.parseInt(req.getParameter("quantity"));
         ProductCategory category = new ProductCategory(req.getParameter("category"),req.getParameter("category"));
-        boolean evidence = req.getParameter("evidence").equals("yes");
+        boolean evidence = req.getParameter("evidence").equals("true");
         //pictures management:
-        String[] mediaStringArray = req.getParameterValues("media");   //returns an array of strings to be casted
+        String[] mediaStringArray = req.getParameterValues("pictures");   //returns an array of strings to be casted
         List<Integer> pictures = null;
         if(mediaStringArray != null){
             pictures = new ArrayList<>();
@@ -240,9 +240,9 @@ public class ProductManagementServlet extends AbstractDatabaseServlet{
         double sale = Double.parseDouble(req.getParameter("sale"));
         int quantity = Integer.parseInt(req.getParameter("quantity"));
         ProductCategory category = new ProductCategory(req.getParameter("category"),req.getParameter("category"));
-        boolean evidence = req.getParameter("evidence").equals("yes");
+        boolean evidence = req.getParameter("evidence").equals("true");
         //pictures management:
-        String[] mediaStringArray = req.getParameterValues("media");   //returns an array of strings to be casted
+        String[] mediaStringArray = req.getParameterValues("pictures");   //returns an array of strings to be casted
         List<Integer> pictures = null;
         if(mediaStringArray != null){
             pictures = new ArrayList<>();
