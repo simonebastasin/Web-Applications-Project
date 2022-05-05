@@ -67,7 +67,7 @@
         </plugins>
 
         <resources>
-            <!-- copy html resorces to the target directory -->
+            <!-- copy html resources to the target directory -->
             <resource>
                 <targetPath>${basedir}/target/${project.artifactId}-${project.version}/html</targetPath>
                 <directory>${basedir}/src/main/webapp/html</directory>
@@ -76,7 +76,16 @@
                 </includes>
             </resource>
 
-            <!-- copy jsp resorces to the target directory -->
+            <!-- copy images resources to the target directory -->
+            <resource>
+                <targetPath>${basedir}/target/${project.artifactId}-${project.version}/images</targetPath>
+                <directory>${basedir}/images</directory>
+                <includes>
+                    <include>**/*.*</include>
+                </includes>
+            </resource>
+
+            <!-- copy jsp resources to the target directory -->
             <resource>
                 <targetPath>${basedir}/target/${project.artifactId}-${project.version}/jsp</targetPath>
                 <directory>${basedir}/src/main/webapp/jsp</directory>
@@ -85,7 +94,7 @@
                 </includes>
             </resource>
 
-            <!-- copy jsp resorces to the target directory -->
+            <!-- copy jsp resources to the target directory -->
             <resource>
                 <targetPath>${basedir}/target/${project.artifactId}-${project.version}/css</targetPath>
                 <directory>${basedir}/src/main/webapp/css</directory>
@@ -94,7 +103,7 @@
                 </includes>
             </resource>
 
-            <!-- copy jsp resorces to the target directory -->
+            <!-- copy jsp resources to the target directory -->
             <resource>
                 <targetPath>${basedir}/target/${project.artifactId}-${project.version}/js</targetPath>
                 <directory>${basedir}/src/main/webapp/js</directory>
