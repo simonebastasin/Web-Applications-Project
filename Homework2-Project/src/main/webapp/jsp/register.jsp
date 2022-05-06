@@ -27,17 +27,39 @@
 </nav>
 
 <form method="post" action="<c:url value="/session/register"/>">
-    <ul>
-        <li><label for="name">Name: </label> <input id="name" type="text" name="name"  required></li>
-        <li><label for="surname">Surname: </label> <input id="surname" type="text" name="surname"  required></li>
-        <li><label for="fiscalCode">Fiscal Code: </label><input id="fiscalCode" type="text" name="fiscalCode"  required></li>
-        <li><label for="email">Email: </label><input id="email" type="email" name="email" required></li>
-        <li><label for="phoneNumber">Phone Number: </label><input id="phoneNumber" type="text" name="phoneNumber" ></li>
-        <li><label for="address">Address: </label><input id="address" type="text" name="address" ></li>
-        <li><label for="username">Username: </label><input id="username" type="text" name="username"  required></li>
-        <li><label for="password">Password: </label><input id="password" type="password" name="password"  required></li>
-    </ul>
-    <input type="submit" value="Sign Up">
+    <div class="mb-3">
+        <label for="name" class="form-label">Name:</label>
+        <input id="name" type="text" class="form-control" name="name" required placeholder="name">
+    </div>
+    <div class="mb-3">
+        <label for="surname" class="form-label">Surname:</label>
+        <input id="surname" type="text" class="form-control" name="surname" required placeholder="surname">
+    </div>
+    <div class="mb-3">
+        <label for="fiscalCode" class="form-label">Fiscal Code:</label>
+        <input id="fiscalCode" type="text" class="form-control" name="fiscalCode" required placeholder="xxxxxxxxxxxxxxxx">
+    </div>
+    <div class="mb-3">
+        <label for="email" class="form-label">Email:</label>
+        <input id="email" type="email" class="form-control" name="email" required placeholder="name@example.com">
+    </div>
+    <div class="mb-3">
+        <label for="phoneNumber" class="form-label">Phone Number:</label>
+        <input id="phoneNumber" type="text" class="form-control" name="phoneNumber" placeholder="+39">
+    </div>
+    <div class="mb-3">
+        <label for="address" class="form-label">Address:</label>
+        <input id="address" type="text" class="form-control" name="address" placeholder="Via Padova 1, Padova (PD)">
+    </div>
+    <div class="mb-3">
+        <label for="username" class="form-label">Username:</label>
+        <input id="username" type="text" class="form-control" name="username" placeholder="username" required>
+    </div>
+    <div class="mb-3">
+        <label for="password" class="form-label">Password:</label>
+        <input id="password" type="text" class="form-control" name="password" placeholder="password" required>
+    </div>
+    <input type="submit" value="Sign Up" class = "btn btn-primary">
 </form>
 
 
