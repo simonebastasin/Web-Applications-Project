@@ -1,6 +1,10 @@
 @import "custom.css";
 @import "style.css";
 
+/*
+    image check box css
+ */
+
 .image-check-box ul {
     list-style-type: none;
     padding: 0;

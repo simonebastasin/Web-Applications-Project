@@ -14,7 +14,6 @@
 <html lang="en">
 <head>
     <c:import url="/jsp/include/head.jsp"/>
-    <link rel="stylesheet" href="<c:url value="/css/productDetail.css"/>" type="text/css">
 
     <title>Product: ${product.name} | Electromechanics Shop</title>
 </head>
@@ -22,16 +21,14 @@
 <body>
 <c:import url="/jsp/include/header.jsp"/>
 <div class="container main-container">
-<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-  <ol class="breadcrumb bg-secondary bg-opacity-25 p-3 mt-3 rounded">
-    <li class="breadcrumb-item"><a href="<c:url value="/"/>">Electromechanics Shop</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Product: ${product.name}</li>
-  </ol>
-</nav>
-
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-xl-6 col-lg-6 col-md-6">
+    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+        <ol class="breadcrumb bg-secondary bg-opacity-25 p-3 mt-3 rounded">
+            <li class="breadcrumb-item"><a href="<c:url value="/"/>">Electromechanics Shop</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Product: ${product.name}</li>
+        </ol>
+    </nav>
+    <div class="clearfix">
+        <div class="col-md-6 me-md-4 float-start ratio ratio-1x1 overflow-hidden rounded">
             <c:choose>
                 <c:when test="${not empty product.pictures}">
 
@@ -42,59 +39,65 @@
 
                     <c:choose>
                         <c:when test="${pic_number > 1}">
-                            <div class="container">
-                                <div id="picCarousel" class="carousel slide" data-bs-ride="carousel">
+                            <div id="picCarousel" class="carousel slide" data-bs-ride="carousel">
 
-                                    <c:set var="i" value="${0}"/>
-                                    <div class="carousel-indicators">
-                                        <c:forEach var="picture" items="${product.pictures}">
-                                            <c:choose>
-                                                <c:when test="${i == 0}">
-                                                    <button type="button" data-bs-target="#picCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                                                </c:when>
-                                                <c:otherwise>
-                                                    <button type="button" data-bs-target="#picCarousel" data-bs-slide-to="${i}" aria-label="Slide ${i+1}"></button>
-                                                </c:otherwise>
-                                            </c:choose>
-                                            <c:set var="i" value="${i+1}"/>
-                                        </c:forEach>
-                                    </div>
-
-                                    <c:set var="j" value="${0}"/>
-                                    <div class="carousel-inner" role="listbox">
-                                        <c:forEach var="picture" items="${product.pictures}">
-                                            <c:choose>
-                                                <c:when test="${j == 0}">
-                                                    <div class="carousel-item active">
-                                                        <img src="<c:url value="/media/view/${picture}"/>" alt="${product.alias}" class="d-block w-100"/>
-                                                    </div>
-                                                </c:when>
-                                                <c:otherwise>
-                                                    <div class="carousel-item">
-                                                        <img src="<c:url value="/media/view/${picture}"/>" alt="${product.alias}" class="d-block w-100"/>
-                                                    </div>
-                                                </c:otherwise>
-                                            </c:choose>
-                                            <c:set var="j" value="${1}"/>
-                                        </c:forEach>
-                                    </div>
-
-                                    <button class="carousel-control-prev" type="button" data-bs-target="#picCarousel" data-bs-slide="prev">
-                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                        <span class="visually-hidden">Previous</span>
-                                    </button>
-                                    <button class="carousel-control-next" type="button" data-bs-target="#picCarousel" data-bs-slide="next">
-                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                        <span class="visually-hidden">Next</span>
-                                    </button>
-
+                                <c:set var="i" value="${0}"/>
+                                <div class="carousel-indicators">
+                                    <c:forEach var="picture" items="${product.pictures}">
+                                        <c:choose>
+                                            <c:when test="${i == 0}">
+                                                <button type="button" data-bs-target="#picCarousel" data-bs-slide-to="0"
+                                                        class="active" aria-current="true"
+                                                        aria-label="Slide 1"></button>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <button type="button" data-bs-target="#picCarousel"
+                                                        data-bs-slide-to="${i}" aria-label="Slide ${i+1}"></button>
+                                            </c:otherwise>
+                                        </c:choose>
+                                        <c:set var="i" value="${i+1}"/>
+                                    </c:forEach>
                                 </div>
+
+                                <c:set var="j" value="${0}"/>
+                                <div class="carousel-inner" role="listbox">
+                                    <c:forEach var="picture" items="${product.pictures}">
+                                        <c:choose>
+                                            <c:when test="${j == 0}">
+                                                <div class="carousel-item active">
+                                                    <img src="<c:url value="/media/view/${picture}"/>"
+                                                         alt="${product.alias}" class="d-block w-100"/>
+                                                </div>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <div class="carousel-item">
+                                                    <img src="<c:url value="/media/view/${picture}"/>"
+                                                         alt="${product.alias}" class="d-block w-100"/>
+                                                </div>
+                                            </c:otherwise>
+                                        </c:choose>
+                                        <c:set var="j" value="${1}"/>
+                                    </c:forEach>
+                                </div>
+
+                                <button class="carousel-control-prev" type="button" data-bs-target="#picCarousel"
+                                        data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Previous</span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#picCarousel"
+                                        data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Next</span>
+                                </button>
+
                             </div>
                         </c:when>
                         <c:otherwise>
                             <c:forEach var="picture" items="${product.pictures}">
                                 <div>
-                                    <img src="<c:url value="/media/view/${picture}"/>" alt="${product.alias}" width="400px"/>
+                                    <img src="<c:url value="/media/view/${picture}"/>" alt="${product.alias}"
+                                         width="400px"/>
                                 </div>
                             </c:forEach>
                         </c:otherwise>
@@ -102,12 +105,13 @@
                 </c:when>
                 <c:otherwise>
                     <div>
-                        <img src="${pageContext.request.contextPath}/images/No_image_available_poster.jpg" alt="${product.alias}" width="400px"/>
+                        <img src="${pageContext.request.contextPath}/images/No_image_available_poster.jpg"
+                             alt="${product.alias}" width="400px"/>
                     </div>
                 </c:otherwise>
             </c:choose>
         </div>
-        <div class="col-xl-6 col-lg-6 col-md-6">
+        <div>
             <div>
                 <ul>
                     <li>Brand: ${product.brand}</li>
@@ -116,8 +120,11 @@
 
                     <c:choose>
                         <c:when test="${not empty product.discount}">
-                            <li>Price: <span  style="text-decoration: line-through;">${product.salePrice}€</span> <span style="color: red;">${product.discountSale}€</span></li>
-                            <li>Discount: ${product.discount.percentage}% (until ${product.discount.endDate.humanDate})</li>
+                            <li>Price: <span style="text-decoration: line-through;">${product.salePrice}€</span> <span
+                                    style="color: red;">${product.discountSale}€</span></li>
+                            <li>Discount: ${product.discount.percentage}%
+                                (until ${product.discount.endDate.humanDate})
+                            </li>
                         </c:when>
                         <c:otherwise>
                             <li>Price: ${product.salePrice}€</li>
@@ -127,37 +134,35 @@
             </div>
         </div>
     </div>
-</div>
 
-<c:choose>
-    <c:when test="${product.quantity <= 0}">
-        <span style="color: red;font-weight: bold">The product is no longer available.</span>
-    </c:when>
-    <c:otherwise>
-        <c:choose>
-            <c:when test="${not empty user && empty user.role}">
-                <hr>
+    <c:choose>
+        <c:when test="${product.quantity <= 0}">
+            <span class="fw-bold text-danger">The product is no longer available.</span>
+        </c:when>
+        <c:otherwise>
+            <c:choose>
+                <c:when test="${not empty user && empty user.role}">
+                    <form method="POST" action="<c:url value="/buy/product/${product.alias}"/>">
+                        <label for="quantity">Selected quantity</label>
+                        <input type="number" name="quantity" max="${product.quantity}" min="1" id="quantity" required>
+                        <br>
 
-                <form method="POST" action="<c:url value="/buy/product/${product.alias}"/>">
-                    <label for="quantity">Selected quantity</label>
-                    <input type="number" name ="quantity" max="${product.quantity}" min="1" id="quantity" required> <br>
-
-                    <input type ="submit" value = "Buy now">
-                </form>
-            </c:when>
-            <c:otherwise>
-                <c:choose>
-                    <c:when test="${not empty user && not empty user.role}">
-                        <span style="color: red;font-weight: bold">Employees are not authorized to make purchases.</span>
-                    </c:when>
-                    <c:otherwise>
-                        Please, <a href="<c:url value="/session/login"/>">login</a> to buy the product
-                    </c:otherwise>
-                </c:choose>
-            </c:otherwise>
-        </c:choose>
-    </c:otherwise>
-</c:choose>
+                        <input type="submit" value="Buy now">
+                    </form>
+                </c:when>
+                <c:otherwise>
+                    <c:choose>
+                        <c:when test="${not empty user && not empty user.role}">
+                            <span class="fw-bold text-danger">Employees are not authorized to make purchases.</span>
+                        </c:when>
+                        <c:otherwise>
+                            Please, <a href="<c:url value="/session/login"/>">login</a> to buy the product
+                        </c:otherwise>
+                    </c:choose>
+                </c:otherwise>
+            </c:choose>
+        </c:otherwise>
+    </c:choose>
 
 </div>
 <c:import url="/jsp/include/footer.jsp"/>
