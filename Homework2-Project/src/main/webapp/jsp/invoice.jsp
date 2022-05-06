@@ -28,14 +28,16 @@
 </nav>
 
 <c:forEach var="invoice" items="${onlineInvoiceList}">
-    <h2>Invoice ID: ${invoice.id}</h2>
-    <li>Date: ${invoice.oiDate.humanDateTimeless}</li>
-    <li>Price: ${invoice.totalPrice}€</li>
-    <li><a href="<c:url value="/invoice/detail/${invoice.id}"/>">Detail Invoice</a></li>
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Invoice ID: ${invoice.id}</h5>
+            <li class="list-group-item">Date: ${invoice.oiDate.humanDateTimeless}</li>
+            <li class="list-group-item">Price: ${invoice.totalPrice}€</li>
+            <a href="<c:url value="/invoice/detail/${invoice.id}"/>" class="btn btn-primary">Detail Invoice</a>
+        </div>
+    </div>
 </c:forEach>
 
-
-</div>
 <c:import url="/jsp/include/footer.jsp"/>
 </body>
 </html>
