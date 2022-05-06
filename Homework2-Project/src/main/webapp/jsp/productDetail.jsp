@@ -20,6 +20,7 @@
 
 <body>
 <c:import url="/jsp/include/header.jsp"/>
+
 <div class="container main-container">
     <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
         <ol class="breadcrumb bg-secondary bg-opacity-25 p-3 mt-3 rounded">
@@ -134,6 +135,7 @@
             </div>
         </div>
     </div>
+</div>
 
     <c:choose>
         <c:when test="${product.quantity <= 0}">
@@ -164,7 +166,6 @@
         </c:otherwise>
     </c:choose>
 
-</div>
 <c:import url="/jsp/include/footer.jsp"/>
 </body>
 </html>
