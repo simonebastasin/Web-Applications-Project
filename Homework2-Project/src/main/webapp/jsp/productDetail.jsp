@@ -115,6 +115,7 @@
                     <li>Brand: ${product.brand}</li>
                     <li>Description: ${product.description}</li>
                     <li>Quantity: ${product.quantity}</li>
+
                     <c:choose>
                         <c:when test="${not empty product.discount}">
                             <li>Price: <span  style="text-decoration: line-through;">${product.salePrice}€</span> <span style="color: red;">${product.discountSale}€</span></li>
