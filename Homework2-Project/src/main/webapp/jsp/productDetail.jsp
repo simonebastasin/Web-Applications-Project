@@ -14,9 +14,7 @@
 <html lang="en">
 <head>
     <c:import url="/jsp/include/head.jsp"/>
-    <style>
-        @import "productDetail.css";
-    </style>
+    <link rel="stylesheet" href="<c:url value="/css/productDetail.css"/>" type="text/css">
 
     <title>Product: ${product.name} | Electromechanics Shop</title>
 </head>
