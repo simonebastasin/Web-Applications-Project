@@ -32,7 +32,7 @@
         <c:forEach var="prod" items="${productList}">
             <li>Product name: <a href="<c:url value="/products/details/${prod.alias}"/>">${prod.name}</a>  - Brand: ${prod.brand} - Quantity: ${prod.quantity} - Price: ${prod.salePrice}<br>
                 <c:forEach var="picture" items="${prod.pictures}">
-                    <img src="<c:url value="/viewmedia/${picture.id}"/>" alt="${picture.filename}" width="100px"/>
+                    <img src="<c:url value="/media/view/${picture}"/>" alt="${prod.alias}" width="100px"/>
                 </c:forEach>
             </li>
         </c:forEach>
