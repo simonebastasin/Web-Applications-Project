@@ -9,7 +9,7 @@
     images in productDetail.jsp
  */
 .pDetail img {
-    object-fit: fill;
+    object-fit: cover;
     object-position: center;
     height: 70vh;
     min-height: 70vh;
