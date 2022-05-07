@@ -20,23 +20,48 @@
 <body>
 <c:import url="/jsp/include/header.jsp"/>
 <div class="container main-container">
-<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-  <ol class="breadcrumb bg-secondary bg-opacity-25 p-3 mt-3 rounded">
-    <li class="breadcrumb-item"><a href="<c:url value="/"/>">Electromechanics Shop</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Your Invoice List</li>
-  </ol>
-</nav>
+    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+        <ol class="breadcrumb bg-secondary bg-opacity-25 p-3 mt-3 rounded">
+            <li class="breadcrumb-item"><a href="<c:url value="/"/>">Electromechanics Shop</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Your Invoice List</li>
+        </ol>
+    </nav>
 
-<c:forEach var="invoice" items="${onlineInvoiceList}">
-    <div class="card">
-        <div class="card-body">
-            <h5 class="card-title">Invoice ID: ${invoice.id}</h5>
-            <li class="list-group-item">Date: ${invoice.oiDate.humanDateTimeless}</li>
-            <li class="list-group-item">Price: ${invoice.totalPrice}€</li>
-            <a href="<c:url value="/invoice/detail/${invoice.id}"/>" class="btn btn-primary">Detail Invoice</a>
+    <c:forEach var="invoice" items="${onlineInvoiceList}">
+        <div class="mx-auto" style="width: 400px;">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Invoice ID: ${invoice.id}</h5>
+
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item text-start">
+                            <div class="row align-items-start">
+                                <div class="col">
+                                    Date:
+                                </div>
+                                <div class="col">
+                                    ${invoice.oiDate.humanDateTimeless}
+                                </div>
+                            </div>
+                        </li>
+                        <li class="list-group-item text-start">
+                            <div class="row align-items-start">
+                                <div class="col">
+                                    Price:
+                                </div>
+                                <div class="col">
+                                    ${invoice.totalPrice}€
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <a href="<c:url value="/invoice/detail/${invoice.id}"/>" class="btn btn-primary">Detail Invoice</a>
+                </div>
+            </div>
         </div>
-    </div>
-</c:forEach>
+    </c:forEach>
+</div>
 
 <c:import url="/jsp/include/footer.jsp"/>
 </body>
