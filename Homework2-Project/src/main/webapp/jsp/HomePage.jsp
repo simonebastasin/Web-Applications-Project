@@ -60,13 +60,13 @@
                                                 </c:if>
                                                 <c:set var="i" value="${1}"/>
                                             </c:forEach>
-                                            <img src=<c:url value="/media/view/${picture}"/> alt="${prod.alias}" class="card-img-top img-fluid">
+                                            <img src=<c:url value="/media/view/${picture}"/> alt="${prod.alias}" class="card-img-top img-fluid img-thumbnail">
                                         </c:when>
                                         <c:otherwise>
-                                            <img src="${pageContext.request.contextPath}/images/No_image_available_circle.png" alt="${prod.alias}" class="card-img-top img-fluid">
+                                            <img src="${pageContext.request.contextPath}/images/No_image_available_circle.png" alt="${prod.alias}" class="card-img-top img-fluid img-thumbnail">
                                         </c:otherwise>
                                     </c:choose>
-                                    <div class="card-header">
+                                    <div class="card-header text-white bg-info border-dark mb-4">
                                         <h3>${prod.brand}</h3>
                                     </div>
                                     <div class="card-body">
@@ -75,7 +75,6 @@
                                         </div>
                                         <div class="card-text">
                                             <p class="price"><span  style="text-decoration: line-through;">${prod.salePrice}€</span> <span style="color: red;">${prod.discountSale}€</span></p>
-                                            <p>Quantity: ${prod.quantity}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -101,13 +100,13 @@
                                                 </c:if>
                                                 <c:set var="i" value="${1}"/>
                                             </c:forEach>
-                                            <img src=<c:url value="/media/view/${picture}"/> alt="${prod.alias}" class="card-img-top img-fluid">
+                                            <img src=<c:url value="/media/view/${picture}"/> alt="${prod.alias}" class="card-img-top img-fluid img-thumbnail">
                                         </c:when>
                                         <c:otherwise>
-                                            <img src="${pageContext.request.contextPath}/images/No_image_available_circle.png" alt="${prod.alias}" class="card-img-top img-fluid">
+                                            <img src="${pageContext.request.contextPath}/images/No_image_available_circle.png" alt="${prod.alias}" class="card-img-top img-fluid img-thumbnail">
                                         </c:otherwise>
                                     </c:choose>
-                                    <div class="card-header">
+                                    <div class="card-header text-white bg-info border-dark mb-4">
                                         <h3>${prod.brand}</h3>
                                     </div>
                                     <div class="card-body">
@@ -116,7 +115,6 @@
                                         </div>
                                         <div class="card-text">
                                             <p class="price">${prod.salePrice}€</p>
-                                            <p>Quantity: ${prod.quantity}</p>
                                         </div>
                                     </div>
                                 </div>
