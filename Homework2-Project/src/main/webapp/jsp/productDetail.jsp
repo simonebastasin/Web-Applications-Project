@@ -28,8 +28,8 @@
             <li class="breadcrumb-item active" aria-current="page">Product: ${product.name}</li>
         </ol>
     </nav>
-    <div class="clearfix">
-        <div class="col-md-6 me-md-4 float-start ratio ratio-1x1 overflow-hidden rounded">
+    <div class="clearfix" id="pDetail">
+        <div class="col-md-6 me-md-4 float-start overflow-hidden rounded">
             <c:choose>
                 <c:when test="${not empty product.pictures}">
 
@@ -66,14 +66,12 @@
                                         <c:choose>
                                             <c:when test="${j == 0}">
                                                 <div class="carousel-item active">
-                                                    <img src="<c:url value="/media/view/${picture}"/>"
-                                                         alt="${product.alias}" class="d-block w-100"/>
+                                                    <img src="<c:url value="/media/view/${picture}"/>" alt="${product.alias}" class="d-block w-100"/>
                                                 </div>
                                             </c:when>
                                             <c:otherwise>
                                                 <div class="carousel-item">
-                                                    <img src="<c:url value="/media/view/${picture}"/>"
-                                                         alt="${product.alias}" class="d-block w-100"/>
+                                                    <img src="<c:url value="/media/view/${picture}"/>" alt="${product.alias}" class="d-block w-100"/>
                                                 </div>
                                             </c:otherwise>
                                         </c:choose>
@@ -98,7 +96,7 @@
                             <c:forEach var="picture" items="${product.pictures}">
                                 <div>
                                     <img src="<c:url value="/media/view/${picture}"/>" alt="${product.alias}"
-                                         width="400px"/>
+                                         class="d-block w-100"/>
                                 </div>
                             </c:forEach>
                         </c:otherwise>
@@ -106,8 +104,7 @@
                 </c:when>
                 <c:otherwise>
                     <div>
-                        <img src="${pageContext.request.contextPath}/images/No_image_available_poster.jpg"
-                             alt="${product.alias}" width="400px"/>
+                        <img src="${pageContext.request.contextPath}/images/No_image_available_poster.jpg" alt="${product.alias}" class="d-block w-100"/>
                     </div>
                 </c:otherwise>
             </c:choose>
