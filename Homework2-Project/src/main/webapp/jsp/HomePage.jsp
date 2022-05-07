@@ -14,8 +14,6 @@
 <html lang="en">
 <head>
     <c:import url="/jsp/include/head.jsp"/>
-    <link rel="stylesheet" href="<c:url value="/css/homePage.css"/>" type="text/css">
-
     <title>Electromechanics Shop</title>
 </head>
 
@@ -43,14 +41,14 @@
 
 <h3>Featured products</h3>
     <c:set var="counter" value="${0}"/>
-    <div class="container">
-        <div class="row gy-3">
+    <div class="featured-products">
+        <div class="row row-cols-1 row-cols-md-3 g-3">
             <c:forEach var="prod" items="${productList}">
                 <c:if test="${prod.evidence == true}">
                     <c:choose>
                         <c:when test="${not empty prod.discount}">
-                            <div class="col-sm-3">
-                                <div class="card h-100">
+                            <div class="col-12 col-sm-6 col-md-4 col-xl-2">
+                                <div class="card h-100 shadow shadow-hover">
                                     <c:choose>
                                         <c:when test="${not empty prod.pictures}">
                                             <c:set var="i" value="${0}"/>
@@ -60,13 +58,13 @@
                                                 </c:if>
                                                 <c:set var="i" value="${1}"/>
                                             </c:forEach>
-                                            <img src=<c:url value="/media/view/${picture}"/> alt="${prod.alias}" class="card-img-top img-fluid img-thumbnail">
+                                            <img src="<c:url value="/media/thumb/${picture}"/>" alt="${prod.alias}" class="card-img-top img-fluid">
                                         </c:when>
                                         <c:otherwise>
-                                            <img src="${pageContext.request.contextPath}/images/No_image_available_circle.png" alt="${prod.alias}" class="card-img-top img-fluid img-thumbnail">
+                                            <<img src="<c:url value="/images/No_image_available_circle.png"/>" alt="${prod.alias}" class="card-img-top img-fluid">
                                         </c:otherwise>
                                     </c:choose>
-                                    <div class="card-header text-white bg-info border-dark mb-4">
+                                    <div class="card-header text-white bg-info border-info mb-4">
                                         <h3>${prod.brand}</h3>
                                     </div>
                                     <div class="card-body">
@@ -89,8 +87,8 @@
                             </div>
                         </c:when>
                         <c:otherwise>
-                            <div class="col-sm-3">
-                                <div class="card h-100">
+                            <div class="col-12 col-sm-6 col-md-4 col-xl-2">
+                                <div class="card h-100 shadow shadow-hover">
                                     <c:choose>
                                         <c:when test="${not empty prod.pictures}">
                                             <c:set var="i" value="${0}"/>
@@ -100,13 +98,13 @@
                                                 </c:if>
                                                 <c:set var="i" value="${1}"/>
                                             </c:forEach>
-                                            <img src=<c:url value="/media/view/${picture}"/> alt="${prod.alias}" class="card-img-top img-fluid img-thumbnail">
+                                            <img src="<c:url value="/media/thumb/${picture}"/>" alt="${prod.alias}" class="card-img-top img-fluid">
                                         </c:when>
                                         <c:otherwise>
-                                            <img src="${pageContext.request.contextPath}/images/No_image_available_circle.png" alt="${prod.alias}" class="card-img-top img-fluid img-thumbnail">
+                                            <img src="<c:url value="/images/No_image_available_circle.png"/>"  alt="${prod.alias}" class="card-img-top img-fluid">
                                         </c:otherwise>
                                     </c:choose>
-                                    <div class="card-header text-white bg-info border-dark mb-4">
+                                    <div class="card-header text-white bg-info border-info mb-4">
                                         <h3>${prod.brand}</h3>
                                     </div>
                                     <div class="card-body">

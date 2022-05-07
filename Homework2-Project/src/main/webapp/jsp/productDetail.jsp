@@ -28,8 +28,8 @@
             <li class="breadcrumb-item active" aria-current="page">Product: ${product.name}</li>
         </ol>
     </nav>
-    <div class="clearfix" id="pDetail">
-        <div class="col-md-6 me-md-4 float-start overflow-hidden rounded">
+    <div class="clearfix pDetail">
+        <div class="col-md-6 me-md-4 float-start ratio ratio-1x1 overflow-hidden rounded border">
             <c:choose>
                 <c:when test="${not empty product.pictures}">
 
@@ -129,39 +129,40 @@
                         </c:otherwise>
                     </c:choose>
                 </ul>
+                <c:choose>
+                    <c:when test="${product.quantity <= 0}">
+                        <span class="fw-bold text-danger">The product is no longer available.</span>
+                    </c:when>
+                    <c:otherwise>
+                        <c:choose>
+                            <c:when test="${not empty user && empty user.role}">
+                                <form method="POST" action="<c:url value="/buy/product/${product.alias}"/>">
+                                    <label for="quantity">Selected quantity</label>
+                                    <input type="number" name="quantity" max="${product.quantity}" min="1" id="quantity" required>
+                                    <br>
+
+                                    <input type="submit" value="Buy now">
+                                </form>
+                            </c:when>
+                            <c:otherwise>
+                                <c:choose>
+                                    <c:when test="${not empty user && not empty user.role}">
+                                        <span class="fw-bold text-danger">Employees are not authorized to make purchases.</span>
+                                    </c:when>
+                                    <c:otherwise>
+                                        Please, <a href="<c:url value="/session/login"/>">login</a> to buy the product
+                                    </c:otherwise>
+                                </c:choose>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:otherwise>
+                </c:choose>
             </div>
         </div>
     </div>
 </div>
 
-    <c:choose>
-        <c:when test="${product.quantity <= 0}">
-            <span class="fw-bold text-danger">The product is no longer available.</span>
-        </c:when>
-        <c:otherwise>
-            <c:choose>
-                <c:when test="${not empty user && empty user.role}">
-                    <form method="POST" action="<c:url value="/buy/product/${product.alias}"/>">
-                        <label for="quantity">Selected quantity</label>
-                        <input type="number" name="quantity" max="${product.quantity}" min="1" id="quantity" required>
-                        <br>
 
-                        <input type="submit" value="Buy now">
-                    </form>
-                </c:when>
-                <c:otherwise>
-                    <c:choose>
-                        <c:when test="${not empty user && not empty user.role}">
-                            <span class="fw-bold text-danger">Employees are not authorized to make purchases.</span>
-                        </c:when>
-                        <c:otherwise>
-                            Please, <a href="<c:url value="/session/login"/>">login</a> to buy the product
-                        </c:otherwise>
-                    </c:choose>
-                </c:otherwise>
-            </c:choose>
-        </c:otherwise>
-    </c:choose>
 
 <c:import url="/jsp/include/footer.jsp"/>
 </body>
