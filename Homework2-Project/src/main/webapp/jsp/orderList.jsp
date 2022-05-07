@@ -27,20 +27,42 @@
 </nav>
 
 <c:forEach var="order" items="${onlineOrderList}">
-    <h2>Order ID: ${order.idOrder}</h2>
-        <a href="<c:url value="/order/detail"/>/${order.idOrder}">Details</a>
-    <ul>
-    <c:forEach var="prod" items="${order.products}">
-        <li>
-            Product name: ${prod.name} <br>
-            Price: ${prod.salePrice}€ <br>
-            Quantity: ${prod.quantity} <br>
-        </li>
-    </c:forEach>
-    </ul>
-    Date: ${order.ooDateTime.getHumanDate()} <br>
-    Status: ${order.status.status.text} <br>
-    Total price: ${order.getTotalPrice()}€ <br>
+    <div class="mx-auto" style="width: 600px;">
+        <div class="card text-center mt-3 mb-3">
+            <div class="card-header text-end">
+                ID ORDER # ${order.idOrder} <br>
+                <a href="<c:url value="/order/detail"/>/${order.idOrder}" class="card-link mt-5">View Order Details</a>
+            </div>
+            <ul class="list-group list-group-flush">
+                <c:forEach var="prod" items="${order.products}">
+                    <li class="list-group-item">
+                        <h5 class="card-title">${prod.name}</h5>
+                            Price: ${prod.salePrice}€ <br>
+                            Quantity: ${prod.quantity}
+                    </li>
+
+                </c:forEach>
+            </ul>
+            <div class="card-body">
+                <div class="row justify-content-start">
+                    <div class="col">
+                        Date: <br>
+                            ${order.ooDateTime.getHumanDate()}
+                    </div>
+                    <div class="col">
+                        Status: <br>
+                            ${order.status.status.text}
+                    </div>
+                    <div class="col">
+                        Total price: <br>
+                            ${order.getTotalPrice()}€
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 </c:forEach>
 
 
