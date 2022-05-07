@@ -65,8 +65,12 @@
     text-align: center;
 }
 
-#featuredCarousel * {
-    box-sizing: border-box;
+.carousel-indicators {
+    bottom: -50px;
+}
+
+#feats {
+    padding-bottom: -50px;
 }
 
 .card:hover {

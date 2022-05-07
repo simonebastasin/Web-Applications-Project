@@ -35,7 +35,8 @@
     <c:set var="number" value="${number+1}"/>
 </c:forEach>
 
-<c:if test="${showcase == true}">
+<c:choose>
+<c:when test="${showcase == true}">
 
 <hr>
 
@@ -218,9 +219,13 @@
         </div>
 
     </div>
-</c:if>
 
-<hr>
+    <hr style="margin-top: 50px">
+</c:when>
+<c:otherwise>
+    <hr>
+</c:otherwise>
+</c:choose>
 
 <h3>Available products</h3>
 <ul>
