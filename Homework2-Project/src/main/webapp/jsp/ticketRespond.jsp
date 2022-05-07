@@ -39,6 +39,7 @@
     <div class="card">
         <div class="card-body">
             <h5 class="card-title">Ticket ID: ${assistanceTicket.id}</h5>
+            <ul class="list-group">
             <li class="list-group-item">${assistanceTicket.description}</li>
             <li class="list-group-item">Customer: ${assistanceTicket.idCustomer}</li>
             <li class="list-group-item"><a href="<c:url value="/products/details/${assistanceTicket.productAlias}"/>">Product ${assistanceTicket.productAlias}</a></li>
@@ -48,7 +49,7 @@
                     <li class="list-group-item"><i>${item.description}</i></li>
                     <li class="list-group-item">${item.tsDate.humanDate}</li>
                 </c:forEach>
-
+            </ul>
 
         <c:choose>
             <c:when test="${empty assistanceTicket.ticketStatusList}" >

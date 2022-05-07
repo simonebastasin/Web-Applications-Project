@@ -28,17 +28,19 @@
   </ol>
 </nav>
 
-<ul>
-    <li>Name: ${customer.name}</li>
-    <li>Surname: ${customer.surname}</li>
-    <li>Address: ${customer.address}</li>
-    <li>Phone number: ${customer.phoneNumber}</li>
-    <li>Email: ${customer.email}</li>
-    <li>FiscalCode: ${customer.fiscalCode}</li>
+<h5>User Info</h5>
+<ul class="list-group list-group-flush">
+    <li class="list-group-item">Name: ${customer.name}</li>
+    <li class="list-group-item">Surname: ${customer.surname}</li>
+    <li class="list-group-item">Address: ${customer.address}</li>
+    <li class="list-group-item">Phone number: ${customer.phoneNumber}</li>
+    <li class="list-group-item">Email: ${customer.email}</li>
+    <li class="list-group-item">FiscalCode: ${customer.fiscalCode}</li>
 </ul>
+<br>
 
-<a href="<c:url value="/user/modify"/>">Edit</a>
-<a href="<c:url value="/user/password"/>">change Password</a>
+<a href="<c:url value="/user/modify"/>" class="btn btn-primary">Edit</a>
+<a href="<c:url value="/user/password"/>" class="btn btn-danger">Change Password</a>
 
 
 </div>
