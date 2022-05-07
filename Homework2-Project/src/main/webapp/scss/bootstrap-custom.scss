@@ -1,0 +1,162 @@
+// 1. Include any default variable overrides here
+$primary: #3dd900;
+$danger: #ff4136;
+$warning: #ffb007;
+$info: #0d8ef0;
+
+// 2. Include functions first (so you can manipulate colors, SVGs, calc, etc)
+@import "bootstrap/scss/functions";
+@import "bootstrap/scss/variables";
+@import "bootstrap/scss/mixins";
+@import "bootstrap/scss/root";
+
+// 3. Include any new variable here
+
+$box-hover-shadow:                  0 1rem 2rem rgba($black, .15);
+$box-hover-shadow-sm:               0 .25rem .5rem rgba($black, .075);
+$box-hover-shadow-lg:               0 2rem 6rem rgba($black, .175);
+
+// 4. Import reboot
+@import "bootstrap/scss/reboot";
+
+// 5. Include any optional Bootstrap CSS as needed
+
+@import "bootstrap/scss/type";
+@import "bootstrap/scss/images";
+@import "bootstrap/scss/containers";
+@import "bootstrap/scss/tables";
+@import "bootstrap/scss/forms";
+@import "bootstrap/scss/buttons";
+@import "bootstrap/scss/transitions";
+@import "bootstrap/scss/dropdown";
+@import "bootstrap/scss/button-group";
+@import "bootstrap/scss/nav";
+@import "bootstrap/scss/navbar";
+@import "bootstrap/scss/card";
+@import "bootstrap/scss/accordion";
+@import "bootstrap/scss/breadcrumb";
+@import "bootstrap/scss/pagination";
+@import "bootstrap/scss/badge";
+@import "bootstrap/scss/alert";
+@import "bootstrap/scss/progress";
+@import "bootstrap/scss/list-group";
+@import "bootstrap/scss/close";
+@import "bootstrap/scss/toasts";
+@import "bootstrap/scss/modal";
+@import "bootstrap/scss/tooltip";
+@import "bootstrap/scss/popover";
+@import "bootstrap/scss/carousel";
+@import "bootstrap/scss/spinners";
+@import "bootstrap/scss/offcanvas";
+@import "bootstrap/scss/placeholders";
+@import "bootstrap/scss/helpers";
+@import "bootstrap/scss/grid";
+@import "bootstrap/scss/grid";
+@import "bootstrap/scss/utilities";
+// 6. Custom utilities & component
+$utilities: map-merge(
+    $utilities, (
+        "shadow-hover-hover": (
+            property: box-shadow,
+            class: shadow,
+            state: hover,
+            values: (
+                null: $box-hover-shadow,
+                sm: $box-hover-shadow-sm,
+                lg: $box-hover-shadow-lg,
+            ),
+        ),
+        "shadow-hover": (
+            property: box-shadow,
+            class: shadow,
+            values: (
+                null: $box-shadow,
+                sm: $box-shadow-sm,
+                lg: $box-shadow-lg,
+            ),
+        ),
+    ),
+);
+
+.image-check-box {
+    ul {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    li {
+        display: inline-block;
+    }
+
+    input[type="checkbox"] {
+        display: none;
+    }
+
+    label {
+        padding: 10px;
+        display: block;
+        position: relative;
+        cursor: pointer;
+        transform: scale(1);
+        @include transition(transform 0.15s);
+    }
+
+    label:before {
+        background-color: $primary;
+        color: $form-check-input-checked-color;
+        @if $enable-gradients {
+            content: escape-svg($form-check-input-checked-bg-image), var(--#{$variable-prefix}gradient);
+        } @else {
+            content: escape-svg($form-check-input-checked-bg-image);
+        }
+        display: block;
+        border-radius: 50%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: $form-check-input-width *1.5;
+        height: $form-check-input-width *1.5;
+        text-align: center;
+        opacity: 0;
+        @include transition(transform 0.5s, opacity 0.15s);
+        transform: scale(0);
+        z-index: 1;
+    }
+
+    label img {
+        border: $input-border-width solid $input-border-color;
+        transform-origin: 50% 50%;
+
+        // Note: This has no effect on <select>s in some browsers, due to the limited stylability of `<select>`s in CSS.
+        @include border-radius($input-border-radius, 0);
+
+        @include box-shadow($input-box-shadow);
+        @include transition($input-transition);
+    }
+
+    :checked + label:before {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    :checked + label {
+        opacity: 1;
+        transform: scale(0.9);
+    }
+
+    :checked + label img {
+        border-color: $input-focus-border-color;
+        outline: 0;
+        @if $enable-shadows {
+            @include box-shadow($input-box-shadow, $input-focus-box-shadow);
+        } @else {
+            // Avoid using mixin so we can pass custom focus shadow properly
+            box-shadow: $input-focus-box-shadow;
+        }
+        z-index: -1;
+    }
+}
+
+// 7. Include utilities API last to generate classes based on the Sass map in `_utilities.scss`
+@import "bootstrap/scss/utilities/api";
+
