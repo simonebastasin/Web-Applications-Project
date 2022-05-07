@@ -18,9 +18,10 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <c:choose>
                 <c:when test="${not empty categories}">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownCategories" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Categories
@@ -31,26 +32,26 @@
                                 </c:forEach>
                             </ul>
                         </li>
-                    </ul>
+
                 </c:when>
             </c:choose>
+            </ul>
             <form class="input-group w-25" method="GET" action="<c:url value="/products/search"/>">
                 <input class="form-control"  type="text" id="q" name="q" pattern="[A-Za-z0-9 ]{1,20}" placeholder="Write here to search" aria-describedby="button-search">
                 <input class="btn btn-outline-success" type="submit" value="Go" id="button-search">
             </form>
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 <c:choose>
                     <c:when test="${not empty user}">
                         <c:choose>
                             <c:when test="${empty user.role}">
-                                <li class="nav-item">
-                                    <a class="nav-link" href="<c:url value="/order/list"/>">View Orders</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="<c:url value="/invoice/list"/>">View Invoices</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="<c:url value="/ticket/list"/>">View Tickets</a>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownView" role="button" data-bs-toggle="dropdown" aria-expanded="false"  href="#">View</a>
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownManagement">
+                                        <li><a class="dropdown-item" href="<c:url value="/order/list"/>">View Orders</a></li>
+                                        <li><a class="dropdown-item" href="<c:url value="/invoice/list"/>">View Invoices</a></li>
+                                        <li><a class="dropdown-item" href="<c:url value="/ticket/list"/>">View Tickets</a></li>
+                                    </ul>
                                 </li>
                             </c:when>
                             <c:when test="${not empty user.role}">
