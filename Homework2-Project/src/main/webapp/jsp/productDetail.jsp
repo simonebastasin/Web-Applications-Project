@@ -119,6 +119,25 @@
         </div>
         <div>
             <div>
+                <h3>${product.name}</h3>
+                <h5 class="text-primary">Brand: ${product.brand}</h5>
+                <hr/>
+
+                <c:choose>
+                    <c:when test="${not empty product.discount}">
+                    <div class="row">
+                        <div class="col-md-6">Price: <span style="text-decoration: line-through;">${product.salePrice}€</span> <span style="color: red;">${product.discountSale}€</span></div>
+                        <div class="col-md-6 text-end"> ${product.discount.percentage}% discount (until ${product.discount.endDate.humanDate})</div>
+                    </div>
+                    </c:when>
+                    <c:otherwise>
+                        <p>Price: ${product.salePrice}€</p>
+                    </c:otherwise>
+                </c:choose>
+                <br>
+                <p>${product.description}</p>
+
+                <%--
                 <ul>
                     <li>Brand: ${product.brand}</li>
                     <li>Description: ${product.description}</li>
@@ -137,6 +156,7 @@
                         </c:otherwise>
                     </c:choose>
                 </ul>
+                --%>
                 <c:choose>
                     <c:when test="${product.quantity <= 0}">
                         <span class="fw-bold text-danger">The product is no longer available.</span>
@@ -149,16 +169,18 @@
                                     <input type="number" name="quantity" max="${product.quantity}" min="1" id="quantity" required>
                                     <br>
 
-                                    <input type="submit" value="Buy now">
+                                    <input type="submit" value="Buy now" class="btn btn-primary">
                                 </form>
                             </c:when>
                             <c:otherwise>
                                 <c:choose>
                                     <c:when test="${not empty user && not empty user.role}">
+                                        <hr/>
                                         <span class="fw-bold text-danger">Employees are not authorized to make purchases.</span>
                                     </c:when>
                                     <c:otherwise>
-                                        Please, <a href="<c:url value="/session/login"/>">login</a> to buy the product
+                                        <hr/>
+                                        Please, <a href="<c:url value="/session/login"/>" class="btn btn-primary">login</a> to buy the product
                                     </c:otherwise>
                                 </c:choose>
                             </c:otherwise>
