@@ -28,32 +28,73 @@
   </ol>
 </nav>
 
-<ul>
-<c:forEach var="prod" items="${onlineOrder.products}">
-    <li>
-        Product name: ${prod.name} <br>
-        Price: ${prod.salePrice}€ <br>
-        Quantity: ${prod.quantity} <br>
-        <br>
-        <a href="<c:url value="/ticket/create"/>/${prod.alias}">Open Ticket</a>
-    </li>
-</c:forEach>
-</ul>
 
-Date: ${onlineOrder.ooDateTime.getHumanDate()} <br>
-Status: ${onlineOrder.status.status.text} <br>
-Total price: ${onlineOrder.getTotalPrice()}€ <br>
+<div class="mx-auto" style="width: 500px;">
+    <div class="card mt-3 mb-3">
+        <div class="card-body ms-10">
+            <ul class="list-group list-group-flush">
+            <c:forEach var="prod" items="${onlineOrder.products}">
+            <li class="list-group-item">
+                <h5 class="card-title">${prod.name}</h5>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-4">
+                            Price:
+                        </div>
+                        <div class="col-4">
+                                ${prod.salePrice}€
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            Quantity:
+                        </div>
+                        <div class="col-4">
+                                ${prod.quantity}
+                        </div>
+                    </div>
+                </div>
 
-<c:if test="${onlineOrder.status.status ne OrderStatusEnum.OPEN }">
-    <a href="<c:url value="/invoice/order/${onlineOrder.idOrder}"/>">Invoice</a>
-</c:if>
-<c:if test="${onlineOrder.status.status eq OrderStatusEnum.OPEN }">
-    <a href="<c:url value="/buy/pay/${onlineOrder.idOrder}"/>">Pay</a>
-    <a href="<c:url value="/buy/cancel/${onlineOrder.idOrder}"/>">Cancel</a>
-</c:if>
-<c:if test="${onlineOrder.status.status eq OrderStatusEnum.PAYMENT_ACCEPTED }">
-    <a href="<c:url value="/buy/cancel/${onlineOrder.idOrder}"/>">Cancel</a>
-</c:if>
+                    <div class="col text-end">
+                        <a href="<c:url value="/ticket/create"/>/${prod.alias}" class="card-link mt-5">Open Ticket</a>
+                    </div>
+
+            </li>
+            </c:forEach>
+            </ul>
+        </div>
+        <div class="card-footer text-start">
+            <div class="col">
+                Date: ${onlineOrder.ooDateTime.getHumanDate()} <br>
+                Status: ${onlineOrder.status.status.text} <br>
+                Total price: ${onlineOrder.getTotalPrice()}€ <br>
+            </div>
+        </div>
+    </div>
+
+    <c:if test="${onlineOrder.status.status ne OrderStatusEnum.OPEN }">
+
+            <a href="<c:url value="/invoice/order/${onlineOrder.idOrder}" />" class="btn btn-primary me-3 float-end">Invoice</a>
+
+    </c:if>
+    <c:if test="${onlineOrder.status.status eq OrderStatusEnum.OPEN }">
+
+            <a href="<c:url value="/buy/pay/${onlineOrder.idOrder}"/>" class="btn btn-primary me-3 float-end">Pay</a>
+            <a href="<c:url value="/buy/cancel/${onlineOrder.idOrder}"/>" class="btn btn-primary me-3 float-end">Cancel</a>
+
+    </c:if>
+    <c:if test="${onlineOrder.status.status eq OrderStatusEnum.PAYMENT_ACCEPTED }">
+
+            <a href="<c:url value="/buy/cancel/${onlineOrder.idOrder}"/>" class="btn btn-primary me-3 float-end">Cancel</a>
+
+    </c:if>
+
+</div>
+
+
+
+
+
 
 
 </div>
