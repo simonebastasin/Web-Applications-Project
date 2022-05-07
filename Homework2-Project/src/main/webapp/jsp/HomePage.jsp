@@ -76,16 +76,51 @@
 
         <c:set var="active" value="${true}"/>
         <div class="carousel-inner" role="listbox">
+
             <c:forEach var="prod" items="${productList}">
                 <c:if test="${prod.evidence == true}">
+
                     <c:choose>
+
                         <c:when test="${active == true}">
                             <div class="carousel-item active">
                                 <div class="card h-100 shadow shadow-hover">
-                                    <c:choose>
-                                        <c:when test="${not empty prod.discount}">
+                                    <div class="row g-0">
+
+                                        <%-- 5/12 cols to text--%>
+                                        <div class="col-sm-5">
+
+                                            <div class="card-header text-white bg-info border-info mb-4">
+                                                <h3>${prod.brand}</h3>
+                                            </div>
+
+                                            <div class="card-body">
+
+                                                <div class="card-title">
+                                                    <h3><a href="<c:url value="/products/details/${prod.alias}"/>" class="stretched-link">${prod.name}</a></h3>
+                                                </div>
+
+                                                <div class="card-text">
+                                                <c:choose>
+                                                    <c:when test="${not empty prod.discount}">
+                                                        <p class="price"><span  style="text-decoration: line-through;">${prod.salePrice}€</span> <span style="color: red;">${prod.discountSale}€</span></p>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <p class="price">${prod.salePrice}€</p>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                        <%-- 7/12 cols to text--%>
+                                        <div class="col-sm-7">
+
                                             <c:choose>
                                                 <c:when test="${not empty prod.pictures}">
+
                                                     <c:set var="i" value="${0}"/>
                                                     <c:forEach var="pic" items="${prod.pictures}">
                                                         <c:if test="${i == 0}">
@@ -94,62 +129,62 @@
                                                         <c:set var="i" value="${1}"/>
                                                     </c:forEach>
                                                     <img src="<c:url value="/media/thumb/${picture}"/>" alt="${prod.alias}" class="card-img-top img-fluid img-thumbnail">
+
                                                 </c:when>
                                                 <c:otherwise>
-                                                    <<img src="<c:url value="/images/No_image_available_circle.png"/>" alt="${prod.alias}" class="card-img-top img-fluid img-thumbnail">
+
+                                                    <img src="<c:url value="/images/No_image_available_circle.png"/>" alt="${prod.alias}" class="card-img-top img-fluid img-thumbnail">
+
                                                 </c:otherwise>
                                             </c:choose>
-                                            <div class="card-header text-white bg-info border-info mb-4">
-                                                <h3>${prod.brand}</h3>
-                                            </div>
-                                            <div class="card-body">
-                                                <div class="card-title">
-                                                    <h3><a href="<c:url value="/products/details/${prod.alias}"/>" class="stretched-link">${prod.name}</a></h3>
-                                                </div>
-                                                <div class="card-text">
-                                                    <p class="price"><span  style="text-decoration: line-through;">${prod.salePrice}€</span> <span style="color: red;">${prod.discountSale}€</span></p>
-                                                </div>
-                                            </div>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <c:choose>
-                                                <c:when test="${not empty prod.pictures}">
-                                                    <c:set var="i" value="${0}"/>
-                                                    <c:forEach var="pic" items="${prod.pictures}">
-                                                        <c:if test="${i == 0}">
-                                                            <c:set var="picture" value="${pic}"/>
-                                                        </c:if>
-                                                        <c:set var="i" value="${1}"/>
-                                                    </c:forEach>
-                                                    <img src="<c:url value="/media/thumb/${picture}"/>" alt="${prod.alias}" class="card-img-top img-fluid img-thumbnail">
-                                                </c:when>
-                                                <c:otherwise>
-                                                    <img src="<c:url value="/images/No_image_available_circle.png"/>"  alt="${prod.alias}" class="card-img-top img-fluid img-thumbnail">
-                                                </c:otherwise>
-                                            </c:choose>
-                                            <div class="card-header text-white bg-info border-info mb-4">
-                                                <h3>${prod.brand}</h3>
-                                            </div>
-                                            <div class="card-body">
-                                                <div class="card-title">
-                                                    <h3><a href="<c:url value="/products/details/${prod.alias}"/>" class="stretched-link">${prod.name}</a></h3>
-                                                </div>
-                                                <div class="card-text">
-                                                    <p class="price">${prod.salePrice}€</p>
-                                                </div>
-                                            </div>
-                                        </c:otherwise>
-                                    </c:choose>
+
+                                        </div>
+
+                                    </div>
                                 </div>
                             </div>
+
                         </c:when>
                         <c:otherwise>
+
                             <div class="carousel-item">
                                 <div class="card h-100 shadow shadow-hover">
-                                    <c:choose>
-                                        <c:when test="${not empty prod.discount}">
+                                    <div class="row g-0">
+
+                                            <%-- 5/12 cols to text--%>
+                                        <div class="col-sm-5">
+
+                                            <div class="card-header text-white bg-info border-info mb-4">
+                                                <h3>${prod.brand}</h3>
+                                            </div>
+
+                                            <div class="card-body">
+
+                                                <div class="card-title">
+                                                    <h3><a href="<c:url value="/products/details/${prod.alias}"/>" class="stretched-link">${prod.name}</a></h3>
+                                                </div>
+
+                                                <div class="card-text">
+                                                    <c:choose>
+                                                        <c:when test="${not empty prod.discount}">
+                                                            <p class="price"><span  style="text-decoration: line-through;">${prod.salePrice}€</span> <span style="color: red;">${prod.discountSale}€</span></p>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <p class="price">${prod.salePrice}€</p>
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                            <%-- 7/12 cols to text--%>
+                                        <div class="col-sm-7">
+
                                             <c:choose>
                                                 <c:when test="${not empty prod.pictures}">
+
                                                     <c:set var="i" value="${0}"/>
                                                     <c:forEach var="pic" items="${prod.pictures}">
                                                         <c:if test="${i == 0}">
@@ -158,63 +193,31 @@
                                                         <c:set var="i" value="${1}"/>
                                                     </c:forEach>
                                                     <img src="<c:url value="/media/thumb/${picture}"/>" alt="${prod.alias}" class="card-img-top img-fluid img-thumbnail">
+
                                                 </c:when>
                                                 <c:otherwise>
+
                                                     <img src="<c:url value="/images/No_image_available_circle.png"/>" alt="${prod.alias}" class="card-img-top img-fluid img-thumbnail">
+
                                                 </c:otherwise>
                                             </c:choose>
-                                            <div class="card-header text-white bg-info border-info mb-4">
-                                                <h3>${prod.brand}</h3>
-                                            </div>
-                                            <div class="card-body">
-                                                <div class="card-title">
-                                                    <h3><a href="<c:url value="/products/details/${prod.alias}"/>" class="stretched-link">${prod.name}</a></h3>
-                                                </div>
-                                                <div class="card-text">
-                                                    <p class="price"><span  style="text-decoration: line-through;">${prod.salePrice}€</span> <span style="color: red;">${prod.discountSale}€</span></p>
-                                                </div>
-                                            </div>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <c:choose>
-                                                <c:when test="${not empty prod.pictures}">
-                                                    <c:set var="i" value="${0}"/>
-                                                    <c:forEach var="pic" items="${prod.pictures}">
-                                                        <c:if test="${i == 0}">
-                                                            <c:set var="picture" value="${pic}"/>
-                                                        </c:if>
-                                                        <c:set var="i" value="${1}"/>
-                                                    </c:forEach>
-                                                    <img src="<c:url value="/media/thumb/${picture}"/>" alt="${prod.alias}" class="card-img-top img-fluid img-thumbnail">
-                                                </c:when>
-                                                <c:otherwise>
-                                                    <img src="<c:url value="/images/No_image_available_circle.png"/>"  alt="${prod.alias}" class="card-img-top img-fluid img-thumbnail">
-                                                </c:otherwise>
-                                            </c:choose>
-                                            <div class="card-header text-white bg-info border-info mb-4">
-                                                <h3>${prod.brand}</h3>
-                                            </div>
-                                            <div class="card-body">
-                                                <div class="card-title">
-                                                    <h3><a href="<c:url value="/products/details/${prod.alias}"/>" class="stretched-link">${prod.name}</a></h3>
-                                                </div>
-                                                <div class="card-text">
-                                                    <p class="price">${prod.salePrice}€</p>
-                                                </div>
-                                            </div>
-                                        </c:otherwise>
-                                    </c:choose>
+
+                                        </div>
+
+                                    </div>
                                 </div>
                             </div>
+
                         </c:otherwise>
+
                     </c:choose>
                     <c:set var="active" value="${false}"/>
+
                 </c:if>
             </c:forEach>
         </div>
+
     </div>
-
-
 </c:if>
 
 <hr>

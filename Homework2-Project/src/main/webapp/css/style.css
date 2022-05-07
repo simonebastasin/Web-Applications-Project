@@ -59,17 +59,21 @@
     color: inherit;
 }
 
-.card {
-    max-width: 300px;
+#featuredCarousel .card {
+    max-width: 600px;
     margin: auto;
     text-align: center;
+}
+
+#featuredCarousel * {
+    box-sizing: border-box;
 }
 
 .card:hover {
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
 
-.card a, a:hover, a:focus, a:active {
+#featuredCarousel .card a, a:hover, a:focus, a:active {
     text-decoration: none;
     color: inherit;
 }
