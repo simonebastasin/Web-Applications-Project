@@ -44,7 +44,9 @@
 
                                 <c:set var="i" value="${0}"/>
                                 <div class="carousel-indicators">
+
                                     <c:forEach var="picture" items="${product.pictures}">
+
                                         <c:choose>
                                             <c:when test="${i == 0}">
                                                 <button type="button" data-bs-target="#picCarousel" data-bs-slide-to="0"
@@ -57,26 +59,9 @@
                                             </c:otherwise>
                                         </c:choose>
                                         <c:set var="i" value="${i+1}"/>
-                                    </c:forEach>
-                                </div>
 
-                                <c:set var="j" value="${0}"/>
-                                <div class="carousel-inner" role="listbox">
-                                    <c:forEach var="picture" items="${product.pictures}">
-                                        <c:choose>
-                                            <c:when test="${j == 0}">
-                                                <div class="carousel-item active">
-                                                    <img src="<c:url value="/media/view/${picture}"/>" alt="${product.alias}" class="d-block w-100"/>
-                                                </div>
-                                            </c:when>
-                                            <c:otherwise>
-                                                <div class="carousel-item">
-                                                    <img src="<c:url value="/media/view/${picture}"/>" alt="${product.alias}" class="d-block w-100"/>
-                                                </div>
-                                            </c:otherwise>
-                                        </c:choose>
-                                        <c:set var="j" value="${1}"/>
                                     </c:forEach>
+
                                 </div>
 
                                 <button class="carousel-control-prev" type="button" data-bs-target="#picCarousel"
@@ -89,6 +74,29 @@
                                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                     <span class="visually-hidden">Next</span>
                                 </button>
+
+                                <c:set var="first" value="${true}"/>
+                                <div class="carousel-inner" role="listbox">
+
+                                    <c:forEach var="picture" items="${product.pictures}">
+
+                                        <c:choose>
+                                            <c:when test="${first == true}">
+                                                <div class="carousel-item active">
+                                                    <img src="<c:url value="/media/view/${picture}"/>" alt="${product.alias}" class="d-block w-100"/>
+                                                </div>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <div class="carousel-item">
+                                                    <img src="<c:url value="/media/view/${picture}"/>" alt="${product.alias}" class="d-block w-100"/>
+                                                </div>
+                                            </c:otherwise>
+                                        </c:choose>
+
+                                        <c:set var="first" value="${false}"/>
+                                    </c:forEach>
+
+                                </div>
 
                             </div>
                         </c:when>
@@ -161,8 +169,6 @@
         </div>
     </div>
 </div>
-
-
 
 <c:import url="/jsp/include/footer.jsp"/>
 </body>
