@@ -168,6 +168,9 @@
                             <input class="form-control" type="file" name="file" id="formFile" required>
                             <button type="submit" class="btn btn-outline-secondary">Upload</button>
                         </div>
+                        <div class="progress mt-3 mb-3" id="uploadImageProgress" style="display: none;">
+                            <div id="uploadImageProgressBar" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>
+                        </div>
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -184,7 +187,17 @@
     const addProductForm = document.getElementById('addProductForm');
     const addProductModal = document.getElementById('addProductModal');
     const uploadImageForm = document.getElementById('uploadImageForm');
+    const uploadImageProgress = document.getElementById('uploadImageProgress');
+    const uploadImageProgressBar = document.getElementById('uploadImageProgressBar');
     let recipient;
+    function updateProgressBar(progress, isError) {
+        uploadImageProgress.style.display = "flex";
+        uploadImageProgressBar.style.width = (isError ? 100 : progress) + "%";
+        uploadImageProgressBar.ariaValueNow = isError ? 100 : progress;
+        uploadImageProgressBar.classList.toggle('progress-bar-animated', progress < 100 && !isError);
+        uploadImageProgressBar.classList.toggle('progress-bar-striped', progress < 100 && !isError);
+        uploadImageProgressBar.classList.toggle('bg-danger', isError);
+    }
     addProductButton.addEventListener('click', (e) => {
 
         console.log(recipient);
@@ -207,7 +220,7 @@
                     // TODO refresh list
                 } else {
                     const alertPlaceholder = document.getElementById('formAlertPlaceholder');
-                    bootstrapAlert(xmlhttp.responseText, 'error', alertPlaceholder);
+                    bootstrapAlert(xmlhttp.responseText !== "" ? xmlhttp.responseText : (xmlhttp.statusText !== ""? 'Error: '+ xmlhttp.statusText : "Generic error"), 'danger', alertPlaceholder);
                 }
             }
         }
@@ -218,8 +231,12 @@
 
         const multipart_data = new FormData(uploadImageForm);
 
-        var xmlhttp = new XMLHttpRequest();   e
+        var xmlhttp = new XMLHttpRequest();
         xmlhttp.open("POST", "<c:url value="/rest/media/upload" />", true);
+        xmlhttp.upload.addEventListener("progress", function(e) {
+            let progress = ((e.loaded * 100.0 / e.total) || 100);
+            updateProgressBar(progress, false);
+        });
         xmlhttp.onreadystatechange = function() {
             if (xmlhttp.readyState === XMLHttpRequest.DONE) {
                 if(xmlhttp.status === 200) {
@@ -236,12 +253,15 @@
                     );
                     bootstrapAlert(response.message, 'success', alertPlaceholder);
                 } else {
+                    console.log(xmlhttp);
                     const alertPlaceholder = document.getElementById('formAlertPlaceholder');
-                    bootstrapAlert(xmlhttp.responseText, 'danger', alertPlaceholder);
+                    bootstrapAlert(xmlhttp.responseText !== "" ? xmlhttp.responseText : (xmlhttp.statusText !== ""? 'Error: '+ xmlhttp.statusText : "Generic error"), 'danger', alertPlaceholder);
+                    updateProgressBar(0, true);
                 }
             }
         }
         xmlhttp.send(multipart_data);
+        updateProgressBar(0, false);
     })
     addProductModal.addEventListener('show.bs.modal', (e) => {
         // Button that triggered the modal
@@ -268,7 +288,7 @@
 
                     } else {
                         const alertPlaceholder = document.getElementById('liveAlertPlaceholder');
-                        bootstrapAlert('product not found', 'danger', alertPlaceholder);
+                        bootstrapAlert(xmlhttp.statusText !== "" ? 'Error: '+xmlhttp.status : 'Generic erro', 'danger', alertPlaceholder);
                         bootstrap.Modal.getOrCreateInstance(addProductModal).hide();
                     }
                 }
