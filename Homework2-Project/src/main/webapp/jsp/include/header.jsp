@@ -36,10 +36,11 @@
                 </c:when>
             </c:choose>
             </ul>
-            <form class="input-group w-25" method="GET" action="<c:url value="/products/search"/>">
+            <form class="input-group w-25" method="GET" id="form" action="<c:url value="/products/search"/>">
                 <input class="form-control"  type="text" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="true"  name="q" pattern="[A-Za-z0-9 ]{1,20}" placeholder="Write here to search" aria-describedby="button-search" onkeyup="showResult(this.value)">
-                <ul class="dropdown-menu" id="menu" aria-labelledby="dropdownMenuButton1">
-                </ul>
+                <ul class="dropdown-menu"  id="menu" aria-labelledby="dropdownMenuButton1">
+                    </ul>
+
                 <input class="btn btn-outline-success" type="submit" value="Go" id="button-search">
             </form>
             <script>
@@ -56,14 +57,20 @@
                                  console.log(jsonData.products.length);
                                  var inner="";
                                 for (var i = 0; i < jsonData.products.length; i++) {
-                                    inner+="<li>"+jsonData.products[i].name+"</li>";
+                                    var stringa=jsonData.products[i].name;
+                                    inner+="<li onclick='showElement(\""+stringa+"\")'>"+jsonData.products[i].name+"</li>";
                             }
+
                                 document.getElementById("menu").innerHTML=inner;
                         }
                     }
                     xmlhttp.open("POST","<c:url value="/products/suggest"/>",true);
                     xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
                     xmlhttp.send("q="+str);
+                }
+                function showElement(str) {
+                    document.getElementById("dropdownMenuButton1").value=str;
+                    document.getElementById("form").submit();
                 }
             </script>
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
