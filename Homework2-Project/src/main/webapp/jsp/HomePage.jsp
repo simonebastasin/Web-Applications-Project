@@ -42,7 +42,7 @@
 
 <h3>Featured products</h3>
 
-    <div id="featuredCarousel" class="carousel carousel-dark slide" data-bs-ride="carousel">
+    <div id="featuredCarousel" class="carousel carousel-dark slide featured-carousel" data-bs-ride="carousel">
 
         <c:set var="i" value="${0}"/>
         <div class="carousel-indicators">
@@ -76,7 +76,7 @@
         </button>
 
         <c:set var="active" value="${true}"/>
-        <div class="carousel-inner" role="listbox">
+        <div class="carousel-inner p-3" role="listbox">
 
             <c:forEach var="prod" items="${productList}">
                 <c:if test="${prod.evidence == true}">
@@ -84,14 +84,13 @@
                     <c:choose>
 
                         <c:when test="${active == true}">
-                            <div class="carousel-item active">
+                            <div class="carousel-item active p-3">
                                 <div class="card h-100 shadow shadow-hover">
-                                    <div class="row g-0">
+                                    <div class="d-flex flex-wrap justify-content-center">
 
-                                        <%-- 5/12 cols to text--%>
-                                        <div class="col-sm-5">
+                                        <div class="flex-grow-1 card-featured-content">
 
-                                            <div class="card-header text-white bg-info border-info mb-4">
+                                            <div class="card-header text-white bg-info border-info mb-4 card-header-left">
                                                 <h3>${prod.brand}</h3>
                                             </div>
 
@@ -116,8 +115,7 @@
 
                                         </div>
 
-                                        <%-- 7/12 cols to text--%>
-                                        <div class="col-sm-7">
+                                        <div >
 
                                             <c:choose>
                                                 <c:when test="${not empty prod.pictures}">
@@ -129,12 +127,12 @@
                                                         </c:if>
                                                         <c:set var="i" value="${1}"/>
                                                     </c:forEach>
-                                                    <img src="<c:url value="/media/thumb/${picture}"/>" alt="${prod.alias}" class="card-img-top img-fluid img-thumbnail">
+                                                    <img src="<c:url value="/media/view/${picture}"/>" alt="${prod.alias}" class="card-img-top card-img-bottom card-header-right img-fluid ">
 
                                                 </c:when>
                                                 <c:otherwise>
 
-                                                    <img src="<c:url value="/images/No_image_available_circle.png"/>" alt="${prod.alias}" class="card-img-top img-fluid img-thumbnail">
+                                                    <img src="<c:url value="/images/No_image_available_circle.png"/>" alt="${prod.alias}" class="card-img-top card-img-bottom card-header-right img-fluid ">
 
                                                 </c:otherwise>
                                             </c:choose>
@@ -148,14 +146,13 @@
                         </c:when>
                         <c:otherwise>
 
-                            <div class="carousel-item">
+                            <div class="carousel-item p-3">
                                 <div class="card h-100 shadow shadow-hover">
-                                    <div class="row g-0">
+                                    <div class="d-flex flex-wrap justify-content-center">
 
-                                            <%-- 5/12 cols to text--%>
-                                        <div class="col-sm-5">
+                                        <div class="flex-grow-1 card-featured-content">
 
-                                            <div class="card-header text-white bg-info border-info mb-4">
+                                            <div class="card-header text-white bg-info border-info mb-4 card-header-left">
                                                 <h3>${prod.brand}</h3>
                                             </div>
 
@@ -180,8 +177,7 @@
 
                                         </div>
 
-                                            <%-- 7/12 cols to text--%>
-                                        <div class="col-sm-7">
+                                        <div >
 
                                             <c:choose>
                                                 <c:when test="${not empty prod.pictures}">
@@ -193,12 +189,12 @@
                                                         </c:if>
                                                         <c:set var="i" value="${1}"/>
                                                     </c:forEach>
-                                                    <img src="<c:url value="/media/thumb/${picture}"/>" alt="${prod.alias}" class="card-img-top img-fluid img-thumbnail">
+                                                    <img src="<c:url value="/media/view/${picture}"/>" alt="${prod.alias}" class="card-img-top card-img-bottom card-header-right img-fluid ">
 
                                                 </c:when>
                                                 <c:otherwise>
 
-                                                    <img src="<c:url value="/images/No_image_available_circle.png"/>" alt="${prod.alias}" class="card-img-top img-fluid img-thumbnail">
+                                                    <img src="<c:url value="/images/No_image_available_circle.png"/>" alt="${prod.alias}" class="card-img-top card-img-bottom card-header-right img-fluid ">
 
                                                 </c:otherwise>
                                             </c:choose>

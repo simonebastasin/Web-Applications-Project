@@ -4,7 +4,6 @@
 .main-container {
     min-height: calc(100vh - 112px);
 }
-
 /*
     images in productDetail.jsp
  */
@@ -14,14 +13,6 @@
     height: 70vh;
     min-height: 70vh;
 }
-
-.product-detail .carousel-item img {
-    object-fit: cover;
-    object-position: center;
-    height: 70vh;
-    min-height: 70vh;
-}
-
 /*
     product carousel  linear gradient for arrow
  */
@@ -29,18 +20,22 @@
     background: rgb(255,255,255);
     background: linear-gradient(270deg, rgba(255,255,255,0) 0%, rgba(204,204,204,0.4) 10%, rgba(153,153,153,0.9) 100%);
 }
+
 .product-carousel .carousel-control-prev:hover {
     background: rgb(255,255,255);
     background: linear-gradient(270deg, rgba(255,255,255,0) 0%, rgba(204,204,204,0.5) 10%, rgba(153,153,153,1) 100%);
 }
+
 .product-carousel .carousel-control-next:hover {
     background: rgb(255,255,255);
     background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(204,204,204,0.4) 10%, rgba(153,153,153,0.9) 100%);
 }
+
 .product-carousel .carousel-control-next:hover {
     background: rgb(255,255,255);
     background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(204,204,204,0.5) 10%, rgba(153,153,153,1) 100%);
 }
+
 .product-carousel .carousel-indicators {
     background: rgba(204,204,204,0.4);
     border-radius: 0.25rem
@@ -66,11 +61,6 @@
     margin: auto;
     text-align: center;
 }
-@media screen and (min-width: 768px) {
-    .featured-carousel .card {
-        max-width: 70%;
-    }
-}
 
 .featured-carousel .carousel-indicators {
     bottom: -50px;
@@ -86,8 +76,32 @@
     width: 200px;
     min-height: 200px;
     min-width: 200px;
+    object-fit: cover;
+    object-position: center;
 }
 
+@media screen and (min-width: 768px) {
+    .featured-carousel .card {
+        max-width: 70%;
+    }
+    .featured-carousel .card-featured-content {
+        width: calc(70% - 300px);
+    }
+    .featured-carousel img {
+        height: 200px;
+        width: 300px;
+    }
+}
+
+@media screen and (min-width:992px) {
+    .featured-carousel .card-featured-content {
+        width: calc(70% - 400px);
+    }
+    .featured-carousel img {
+        height: 300px;
+        width: 400px;
+    }
+}
 /*
     card left - right
 
@@ -107,6 +121,9 @@
     Ticket color
  */
 .ticket-OPEN{color: green;}
+
 .ticket-PROCESSING{color: blue;}
+
 .ticket-CLOSED{color: red;}
+
 .ticket-RETURN{color: black;}
