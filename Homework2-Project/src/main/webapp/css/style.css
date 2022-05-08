@@ -8,14 +8,14 @@
 /*
     images in productDetail.jsp
  */
-.pDetail img {
+.product-detail img {
     object-fit: cover;
     object-position: center;
     height: 70vh;
     min-height: 70vh;
 }
 
-.pDetail .carousel-item img {
+.product-detail .carousel-item img {
     object-fit: cover;
     object-position: center;
     height: 70vh;
@@ -23,25 +23,25 @@
 }
 
 /*
-    carousel linear gradient for arrow
+    product carousel  linear gradient for arrow
  */
-#picCarousel .carousel-control-prev {
+.product-carousel .carousel-control-prev {
     background: rgb(255,255,255);
     background: linear-gradient(270deg, rgba(255,255,255,0) 0%, rgba(204,204,204,0.4) 10%, rgba(153,153,153,0.9) 100%);
 }
-#picCarousel .carousel-control-prev:hover {
+.product-carousel .carousel-control-prev:hover {
     background: rgb(255,255,255);
     background: linear-gradient(270deg, rgba(255,255,255,0) 0%, rgba(204,204,204,0.5) 10%, rgba(153,153,153,1) 100%);
 }
-#picCarousel .carousel-control-next:hover {
+.product-carousel .carousel-control-next:hover {
     background: rgb(255,255,255);
     background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(204,204,204,0.4) 10%, rgba(153,153,153,0.9) 100%);
 }
-#picCarousel .carousel-control-next:hover {
+.product-carousel .carousel-control-next:hover {
     background: rgb(255,255,255);
     background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(204,204,204,0.5) 10%, rgba(153,153,153,1) 100%);
 }
-#picCarousel .carousel-indicators {
+.product-carousel .carousel-indicators {
     background: rgba(204,204,204,0.4);
     border-radius: 0.25rem
 }
@@ -58,34 +58,54 @@
     text-decoration: none;
     color: inherit;
 }
-
-#featuredCarousel .card {
-    max-width: 600px;
+/*
+    feautred carousel
+ */
+.featured-carousel .card {
+    max-width: 90%;
     margin: auto;
     text-align: center;
 }
+@media screen and (min-width: 768px) {
+    .featured-carousel .card {
+        max-width: 70%;
+    }
+}
 
-#featuredCarousel .carousel-indicators {
+.featured-carousel .carousel-indicators {
     bottom: -50px;
 }
 
-.card:hover {
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-}
-
-#featuredCarousel .card a, a:hover, a:focus, a:active {
+.featured-carousel .card a, a:hover, a:focus, a:active {
     text-decoration: none;
     color: inherit;
 }
 
-.card-img-top {
-    width: 100%;
-    height: 30vh;
-    object-fit: contain;
-    object-position: center;
-    overflow: hidden;
+.featured-carousel img {
+    height: 200px;
+    width: 200px;
+    min-height: 200px;
+    min-width: 200px;
 }
 
+/*
+    card left - right
+
+ */
+@media screen and (min-width: 768px) {
+    .card-header-left {
+        border-bottom-right-radius: 0 !important;
+        border-top-right-radius: 0 !important;
+    }
+
+    .card-header-right {
+        border-bottom-left-radius: 0 !important;
+        border-top-left-radius: 0  !important;
+    }
+}
+/*
+    Ticket color
+ */
 .ticket-OPEN{color: green;}
 .ticket-PROCESSING{color: blue;}
 .ticket-CLOSED{color: red;}

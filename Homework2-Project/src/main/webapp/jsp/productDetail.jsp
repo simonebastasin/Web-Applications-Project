@@ -28,7 +28,7 @@
             <li class="breadcrumb-item active" aria-current="page">Product: ${product.name}</li>
         </ol>
     </nav>
-    <div class="clearfix pDetail">
+    <div class="clearfix product-detail">
         <div class="col-md-6 me-md-4 float-start ratio ratio-1x1 overflow-hidden rounded border">
             <c:choose>
                 <c:when test="${not empty product.pictures}">
@@ -40,7 +40,7 @@
 
                     <c:choose>
                         <c:when test="${pic_number > 1}">
-                            <div id="picCarousel" class="carousel slide" data-bs-ride="carousel">
+                            <div id="picCarousel" class="carousel slide product-carousel" data-bs-ride="carousel">
 
                                 <c:set var="i" value="${0}"/>
                                 <div class="carousel-indicators">
