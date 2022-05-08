@@ -52,6 +52,13 @@
                     xmlhttp.onreadystatechange=function() {
                         if (this.readyState==4 && this.status==200) {
                                 console.log(this.responseText.toString());
+                                 var jsonData = JSON.parse(this.responseText.toString());
+                                 console.log(jsonData.products.length);
+                                 var inner="";
+                                for (var i = 0; i < jsonData.products.length; i++) {
+                                    inner+="<li>"+jsonData.products[i].name+"</li>";
+                            }
+                                document.getElementById("menu").innerHTML=inner;
                         }
                     }
                     xmlhttp.open("POST","<c:url value="/products/suggest"/>",true);
