@@ -10,12 +10,15 @@ import it.unipd.dei.wa2122.wadteam.resources.*;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.json.*;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.*;
 
 public class HomePageServlet extends AbstractDatabaseServlet{
+
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
@@ -34,8 +37,40 @@ public class HomePageServlet extends AbstractDatabaseServlet{
                 }
                 else productSearch(req,res,query);
             }
+            case "suggest"->{
+                productSuggest(req,res,query);
+            }
             default -> writeError(req, res, GenericError.PAGE_NOT_FOUND);
         }
+    }
+
+    private void productSuggest(HttpServletRequest req, HttpServletResponse res, String param) throws ServletException, IOException {
+        String partialAlias = null;
+        List<Product> products;
+       JSONArray jsonArray=new JSONArray();
+
+        try {
+            products = new SearchProductListDatabase(getDataSource().getConnection(), param).searchProductList();
+
+            for (var prod : products) {
+                if (prod.getQuantity() >0)
+                {
+                    jsonArray.put(new JSONObject().put("alias", prod.getAlias()).put("name",prod.getName()));
+                }
+            }
+        }catch (SQLException e) {
+            logger.error(e.getMessage());
+            writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
+        }
+        JSONObject jo=new JSONObject();
+        jo.put("products",jsonArray);
+        res.setContentType("application/json");
+        res.setCharacterEncoding("UTF-8");
+        res.getWriter().write(jo.toString());
+
+
+
+
     }
 
     private void productSearch(HttpServletRequest req, HttpServletResponse res, String param) throws ServletException, IOException{
