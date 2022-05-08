@@ -85,3 +85,8 @@
     object-position: center;
     overflow: hidden;
 }
+
+.ticket-OPEN{color: green;}
+.ticket-PROCESSING{color: blue;}
+.ticket-CLOSED{color: red;}
+.ticket-RETURN{color: black;}

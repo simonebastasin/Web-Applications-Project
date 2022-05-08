@@ -28,15 +28,9 @@
   </ol>
 </nav>
 
-    <style>
-        .ticket-OPEN{color: green;}
-        .ticket-PROCESSING{color: blue;}
-        .ticket-CLOSED{color: red;}
-        .ticket-RETURN{color: black;}
-    </style>
-
     <c:forEach var="assistanceTicket" items="${assistanceTicketList}">
-    <div class="card">
+    <div class="mx-auto" style="width: 400px;">
+    <div class="card text-center">
         <div class="card-body">
             <h5 class="card-title">Ticket ID: ${assistanceTicket.id}</h5>
             <ul class="list-group">
@@ -64,6 +58,7 @@
         </c:choose>
 
         </div>
+    </div>
     </div>
     <br>
     </c:forEach>
