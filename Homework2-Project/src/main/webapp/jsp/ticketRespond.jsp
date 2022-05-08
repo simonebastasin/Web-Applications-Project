@@ -33,7 +33,7 @@
     <div class="card text-center">
         <div class="card-body">
             <h5 class="card-title">Ticket ID: ${assistanceTicket.id}</h5>
-            <ul class="list-group">
+            <ul class="list-group list-group-flush">
             <li class="list-group-item">${assistanceTicket.description}</li>
             <li class="list-group-item">Customer: ${assistanceTicket.idCustomer}</li>
             <li class="list-group-item"><a href="<c:url value="/products/details/${assistanceTicket.productAlias}"/>">Product ${assistanceTicket.productAlias}</a></li>

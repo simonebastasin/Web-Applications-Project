@@ -23,6 +23,7 @@
     <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
         <ol class="breadcrumb bg-secondary bg-opacity-25 p-3 mt-3 rounded">
             <li class="breadcrumb-item"><a href="<c:url value="/"/>">Electromechanics Shop</a></li>
+            <li class="breadcrumb-item"><a href="<c:url value="/invoice/list"/>">Invoice List</a></li>
             <li class="breadcrumb-item active" aria-current="page">Invoice Detail ${onlineInvoice.id}</li>
         </ol>
     </nav>
@@ -30,22 +31,28 @@
     <div id="invoice">
         <div class="d-none d-print-block">Electromechanics Shop</div>
 
-        <h2>Invoice ID: ${onlineInvoice.id}</h2>
-        <li>Transaction ID: ${onlineInvoice.transactionId}</li>
-        <li>Payment Type: ${onlineInvoice.paymentType.text}</li>
-        <li>Date: ${onlineInvoice.oiDate.humanDate}</li>
-        <li>Total Price: ${onlineInvoice.totalPrice}€</li>
+        <h3>Invoice ID: ${onlineInvoice.id}</h3>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">Transaction ID: ${onlineInvoice.transactionId}</li>
+            <li class="list-group-item">Payment Type: ${onlineInvoice.paymentType.text}</li>
+            <li class="list-group-item">Date: ${onlineInvoice.oiDate.humanDate}</li>
+            <li class="list-group-item">Total Price: ${onlineInvoice.totalPrice}€</li>
+        </ul>
+        <br>
 
-        <h2>Product list</h2>
-        <b>Order ID: ${onlineInvoice.idOrder.idOrder}</b>
+        <h3>Product list</h3>
+        <h5>Order ID: ${onlineInvoice.idOrder.idOrder}</h5>
 
-        <table>
+        <table class="table">
+            <thead>
             <tr>
-                <th>Product name</th>
-                <th>Price</th>
-                <th>Quantity</th>
-                <th>Total price</th>
+                <th scope="col">Product name</th>
+                <th scope="col">Price</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Total price</th>
             </tr>
+            </thead>
+            <tbody>
             <c:forEach var="prod" items="${onlineInvoice.idOrder.products}">
                 <tr>
                     <td> ${prod.name} </td>
@@ -61,14 +68,14 @@
                 <td></td>
                 <td>${onlineInvoice.idOrder.getTotalPrice()}€</td>
             </tr>
+            </tbody>
         </table>
 
         Date: ${onlineInvoice.idOrder.ooDateTime.getHumanDate()} <br>
-        Status: ${onlineInvoice.idOrder.status.status.text} <br>
         Total price: ${onlineInvoice.totalPrice}€ <br>
     </div>
 
-    <button class="btn btn-primary" onclick="printDiv('invoice')">Print invoice</button>
+    <button class="btn btn-primary" onclick="printDiv('invoice')">Print Invoice</button>
 
 </div>
 <c:import url="/jsp/include/footer.jsp"/>
