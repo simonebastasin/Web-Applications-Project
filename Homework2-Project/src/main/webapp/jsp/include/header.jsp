@@ -37,9 +37,28 @@
             </c:choose>
             </ul>
             <form class="input-group w-25" method="GET" action="<c:url value="/products/search"/>">
-                <input class="form-control"  type="text" id="q" name="q" pattern="[A-Za-z0-9 ]{1,20}" placeholder="Write here to search" aria-describedby="button-search">
+                <input class="form-control"  type="text" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="true"  name="q" pattern="[A-Za-z0-9 ]{1,20}" placeholder="Write here to search" aria-describedby="button-search" onkeyup="showResult(this.value)">
+                <ul class="dropdown-menu" id="menu" aria-labelledby="dropdownMenuButton1">
+                </ul>
                 <input class="btn btn-outline-success" type="submit" value="Go" id="button-search">
             </form>
+            <script>
+                function showResult(str) {
+                    if (str.length==0) {
+                        document.getElementById("menu").innerHTML="";
+                        return;
+                    }
+                    var xmlhttp=new XMLHttpRequest();
+                    xmlhttp.onreadystatechange=function() {
+                        if (this.readyState==4 && this.status==200) {
+                                console.log(this.responseText.toString());
+                        }
+                    }
+                    xmlhttp.open("POST","<c:url value="/products/suggest"/>",true);
+                    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                    xmlhttp.send("q="+str);
+                }
+            </script>
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 <c:choose>
                     <c:when test="${not empty user}">
