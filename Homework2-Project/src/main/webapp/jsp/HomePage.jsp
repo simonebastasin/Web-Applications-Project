@@ -181,12 +181,12 @@
                                                         </c:if>
                                                         <c:set var="i" value="${1}"/>
                                                     </c:forEach>
-                                                    <img src="<c:url value="/media/view/${picture}"/>" alt="${prod.alias}" class="mh-100 mw-100">
+                                                    <img src="<c:url value="/media/view/${picture}"/>" alt="${prod.alias}" class="mh-100 w-auto">
 
                                                 </c:when>
                                                 <c:otherwise>
 
-                                                    <img src="<c:url value="/images/No_image_available_circle.png"/>" alt="${prod.alias}" class="mh-100 mw-100">
+                                                    <img src="<c:url value="/images/No_image_available_circle.png"/>" alt="${prod.alias}" class="mh-100 w-auto">
 
 
                                                 </c:otherwise>
