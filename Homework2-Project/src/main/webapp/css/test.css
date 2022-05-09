@@ -58,7 +58,6 @@
     background-color: white;
     object-fit: cover;
     resize: both;
-    border-radius: 10px;
 }
 
 .content {

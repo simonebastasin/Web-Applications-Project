@@ -82,7 +82,7 @@
 
                         <div class="box">
                             <a href="<c:url value="/products/details/${prod.alias}"/>" class="stretched-link">
-                                <div class="imgBox shadow shadow-hover">
+                                <div class="imgBox rounded shadow shadow-hover rounded">
                                     <c:choose>
                                         <c:when test="${not empty prod.pictures}">
 
@@ -93,12 +93,12 @@
                                                 </c:if>
                                                 <c:set var="i" value="${1}"/>
                                             </c:forEach>
-                                            <img src="<c:url value="/media/view/${picture}"/>" alt="${prod.alias}" class="mh-100 w-100">
+                                            <img src="<c:url value="/media/view/${picture}"/>" alt="${prod.alias}" class="mh-100 w-100 img-thumbnail">
 
                                         </c:when>
                                         <c:otherwise>
 
-                                            <img src="<c:url value="/images/No_image_available_circle.png"/>" alt="${prod.alias}" class="mh-100 w-100" >
+                                            <img src="<c:url value="/images/No_image_available_circle.png"/>" alt="${prod.alias}" class="mh-100 w-100 img-thumbnail" >
 
                                         </c:otherwise>
                                     </c:choose>
@@ -125,8 +125,6 @@
                                 </div>
                             </a>
                         </div>
-
-
                 </div>
             </div>
             </c:when>
@@ -138,7 +136,7 @@
                             <div class="box">
                                 <a href="<c:url value="/products/details/${prod.alias}"/>" class="stretched-link">
 
-                                    <div class="imgBox shadow shadow-hover">
+                                    <div class="imgBox rounded shadow shadow-hover rounded">
                                         <c:choose>
                                             <c:when test="${not empty prod.pictures}">
 
@@ -149,12 +147,12 @@
                                                     </c:if>
                                                     <c:set var="i" value="${1}"/>
                                                 </c:forEach>
-                                                <img src="<c:url value="/media/view/${picture}"/>" alt="${prod.alias}" class="mh-100 w-100">
+                                                <img src="<c:url value="/media/view/${picture}"/>" alt="${prod.alias}" class="mh-100 w-100 img-thumbnail">
 
                                             </c:when>
                                             <c:otherwise>
 
-                                                <img src="<c:url value="/images/No_image_available_circle.png"/>" alt="${prod.alias}" class="mh-100 w-100">
+                                                <img src="<c:url value="/images/No_image_available_circle.png"/>" alt="${prod.alias}" class="mh-100 w-100 img-thumbnail">
 
 
                                             </c:otherwise>
