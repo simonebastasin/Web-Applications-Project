@@ -85,12 +85,10 @@
 
                         <c:when test="${active == true}">
                             <div class="carousel-item active p-3">
-                                <div class="card h-100 shadow shadow-hover">
-                                    <div class="d-flex flex-wrap justify-content-center">
-
-                                        <div class="flex-grow-1 card-featured-content">
-
-                                            <div class="card-header text-white bg-info border-info mb-4 card-header-left">
+                                <div class="card h-100 w-100 shadow shadow-hover">
+                                    <div class="row g-0">
+                                        <div class="col-md-4">
+                                            <div class="card-header text-white bg-info border-info mb-4">
                                                 <h3>${prod.brand}</h3>
                                             </div>
 
@@ -112,10 +110,8 @@
                                                 </div>
 
                                             </div>
-
                                         </div>
-
-                                        <div >
+                                        <div class="col-md-8 align-self-center">
 
                                             <c:choose>
                                                 <c:when test="${not empty prod.pictures}">
@@ -127,18 +123,16 @@
                                                         </c:if>
                                                         <c:set var="i" value="${1}"/>
                                                     </c:forEach>
-                                                    <img src="<c:url value="/media/view/${picture}"/>" alt="${prod.alias}" class="card-img-top card-img-bottom card-header-right img-fluid ">
+                                                    <img src="<c:url value="/media/view/${picture}"/>" alt="${prod.alias}" class="mh-100 w-auto">
 
                                                 </c:when>
                                                 <c:otherwise>
 
-                                                    <img src="<c:url value="/images/No_image_available_circle.png"/>" alt="${prod.alias}" class="card-img-top card-img-bottom card-header-right img-fluid ">
+                                                    <img src="<c:url value="/images/No_image_available_circle.png"/>" alt="${prod.alias}" class="mh-100 w-auto" >
 
                                                 </c:otherwise>
                                             </c:choose>
-
                                         </div>
-
                                     </div>
                                 </div>
                             </div>
@@ -147,12 +141,11 @@
                         <c:otherwise>
 
                             <div class="carousel-item p-3">
-                                <div class="card h-100 shadow shadow-hover">
-                                    <div class="d-flex flex-wrap justify-content-center">
+                                <div class="card h-100 w-100 shadow shadow-hover">
+                                    <div class="row g-0">
+                                        <div class="col-sm-4">
 
-                                        <div class="flex-grow-1 card-featured-content">
-
-                                            <div class="card-header text-white bg-info border-info mb-4 card-header-left">
+                                            <div class="card-header text-white bg-info border-info mb-4">
                                                 <h3>${prod.brand}</h3>
                                             </div>
 
@@ -176,8 +169,7 @@
                                             </div>
 
                                         </div>
-
-                                        <div >
+                                        <div class="col-sm-8 align-self-center">
 
                                             <c:choose>
                                                 <c:when test="${not empty prod.pictures}">
@@ -189,18 +181,17 @@
                                                         </c:if>
                                                         <c:set var="i" value="${1}"/>
                                                     </c:forEach>
-                                                    <img src="<c:url value="/media/view/${picture}"/>" alt="${prod.alias}" class="card-img-top card-img-bottom card-header-right img-fluid ">
+                                                    <img src="<c:url value="/media/view/${picture}"/>" alt="${prod.alias}" class="mh-100 mw-100">
 
                                                 </c:when>
                                                 <c:otherwise>
 
-                                                    <img src="<c:url value="/images/No_image_available_circle.png"/>" alt="${prod.alias}" class="card-img-top card-img-bottom card-header-right img-fluid ">
+                                                    <img src="<c:url value="/images/No_image_available_circle.png"/>" alt="${prod.alias}" class="mh-100 mw-100">
+
 
                                                 </c:otherwise>
                                             </c:choose>
-
                                         </div>
-
                                     </div>
                                 </div>
                             </div>
