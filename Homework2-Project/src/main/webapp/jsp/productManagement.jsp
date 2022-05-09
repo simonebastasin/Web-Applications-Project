@@ -37,7 +37,7 @@
     </button>
 </div><br>
 
-<table>
+<table id="productTable">
     <tr>
         <th>Name</th>
         <th>Alias</th>
@@ -51,7 +51,7 @@
 
     <c:forEach var="prod" items="${productList}">
 
-        <tr>
+        <tr id="${prod.alias}">
             <td><a href="<c:url value="/products/details/${prod.alias}"/>">${prod.name}</a></td>
             <td>${prod.alias}</td>
             <td>${prod.brand}</td>
@@ -67,10 +67,10 @@
             <td><button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#addProductModal" data-bs-whatever="${prod.alias}">
                 Edit
             </button></td>
-            <!--<td><button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteProductModal" data-bs-whatever="${prod.alias}">
-                Delete product
-            </button></td>-->
-            <td><a class="btn btn-outline-danger" href="<c:url value="/management/productManagement/deleteProduct/${prod.alias}"/>">Delete</a></td>
+            <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteProductModal" data-bs-whatever="${prod.alias}">
+                Delete
+            </button></td>
+            <%--<td><a class="btn btn-outline-danger" href="<c:url value="/management/productManagement/deleteProduct/${prod.alias}"/>">Delete</a></td>--%>
         </tr>
 
     </c:forEach>
@@ -110,7 +110,7 @@
                             </div>
                         </div>
                         <div class="mb-3">
-                            <label for="purchase" class="col-form-label">Sale price:</label>
+                            <label for="sale" class="col-form-label">Sale price:</label>
                             <div class="input-group">
                                 <span class="input-group-text">€</span>
                                 <input type="number" class="form-control" min="0.01" step="0.01" max="2500" placeholder="10.00" id="sale" name="sale" required/>
@@ -183,13 +183,14 @@
 </div>
 <c:import url="/jsp/include/footer-management.jsp"/>
 <script>
+    const productTable = document.getElementById('productTable');
     const addProductButton = document.getElementById('addProductButton');
     const addProductForm = document.getElementById('addProductForm');
     const addProductModal = document.getElementById('addProductModal');
     const uploadImageForm = document.getElementById('uploadImageForm');
     const uploadImageProgress = document.getElementById('uploadImageProgress');
     const uploadImageProgressBar = document.getElementById('uploadImageProgressBar');
-    let recipient;
+    let alias;
     function updateProgressBar(progress, isError) {
         uploadImageProgress.style.display = "flex";
         uploadImageProgressBar.style.width = (isError ? 100 : progress) + "%";
@@ -199,32 +200,51 @@
         uploadImageProgressBar.classList.toggle('bg-danger', isError);
     }
     addProductButton.addEventListener('click', (e) => {
-
-        console.log(recipient);
-        const urlencoded_data = new URLSearchParams(new FormData(addProductForm));
-
+        let createProduct = (alias  === null);
+        const formData = new FormData(addProductForm);
+        const urlencodedData = new URLSearchParams(formData);
         const xmlhttp = new XMLHttpRequest();
-        if(recipient  === null)
+
+        if(createProduct)
             xmlhttp.open("POST", "<c:url value="/rest/management/productManagement/createProduct" />", true);
-        else
-            xmlhttp.open("POST", "<c:url value="/rest/management/productManagement/editProduct/" />"+recipient, true);
+        else {
+            xmlhttp.open("POST", "<c:url value="/rest/management/productManagement/editProduct/" />" + alias, true);
+            formData.delete('alias');
+        }
         xmlhttp.onreadystatechange = function() {
             if (xmlhttp.readyState === XMLHttpRequest.DONE) {
                 if(xmlhttp.status === 200) {
                     const alertPlaceholder = document.getElementById('liveAlertPlaceholder');
-                    if(recipient  === null)
+                    let newInnerHTML =
+                        '<td><a href="<c:url value="/products/details/"/>'+alias+'">'+alias+'</a></td>'+
+                        '<td>'+formData.get('name')+'</td>'+
+                        '<td>'+formData.get('brand')+'</td>'+
+                        '<td>'+formData.get('category')+'</td>'+
+                        '<td>'+formData.get('sale')+'</td>'+
+                        '<td>'+formData.get('quantity')+'</td>'+
+                        '<td>'+formData.get('evidence')+'</td>'+
+                        '<td>'+formData.getAll('pictures').join(' ')+'</td>'+
+                        '<td><button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#addProductModal" data-bs-whatever="'+alias+'">Edit</button></td>'+
+                        '<td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteProductModal" data-bs-whatever="'+alias+'">Delete</button></td>';
+                    if(createProduct) {
                         bootstrapAlert("The product was created", 'success', alertPlaceholder);
-                    else
+                        let tr=document.createElement('tr');
+                        tr.id = alias;
+                        tr.innerHTML = newInnerHTML;
+                        productTable.appendChild(tr);
+                    }
+                    else {
                         bootstrapAlert("The product was modified", 'success', alertPlaceholder);
+                        document.getElementById(alias).innerHTML = newInnerHTML;
+                    }
                     bootstrap.Modal.getOrCreateInstance(addProductModal).hide();
-                    // TODO refresh list
                 } else {
                     const alertPlaceholder = document.getElementById('formAlertPlaceholder');
                     bootstrapAlert(xmlhttp.responseText !== "" ? xmlhttp.responseText : (xmlhttp.statusText !== ""? 'Error: '+ xmlhttp.statusText : "Generic error"), 'danger', alertPlaceholder);
                 }
             }
         }
-        xmlhttp.send(urlencoded_data);
+        xmlhttp.send(urlencodedData);
     })
     uploadImageForm.addEventListener('submit', (e) => {
         e.preventDefault();
@@ -244,7 +264,7 @@
                     const response = JSON.parse(xmlhttp.responseText)[0];
                     const imageCheckBox = document.querySelectorAll('.image-check-box ul');
                     [...imageCheckBox].forEach(
-                        (element, index, array) => {
+                        (element) => {
                             const li = document.createElement('li');
                             li.innerHTML = '<input type="checkbox" id="media-'+response.resourceId+'" name="media" value="'+response.resourceId+' checked"/>'+
                                 '<label for="media-'+response.resourceId+'"><img src="<c:url value="/media/thumb/" />'+response.resourceId+'" /></label>';
@@ -253,7 +273,6 @@
                     );
                     bootstrapAlert(response.message, 'success', alertPlaceholder);
                 } else {
-                    console.log(xmlhttp);
                     const alertPlaceholder = document.getElementById('formAlertPlaceholder');
                     bootstrapAlert(xmlhttp.responseText !== "" ? xmlhttp.responseText : (xmlhttp.statusText !== ""? 'Error: '+ xmlhttp.statusText : "Generic error"), 'danger', alertPlaceholder);
                     updateProgressBar(0, true);
@@ -267,9 +286,12 @@
         // Button that triggered the modal
         var button = e.relatedTarget;
         // Extract info from data-bs-* attributes
-        recipient = button.getAttribute('data-bs-whatever');
+        alias = button.getAttribute('data-bs-whatever');
+        let createProduct = (alias  === null);
+        document.getElementById('alias').readOnly = !createProduct;
+        document.getElementById('alias').disabled = !createProduct;
 
-        if(recipient === null) {
+        if(createProduct) {
             addProductForm.reset();
 
 
@@ -279,7 +301,7 @@
         }
         else {
             const xmlhttp = new XMLHttpRequest();
-            xmlhttp.open("GET", "<c:url value="/rest/management/productManagement/editProduct/" />"+recipient, true);
+            xmlhttp.open("GET", "<c:url value="/rest/management/productManagement/editProduct/" />"+alias, true);
             xmlhttp.onreadystatechange = function() {
                 if (xmlhttp.readyState === XMLHttpRequest.DONE) {
                     if(xmlhttp.status === 200) {
@@ -296,7 +318,7 @@
             xmlhttp.send();
 
             let modalTitle = addProductModal.querySelector('.modal-title');
-            modalTitle.textContent = 'Edit product ' + recipient;
+            modalTitle.textContent = 'Edit product ' + alias;
             addProductButton.textContent = 'Edit product';
         }
 
