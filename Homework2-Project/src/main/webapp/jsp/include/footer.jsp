@@ -34,16 +34,34 @@
                     let jsonData = JSON.parse(this.responseText.toString());
                     if(jsonData.products.length > 0) {
                         let inner = "";
+                        let keys = jsonData.products.flatMap(x => {
+                            let split = x.name.split(' ');
+                            console.log(split);
+                            return split.map((x, i) => split.slice(0,i).join(' '));
+                        }).filter(x => x !== null && x.length > 0);
+                        keys = new Set(keys);
+                        for (const key of keys) {
+                            inner += "<li><a class='dropdown-item' href='#' data-autocomplete='"+key+"' >" + key + "</a></li>";
+                        }
+                        if(keys.size > 0) {
+                            inner += "<li><hr class='dropdown-divider'></li>";
+                        }
+                        inner += "<li><h6 class='dropdown-header'>Product</h6></li>";
+
                         for (const product of jsonData.products) {
                             let alias = product.alias;
                             let name = product.name;
+                            let price = product.finalSalePrice;
                             let url = '<c:url value="/products/details/"/>'+alias;
-                            inner+="<li><a class='dropdown-item' href='"+url+"'>"+name+"</a></li>";
-                            //inner += "<li><a class='dropdown-item' href='#' onclick='showElement(\"" + name + "\")'>" + name + "</a></li>";
+                            inner+="<li><a class='dropdown-item' href='"+url+"'><i>"+name+"</i> <small>Price: "+price+"€</small></a></li>";
                         }
                         searchAutocompleteMenu.innerHTML = inner;
                         searchAutocompleteMenu.classList.add("show");
+
                         popperInstance.update();
+                        searchAutocompleteMenu.querySelectorAll("a[data-autocomplete]").forEach(li => {
+                            li.addEventListener('click', (e) => showElement(e));
+                        });
                     }
                 }
             }
@@ -52,8 +70,8 @@
         xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xmlhttp.send(new URLSearchParams(formData));
     });
-    function showElement(str) {
-        searchAutocompleteInput.value = str;
-        //document.getElementById("form").submit();
+    function showElement(e) {
+        searchAutocompleteInput.value = e.target.getAttribute('data-autocomplete');
+        //searchForm.submit();
     }
 </script>

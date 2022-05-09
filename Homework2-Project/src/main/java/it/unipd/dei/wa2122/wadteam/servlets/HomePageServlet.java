@@ -45,9 +45,8 @@ public class HomePageServlet extends AbstractDatabaseServlet{
     }
 
     private void productSuggest(HttpServletRequest req, HttpServletResponse res, String param) throws ServletException, IOException {
-        String partialAlias = null;
         List<Product> products;
-       JSONArray jsonArray=new JSONArray();
+        JSONArray jsonArray=new JSONArray();
 
         try {
             products = new SearchProductListDatabase(getDataSource().getConnection(), param).searchProductList();
@@ -55,22 +54,16 @@ public class HomePageServlet extends AbstractDatabaseServlet{
             for (var prod : products) {
                 if (prod.getQuantity() >0)
                 {
-                    jsonArray.put(new JSONObject().put("alias", prod.getAlias()).put("name",prod.getName()));
+                    jsonArray.put(prod.toJSON());
                 }
             }
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("products", jsonArray);
+            writeJSON(res, jsonObject);
         }catch (SQLException e) {
             logger.error(e.getMessage());
             writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));
         }
-        JSONObject jo=new JSONObject();
-        jo.put("products",jsonArray);
-        res.setContentType("application/json");
-        res.setCharacterEncoding("UTF-8");
-        res.getWriter().write(jo.toString());
-
-
-
-
     }
 
     private void productSearch(HttpServletRequest req, HttpServletResponse res, String param) throws ServletException, IOException{

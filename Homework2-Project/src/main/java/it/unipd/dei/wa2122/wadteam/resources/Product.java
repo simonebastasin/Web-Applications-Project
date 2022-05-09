@@ -86,6 +86,10 @@ public class Product implements Resource {
             jsonObject.put("pictures", pictures);
         if(discount != null)
             jsonObject.put("discount", discount.toJSON());
+        if(getDiscountSale() != null)
+            jsonObject.put("discountSale", getDiscountSale());
+        if(getFinalSalePrice() != null)
+            jsonObject.put("finalSalePrice", getFinalSalePrice());
         return jsonObject;
     }
 
