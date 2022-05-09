@@ -82,12 +82,12 @@
 
                                         <c:choose>
                                             <c:when test="${first == true}">
-                                                <div class="carousel-item active">
+                                                <div class="carousel-item active ratio ratio-1x1 ">
                                                     <img src="<c:url value="/media/view/${picture}"/>" alt="${product.alias}" class="d-block w-100"/>
                                                 </div>
                                             </c:when>
                                             <c:otherwise>
-                                                <div class="carousel-item">
+                                                <div class="carousel-item ratio ratio-1x1 ">
                                                     <img src="<c:url value="/media/view/${picture}"/>" alt="${product.alias}" class="d-block w-100"/>
                                                 </div>
                                             </c:otherwise>

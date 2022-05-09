@@ -10,8 +10,6 @@
 .product-detail img {
     object-fit: cover;
     object-position: center;
-    height: 70vh;
-    min-height: 70vh;
 }
 /*
     product carousel  linear gradient for arrow
