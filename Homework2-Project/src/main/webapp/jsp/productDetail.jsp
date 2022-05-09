@@ -102,7 +102,7 @@
                         </c:when>
                         <c:otherwise>
                             <c:forEach var="picture" items="${product.pictures}">
-                                <div>
+                                <div class="ratio ratio 1x1">
                                     <img src="<c:url value="/media/view/${picture}"/>" alt="${product.alias}"
                                          class="d-block w-100"/>
                                 </div>
