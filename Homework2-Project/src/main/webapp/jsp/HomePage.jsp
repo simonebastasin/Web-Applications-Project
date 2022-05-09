@@ -20,27 +20,27 @@
 <body>
 <c:import url="/jsp/include/header.jsp"/>
 <div class="container main-container">
-<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-  <ol class="breadcrumb bg-secondary bg-opacity-25 p-3 mt-3 rounded">
-    <li class="breadcrumb-item active" aria-current="page">Electromechanics Shop</li>
-  </ol>
-</nav>
+    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+        <ol class="breadcrumb bg-secondary bg-opacity-25 p-3 mt-3 rounded">
+            <li class="breadcrumb-item active" aria-current="page">Electromechanics Shop</li>
+        </ol>
+    </nav>
 
-<c:set var="number" value="${0}"/>
-<c:set value="${false}" var="showcase"/>
-<c:forEach var="prod" items="${productList}">
-    <c:if test="${prod.evidence == true}">
-        <c:set value="${true}" var="showcase"/>
-    </c:if>
-    <c:set var="number" value="${number+1}"/>
-</c:forEach>
+    <c:set var="number" value="${0}"/>
+    <c:set value="${false}" var="showcase"/>
+    <c:forEach var="prod" items="${productList}">
+        <c:if test="${prod.evidence == true}">
+            <c:set value="${true}" var="showcase"/>
+        </c:if>
+        <c:set var="number" value="${number+1}"/>
+    </c:forEach>
 
-<c:choose>
-<c:when test="${showcase == true}">
+    <c:choose>
+    <c:when test="${showcase == true}">
 
-<hr>
+    <hr>
 
-<h3>Featured products</h3>
+    <h3>Featured products</h3>
 
     <div id="featuredCarousel" class="carousel carousel-dark slide featured-carousel" data-bs-ride="carousel">
 
@@ -79,135 +79,126 @@
         <div class="carousel-inner p-3" role="listbox">
 
             <c:forEach var="prod" items="${productList}">
-                <c:if test="${prod.evidence == true}">
+            <c:if test="${prod.evidence == true}">
 
-                    <c:choose>
+            <c:choose>
 
-                        <c:when test="${active == true}">
-                            <div class="carousel-item active p-3">
-                                <div class="card h-100 w-100 shadow shadow-hover">
-                                    <div class="row g-0">
-                                        <div class="col-md-4">
-                                            <div class="card-header text-white bg-info border-info mb-4">
-                                                <h3>${prod.brand}</h3>
-                                            </div>
+            <c:when test="${active == true}">
+            <div class="carousel-item active p-3">
 
-                                            <div class="card-body">
+                <div class="d-flex justify-content-center">
+                    <div class="mycontainer">
+                        <div class="box">
+                            <div class="imgBox">
+                                <c:choose>
+                                    <c:when test="${not empty prod.pictures}">
 
-                                                <div class="card-title">
-                                                    <h3><a href="<c:url value="/products/details/${prod.alias}"/>" class="stretched-link">${prod.name}</a></h3>
-                                                </div>
+                                        <c:set var="i" value="${0}"/>
+                                        <c:forEach var="pic" items="${prod.pictures}">
+                                            <c:if test="${i == 0}">
+                                                <c:set var="picture" value="${pic}"/>
+                                            </c:if>
+                                            <c:set var="i" value="${1}"/>
+                                        </c:forEach>
+                                        <img src="<c:url value="/media/view/${picture}"/>" alt="${prod.alias}" class="mh-100 w-100">
 
-                                                <div class="card-text">
-                                                <c:choose>
-                                                    <c:when test="${not empty prod.discount}">
-                                                        <p class="price"><span  style="text-decoration: line-through;">${prod.salePrice}€</span> <span style="color: red;">${prod.discountSale}€</span></p>
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                        <p class="price">${prod.salePrice}€</p>
-                                                    </c:otherwise>
-                                                </c:choose>
-                                                </div>
+                                    </c:when>
+                                    <c:otherwise>
 
-                                            </div>
-                                        </div>
-                                        <div class="col-md-8 align-self-center">
+                                        <img src="<c:url value="/images/No_image_available_circle.png"/>" alt="${prod.alias}" class="mh-100 w-100" >
 
-                                            <c:choose>
-                                                <c:when test="${not empty prod.pictures}">
+                                    </c:otherwise>
+                                </c:choose>
+                            </div>
 
-                                                    <c:set var="i" value="${0}"/>
-                                                    <c:forEach var="pic" items="${prod.pictures}">
-                                                        <c:if test="${i == 0}">
-                                                            <c:set var="picture" value="${pic}"/>
-                                                        </c:if>
-                                                        <c:set var="i" value="${1}"/>
-                                                    </c:forEach>
-                                                    <img src="<c:url value="/media/view/${picture}"/>" alt="${prod.alias}" class="mh-100 w-auto">
+                            <div class="content">
+                                <div class="d-flex align-items-end">
 
-                                                </c:when>
-                                                <c:otherwise>
+                                    <h3>${prod.brand}</h3>
 
-                                                    <img src="<c:url value="/images/No_image_available_circle.png"/>" alt="${prod.alias}" class="mh-100 w-auto" >
+                                    <h3><a href="<c:url value="/products/details/${prod.alias}"/>" class="stretched-link">${prod.name}</a></h3>
 
-                                                </c:otherwise>
-                                            </c:choose>
-                                        </div>
+
+                                    <c:choose>
+                                        <c:when test="${not empty prod.discount}">
+                                            <p class="price"><span  style="text-decoration: line-through;">${prod.salePrice}€</span> <span style="color: red;">${prod.discountSale}€</span></p>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <p class="price">${prod.salePrice}€</p>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            </c:when>
+            <c:otherwise>
+
+                <div class="carousel-item p-3">
+                    <div class="d-flex justify-content-center">
+
+                            <div class="box">
+                                <div class="imgBox">
+                                    <c:choose>
+                                        <c:when test="${not empty prod.pictures}">
+
+                                            <c:set var="i" value="${0}"/>
+                                            <c:forEach var="pic" items="${prod.pictures}">
+                                                <c:if test="${i == 0}">
+                                                    <c:set var="picture" value="${pic}"/>
+                                                </c:if>
+                                                <c:set var="i" value="${1}"/>
+                                            </c:forEach>
+                                            <img src="<c:url value="/media/view/${picture}"/>" alt="${prod.alias}" class="mh-100 w-100">
+
+                                        </c:when>
+                                        <c:otherwise>
+
+                                            <img src="<c:url value="/images/No_image_available_circle.png"/>" alt="${prod.alias}" class="mh-100 w-100">
+
+
+                                        </c:otherwise>
+                                    </c:choose>
+                                </div>
+                                <div class="content">
+                                    <div class="d-flex align-items-end">
+
+                                        <h3>${prod.brand}</h3>
+
+                                        <h3><a href="<c:url value="/products/details/${prod.alias}"/>" class="stretched-link">${prod.name}</a></h3>
+
+                                        <c:choose>
+                                            <c:when test="${not empty prod.discount}">
+                                                <p class="price"><span  style="text-decoration: line-through;">${prod.salePrice}€</span> <span style="color: red;">${prod.discountSale}€</span></p>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <p class="price">${prod.salePrice}€</p>
+                                            </c:otherwise>
+                                        </c:choose>
                                     </div>
+
                                 </div>
                             </div>
 
-                        </c:when>
-                        <c:otherwise>
+                    </div>
+                </div>
 
-                            <div class="carousel-item p-3">
-                                <div class="card h-100 w-100 shadow shadow-hover">
-                                    <div class="row g-0">
-                                        <div class="col-sm-4">
+            </c:otherwise>
+            </c:choose>
 
-                                            <div class="card-header text-white bg-info border-info mb-4">
-                                                <h3>${prod.brand}</h3>
-                                            </div>
+            <c:set var="active" value="${false}"/>
 
-                                            <div class="card-body">
-
-                                                <div class="card-title">
-                                                    <h3><a href="<c:url value="/products/details/${prod.alias}"/>" class="stretched-link">${prod.name}</a></h3>
-                                                </div>
-
-                                                <div class="card-text">
-                                                    <c:choose>
-                                                        <c:when test="${not empty prod.discount}">
-                                                            <p class="price"><span  style="text-decoration: line-through;">${prod.salePrice}€</span> <span style="color: red;">${prod.discountSale}€</span></p>
-                                                        </c:when>
-                                                        <c:otherwise>
-                                                            <p class="price">${prod.salePrice}€</p>
-                                                        </c:otherwise>
-                                                    </c:choose>
-                                                </div>
-
-                                            </div>
-
-                                        </div>
-                                        <div class="col-sm-8 align-self-center">
-
-                                            <c:choose>
-                                                <c:when test="${not empty prod.pictures}">
-
-                                                    <c:set var="i" value="${0}"/>
-                                                    <c:forEach var="pic" items="${prod.pictures}">
-                                                        <c:if test="${i == 0}">
-                                                            <c:set var="picture" value="${pic}"/>
-                                                        </c:if>
-                                                        <c:set var="i" value="${1}"/>
-                                                    </c:forEach>
-                                                    <img src="<c:url value="/media/view/${picture}"/>" alt="${prod.alias}" class="mh-100 w-auto">
-
-                                                </c:when>
-                                                <c:otherwise>
-
-                                                    <img src="<c:url value="/images/No_image_available_circle.png"/>" alt="${prod.alias}" class="mh-100 w-auto">
-
-
-                                                </c:otherwise>
-                                            </c:choose>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </c:otherwise>
-
-                    </c:choose>
-                    <c:set var="active" value="${false}"/>
-
-                </c:if>
+            </c:if>
             </c:forEach>
         </div>
+</div>
 
-    </div>
+</div>
 
-    <hr style="margin-top: 50px">
+<hr style="margin-top: 50px">
 </c:when>
 <c:otherwise>
     <hr>
@@ -216,61 +207,61 @@
 
 <h3>Available products</h3>
 
-    <c:forEach var="item" items="${productCategoryList}">
-        <b><a href="<c:url value="products/category/${item.name}"/>">${item.name}</a></b>
+<c:forEach var="item" items="${productCategoryList}">
+    <b><a href="<c:url value="products/category/${item.name}"/>">${item.name}</a></b>
 
-        <c:set value="${true}" var="empty_cat"/>
-
-
-
-                <div class="row w-100 h-100">
-                    <c:forEach var="prod" items="${productList}">
-                        <c:if test="${prod.category.name.equals(item.name)}">
-
-                            <c:set value="${false}" var="empty_cat"/>
+    <c:set value="${true}" var="empty_cat"/>
 
 
-                            <c:set var="i" value="${0}"/>
-                            <c:forEach var="picture" items="${prod.pictures}">
-                                <c:if test="${i == 0}">
-                                    <c:set var="pic" value="${picture}"/>
-                                </c:if>
-                                <c:set var="i" value="${1}"/>
-                            </c:forEach>
-                        <div class="square one">
-                            <div class="col align-self-center">
-                                <div class="card ms-3 me-3">
-                                <img src="<c:url value="/media/view/${pic}"/>" alt="${prod.alias}" class="card-img-top"/>
-                                <c:choose>
-                                    <c:when test="${not empty prod.discount}">
-                                        <div class="text">
-                                            Product name: <a href="<c:url value="/products/details/${prod.alias}"/>">${prod.name}</a>  <br>
-                                            Brand: ${prod.brand} <br>
-                                            Quantity: ${prod.quantity} <br>
-                                            Price: <span  style="text-decoration: line-through;">${prod.salePrice}€</span> <span style="color: red;">${prod.discountSale}€</span>
-                                        </div>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <div class="text">
-                                            Product name: <a href="<c:url value="/products/details/${prod.alias}"/>">${prod.name}</a>  <br>
-                                            Brand: ${prod.brand} <br>
-                                            Quantity: ${prod.quantity} <br>
-                                            Price: ${prod.salePrice}€
-                                        </div>
 
-                                    </c:otherwise>
-                                </c:choose>
-                                </div>
-                            </div>
+    <div class="row w-100 h-100">
+        <c:forEach var="prod" items="${productList}">
+            <c:if test="${prod.category.name.equals(item.name)}">
+
+                <c:set value="${false}" var="empty_cat"/>
+
+
+                <c:set var="i" value="${0}"/>
+                <c:forEach var="picture" items="${prod.pictures}">
+                    <c:if test="${i == 0}">
+                        <c:set var="pic" value="${picture}"/>
+                    </c:if>
+                    <c:set var="i" value="${1}"/>
+                </c:forEach>
+                <div class="square one">
+                    <div class="col align-self-center">
+                        <div class="card ms-3 me-3">
+                            <img src="<c:url value="/media/view/${pic}"/>" alt="${prod.alias}" class="card-img-top"/>
+                            <c:choose>
+                                <c:when test="${not empty prod.discount}">
+                                    <div class="text">
+                                        Product name: <a href="<c:url value="/products/details/${prod.alias}"/>">${prod.name}</a>  <br>
+                                        Brand: ${prod.brand} <br>
+                                        Quantity: ${prod.quantity} <br>
+                                        Price: <span  style="text-decoration: line-through;">${prod.salePrice}€</span> <span style="color: red;">${prod.discountSale}€</span>
+                                    </div>
+                                </c:when>
+                                <c:otherwise>
+                                    <div class="text">
+                                        Product name: <a href="<c:url value="/products/details/${prod.alias}"/>">${prod.name}</a>  <br>
+                                        Brand: ${prod.brand} <br>
+                                        Quantity: ${prod.quantity} <br>
+                                        Price: ${prod.salePrice}€
+                                    </div>
+
+                                </c:otherwise>
+                            </c:choose>
                         </div>
-                        </c:if>
-                    </c:forEach>
+                    </div>
                 </div>
-                <c:if test="${empty_cat}">
-                    There are no more products for this category! =(
-                </c:if>
+            </c:if>
+        </c:forEach>
+    </div>
+    <c:if test="${empty_cat}">
+        There are no more products for this category! =(
+    </c:if>
 
-    </c:forEach>
+</c:forEach>
 
 
 
