@@ -20,11 +20,7 @@
 <body>
 <c:import url="/jsp/include/header.jsp"/>
 <div class="container main-container">
-    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-        <ol class="breadcrumb bg-secondary bg-opacity-25 p-3 mt-3 rounded">
-            <li class="breadcrumb-item active" aria-current="page">Electromechanics Shop</li>
-        </ol>
-    </nav>
+    <h1 class="title">Electromechanical <span class="text-primary" style="font-size: 0.5em;">Shop</span></h1>
 
     <c:set var="number" value="${0}"/>
     <c:set value="${false}" var="showcase"/>
@@ -37,10 +33,6 @@
 
     <c:choose>
     <c:when test="${showcase == true}">
-
-    <hr>
-
-    <h3>Featured products</h3>
 
     <div id="featuredCarousel" class="carousel carousel-dark slide featured-carousel" data-bs-ride="carousel">
 
@@ -87,61 +79,10 @@
             <div class="carousel-item active p-3">
 
                 <div class="d-flex justify-content-center">
-                    <div class="mycontainer">
+
                         <div class="box">
-                            <div class="imgBox">
-                                <c:choose>
-                                    <c:when test="${not empty prod.pictures}">
-
-                                        <c:set var="i" value="${0}"/>
-                                        <c:forEach var="pic" items="${prod.pictures}">
-                                            <c:if test="${i == 0}">
-                                                <c:set var="picture" value="${pic}"/>
-                                            </c:if>
-                                            <c:set var="i" value="${1}"/>
-                                        </c:forEach>
-                                        <img src="<c:url value="/media/view/${picture}"/>" alt="${prod.alias}" class="mh-100 w-100">
-
-                                    </c:when>
-                                    <c:otherwise>
-
-                                        <img src="<c:url value="/images/No_image_available_circle.png"/>" alt="${prod.alias}" class="mh-100 w-100" >
-
-                                    </c:otherwise>
-                                </c:choose>
-                            </div>
-
-                            <div class="content">
-                                <div class="d-flex align-items-end">
-
-                                    <h3>${prod.brand}</h3>
-
-                                    <h3><a href="<c:url value="/products/details/${prod.alias}"/>" class="stretched-link">${prod.name}</a></h3>
-
-
-                                    <c:choose>
-                                        <c:when test="${not empty prod.discount}">
-                                            <p class="price"><span  style="text-decoration: line-through;">${prod.salePrice}€</span> <span style="color: red;">${prod.discountSale}€</span></p>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <p class="price">${prod.salePrice}€</p>
-                                        </c:otherwise>
-                                    </c:choose>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-            </c:when>
-            <c:otherwise>
-
-                <div class="carousel-item p-3">
-                    <div class="d-flex justify-content-center">
-
-                            <div class="box">
-                                <div class="imgBox">
+                            <a href="<c:url value="/products/details/${prod.alias}"/>" class="stretched-link">
+                                <div class="imgBox shadow shadow-hover">
                                     <c:choose>
                                         <c:when test="${not empty prod.pictures}">
 
@@ -157,30 +98,88 @@
                                         </c:when>
                                         <c:otherwise>
 
-                                            <img src="<c:url value="/images/No_image_available_circle.png"/>" alt="${prod.alias}" class="mh-100 w-100">
-
+                                            <img src="<c:url value="/images/No_image_available_circle.png"/>" alt="${prod.alias}" class="mh-100 w-100" >
 
                                         </c:otherwise>
                                     </c:choose>
                                 </div>
-                                <div class="content">
-                                    <div class="d-flex align-items-end">
 
-                                        <h3>${prod.brand}</h3>
+                                <div class="content shadow shadow-hover">
 
-                                        <h3><a href="<c:url value="/products/details/${prod.alias}"/>" class="stretched-link">${prod.name}</a></h3>
-
+                                    <div class="col-md-auto text-start">
+                                        <h3>${prod.name}</h3>
+                                    </div>
+                                    <div class="col ms-3 text-start">
+                                        <span>${prod.brand}</span>
+                                    </div>
+                                    <div class="col text-end">
                                         <c:choose>
                                             <c:when test="${not empty prod.discount}">
-                                                <p class="price"><span  style="text-decoration: line-through;">${prod.salePrice}€</span> <span style="color: red;">${prod.discountSale}€</span></p>
+                                                <span  style="text-decoration: line-through;">${prod.salePrice}€</span> <span style="color: red;">${prod.discountSale}€</span>
                                             </c:when>
                                             <c:otherwise>
-                                                <p class="price">${prod.salePrice}€</p>
+                                                <span>${prod.salePrice}€</span>
                                             </c:otherwise>
                                         </c:choose>
                                     </div>
-
                                 </div>
+                            </a>
+                        </div>
+
+
+                </div>
+            </div>
+            </c:when>
+            <c:otherwise>
+
+                <div class="carousel-item p-3">
+                    <div class="d-flex justify-content-center">
+
+                            <div class="box">
+                                <a href="<c:url value="/products/details/${prod.alias}"/>" class="stretched-link">
+
+                                    <div class="imgBox shadow shadow-hover">
+                                        <c:choose>
+                                            <c:when test="${not empty prod.pictures}">
+
+                                                <c:set var="i" value="${0}"/>
+                                                <c:forEach var="pic" items="${prod.pictures}">
+                                                    <c:if test="${i == 0}">
+                                                        <c:set var="picture" value="${pic}"/>
+                                                    </c:if>
+                                                    <c:set var="i" value="${1}"/>
+                                                </c:forEach>
+                                                <img src="<c:url value="/media/view/${picture}"/>" alt="${prod.alias}" class="mh-100 w-100">
+
+                                            </c:when>
+                                            <c:otherwise>
+
+                                                <img src="<c:url value="/images/No_image_available_circle.png"/>" alt="${prod.alias}" class="mh-100 w-100">
+
+
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </div>
+                                    <div class="content shadow shadow-hover">
+
+                                        <div class="col-md-auto text-start">
+                                            <h3>${prod.name}</h3>
+                                        </div>
+                                        <div class="col ms-3 text-start">
+                                            <span>${prod.brand}</span>
+                                        </div>
+                                        <div class="col text-end">
+                                            <c:choose>
+                                                <c:when test="${not empty prod.discount}">
+                                                    <span  style="text-decoration: line-through;">${prod.salePrice}€</span> <span style="color: red;">${prod.discountSale}€</span>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <span>${prod.salePrice}€</span>
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </div>
+                                    </div>
+                                </a>
                             </div>
 
                     </div>

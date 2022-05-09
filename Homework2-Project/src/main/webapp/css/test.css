@@ -28,11 +28,13 @@
 
 .box {
     position: relative;
-    justify-content: center;
+    justify-content: space-evenly;
     height: 30rem;
     margin-top: 4rem;
     margin-bottom: 4rem;
 }
+
+
 
 .box:hover .imgBox {
     transform: translate(-2.5rem, -2.5rem);
@@ -67,7 +69,7 @@
     height: 100%;
     padding: 1.5rem;
     display: flex;
-    justify-content: center;
+
     background-color: lightgray;
     z-index: 1;
     align-items: flex-end;
@@ -83,5 +85,16 @@
     .box:hover .imgBox {
         transform: translate(0, -2.5rem);
     }
+}
+
+.title{
+    font-family: 'Bebas Neue', cursive;
+    font-size: 5em;
+}
+
+.title .shop{
+    font-family: 'Bebas Neue', cursive;
+    font-size: 1em;
+    color: #0d6efd;
 }
 
