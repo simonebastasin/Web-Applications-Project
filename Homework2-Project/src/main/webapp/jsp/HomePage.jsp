@@ -215,43 +215,63 @@
 </c:choose>
 
 <h3>Available products</h3>
-<ul>
+
     <c:forEach var="item" items="${productCategoryList}">
-        <li><b><a href="<c:url value="products/category/${item.name}"/>">${item.name}</a></b></li>
+        <b><a href="<c:url value="products/category/${item.name}"/>">${item.name}</a></b>
 
         <c:set value="${true}" var="empty_cat"/>
 
-        <ul>
-            <c:forEach var="prod" items="${productList}">
-                <c:if test="${prod.category.name.equals(item.name)}">
 
-                    <c:set value="${false}" var="empty_cat"/>
 
-                    <c:choose>
-                        <c:when test="${not empty prod.discount}">
-                            <li>Product name: <a href="<c:url value="/products/details/${prod.alias}"/>">${prod.name}</a>  - Brand: ${prod.brand} - Quantity: ${prod.quantity} - Price: <span  style="text-decoration: line-through;">${prod.salePrice}€</span> <span style="color: red;">${prod.discountSale}€</span><br>
-                                <c:forEach var="picture" items="${prod.pictures}">
-                                    <img src="<c:url value="/media/view/${picture}"/>" alt="${prod.alias}" width="250px"/>
-                                </c:forEach>
-                            </li>
-                        </c:when>
-                        <c:otherwise>
-                            <li>Product name: <a href="<c:url value="/products/details/${prod.alias}"/>">${prod.name}</a>  - Brand: ${prod.brand} - Quantity: ${prod.quantity} - Price: ${prod.salePrice}€<br>
-                                <c:forEach var="picture" items="${prod.pictures}">
-                                    <img src="<c:url value="/media/view/${picture}"/>" alt="${prod.alias}" width="250px"/>
-                                </c:forEach>
-                            </li>
-                        </c:otherwise>
-                    </c:choose>
+                <div class="row w-100 h-100">
+                    <c:forEach var="prod" items="${productList}">
+                        <c:if test="${prod.category.name.equals(item.name)}">
+
+                            <c:set value="${false}" var="empty_cat"/>
+
+
+                            <c:set var="i" value="${0}"/>
+                            <c:forEach var="picture" items="${prod.pictures}">
+                                <c:if test="${i == 0}">
+                                    <c:set var="pic" value="${picture}"/>
+                                </c:if>
+                                <c:set var="i" value="${1}"/>
+                            </c:forEach>
+                        <div class="square one">
+                            <div class="col align-self-center">
+                                <div class="card ms-3 me-3">
+                                <img src="<c:url value="/media/view/${pic}"/>" alt="${prod.alias}" class="card-img-top"/>
+                                <c:choose>
+                                    <c:when test="${not empty prod.discount}">
+                                        <div class="text">
+                                            Product name: <a href="<c:url value="/products/details/${prod.alias}"/>">${prod.name}</a>  <br>
+                                            Brand: ${prod.brand} <br>
+                                            Quantity: ${prod.quantity} <br>
+                                            Price: <span  style="text-decoration: line-through;">${prod.salePrice}€</span> <span style="color: red;">${prod.discountSale}€</span>
+                                        </div>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <div class="text">
+                                            Product name: <a href="<c:url value="/products/details/${prod.alias}"/>">${prod.name}</a>  <br>
+                                            Brand: ${prod.brand} <br>
+                                            Quantity: ${prod.quantity} <br>
+                                            Price: ${prod.salePrice}€
+                                        </div>
+
+                                    </c:otherwise>
+                                </c:choose>
+                                </div>
+                            </div>
+                        </div>
+                        </c:if>
+                    </c:forEach>
+                </div>
+                <c:if test="${empty_cat}">
+                    There are no more products for this category! =(
                 </c:if>
-            </c:forEach>
 
-            <c:if test="${empty_cat}">
-                <li>There are no more products for this category! =(</li>
-            </c:if>
-        </ul>
     </c:forEach>
-</ul>
+
 
 
 </div>

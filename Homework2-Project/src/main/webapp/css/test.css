@@ -1,0 +1,25 @@
+
+.square {
+    width: 200px;
+    height: 200px;
+    transition: transform 100ms ease-out, border-radius 200ms ease-out;
+}
+
+.square .text {
+    display: none;
+    background: white;
+    width: 100%;
+    transition: opacity 300ms ease-out, border-radius 200ms ease-out;
+}
+
+.square:hover {
+    transform: scale(1.5);
+    position: relative;
+    z-index: 100;
+}
+
+.square:hover .text {
+    display: block;
+    position: relative;
+    z-index: 100;
+}
