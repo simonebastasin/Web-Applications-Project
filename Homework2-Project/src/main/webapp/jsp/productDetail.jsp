@@ -119,7 +119,7 @@
         </div>
         <div>
             <div>
-                <h3>${product.name}</h3>
+                <h3 class="title">${product.name}</h3>
                 <h5 class="text-primary">Brand: ${product.brand}</h5>
                 <hr/>
 
