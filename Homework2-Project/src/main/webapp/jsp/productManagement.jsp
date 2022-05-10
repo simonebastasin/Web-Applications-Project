@@ -100,7 +100,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="description" class="col-form-label">Description:</label>
-                            <textarea class="form-control" id="description" name="description"></textarea>
+                            <textarea class="form-control" id="description" name="description" required></textarea>
                         </div>
                         <div class="mb-3">
                             <label for="purchase" class="col-form-label">Purchase price:</label>
@@ -138,12 +138,12 @@
                             Evidence:
                             <div class="form-check form-check-inline" >
                                 <input class="form-check-input" type="radio" id="yes"
-                                       name="evidence" value="true">
+                                       name="evidence" value="true" required>
                                 <label class="form-check-label" for="yes">Yes</label>
                             </div>
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" id="no"
-                                       name="evidence" value="false">
+                                       name="evidence" value="false" required>
                                 <label class="form-check-label" for="no">No</label>
                             </div>
                         </div>
@@ -161,6 +161,7 @@
                                 </c:forEach>
                             </ul>
                         </div>
+                        <input type="submit" id="addProductSubmit" class="d-none" value="submit">
                     </form>
                     <form id="uploadImageForm" class="mb-3">
                         <label for="formFile" class="form-label">Upload image</label>

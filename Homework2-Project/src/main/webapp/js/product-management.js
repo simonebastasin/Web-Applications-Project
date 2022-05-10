@@ -5,17 +5,24 @@ const addProductModal = document.getElementById('addProductModal');
 const uploadImageForm = document.getElementById('uploadImageForm');
 const uploadImageProgress = document.getElementById('uploadImageProgress');
 const uploadImageProgressBar = document.getElementById('uploadImageProgressBar');
+const addProductSubmit = document.getElementById('addProductSubmit');
 let alias;
 addProductButton.addEventListener('click', (e) => {
+    addProductSubmit.click(); // only  html5 required
+})
+addProductForm.addEventListener('submit', (e) => {
+    e.preventDefault();
     let createProduct = (alias  === null);
     const formData = new FormData(addProductForm);
     const urlencodedData = new URLSearchParams(formData);
     const xmlhttp = new XMLHttpRequest();
 
-    if(createProduct)
+    if(createProduct) {
         xmlhttp.open("POST", rootPath + "/rest/management/productManagement/createProduct", true);
+        alias = formData.get('alias');
+    }
     else {
-        xmlhttp.open("POST", rootPath + "/rest/management/productManagement/createProduct/" + alias, true);
+        xmlhttp.open("POST", rootPath + "/rest/management/productManagement/editProduct/" + alias, true);
         formData.delete('alias');
     }
     xmlhttp.onreadystatechange = function() {
@@ -23,7 +30,7 @@ addProductButton.addEventListener('click', (e) => {
             if(xmlhttp.status === 200) {
                 const alertPlaceholder = document.getElementById('liveAlertPlaceholder');
                 let newInnerHTML =
-                    '<td><a href="'+ rootPath + '/products/details/'+alias+'">"'+formData.get('name')+'</a></td>'+
+                    '<td><a href="'+ rootPath + '/products/details/'+alias+'">'+formData.get('name')+'</a></td>'+
                     '<td>'+alias+'</td>'+
                     '<td>'+formData.get('brand')+'</td>'+
                     '<td>'+formData.get('category')+'</td>'+
@@ -130,4 +137,5 @@ addProductModal.addEventListener('show.bs.modal', (e) => {
     }
 
 })
+
 
