@@ -23,18 +23,22 @@
 </nav>
 
 <form method="POST" action="<c:url value="/session/login"/>">
-    <input type="text" name ="identification" id="identification">
-    <label for = "identification">username or email</label>
-    <br>
-    <input type ="password" name ="password" id ="password">
-    <label for = "password">password</label>
-    <br>
-    <select name="usertype" id="usertype">
-        <option value ="${TypeUserEnum.CUSTOMER}">Customer</option>
-        <option value ="${TypeUserEnum.EMPLOYEE}">Employee</option>
-    </select>
-    <br><br>
-    <input type ="submit" value = "Login">
+    <div class="mb-3">
+        <label for="identification" class="form-label">Username or Email: </label>
+        <input id="identification" type="text" class="form-control" name="identification" required placeholder="Username or Email">
+    </div>
+    <div class="mb-3">
+        <label for="password" class="form-label">Password: </label>
+        <input id="password" type="password" class="form-control" name="password" required placeholder="Password">
+    </div>
+    <div class="mb-3">
+        <select class="form-select" name="usertype" id="usertype">
+            <option selected>Select User</option>
+            <option value ="${TypeUserEnum.CUSTOMER}">Customer</option>
+            <option value ="${TypeUserEnum.EMPLOYEE}">Employee</option>
+        </select>
+    </div>
+    <input type ="submit" value = "Login" class = "btn btn-primary">
 </form>
 
 

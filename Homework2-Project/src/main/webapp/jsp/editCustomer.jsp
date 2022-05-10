@@ -30,33 +30,45 @@
 <c:forEach var="customer" items="${customerList}">
     <form method="POST" action="">
 
-        <label for="id">ID:</label><br>
-        <input type="text" id="id" name="id" value="${customer.id}" disabled><br>
-        <label for="username">Username:</label><br>
-        <input type="text" id="username" name="username" value="${customer.username}" disabled><br>
-        <label for="name">Name:</label><br>
-        <input type="text" id="name" name="name" value="${customer.name}"><br>
-        <label for="surname">Surname:</label><br>
-        <input type="text" id="surname" name="surname" value="${customer.surname}"><br>
-        <label for="fiscalCode">fiscal_code:</label><br>
-        <input type="text" id="fiscalCode" name="fiscalCode" value="${customer.fiscalCode}"><br>
-        <label for="address">address:</label><br>
-        <input type="text" id="address" name="address" value="${customer.address}"><br>
-        <label for="email">email:</label><br>
-        <input type="text" id="email" name="email" value="${customer.email}"><br>
-        <label for="phoneNumber">Phone Number:</label><br>
-        <input type="text" id="phoneNumber" name="phoneNumber" value="${customer.phoneNumber}"><br>
+        <div class="mb-3">
+            <label for="id" class="form-label">ID: </label>
+            <input type="text" id="id" name="id" class="form-control" value="${customer.id}" disabled>
+        </div>
+        <div class="mb-3">
+            <label for="username" class="form-label">Username: </label>
+            <input type="text" id="username" name="username" class="form-control" value="${customer.username}" disabled>
+        </div>
+        <div class="mb-3">
+            <label for="name" class="form-label">Name: </label>
+            <input type="text" id="name" name="name" class="form-control" value="${customer.name}">
+        </div>
+        <div class="mb-3">
+            <label for="surname" class="form-label">Surname: </label>
+            <input type="text" id="surname" name="surname" class="form-control" value="${customer.surname}">
+        </div>
+        <div class="mb-3">
+            <label for="fiscalCode" class="form-label">Fiscal Code: </label>
+            <input type="text" id="fiscalCode" name="fiscalCode" class="form-control" value="${customer.fiscalCode}">
+        </div>
+        <div class="mb-3">
+            <label for="address" class="form-label">Address: </label>
+            <input type="text" id="address" name="address" class="form-control" value="${customer.address}">
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email: </label>
+            <input type="text" id="email" name="email" class="form-control" value="${customer.email}">
+        </div>
+        <div class="mb-3">
+            <label for="phoneNumber" class="form-label">Phone Number: </label>
+            <input type="text" id="phoneNumber" name="phoneNumber" class="form-control" value="${customer.phoneNumber}">
+        </div>
 
-        <br>
-        <input type="submit" value="Submit">
+        <input type="submit" value="Submit" class = "btn btn-primary">
 
     </form>
 </c:forEach>
 
-<a href="<c:url value="/management/customerManagement"/>">
-    Cancel changes
-</a>
-
+    <a href="<c:url value="/management/customerManagement"/>" class="btn btn-primary">Cancel changes</a>
 
 </div>
 <c:import url="/jsp/include/footer.jsp"/>

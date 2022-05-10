@@ -28,17 +28,32 @@
 </nav>
 
 <form method="post" action="<c:url value="/user/modify"/>">
-    <ul>
-        <li>Name: <input type="text" name="name" value="${customer.name}" required></li>
-        <li>Surname: <input type="text" name="surname" value="${customer.surname}" required></li>
-        <li>Fiscal Code: <input type="text" name="fiscalCode" value="${customer.fiscalCode}" required></li>
-        <li>Phone Number: <input type="text" name="phoneNumber" value="${customer.phoneNumber}"></li>
-        <li>Address :<input type="text" name="address" value="${customer.address}"></li>
 
-        <input type="submit" value="submit">
-    </ul>
+    <div class="mb-3">
+        <label for="name" class="form-label">Name: </label>
+        <input type="text" id="name" name="name" class="form-control" value="${customer.name}" required>
+    </div>
+    <div class="mb-3">
+        <label for="surname" class="form-label">Surname: </label>
+        <input type="text" id="surname" name="surname" class="form-control" value="${customer.surname}" required>
+    </div>
+    <div class="mb-3">
+        <label for="fiscalCode" class="form-label">Fiscal Code: </label>
+        <input type="text" id="fiscalCode" name="fiscalCode" class="form-control" value="${customer.fiscalCode}" required>
+    </div>
+    <div class="mb-3">
+        <label for="phoneNumber" class="form-label">Phone Number: </label>
+        <input type="text" id="phoneNumber" name="phoneNumber" class="form-control" value="${customer.phoneNumber}">
+    </div>
+    <div class="mb-3">
+        <label for="address" class="form-label">Address: </label>
+        <input type="text" id="address" name="address" class="form-control" value="${customer.address}">
+    </div>
+
+    <input type="submit" value="Submit" class = "btn btn-primary">
+    <a href="<c:url value="/user/info"/>" class="btn btn-danger">Cancel changes</a>
+
 </form>
-
 
 </div>
 <c:import url="/jsp/include/footer.jsp"/>
