@@ -20,7 +20,7 @@
 <body>
 <c:import url="/jsp/include/header.jsp"/>
 <div class="container main-container">
-    <h1 class="title">Electromechanical <span class="text-primary" style="font-size: 0.5em;">Shop</span></h1>
+    <h1 class="title">Electromechanical <small class="text-primary" >Shop</small></h1>
 
     <c:set var="number" value="${0}"/>
     <c:set value="${false}" var="showcase"/>
@@ -195,7 +195,7 @@
 
 </div>
 
-<hr style="margin-top: 50px">
+<hr class="mt-3">
 </c:when>
 <c:otherwise>
     <hr>
