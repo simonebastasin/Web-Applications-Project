@@ -52,7 +52,7 @@
                             let alias = product.alias;
                             let name = product.name;
                             let price = product.finalSalePrice;
-                            let url = '<c:url value="/products/details/"/>'+alias;
+                            let url = '${pageContext.request.contextPath}/products/details/'+alias;
                             inner+="<li><a class='dropdown-item' href='"+url+"'><i>"+name+"</i> <small>Price: "+price+"€</small></a></li>";
                         }
                         searchAutocompleteMenu.innerHTML = inner;
