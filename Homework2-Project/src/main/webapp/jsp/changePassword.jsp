@@ -22,13 +22,17 @@
 </nav>
 
 <form method="post" action="<c:url value="/user/password"/>">
-    <ul>
-        <li>Old Password: <input type="password" name="oldPassword" required></li>
-        <br>
-        <li>newPassword: <input type="password" name="newPassword" required></li>
+    <div class="form-floating mb-3">
+        <input id="oldPassword" type="password" class="form-control" name="oldPassword" placeholder="password" required>
+        <label for="oldPassword">Old Password:</label>
+    </div>
+    <div class="form-floating mb-3">
+        <input id="newPassword" type="password" class="form-control" name="newPassword" placeholder="password" required>
+        <label for="newPassword">New Password:</label>
+    </div>
 
-        <input type="submit" value="submit">
-    </ul>
+        <input type="submit" value="Submit" class = "btn btn-primary">
+        <a href="<c:url value="/user/info"/>" class="btn btn-danger">Cancel changes</a>
 </form>
 
 

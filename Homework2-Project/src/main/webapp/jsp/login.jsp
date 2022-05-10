@@ -23,14 +23,15 @@
 </nav>
 
 <form method="POST" action="<c:url value="/session/login"/>">
-    <div class="mb-3">
-        <label for="identification" class="form-label">Username or Email: </label>
-        <input id="identification" type="text" class="form-control" name="identification" required placeholder="Username or Email">
+    <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="identification" name="identification" required placeholder="identification">
+        <label for="identification">Username or Email: </label>
     </div>
-    <div class="mb-3">
-        <label for="password" class="form-label">Password: </label>
-        <input id="password" type="password" class="form-control" name="password" required placeholder="Password">
+    <div class="form-floating mb-3">
+        <input type="password" class="form-control" id="password" name="password" required placeholder="password">
+        <label for="password">Password: </label>
     </div>
+
     <div class="mb-3">
         <select class="form-select" name="usertype" id="usertype">
             <option selected>Select User</option>

@@ -29,25 +29,25 @@
 
 <form method="post" action="<c:url value="/user/modify"/>">
 
-    <div class="mb-3">
-        <label for="name" class="form-label">Name: </label>
-        <input type="text" id="name" name="name" class="form-control" value="${customer.name}" required>
+    <div class="form-floating mb-3">
+        <input type="text" id="name" name="name" class="form-control" value="${customer.name}" required placeholder="name">
+        <label for="name">Name: </label>
     </div>
-    <div class="mb-3">
-        <label for="surname" class="form-label">Surname: </label>
-        <input type="text" id="surname" name="surname" class="form-control" value="${customer.surname}" required>
+    <div class="form-floating mb-3">
+        <input type="text" id="surname" name="surname" class="form-control" value="${customer.surname}" required placeholder="surname">
+        <label for="surname">Surname: </label>
     </div>
-    <div class="mb-3">
-        <label for="fiscalCode" class="form-label">Fiscal Code: </label>
-        <input type="text" id="fiscalCode" name="fiscalCode" class="form-control" value="${customer.fiscalCode}" required>
+    <div class="form-floating mb-3">
+        <input type="text" id="fiscalCode" name="fiscalCode" class="form-control" value="${customer.fiscalCode}" required placeholder="xxxxxxxxxxxxxxxx">
+        <label for="fiscalCode">Fiscal Code: </label>
     </div>
-    <div class="mb-3">
-        <label for="phoneNumber" class="form-label">Phone Number: </label>
-        <input type="text" id="phoneNumber" name="phoneNumber" class="form-control" value="${customer.phoneNumber}">
+    <div class="form-floating mb-3">
+        <input type="text" id="phoneNumber" name="phoneNumber" class="form-control" value="${customer.phoneNumber}" placeholder="+39">
+        <label for="phoneNumber">Phone Number: </label>
     </div>
-    <div class="mb-3">
-        <label for="address" class="form-label">Address: </label>
-        <input type="text" id="address" name="address" class="form-control" value="${customer.address}">
+    <div class="form-floating mb-3">
+        <input type="text" id="address" name="address" class="form-control" value="${customer.address}" placeholder="Via Padova 1, Padova (PD)">
+        <label for="address">Address: </label>
     </div>
 
     <input type="submit" value="Submit" class = "btn btn-primary">
