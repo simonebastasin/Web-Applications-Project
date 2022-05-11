@@ -30,7 +30,8 @@
 
 .product-carousel .carousel-indicators {
     background: rgba(204,204,204,0.4);
-    border-radius: 0.25rem
+    border-radius: 0.25rem;
+    bottom: -50px;
 }
 
 /*
@@ -46,7 +47,7 @@
     color: inherit;
 }
 /*
-    feautred carousel
+    featured carousel
  */
 .featured-carousel .card {
     max-width: 90%;
