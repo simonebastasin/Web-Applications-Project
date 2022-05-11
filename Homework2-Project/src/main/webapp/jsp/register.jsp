@@ -61,15 +61,22 @@
         <div class="invalid-feedback">Insert your username.</div>
     </div>
     <div class="form-floating mb-3">
-        <input id="password" type="text" class="form-control" name="password" placeholder="password" required>
+        <input id="password" type="password" class="form-control" name="password" placeholder="password" required onchange="check_pass()">
         <label for="password">Password:</label>
         <div class="invalid-feedback">Insert the password</div>
     </div>
-    <input type="submit" value="Sign Up" class = "btn btn-primary">
+    <div class="form-floating mb-3">
+        <input id="confirm_password" type="password" class="form-control" name="confirm_password" placeholder="confirm_password" required onchange="check_pass()">
+        <label for="confirm_password">Confirm Password:</label>
+        <div class="invalid-feedback">Confirm your password</div>
+    </div>
+    <span id="Message"></span><br>
+    <input type="submit" name="submit" id="submit" value="Sign Up" class = "btn btn-primary" disabled>
 </form>
 
 
 </div>
 <c:import url="/jsp/include/footer.jsp"/>
+<script src="<c:url value="/js/checkPassword.js"/>"></script>
 </body>
 </html>
