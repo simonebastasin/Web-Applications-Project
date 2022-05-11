@@ -1,7 +1,5 @@
 
 .square {
-    width: 200px;
-    height: 200px;
     transition: transform 100ms ease-out, border-radius 200ms ease-out;
 }
 
@@ -88,9 +86,10 @@
     font-size: 5em;
 }
 
-.title .shop{
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1em;
-    color: #0d6efd;
+.imgCat img {
+    width: 10rem;
+    height: 10rem;
+    object-fit: cover;
+    resize: both;
 }
 
