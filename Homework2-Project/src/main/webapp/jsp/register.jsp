@@ -26,22 +26,26 @@
   </ol>
 </nav>
 
-<form method="post" action="<c:url value="/session/register"/>">
+<form method="post" action="<c:url value="/session/register"/>" class="was-validated">
     <div class="form-floating mb-3">
         <input id="name" type="text" class="form-control" name="name" required placeholder="name">
         <label for="name">Name:</label>
+        <div class="invalid-feedback">Insert your name.</div>
     </div>
     <div class="form-floating mb-3">
         <input id="surname" type="text" class="form-control" name="surname" required placeholder="surname">
         <label for="surname">Surname:</label>
+        <div class="invalid-feedback">Insert your surname.</div>
     </div>
     <div class="form-floating mb-3">
         <input id="fiscalCode" type="text" class="form-control" name="fiscalCode" required placeholder="xxxxxxxxxxxxxxxx">
         <label for="fiscalCode">Fiscal Code:</label>
+        <div class="invalid-feedback">Insert your fiscal code.</div>
     </div>
     <div class="form-floating mb-3">
         <input id="email" type="email" class="form-control" name="email" required placeholder="name@example.com">
         <label for="email">Email:</label>
+        <div class="invalid-feedback">Insert your email.</div>
     </div>
     <div class="form-floating mb-3">
         <input id="phoneNumber" type="text" class="form-control" name="phoneNumber" placeholder="+39">
@@ -54,10 +58,12 @@
     <div class="form-floating mb-3">
         <input id="username" type="text" class="form-control" name="username" placeholder="username" required>
         <label for="username">Username:</label>
+        <div class="invalid-feedback">Insert your username.</div>
     </div>
     <div class="form-floating mb-3">
         <input id="password" type="text" class="form-control" name="password" placeholder="password" required>
         <label for="password">Password:</label>
+        <div class="invalid-feedback">Insert the password</div>
     </div>
     <input type="submit" value="Sign Up" class = "btn btn-primary">
 </form>
