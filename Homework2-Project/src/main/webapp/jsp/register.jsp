@@ -61,12 +61,12 @@
         <div class="invalid-feedback">Insert your username.</div>
     </div>
     <div class="form-floating mb-3">
-        <input id="password" type="password" class="form-control" name="password" placeholder="password" required>
+        <input id="password" type="password" class="form-control" name="password" placeholder="password" required onchange="check_pass()">
         <label for="password">Password</label>
         <div class="invalid-feedback">Insert the password</div>
     </div>
     <div class="form-floating mb-3">
-        <input id="confirm_password" type="password" class="form-control" name="confirm_password" placeholder="confirm_password" required>
+        <input id="confirm_password" type="password" class="form-control" name="confirm_password" placeholder="confirm_password" required onchange="check_pass()">
         <label for="confirm_password">Confirm Password</label>
         <div class="invalid-feedback">Confirm your password</div>
     </div>
