@@ -28,42 +28,42 @@
 </nav>
 
 <c:forEach var="customer" items="${customerList}">
-    <form method="POST" action="" class="was-validated">
+    <form method="POST" action="" class="row g-3 needs-validation" novalidate>
 
         <div class="mb-3">
-            <label for="id" class="form-label">ID: </label>
+            <label for="id" class="form-label">ID </label>
             <input type="text" id="id" name="id" class="form-control" value="${customer.id}" disabled>
         </div>
         <div class="mb-3">
-            <label for="username" class="form-label">Username: </label>
+            <label for="username" class="form-label">Username </label>
             <input type="text" id="username" name="username" class="form-control" value="${customer.username}" disabled>
         </div>
         <div class="mb-3">
-            <label for="name" class="form-label">Name: </label>
+            <label for="name" class="form-label">Name </label>
             <input type="text" id="name" name="name" class="form-control" value="${customer.name}" required>
             <div class="invalid-feedback">Insert the name.</div>
         </div>
         <div class="mb-3">
-            <label for="surname" class="form-label">Surname: </label>
+            <label for="surname" class="form-label">Surname </label>
             <input type="text" id="surname" name="surname" class="form-control" value="${customer.surname}" required>
             <div class="invalid-feedback">Insert the surname.</div>
         </div>
         <div class="mb-3">
-            <label for="fiscalCode" class="form-label">Fiscal Code: </label>
+            <label for="fiscalCode" class="form-label">Fiscal Code </label>
             <input type="text" id="fiscalCode" name="fiscalCode" class="form-control" value="${customer.fiscalCode}" required>
             <div class="invalid-feedback">Insert the fiscla code.</div>
         </div>
         <div class="mb-3">
-            <label for="address" class="form-label">Address: </label>
+            <label for="address" class="form-label">Address </label>
             <input type="text" id="address" name="address" class="form-control" value="${customer.address}">
         </div>
         <div class="mb-3">
-            <label for="email" class="form-label">Email: </label>
+            <label for="email" class="form-label">Email </label>
             <input type="text" id="email" name="email" class="form-control" value="${customer.email}" required>
             <div class="invalid-feedback">Insert the email.</div>
         </div>
         <div class="mb-3">
-            <label for="phoneNumber" class="form-label">Phone Number: </label>
+            <label for="phoneNumber" class="form-label">Phone Number </label>
             <input type="text" id="phoneNumber" name="phoneNumber" class="form-control" value="${customer.phoneNumber}">
         </div>
 
@@ -76,5 +76,6 @@
 
 </div>
 <c:import url="/jsp/include/footer.jsp"/>
+<script src="<c:url value="/js/formValidation.js"/>"></script>
 </body>
 </html>

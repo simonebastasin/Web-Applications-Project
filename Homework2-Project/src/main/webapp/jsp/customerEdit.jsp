@@ -27,30 +27,30 @@
   </ol>
 </nav>
 
-<form method="post" action="<c:url value="/user/modify"/>" class="was-validated">
+<form method="post" action="<c:url value="/user/modify"/>" class="row g-3 needs-validation" novalidate>
 
     <div class="form-floating mb-3">
         <input type="text" id="name" name="name" class="form-control" value="${customer.name}" required placeholder="name">
-        <label for="name">Name: </label>
+        <label for="name">Name </label>
         <div class="invalid-feedback">Insert your name.</div>
     </div>
     <div class="form-floating mb-3">
         <input type="text" id="surname" name="surname" class="form-control" value="${customer.surname}" required placeholder="surname">
-        <label for="surname">Surname: </label>
+        <label for="surname">Surname </label>
         <div class="invalid-feedback">Insert your surname.</div>
     </div>
     <div class="form-floating mb-3">
         <input type="text" id="fiscalCode" name="fiscalCode" class="form-control" value="${customer.fiscalCode}" required placeholder="xxxxxxxxxxxxxxxx">
-        <label for="fiscalCode">Fiscal Code: </label>
+        <label for="fiscalCode">Fiscal Code </label>
         <div class="invalid-feedback">Insert your fiscal code.</div>
     </div>
     <div class="form-floating mb-3">
         <input type="text" id="phoneNumber" name="phoneNumber" class="form-control" value="${customer.phoneNumber}" placeholder="+39">
-        <label for="phoneNumber">Phone Number: </label>
+        <label for="phoneNumber">Phone Number </label>
     </div>
     <div class="form-floating mb-3">
         <input type="text" id="address" name="address" class="form-control" value="${customer.address}" placeholder="Via Padova 1, Padova (PD)">
-        <label for="address">Address: </label>
+        <label for="address">Address </label>
     </div>
 
     <input type="submit" value="Submit" class = "btn btn-primary">
@@ -60,5 +60,6 @@
 
 </div>
 <c:import url="/jsp/include/footer.jsp"/>
+<script src="<c:url value="/js/formValidation.js"/>"></script>
 </body>
 </html>

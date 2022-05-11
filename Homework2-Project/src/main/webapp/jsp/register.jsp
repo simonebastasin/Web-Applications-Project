@@ -26,48 +26,48 @@
   </ol>
 </nav>
 
-<form method="post" action="<c:url value="/session/register"/>" class="was-validated">
+<form method="post" action="<c:url value="/session/register"/>" class="row g-3 needs-validation" novalidate>
     <div class="form-floating mb-3">
         <input id="name" type="text" class="form-control" name="name" required placeholder="name">
-        <label for="name">Name:</label>
+        <label for="name">Name</label>
         <div class="invalid-feedback">Insert your name.</div>
     </div>
     <div class="form-floating mb-3">
         <input id="surname" type="text" class="form-control" name="surname" required placeholder="surname">
-        <label for="surname">Surname:</label>
+        <label for="surname">Surname</label>
         <div class="invalid-feedback">Insert your surname.</div>
     </div>
     <div class="form-floating mb-3">
         <input id="fiscalCode" type="text" class="form-control" name="fiscalCode" required placeholder="xxxxxxxxxxxxxxxx">
-        <label for="fiscalCode">Fiscal Code:</label>
+        <label for="fiscalCode">Fiscal Code</label>
         <div class="invalid-feedback">Insert your fiscal code.</div>
     </div>
     <div class="form-floating mb-3">
         <input id="email" type="email" class="form-control" name="email" required placeholder="name@example.com">
-        <label for="email">Email:</label>
+        <label for="email">Email</label>
         <div class="invalid-feedback">Insert your email.</div>
     </div>
     <div class="form-floating mb-3">
         <input id="phoneNumber" type="text" class="form-control" name="phoneNumber" placeholder="+39">
-        <label for="phoneNumber">Phone Number:</label>
+        <label for="phoneNumber">Phone Number</label>
     </div>
     <div class="form-floating mb-3">
         <input id="address" type="text" class="form-control" name="address" placeholder="Via Padova 1, Padova (PD)">
-        <label for="address">Address:</label>
+        <label for="address">Address</label>
     </div>
     <div class="form-floating mb-3">
         <input id="username" type="text" class="form-control" name="username" placeholder="username" required>
-        <label for="username">Username:</label>
+        <label for="username">Username</label>
         <div class="invalid-feedback">Insert your username.</div>
     </div>
     <div class="form-floating mb-3">
-        <input id="password" type="password" class="form-control" name="password" placeholder="password" required onchange="check_pass()">
-        <label for="password">Password:</label>
+        <input id="password" type="password" class="form-control" name="password" placeholder="password" required>
+        <label for="password">Password</label>
         <div class="invalid-feedback">Insert the password</div>
     </div>
     <div class="form-floating mb-3">
-        <input id="confirm_password" type="password" class="form-control" name="confirm_password" placeholder="confirm_password" required onchange="check_pass()">
-        <label for="confirm_password">Confirm Password:</label>
+        <input id="confirm_password" type="password" class="form-control" name="confirm_password" placeholder="confirm_password" required>
+        <label for="confirm_password">Confirm Password</label>
         <div class="invalid-feedback">Confirm your password</div>
     </div>
     <span id="Message"></span><br>
@@ -78,5 +78,6 @@
 </div>
 <c:import url="/jsp/include/footer.jsp"/>
 <script src="<c:url value="/js/checkPassword.js"/>"></script>
+<script src="<c:url value="/js/formValidation.js"/>"></script>
 </body>
 </html>

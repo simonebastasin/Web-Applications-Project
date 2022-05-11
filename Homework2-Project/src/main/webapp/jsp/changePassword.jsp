@@ -21,20 +21,20 @@
   </ol>
 </nav>
 
-<form method="post" action="<c:url value="/user/password"/>" class="was-validated">
+<form method="post" action="<c:url value="/user/password"/>" class="row g-3 needs-validation" novalidate>
     <div class="form-floating mb-3">
         <input id="oldPassword" type="password" class="form-control" name="oldPassword" placeholder="password" required>
         <label for="oldPassword">Old Password:</label>
         <div class="invalid-feedback">Insert the current password.</div>
     </div>
     <div class="form-floating mb-3">
-        <input id="password" type="password" class="form-control" name="newPassword" placeholder="password" required onchange="check_pass()">
-        <label for="password">New Password:</label>
+        <input id="password" type="password" class="form-control" name="newPassword" placeholder="password" required>
+        <label for="password">New Password</label>
         <div class="invalid-feedback">Insert the new password.</div>
     </div>
     <div class="form-floating mb-3">
-        <input id="confirm_password" type="password" class="form-control" name="confirm_password" placeholder="confirm_password" required onchange="check_pass()">
-        <label for="confirm_password">Confirm New Password:</label>
+        <input id="confirm_password" type="password" class="form-control" name="confirm_password" placeholder="confirm_password">
+        <label for="confirm_password">Confirm New Password</label>
         <div class="invalid-feedback">Confirm your password</div>
     </div>
     <span id="Message"></span><br>
@@ -47,6 +47,7 @@
 </div>
 <c:import url="/jsp/include/footer.jsp"/>
 <script src="<c:url value="/js/checkPassword.js"/>"></script>
+<script src="<c:url value="/js/formValidation.js"/>"></script>
 </body>
 </html>
 

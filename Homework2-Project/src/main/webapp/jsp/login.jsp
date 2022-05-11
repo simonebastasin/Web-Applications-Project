@@ -22,20 +22,19 @@
   </ol>
 </nav>
 
-<form method="POST" action="<c:url value="/session/login"/>" class="was-validated">
+<form method="POST" action="<c:url value="/session/login"/>" class="row g-3 needs-validation" novalidate>
     <div class="form-floating mb-3">
-        <input type="text" class="form-control" id="identification" name="identification" required placeholder="identification">
-        <label for="identification">Username or Email: </label>
+        <input type="text" class="form-control" id="identification" name="identification" required>
+        <label for="identification">Username or Email </label>
         <div class="invalid-feedback">Insert your username or email.</div>
 
     </div>
     <div class="form-floating mb-3">
-        <input type="password" class="form-control" id="password" name="password" required placeholder="password">
-        <label for="password">Password: </label>
+        <input type="password" class="form-control" id="password" name="password" required>
+        <label for="password">Password </label>
         <div class="invalid-feedback">Insert your password.</div>
 
     </div>
-
 
     <div class="form-check">
         <input type="radio" class="form-check-input" id="CUSTOMER" name="usertype" required value="${TypeUserEnum.CUSTOMER}">
@@ -46,11 +45,14 @@
         <label class="form-check-label" for="EMPLOYEE">Employee</label>
         <div class="invalid-feedback">Select the type of user you are.</div>
     </div>
-    <input type ="submit" value = "Login" class = "btn btn-primary">
+
+    <button class="btn btn-primary" type="submit">Login</button>
+
 </form>
 
 
 </div>
 <c:import url="/jsp/include/footer.jsp"/>
+<script src="<c:url value="/js/formValidation.js"/>"></script>
 </body>
 </html>
