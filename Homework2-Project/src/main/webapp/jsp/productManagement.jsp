@@ -77,7 +77,7 @@
 </table>
 
     <div class="modal fade" id="addProductModal" tabindex="-1" aria-labelledby="addProductModal" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false" >
-        <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg">
+        <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg modal-fullscreen-md-down">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="addProductModalTitle">Add Product</h5>

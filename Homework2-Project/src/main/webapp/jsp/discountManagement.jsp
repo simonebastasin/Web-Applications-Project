@@ -102,7 +102,7 @@
 
 
     <div class="modal fade" id="addDiscountModal" tabindex="-1" aria-labelledby="addDiscountModal" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false" >
-        <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg">
+        <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg modal-fullscreen-md-down">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="addDiscountModalTitle">Add Discount</h5>

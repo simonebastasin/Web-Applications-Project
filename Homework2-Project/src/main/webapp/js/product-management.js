@@ -55,6 +55,7 @@ addProductForm.addEventListener('submit', (e) => {
                 }
                 bootstrap.Modal.getOrCreateInstance(addProductModal).hide();
             } else {
+                if(createProduct) alias = null;
                 const alertPlaceholder = document.getElementById('formAlertPlaceholder');
                 bootstrapAlert(xmlhttp.responseText !== "" ? (xmlhttp.responseText.startsWith("<!doctype html>") ?  parseServletError(xmlhttp.response): xmlhttp.responseText ): (xmlhttp.statusText !== ""? 'Error: '+ xmlhttp.statusText : "Generic error"), 'danger', alertPlaceholder);
             }

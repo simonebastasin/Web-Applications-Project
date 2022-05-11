@@ -22,9 +22,8 @@ function bootstrapAlert(message, type, placeholder) {
     placeholder.append(wrapper);
 
     setTimeout(function(){
-        wrapper.style.display = "none"
-
-    }, 3000);
+        wrapper.remove();
+    }, 10000);
 }
 
 function populateForm(form, data, basename) {
