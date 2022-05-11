@@ -36,7 +36,7 @@
     <label for="percentage"  >percentage:</label>
     <input type="number" id="percentage" name="percentage" min="1" max="100" value="${discountListProduct.discount.percentage}">
     <br>
-    <label for="start">Enter start Day:</label>
+    <label for="startDate">Enter start Day:</label>
     <%
         LocalDateTime now = LocalDateTime.now();
         String day = "";
@@ -56,15 +56,15 @@
 
     %>
     <br>
-    <input type="date" id="start" name="start"
+    <input type="date" id="startDate" name="startDate"
            value="${discountListProduct.discount.startDate.getInputDateFormat()}"
            value="<%=(LocalDateTime.now()).getYear()%>-<%= month %>-<%= day %>"
            min="${discountListProduct.discount.startDate.getInputDateFormat()}"
            max="<%=(LocalDateTime.now()).getYear() + 1%>-<%= month %>-<%= day %>">
     <br>
 
-    <label for="end">Enter end Day:</label>
-    <input type="date" id="end" name="end"
+    <label for="endDate">Enter end Day:</label>
+    <input type="date" id="endDate" name="endDate"
            value="${discountListProduct.discount.endDate.getInputDateFormat()}"
            min="${discountListProduct.discount.endDate.getInputDateFormat()}"
            max="<%=(LocalDateTime.now()).getYear() + 1%>-<%= month %>-<%= day %>">
@@ -74,24 +74,24 @@
     <c:forEach var="prod" items="${productList}">
         <c:choose>
             <c:when test =  "${discountListProduct.cointainsProduct(prod.alias)}">
-                <input type="checkbox" name="productList" value="${prod.alias}" checked>
-                ${prod.alias}
+                <input type="checkbox" name="productList" value="${prod.alias}" checked id="selectProduct-${prod.alias}">
+                <label for="selectProduct-${prod.alias}">${prod.alias}
                 <a href="<c:url value="/products/details/${prod.alias}"/>">${prod.name}</a>&nbsp
                 ${prod.brand}&nbsp
                 ${prod.salePrice}&nbsp
                 ${prod.quantity}&nbsp
                 ${prod.category.name}&nbsp
-                ${prod.evidence}<br>
+                        ${prod.evidence}</label><br>
             </c:when>
             <c:otherwise>
-                <input type="checkbox" name="productList" value="${prod.alias}" >
-                ${prod.alias}&nbsp
+                <input type="checkbox" name="productList" value="${prod.alias}" id="selectProduct-${prod.alias}">
+                <label for="selectProduct-${prod.alias}">${prod.alias}&nbsp
                 <a href="<c:url value="/products/details/${prod.alias}"/>">${prod.name}</a>&nbsp
                 ${prod.brand}&nbsp
                 ${prod.salePrice}&nbsp
                 ${prod.quantity}&nbsp
                 ${prod.category.name}&nbsp
-                ${prod.evidence}<br>
+                ${prod.evidence}</label><br>
             </c:otherwise>
         </c:choose>
 

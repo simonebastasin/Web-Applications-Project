@@ -26,7 +26,7 @@
   </ol>
 </nav>
 
-<form method="post" action="<c:url value="/session/register"/>" class="row g-3 needs-validation" novalidate>
+<form method="post" action="<c:url value="/session/register"/>" class="row g-3 needs-validation" novalidate id="formConfirmPassword">
     <div class="form-floating mb-3">
         <input id="name" type="text" class="form-control" name="name" required placeholder="name">
         <label for="name">Name</label>
@@ -38,7 +38,7 @@
         <div class="invalid-feedback">Insert your surname.</div>
     </div>
     <div class="form-floating mb-3">
-        <input id="fiscalCode" type="text" class="form-control" name="fiscalCode" required placeholder="xxxxxxxxxxxxxxxx">
+        <input id="fiscalCode" type="text" class="form-control" name="fiscalCode" required placeholder="fiscal code">
         <label for="fiscalCode">Fiscal Code</label>
         <div class="invalid-feedback">Insert your fiscal code.</div>
     </div>
@@ -61,22 +61,21 @@
         <div class="invalid-feedback">Insert your username.</div>
     </div>
     <div class="form-floating mb-3">
-        <input id="password" type="password" class="form-control" name="password" placeholder="password" required">
-        <label for="password">Password</label>
-        <div class="invalid-feedback">Insert the password</div>
+        <input id="newPassword" type="password" class="form-control" name="newPassword" placeholder="password" required>
+        <label for="newPassword">Password</label>
+        <div class="invalid-feedback" id="newPasswordFeedback">Insert the password</div>
     </div>
     <div class="form-floating mb-3">
-        <input id="confirm_password" type="password" class="form-control" name="confirm_password" placeholder="confirm_password">
-        <label for="confirm_password">Confirm Password</label>
-        <div class="invalid-feedback">Confirm your password</div>
+        <input id="confirmPassword" type="password" class="form-control" name="confirmPassword" placeholder="confirm_password" required>
+        <label for="confirmPassword">Confirm Password</label>
+        <div class="invalid-feedback" id="confirmPasswordFeedback">Confirm your password</div>
     </div>
-    <span id="Message"></span><br>
-    <input type="submit" name="submit" id="submit" value="Sign Up" class = "btn btn-primary" disabled>
+    <input type="submit" name="submit" id="submit" value="Sign Up" class = "btn btn-primary">
 </form>
 
 
 </div>
 <c:import url="/jsp/include/footer.jsp"/>
-<script src="<c:url value="/check-password.js"/>"></script>
+<script src="<c:url value="/js/check-password.js"/>"></script>
 </body>
 </html>

@@ -109,10 +109,10 @@ public class LoginServlet extends AbstractDatabaseServlet {
                         custumerEmail=new GetEmailCustomerDatabase(getDataSource().getConnection(),email).getEmailCustomer();
                         if (customer==null&&custumerEmail==null)
                         {
-                            customer=new Customer(null, req.getParameter("name"), req.getParameter("surname"), req.getParameter("fiscalCode"), req.getParameter("address"), req.getParameter("email"), req.getParameter("phoneNumber"), username, req.getParameter("password"));
+                            customer=new Customer(null, req.getParameter("name"), req.getParameter("surname"), req.getParameter("fiscalCode"), req.getParameter("address"), req.getParameter("email"), req.getParameter("phoneNumber"), username, req.getParameter("newPassword"));
                             Customer cu=new CreateCustomerDatabase(getDataSource().getConnection(),customer).createCustomer();
                             logger.info("User "+cu.getUsername() +" was created");
-                            String password = req.getParameter("password");
+                            String password = req.getParameter("newPassword");
                             TypeUserEnum type = TypeUserEnum.CUSTOMER;
 
                             UserCredential userCredentialAttempt = new UserCredential(username, password, type, null, req.getParameter("email"), cu.getId());

@@ -183,7 +183,7 @@ public class DiscountManagementServlet extends AbstractDatabaseServlet{
 
         int percentage = Integer.parseInt(req.getParameter("percentage"));
 
-        String startDateString = req.getParameter("start");
+        String startDateString = req.getParameter("startDate");
         String[] date1 = startDateString.split("-");
 
         //StartDate
@@ -195,7 +195,7 @@ public class DiscountManagementServlet extends AbstractDatabaseServlet{
 
         DateTime startDate = new DateTime(LocalDateTime.of(startDateyear, startDatemonth, startDateday, 0,0,0));
         //EndDate
-        String endDateString = req.getParameter("end");
+        String endDateString = req.getParameter("endDate");
         String[] date2 = endDateString.split("-");
 
         int endDateday = Integer.parseInt(date2[2]);
@@ -253,7 +253,7 @@ public class DiscountManagementServlet extends AbstractDatabaseServlet{
         int id = Integer.parseInt(param);
         int percentage = Integer.parseInt(req.getParameter("percentage"));
 
-        String startDateString = req.getParameter("start");
+        String startDateString = req.getParameter("startDate");
         String[] date1 = startDateString.split("-");
 
         //StartDate
@@ -265,7 +265,7 @@ public class DiscountManagementServlet extends AbstractDatabaseServlet{
 
         DateTime startDate = new DateTime(LocalDateTime.of(startDateyear, startDatemonth, startDateday, 0,0,0));
         //EndDate
-        String endDateString = req.getParameter("end");
+        String endDateString = req.getParameter("endDate");
         String[] date2 = endDateString.split("-");
 
         int endDateday = Integer.parseInt(date2[2]);

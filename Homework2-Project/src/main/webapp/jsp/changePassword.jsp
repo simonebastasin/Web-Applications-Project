@@ -21,32 +21,31 @@
   </ol>
 </nav>
 
-<form method="post" action="<c:url value="/user/password"/>" class="row g-3 needs-validation" novalidate>
+<form method="post" action="<c:url value="/user/password"/>" class="row g-3 needs-validation" novalidate id="formConfirmPassword">
     <div class="form-floating mb-3">
-        <input id="oldPassword" type="password" class="form-control" name="oldPassword" placeholder="password" required>
-        <label for="oldPassword">Old Password:</label>
-        <div class="invalid-feedback">Insert the current password.</div>
+        <input id="oldPassword" type="password" class="form-control" name="oldPassword" placeholder="Old Password" required>
+        <label for="oldPassword">Old Password</label>
+        <div class="invalid-feedback" id="oldPasswordFeedback">Insert the current password.</div>
     </div>
     <div class="form-floating mb-3">
-        <input id="password" type="password" class="form-control" name="newPassword" placeholder="password" required>
-        <label for="password">New Password</label>
-        <div class="invalid-feedback">Insert the new password.</div>
+        <input id="newPassword" type="password" class="form-control" name="newPassword" placeholder="New Password" required>
+        <label for="newPassword">New Password</label>
+        <div class="invalid-feedback"  id="newPasswordFeedback">Insert the new password.</div>
     </div>
     <div class="form-floating mb-3">
-        <input id="confirm_password" type="password" class="form-control" name="confirm_password" placeholder="confirm_password">
-        <label for="confirm_password">Confirm New Password</label>
-        <div class="invalid-feedback">Confirm your password</div>
+        <input id="confirmPassword" type="password" class="form-control" name="confirmPassword" placeholder="Confirm Password" required>
+        <label for="confirmPassword">Confirm New Password</label>
+        <div class="invalid-feedback"  id="confirmPasswordFeedback">Confirm your password.</div>
     </div>
-    <span id="Message"></span><br>
 
-        <input type="submit" id="submit" value="Submit" class = "btn btn-primary">
-        <a href="<c:url value="/user/info"/>" class="btn btn-danger">Cancel changes</a>
+    <input type="submit" id="submit" value="Submit" class = "btn btn-primary">
+    <a href="<c:url value="/user/info"/>" class="btn btn-danger">Cancel changes</a>
 </form>
 
 
 </div>
 <c:import url="/jsp/include/footer.jsp"/>
-<script src="<c:url value="/check-password.js"/>"></script>
+<script src="<c:url value="/js/check-password.js"/>"></script>
 </body>
 </html>
 

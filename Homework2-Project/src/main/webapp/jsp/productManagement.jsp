@@ -85,7 +85,7 @@
                 </div>
                 <div id="formAlertPlaceholder"></div>
                 <div class="modal-body">
-                    <form id="addProductForm">
+                    <form id="addProductForm" class="needs-validation" novalidate>
                         <div class="mb-3">
                             <label for="alias" class="col-form-label">Alias:</label>
                             <input type="text" class="form-control" id="alias" name="alias" required>
@@ -163,7 +163,7 @@
                         </div>
                         <input type="submit" id="addProductSubmit" class="d-none" value="submit">
                     </form>
-                    <form id="uploadImageForm" class="mb-3">
+                    <form id="uploadImageForm" class="mb-3 needs-validation" novalidate>
                         <label for="formFile" class="form-label">Upload image</label>
                         <div class="input-group">
                             <input class="form-control" type="file" name="file" id="formFile" required>

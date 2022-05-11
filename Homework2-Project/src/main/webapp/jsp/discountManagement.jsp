@@ -110,7 +110,7 @@
                 </div>
                 <div id="formAlertPlaceholder"></div>
                 <div class="modal-body">
-                    <form id="addDiscountForm">
+                    <form id="addDiscountForm" class="needs-validation" novalidate>
                         <div class="mb-3">
                             <label for="percentage" class="col-form-label">Percentage:</label>
                             <div class="input-group">
@@ -119,16 +119,16 @@
                             </div>
                         </div>
                         <div class="mb-3">
-                            <label for="start">Start Date</label>
-                            <input type="date" class="form-control" id="start" required name="start"
+                            <label for="startDate">Start Date</label>
+                            <input type="date" class="form-control" id="startDate" required name="startDate"
                                    value="<%=(LocalDateTime.now()).getYear()%>-<%= month %>-<%= day %>"
                                    min="<%=(LocalDateTime.now()).getYear()%>-<%= month %>-<%= day %>"
                                    max="<%=(LocalDateTime.now()).getYear() + 1%>-<%= month %>-<%= day %>">
 
                         </div>
                         <div class="mb-3">
-                            <label for="end" class="col-2 col-form-label">End Date</label>
-                            <input type="date" class="form-control" id="end" required name="end"
+                            <label for="endDate" class="col-2 col-form-label">End Date</label>
+                            <input type="date" class="form-control" id="endDate" required name="endDate"
                                    value="<%=(LocalDateTime.now()).getYear()%>-<%= month %>-<%= day %>"
                                    min="<%=(LocalDateTime.now()).getYear()%>-<%= month %>-<%= day %>"
                                    max="<%=(LocalDateTime.now()).getYear() + 1%>-<%= month %>-<%= day %>">
@@ -137,8 +137,8 @@
                         <p>Select the products to be discounted</p>
                         <c:forEach var="prod" items="${productList}">
                             <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" role="switch" value="${prod.alias}" id="selectProduct${prod.alias}" name="productList" >
-                                <label class="form-check-label" for="selectProduct${prod.alias}">
+                                <input class="form-check-input" type="checkbox" role="switch" value="${prod.alias}" id="selectProduct-${prod.alias}" name="productList" >
+                                <label class="form-check-label" for="selectProduct-${prod.alias}">
                                         ${prod.alias}&nbsp
                                     <a href="<c:url value="/productDetail/${prod.alias}"/>">${prod.name}</a>&nbsp
                                         ${prod.brand}&nbsp

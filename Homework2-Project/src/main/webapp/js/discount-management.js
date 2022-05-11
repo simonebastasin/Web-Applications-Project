@@ -8,6 +8,8 @@ addDiscountButton.addEventListener('click', (e) => {
     addDiscountSubmit.click(); // only  html5 required
 });
 addDiscountForm.addEventListener('submit', (e) => {
+    if(!addDiscountForm.checkValidity()) return;
+
     e.preventDefault();
     let createDiscount = (idDiscount  === null);
 
@@ -35,9 +37,11 @@ addDiscountModal.addEventListener('show.bs.modal', (e) => {
         xmlhttp.onreadystatechange = function() {
             if (xmlhttp.readyState === XMLHttpRequest.DONE) {
                 if(xmlhttp.status === 200) {
-                    const response = JSON.parse(xmlhttp.responseText);
-                    console.log(response);
-                    //TODO populateForm(addDiscountForm, response["discountListProduct"]);
+                    const response = JSON.parse(xmlhttp.responseText).discountListProduct;
+                    let fullProductList = response.productList; // for backup
+                    const respondeElaborated = Object.assign({}, response, {productList : response.productList.map(it =>  it.alias)});
+                    console.log(respondeElaborated);
+                    populateForm(addDiscountForm, respondeElaborated);
 
                 } else {
                     const alertPlaceholder = document.getElementById('liveAlertPlaceholder');

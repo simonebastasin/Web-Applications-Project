@@ -9,6 +9,12 @@ function printDiv(divId) {
     document.body.innerHTML = originalContents;
 }
 
+function parseServletError(message) {
+    const parser = new DOMParser();
+    const floatingElement = parser.parseFromString(message, 'text/xml');
+    return  floatingElement.innerText;
+}
+
 function bootstrapAlert(message, type, placeholder) {
     var wrapper = document.createElement('div');
     wrapper.innerHTML = '<div class="alert alert-' + type + ' alert-dismissible" role="alert">' + message + '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';

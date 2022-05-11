@@ -11,6 +11,8 @@ addProductButton.addEventListener('click', (e) => {
     addProductSubmit.click(); // only  html5 required
 })
 addProductForm.addEventListener('submit', (e) => {
+    if(!addProductForm.checkValidity()) return;
+
     e.preventDefault();
     let createProduct = (alias  === null);
     const formData = new FormData(addProductForm);
@@ -54,13 +56,15 @@ addProductForm.addEventListener('submit', (e) => {
                 bootstrap.Modal.getOrCreateInstance(addProductModal).hide();
             } else {
                 const alertPlaceholder = document.getElementById('formAlertPlaceholder');
-                bootstrapAlert(xmlhttp.responseText !== "" ? xmlhttp.responseText : (xmlhttp.statusText !== ""? 'Error: '+ xmlhttp.statusText : "Generic error"), 'danger', alertPlaceholder);
+                bootstrapAlert(xmlhttp.responseText !== "" ? (xmlhttp.responseText.startsWith("<!doctype html>") ?  parseServletError(xmlhttp.response): xmlhttp.responseText ): (xmlhttp.statusText !== ""? 'Error: '+ xmlhttp.statusText : "Generic error"), 'danger', alertPlaceholder);
             }
         }
     }
     xmlhttp.send(urlencodedData);
 })
 uploadImageForm.addEventListener('submit', (e) => {
+    if(!uploadImageForm.checkValidity()) return;
+
     e.preventDefault();
 
     const multipart_data = new FormData(uploadImageForm);
@@ -88,7 +92,7 @@ uploadImageForm.addEventListener('submit', (e) => {
                 bootstrapAlert(response.message, 'success', alertPlaceholder);
             } else {
                 const alertPlaceholder = document.getElementById('formAlertPlaceholder');
-                bootstrapAlert(xmlhttp.responseText !== "" ? xmlhttp.responseText : (xmlhttp.statusText !== ""? 'Error: '+ xmlhttp.statusText : "Generic error"), 'danger', alertPlaceholder);
+                bootstrapAlert(xmlhttp.responseText !== "" ? (xmlhttp.responseText.startsWith("<!doctype html>") ?  parseServletError(xmlhttp.response): xmlhttp.responseText ) : (xmlhttp.statusText !== ""? 'Error: '+ xmlhttp.statusText : "Generic error"), 'danger', alertPlaceholder);
                 updateProgressBar(0, true);
             }
         }
@@ -120,11 +124,11 @@ addProductModal.addEventListener('show.bs.modal', (e) => {
             if (xmlhttp.readyState === XMLHttpRequest.DONE) {
                 if(xmlhttp.status === 200) {
                     const response = JSON.parse(xmlhttp.responseText);
-                    populateForm(addProductForm, response["product"],)
+                    populateForm(addProductForm, response["product"] ?? response,)
 
                 } else {
                     const alertPlaceholder = document.getElementById('liveAlertPlaceholder');
-                    bootstrapAlert(xmlhttp.statusText !== "" ? 'Error: '+xmlhttp.status : 'Generic erro', 'danger', alertPlaceholder);
+                    bootstrapAlert(xmlhttp.statusText !== "" ? 'Error: '+xmlhttp.status : 'Generic error', 'danger', alertPlaceholder);
                     bootstrap.Modal.getOrCreateInstance(addProductModal).hide();
                 }
             }
