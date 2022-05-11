@@ -11,27 +11,21 @@
     object-fit: cover;
     object-position: center;
 }
+
 /*
-    product carousel  linear gradient for arrow
+    it ensures that the arrows of all carousels stay in the foreground when resizing the page
  */
-.product-carousel .carousel-control-prev {
-    background: rgb(255,255,255);
-    background: linear-gradient(270deg, rgba(255,255,255,0) 0%, rgba(204,204,204,0.4) 10%, rgba(153,153,153,0.9) 100%);
+.carousel-control-prev, .carousel-control-next {
+    z-index: 100;
 }
 
-.product-carousel .carousel-control-prev:hover {
+
+/*
+    product carousel  linear gradient for arrows and indicators
+ */
+.product-carousel .carousel-control-prev:hover, .product-carousel .carousel-control-next:hover {
     background: rgb(255,255,255);
     background: linear-gradient(270deg, rgba(255,255,255,0) 0%, rgba(204,204,204,0.5) 10%, rgba(153,153,153,1) 100%);
-}
-
-.product-carousel .carousel-control-next:hover {
-    background: rgb(255,255,255);
-    background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(204,204,204,0.4) 10%, rgba(153,153,153,0.9) 100%);
-}
-
-.product-carousel .carousel-control-next:hover {
-    background: rgb(255,255,255);
-    background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(204,204,204,0.5) 10%, rgba(153,153,153,1) 100%);
 }
 
 .product-carousel .carousel-indicators {
