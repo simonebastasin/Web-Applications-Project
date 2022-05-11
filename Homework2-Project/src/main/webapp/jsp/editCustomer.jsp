@@ -28,7 +28,7 @@
 </nav>
 
 <c:forEach var="customer" items="${customerList}">
-    <form method="POST" action="">
+    <form method="POST" action="" class="was-validated">
 
         <div class="mb-3">
             <label for="id" class="form-label">ID: </label>
@@ -40,15 +40,18 @@
         </div>
         <div class="mb-3">
             <label for="name" class="form-label">Name: </label>
-            <input type="text" id="name" name="name" class="form-control" value="${customer.name}">
+            <input type="text" id="name" name="name" class="form-control" value="${customer.name}" required>
+            <div class="invalid-feedback">Insert the name.</div>
         </div>
         <div class="mb-3">
             <label for="surname" class="form-label">Surname: </label>
-            <input type="text" id="surname" name="surname" class="form-control" value="${customer.surname}">
+            <input type="text" id="surname" name="surname" class="form-control" value="${customer.surname}" required>
+            <div class="invalid-feedback">Insert the surname.</div>
         </div>
         <div class="mb-3">
             <label for="fiscalCode" class="form-label">Fiscal Code: </label>
-            <input type="text" id="fiscalCode" name="fiscalCode" class="form-control" value="${customer.fiscalCode}">
+            <input type="text" id="fiscalCode" name="fiscalCode" class="form-control" value="${customer.fiscalCode}" required>
+            <div class="invalid-feedback">Insert the fiscla code.</div>
         </div>
         <div class="mb-3">
             <label for="address" class="form-label">Address: </label>
@@ -56,7 +59,8 @@
         </div>
         <div class="mb-3">
             <label for="email" class="form-label">Email: </label>
-            <input type="text" id="email" name="email" class="form-control" value="${customer.email}">
+            <input type="text" id="email" name="email" class="form-control" value="${customer.email}" required>
+            <div class="invalid-feedback">Insert the email.</div>
         </div>
         <div class="mb-3">
             <label for="phoneNumber" class="form-label">Phone Number: </label>

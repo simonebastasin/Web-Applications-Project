@@ -27,19 +27,22 @@
   </ol>
 </nav>
 
-<form method="post" action="<c:url value="/user/modify"/>">
+<form method="post" action="<c:url value="/user/modify"/>" class="was-validated">
 
     <div class="form-floating mb-3">
         <input type="text" id="name" name="name" class="form-control" value="${customer.name}" required placeholder="name">
         <label for="name">Name: </label>
+        <div class="invalid-feedback">Insert your name.</div>
     </div>
     <div class="form-floating mb-3">
         <input type="text" id="surname" name="surname" class="form-control" value="${customer.surname}" required placeholder="surname">
         <label for="surname">Surname: </label>
+        <div class="invalid-feedback">Insert your surname.</div>
     </div>
     <div class="form-floating mb-3">
         <input type="text" id="fiscalCode" name="fiscalCode" class="form-control" value="${customer.fiscalCode}" required placeholder="xxxxxxxxxxxxxxxx">
         <label for="fiscalCode">Fiscal Code: </label>
+        <div class="invalid-feedback">Insert your fiscal code.</div>
     </div>
     <div class="form-floating mb-3">
         <input type="text" id="phoneNumber" name="phoneNumber" class="form-control" value="${customer.phoneNumber}" placeholder="+39">

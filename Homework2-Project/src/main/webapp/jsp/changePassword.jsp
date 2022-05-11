@@ -21,23 +21,32 @@
   </ol>
 </nav>
 
-<form method="post" action="<c:url value="/user/password"/>">
+<form method="post" action="<c:url value="/user/password"/>" class="was-validated">
     <div class="form-floating mb-3">
         <input id="oldPassword" type="password" class="form-control" name="oldPassword" placeholder="password" required>
         <label for="oldPassword">Old Password:</label>
+        <div class="invalid-feedback">Insert the current password.</div>
     </div>
     <div class="form-floating mb-3">
-        <input id="newPassword" type="password" class="form-control" name="newPassword" placeholder="password" required>
-        <label for="newPassword">New Password:</label>
+        <input id="password" type="password" class="form-control" name="newPassword" placeholder="password" required onchange="check_pass()">
+        <label for="password">New Password:</label>
+        <div class="invalid-feedback">Insert the new password.</div>
     </div>
+    <div class="form-floating mb-3">
+        <input id="confirm_password" type="password" class="form-control" name="confirm_password" placeholder="confirm_password" required onchange="check_pass()">
+        <label for="confirm_password">Confirm New Password:</label>
+        <div class="invalid-feedback">Confirm your password</div>
+    </div>
+    <span id="Message"></span><br>
 
-        <input type="submit" value="Submit" class = "btn btn-primary">
+        <input type="submit" id="submit" value="Submit" class = "btn btn-primary" disabled>
         <a href="<c:url value="/user/info"/>" class="btn btn-danger">Cancel changes</a>
 </form>
 
 
 </div>
 <c:import url="/jsp/include/footer.jsp"/>
+<script src="<c:url value="/js/checkPassword.js"/>"></script>
 </body>
 </html>
 
