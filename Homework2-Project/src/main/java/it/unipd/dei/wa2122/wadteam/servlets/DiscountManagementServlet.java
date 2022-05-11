@@ -60,10 +60,7 @@ public class DiscountManagementServlet extends AbstractDatabaseServlet{
      * @throws IOException
      */
     private void getListDiscount(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
-
         List<Discount> discounts;
-        List<Product> products;
-        List<DiscountListProduct> DiscountListProducts = new ArrayList<>();
 
         try{
             discounts = new ListDiscountDatabase(getDataSource().getConnection()).getDiscounts();
@@ -72,17 +69,11 @@ public class DiscountManagementServlet extends AbstractDatabaseServlet{
             List<Resource> lists = new ArrayList<>();
             for(var dis : discounts){
 
-                List<Product> products2 = new ListProductsFromIdDiscoutDatabase(getDataSource().getConnection(), dis).getListProductsFromIdDiscoutDatabase();
-                DiscountListProducts.add( new DiscountListProduct(dis, products2));
+                List<Product> products = new ListProductsFromIdDiscoutDatabase(getDataSource().getConnection(), dis).getListProductsFromIdDiscoutDatabase();
+                DiscountListProduct discountListProduct = new DiscountListProduct(dis, products);
 
-
+                lists.add(discountListProduct);
             }
-
-            products = new ListProductDatabase(getDataSource().getConnection()).getProduct();
-
-            lists.addAll(DiscountListProducts);
-            lists.addAll(products);
-
 
             writeResource(req, res, "/jsp/discountManagement.jsp", false, lists.toArray(Resource[]::new));
 
