@@ -78,6 +78,5 @@
 </div>
 <c:import url="/jsp/include/footer.jsp"/>
 <script src="<c:url value="/js/checkPassword.js"/>"></script>
-<script src="<c:url value="/js/formValidation.js"/>"></script>
 </body>
 </html>

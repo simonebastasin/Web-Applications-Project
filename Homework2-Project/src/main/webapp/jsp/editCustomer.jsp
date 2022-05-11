@@ -72,10 +72,9 @@
     </form>
 </c:forEach>
 
-    <a href="<c:url value="/management/customerManagement"/>" class="btn btn-primary">Cancel changes</a>
+    <a href="<c:url value="/management/customerManagement/"/>" class="btn btn-primary">Cancel changes</a>
 
 </div>
 <c:import url="/jsp/include/footer.jsp"/>
-<script src="<c:url value="/js/formValidation.js"/>"></script>
 </body>
 </html>

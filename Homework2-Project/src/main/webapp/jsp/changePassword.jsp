@@ -39,7 +39,7 @@
     </div>
     <span id="Message"></span><br>
 
-        <input type="submit" id="submit" value="Submit" class = "btn btn-primary" disabled>
+        <input type="submit" id="submit" value="Submit" class = "btn btn-primary">
         <a href="<c:url value="/user/info"/>" class="btn btn-danger">Cancel changes</a>
 </form>
 
@@ -47,7 +47,6 @@
 </div>
 <c:import url="/jsp/include/footer.jsp"/>
 <script src="<c:url value="/js/checkPassword.js"/>"></script>
-<script src="<c:url value="/js/formValidation.js"/>"></script>
 </body>
 </html>
 
