@@ -1,5 +1,8 @@
 
 .square {
+    position: relative;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
     transition: transform 100ms ease-out, border-radius 200ms ease-out;
 }
 
@@ -12,7 +15,6 @@
 
 .square:hover {
     transform: scale(1.5);
-    position: relative;
     z-index: 100;
 }
 
@@ -21,6 +23,13 @@
     position: relative;
     z-index: 100;
 }
+
+.img-cat img {
+    height: 11rem;
+    object-fit: cover;
+    resize: both;
+}
+
 
 
 .box {
@@ -86,12 +95,6 @@
     font-size: 5em;
 }
 
-.img-cat img {
-    width: 10rem;
-    height: 10rem;
-    object-fit: cover;
-    resize: both;
-}
 
 @media (min-width: 768px) {
 
