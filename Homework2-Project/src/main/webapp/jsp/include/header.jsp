@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="it.unipd.dei.wa2122.wadteam.resources.TypeUserEnum" %>
 <%--@elvariable id="user" type="it.unipd.dei.wa2122.wadteam.resources.UserCredential"--%>
 <%--@elvariable id="employee" type="it.unipd.dei.wa2122.wadteam.resources.Employee"--%>
 <%--@elvariable id="categories" type="java.util.List<ProductCategory>"--%>
@@ -87,7 +88,33 @@
                     </c:when>
                     <c:otherwise>
                         <li class="nav-item">
-                            <a class="nav-link" href="<c:url value="/session/login"/>">Login</a>
+                            <div class="dropdown w-50">
+                                <button class="nav-link dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Login
+                                </button>
+                                <div class="dropdown-menu">
+                                    <form class="px-4 py-3" method="POST" action="<c:url value="/session/login"/>">
+                                        <div class="form-floating mb-3">
+                                            <input type="text" class="form-control" id="identification" name="identification" required placeholder="identification">
+                                            <label for="identification">Username or Email: </label>
+                                        </div>
+                                        <div class="form-floating mb-3">
+                                            <input type="password" class="form-control" id="password" name="password" required placeholder="password">
+                                            <label for="password">Password: </label>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <select class="form-select" name="usertype" id="usertype">
+                                                <option selected>Select User</option>
+                                                <option value ="${TypeUserEnum.CUSTOMER}">Customer</option>
+                                                <option value ="${TypeUserEnum.EMPLOYEE}">Employee</option>
+                                            </select>
+                                        </div>
+
+                                        <input type ="submit" value = "Login" class = "btn btn-primary">
+                                    </form>
+                                </div>
+                            </div>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link"  href="<c:url value="/session/register"/>">Register</a>
