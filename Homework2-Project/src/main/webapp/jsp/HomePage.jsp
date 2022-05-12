@@ -83,7 +83,7 @@
 
                         <div class="box">
                             <a href="<c:url value="/products/details/${prod.alias}"/>" class="stretched-link">
-                                <div class="imgBox rounded shadow shadow-hover rounded">
+                                <div class="img-box rounded shadow shadow-hover rounded">
                                     <c:choose>
                                         <c:when test="${not empty prod.pictures}">
 
@@ -137,7 +137,7 @@
                             <div class="box">
                                 <a href="<c:url value="/products/details/${prod.alias}"/>" class="stretched-link">
 
-                                    <div class="imgBox rounded shadow shadow-hover rounded">
+                                    <div class="img-box rounded shadow shadow-hover rounded">
                                         <c:choose>
                                             <c:when test="${not empty prod.pictures}">
 
@@ -203,6 +203,7 @@
     </c:choose>
 
 <h3>Available products</h3>
+    <c:set var="count" value="0" scope="page" />
 
 <c:forEach var="item" items="${productCategoryList}">
 
@@ -220,15 +221,15 @@
         </c:when>
         <c:otherwise>
     <div class="row mx-auto my-auto justify-content-center border">
-            <div class="carousel carousel-dark slide"   data-bs-ride="carousel">
+            <div class="carousel carousel-category carousel-dark slide" id="categoryCarousel${count}"  data-bs-ride="carousel">
 
 
-                <button class="carousel-control-prev" type="button" data-bs-target="#categoryCarousel"
+                <button class="carousel-control-prev" type="button" data-bs-target="#categoryCarousel${count}"
                         data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Previous</span>
                 </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#categoryCarousel"
+                <button class="carousel-control-next" type="button" data-bs-target="#categoryCarousel${count}"
                         data-bs-slide="next">
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Next</span>
@@ -240,12 +241,12 @@
                         <c:if test="${prod.category.name.equals(item.name)}">
                             <c:choose>
                                 <c:when test="${i == 0}">
-                                    <button type="button" data-bs-target="#categoryCarousel" data-bs-slide-to="0"
+                                    <button type="button" data-bs-target="#categoryCarousel${count}" data-bs-slide-to="0"
                                             class="active" aria-current="true"
                                             aria-label="Slide 1"></button>
                                 </c:when>
                                 <c:otherwise>
-                                    <button type="button" data-bs-target="#categoryCarousel"
+                                    <button type="button" data-bs-target="#categoryCarousel${count}"
                                             data-bs-slide-to="${i}" aria-label="Slide ${i+1}"></button>
                                 </c:otherwise>
                             </c:choose>
@@ -257,7 +258,6 @@
                 <c:set var="counter" value="${0}"/>
                 <c:set var="active" value="${true}"/>
 
-                    <div class="carousel-category">
                         <div class="carousel-inner p-3" role="listbox">
 
                             <c:forEach var="prod" items="${productList}">
@@ -271,7 +271,7 @@
 
                                             <div class="col-md-3">
                                                 <div class="square one">
-                                                <div class="imgCat">
+                                                <div class="img-cat">
                                                     <c:choose>
                                                         <c:when test="${not empty prod.pictures}">
                                                             <c:set var="i" value="${0}"/>
@@ -322,7 +322,7 @@
 
                                             <div class="col-md-3">
                                                 <div class="square one">
-                                                <div class="imgCat">
+                                                <div class="img-cat">
                                                     <c:choose>
                                                         <c:when test="${not empty prod.pictures}">
                                                             <c:set var="i" value="${0}"/>
@@ -370,63 +370,13 @@
                         </c:forEach>
 
                         </div>
-                    </div>
 
             </div>
     </div>
         </c:otherwise>
     </c:choose>
 
-    <%--
-    <c:set value="${true}" var="empty_cat"/>
-
-    <div class="row w-100 h-100">
-        <c:forEach var="prod" items="${productList}">
-            <c:if test="${prod.category.name.equals(item.name)}">
-
-                <c:set value="${false}" var="empty_cat"/>
-
-
-                <c:set var="i" value="${0}"/>
-                <c:forEach var="picture" items="${prod.pictures}">
-                    <c:if test="${i == 0}">
-                        <c:set var="pic" value="${picture}"/>
-                    </c:if>
-                    <c:set var="i" value="${1}"/>
-                </c:forEach>
-                <div class="square one">
-                    <div class="col align-self-center">
-                        <div class="card ms-3 me-3">
-                            <img src="<c:url value="/media/view/${pic}"/>" alt="${prod.alias}" class="card-img-top"/>
-                            <c:choose>
-                                <c:when test="${not empty prod.discount}">
-                                    <div class="text">
-                                        Product name: <a href="<c:url value="/products/details/${prod.alias}"/>">${prod.name}</a>  <br>
-                                        Brand: ${prod.brand} <br>
-                                        Quantity: ${prod.quantity} <br>
-                                        Price: <span  style="text-decoration: line-through;">${prod.salePrice}€</span> <span style="color: red;">${prod.discountSale}€</span>
-                                    </div>
-                                </c:when>
-                                <c:otherwise>
-                                    <div class="text">
-                                        Product name: <a href="<c:url value="/products/details/${prod.alias}"/>">${prod.name}</a>  <br>
-                                        Brand: ${prod.brand} <br>
-                                        Quantity: ${prod.quantity} <br>
-                                        Price: ${prod.salePrice}€
-                                    </div>
-
-                                </c:otherwise>
-                            </c:choose>
-                        </div>
-                    </div>
-                </div>
-            </c:if>
-        </c:forEach>
-    </div>
-    <c:if test="${empty_cat}">
-        There are no more products for this category! =(
-    </c:if>
-    --%>
+    <c:set var="count" value="${count + 1}" scope="page"/>
 
 </c:forEach>
 </div>
@@ -435,26 +385,28 @@
 <c:import url="/jsp/include/footer.jsp"/>
 </div>
 <script>
-    let items = document.querySelectorAll('.carousel .carousel-category .carousel-item')
+    let carousels = document.querySelectorAll('.carousel-category')
 
-    items.forEach((el) => {
-// number of slides per carousel-item
-        const minPerSlide = 4
-        let next = el.nextElementSibling
-        for (var i=1; i<minPerSlide; i++) {
-            if (!next) {
-// wrap carousel by using first child
-                next = items[0]
+    carousels.forEach((it) => {
+        let items = it.querySelectorAll('.carousel-item')
+
+        items.forEach((el) => {
+            const minPerSlide = 4 // number of slides per carousel-item
+
+            let next = el.nextElementSibling
+            for (var i=1; i<minPerSlide && i< items.length; i++) {
+                if (!next && items.length > 1) {
+                    // wrap carousel by using first child
+                    next = items[0]
+                }
+                if(next) {
+                    let cloneChild = next.cloneNode(true)
+                    el.appendChild(cloneChild.children[0])
+                    next = next.nextElementSibling
+                }
             }
-            let cloneChild = next.cloneNode(true)
-            el.appendChild(cloneChild.children[0])
-            next = next.nextElementSibling
-        }
+        })
     })
 </script>
-
-
-
-
 </body>
 </html>

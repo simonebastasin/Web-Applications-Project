@@ -31,7 +31,7 @@
     margin-bottom: 4rem;
 }
 
-.box:hover .imgBox {
+.box:hover .img-box {
     transform: translate(-2.5rem, -2.5rem);
 }
 
@@ -39,7 +39,7 @@
     transform: translate(2.5rem, 2.5rem);
 }
 
-.imgBox {
+.img-box {
     position: relative;
     width: 100%;
     height: 100%;
@@ -47,7 +47,7 @@
     transition: all 0.5s ease-in-out;
 }
 
-.imgBox img {
+.img-box img {
     width: 30rem;
     height: 30rem;
     background-color: white;
@@ -86,7 +86,7 @@
     font-size: 5em;
 }
 
-.imgCat img {
+.img-cat img {
     width: 10rem;
     height: 10rem;
     object-fit: cover;
