@@ -271,7 +271,7 @@
                                             <div class="col-md-3 text-center">
                                                 <div class="square one">
                                                     <div class="img-cat">
-                                                    <div class="overlay-hover">
+                                                        <div class="overlay-hover">
                                                         <c:choose>
                                                         <c:when test="${not empty prod.pictures}">
                                                             <c:set var="i" value="${0}"/>
@@ -286,31 +286,34 @@
                                                         <c:otherwise>
                                                             <img src="<c:url value="/images/No_image_available_circle.png"/>" alt="${prod.alias}" class="mh-100 w-auto img-thumbnail" >
                                                         </c:otherwise>
-                                                    </c:choose>
-                                                    <c:choose>
+                                                        </c:choose>
+                                                        <c:choose>
                                                     <c:when test="${not empty prod.discount}">
-                                                    <div class="mask bg-primary">
-
+                                                    <div class="mask">
+                                                        <div class="text-center text-white fw-bold">
                                                                 Product name: <a href="<c:url value="/products/details/${prod.alias}"/>">${prod.name}</a>  <br>
                                                                 Brand: ${prod.brand} <br>
                                                                 Quantity: ${prod.quantity} <br>
-                                                                Price: <span  style="text-decoration: line-through;">${prod.salePrice}€</span> <span style="color: red;">${prod.discountSale}€</span>
-
+                                                                Price: <div class="text-decoration-line-through"> ${prod.salePrice}€</div> <div class="text-red">${prod.discountSale}€</div>
+                                                        </div>
                                                     </div>
                                                     </c:when>
                                                     <c:otherwise>
-                                                        <div class="mask bg-primary">
-                                                                Strong overlay
+                                                        <div class="mask">
+
+                                                            <div class="text-center text-white fw-bold">
                                                                 Product name: <a href="<c:url value="/products/details/${prod.alias}"/>">${prod.name}</a>  <br>
                                                                 Brand: ${prod.brand} <br>
                                                                 Quantity: ${prod.quantity} <br>
                                                                 Price: ${prod.salePrice}€
+                                                            </div>
+
                                                         </div>
 
                                                     </c:otherwise>
                                                     </c:choose>
                                                     </div>
-                                                </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -342,19 +345,22 @@
                                                     <c:choose>
                                                         <c:when test="${not empty prod.discount}">
                                                             <div class="mask">
+                                                                <div class="text-center text-white fw-bold">
                                                                 Product name: <a href="<c:url value="/products/details/${prod.alias}"/>">${prod.name}</a>  <br>
                                                                 Brand: ${prod.brand} <br>
                                                                 Quantity: ${prod.quantity} <br>
-                                                                Price: <span  style="text-decoration: line-through;">${prod.salePrice}€</span> <span style="color: red;">${prod.discountSale}€</span>
+                                                                Price: <div  class="text-decoration-line-through">${prod.salePrice}€</div> <div class="text-red">${prod.discountSale}€</div>
+                                                                </div>
                                                             </div>
                                                         </c:when>
                                                         <c:otherwise>
                                                         <div class="mask">
-
+                                                            <div class="text-center text-white fw-bold">
                                                                 Product name: <a href="<c:url value="/products/details/${prod.alias}"/>">${prod.name}</a>  <br>
                                                                 Brand: ${prod.brand} <br>
                                                                 Quantity: ${prod.quantity} <br>
                                                                 Price: ${prod.salePrice}€
+                                                            </div>
                                                         </div>
 
                                                         </c:otherwise>
@@ -370,10 +376,10 @@
                             </c:if>
 
                         </c:forEach>
-
+                            </div>
                         </div>
 
-            </div>
+
     </div>
         </c:otherwise>
     </c:choose>

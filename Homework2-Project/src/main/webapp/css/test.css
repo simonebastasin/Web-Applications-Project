@@ -1,16 +1,10 @@
 
 .square {
+    display: inline-block;
     position: relative;
     margin-top: 2rem;
     margin-bottom: 2rem;
     transition: transform 100ms ease-out, border-radius 200ms ease-out;
-}
-
-.square .text {
-    display: none;
-    background: #ccd0cc;
-    width: 100%;
-    transition: opacity 300ms ease-out, border-radius 200ms ease-out;
 }
 
 .square:hover {
@@ -18,11 +12,6 @@
     z-index: 100;
 }
 
-.square:hover .text {
-    display: block;
-    position: relative;
-    z-index: 100;
-}
 
 .img-cat img {
     height: 11rem;
@@ -30,6 +19,9 @@
     resize: both;
 }
 
+.img-cat .overlay-hover .mask{
+    background-color: rgba(0, 0, 0, 0.75);
+}
 
 
 .box {
