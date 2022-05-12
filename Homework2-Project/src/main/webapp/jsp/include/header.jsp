@@ -49,10 +49,37 @@
                         <c:choose>
                             <c:when test="${empty user.role}">
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownCart" role="button" data-bs-toggle="dropdown" aria-expanded="false"  href="#">Cart</a>
-                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownCart">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownCart" role="button" data-bs-toggle="dropdown" aria-expanded="false" onclick="presentCart()" href="#">Cart</a>
+                                    <ul class="dropdown-menu" id="cart" aria-labelledby="navbarDropdownCart">
 
                                     </ul>
+                                    <script>
+
+                                            function invalidate()
+                                            {
+                                                localStorage.clear();
+                                            }
+
+                                        function presentCart()
+                                        {
+                                            var text="";
+                                            if(localStorage.length==0)
+                                                text='<li><a class="dropdown-item" >Empty</li>';
+                                            for (let i = 0; i < localStorage.length; i++) {
+                                                console.log(localStorage.length)
+                                                if(localStorage.key(i).substring(0,3)=="cart")
+                                                    console.log(localStorage.getItem(localStorage.key(i)));
+                                                const element=localStorage.getItem(localStorage.key(i)).split(";")
+                                                const qta=element[0];
+                                                const name=element[1];
+                                                text+='<li><a class="dropdown-item" >'+ name+" qt"+qta +'</li>';
+                                            }
+                                            console.log(text)
+                                            const list=document.getElementById("cart");
+                                            list.innerHTML=text;
+                                        }
+
+                                    </script>
                                 </li>
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownView" role="button" data-bs-toggle="dropdown" aria-expanded="false"  href="#">View</a>
@@ -88,7 +115,7 @@
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownUser" role="button" data-bs-toggle="dropdown" aria-expanded="false"  href="#">Hello, ${user.identification}</a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdownUser">
                                 <li><a class="dropdown-item" href="<c:url value="/user/info"/>">Info</a></li>
-                                <li><a class="dropdown-item" href="<c:url value="/session/logout"/>">Logout</a></li>
+                                <li><a class="dropdown-item" href="<c:url value="/session/logout"/>" onclick="invalidate()">Logout</a></li>
                             </ul>
                         </li>
                     </c:when>

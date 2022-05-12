@@ -50,7 +50,7 @@
         </div>
     </div>
     <div class="mb-3">
-        <button class="btn btn-outline-primary" type="submit">Login</button>
+        <button class="btn btn-outline-primary" type="submit" >Login</button>
     </div>
 
 
