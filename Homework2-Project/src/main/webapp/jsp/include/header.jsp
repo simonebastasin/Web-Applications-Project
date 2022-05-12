@@ -60,24 +60,69 @@
                                                 localStorage.clear();
                                             }
 
-                                        function presentCart()
-                                        {
-                                            var text="";
-                                            if(localStorage.length==0)
-                                                text='<li><a class="dropdown-item" >Empty</li>';
-                                            for (let i = 0; i < localStorage.length; i++) {
-                                                console.log(localStorage.length)
-                                                if(localStorage.key(i).substring(0,3)=="cart")
-                                                    console.log(localStorage.getItem(localStorage.key(i)));
-                                                const element=localStorage.getItem(localStorage.key(i)).split(";")
-                                                const qta=element[0];
-                                                const name=element[1];
-                                                text+='<li><a class="dropdown-item" >'+ name+" qt"+qta +'</li>';
+                                        function presentCart() {
+                                            var text = "";
+
+                                            if (localStorage.length == 0)
+                                                text = '<li><a class="dropdown-item" >Empty</li>';
+                                            else {
+                                                for (let i = 0; i < localStorage.length; i++) {
+                                                    console.log(localStorage.length)
+                                                    if (localStorage.key(i).substring(0, 4).localeCompare("cart") == 0) {
+                                                        console.log(localStorage.getItem(localStorage.key(i)));
+                                                        const element = localStorage.getItem(localStorage.key(i)).split(";")
+                                                        const qta = element[0];
+                                                        const name = element[1];
+                                                        text += '<li><a class="dropdown-item" >' + name + " qt" + qta + '</li>';
+
+                                                    }
+
+
+                                                }
+                                                text += '<button onclick="buyCart()">buy</button>';
+
                                             }
-                                            console.log(text)
-                                            const list=document.getElementById("cart");
-                                            list.innerHTML=text;
+                                            const list = document.getElementById("cart");
+                                            list.innerHTML = text;
                                         }
+                                        function buyCart()
+                                        {
+                                            var text='{"cart":[';
+                                            for (let i = 0; i < localStorage.length; i++) {
+
+
+                                                if (localStorage.key(i).substring(0, 4).localeCompare("cart")==0) {
+                                                    const element = localStorage.getItem(localStorage.key(i)).split(";")
+                                                    const qta = element[0];
+                                                    const name = element[1];
+                                                    console.log(i);
+
+                                                    text += '{"quantity":' + qta + ',"alias":\"' + localStorage.key(i).substring(4) + '"},';
+                                                }
+                                                }
+                                                text=text.substring(0,text.length-1);
+                                                text+=']}';
+
+                                                console.log(text);
+                                            var json = JSON.parse(text);
+                                            json = JSON.stringify(json, undefined, 4);
+                                            var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance
+                                            xmlhttp.onreadystatechange = function() {
+                                                if (xmlhttp.readyState === XMLHttpRequest.DONE) {
+                                                    console.log(xmlhttp.responseText);
+                                                    let id = JSON.parse(xmlhttp.responseText).resourceId;
+                                                    console.log(id);
+
+                                                    location.href = '<c:url value="/buy/pay/" />'+id;
+
+                                                }
+                                            }
+                                            xmlhttp.open("POST", "<c:url value="/rest/buy/cart" />");
+                                            xmlhttp.setRequestHeader("Content-Type", "application/json");
+                                            xmlhttp.send(json);
+                                                                                     }
+
+
 
                                     </script>
                                 </li>

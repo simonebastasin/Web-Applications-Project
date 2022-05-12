@@ -56,7 +56,7 @@
                 <option value="${PaymentMethodOnlineEnum.APPLE_PAY}">Apple Pay</option>
                 <option value="${PaymentMethodOnlineEnum.GOOGLE_PAY}">Google Pay</option>
             </select>
-            <input type ="submit" value = "Confirm payment">
+            <input type ="submit" value = "Confirm payment" onclick="invalidate()">
         </form>
     </c:when>
     <c:otherwise>

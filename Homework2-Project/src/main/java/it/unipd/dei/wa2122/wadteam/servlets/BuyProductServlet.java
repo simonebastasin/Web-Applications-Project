@@ -198,7 +198,7 @@ public class BuyProductServlet extends AbstractDatabaseServlet {
 
     private void buyChart(HttpServletRequest req, HttpServletResponse res, JSONObject cart)   throws  ServletException, IOException {
         JSONArray products = cart.getJSONArray("cart");
-
+        System.out.println(products.toString());
         try {
             List<Product> productList = new ArrayList<>();
 
@@ -207,7 +207,9 @@ public class BuyProductServlet extends AbstractDatabaseServlet {
             for(var item : products) {
                 if (item instanceof JSONObject) {
                     Product product = Product.fromJSON((JSONObject) item);
+
                     Product dbProduct = new GetProductDatabase((getDataSource().getConnection()), product.getAlias()).getProduct();
+                    System.out.println(dbProduct.getAlias());
                     if(product.getQuantity() > dbProduct.getQuantity() || product.getQuantity() < 1) {
                         writeError(req, res, new ErrorMessage.InternalError("Product quantity out of bounds"));
                     } else {
@@ -222,14 +224,15 @@ public class BuyProductServlet extends AbstractDatabaseServlet {
                                 dbProduct.getCategory(),
                                 dbProduct.getEvidence(),
                                 null, null );
-
+                        System.out.println(finalProduct.getAlias());
                         productList.add(finalProduct);
+                        System.out.println(productList.size());
                     }
                 }  else {
                     writeError(req, res, new ErrorMessage.InternalError("Parsing error"));
                 }
             }
-            if(productList.size() > 1) {
+            if(productList.size() >= 1) {
 
                 OnlineOrder newOrder = new OnlineOrder(
                         null,
@@ -252,6 +255,7 @@ public class BuyProductServlet extends AbstractDatabaseServlet {
                     writeError(req, res, new ErrorMessage.InternalError("Error generated error"));
                 }
             } else {
+                System.out.println("nooo");
                 writeError(req, res, new ErrorMessage.InternalError("nothing to buy"));
             }
         } catch (SQLException e) {
