@@ -171,7 +171,7 @@
                                     <br>
 
                                     <input type="submit" value="Buy now" class="btn btn-primary">
-                                    <input type="submit" value="cart" class="btn btn-primary" onclick="cart()">
+                                    <input type="submit" value="Add to cart" class="btn btn-primary" onclick="cart()">
                                 </form>
                                 <br>
 

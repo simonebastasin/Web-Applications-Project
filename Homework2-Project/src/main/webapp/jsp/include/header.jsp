@@ -79,7 +79,7 @@
 
 
                                                 }
-                                                text += '<button onclick="buyCart()">buy</button>';
+                                                text += '<button  class="btn btn-primary" onclick="buyCart()">buy</button>';
 
                                             }
                                             const list = document.getElementById("cart");
