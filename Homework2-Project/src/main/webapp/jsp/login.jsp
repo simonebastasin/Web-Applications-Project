@@ -43,10 +43,16 @@
         <div class="form-check form-check-inline">
             <input type="radio" class="form-check-input" id="EMPLOYEE" name="usertype" required value="${TypeUserEnum.EMPLOYEE}">
             <label class="form-check-label" for="EMPLOYEE">Employee</label>
+        </div>
+        <div class = "form-check">
+            <input type="radio" class="form-check-input d-none" id="HIDDEN" name="usertype" required value="HIDDEN">
             <div class="invalid-feedback">Select the type of user you are.</div>
         </div>
     </div>
-    <button class="btn btn-primary" type="submit">Login</button>
+    <div class="mb-3">
+        <button class="btn btn-outline-primary" type="submit">Login</button>
+    </div>
+
 
 </form>
 

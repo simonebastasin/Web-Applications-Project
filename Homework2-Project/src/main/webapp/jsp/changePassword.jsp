@@ -38,8 +38,10 @@
         <div class="invalid-feedback"  id="confirmPasswordFeedback">Confirm your password.</div>
     </div>
 
-    <input type="submit" id="submit" value="Submit" class = "btn btn-primary">
-    <a href="<c:url value="/user/info"/>" class="btn btn-danger">Cancel changes</a>
+    <div class="mb-3">
+        <input type="submit" id="submit" value="Submit" class = "btn btn-outline-primary">
+        <a href="<c:url value="/user/info"/>" class="btn btn-outline-danger">Cancel changes</a>
+    </div>
 </form>
 
 

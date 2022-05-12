@@ -70,7 +70,9 @@
         <label for="confirmPassword">Confirm Password</label>
         <div class="invalid-feedback" id="confirmPasswordFeedback">Confirm your password</div>
     </div>
-    <input type="submit" name="submit" id="submit" value="Sign Up" class = "btn btn-primary">
+    <div class="mb-3">
+        <input type="submit" name="submit" id="submit" value="Sign Up" class = "btn btn-outline-primary">
+    </div>
 </form>
 
 

@@ -67,12 +67,14 @@
             <input type="text" id="phoneNumber" name="phoneNumber" class="form-control" value="${customer.phoneNumber}">
         </div>
 
-        <input type="submit" value="Submit" class = "btn btn-primary">
+        <div class="mb-3">
+            <button class="btn btn-outline-primary" type="submit">Submit</button>
+        </div>
 
     </form>
 </c:forEach>
 
-    <a href="<c:url value="/management/customerManagement/"/>" class="btn btn-primary">Cancel changes</a>
+    <a href="<c:url value="/management/customerManagement/"/>" class="btn btn-outline-danger">Cancel changes</a>
 
 </div>
 <c:import url="/jsp/include/footer.jsp"/>

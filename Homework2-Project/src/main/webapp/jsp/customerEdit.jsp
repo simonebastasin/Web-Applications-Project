@@ -53,8 +53,14 @@
         <label for="address">Address </label>
     </div>
 
-    <input type="submit" value="Submit" class = "btn btn-primary">
-    <a href="<c:url value="/user/info"/>" class="btn btn-danger">Cancel changes</a>
+    <div class="mb-3">
+        <button class="btn btn-outline-primary" type="submit">Submit</button>
+        <a href="<c:url value="/user/info"/>" class="btn btn-outline-danger">Cancel changes</a>
+    </div>
+    <div class="mb-3">
+
+    </div>
+
 
 </form>
 
