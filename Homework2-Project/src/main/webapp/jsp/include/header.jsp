@@ -93,25 +93,35 @@
                                     Login
                                 </button>
                                 <div class="dropdown-menu">
-                                    <form class="px-4 py-3" method="POST" action="<c:url value="/session/login"/>">
+                                    <form class="px-4 py-3 row g-3 needs-validation" novalidate method="POST" action="<c:url value="/session/login"/>">
                                         <div class="form-floating mb-3">
-                                            <input type="text" class="form-control" id="identification" name="identification" required placeholder="identification">
-                                            <label for="identification">Username or Email: </label>
+                                            <input type="text" class="form-control" id="identification" name="identification" placeholder="Username or Email" required>
+                                            <label for="identification">Username or Email</label>
+                                            <div class="invalid-feedback">Insert your username or email.</div>
                                         </div>
                                         <div class="form-floating mb-3">
-                                            <input type="password" class="form-control" id="password" name="password" required placeholder="password">
-                                            <label for="password">Password: </label>
+                                            <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+                                            <label for="password">Password</label>
+                                            <div class="invalid-feedback">Insert your password.</div>
                                         </div>
 
                                         <div class="mb-3">
-                                            <select class="form-select" name="usertype" id="usertype">
-                                                <option selected>Select User</option>
-                                                <option value ="${TypeUserEnum.CUSTOMER}">Customer</option>
-                                                <option value ="${TypeUserEnum.EMPLOYEE}">Employee</option>
-                                            </select>
+                                            <div class="form-check form-check-inline">
+                                                <input type="radio" class="form-check-input" id="CUSTOMER" name="usertype" required value="${TypeUserEnum.CUSTOMER}">
+                                                <label class="form-check-label" for="CUSTOMER">Customer</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input type="radio" class="form-check-input" id="EMPLOYEE" name="usertype" required value="${TypeUserEnum.EMPLOYEE}">
+                                                <label class="form-check-label" for="EMPLOYEE">Employee</label>
+                                            </div>
+                                            <div class = "form-check">
+                                                <input type="radio" class="form-check-input d-none" id="HIDDEN" name="usertype" required value="HIDDEN">
+                                                <div class="invalid-feedback">Select the type of user you are.</div>
+                                            </div>
                                         </div>
-
-                                        <input type ="submit" value = "Login" class = "btn btn-primary">
+                                        <div class="mb-3">
+                                            <button class="btn btn-outline-primary" type="submit">Login</button>
+                                        </div>
                                     </form>
                                 </div>
                             </div>
