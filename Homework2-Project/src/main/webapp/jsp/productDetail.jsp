@@ -164,7 +164,7 @@
                     <c:otherwise>
                         <c:choose>
                             <c:when test="${not empty user && empty user.role}">
-                                <form method="POST" action="<c:url value="/buy/product/${product.alias}"/>" id="form" data-product-alias="${product.alias}" data-product-name="${product.name}">
+                                <form method="POST" action="<c:url value="/buy/product/${product.alias}"/>" id="formSend" data-product-alias="${product.alias}" data-product-name="${product.name}">
                                     <label for="quantity">Selected quantity</label>
                                     <input type="number" name="quantity" max="${product.quantity}" min="1" id="quantity" required>
                                     <br>
@@ -175,26 +175,6 @@
                                 </form>
                                 <br>
 
-                                <script>
-
-                                    const form=document.getElementById("form");
-                                    const alias=form.getAttribute("data-product-alias");
-                                    const name=form.getAttribute("data-product-name");
-                                    function cart()
-                                    {
-                                       form.addEventListener("submit",(e) => {
-                                            e.preventDefault();
-                                            const qt=new FormData(form).get("quantity");
-                                            console.log(qt.toString()+ " "+name);
-                                            localStorage.setItem("cart"+alias,qt.toString()+";"+name);
-                                            console.log(localStorage.length);
-
-                                        });
-                                    }
-
-
-
-                                </script>
                             </c:when>
                             <c:otherwise>
                                 <c:choose>
