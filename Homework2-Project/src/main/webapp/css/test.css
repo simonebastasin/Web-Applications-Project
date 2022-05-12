@@ -93,3 +93,39 @@
     resize: both;
 }
 
+@media (min-width: 768px) {
+
+    .carousel-category .carousel-inner .carousel-item-end.active,
+    .carousel-category .carousel-inner .carousel-item-next {
+        transform: translateX(25%);
+    }
+
+    .carousel-category .carousel-inner .carousel-item-start.active,
+    .carousel-category .carousel-inner .carousel-item-prev {
+        transform: translateX(-25%);
+    }
+}
+
+.carousel-category .carousel-inner .carousel-item.active,
+.carousel-category .carousel-inner .carousel-item-next,
+.carousel-category .carousel-inner .carousel-item-prev {
+    display: flex;
+}
+
+@media (min-width: 768px) {
+
+    .carousel-category .carousel-inner .carousel-item-end.active,
+    .carousel-category .carousel-inner .carousel-item-next {
+        transform: translateX(25%);
+    }
+
+    .carousel-category .carousel-inner .carousel-item-start.active,
+    .carousel-category .carousel-inner .carousel-item-prev {
+        transform: translateX(-25%);
+    }
+}
+
+.carousel-category .carousel-inner .carousel-item-end,
+.carousel-category .carousel-inner .carousel-item-start {
+    transform: translateX(0);
+}

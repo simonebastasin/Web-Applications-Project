@@ -219,8 +219,9 @@
             <p>No prod here</p>
         </c:when>
         <c:otherwise>
+    <div class="row mx-auto my-auto justify-content-center border">
+            <div class="carousel carousel-dark slide"   data-bs-ride="carousel">
 
-            <div id="categoryCarousel" class="carousel carousel-dark slide category-carousel" data-bs-ride="carousel">
 
                 <button class="carousel-control-prev" type="button" data-bs-target="#categoryCarousel"
                         data-bs-slide="prev">
@@ -255,74 +256,21 @@
 
                 <c:set var="counter" value="${0}"/>
                 <c:set var="active" value="${true}"/>
-                <div class="carousel-inner p-3" role="listbox">
-                    <c:forEach var="prod" items="${productList}">
-                        <c:if test="${prod.category.name.equals(item.name)}">
 
-                            <c:choose>
-                                <c:when test="${active == true}">
+                    <div class="carousel-category">
+                        <div class="carousel-inner p-3" role="listbox">
 
-                                    <c:if test="${counter==0}">
+                            <c:forEach var="prod" items="${productList}">
+                            <c:if test="${prod.category.name.equals(item.name)}">
+
+                                <c:choose>
+                                    <c:when test="${active == true}">
+
+
                                         <div class="carousel-item active p-3">
-                                            <div class="d-flex clearfix justify-content-center">
-                                    </c:if>
 
-
-                                    <div class="square one">
-                                        <div class="imgCat">
-                                            <c:choose>
-                                                <c:when test="${not empty prod.pictures}">
-                                                    <c:set var="i" value="${0}"/>
-                                                    <c:forEach var="picture" items="${prod.pictures}">
-                                                        <c:if test="${i == 0}">
-                                                            <c:set var="pic" value="${picture}"/>
-                                                        </c:if>
-                                                        <c:set var="i" value="${1}"/>
-                                                    </c:forEach>
-                                                    <img src="<c:url value="/media/view/${pic}"/>" alt="${prod.alias}" class="mh-100 w-100 img-thumbnail"/>
-                                                </c:when>
-                                                <c:otherwise>
-                                                    <img src="<c:url value="/images/No_image_available_circle.png"/>" alt="${prod.alias}" class="mh-100 w-100 img-thumbnail" >
-                                                </c:otherwise>
-                                            </c:choose>
-                                            <c:choose>
-                                                <c:when test="${not empty prod.discount}">
-                                                    <div class="text">
-                                                        Product name: <a href="<c:url value="/products/details/${prod.alias}"/>">${prod.name}</a>  <br>
-                                                        Brand: ${prod.brand} <br>
-                                                        Quantity: ${prod.quantity} <br>
-                                                        Price: <span  style="text-decoration: line-through;">${prod.salePrice}€</span> <span style="color: red;">${prod.discountSale}€</span>
-                                                    </div>
-                                                </c:when>
-                                                <c:otherwise>
-                                                    <div class="text">
-                                                        Product name: <a href="<c:url value="/products/details/${prod.alias}"/>">${prod.name}</a>  <br>
-                                                        Brand: ${prod.brand} <br>
-                                                        Quantity: ${prod.quantity} <br>
-                                                        Price: ${prod.salePrice}€
-                                                    </div>
-
-                                                </c:otherwise>
-                                            </c:choose>
-                                        </div>
-                                    </div>
-
-
-                                    <c:if test="${counter == 4}">
-                                      </div>
-                                        </div>
-                                     <c:set value="${false}" var="active"/>
-                                    </c:if>
-                                    <c:set var="counter" value="${counter+1}"/>
-                                </c:when>
-                                <c:otherwise>
-
-                                    <c:if test="${counter%5==0}">
-                                            <div class="carousel-item p-3">
-                                                <div class="d-flex clearfix justify-content-center">
-                                        </c:if>
-
-                                    <div class="square one">
+                                            <div class="col-md-3">
+                                                <div class="square one">
                                                 <div class="imgCat">
                                                     <c:choose>
                                                         <c:when test="${not empty prod.pictures}">
@@ -360,26 +308,72 @@
                                                     </c:choose>
                                                 </div>
                                             </div>
-
-                                    <c:if test="${counter+1%5==0}">
                                             </div>
+
+
+
+
+                                </div>
+                                        <c:set var="active" value="${false}"/>
+
+                                    </c:when>
+                                    <c:otherwise>
+                                        <div class="carousel-item p-3">
+
+                                            <div class="col-md-3">
+                                                <div class="square one">
+                                                <div class="imgCat">
+                                                    <c:choose>
+                                                        <c:when test="${not empty prod.pictures}">
+                                                            <c:set var="i" value="${0}"/>
+                                                            <c:forEach var="picture" items="${prod.pictures}">
+                                                                <c:if test="${i == 0}">
+                                                                    <c:set var="pic" value="${picture}"/>
+                                                                </c:if>
+                                                                <c:set var="i" value="${1}"/>
+                                                            </c:forEach>
+                                                            <img src="<c:url value="/media/view/${pic}"/>" alt="${prod.alias}" class="mh-100 w-100 img-thumbnail"/>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <img src="<c:url value="/images/No_image_available_circle.png"/>" alt="${prod.alias}" class="mh-100 w-100 img-thumbnail" >
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                    <c:choose>
+                                                        <c:when test="${not empty prod.discount}">
+                                                            <div class="text">
+                                                                Product name: <a href="<c:url value="/products/details/${prod.alias}"/>">${prod.name}</a>  <br>
+                                                                Brand: ${prod.brand} <br>
+                                                                Quantity: ${prod.quantity} <br>
+                                                                Price: <span  style="text-decoration: line-through;">${prod.salePrice}€</span> <span style="color: red;">${prod.discountSale}€</span>
+                                                            </div>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <div class="text">
+                                                                Product name: <a href="<c:url value="/products/details/${prod.alias}"/>">${prod.name}</a>  <br>
+                                                                Brand: ${prod.brand} <br>
+                                                                Quantity: ${prod.quantity} <br>
+                                                                Price: ${prod.salePrice}€
+                                                            </div>
+
+                                                        </c:otherwise>
+                                                    </c:choose>
                                                 </div>
-                                            </c:if>
-                                    <c:set var="counter" value="${counter+1}"/>
-                                </c:otherwise>
-                            </c:choose>
-                        </c:if>
+                                            </div>
+                                            </div>
 
+                                        </div>
 
+                                    </c:otherwise>
+                                </c:choose>
+                            </c:if>
 
-                    </c:forEach>
-                    <c:if test="${counter%5!=0}">
-                            </div>
+                        </c:forEach>
+
                         </div>
-                    </c:if>
-                </div>
-            </div>
+                    </div>
 
+            </div>
+    </div>
         </c:otherwise>
     </c:choose>
 
@@ -439,8 +433,28 @@
 
 
 <c:import url="/jsp/include/footer.jsp"/>
-
 </div>
+<script>
+    let items = document.querySelectorAll('.carousel .carousel-category .carousel-item')
+
+    items.forEach((el) => {
+// number of slides per carousel-item
+        const minPerSlide = 4
+        let next = el.nextElementSibling
+        for (var i=1; i<minPerSlide; i++) {
+            if (!next) {
+// wrap carousel by using first child
+                next = items[0]
+            }
+            let cloneChild = next.cloneNode(true)
+            el.appendChild(cloneChild.children[0])
+            next = next.nextElementSibling
+        }
+    })
+</script>
+
+
+
 
 </body>
 </html>
