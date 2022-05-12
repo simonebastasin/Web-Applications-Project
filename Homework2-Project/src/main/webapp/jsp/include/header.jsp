@@ -120,13 +120,12 @@
                         </li>
                     </c:when>
                     <c:otherwise>
-                        <li class="nav-item">
-                            <div class="dropdown w-50">
-                                <button class="nav-link dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" type="button" id="dropdownMenuLogin" data-bs-toggle="dropdown" data-bs-auto-close="false" aria-expanded="false">
                                     Login
-                                </button>
-                                <div class="dropdown-menu">
-                                    <form class="px-4 py-3 row g-3 needs-validation" novalidate method="POST" action="<c:url value="/session/login"/>">
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-lg-end dropdown-menu-login" aria-labelledby="dropdownMenuLogin">
+                                    <form class="px-4 py-3 g-3 needs-validation" novalidate method="POST" action="<c:url value="/session/login"/>">
                                         <div class="form-floating mb-3">
                                             <input type="text" class="form-control" id="identification" name="identification" placeholder="Username or Email" required>
                                             <label for="identification">Username or Email</label>
@@ -152,15 +151,11 @@
                                                 <div class="invalid-feedback">Select the type of user you are.</div>
                                             </div>
                                         </div>
-                                        <div class="mb-3">
                                             <button class="btn btn-outline-primary" type="submit">Login</button>
-                                        </div>
                                     </form>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="btn btn-outline-primary"  href="<c:url value="/session/register"/>">Register</a>
                                 </div>
-                            </div>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link"  href="<c:url value="/session/register"/>">Register</a>
                         </li>
                     </c:otherwise>
                 </c:choose>
