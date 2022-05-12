@@ -164,13 +164,34 @@
                     <c:otherwise>
                         <c:choose>
                             <c:when test="${not empty user && empty user.role}">
-                                <form method="POST" action="<c:url value="/buy/product/${product.alias}"/>">
+                                <form method="POST" action="<c:url value="/buy/product/${product.alias}"/>" id="form" data-product-alias="${product.alias}">
                                     <label for="quantity">Selected quantity</label>
                                     <input type="number" name="quantity" max="${product.quantity}" min="1" id="quantity" required>
                                     <br>
+                                    <br>
 
                                     <input type="submit" value="Buy now" class="btn btn-primary">
+                                    <input type="submit" value="cart" class="btn btn-primary" onclick="cart()">
                                 </form>
+                                <br>
+
+                                <script>
+
+                                    const form=document.getElementById("form");
+                                    const alias=form.getAttribute("data-product-alias");
+                                    function cart()
+                                    {
+                                       form.addEventListener("submit",(e) => {
+                                            e.preventDefault();
+                                            const quant=document.getElementById("quantity").value;
+                                            console.log(quant+ " "+alias);
+
+                                        });
+                                    }
+
+
+
+                                </script>
                             </c:when>
                             <c:otherwise>
                                 <c:choose>

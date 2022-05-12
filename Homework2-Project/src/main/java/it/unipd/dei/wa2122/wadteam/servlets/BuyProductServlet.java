@@ -30,6 +30,7 @@ public class BuyProductServlet extends AbstractDatabaseServlet {
         String param = req.getPathInfo() != null ? req.getPathInfo().substring(1).lastIndexOf('/') != -1 ? req.getPathInfo().substring(req.getPathInfo().lastIndexOf('/')+1) : "" : "";
 
         switch (path){
+
             case "pay" -> {
                 if (param.chars().allMatch(Character::isDigit) && !param.equals("")) {
                     int orderId = Integer.parseInt(param);

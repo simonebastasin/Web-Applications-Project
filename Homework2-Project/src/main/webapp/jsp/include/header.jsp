@@ -49,6 +49,12 @@
                         <c:choose>
                             <c:when test="${empty user.role}">
                                 <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownCart" role="button" data-bs-toggle="dropdown" aria-expanded="false"  href="#">Cart</a>
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownCart">
+
+                                    </ul>
+                                </li>
+                                <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownView" role="button" data-bs-toggle="dropdown" aria-expanded="false"  href="#">View</a>
                                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownManagement">
                                         <li><a class="dropdown-item" href="<c:url value="/order/list"/>">View Orders</a></li>
