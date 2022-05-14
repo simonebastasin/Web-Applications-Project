@@ -4,9 +4,6 @@ const addDiscountModal = document.getElementById('addDiscountModal');
 const addDiscountSubmit = document.getElementById('addDiscountSubmit');
 let idDiscount;
 
-addDiscountButton.addEventListener('click', (e) => {
-    addDiscountSubmit.click(); // only  html5 required
-});
 addDiscountForm.addEventListener('submit', (e) => {
     if(!addDiscountForm.checkValidity()) return;
 
@@ -27,6 +24,7 @@ addDiscountModal.addEventListener('show.bs.modal', (e) => {
     idDiscount = button.getAttribute('data-bs-whatever');
     let createDiscount = (idDiscount  === null);
 
+    addProductForm.classList.toggle('was-validated', false);
     if(createDiscount) {
         let modalTitle = addDiscountModal.querySelector('.modal-title');
         modalTitle.textContent = 'Add discount';

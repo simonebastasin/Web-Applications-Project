@@ -149,12 +149,10 @@
                                 </label>
                             </div>
                         </c:forEach>
-                        <input type="submit" id="addDiscountSubmit" class="d-none" value="submit">
-
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" id="addDiscountButton">Add discount</button>
+                    <button type="submit" class="btn btn-primary" id="addDiscountButton" form="addDiscountForm">Add discount</button>
                 </div>
             </div>
         </div>

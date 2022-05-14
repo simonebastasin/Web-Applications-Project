@@ -161,7 +161,6 @@
                                 </c:forEach>
                             </ul>
                         </div>
-                        <input type="submit" id="addProductSubmit" class="d-none" value="submit">
                     </form>
                     <form id="uploadImageForm" class="mb-3 needs-validation" novalidate>
                         <label for="formFile" class="form-label">Upload image</label>
@@ -175,7 +174,7 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" id="addProductButton">Add product</button>
+                    <button type="submit" class="btn btn-primary" id="addProductButton" form="addProductForm">Add product</button>
                 </div>
             </div>
         </div>

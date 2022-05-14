@@ -5,11 +5,8 @@ const addProductModal = document.getElementById('addProductModal');
 const uploadImageForm = document.getElementById('uploadImageForm');
 const uploadImageProgress = document.getElementById('uploadImageProgress');
 const uploadImageProgressBar = document.getElementById('uploadImageProgressBar');
-const addProductSubmit = document.getElementById('addProductSubmit');
 let alias;
-addProductButton.addEventListener('click', (e) => {
-    addProductSubmit.click(); // only  html5 required
-})
+
 addProductForm.addEventListener('submit', (e) => {
     if(!addProductForm.checkValidity()) return;
 
@@ -63,6 +60,7 @@ addProductForm.addEventListener('submit', (e) => {
     }
     xmlhttp.send(urlencodedData);
 })
+
 uploadImageForm.addEventListener('submit', (e) => {
     if(!uploadImageForm.checkValidity()) return;
 
@@ -101,6 +99,7 @@ uploadImageForm.addEventListener('submit', (e) => {
     xmlhttp.send(multipart_data);
     updateProgressBar(0, false);
 })
+
 addProductModal.addEventListener('show.bs.modal', (e) => {
     // Button that triggered the modal
     var button = e.relatedTarget;
@@ -110,6 +109,7 @@ addProductModal.addEventListener('show.bs.modal', (e) => {
     document.getElementById('alias').readOnly = !createProduct;
     document.getElementById('alias').disabled = !createProduct;
 
+    addProductForm.classList.toggle('was-validated', false);
     if(createProduct) {
         addProductForm.reset();
 
