@@ -36,7 +36,7 @@
                     </c:when>
                 </c:choose>
             </ul>
-            <form class="input-group w-25" method="GET" id="searchForm" action="<c:url value="/products/search"/>">
+            <form class="input-group w-100 w-lg-25" method="GET" id="searchForm" action="<c:url value="/products/search"/>">
                 <input class="form-control" type="text" id="searchAutocompleteInput" name="q"  pattern="[A-Za-z0-9 ]{1,20}" placeholder="Write here to search" aria-describedby="button-search" autocomplete="off">
                 <ul class="dropdown-menu" id="searchAutocompleteMenu">
                 </ul>
@@ -94,7 +94,7 @@
                         </li>
                     </c:when>
                     <c:otherwise>
-                        <li class="nav-item">
+                        <li class="nav-item dropdown">
                                 <a href="#" class="nav-link" type="button" id="dropdownMenuLogin" data-bs-toggle="dropdown" data-bs-auto-close="false" aria-expanded="false">
                                     Login
                                 </a>
