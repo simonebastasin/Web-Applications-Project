@@ -95,7 +95,87 @@ $utilities: map-merge(
                 sm: $box-shadow-sm,
                 lg: $box-shadow-lg,
             ),
-        )
+        ),
+        "width": (
+            responsive: true,
+            property: width,
+            class: w,
+            values: (
+                25: 25%,
+                50: 50%,
+                75: 75%,
+                100: 100%,
+                auto: auto
+            )
+        ),
+        "max-width": (
+            responsive: true,
+            property: max-width,
+            class: mw,
+            values: (
+                25: 25%,
+                50: 50%,
+                75: 75%,
+                100: 100%)
+        ),
+        "viewport-width": (
+            responsive: true,
+            property: width,
+            class: vw,
+            values: (25: 25vw,
+                50: 50vw,
+                75: 75vw,
+                100: 100vw)
+        ),
+        "min-viewport-width": (
+            responsive: true,
+            property: min-width,
+            class: min-vw,
+            values: (25: 25vw,
+                50: 50vw,
+                75: 75vw,
+                100: 100vw)
+        ),
+        "height": (
+            responsive: true,
+            property: height,
+            class: h,
+            values: (
+                25: 25%,
+                50: 50%,
+                75: 75%,
+                100: 100%,
+                auto: auto
+            )
+        ),
+        "max-height": (
+            responsive: true,
+            property: max-height,
+            class: mh,
+            values: (
+                25: 25%,
+                50: 50%,
+                75: 75%,
+                100: 100%)
+        ),
+        "viewport-height": (
+            responsive: true,
+            property: height,
+            class: vh,
+            values: (25: 25vh,
+                50: 50vh,
+                75: 75vh,
+                100: 100vh)
+        ),
+        "min-viewport-height": (
+            responsive: true,
+            property: min-height,
+            class: min-vh,
+            values: (25: 25vh,
+                50: 50vh,
+                75: 75vh,
+                100: 100vh)
+        ),
     ),
 );
 .mask {
