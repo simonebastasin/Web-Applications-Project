@@ -1,11 +1,14 @@
+// 0. Include functions first (so you can manipulate colors, SVGs, calc, etc)
+@import "bootstrap/scss/functions";
+
 // 1. Include any default variable overrides here
 $primary: #3dd900;
 $danger: #ff4136;
 $warning: #ffb007;
 $info: #0d8ef0;
 
-// 2. Include functions first (so you can manipulate colors, SVGs, calc, etc)
-@import "bootstrap/scss/functions";
+// 2. Includes variables, mixins and root
+
 @import "bootstrap/scss/variables";
 @import "bootstrap/scss/mixins";
 @import "bootstrap/scss/root";
@@ -58,7 +61,6 @@ $zoom-hover-transform:              scale(1.1) !default;
 @import "bootstrap/scss/offcanvas";
 @import "bootstrap/scss/placeholders";
 @import "bootstrap/scss/helpers";
-@import "bootstrap/scss/grid";
 @import "bootstrap/scss/grid";
 @import "bootstrap/scss/utilities";
 // 6. Custom utilities & component
