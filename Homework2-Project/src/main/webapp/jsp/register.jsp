@@ -26,7 +26,7 @@
   </ol>
 </nav>
 
-<form method="post" action="<c:url value="/session/register"/>" class="row g-3 needs-validation" novalidate id="formConfirmPassword">
+<form method="post" action="<c:url value="/session/register"/>" class="row g-3 w-50 mx-auto needs-validation" novalidate id="formConfirmPassword">
     <div class="form-floating mb-3">
         <input id="name" type="text" class="form-control" name="name" required placeholder="name">
         <label for="name">Name</label>

@@ -94,8 +94,8 @@
                         </li>
                     </c:when>
                     <c:otherwise>
-                        <li class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" type="button" id="dropdownMenuLogin" data-bs-toggle="dropdown" data-bs-auto-close="false" aria-expanded="false">
+                        <li class="nav-item">
+                                <a href="#" class="nav-link" type="button" id="dropdownMenuLogin" data-bs-toggle="dropdown" data-bs-auto-close="false" aria-expanded="false">
                                     Login
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-lg-end dropdown-menu-login" aria-labelledby="dropdownMenuLogin">
@@ -128,7 +128,7 @@
                                             <button class="btn btn-outline-primary" type="submit">Login</button>
                                     </form>
                                     <div class="dropdown-divider"></div>
-                                    <a class="btn btn-outline-primary"  href="<c:url value="/session/register"/>">Register</a>
+                                    <a class="dropdown-item"  href="<c:url value="/session/register"/>">Register</a>
                                 </div>
                         </li>
                     </c:otherwise>

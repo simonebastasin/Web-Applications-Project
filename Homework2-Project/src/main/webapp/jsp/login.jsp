@@ -22,7 +22,7 @@
   </ol>
 </nav>
 
-<form method="POST" action="<c:url value="/session/login"/>" class="row g-3 needs-validation" novalidate>
+<form method="POST" action="<c:url value="/session/login"/>" class="row g-3 w-50 mx-auto needs-validation" novalidate>
     <div class="form-floating mb-3">
         <input type="text" class="form-control" id="identification" name="identification" placeholder="Username or Email" required>
         <label for="identification">Username or Email</label>
@@ -37,12 +37,12 @@
     </div>
     <div class="mb-3">
         <div class="form-check form-check-inline">
-            <input type="radio" class="form-check-input" id="CUSTOMER" name="usertype" required value="${TypeUserEnum.CUSTOMER}">
-            <label class="form-check-label" for="CUSTOMER">Customer</label>
+            <input type="radio" class="form-check-input" id="logCUSTOMER" name="usertype" required value="${TypeUserEnum.CUSTOMER}">
+            <label class="form-check-label" for="logCUSTOMER">Customer</label>
         </div>
         <div class="form-check form-check-inline">
-            <input type="radio" class="form-check-input" id="EMPLOYEE" name="usertype" required value="${TypeUserEnum.EMPLOYEE}">
-            <label class="form-check-label" for="EMPLOYEE">Employee</label>
+            <input type="radio" class="form-check-input" id="logEMPLOYEE" name="usertype" required value="${TypeUserEnum.EMPLOYEE}">
+            <label class="form-check-label" for="logEMPLOYEE">Employee</label>
         </div>
         <div class = "form-check">
             <input type="radio" class="form-check-input d-none" id="HIDDEN" name="usertype" required value="HIDDEN">
