@@ -83,11 +83,15 @@ uploadImageForm.addEventListener('submit', (e) => {
                 [...imageCheckBox].forEach(
                     (element) => {
                         const li = document.createElement('li');
-                        li.innerHTML = '<input type="checkbox" id="media-'+response.resourceId+'" name="media" value="'+response.resourceId+' checked"/>'+
+                        li.innerHTML = '<input type="checkbox" id="media-'+response.resourceId+'" name="pictures" value="'+response.resourceId+'"/>'+
                             '<label for="media-'+response.resourceId+'"><img src="'+rootPath+"/media/thumb/"+response.resourceId+'" /></label>';
                         element.appendChild(li);
                     }
                 );
+
+                const imageCheckBoxItem = document.querySelectorAll('.image-check-box ul li:last-child input');
+                [...imageCheckBoxItem].forEach((element) => element.click());
+
                 bootstrapAlert(response.message, 'success', alertPlaceholder);
             } else {
                 const alertPlaceholder = document.getElementById('formAlertPlaceholder');
@@ -110,10 +114,13 @@ addProductModal.addEventListener('show.bs.modal', (e) => {
     document.getElementById('alias').disabled = !createProduct;
 
     addProductForm.classList.toggle('was-validated', false);
+    addProductForm.reset();
+
+    uploadImageForm.classList.toggle('was-validated', false);
+    uploadImageForm.reset();
+
+    uploadImageProgress.style.display = "none";
     if(createProduct) {
-        addProductForm.reset();
-
-
         let modalTitle = addProductModal.querySelector('.modal-title');
         modalTitle.textContent = 'Add product';
         addProductButton.textContent = 'Add product';

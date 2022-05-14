@@ -25,6 +25,7 @@ addDiscountModal.addEventListener('show.bs.modal', (e) => {
     let createDiscount = (idDiscount  === null);
 
     addProductForm.classList.toggle('was-validated', false);
+    addProductForm.reset();
     if(createDiscount) {
         let modalTitle = addDiscountModal.querySelector('.modal-title');
         modalTitle.textContent = 'Add discount';
