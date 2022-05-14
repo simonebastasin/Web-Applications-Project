@@ -1,7 +1,6 @@
 const addDiscountButton = document.getElementById('addDiscountButton');
 const addDiscountForm = document.getElementById('addDiscountForm');
 const addDiscountModal = document.getElementById('addDiscountModal');
-const addDiscountSubmit = document.getElementById('addDiscountSubmit');
 let idDiscount;
 
 addDiscountForm.addEventListener('submit', (e) => {
@@ -24,8 +23,8 @@ addDiscountModal.addEventListener('show.bs.modal', (e) => {
     idDiscount = button.getAttribute('data-bs-whatever');
     let createDiscount = (idDiscount  === null);
 
-    addProductForm.classList.toggle('was-validated', false);
-    addProductForm.reset();
+    addDiscountForm.classList.toggle('was-validated', false);
+    addDiscountForm.reset();
     if(createDiscount) {
         let modalTitle = addDiscountModal.querySelector('.modal-title');
         modalTitle.textContent = 'Add discount';
@@ -39,7 +38,6 @@ addDiscountModal.addEventListener('show.bs.modal', (e) => {
                     const response = JSON.parse(xmlhttp.responseText).discountListProduct;
                     let fullProductList = response.productList; // for backup
                     const respondeElaborated = Object.assign({}, response, {productList : response.productList.map(it =>  it.alias)});
-                    console.log(respondeElaborated);
                     populateForm(addDiscountForm, respondeElaborated);
 
                 } else {
