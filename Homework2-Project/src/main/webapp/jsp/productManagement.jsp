@@ -37,7 +37,7 @@
     </button>
 </div><br>
 
-<table id="productTable">
+<table id="productTable" class="table">
     <tr>
         <th>Name</th>
         <th>Alias</th>

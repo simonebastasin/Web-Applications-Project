@@ -56,7 +56,7 @@
             Add new Discount
         </button>
     </div>
-<table>
+<table class="table">
     <tr>
         <th>Id</th>
         <th>Percentage</th>

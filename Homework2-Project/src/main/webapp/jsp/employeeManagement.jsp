@@ -33,7 +33,7 @@
     </a>
 </div><br>
 
-<table>
+    <table class="table">
     <tr>
         <th>Username</th>
         <th>Name</th>

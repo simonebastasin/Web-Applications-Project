@@ -27,7 +27,7 @@
   </ol>
 </nav>
 
-<table>
+    <table class="table">
     <tr>
         <th>ID</th>
         <th>Username</th>

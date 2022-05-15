@@ -8,12 +8,50 @@ addDiscountForm.addEventListener('submit', (e) => {
 
     e.preventDefault();
     let createDiscount = (idDiscount  === null);
+    const formData = new FormData(addDiscountForm);
+    const urlencodedData = new URLSearchParams(formData);
+    const xmlhttp = new XMLHttpRequest();
+
 
     if(createDiscount) {
-        //alert("send create");
+        alert("send create");
+        xmlhttp.open("POST", rootPath + "/rest/management/discountManagement/createDiscount", true);
     } else {
-        //alert("send edit "+idDiscount);
+        alert("send edit "+idDiscount);
+        xmlhttp.open("POST", rootPath + "/rest/management/discountManagement/editDiscount/" + alias, true);
+
     }
+
+    xmlhttp.onreadystatechange = function() {
+        if (xmlhttp.readyState === XMLHttpRequest.DONE) {
+            if(xmlhttp.status === 200) {
+                const alertPlaceholder = document.getElementById('liveAlertPlaceholder');
+                let newInnerHTML =
+                    '<td>'+formData.get('percentage')+'</td>'+
+                    '<td>'+formData.get('start')+'</td>'+
+                    '<td>'+formData.get('end')+'</td>'+
+                    '<td>'+formData.getAll('productList').join(' ')+'</td>'+
+                    '<td><button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#addDiscountModal" data-bs-whatever="'+alias+'">Edit</button></td>'+
+                    '<td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteDiscountModal" data-bs-whatever="'+alias+'">Delete</button></td>';
+                if(createDiscount) {
+                    bootstrapAlert("The discount was created", 'success', alertPlaceholder);
+                    let tr = document.createElement('tr');
+                    tr.id = alias;
+                    tr.innerHTML = newInnerHTML;
+                    productTable.appendChild(tr);
+                }
+                else {
+                    bootstrapAlert("The product was modified", 'success', alertPlaceholder);
+                    document.getElementById(alias).innerHTML = newInnerHTML;
+                }
+                bootstrap.Modal.getOrCreateInstance(addDiscountModal).hide();
+            }else {
+                const alertPlaceholder = document.getElementById('formAlertPlaceholder');
+                bootstrapAlert(xmlhttp.responseText !== "" ? xmlhttp.responseText : (xmlhttp.statusText !== ""? 'Error: '+ xmlhttp.statusText : "Generic error"), 'danger', alertPlaceholder);
+            }
+        }
+    }
+    xmlhttp.send(urlencodedData);
 });
 
 addDiscountModal.addEventListener('show.bs.modal', (e) => {
