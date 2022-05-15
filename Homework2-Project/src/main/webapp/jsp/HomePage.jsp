@@ -23,7 +23,7 @@
 
 <div class="container main-container">
 
-<h1 class="title">Electromechanical <small class="text-primary" >Shop</small></h1>
+<h1 class="title">Electromechanical <small class="text-secondary" >Shop</small></h1>
 
     <c:set value="${false}" var="showcase"/>
     <c:forEach var="prod" items="${productList}">
@@ -111,15 +111,15 @@
                                         <h3>${prod.name}</h3>
                                     </div>
                                     <div class="col ms-3 em text-start">
-                                        <span class="em">${prod.brand}</span>
+                                        <span class="roboto">${prod.brand}</span>
                                     </div>
                                     <div class="col text-end">
                                         <c:choose>
                                             <c:when test="${not empty prod.discount}">
-                                                <span  style="text-decoration: line-through;">${prod.salePrice}€</span> <span style="color: red;">${prod.discountSale}€</span>
+                                                <span class="text-decoration-line-through roboto">${prod.salePrice}€</span> <span class="roboto text-red">${prod.discountSale}€</span>
                                             </c:when>
                                             <c:otherwise>
-                                                <span>${prod.salePrice}€</span>
+                                                <span class="roboto">${prod.salePrice}€</span>
                                             </c:otherwise>
                                         </c:choose>
                                     </div>
@@ -166,15 +166,15 @@
                                             <h3>${prod.name}</h3>
                                         </div>
                                         <div class="col ms-3 text-start">
-                                            <span class="em">${prod.brand}</span>
+                                            <span class="roboto">${prod.brand}</span>
                                         </div>
                                         <div class="col text-end">
                                             <c:choose>
                                                 <c:when test="${not empty prod.discount}">
-                                                    <span  style="text-decoration: line-through;">${prod.salePrice}€</span> <span style="color: red;">${prod.discountSale}€</span>
+                                                    <span class="text-decoration-line-through roboto">${prod.salePrice}€</span> <span class="roboto text-red">${prod.discountSale}€</span>
                                                 </c:when>
                                                 <c:otherwise>
-                                                    <span>${prod.salePrice}€</span>
+                                                    <span class="roboto">${prod.salePrice}€</span>
                                                 </c:otherwise>
                                             </c:choose>
                                         </div>
@@ -221,7 +221,7 @@
     </c:if>
     <c:choose>
         <c:when test="${empty_cat eq true}">
-    <div class="row mx-auto justify-content-center border mt-3 mb-3 rounded">
+    <div class="row mx-auto justify-content-center border mt-3 mb-3 rounded bg-light">
         <div class="d-inline p-3">
             <h3 class="title d-inline pe-3">${item.name}</h3>
             <span>Sorry, there are no products at the moment for this category</span>
@@ -230,7 +230,7 @@
         </c:when>
         <c:otherwise>
 
-            <div class="row mx-auto justify-content-center border mt-3 mb-3 rounded">
+            <div class="row mx-auto justify-content-center border mt-3 mb-3 rounded bg-light">
             <div class="d-inline p-3">
                 <h3 class="title d-inline">${item.name}</h3>
                 <a href="<c:url value="products/category/${item.name}"/>" class="d-inline p-3 fw-bold">Shop now</a>
@@ -309,8 +309,8 @@
                                                                 <div class="mask">
                                                                     <div class="text-center text-white mt-3 mb-3">
                                                                         <a href="<c:url value="/products/details/${prod.alias}"/>" class="stretched-link fw-bold">${prod.name}</a>  <br>
-                                                                        <span>${prod.brand}</span> <br> <br>
-                                                                        <div class="text-decoration-line-through"> ${prod.salePrice}€</div> <div class="text-red">${prod.discountSale}€</div>
+                                                                        <span class="roboto">${prod.brand}</span> <br> <br>
+                                                                        <span class="text-decoration-line-through roboto"> ${prod.salePrice}€</span> <span class="roboto text-red">${prod.discountSale}€</span>
                                                                     </div>
                                                                 </div>
                                                             </c:when>
@@ -319,8 +319,8 @@
 
                                                                     <div class="text-center text-white mt-3 mb-3">
                                                                         <a href="<c:url value="/products/details/${prod.alias}"/>" class="stretched-link fw-bold">${prod.name}</a>  <br>
-                                                                        <span>${prod.brand}</span> <br> <br>
-                                                                        ${prod.salePrice}€
+                                                                        <span class="roboto">${prod.brand}</span> <br> <br>
+                                                                        <span class="roboto">${prod.salePrice}€ </span>
                                                                     </div>
 
                                                                 </div>
@@ -362,8 +362,8 @@
                                                                 <div class="mask">
                                                                     <div class="text-center text-white mt-3 mb-3">
                                                                         <a href="<c:url value="/products/details/${prod.alias}"/>" class="stretched-link fw-bold">${prod.name}</a>  <br>
-                                                                        <span>${prod.brand}</span> <br> <br>
-                                                                        <div class="text-decoration-line-through">${prod.salePrice}€</div> <div class="text-red">${prod.discountSale}€</div>
+                                                                        <span class="roboto">${prod.brand}</span> <br> <br>
+                                                                        <span class="text-decoration-line-through roboto">${prod.salePrice}€</span> <span class="roboto text-red">${prod.discountSale}€</span>
                                                                     </div>
                                                                 </div>
                                                             </c:when>
@@ -371,8 +371,8 @@
                                                             <div class="mask">
                                                                 <div class="text-center text-white mt-3 mb-3">
                                                                     <a href="<c:url value="/products/details/${prod.alias}"/>" class="stretched-link fw-bold">${prod.name}</a>  <br>
-                                                                    <span>${prod.brand}</span> <br> <br>
-                                                                    ${prod.salePrice}€
+                                                                    <span class="roboto">${prod.brand}</span> <br> <br>
+                                                                    <span class="roboto">${prod.salePrice}€</span>
                                                                 </div>
                                                             </div>
 

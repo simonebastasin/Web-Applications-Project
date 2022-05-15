@@ -1,3 +1,10 @@
+body {
+    background-image: url('../images/cool-background.svg');
+    background-size: 100vw;
+    background-repeat: repeat-y;
+    background-position-y: 50%;
+}
+
 /*
     global setting
  */
