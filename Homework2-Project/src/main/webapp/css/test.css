@@ -1,4 +1,6 @@
-
+span {
+    font-family: "Roboto Thin", sans-serif;
+}
 .square {
     display: inline-block;
     position: relative;
@@ -81,10 +83,16 @@
         transform: translate(0, -2.5rem);
     }
 }
-
 .title{
     font-family: 'Bebas Neue', sans-serif;
+}
+
+h1.title{
     font-size: 5em;
+}
+
+h3.title{
+    font-size: 2em;
 }
 
 
@@ -123,4 +131,9 @@
 .carousel-category .carousel-inner .carousel-item-end,
 .carousel-category .carousel-inner .carousel-item-start {
     transform: translateX(0);
+}
+
+.carousel-category .carousel-control-prev,
+.carousel-category .carousel-control-next {
+    width: 5%;
 }
