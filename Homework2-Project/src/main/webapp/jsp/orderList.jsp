@@ -27,7 +27,7 @@
 </nav>
 
 <c:forEach var="order" items="${onlineOrderList}">
-    <div class="mx-auto" style="width: 500px;">
+    <div class="mx-auto w-50">
         <div class="card mt-3 mb-3">
             <div class="card-header text-end">
                 ID ORDER # ${order.idOrder} <br>

@@ -286,8 +286,8 @@
                                         <div class="carousel-item active p-3">
 
                                             <div class="col-md-3 text-center">
-                                                <div class="square one">
-                                                    <div class="img-cat">
+                                                <div class="square one img-cat">
+
                                                         <div class="overlay-hover">
                                                             <c:choose>
                                                             <c:when test="${not empty prod.pictures}">
@@ -328,7 +328,7 @@
                                                     </c:otherwise>
                                                         </c:choose>
                                                         </div>
-                                                    </div>
+
                                                 </div>
                                             </div>
                                         </div>
@@ -339,8 +339,8 @@
                                         <div class="carousel-item p-3">
 
                                             <div class="col-md-3 text-center">
-                                                <div class="square one">
-                                                    <div class="img-cat">
+                                                <div class="square one img-cat">
+
                                                         <div class="overlay-hover">
                                                             <c:choose>
                                                             <c:when test="${not empty prod.pictures}">
@@ -379,7 +379,6 @@
                                                             </c:otherwise>
                                                         </c:choose>
                                                         </div>
-                                                    </div>
                                                 </div>
                                             </div>
                                         </div>

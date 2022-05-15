@@ -24,7 +24,7 @@
 <div class="container main-container">
 
     <div class="clearfix product-detail">
-            <div class="col-md-6 me-md-4 float-start ratio ratio-1x1 rounded border mt-3 mb-5">
+            <div class="col-md-6 me-md-4 float-start ratio ratio-1x1 rounded border mt-3 mb-5 bg-light">
                 <c:choose>
                     <c:when test="${not empty product.pictures}">
 

@@ -29,7 +29,7 @@
 </nav>
 
 
-<div class="mx-auto" style="width: 500px;">
+<div class="mx-auto w-50">
     <div class="card mt-3 mb-3">
         <div class="card-body ms-10">
             <ul class="list-group list-group-flush">

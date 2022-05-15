@@ -29,7 +29,7 @@
 
 
     <c:forEach var="assistanceTicket" items="${assistanceTicketList}">
-    <div class="mx-auto" style="width: 400px;">
+    <div class="mx-auto w-50">
     <div class="card text-center">
         <div class="card-body">
             <h5 class="card-title">Ticket ID: ${assistanceTicket.id}</h5>
