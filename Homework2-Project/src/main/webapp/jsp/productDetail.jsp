@@ -115,24 +115,25 @@
                 </c:choose>
             </div>
             <div class="col-md-5 me-md-4 float-end mt-3 mb-4">
-                <div>
+                <div class="card mt-3">
+                    <div class="card-body ms-10">
                     <h3 class="title">${product.name}</h3>
-                    <h5 class="text-primary">Brand: ${product.brand}</h5>
+                    <span class="roboto text-primary">Brand: ${product.brand}</span>
                     <hr/>
 
                     <c:choose>
                         <c:when test="${not empty product.discount}">
                             <div class="row">
-                                <div class="col-md-6">Price: <span style="text-decoration: line-through;">${product.salePrice}€</span> <span style="color: red;">${product.discountSale}€</span></div>
+                                <div class="col-md-6">Price: <span class="text-decoration-line-through">${product.salePrice}€</span> <span class="text-red display-6">${product.discountSale}€</span></div>
                                 <div class="col-md-6 text-end"> ${product.discount.percentage}% discount (until ${product.discount.endDate.humanDate})</div>
                             </div>
                         </c:when>
                         <c:otherwise>
-                            <p>Price: ${product.salePrice}€</p>
+                            Price: <span class="display-6"> ${product.salePrice}€</span>
                         </c:otherwise>
                     </c:choose>
-                    <br>
-                    <p>${product.description}</p>
+
+                    <p class="mt-3">${product.description}</p>
 
                     <%--
                     <ul>
@@ -177,17 +178,18 @@
                                     <c:choose>
                                         <c:when test="${not empty user && not empty user.role}">
                                             <hr/>
-                                            <span class="fw-bold text-danger">Employees are not authorized to make purchases.</span>
+                                            <span class="fw-bold text-danger">Employees are not authorized to make purchases</span>
                                         </c:when>
                                         <c:otherwise>
                                             <hr/>
-                                            Please, <a href="<c:url value="/session/login"/>" class="btn btn-primary">login</a> to buy the product
+                                            Please <a class="btn btn-primary" id="loginForBuy">login</a> to buy the product
                                         </c:otherwise>
                                     </c:choose>
                                 </c:otherwise>
                             </c:choose>
                         </c:otherwise>
                     </c:choose>
+                    </div>
                 </div>
             </div>
     </div>

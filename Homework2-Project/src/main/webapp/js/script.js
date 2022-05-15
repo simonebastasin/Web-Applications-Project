@@ -266,3 +266,9 @@ function cart()
 
     });
 }
+
+
+const dropdownMenuLogin = document.getElementById('dropdownMenuLogin')
+
+const loginForBuy = document.getElementById('loginForBuy')
+loginForBuy.addEventListener('click', (e) => {dropdownMenuLogin.click()})
