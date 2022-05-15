@@ -41,15 +41,19 @@
                 <ul class="dropdown-menu" id="searchAutocompleteMenu">
                 </ul>
 
-                <input class="btn btn-outline-success" type="submit" value="Go" id="button-search">
-            </form>
+                <button class="btn btn-outline-primary" type="submit" id="button-search">
+                    <i class="fa-solid fa-search"></i>
+                </button>
+                </form>
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 <c:choose>
                     <c:when test="${not empty user}">
                         <c:choose>
                             <c:when test="${empty user.role}">
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownCart" role="button" data-bs-toggle="dropdown" aria-expanded="false" onclick="presentCart()" href="#">Cart</a>
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownCart" role="button" data-bs-toggle="dropdown" aria-expanded="false" onclick="presentCart()" href="#">
+                                        <i class="fa-solid fa-cart-shopping"></i>
+                                    </a>
                                     <ul class="dropdown-menu" id="cart" aria-labelledby="navbarDropdownCart">
 
                                     </ul>
@@ -88,14 +92,19 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownUser" role="button" data-bs-toggle="dropdown" aria-expanded="false"  href="#">Hello, ${user.identification}</a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdownUser">
-                                <li><a class="dropdown-item" href="<c:url value="/user/info"/>">Info</a></li>
-                                <li><a class="dropdown-item" href="<c:url value="/session/logout"/>" onclick="invalidate()">Logout</a></li>
+                                <li><a class="dropdown-item" href="<c:url value="/user/info"/>">
+                                    <i class="fa-solid fa-gear"></i>
+                                    Info</a></li>
+                                <li><a class="dropdown-item" href="<c:url value="/session/logout"/>" onclick="invalidate()">
+                                    <i class="fa-solid fa-right-from-bracket"></i>
+                                    Logout</a></li>
                             </ul>
                         </li>
                     </c:when>
                     <c:otherwise>
                         <li class="nav-item dropdown">
                                 <a href="#" class="nav-link" type="button" id="dropdownMenuLogin" data-bs-toggle="dropdown" data-bs-auto-close="false" aria-expanded="false">
+                                    <i class="fa-solid fa-right-to-bracket"></i>
                                     Login
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-lg-end dropdown-menu-login" aria-labelledby="dropdownMenuLogin">

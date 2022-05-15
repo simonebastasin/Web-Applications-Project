@@ -33,6 +33,7 @@
     <div id="liveAlertPlaceholder"></div>
 <div>
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addProductModal">
+        <i class="fa-solid fa-circle-plus"></i>
         Add new product
     </button>
 </div><br>
@@ -64,11 +65,11 @@
                     ${picture}
                 </c:forEach>
             </td>
-            <td><button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#addProductModal" data-bs-whatever="${prod.alias}">
-                Edit
+            <td><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#addProductModal" data-bs-whatever="${prod.alias}">
+                <i class="fa-solid fa-pen-to-square text-primary"></i>
             </button></td>
-            <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteProductModal" data-bs-whatever="${prod.alias}">
-                Delete
+            <td><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteProductModal" data-bs-whatever="${prod.alias}">
+                <i class="fa-solid fa-trash-can text-danger"></i>
             </button></td>
             <%--<td><a class="btn btn-outline-danger" href="<c:url value="/management/productManagement/deleteProduct/${prod.alias}"/>">Delete</a></td>--%>
         </tr>
