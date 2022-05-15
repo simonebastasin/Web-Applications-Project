@@ -1,3 +1,4 @@
+const discountTable = document.getElementById('discountTable');
 const addDiscountButton = document.getElementById('addDiscountButton');
 const addDiscountForm = document.getElementById('addDiscountForm');
 const addDiscountModal = document.getElementById('addDiscountModal');
@@ -14,11 +15,11 @@ addDiscountForm.addEventListener('submit', (e) => {
 
 
     if(createDiscount) {
-        alert("send create");
+       //alert("send create");
         xmlhttp.open("POST", rootPath + "/rest/management/discountManagement/createDiscount", true);
     } else {
-        alert("send edit "+idDiscount);
-        xmlhttp.open("POST", rootPath + "/rest/management/discountManagement/editDiscount/" + alias, true);
+        //alert("send edit "+idDiscount);
+        xmlhttp.open("POST", rootPath + "/rest/management/discountManagement/editDiscount/" + idDiscount, true);
 
     }
 
@@ -31,18 +32,18 @@ addDiscountForm.addEventListener('submit', (e) => {
                     '<td>'+formData.get('start')+'</td>'+
                     '<td>'+formData.get('end')+'</td>'+
                     '<td>'+formData.getAll('productList').join(' ')+'</td>'+
-                    '<td><button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#addDiscountModal" data-bs-whatever="'+alias+'">Edit</button></td>'+
-                    '<td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteDiscountModal" data-bs-whatever="'+alias+'">Delete</button></td>';
+                    '<td><button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#addDiscountModal" data-bs-whatever="'+idDiscount+'">Edit</button></td>'+
+                    '<td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteDiscountModal" data-bs-whatever="'+idDiscount+'">Delete</button></td>';
                 if(createDiscount) {
                     bootstrapAlert("The discount was created", 'success', alertPlaceholder);
                     let tr = document.createElement('tr');
-                    tr.id = alias;
+                    tr.id = idDiscount;
                     tr.innerHTML = newInnerHTML;
-                    productTable.appendChild(tr);
+                    discountTable.appendChild(tr);
                 }
                 else {
                     bootstrapAlert("The product was modified", 'success', alertPlaceholder);
-                    document.getElementById(alias).innerHTML = newInnerHTML;
+                    document.getElementById(idDiscount).innerHTML = newInnerHTML;
                 }
                 bootstrap.Modal.getOrCreateInstance(addDiscountModal).hide();
             }else {

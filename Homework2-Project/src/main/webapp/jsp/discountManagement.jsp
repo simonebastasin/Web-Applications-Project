@@ -56,7 +56,7 @@
             Add new Discount
         </button>
     </div>
-<table class="table">
+<table id="discountTable" class="table">
     <tr>
         <th>Id</th>
         <th>Percentage</th>
@@ -69,7 +69,7 @@
 
 
     <c:forEach var="discountListProduct" items="${discountListProductList}">
-        <tr>
+        <tr id="${discountListProduct.discount.id}">
             <td>${discountListProduct.discount.id}</td>
             <td>${discountListProduct.discount.percentage}%</td>
             <td>${discountListProduct.discount.startDate.getHumanDateTimeless()}</td>
