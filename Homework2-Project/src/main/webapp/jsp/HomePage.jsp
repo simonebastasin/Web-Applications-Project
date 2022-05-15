@@ -110,8 +110,8 @@
                                     <div class="col-md-auto text-start">
                                         <h3>${prod.name}</h3>
                                     </div>
-                                    <div class="col ms-3 text-start">
-                                        <span>${prod.brand}</span>
+                                    <div class="col ms-3 em text-start">
+                                        <span class="em">${prod.brand}</span>
                                     </div>
                                     <div class="col text-end">
                                         <c:choose>
@@ -123,6 +123,7 @@
                                             </c:otherwise>
                                         </c:choose>
                                     </div>
+
                                 </div>
                             </a>
                         </div>
@@ -165,7 +166,7 @@
                                             <h3>${prod.name}</h3>
                                         </div>
                                         <div class="col ms-3 text-start">
-                                            <span>${prod.brand}</span>
+                                            <span class="em">${prod.brand}</span>
                                         </div>
                                         <div class="col text-end">
                                             <c:choose>
