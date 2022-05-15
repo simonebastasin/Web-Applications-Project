@@ -28,12 +28,14 @@
   </ol>
 </nav>
 
+    <div id="liveAlertPlaceholder"></div>
+
     <c:forEach var="assistanceTicket" items="${assistanceTicketList}">
     <div class="mx-auto" style="width: 400px;">
     <div class="card text-center">
         <div class="card-body">
             <h5 class="card-title">Ticket ID: ${assistanceTicket.id}</h5>
-            <ul class="list-group list-group-flush">
+            <ul class="list-group list-group-flush" id="${assistanceTicket.id}">
             <li class="list-group-item">${assistanceTicket.description}</li>
             <li class="list-group-item">Customer: ${assistanceTicket.idCustomer}</li>
             <li class="list-group-item"><a href="<c:url value="/products/details/${assistanceTicket.productAlias}"/>">Product ${assistanceTicket.productAlias}</a></li>
@@ -47,10 +49,15 @@
 
         <c:choose>
             <c:when test="${empty assistanceTicket.ticketStatusList}" >
-                <a href="<c:url value="/ticket/respond/${assistanceTicket.id}"/>" class="btn btn-primary">Respond</a>
+                <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#respondTicketModal" data-bs-whatever="${assistanceTicket.id}">
+                    Respond
+                </button>
             </c:when>
             <c:when test="${not (assistanceTicket.ticketStatusList[0].status eq TicketStatusEnum.CLOSED) }">
-                <a href="<c:url value="/ticket/respond/${assistanceTicket.id}"/>" class="btn btn-primary">Respond</a>
+                <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#respondTicketModal" data-bs-whatever="${assistanceTicket.id}">
+                    Respond
+                </button>
+
             </c:when>
             <c:otherwise>
                 <li class="list-group-item">The ticket is closed</li>
@@ -63,8 +70,53 @@
     <br>
     </c:forEach>
 
+    <div class="modal fade" id="respondTicketModal" tabindex="-1" aria-labelledby="respondTicketModal" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false" >
+        <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg modal-fullscreen-md-down">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="respondTicketModalTitle">Respond Ticket</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div id="formAlertPlaceholder"></div>
+                <div class="modal-body">
+                    <form id="respondTicketForm" class="needs-validation" novalidate>
+                        <div class="mb-3"> Ticket Status:
+                            <div class="form-check form-check-inline" >
+                                <input class="form-check-input" type="radio" id="${TicketStatusEnum.OPEN}"
+                                       name="status" value="${TicketStatusEnum.OPEN}" required>
+                                <label class="form-check-label ticket-OPEN" for="${TicketStatusEnum.OPEN}">Open</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" id="${TicketStatusEnum.PROCESSING}"
+                                       name="status" value="${TicketStatusEnum.PROCESSING}" required>
+                                <label class="form-check-label ticket-PROCESSING" for="${TicketStatusEnum.PROCESSING}">Processing</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" id="${TicketStatusEnum.CLOSED}"
+                                       name="status" value="${TicketStatusEnum.CLOSED}" required>
+                                <label class="form-check-label ticket-CLOSED" for="${TicketStatusEnum.CLOSED}">Closed</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" id="${TicketStatusEnum.RETURN}"
+                                       name="status" value="${TicketStatusEnum.RETURN}" required>
+                                <label class="form-check-label ticket-RETURN" for="${TicketStatusEnum.RETURN}">Return</label>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="description" class="col-form-label">Description:</label>
+                            <textarea class="form-control" id="description" name="description" required></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary" id="respondTicketButton" form="respondTicketForm">Respond</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </div>
 <c:import url="/jsp/include/footer.jsp"/>
+<script src="<c:url value="/js/respond-ticket.js"/>"></script>
 </body>
 </html>
