@@ -218,7 +218,7 @@ function presentCart() {
     buyButton.addEventListener("click",buyCart);
 }
 function buyCart() {
-    var text = '{"cart":[';
+    var json={cart:[]};
     for (let i = 0; i < localStorage.length; i++) {
 
 
@@ -227,16 +227,16 @@ function buyCart() {
             const qta = element[0];
             const name = element[1];
             console.log(i);
-
-            text += '{"quantity":' + qta + ',"alias":\"' + localStorage.key(i).substring(4) + '"},';
+            json.cart.push({quantity:qta,alias:localStorage.key(i).substring(4)});
+           // text += '{"quantity":' + qta + ',"alias":\"' + localStorage.key(i).substring(4) + '"},';
         }
     }
-    text = text.substring(0, text.length - 1);
-    text += ']}';
 
-    console.log(text);
-    var json = JSON.parse(text);
-    json = JSON.stringify(json, undefined, 4);
+
+
+
+    const send = JSON.stringify(json, undefined, 4);
+    console.log(send);
     var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance
     xmlhttp.onreadystatechange = function () {
         if (xmlhttp.readyState === XMLHttpRequest.DONE) {
@@ -251,7 +251,7 @@ function buyCart() {
 
     xmlhttp.open("POST",rootPath+"/rest/buy/cart");
     xmlhttp.setRequestHeader("Content-Type", "application/json");
-    xmlhttp.send(json);
+    xmlhttp.send(send);
 }
 
 function cart()
