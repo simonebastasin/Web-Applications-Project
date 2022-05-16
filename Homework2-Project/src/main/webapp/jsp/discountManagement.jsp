@@ -66,8 +66,6 @@
                     <th>Start Date</th>
                     <th>End Date</th>
                     <th>Product List</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
                 </tr>
             </thead>
             <tbody>

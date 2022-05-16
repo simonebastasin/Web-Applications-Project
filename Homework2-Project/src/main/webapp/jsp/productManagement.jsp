@@ -24,19 +24,19 @@
 <body>
 <c:import url="/jsp/include/header.jsp"/>
 <div class="container main-container">
-<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-  <ol class="breadcrumb bg-secondary bg-opacity-25 p-3 mt-3 rounded">
-    <li class="breadcrumb-item"><a href="<c:url value="/"/>">Electromechanics Shop</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Product List</li>
-  </ol>
-</nav>
+    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+      <ol class="breadcrumb bg-secondary bg-opacity-25 p-3 mt-3 rounded">
+        <li class="breadcrumb-item"><a href="<c:url value="/"/>">Electromechanics Shop</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Product List</li>
+      </ol>
+    </nav>
     <div id="liveAlertPlaceholder"></div>
-<div>
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addProductModal">
-        <i class="fa-solid fa-circle-plus"></i>
-        Add new product
-    </button>
-</div><br>
+    <div>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addProductModal">
+            <i class="fa-solid fa-circle-plus"></i>
+            Add new product
+        </button>
+    </div><br>
 
     <div class="card">
         <table id="productTable" class="table table-hover table-hide-lg-col-7 table-hide-lg-col-8 table-hide-md-col-4 table-hide-md-col-5 table-hide-md-col-6 table-hide-sm-col-2 table-hide-sm-col-3" >
