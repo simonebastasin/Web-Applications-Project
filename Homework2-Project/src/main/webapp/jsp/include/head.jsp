@@ -9,7 +9,6 @@
 
 <link rel="stylesheet" href="<c:url value="/css/bootstrap-custom.css"/>" type="text/css">
 <link rel="stylesheet" href="<c:url value="/css/style.css"/>" type="text/css">
-<link rel="stylesheet" href="<c:url value="/css/test.css"/>" type="text/css">
 
 <meta charset="utf-8">
 <meta name="description" content="Electromechanics Shop">

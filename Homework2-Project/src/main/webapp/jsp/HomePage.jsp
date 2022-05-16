@@ -35,7 +35,7 @@
     <c:choose>
     <c:when test="${showcase == true}">
 
-    <div id="featuredCarousel" class="carousel carousel-dark slide featured-carousel" data-bs-ride="carousel">
+    <div id="featuredCarousel" class="carousel carousel-dark slide " data-bs-ride="carousel">
 
         <c:set var="i" value="${0}"/>
         <div class="carousel-indicators">
@@ -82,8 +82,9 @@
                 <div class="d-flex justify-content-center">
 
                         <div class="box">
-                            <a href="<c:url value="/products/details/${prod.alias}"/>" class="stretched-link">
+
                                 <div class="img-box rounded shadow shadow-hover rounded">
+                                    <a href="<c:url value="/products/details/${prod.alias}"/>" class="stretched-link"> </a>
                                     <c:choose>
                                         <c:when test="${not empty prod.pictures}">
 
@@ -107,10 +108,10 @@
 
                                 <div class="content shadow shadow-hover">
 
-                                    <div class="col-md-auto text-start">
+                                    <div class="col-md-auto text-start text-black">
                                         <h3>${prod.name}</h3>
                                     </div>
-                                    <div class="col ms-3 em text-start">
+                                    <div class="col-md-auto ms-3 em text-start">
                                         <span class="roboto">${prod.brand}</span>
                                     </div>
                                     <div class="col text-end">
@@ -125,7 +126,7 @@
                                     </div>
 
                                 </div>
-                            </a>
+
                         </div>
                 </div>
             </div>
@@ -136,9 +137,10 @@
                     <div class="d-flex justify-content-center">
 
                             <div class="box">
-                                <a href="<c:url value="/products/details/${prod.alias}"/>" class="stretched-link">
+
 
                                     <div class="img-box rounded shadow shadow-hover rounded">
+                                        <a href="<c:url value="/products/details/${prod.alias}"/>" class="stretched-link"> </a>
                                         <c:choose>
                                             <c:when test="${not empty prod.pictures}">
 
@@ -162,10 +164,10 @@
                                     </div>
                                     <div class="content shadow shadow-hover">
 
-                                        <div class="col-md-auto text-start">
+                                        <div class="col-md-auto text-start text-black">
                                             <h3>${prod.name}</h3>
                                         </div>
-                                        <div class="col ms-3 text-start">
+                                        <div class="col-md-auto ms-3 text-start">
                                             <span class="roboto">${prod.brand}</span>
                                         </div>
                                         <div class="col text-end">
@@ -179,7 +181,7 @@
                                             </c:choose>
                                         </div>
                                     </div>
-                                </a>
+
                             </div>
 
                     </div>
@@ -307,8 +309,9 @@
                                                             <c:choose>
                                                             <c:when test="${not empty prod.discount}">
                                                                 <div class="mask">
+                                                                    <a href="<c:url value="/products/details/${prod.alias}"/>" class="stretched-link fw-bold"></a>
                                                                     <div class="text-center text-white mt-3 mb-3">
-                                                                        <a href="<c:url value="/products/details/${prod.alias}"/>" class="stretched-link fw-bold">${prod.name}</a>  <br>
+                                                                        <b>${prod.name}</b><br>
                                                                         <span class="roboto">${prod.brand}</span> <br> <br>
                                                                         <span class="text-decoration-line-through roboto"> ${prod.salePrice}€</span> <span class="roboto text-red">${prod.discountSale}€</span>
                                                                     </div>
@@ -316,9 +319,9 @@
                                                             </c:when>
                                                             <c:otherwise>
                                                                 <div class="mask">
-
+                                                                    <a href="<c:url value="/products/details/${prod.alias}"/>" class="stretched-link fw-bold"></a>
                                                                     <div class="text-center text-white mt-3 mb-3">
-                                                                        <a href="<c:url value="/products/details/${prod.alias}"/>" class="stretched-link fw-bold">${prod.name}</a>  <br>
+                                                                        <b>${prod.name}</b><br>
                                                                         <span class="roboto">${prod.brand}</span> <br> <br>
                                                                         <span class="roboto">${prod.salePrice}€ </span>
                                                                     </div>
@@ -360,8 +363,9 @@
                                                             <c:choose>
                                                             <c:when test="${not empty prod.discount}">
                                                                 <div class="mask">
+                                                                    <a href="<c:url value="/products/details/${prod.alias}"/>" class="stretched-link fw-bold"></a>
                                                                     <div class="text-center text-white mt-3 mb-3">
-                                                                        <a href="<c:url value="/products/details/${prod.alias}"/>" class="stretched-link fw-bold">${prod.name}</a>  <br>
+                                                                        <b>${prod.name}</b><br>
                                                                         <span class="roboto">${prod.brand}</span> <br> <br>
                                                                         <span class="text-decoration-line-through roboto">${prod.salePrice}€</span> <span class="roboto text-red">${prod.discountSale}€</span>
                                                                     </div>
@@ -369,8 +373,9 @@
                                                             </c:when>
                                                             <c:otherwise>
                                                             <div class="mask">
+                                                                <a href="<c:url value="/products/details/${prod.alias}"/>" class="stretched-link"></a>
                                                                 <div class="text-center text-white mt-3 mb-3">
-                                                                    <a href="<c:url value="/products/details/${prod.alias}"/>" class="stretched-link fw-bold">${prod.name}</a>  <br>
+                                                                    <b>${prod.name}</b><br>
                                                                     <span class="roboto">${prod.brand}</span> <br> <br>
                                                                     <span class="roboto">${prod.salePrice}€</span>
                                                                 </div>

@@ -115,7 +115,7 @@
                 </c:choose>
             </div>
             <div class="col-md-5 me-md-4 float-end mt-3 mb-4">
-                <div class="card mt-3">
+                <div class="card mt-5">
                     <div class="card-body ms-10">
                     <h3 class="title">${product.name}</h3>
                     <span class="roboto text-primary">Brand: ${product.brand}</span>
