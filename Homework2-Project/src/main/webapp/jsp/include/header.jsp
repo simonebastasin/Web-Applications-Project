@@ -12,6 +12,7 @@
 <%--@elvariable id="employee" type="it.unipd.dei.wa2122.wadteam.resources.Employee"--%>
 <%--@elvariable id="categories" type="java.util.List<ProductCategory>"--%>
 
+
 <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
     <div class="container header-container">
         <a class="navbar-brand" href="<c:url value="/"/>">Home</a>
@@ -51,7 +52,7 @@
                         <c:choose>
                             <c:when test="${empty user.role}">
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownCart" role="button" data-bs-toggle="dropdown" aria-expanded="false"  href="#">
+                                    <a class="nav-link" href="#" id="navbarDropdownCart" role="button"  data-bs-toggle="dropdown" aria-expanded="false"  href="#">
                                         <i class="fa-solid fa-cart-shopping"></i>
                                     </a>
                                     <ul class="dropdown-menu" id="cart" aria-labelledby="navbarDropdownCart">
