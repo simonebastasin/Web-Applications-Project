@@ -38,8 +38,8 @@ addProductForm.addEventListener('submit', (e) => {
                     '<td>'+formData.get('quantity')+'</td>'+
                     '<td>'+formData.get('evidence')+'</td>'+
                     '<td>'+formData.getAll('pictures').join(' ')+'</td>'+
-                    '<td><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#addProductModal" data-bs-whatever="${prod.alias}"> <i class="fa-solid fa-pen-to-square text-primary"></i></button></td>'+
-                    '<td><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteProductModal" data-bs-whatever="${prod.alias}"> <i class="fa-solid fa-trash-can text-danger"></i></button></td>';
+                    '<td><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#addProductModal" data-bs-whatever="'+alias+'"> <i class="fa-solid fa-pen-to-square text-primary"></i></button></td>'+
+                    '<td><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteProductModal" data-bs-whatever="'+alias+'"> <i class="fa-solid fa-trash-can text-danger"></i></button></td>';
                 if(createProduct) {
                     bootstrapAlert("The product was created", 'success', alertPlaceholder);
                     let tr=document.createElement('tr');
