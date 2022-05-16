@@ -32,7 +32,7 @@
     <div class="mx-auto w-50">
         <div class="card mt-3 mb-3">
 
-<table class="table table-striped">
+<table >
     <tr>
         <th>Product name</th>
         <th>Price Unitary</th>
