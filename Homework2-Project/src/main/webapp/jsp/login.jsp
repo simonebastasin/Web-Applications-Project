@@ -24,14 +24,14 @@
 
 <form method="POST" action="<c:url value="/session/login"/>" class="row g-3 w-50 mx-auto needs-validation" novalidate>
     <div class="form-floating mb-3">
-        <input type="text" class="form-control" id="identification" name="identification" placeholder="Username or Email" required>
-        <label for="identification">Username or Email</label>
+        <input type="text" class="form-control" id="logIdentification" name="identification" placeholder="Username or Email" required>
+        <label for="logIdentification">Username or Email</label>
         <div class="invalid-feedback">Insert your username or email.</div>
 
     </div>
     <div class="form-floating mb-3">
-        <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
-        <label for="password">Password</label>
+        <input type="password" class="form-control" id="logPassword" name="password" placeholder="Password" required>
+        <label for="logPassword">Password</label>
         <div class="invalid-feedback">Insert your password.</div>
 
     </div>
@@ -45,7 +45,7 @@
             <label class="form-check-label" for="logEMPLOYEE">Employee</label>
         </div>
         <div class = "form-check">
-            <input type="radio" class="form-check-input d-none" id="HIDDEN" name="usertype" required value="HIDDEN">
+            <input type="radio" class="form-check-input d-none" id="logHIDDEN" name="usertype" required value="HIDDEN">
             <div class="invalid-feedback">Select the type of user you are.</div>
         </div>
     </div>

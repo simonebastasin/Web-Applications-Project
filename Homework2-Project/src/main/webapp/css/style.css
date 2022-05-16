@@ -206,13 +206,13 @@ span.roboto {
 /*
     Ticket color
  */
-.ticket-OPEN{color: green;}
+.ticket-OPEN{color: var(--bs-green);}
 
-.ticket-PROCESSING{color: blue;}
+.ticket-PROCESSING{color: var(--bs-blue);}
 
-.ticket-CLOSED{color: red;}
+.ticket-CLOSED{color: var(--bs-red);}
 
-.ticket-RETURN{color: black;}
+.ticket-RETURN{color: var(--bs-black);}
 
 @media screen and (min-width: 992px){
     .dropdown-menu-login {width: 500px}
