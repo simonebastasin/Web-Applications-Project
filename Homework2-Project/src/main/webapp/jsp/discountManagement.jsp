@@ -25,12 +25,12 @@
 <body>
 <c:import url="/jsp/include/header.jsp"/>
 <div class="container main-container">
-<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-  <ol class="breadcrumb bg-secondary bg-opacity-25 p-3 mt-3 rounded">
-    <li class="breadcrumb-item"><a href="<c:url value="/"/>">Electromechanics Shop</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Discount List</li>
-  </ol>
-</nav>
+    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+      <ol class="breadcrumb bg-secondary bg-opacity-25 p-3 mt-3 rounded">
+        <li class="breadcrumb-item"><a href="<c:url value="/"/>">Electromechanics Shop</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Discount List</li>
+      </ol>
+    </nav>
 
     <%
         LocalDateTime now = LocalDateTime.now();
@@ -85,13 +85,13 @@
                         </td>
 
                         <td>
-                            <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#addDiscountModal" data-bs-whatever="${discountListProduct.discount.id}">
-                                Edit
+                            <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#addDiscountModal" data-bs-whatever="${discountListProduct.discount.id}">
+                                <i class="fa-solid fa-pen-to-square text-primary"></i>
                             </button>
                         </td>
                         <td>
                             <a href="<c:url value="/management/discountManagement/deleteDiscount/${discountListProduct.discount.id}"/>">
-                                Delete
+                                <i class="fa-solid fa-trash-can text-danger"></i>
                             </a>
 
                         </td>
