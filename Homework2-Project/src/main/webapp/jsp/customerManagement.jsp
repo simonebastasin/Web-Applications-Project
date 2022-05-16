@@ -28,39 +28,42 @@
 </nav>
 
     <table class="table">
-    <tr>
-        <th>ID</th>
-        <th>Username</th>
-        <th>Name</th>
-        <th>Surname</th>
-        <th>Fiscal_Code</th>
-        <th>Address</th>
-        <th>Email</th>
-        <th>Phone_Number</th>
-    </tr>
-
-    <c:forEach var="customer" items="${customerList}">
-        <tr>
-            <td>${customer.id}</td>
-            <td>${customer.username}</td>
-            <td>${customer.name}</td>
-            <td>${customer.surname}</td>
-            <td>${customer.fiscalCode}</td>
-            <td>${customer.address}</td>
-            <td>${customer.email}</td>
-            <td>${customer.phoneNumber}</td>
-            <td>
-                <a href="<c:url value="/management/customerManagement/editCustomer/${customer.username}"/>">
-                    Edit
-                </a>
-            </td>
-            <td>
-                <a href="<c:url value="/management/customerManagement/deleteCustomer/${customer.username}"/>">
-                    Delete
-                </a>
-            </td>
-        </tr>
-    </c:forEach>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Username</th>
+                <th>Name</th>
+                <th>Surname</th>
+                <th>Fiscal_Code</th>
+                <th>Address</th>
+                <th>Email</th>
+                <th>Phone_Number</th>
+            </tr>
+        </thead>
+        <tbody>
+            <c:forEach var="customer" items="${customerList}">
+                <tr>
+                    <td>${customer.id}</td>
+                    <td>${customer.username}</td>
+                    <td>${customer.name}</td>
+                    <td>${customer.surname}</td>
+                    <td>${customer.fiscalCode}</td>
+                    <td>${customer.address}</td>
+                    <td>${customer.email}</td>
+                    <td>${customer.phoneNumber}</td>
+                    <td>
+                        <a href="<c:url value="/management/customerManagement/editCustomer/${customer.username}"/>">
+                            Edit
+                        </a>
+                    </td>
+                    <td>
+                        <a href="<c:url value="/management/customerManagement/deleteCustomer/${customer.username}"/>">
+                            Delete
+                        </a>
+                    </td>
+                </tr>
+            </c:forEach>
+        </tbody>
 </table>
 
 

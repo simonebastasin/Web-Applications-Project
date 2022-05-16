@@ -34,40 +34,43 @@
 </div><br>
 
     <table class="table">
-    <tr>
-        <th>Username</th>
-        <th>Name</th>
-        <th>Surname</th>
-        <th>Role</th>
-    </tr>
-
-    <c:forEach var="employee" items="${employeeList}">
-        <tr>
-            <td>${employee.username}</td>
-            <td>${employee.name}</td>
-            <td>${employee.surname}</td>
-            <td>${employee.role}</td>
-            <td>
-                <a href="<c:url value="/management/employeeManagement/editEmployee/${employee.username}"/>">
-                    Edit
-                </a>
-            </td>
-
-            <c:choose>
-                <c:when test =  "${employee.role == 'Administrator'}">
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Name</th>
+                <th>Surname</th>
+                <th>Role</th>
+            </tr>
+        </thead>
+        <tbody>
+            <c:forEach var="employee" items="${employeeList}">
+                <tr>
+                    <td>${employee.username}</td>
+                    <td>${employee.name}</td>
+                    <td>${employee.surname}</td>
+                    <td>${employee.role}</td>
                     <td>
-                    </td>
-                </c:when>
-                <c:otherwise>
-                    <td>
-                        <a href="<c:url value="/management/employeeManagement/deleteEmployee/${employee.username}"/>" aria-disabled="false">
-                            Delete
+                        <a href="<c:url value="/management/employeeManagement/editEmployee/${employee.username}"/>">
+                            Edit
                         </a>
                     </td>
-                </c:otherwise>
-            </c:choose>
-        </tr>
-    </c:forEach>
+
+                    <c:choose>
+                        <c:when test =  "${employee.role == 'Administrator'}">
+                            <td>
+                            </td>
+                        </c:when>
+                        <c:otherwise>
+                            <td>
+                                <a href="<c:url value="/management/employeeManagement/deleteEmployee/${employee.username}"/>" aria-disabled="false">
+                                    Delete
+                                </a>
+                            </td>
+                        </c:otherwise>
+                    </c:choose>
+                </tr>
+            </c:forEach>
+        </tbody>
 </table>
 
 

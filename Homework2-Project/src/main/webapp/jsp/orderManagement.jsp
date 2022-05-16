@@ -28,35 +28,38 @@
 </nav>
 
 <table>
-    <tr>
-        <th>ID_Order</th>
-        <th>ID_Customer</th>
-        <th>Order_Date</th>
-        <th>Products</th>
-        <th>Status</th>
-        <th>Last_Status_Update</th>
-    </tr>
-
-    <c:forEach var="onlineOrder" items="${onlineOrderList}">
+    <thead>
         <tr>
-            <td>${onlineOrder.idOrder}</td>
-            <td>${onlineOrder.idCustomer}</td>
-            <td>${onlineOrder.ooDateTime.getHumanDate()}</td>
-            <td><ul>
-                <c:forEach var="product" items="${onlineOrder.products}">
-                    <li>${product.alias}, ${product.brand}, ${product.name}, ${product.quantity}</li>
-                </c:forEach>
-            </ul></td>
-            <td>${onlineOrder.status}</td>
-            <td>${onlineOrder.status.osDateTime.getHumanDate()}</td>
-            <td>
-                <a href="<c:url value="/management/orderManagement/editOrder/${onlineOrder.idOrder}"/>">Edit</a>
-            </td>
-            <td>
-                <a href="<c:url value="/management/orderManagement/deleteOrder/${onlineOrder.idOrder}"/>">Delete</a>
-            </td>
+            <th>ID_Order</th>
+            <th>ID_Customer</th>
+            <th>Order_Date</th>
+            <th>Products</th>
+            <th>Status</th>
+            <th>Last_Status_Update</th>
         </tr>
-    </c:forEach>
+    </thead>
+    <tbody>
+        <c:forEach var="onlineOrder" items="${onlineOrderList}">
+            <tr>
+                <td>${onlineOrder.idOrder}</td>
+                <td>${onlineOrder.idCustomer}</td>
+                <td>${onlineOrder.ooDateTime.getHumanDate()}</td>
+                <td><ul>
+                    <c:forEach var="product" items="${onlineOrder.products}">
+                        <li>${product.alias}, ${product.brand}, ${product.name}, ${product.quantity}</li>
+                    </c:forEach>
+                </ul></td>
+                <td>${onlineOrder.status}</td>
+                <td>${onlineOrder.status.osDateTime.getHumanDate()}</td>
+                <td>
+                    <a href="<c:url value="/management/orderManagement/editOrder/${onlineOrder.idOrder}"/>">Edit</a>
+                </td>
+                <td>
+                    <a href="<c:url value="/management/orderManagement/deleteOrder/${onlineOrder.idOrder}"/>">Delete</a>
+                </td>
+            </tr>
+        </c:forEach>
+    </tbody>
 </table>
 
 
