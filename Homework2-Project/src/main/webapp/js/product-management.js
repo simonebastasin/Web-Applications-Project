@@ -1,4 +1,5 @@
 const productTable = document.getElementById('productTable');
+const productTableBody = productTable.getElementsByTagName('tbody')[0];
 const addProductButton = document.getElementById('addProductButton');
 const addProductForm = document.getElementById('addProductForm');
 const addProductModal = document.getElementById('addProductModal');
@@ -37,14 +38,14 @@ addProductForm.addEventListener('submit', (e) => {
                     '<td>'+formData.get('quantity')+'</td>'+
                     '<td>'+formData.get('evidence')+'</td>'+
                     '<td>'+formData.getAll('pictures').join(' ')+'</td>'+
-                    '<td><button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#addProductModal" data-bs-whatever="'+alias+'">Edit</button></td>'+
-                    '<td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteProductModal" data-bs-whatever="'+alias+'">Delete</button></td>';
+                    '<td><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#addProductModal" data-bs-whatever="${prod.alias}"> <i class="fa-solid fa-pen-to-square text-primary"></i></button></td>'+
+                    '<td><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteProductModal" data-bs-whatever="${prod.alias}"> <i class="fa-solid fa-trash-can text-danger"></i></button></td>';
                 if(createProduct) {
                     bootstrapAlert("The product was created", 'success', alertPlaceholder);
                     let tr=document.createElement('tr');
                     tr.id = alias;
                     tr.innerHTML = newInnerHTML;
-                    productTable.appendChild(tr);
+                    productTableBody.appendChild(tr);
                 }
                 else {
                     bootstrapAlert("The product was modified", 'success', alertPlaceholder);
