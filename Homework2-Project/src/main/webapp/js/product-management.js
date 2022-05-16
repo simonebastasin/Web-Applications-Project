@@ -1,5 +1,5 @@
 const productTable = document.getElementById('productTable');
-const productTableBody = productTable.getElementsByTagName('tbody')[0];
+const productTableBody = productTable.getElementsByTagName('tbody')[0] ?? productTable;
 const addProductButton = document.getElementById('addProductButton');
 const addProductForm = document.getElementById('addProductForm');
 const addProductModal = document.getElementById('addProductModal');

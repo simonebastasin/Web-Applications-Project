@@ -40,42 +40,45 @@
 
     <div class="card">
         <table id="productTable" class="table table-hover" >
-            <tr>
-                <th>Name</th>
-                <th>Alias</th>
-                <th>Brand</th>
-                <th>Category</th>
-                <th>Sale Price</th>
-                <th>Quantity</th>
-                <th>Evidence</th>
-                <th>Media</th>
-            </tr>
-
-            <c:forEach var="prod" items="${productList}">
-
-                <tr id="${prod.alias}">
-                    <td><a href="<c:url value="/products/details/${prod.alias}"/>">${prod.name}</a></td>
-                    <td>${prod.alias}</td>
-                    <td>${prod.brand}</td>
-                    <td>${prod.category.name}</td>
-                    <td>${prod.salePrice}</td>
-                    <td>${prod.quantity}</td>
-                    <td>${prod.evidence}</td>
-                    <td>
-                        <c:forEach var="picture" items="${prod.pictures}">
-                            ${picture}
-                        </c:forEach>
-                    </td>
-                    <td><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#addProductModal" data-bs-whatever="${prod.alias}">
-                        <i class="fa-solid fa-pen-to-square text-primary"></i>
-                    </button></td>
-                    <td><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteProductModal" data-bs-whatever="${prod.alias}">
-                        <i class="fa-solid fa-trash-can text-danger"></i>
-                    </button></td>
-                    <%--<td><a class="btn btn-outline-danger" href="<c:url value="/management/productManagement/deleteProduct/${prod.alias}"/>">Delete</a></td>--%>
+            <thead>
+                <tr>
+                        <th>Name</th>
+                        <th>Alias</th>
+                        <th>Brand</th>
+                        <th>Category</th>
+                        <th>Sale Price</th>
+                        <th>Quantity</th>
+                        <th>Evidence</th>
+                        <th>Media</th>
                 </tr>
+            </thead>
+            <tbody>
+                <c:forEach var="prod" items="${productList}">
 
-            </c:forEach>
+                    <tr id="${prod.alias}">
+                        <td><a href="<c:url value="/products/details/${prod.alias}"/>">${prod.name}</a></td>
+                        <td>${prod.alias}</td>
+                        <td>${prod.brand}</td>
+                        <td>${prod.category.name}</td>
+                        <td>${prod.salePrice}</td>
+                        <td>${prod.quantity}</td>
+                        <td>${prod.evidence}</td>
+                        <td>
+                            <c:forEach var="picture" items="${prod.pictures}">
+                                ${picture}
+                            </c:forEach>
+                        </td>
+                        <td><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#addProductModal" data-bs-whatever="${prod.alias}">
+                            <i class="fa-solid fa-pen-to-square text-primary"></i>
+                        </button></td>
+                        <td><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteProductModal" data-bs-whatever="${prod.alias}">
+                            <i class="fa-solid fa-trash-can text-danger"></i>
+                        </button></td>
+                        <%--<td><a class="btn btn-outline-danger" href="<c:url value="/management/productManagement/deleteProduct/${prod.alias}"/>">Delete</a></td>--%>
+                    </tr>
+
+                </c:forEach>
+            </tbody>
         </table>
     </div>
 
