@@ -267,7 +267,8 @@ function cart()
     });
 }
 
-
+logout=document.getElementById("logoutButton");
+logout.addEventListener("click",invalidate);
 const dropdownMenuLogin = document.getElementById('dropdownMenuLogin')
 
 const loginForBuy = document.getElementById('loginForBuy')
