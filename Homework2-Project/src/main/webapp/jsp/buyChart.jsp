@@ -29,6 +29,7 @@
     <li class="breadcrumb-item active" aria-current="page">Order ID: ${onlineOrder.idOrder}</li>
   </ol>
 </nav>
+    <div class="card-body">
     <div class="mx-auto w-50">
         <div class="card mt-3 mb-3">
 
@@ -50,9 +51,9 @@
     </c:forEach>
     <tr><td>Total</td><td></td><td></td><td>${onlineOrder.totalPrice}€</td></tr>
 </table>
-
         </div>
-    </div>
+        </div>
+
 <c:choose>
     <c:when test="${onlineOrder.status.status eq OrderStatusEnum.OPEN}">
         <form method="post" action="">
@@ -62,7 +63,7 @@
                 <option value="${PaymentMethodOnlineEnum.APPLE_PAY}">Apple Pay</option>
                 <option value="${PaymentMethodOnlineEnum.GOOGLE_PAY}">Google Pay</option>
             </select>
-            <input type ="submit" value = "Confirm payment" onclick="invalidate()">
+            <input type ="submit" value = "Confirm payment" id="confirmPayment" class="btn btn-primary " >
         </form>
     </c:when>
     <c:otherwise>
@@ -75,7 +76,7 @@
     </c:otherwise>
 </c:choose>
 
-
+    </div>
 </div>
 <c:import url="/jsp/include/footer.jsp"/>
 </body>

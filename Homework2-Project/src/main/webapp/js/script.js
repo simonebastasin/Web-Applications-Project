@@ -275,6 +275,9 @@ logout.addEventListener("click",invalidate);
 const cartButton=document.getElementById("navbarDropdownCart");
 cartButton.addEventListener("click",presentCart);
 
+const payment=document.getElementById("confirmPayment");
+payment.addEventListener("click",invalidate);
+
 const dropdownMenuLogin = document.getElementById('dropdownMenuLogin')
 
 const loginForBuy = document.getElementById('loginForBuy')
