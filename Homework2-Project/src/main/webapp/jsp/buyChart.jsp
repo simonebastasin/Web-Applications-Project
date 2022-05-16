@@ -29,8 +29,10 @@
     <li class="breadcrumb-item active" aria-current="page">Order ID: ${onlineOrder.idOrder}</li>
   </ol>
 </nav>
+    <div class="mx-auto w-50">
+        <div class="card mt-3 mb-3">
 
-<table>
+<table class="table table-striped">
     <tr>
         <th>Product name</th>
         <th>Price Unitary</th>
@@ -47,6 +49,9 @@
     </c:forEach>
     <tr><td>Total</td><td></td><td></td><td>${onlineOrder.totalPrice}€</td></tr>
 </table>
+
+        </div>
+    </div>
 <c:choose>
     <c:when test="${onlineOrder.status.status eq OrderStatusEnum.OPEN}">
         <form method="post" action="">
