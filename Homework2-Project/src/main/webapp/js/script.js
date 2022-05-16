@@ -209,11 +209,13 @@ function presentCart() {
 
 
         }
-        text += '<button  class="btn btn-primary" onclick="buyCart()">buy</button>';
+        text += '<button  class="btn btn-primary" id="buyButton" >buy</button>';
 
     }
     const list = document.getElementById("cart");
     list.innerHTML = text;
+    const buyButton=document.getElementById("buyButton");
+    buyButton.addEventListener("click",buyCart);
 }
 function buyCart() {
     var text = '{"cart":[';
@@ -267,8 +269,12 @@ function cart()
     });
 }
 
-logout=document.getElementById("logoutButton");
+const logout=document.getElementById("logoutButton");
 logout.addEventListener("click",invalidate);
+
+const cartButton=document.getElementById("navbarDropdownCart");
+cartButton.addEventListener("click",presentCart);
+
 const dropdownMenuLogin = document.getElementById('dropdownMenuLogin')
 
 const loginForBuy = document.getElementById('loginForBuy')

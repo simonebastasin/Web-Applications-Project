@@ -51,7 +51,7 @@
                         <c:choose>
                             <c:when test="${empty user.role}">
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownCart" role="button" data-bs-toggle="dropdown" aria-expanded="false" onclick="presentCart()" href="#">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownCart" role="button" data-bs-toggle="dropdown" aria-expanded="false"  href="#">
                                         <i class="fa-solid fa-cart-shopping"></i>
                                     </a>
                                     <ul class="dropdown-menu" id="cart" aria-labelledby="navbarDropdownCart">
