@@ -144,18 +144,51 @@
                         <c:otherwise>
                             <c:choose>
                                 <c:when test="${not empty user && empty user.role}">
-                                    <form method="POST" action="<c:url value="/buy/product/${product.alias}"/>" id="formSend" data-product-alias="${product.alias}" data-product-name="${product.name}" class="needs-validation" novalidate>
-                                        <div class="input-group mb-3 w-50">
-                                            <label for="quantity" class="input-group-text">Selected quantity</label>
-                                            <input type="number" name="quantity" max="${product.quantity}" min="1" id="quantity" required class="form-control">
-                                            <div class="invalid-feedback">
-                                                Please choose an appropriate quantity.
+
+                                   <%-- <p class="text-danger">Available quantity: ${product.quantity}</p>--%>
+
+                                    <form method="POST" action="<c:url value="/buy/product/${product.alias}"/>" id="formSend" data-product-alias="${product.alias}" data-product-name="${product.name}" class="needs-validation input-group" novalidate>
+                                        <div class="row w-100 align-items-center g-3 mb-3 pl-0">
+                                            <div class="col-auto pl-0">
+                                                <label class="col-form-label" for="quantity">Quantity</label>
+                                            </div>
+                                            <div class="col-auto">
+                                                <input type="number" name="quantity" max="${product.quantity}" min="1" id="quantity" required class="form-control">
+                                            </div>
+                                            <div class="col-auto">
+                                                <span class="form-text text-danger">Available quantity: ${product.quantity}</span>
                                             </div>
                                         </div>
 
-                                        <input type="submit" value="Buy now" class="btn btn-primary">
-                                        <input type="submit" value="Add to cart" class="btn btn-primary" onclick="cart()">
+                                        <%-- <div class="row w-100 align-items-center g-3">
+                                            <div class="col-md-5">
+                                                <div class="input-group mb-3">
+                                                    <label for="quantity" class="input-group-text">Quantity</label>
+                                                    <input type="number" name="quantity" max="${product.quantity}" min="1" id="quantity" required class="form-control">
+                                                    <div class="invalid-feedback">
+                                                        Please choose an appropriate quantity.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <span class="form-text text-danger">Available quantity: ${product.quantity}</span>
+                                            </div>
+                                        </div>--%>
+
+                                        <div class="row w-100 align-items-center">
+                                            <div class="col">
+                                                <button type="submit" class="btn btn-outline-primary">
+                                                    Buy now   <i class="fa-solid fa-money-check"></i>
+                                                </button>
+                                            </div>
+                                            <div class="col">
+                                                <button type="submit" class="btn btn-outline-primary" onclick="cart()">
+                                                    Add to cart   <i class="fa-solid fa-cart-plus"></i>
+                                                </button>
+                                            </div>
+                                        </div>
                                     </form>
+
                                     <br>
 
                                 </c:when>
@@ -165,7 +198,7 @@
                                             <span class="fw-bold text-danger">Employees are not authorized to make purchases</span>
                                         </c:when>
                                         <c:otherwise>
-                                            Please <a class="btn btn-primary" id="loginForBuy">login</a> to buy the product
+                                            Please <a class="btn btn-outline-primary" id="loginForBuy">login</a> to buy the product
                                         </c:otherwise>
                                     </c:choose>
                                 </c:otherwise>
