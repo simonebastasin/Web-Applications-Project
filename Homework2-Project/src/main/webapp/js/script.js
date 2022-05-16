@@ -215,6 +215,7 @@ function presentCart() {
     const list = document.getElementById("cart");
     list.innerHTML = text;
     const buyButton=document.getElementById("buyButton");
+    if(buyButton!=null)
     buyButton.addEventListener("click",buyCart);
 }
 function buyCart() {
@@ -270,15 +271,19 @@ function cart()
 }
 
 const logout=document.getElementById("logoutButton");
+if(logout!=null)
 logout.addEventListener("click",invalidate);
 
 const cartButton=document.getElementById("navbarDropdownCart");
+if(cartButton!=null)
 cartButton.addEventListener("click",presentCart);
 
 const payment=document.getElementById("confirmPayment");
+if(payment!=null)
 payment.addEventListener("click",invalidate);
 
 const dropdownMenuLogin = document.getElementById('dropdownMenuLogin')
 
 const loginForBuy = document.getElementById('loginForBuy')
+if(loginForBuy!=null)
 loginForBuy.addEventListener('click', (e) => {dropdownMenuLogin.click()})
