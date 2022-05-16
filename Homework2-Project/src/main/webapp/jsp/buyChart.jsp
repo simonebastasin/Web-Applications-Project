@@ -46,6 +46,7 @@
             <td>${product.quantity}</td>
             <td>${product.finalSalePrice*product.quantity}€</td>
         </tr>
+
     </c:forEach>
     <tr><td>Total</td><td></td><td></td><td>${onlineOrder.totalPrice}€</td></tr>
 </table>
