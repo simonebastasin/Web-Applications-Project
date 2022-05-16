@@ -42,7 +42,7 @@ addDiscountForm.addEventListener('submit', (e) => {
                     discountTable.appendChild(tr);
                 }
                 else {
-                    bootstrapAlert("The product was modified", 'success', alertPlaceholder);
+                    bootstrapAlert("The discount was modified", 'success', alertPlaceholder);
                     document.getElementById(idDiscount).innerHTML = newInnerHTML;
                 }
                 bootstrap.Modal.getOrCreateInstance(addDiscountModal).hide();

@@ -56,46 +56,49 @@
             Add new Discount
         </button>
     </div>
-<table id="discountTable" class="table">
-    <tr>
-        <th>Id</th>
-        <th>Percentage</th>
-        <th>Start Date</th>
-        <th>End Date</th>
-        <th>Product List</th>
-        <th>Edit</th>
-        <th>Delete</th>
-    </tr>
+
+    <div class="card">
+        <table id="discountTable" class="table table-hover" >
+            <tr>
+                <th>Id</th>
+                <th>Percentage</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Product List</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
 
 
-    <c:forEach var="discountListProduct" items="${discountListProductList}">
-        <tr id="${discountListProduct.discount.id}">
-            <td>${discountListProduct.discount.id}</td>
-            <td>${discountListProduct.discount.percentage}%</td>
-            <td>${discountListProduct.discount.startDate.getHumanDateTimeless()}</td>
-            <td>${discountListProduct.discount.endDate.getHumanDateTimeless()}</td>
+            <c:forEach var="discountListProduct" items="${discountListProductList}">
+                <tr id="${discountListProduct.discount.id}">
+                    <td>${discountListProduct.discount.id}</td>
+                    <td>${discountListProduct.discount.percentage}%</td>
+                    <td>${discountListProduct.discount.startDate.getHumanDateTimeless()}</td>
+                    <td>${discountListProduct.discount.endDate.getHumanDateTimeless()}</td>
 
-            <td>
-            <c:forEach var="prod" items="${discountListProduct.productList}">
-                <a href="<c:url value="/products/details/${prod.alias}"/>">${prod.name}, </a>&nbsp
+                    <td>
+                    <c:forEach var="prod" items="${discountListProduct.productList}">
+                        <a href="<c:url value="/products/details/${prod.alias}"/>">${prod.name}, </a>&nbsp
+                    </c:forEach>
+                    </td>
+
+                    <td>
+                        <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#addDiscountModal" data-bs-whatever="${discountListProduct.discount.id}">
+                            Edit
+                        </button>
+                    </td>
+                    <td>
+                        <a href="<c:url value="/management/discountManagement/deleteDiscount/${discountListProduct.discount.id}"/>">
+                            Delete
+                        </a>
+
+                    </td>
+                </tr>
             </c:forEach>
-            </td>
 
-            <td>
-                <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#addDiscountModal" data-bs-whatever="${discountListProduct.discount.id}">
-                    Edit
-                </button>
-            </td>
-            <td>
-                <a href="<c:url value="/management/discountManagement/deleteDiscount/${discountListProduct.discount.id}"/>">
-                    Delete
-                </a>
-
-            </td>
-        </tr>
-    </c:forEach>
-
-</table>
+        </table>
+    </div>
 
 
 
