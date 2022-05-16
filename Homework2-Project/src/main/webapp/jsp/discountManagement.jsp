@@ -161,7 +161,7 @@
     </div>
 
 </div>
-<c:import url="/jsp/include/footer.jsp"/>
+<c:import url="/jsp/include/footer-management.jsp"/>
 <script type="text/javascript"  src="<c:url value="/js/discount-management.js"/>"></script>
 
 </body>

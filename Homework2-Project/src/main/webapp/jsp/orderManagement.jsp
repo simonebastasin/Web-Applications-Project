@@ -72,6 +72,6 @@
     </div>
 
 </div>
-<c:import url="/jsp/include/footer.jsp"/>
+<c:import url="/jsp/include/footer-management.jsp"/>
 </body>
 </html>
