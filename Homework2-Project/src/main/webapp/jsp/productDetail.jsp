@@ -83,7 +83,7 @@
                                                 </c:when>
                                                 <c:otherwise>
                                                     <div class="carousel-item ratio ratio-1x1 ">
-                                                        <img src="<c:url value="/media/view/${picture}"/>" alt="${product.alias}" class="d-block w-100"/>
+                                                        <img src="<c:url value="/media/view/${picture}"/>" alt="${product.alias}" class="d-block w-100 img-fluid"/>
                                                     </div>
                                                 </c:otherwise>
                                             </c:choose>
@@ -99,7 +99,7 @@
                                 <c:forEach var="picture" items="${product.pictures}">
                                     <div class="ratio ratio-1x1">
                                         <img src="<c:url value="/media/view/${picture}"/>" alt="${product.alias}"
-                                             class="d-block w-100"/>
+                                             class="d-block w-100 img-fluid"/>
                                     </div>
                                 </c:forEach>
                             </c:otherwise>
@@ -108,7 +108,7 @@
                     <c:otherwise>
                         <div>
                             <div class="ratio ratio-1x1">
-                                <img src="${pageContext.request.contextPath}/images/No_image_available_poster.jpg" alt="${product.alias}" class="d-block w-100"/>
+                                <img src="${pageContext.request.contextPath}/images/No_image_available_poster.jpg" alt="${product.alias}" class="d-block w-100 img-fluid"/>
                             </div>
                         </div>
                     </c:otherwise>
@@ -125,36 +125,18 @@
                         <c:when test="${not empty product.discount}">
                             <div class="row">
                                 <div class="col-md-6">Price: <span class="text-decoration-line-through">${product.salePrice}€</span> <span class="text-red display-6">${product.discountSale}€</span></div>
-                                <div class="col-md-6 text-end"> ${product.discount.percentage}% discount (until ${product.discount.endDate.humanDate})</div>
+                                <div class="col-md-6 text-end"> -${product.discount.percentage}% (until ${product.discount.endDate.humanDate})</div>
                             </div>
                         </c:when>
                         <c:otherwise>
-                            Price: <span class="display-6"> ${product.salePrice}€</span>
+                                Price: <span class="display-6"> ${product.salePrice}€</span>
                         </c:otherwise>
                     </c:choose>
 
                     <p class="mt-3">${product.description}</p>
 
-                    <%--
-                    <ul>
-                        <li>Brand: ${product.brand}</li>
-                        <li>Description: ${product.description}</li>
-                        <li>Quantity: ${product.quantity}</li>
+                    <hr/>
 
-                        <c:choose>
-                            <c:when test="${not empty product.discount}">
-                                <li>Price: <span style="text-decoration: line-through;">${product.salePrice}€</span> <span
-                                        style="color: red;">${product.discountSale}€</span></li>
-                                <li>Discount: ${product.discount.percentage}%
-                                    (until ${product.discount.endDate.humanDate})
-                                </li>
-                            </c:when>
-                            <c:otherwise>
-                                <li>Price: ${product.salePrice}€</li>
-                            </c:otherwise>
-                        </c:choose>
-                    </ul>
-                    --%>
                     <c:choose>
                         <c:when test="${product.quantity <= 0}">
                             <span class="fw-bold text-danger">The product is no longer available.</span>
@@ -162,11 +144,14 @@
                         <c:otherwise>
                             <c:choose>
                                 <c:when test="${not empty user && empty user.role}">
-                                    <form method="POST" action="<c:url value="/buy/product/${product.alias}"/>" id="formSend" data-product-alias="${product.alias}" data-product-name="${product.name}">
-                                        <label for="quantity">Selected quantity</label>
-                                        <input type="number" name="quantity" max="${product.quantity}" min="1" id="quantity" required>
-                                        <br>
-                                        <br>
+                                    <form method="POST" action="<c:url value="/buy/product/${product.alias}"/>" id="formSend" data-product-alias="${product.alias}" data-product-name="${product.name}" class="needs-validation" novalidate>
+                                        <div class="input-group mb-3 w-50">
+                                            <label for="quantity" class="input-group-text">Selected quantity</label>
+                                            <input type="number" name="quantity" max="${product.quantity}" min="1" id="quantity" required class="form-control">
+                                            <div class="invalid-feedback">
+                                                Please choose an appropriate quantity.
+                                            </div>
+                                        </div>
 
                                         <input type="submit" value="Buy now" class="btn btn-primary">
                                         <input type="submit" value="Add to cart" class="btn btn-primary" onclick="cart()">
@@ -177,11 +162,9 @@
                                 <c:otherwise>
                                     <c:choose>
                                         <c:when test="${not empty user && not empty user.role}">
-                                            <hr/>
                                             <span class="fw-bold text-danger">Employees are not authorized to make purchases</span>
                                         </c:when>
                                         <c:otherwise>
-                                            <hr/>
                                             Please <a class="btn btn-primary" id="loginForBuy">login</a> to buy the product
                                         </c:otherwise>
                                     </c:choose>
