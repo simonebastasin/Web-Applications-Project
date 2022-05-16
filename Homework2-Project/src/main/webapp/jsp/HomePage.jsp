@@ -410,29 +410,5 @@
 
 <c:import url="/jsp/include/footer.jsp"/>
 
-<script>
-    let carousels = document.querySelectorAll('.carousel-category')
-
-    carousels.forEach((it) => {
-        let items = it.querySelectorAll('.carousel-item')
-
-        items.forEach((el) => {
-            const minPerSlide = 4 // number of slides per carousel-item
-
-            let next = el.nextElementSibling
-            for (var i=1; i<minPerSlide && i< items.length; i++) {
-                if (!next && items.length > 1) {
-                    // wrap carousel by using first child
-                    next = items[0]
-                }
-                if(next) {
-                    let cloneChild = next.cloneNode(true)
-                    el.appendChild(cloneChild.children[0])
-                    next = next.nextElementSibling
-                }
-            }
-        })
-    })
-</script>
 </body>
 </html>

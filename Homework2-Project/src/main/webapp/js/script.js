@@ -106,6 +106,12 @@ function populateForm(form, data, basename) {
 const searchForm = document.getElementById('searchForm');
 const searchAutocompleteInput = document.getElementById('searchAutocompleteInput');
 const searchAutocompleteMenu = document.getElementById('searchAutocompleteMenu');
+const logout=document.getElementById("logoutButton");
+const cartButton=document.getElementById("navbarDropdownCart");
+const payment=document.getElementById("confirmPayment");
+const dropdownMenuLogin = document.getElementById('dropdownMenuLogin');
+const loginForBuy = document.getElementById('loginForBuy');
+let carousels = document.querySelectorAll('.carousel-category');
 
 const popperInstance = Popper.createPopper(searchAutocompleteInput, searchAutocompleteMenu, {
     placement: 'bottom-start',
@@ -194,7 +200,7 @@ function presentCart() {
     var text = "";
 
     if (localStorage.length == 0)
-        text = '<li><a class="dropdown-item" >Empty</li>';
+        text = '<li><span class="dropdown-item-text" >Empty</span></li>';
     else {
         for (let i = 0; i < localStorage.length; i++) {
             console.log(localStorage.length)
@@ -203,38 +209,27 @@ function presentCart() {
                 const element = localStorage.getItem(localStorage.key(i)).split(";")
                 const qta = element[0];
                 const name = element[1];
-                text += '<li><a class="dropdown-item" >' + name + '<br>'+'<i>quantity: </i>'+ qta + '</li><hr class="dropdown-divider">';
-
+                text += '<li><span class="dropdown-item-text" >' + name + '<br>'+'<i>quantity: </i>'+ qta + '</a></li><li><hr class="dropdown-divider"></li>';
             }
-
-
         }
-        text += '<button  class="btn btn-primary" id="buyButton" >buy</button>';
-
+        text += '<li><span class="dropdown-item-text"><button  class="btn btn-primary" id="buyButton" >buy</button></span></li>';
     }
     const list = document.getElementById("cart");
     list.innerHTML = text;
     const buyButton=document.getElementById("buyButton");
-    if(buyButton!=null)
-    buyButton.addEventListener("click",buyCart);
+    buyButton?.addEventListener("click",buyCart);
 }
 function buyCart() {
     var json={cart:[]};
     for (let i = 0; i < localStorage.length; i++) {
-
-
         if (localStorage.key(i).substring(0, 4).localeCompare("cart") == 0) {
             const element = localStorage.getItem(localStorage.key(i)).split(";")
             const qta = element[0];
             const name = element[1];
             console.log(i);
             json.cart.push({quantity:qta,alias:localStorage.key(i).substring(4)});
-           // text += '{"quantity":' + qta + ',"alias":\"' + localStorage.key(i).substring(4) + '"},';
         }
     }
-
-
-
 
     const send = JSON.stringify(json, undefined, 4);
     console.log(send);
@@ -246,7 +241,6 @@ function buyCart() {
             console.log(id);
 
             location.href = rootPath+"/buy/pay/"  + id;
-
         }
     }
 
@@ -266,24 +260,34 @@ function cart()
         console.log(qt.toString()+ " "+name);
         localStorage.setItem("cart"+alias,qt.toString()+";"+name);
         console.log(localStorage.length);
-
     });
 }
 
-const logout=document.getElementById("logoutButton");
-if(logout!=null)
-logout.addEventListener("click",invalidate);
+logout?.addEventListener("click",invalidate);
 
-const cartButton=document.getElementById("navbarDropdownCart");
-if(cartButton!=null)
-cartButton.addEventListener("click",presentCart);
+cartButton?.addEventListener("click",presentCart);
 
-const payment=document.getElementById("confirmPayment");
-if(payment!=null)
-payment.addEventListener("click",invalidate);
+payment?.addEventListener("click",invalidate);
 
-const dropdownMenuLogin = document.getElementById('dropdownMenuLogin')
+loginForBuy?.addEventListener('click', (e) => {dropdownMenuLogin.click()});
 
-const loginForBuy = document.getElementById('loginForBuy')
-if(loginForBuy!=null)
-loginForBuy.addEventListener('click', (e) => {dropdownMenuLogin.click()})
+carousels?.forEach((it) => {
+    let items = it.querySelectorAll('.carousel-item')
+
+    items.forEach((el) => {
+        const minPerSlide = 4 // number of slides per carousel-item
+
+        let next = el.nextElementSibling
+        for (var i=1; i<minPerSlide && i< items.length; i++) {
+            if (!next && items.length > 1) {
+                // wrap carousel by using first child
+                next = items[0]
+            }
+            if(next) {
+                let cloneChild = next.cloneNode(true)
+                el.appendChild(cloneChild.children[0])
+                next = next.nextElementSibling
+            }
+        }
+    })
+})
