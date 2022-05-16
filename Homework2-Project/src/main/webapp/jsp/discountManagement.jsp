@@ -18,7 +18,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <c:import url="/jsp/include/head.jsp"/>
+    <c:import url="/jsp/include/head-management.jsp"/>
 
     <title>Discount List | Electromechanics Shop</title>
 </head>
@@ -58,7 +58,7 @@
     </div>
 
     <div class="card">
-        <table id="discountTable" class="table table-hover" >
+        <table id="discountTable" class="table table-hover table-hide-lg-col-5 table-hide-sm-col-1 table-hide-sm-col-3" >
             <thead>
                 <tr>
                     <th>Id</th>
