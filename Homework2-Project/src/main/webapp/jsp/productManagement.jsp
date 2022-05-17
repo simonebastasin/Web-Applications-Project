@@ -171,7 +171,7 @@
                     <form id="uploadImageForm" class="mb-3 needs-validation" novalidate>
                         <label for="formFile" class="form-label">Upload image</label>
                         <div class="input-group">
-                            <input class="form-control" type="file" name="file" id="formFile" required>
+                            <input class="form-control" type="file" name="file" id="formFile" required accept="image/*">
                             <button type="submit" class="btn btn-outline-secondary">Upload</button>
                         </div>
                         <div class="progress mt-3 mb-3" id="uploadImageProgress" style="display: none;">

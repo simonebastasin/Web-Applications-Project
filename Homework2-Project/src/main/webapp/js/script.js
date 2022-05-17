@@ -9,10 +9,27 @@ function printDiv(divId) {
     document.body.innerHTML = originalContents;
 }
 
+function parseError(xmlhttp) {
+    if(xmlhttp.responseText !== "") {
+        let message = xmlhttp.responseText;
+        if(message.startsWith("<!doctype html>")) {
+            return parseServletError(message);
+        }
+        try{
+            var json = JSON.parse(message);
+            return "Error " + json.errorCode + ": " + json.message +  " ("+ json.errorDetails + ")";
+        }
+        catch (e) {
+
+        }
+    }
+    return xmlhttp.statusText !== ""? 'HTTP Error: '+ xmlhttp.statusText : "Generic error";
+}
 function parseServletError(message) {
     const parser = new DOMParser();
     const floatingElement = parser.parseFromString(message, 'text/html');
     return [...floatingElement.body.getElementsByTagName('p')].map(i => i.innerText).join(" ");
+
 }
 
 function bootstrapAlert(message, type, placeholder) {

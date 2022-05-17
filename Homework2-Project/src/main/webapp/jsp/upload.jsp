@@ -27,7 +27,7 @@
 </nav>
 
 <form method="post" action="<c:url value="/media/upload"/>" enctype="multipart/form-data">
-    <input type="file" name="file" />
+    <input type="file" name="file" accept="image/*"/>
     <input type="submit" value="Upload" />
 </form>
 

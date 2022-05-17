@@ -55,7 +55,7 @@ addProductForm.addEventListener('submit', (e) => {
             } else {
                 if(createProduct) alias = null;
                 const alertPlaceholder = document.getElementById('formAlertPlaceholder');
-                bootstrapAlert(xmlhttp.responseText !== "" ? (xmlhttp.responseText.startsWith("<!doctype html>") ?  parseServletError(xmlhttp.response): xmlhttp.responseText ): (xmlhttp.statusText !== ""? 'Error: '+ xmlhttp.statusText : "Generic error"), 'danger', alertPlaceholder);
+                bootstrapAlert(parseError(xmlhttp), 'danger', alertPlaceholder);
             }
         }
     }
@@ -96,7 +96,7 @@ uploadImageForm.addEventListener('submit', (e) => {
                 bootstrapAlert(response.message, 'success', alertPlaceholder);
             } else {
                 const alertPlaceholder = document.getElementById('formAlertPlaceholder');
-                bootstrapAlert(xmlhttp.responseText !== "" ? (xmlhttp.responseText.startsWith("<!doctype html>") ?  parseServletError(xmlhttp.response): xmlhttp.responseText ) : (xmlhttp.statusText !== ""? 'Error: '+ xmlhttp.statusText : "Generic error"), 'danger', alertPlaceholder);
+                bootstrapAlert(parseError(xmlhttp), 'danger', alertPlaceholder);
                 updateProgressBar(0, true);
             }
         }
@@ -137,7 +137,7 @@ addProductModal.addEventListener('show.bs.modal', (e) => {
 
                 } else {
                     const alertPlaceholder = document.getElementById('liveAlertPlaceholder');
-                    bootstrapAlert(xmlhttp.statusText !== "" ? 'Error: '+xmlhttp.status : 'Generic error', 'danger', alertPlaceholder);
+                    bootstrapAlert(parseError(xmlhttp), 'danger', alertPlaceholder);
                     bootstrap.Modal.getOrCreateInstance(addProductModal).hide();
                 }
             }

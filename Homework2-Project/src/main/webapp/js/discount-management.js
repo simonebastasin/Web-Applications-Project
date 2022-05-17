@@ -48,7 +48,7 @@ addDiscountForm.addEventListener('submit', (e) => {
                 bootstrap.Modal.getOrCreateInstance(addDiscountModal).hide();
             }else {
                 const alertPlaceholder = document.getElementById('formAlertPlaceholder');
-                bootstrapAlert(xmlhttp.responseText !== "" ? xmlhttp.responseText : (xmlhttp.statusText !== ""? 'Error: '+ xmlhttp.statusText : "Generic error"), 'danger', alertPlaceholder);
+                bootstrapAlert(parseError(xmlhttp), 'danger', alertPlaceholder);
             }
         }
     }
@@ -81,7 +81,7 @@ addDiscountModal.addEventListener('show.bs.modal', (e) => {
 
                 } else {
                     const alertPlaceholder = document.getElementById('liveAlertPlaceholder');
-                    bootstrapAlert(xmlhttp.statusText !== "" ? 'Error: '+xmlhttp.status : 'Generic erro', 'danger', alertPlaceholder);
+                    bootstrapAlert(parseError(xmlhttp), 'danger', alertPlaceholder);
                     bootstrap.Modal.getOrCreateInstance(addDiscountModal).hide();
                 }
             }
