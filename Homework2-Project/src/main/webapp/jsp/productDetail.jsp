@@ -160,30 +160,13 @@
                                             </div>
                                         </div>
 
-                                        <%-- <div class="row w-100 align-items-center g-3">
-                                            <div class="col-md-5">
-                                                <div class="input-group mb-3">
-                                                    <label for="quantity" class="input-group-text">Quantity</label>
-                                                    <input type="number" name="quantity" max="${product.quantity}" min="1" id="quantity" required class="form-control">
-                                                    <div class="invalid-feedback">
-                                                        Please choose an appropriate quantity.
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col">
-                                                <span class="form-text text-danger">Available quantity: ${product.quantity}</span>
-                                            </div>
-                                        </div>--%>
-
                                         <div class="row w-100 align-items-center">
-                                            <div class="col">
-                                                <button type="submit" class="btn btn-outline-primary">
-                                                    Buy now   <i class="fa-solid fa-money-check"></i>
+                                            <div class="col text-end">
+                                                <button type="submit" class="btn btn-outline-primary mt-1" id="addToCart" >
+                                                    Add to   <i class="fa-solid fa-cart-plus"></i>
                                                 </button>
-                                            </div>
-                                            <div class="col">
-                                                <button type="submit" class="btn btn-outline-primary" id="addToCart" >
-                                                    Add to cart   <i class="fa-solid fa-cart-plus"></i>
+                                                <button type="submit" class="btn btn-outline-primary mt-1">
+                                                    Buy now   <i class="fa-solid fa-money-check"></i>
                                                 </button>
                                             </div>
                                         </div>
