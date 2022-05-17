@@ -52,8 +52,8 @@
                         <c:choose>
                             <c:when test="${empty user.role}">
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link" href="#" id="navbarDropdownCart" role="button"  data-bs-toggle="dropdown" aria-expanded="false"  href="#">
-                                        <i class="fa-solid fa-cart-shopping">
+                                    <a class="nav-link " href="#" id="navbarDropdownCart" role="button"  data-bs-toggle="dropdown" aria-expanded="false"  href="#">
+                                        <i class="fa-solid fa-cart-shopping position-relative ">
                                             <span id="numberOfElementCart" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary"><span class="visually-hidden">Distinct product</span></span>
                                         </i>
                                     </a>
