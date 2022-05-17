@@ -195,9 +195,11 @@ function invalidate()
 {
     localStorage.clear();
 }
-
+const number=document.getElementById("numberOfElementCart");
+number.innerHTML=localStorage.length.toString();
 function presentCart() {
     var text = "";
+
 
     if (localStorage.length == 0)
         text = '<li><span class="dropdown-item-text" >Empty</span></li>';
@@ -218,6 +220,7 @@ function presentCart() {
     list.innerHTML = text;
     const buyButton=document.getElementById("buyButton");
     buyButton?.addEventListener("click",buyCart);
+
 }
 function buyCart() {
     var json={cart:[]};
@@ -260,11 +263,14 @@ function cart()
         console.log(qt.toString()+ " "+name);
         localStorage.setItem("cart"+alias,qt.toString()+";"+name);
         console.log(localStorage.length);
+        number.innerHTML=localStorage.length.toString();
     });
+    number.innerHTML=localStorage.length.toString();
 }
-
+const addToCart=document.getElementById("addToCart");
+addToCart?.addEventListener("click",cart);
 logout?.addEventListener("click",invalidate);
-
+number.innerHTML=localStorage.length.toString();
 cartButton?.addEventListener("click",presentCart);
 
 payment?.addEventListener("click",invalidate);

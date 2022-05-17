@@ -182,7 +182,7 @@
                                                 </button>
                                             </div>
                                             <div class="col">
-                                                <button type="submit" class="btn btn-outline-primary" onclick="cart()">
+                                                <button type="submit" class="btn btn-outline-primary" id="addToCart" >
                                                     Add to cart   <i class="fa-solid fa-cart-plus"></i>
                                                 </button>
                                             </div>
