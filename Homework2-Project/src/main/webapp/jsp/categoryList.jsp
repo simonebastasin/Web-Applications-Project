@@ -28,9 +28,16 @@
 </nav>
 
 <c:forEach var="cat" items="${categories}">
-    <li>
-        <a href="<c:url value="/products/category/${cat.name}"/>">${cat.name}</a>
-    </li>
+
+    <div class="row w-50 mx-auto justify-content-center border mt-3 mb-3 rounded bg-light">
+        <div class="d-inline p-3">
+            <h3 class="title d-inline">${cat.name}</h3>
+            <div class="text-end">
+                <span><a href="<c:url value="products/category/${cat.name}"/>" class="d-inline p-3 fw-bold">Shop now</a></span>
+            </div>
+        </div>
+    </div>
+
 </c:forEach>
 
 
