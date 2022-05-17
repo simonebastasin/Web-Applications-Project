@@ -11,8 +11,8 @@ function printDiv(divId) {
 
 function parseServletError(message) {
     const parser = new DOMParser();
-    const floatingElement = parser.parseFromString(message, 'text/xml');
-    return  floatingElement.innerText;
+    const floatingElement = parser.parseFromString(message, 'text/html');
+    return [...floatingElement.body.getElementsByTagName('p')].map(i => i.innerText).join(" ");
 }
 
 function bootstrapAlert(message, type, placeholder) {

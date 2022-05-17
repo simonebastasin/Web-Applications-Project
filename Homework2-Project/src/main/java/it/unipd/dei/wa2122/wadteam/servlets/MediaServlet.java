@@ -74,7 +74,7 @@ public class MediaServlet extends AbstractDatabaseServlet {
                 byte[] blob = new GetMediaByteFromMediaDatabase(getDataSource().getConnection(), id, thumb).getMedia();
 
                 if (blob != null && blob.length > 0) {
-                    writeBlob(response, blob, media.getMimetype(), thumb ? media.getFilename() + "_thumb.png" : media.getFilename(), true);
+                    writeBlob(response, blob, thumb ? "image/png" : media.getMimetype(), thumb ? media.getFilename() + "_thumb.png" : media.getFilename(), true);
                 } else {
                     writeError(request,response, new ErrorMessage.EmptyMediaError("The media is empty"));
                 }
@@ -91,6 +91,22 @@ public class MediaServlet extends AbstractDatabaseServlet {
             logger.error(e.getMessage());
 
             writeError(request, response, GenericError.PAGE_NOT_FOUND);
+        }
+    }
+
+    private boolean checkImage(byte[] source)  {
+        try {
+            BufferedImage sourceImage = ImageIO.read(new ByteArrayInputStream(source));
+            int width = sourceImage.getWidth();
+            int height = sourceImage.getHeight();
+            if (width < 200) return false;
+            if (height < 200) return false;
+            if (width / height > 2) return false;
+            if (width > 20000) return false;
+            if (height > 20000) return false;
+            return true;
+        }catch (Exception e) {
+            return false;
         }
     }
 
@@ -124,40 +140,63 @@ public class MediaServlet extends AbstractDatabaseServlet {
     }
 
     private void uploadImage(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        Part filePart = request.getPart("file");
+        Part filePart;
+        try {
+            filePart = request.getPart("file");
+
+        } catch (Exception e) {
+            writeError(request, response, new ErrorMessage.UploadMediaError(e.getMessage()));
+            logger.error(e.getMessage());
+            return;
+        }
         String filename = filePart.getSubmittedFileName();
         String mimetype = filePart.getContentType();
         InputStream filePartInputStream = filePart.getInputStream();
         byte[] bytes = filePartInputStream.readAllBytes();
 
         if(bytes.length == 0) {
-            logger.error("cannot upload a empty media");
 
             writeError(request, response, new ErrorMessage.EmptyMediaError("cannot upload a empty media"));
+            logger.error("cannot upload a empty media");
 
-            return;
         }
+        else if(!mimetype.startsWith("image")) {
 
-        try {
+            writeError(request, response, new ErrorMessage.UploadMediaError("you can upload only image"));
+            logger.error("you can upload only image");
 
-            Media media = new CreateMediaDatabase(getDataSource().getConnection(), filename, mimetype, bytes,mimetype.startsWith("image") ? scaleImage(bytes, THUMB_SIZE) : null).createMedia();
+        }
+        else if(!checkImage(bytes)) {
 
-            if(media != null) {
-                Message m = new Message("Upload completed successfully.",
-                        media.getId());
+            writeError(request, response, new ErrorMessage.UploadMediaError("image quality is not eligible"));
+            logger.error("image quality is not eligible");
 
-                logger.info("media "+media.getId()+ "Upload completed successfully from user"+((UserCredential)request.getSession(false).getAttribute(USER_ATTRIBUTE)).getIdentification());
-                writeResource(request,response, "/jsp/message.jsp",true, m);
-            } else {
-                logger.error("There was a problem with upload");
+        }
+        else {
 
-                writeError(request, response, new ErrorMessage.UploadMediaError("There was a problem with upload"));
+            try {
+
+                Media media = new CreateMediaDatabase(getDataSource().getConnection(), filename, mimetype, bytes, mimetype.startsWith("image") ? scaleImage(bytes, THUMB_SIZE) : null).createMedia();
+
+                if (media != null) {
+                    Message m = new Message("Upload completed successfully.",
+                            media.getId());
+
+                    logger.info("media " + media.getId() + "Upload completed successfully from user" + ((UserCredential) request.getSession(false).getAttribute(USER_ATTRIBUTE)).getIdentification());
+                    writeResource(request, response, "/jsp/message.jsp", true, m);
+                } else {
+
+                    writeError(request, response, new ErrorMessage.UploadMediaError("There was a problem with upload"));
+                    logger.error("There was a problem with upload");
+
+                }
+
+            } catch (SQLException e) {
+
+                writeError(request, response, new ErrorMessage.SqlInternalError(e.getMessage()));
+                logger.error(e.getMessage());
+
             }
-
-        } catch (SQLException e) {
-            logger.error(e.getMessage());
-
-            writeError(request, response, new ErrorMessage.SqlInternalError(e.getMessage()));
         }
     }
 
