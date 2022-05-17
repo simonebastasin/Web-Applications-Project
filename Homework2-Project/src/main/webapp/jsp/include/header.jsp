@@ -54,7 +54,7 @@
                                 <li class="nav-item dropdown">
                                     <a class="nav-link" href="#" id="navbarDropdownCart" role="button"  data-bs-toggle="dropdown" aria-expanded="false"  href="#">
                                         <i class="fa-solid fa-cart-shopping">
-                                            <span id="numberOfElementCart" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary"><span class="visually-hidden">unread messages</span></span>
+                                            <span id="numberOfElementCart" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary"><span class="visually-hidden">Distinct product</span></span>
                                         </i>
                                     </a>
                                     <ul class="dropdown-menu" id="cart" aria-labelledby="navbarDropdownCart">
