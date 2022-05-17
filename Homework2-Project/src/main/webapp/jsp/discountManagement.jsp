@@ -88,10 +88,12 @@
                             </button>
                         </td>
                         <td>
-                            <a href="<c:url value="/management/discountManagement/deleteDiscount/${discountListProduct.discount.id}"/>">
+                            <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteDiscountModal" data-bs-whatever="${discountListProduct.discount.id}">
                                 <i class="fa-solid fa-trash-can text-danger"></i>
-                            </a>
-
+                            </button>
+                            <!--<a href="<c:url value="/management/discountManagement/deleteDiscount/${discountListProduct.discount.id}"/>">
+                                <i class="fa-solid fa-trash-can text-danger"></i>
+                            </a>-->
                         </td>
                     </tr>
                 </c:forEach>

@@ -1,4 +1,5 @@
 const discountTable = document.getElementById('discountTable');
+const discountTableBody = discountTable.getElementsByTagName('tbody')[0] ?? discountTable;
 const addDiscountButton = document.getElementById('addDiscountButton');
 const addDiscountForm = document.getElementById('addDiscountForm');
 const addDiscountModal = document.getElementById('addDiscountModal');
@@ -17,6 +18,7 @@ addDiscountForm.addEventListener('submit', (e) => {
     if(createDiscount) {
        //alert("send create");
         xmlhttp.open("POST", rootPath + "/rest/management/discountManagement/createDiscount", true);
+        idDiscount = formData.get('idDiscount');
     } else {
         //alert("send edit "+idDiscount);
         xmlhttp.open("POST", rootPath + "/rest/management/discountManagement/editDiscount/" + idDiscount, true);
@@ -28,18 +30,19 @@ addDiscountForm.addEventListener('submit', (e) => {
             if(xmlhttp.status === 200) {
                 const alertPlaceholder = document.getElementById('liveAlertPlaceholder');
                 let newInnerHTML =
-                    '<td>'+formData.get('percentage')+'</td>'+
+                    '<td>'+idDiscount+'</td>'+
+                    '<td>'+formData.get('percentage')+'%</td>'+
                     '<td>'+formData.get('start')+'</td>'+
                     '<td>'+formData.get('end')+'</td>'+
                     '<td>'+formData.getAll('productList').join(' ')+'</td>'+
-                    '<td><button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#addDiscountModal" data-bs-whatever="'+idDiscount+'">Edit</button></td>'+
-                    '<td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteDiscountModal" data-bs-whatever="'+idDiscount+'">Delete</button></td>';
+                    '<td><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#addDiscountModal" data-bs-whatever="'+idDiscount+'"> <i class="fa-solid fa-pen-to-square text-primary"></i></button></td>'+
+                    '<td><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteDiscountModal" data-bs-whatever="'+idDiscount+'"> <i class="fa-solid fa-trash-can text-danger"></i></button></td>';
                 if(createDiscount) {
                     bootstrapAlert("The discount was created", 'success', alertPlaceholder);
                     let tr = document.createElement('tr');
                     tr.id = idDiscount;
                     tr.innerHTML = newInnerHTML;
-                    discountTable.appendChild(tr);
+                    discountTableBody.appendChild(tr);
                 }
                 else {
                     bootstrapAlert("The discount was modified", 'success', alertPlaceholder);
