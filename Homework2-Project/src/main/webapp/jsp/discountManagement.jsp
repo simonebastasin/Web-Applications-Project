@@ -50,12 +50,12 @@
     %>
 
     <div id="liveAlertPlaceholder"></div>
-
     <div>
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addDiscountModal">
-            Add new Discount
+            <i class="fa-solid fa-circle-plus"></i>
+            Add new discount
         </button>
-    </div>
+    </div><br>
 
     <div class="card">
         <table id="discountTable" class="table table-hover table-hide-lg-col-5 table-hide-sm-col-1 table-hide-sm-col-3" >
