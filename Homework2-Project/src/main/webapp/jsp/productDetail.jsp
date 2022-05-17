@@ -162,7 +162,7 @@
 
                                         <div class="row w-100 align-items-center">
                                             <div class="col text-end">
-                                                <button type="submit" class="btn btn-outline-primary mt-1" id="addToCart" >
+                                                <button type="button" class="btn btn-outline-primary mt-1" id="addToCart" >
                                                     Add to   <i class="fa-solid fa-cart-plus"></i>
                                                 </button>
                                                 <button type="submit" class="btn btn-outline-primary mt-1">

@@ -273,19 +273,19 @@ function buyCart() {
 function cart()
 {
     const form=document.getElementById("formSend");
-    const alias=form.getAttribute("data-product-alias");
-    const name=form.getAttribute("data-product-name");
-    form.addEventListener("submit",(e) => {
-        e.preventDefault();
-        const qt=new FormData(form).get("quantity");
-        console.log(qt.toString()+ " "+name);
-        localStorage.setItem("cart"+alias,qt.toString()+";"+name);
+
+    if (form.checkValidity()) {
+        const alias = form.getAttribute("data-product-alias");
+        const name = form.getAttribute("data-product-name");
+
+        const qt = new FormData(form).get("quantity");
+        console.log(qt.toString() + " " + name);
+        localStorage.setItem("cart" + alias, qt.toString() + ";" + name);
         console.log(localStorage.length);
-        if(number!=null)
-        number.innerHTML=localStorage.length.toString();
-    });
-    if(number!=null)
-    number.innerHTML=localStorage.length.toString();
+        if (number != null)
+            number.innerHTML = localStorage.length.toString();
+    }
+    form.classList.add('was-validated');
 }
 const addToCart=document.getElementById("addToCart");
 addToCart?.addEventListener("click",cart);
