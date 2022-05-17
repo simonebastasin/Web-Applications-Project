@@ -212,7 +212,7 @@ function presentCart() {
                 const element = localStorage.getItem(localStorage.key(i)).split(";")
                 const qta = element[0];
                 const name = element[1];
-                text += '<li><span class="dropdown-item-text" >' + name + '<br>'+'<i>quantity: </i>'+ qta + '</a></li><li><hr class="dropdown-divider"></li>';
+                text += '<li><span class="dropdown-item-text" >' + name + '<br>'+'<i>quantity: </i>'+ qta + '</a></li> <button class="btn"><i class="fa-solid fa-trash"></i></button><li><hr class="dropdown-divider"></li>';
             }
         }
         text += '<li><span class="dropdown-item-text"><button  class="btn btn-primary" id="buyButton" >buy</button></span></li>';
