@@ -196,6 +196,7 @@ function invalidate()
     localStorage.clear();
 }
 const number=document.getElementById("numberOfElementCart");
+if(number!=null)
 number.innerHTML=localStorage.length.toString();
 function presentCart() {
     var text = "";
@@ -263,13 +264,16 @@ function cart()
         console.log(qt.toString()+ " "+name);
         localStorage.setItem("cart"+alias,qt.toString()+";"+name);
         console.log(localStorage.length);
+        if(number!=null)
         number.innerHTML=localStorage.length.toString();
     });
+    if(number!=null)
     number.innerHTML=localStorage.length.toString();
 }
 const addToCart=document.getElementById("addToCart");
 addToCart?.addEventListener("click",cart);
 logout?.addEventListener("click",invalidate);
+if(number!=null)
 number.innerHTML=localStorage.length.toString();
 cartButton?.addEventListener("click",presentCart);
 
