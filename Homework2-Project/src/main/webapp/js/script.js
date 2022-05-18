@@ -216,7 +216,7 @@ function invalidate()
 }
 const number=document.getElementById("numberOfElementCart");
 if(number!=null)
-number.innerHTML=localStorage.length.toString();
+    number.innerHTML=localStorage.length.toString();
 function presentCart() {
     let text = "<div id='wrapper'>";
     if (localStorage.length == 0)
@@ -229,14 +229,14 @@ function presentCart() {
                 const element = localStorage.getItem(localStorage.key(i)).split(";")
                 const qta = element[0];
                 const name = element[1];
-                text += '<li><span class="dropdown-item-text" >' + name + '<br>' +
+                text += '<li><span class="dropdown-item-text" > ' + name + '<br>' +
                     '<div class="d-inline p-2 "><i>quantity: </i>'+ qta +'</div>' +
                     '<div class="d-inline p-2 "><button class="btn cartButton" data-cart='+localStorage.key(i)+'>' +
                     '<i class="fa-solid fa-trash"></i></button><li><hr class="dropdown-divider"></div>' +
                     '</li>';
             }
         }
-        text += '<li><span class="dropdown-item-text "><button  class="btn btn-primary " id="buyButton" >buy</button></span></li>';
+        text += '<li><span class="dropdown-item-text d-flex justify-content-center "><button  class="btn btn-primary " id="buyButton" >buy</button></span></li>';
     }
     text+="</div>";
 
@@ -314,7 +314,7 @@ const addToCart=document.getElementById("addToCart");
 addToCart?.addEventListener("click",cart);
 logout?.addEventListener("click",invalidate);
 if(number!=null)
-number.innerHTML=localStorage.length.toString();
+    number.innerHTML=localStorage.length.toString();
 cartButton?.addEventListener("click",presentCart);
 
 //payment?.addEventListener("click",invalidate);
