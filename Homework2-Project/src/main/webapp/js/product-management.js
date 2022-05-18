@@ -1,7 +1,6 @@
 const productTable = document.getElementById('productTable');
 const productTableBody = productTable.getElementsByTagName('tbody')[0] ?? productTable;
 const addProductButton = document.getElementById('addProductButton');
-const deleteProductButton = document.getElementById('deleteProductButton');
 const addProductForm = document.getElementById('addProductForm');
 const deleteProductForm = document.getElementById('deleteProductForm');
 const addCategoryForm = document.getElementById('addCategoryForm');
@@ -50,14 +49,14 @@ addProductForm.addEventListener('submit', (e) => {
                     '<td class="bg-primary"><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#addProductModal" data-bs-whatever="'+alias+'"> <i class="fa-solid fa-pen-to-square text-light"></i></button></td>'+
                     '<td class="bg-primary"><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteProductModal" data-bs-whatever="'+alias+'"> <i class="fa-solid fa-trash-can text-light"></i></button></td>';
                 if(createProduct) {
-                    bootstrapAlert("The product was created", 'success', alertPlaceholder);
+                    bootstrapAlert("The product has been created", 'success', alertPlaceholder);
                     let tr=document.createElement('tr');
                     tr.id = alias;
                     tr.innerHTML = newInnerHTML;
                     productTableBody.appendChild(tr);
                 }
                 else {
-                    bootstrapAlert("The product was modified", 'success', alertPlaceholder);
+                    bootstrapAlert("The product has been modified", 'success', alertPlaceholder);
                     document.getElementById(alias).innerHTML = newInnerHTML;
                 }
                 bootstrap.Modal.getOrCreateInstance(addProductModal).hide();
@@ -210,7 +209,7 @@ deleteProductForm.addEventListener('submit', (e) => {
         if (xmlhttp.readyState === XMLHttpRequest.DONE) {
             if(xmlhttp.status === 200) {
                 const alertPlaceholder = document.getElementById('liveAlertPlaceholder');
-                bootstrapAlert("The product was remove", 'success', alertPlaceholder);
+                bootstrapAlert("The product has been removed", 'success', alertPlaceholder);
 
 
                 let newInnerHTML =
@@ -269,10 +268,13 @@ deleteProductModal.addEventListener('show.bs.modal', (e) => {
         if (xmlhttp.readyState === XMLHttpRequest.DONE) {
             if(xmlhttp.status === 200) {
                 const response = JSON.parse(xmlhttp.responseText);
-                populateForm(deleteProductForm, response["product"] ?? response,)
-
-
-
+                populateForm(deleteProductForm, response["product"] ?? response,);
+                document.getElementById('aliasDelete').readOnly = true;
+                document.getElementById('aliasDelete').disabled = true;
+                document.getElementById('nameDelete').readOnly = true;
+                document.getElementById('nameDelete').disabled = true;
+                document.getElementById('brandDelete').readOnly = true;
+                document.getElementById('brandDelete').disabled = true;
 
             } else {
                 const alertPlaceholder = document.getElementById('liveAlertPlaceholder');
@@ -284,8 +286,7 @@ deleteProductModal.addEventListener('show.bs.modal', (e) => {
     xmlhttp.send();
 
     let modalTitle = deleteProductModal.querySelector('.modal-title');
-    modalTitle.textContent = 'Delete ' + alias;
-    deleteProductButton.textContent = 'Delete product';
+    modalTitle.textContent = 'Are you sure to delete this product?';
 
 })
 
@@ -333,7 +334,7 @@ addCategoryForm.addEventListener('submit', (e) => {
 
 
                 const alertPlaceholder = document.getElementById('formAlertPlaceholder');
-                bootstrapAlert("The category was added", 'success', alertPlaceholder);
+                bootstrapAlert("The category has been added", 'success', alertPlaceholder);
 
                 // Get the content
                 var content = document.getElementById('toggleCategory');

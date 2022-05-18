@@ -232,66 +232,10 @@
                             <label for="brandDelete" class="col-form-label">Brand:</label>
                             <input type="text" class="form-control" id="brandDelete" name="brand" required/>
                         </div>
-                        <div class="mb-3">
-                            <label for="descriptionDelete" class="col-form-label">Description:</label>
-                            <textarea class="form-control" id="descriptionDelete" name="description" required></textarea>
-                        </div>
-                        <div class="mb-3">
-                            <div class="input-group">
-                                <input type="hidden" class="form-control" min="0.01" step="0.01" max="2500" placeholder="10.00" id="purchaseDelete" name="purchase" required/>
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <div class="input-group">
-                                <input type="hidden" class="form-control" min="0.01" step="0.01" max="2500" placeholder="10.00" id="saleDelete" name="sale" required/>
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <input type="hidden" class="form-control" min="1" step="1" placeholder="1" id="quantityDelete" name="quantity" required/>
-                        </div>
-                        <div class="mb-3">
-                            <label for="category">Category:</label>
-                            <div class="input-group">
-                                <select class="form-control" name="category" id="categoryDelete" required>
-                                    <option value=""  hidden selected disabled>Choose</option>
-                                    <c:forEach var="cat" items="${productCategoryList}">
-                                        <option value="${cat.name}">
-                                                ${cat.name}
-                                        </option>
-                                    </c:forEach>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            Evidence:
-                            <div class="form-check form-check-inline" >
-                                <input class="form-check-input" type="hidden" id="yesDelete"
-                                       name="evidence" value="true" required>
-
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="hidden" id="noDelete"
-                                       name="evidence" value="false" required>
-                            </div>
-                        </div>
-                        <div class="mb-3 image-check-box">
-                            <ul>
-                                <c:if test="${not empty media}">
-                                    <li><input type="checkbox" id="media-${media.id}" name="pictures" value="${media.id}"/>
-                                        <label for="media-${media.id}"><img src="<c:url value="/media/thumb/${media.id}" />" alt="${media.filename}" /></label>
-                                    </li>
-                                </c:if>
-                                <c:forEach var="media" items="${mediaList}">
-                                    <li><input type="checkbox" id="media-${media.id}" name="pictures" value="${media.id}"/>
-                                        <label for="media-${media.id}"><img src="<c:url value="/media/thumb/${media.id}" />" alt="${media.filename}" /></label>
-                                    </li>
-                                </c:forEach>
-                            </ul>
-                        </div>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary" id="deleteProductButton" form="deleteProductForm">Delete product</button>
+                    <button type="submit" class="btn btn-primary" id="deleteProductButton" form="deleteProductForm">Delete</button>
                 </div>
             </div>
         </div>
