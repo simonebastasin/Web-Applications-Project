@@ -29,54 +29,128 @@
     <li class="breadcrumb-item active" aria-current="page">Order ID: ${onlineOrder.idOrder}</li>
   </ol>
 </nav>
-    <div class="card-body">
-    <div class="mx-auto w-lg-50">
-        <div class="card mt-3 mb-3">
 
-<table >
-    <tr>
-        <th>Product name</th>
-        <th>Price Unitary</th>
-        <th>Quantity</th>
-        <th>Total</th>
-    </tr>
-    <c:forEach var="product" items="${onlineOrder.products}">
-        <tr>
-            <td>${product.name}</td>
-            <td>${product.finalSalePrice}€</td>
-            <td>${product.quantity}</td>
-            <td>${product.finalSalePrice*product.quantity}€</td>
-        </tr>
 
-    </c:forEach>
-    <tr><td>Total</td><td></td><td></td><td>${onlineOrder.totalPrice}€</td></tr>
-</table>
+
+<div class="mx-auto w-lg-50">
+    <div class="card mt-3 mb-3">
+        <div class="card-header">
+            <div class="row">
+                <div class="col">
+                    Product name
+                </div>
+                <div class="col">
+                    Price Unitary
+                </div>
+                <div class="col">
+                    Quantity
+                </div>
+                <div class="col">
+                    Total
+                </div>
+            </div>
         </div>
+        <ul class="list-group list-group-flush">
+            <c:forEach var="product" items="${onlineOrder.products}">
+                <li class="list-group-item">
+                    <div class="row">
+                        <div class="col">
+                                ${product.name}
+                        </div>
+                        <div class="col">
+                                ${product.finalSalePrice}€
+                        </div>
+                        <div class="col">
+                                ${product.quantity}
+                        </div>
+                        <div class="col">
+                                ${product.finalSalePrice*product.quantity}€
+                        </div>
+                    </div>
+                </li>
+            </c:forEach>
+        </ul>
+        <div class="card-footer">
+            <div class="row">
+                <div class="col">
+                    Total
+                </div>
+                <div class="col">
+                </div>
+                <div class="col">
+                </div>
+                <div class="col">
+                    ${String.format("%.2f", onlineOrder.totalPrice)}€
+                </div>
+            </div>
         </div>
+    </div>
+
+
+
+
+
+
 
 <c:choose>
     <c:when test="${onlineOrder.status.status eq OrderStatusEnum.OPEN}">
-        <form method="post" action="">
-            <label for="payment">Select a payment method: </label>
-            <select name="payment" id="payment" autofocus required>
-                <option value="${PaymentMethodOnlineEnum.CREDIT_CARD}">Credit Card</option>
-                <option value="${PaymentMethodOnlineEnum.APPLE_PAY}">Apple Pay</option>
-                <option value="${PaymentMethodOnlineEnum.GOOGLE_PAY}">Google Pay</option>
-            </select>
-            <input type ="submit" value = "Confirm payment" id="confirmPayment" class="btn btn-primary " >
-        </form>
+
+
+                    <form method="post" action="">
+                        <div class="card mt-3 mb-3">
+                            <div class="card-body">
+                                <div class="row align-items-center">
+                                    <div class="col">
+                                        <label for="payment">Select a payment method: </label>
+                                    </div>
+                                    <div class="col">
+                                        <select class="form-select" name="payment" id="payment" autofocus required>
+                                            <option value="${PaymentMethodOnlineEnum.CREDIT_CARD}">Credit Card</option>
+                                            <option value="${PaymentMethodOnlineEnum.APPLE_PAY}">Apple Pay</option>
+                                            <option value="${PaymentMethodOnlineEnum.GOOGLE_PAY}">Google Pay</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-center">
+                            <input type ="submit" value = "Confirm payment" id="confirmPayment" class="btn btn-primary" >
+                        </div>
+                    </form>
+
+
     </c:when>
     <c:otherwise>
-        Your payment is now being processed. <br>
-        <c:if test="${not empty onlineInvoice}">
-            Transaction id: ${onlineInvoice.transactionId} <br>
-            Payment method: ${onlineInvoice.paymentType.text} <br>
-        </c:if>
-        Hang on and check out your <a href="<c:url value="/order/detail/${onlineOrder.idOrder}"/>">order</a>.
+    <div class="card mt-3 mb-3">
+        <div class="card-body">
+            <c:if test="${not empty onlineInvoice}">
+                <div class="row">
+                    <div class="col">
+                        Transaction id:
+                    </div>
+                    <div class="col">
+                            ${onlineInvoice.transactionId}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        Payment method:
+                    </div>
+                    <div class="col">
+                            ${onlineInvoice.paymentType.text}
+                    </div>
+                </div>
+            </c:if>
+        </div>
+        <div class="card-footer">
+            Your payment is now being processed.
+            Hang on and check out your <a href="<c:url value="/order/detail/${onlineOrder.idOrder}"/>" class="card-link">order</a>.
+        </div>
+    </div>
     </c:otherwise>
 </c:choose>
+</div>
 
-    </div>
 </div>
 <c:import url="/jsp/include/footer.jsp"/>
 </body>
