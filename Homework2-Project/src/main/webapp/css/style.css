@@ -122,59 +122,69 @@ span.roboto {
     background-color: rgba(0, 0, 0, 0.75);
 }
 
-@media (min-width: 1023px) {
-    .only_row {
-        display: none;
-    }
-}
-
-@media (max-width: 1023px) {
-    .carousel-category .carousel-inner .carousel-item.active {
-        display: flex;
-        justify-content: space-evenly;
-    }
-}
-
-@media (min-width: 768px) and (max-width: 1024px) {
-    .carousel-category .carousel-inner .carousel-item > div:nth-child(4),
-    .carousel-category .carousel-inner .carousel-item > div:nth-child(3){
-        display: none;
-    }
-}
-
-
-@media (max-width: 767px) {
-    .carousel-category .carousel-inner .carousel-item > div:not(:first-child) {
-        display: none;
-    }
-
-    .only_row {
-        display: block;
-    }
-}
 
 .carousel-category .carousel-inner .carousel-item.active,
 .carousel-category .carousel-inner .carousel-item-next,
 .carousel-category .carousel-inner .carousel-item-prev {
     display: flex;
+    justify-content: space-evenly;
 }
 
 .carousel-category .carousel-control-prev,
 .carousel-category .carousel-control-next {
     width: 5%;
 }
+.carousel-category .carousel-inner .carousel-item.active {
+    z-index: 2000;
+}
 
-/* medium and up screens */
-@media (min-width: 768px) {
+.carousel-category .carousel-inner .carousel-item-next,
+.carousel-category .carousel-inner .carousel-item-prev {
+    z-index: 2001;
+}
+
+.carousel-category .carousel-inner .carousel-item.active.carousel-item-end  > div:not(:last-child),
+.carousel-category .carousel-inner .carousel-item.active.carousel-item-start  > div:not(:first-child) {
+    visibility: hidden;
+}
+
+@media (max-width: 767.98px) {
+    .carousel-category .carousel-inner .carousel-item > div:not(:first-child) {
+        display: none;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1199.98px) {
+
+    .carousel-category .carousel-inner .carousel-item > div:nth-child(4),
+    .carousel-category .carousel-inner .carousel-item > div:nth-child(3){
+        display: none;
+    }
 
     .carousel-category .carousel-inner .carousel-item-end.active,
     .carousel-category .carousel-inner .carousel-item-next {
-        transform: translateX(25%);
+        transform: translateX(calc(50% - 3rem));
     }
 
     .carousel-category .carousel-inner .carousel-item-start.active,
     .carousel-category .carousel-inner .carousel-item-prev {
-        transform: translateX(-25%);
+        transform: translateX(calc(-50% + 3rem));
+    }
+}
+
+@media (min-width: 1200px) {
+    .only_row {
+        display: none;
+    }
+
+    .carousel-category .carousel-inner .carousel-item-end.active,
+    .carousel-category .carousel-inner .carousel-item-next {
+        transform: translateX(calc(25% - 3rem));
+    }
+
+    .carousel-category .carousel-inner .carousel-item-start.active,
+    .carousel-category .carousel-inner .carousel-item-prev {
+        transform: translateX(calc(-25% + 3rem));
     }
 }
 

@@ -331,14 +331,18 @@ carousels?.forEach((it) => {
         const minPerSlide = 4 // number of slides per carousel-item
 
         let next = el.nextElementSibling
-        for (var i=1; i<minPerSlide && i< items.length; i++) {
-            if (!next && items.length > 1) {
+        for (var i=1; i<minPerSlide; i++) {
+            if (!next) {
                 // wrap carousel by using first child
                 next = items[0]
             }
             if(next) {
                 let cloneChild = next.cloneNode(true)
-                el.appendChild(cloneChild.children[0])
+                let children = cloneChild.children[0];
+                el.appendChild(children)
+                if(i >= items.length) {
+                    children.style.visibility = "hidden";
+                }
                 next = next.nextElementSibling
             }
         }

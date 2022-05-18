@@ -290,9 +290,9 @@
                                     <c:when test="${active == true}">
 
 
-                                        <div class="carousel-item active p-3 bg-light">
+                                        <div class="carousel-item active p-3">
 
-                                            <div class="col-md-3 text-center">
+                                            <div class="text-center">
                                                 <div class="square one img-cat">
 
                                                         <div class="overlay-hover">
@@ -344,9 +344,9 @@
 
                                     </c:when>
                                     <c:otherwise>
-                                        <div class="carousel-item p-3 bg-light">
+                                        <div class="carousel-item p-3">
 
-                                            <div class="col-md-3 text-center">
+                                            <div class="text-center">
                                                 <div class="square one img-cat">
 
                                                         <div class="overlay-hover">
