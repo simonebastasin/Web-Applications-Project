@@ -210,7 +210,10 @@ function showElement(e) {
 
 function invalidate()
 {
-    localStorage.clear();
+    console.log(fromCart.toString());
+    if(fromCart==true)
+        localStorage.clear();
+    fromCart=false;
 }
 const number=document.getElementById("numberOfElementCart");
 if(number!=null)
@@ -259,7 +262,9 @@ function presentCart() {
     buyButton?.addEventListener("click",buyCart);
 
 }
+var fromCart;
 function buyCart() {
+    fromCart=true;
     var json={cart:[]};
     for (let i = 0; i < localStorage.length; i++) {
         if (localStorage.key(i).substring(0, 4).localeCompare("cart") == 0) {
@@ -281,6 +286,7 @@ function buyCart() {
             console.log(id);
 
             location.href = rootPath+"/buy/pay/"  + id;
+            invalidate();
         }
     }
 
@@ -313,7 +319,7 @@ if(number!=null)
 number.innerHTML=localStorage.length.toString();
 cartButton?.addEventListener("click",presentCart);
 
-payment?.addEventListener("click",invalidate);
+//payment?.addEventListener("click",invalidate);
 
 loginForBuy?.addEventListener('click', (e) => {dropdownMenuLogin.click()});
 
