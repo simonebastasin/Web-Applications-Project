@@ -17,13 +17,12 @@ editCustomerForm.addEventListener('submit', (e) => {
     if(!editCustomerForm.checkValidity()) return;
 
     e.preventDefault();
-    // let notEditCustomer = (idCustomer  === null);
     const formData = new FormData(editCustomerForm);
     const urlencodedData = new URLSearchParams(formData);
     const xmlhttp = new XMLHttpRequest();
 
     // -> edit
-    //alert("send edit "+idCustomer);
+    //alert("send edit " + username);
     xmlhttp.open("POST", rootPath + "/rest/management/customerManagement/editCustomer/" + username, true);
 
     xmlhttp.onreadystatechange = function() {
@@ -62,23 +61,21 @@ editCustomerModal.addEventListener('show.bs.modal', (e) => {
     var button = e.relatedTarget;
     // Extract info from data-bs-* attributes
     username = button.getAttribute('data-bs-whatever');
-    // let notEditCustomer = (idCustomer  === null);
+
+    alert("USERNAME: " + username);
 
     editCustomerForm.classList.toggle('was-validated', false);
     editCustomerForm.reset();
 
     // -> edit
     const xmlhttp = new XMLHttpRequest();
-    xmlhttp.open("GET", rootPath+"/rest/management/customerManagement/editCustomer/" + username, true);
+    xmlhttp.open("GET", rootPath + "/rest/management/customerManagement/editCustomer/" + username, true);
     xmlhttp.onreadystatechange = function() {
         if (xmlhttp.readyState === XMLHttpRequest.DONE) {
             if (xmlhttp.status === 200) {
-                const response = JSON.parse(xmlhttp.responseText).customer;
-                // const respondeElaborated = Object.assign({}, response, {productList : response.productList.map(it =>  it.alias)});
-                // populateForm(editCustomerForm, respondeElaborated);
+                const response = JSON.parse(xmlhttp.responseText);
                 populateForm(editCustomerForm, response);
-                // document.getElementById('idCustomer').readOnly = true;
-                // document.getElementById('idCustomer').disabled = true;
+                document.getElementById('id').disabled = true;
                 document.getElementById('username').disabled = true;
             } else {
                 const alertPlaceholder = document.getElementById('liveAlertPlaceholder');
@@ -86,10 +83,10 @@ editCustomerModal.addEventListener('show.bs.modal', (e) => {
                 bootstrap.Modal.getOrCreateInstance(editCustomerModal).hide();
             }
         }
-        xmlhttp.send();
-
-        let modalTitle = editCustomerModal.querySelector('.modal-title');
-        modalTitle.textContent = 'Edit customer ' + username;
-        editCustomerButton.textContent = 'Edit customer';
     }
+    xmlhttp.send();
+
+    let modalTitle = editCustomerModal.querySelector('.modal-title');
+    modalTitle.textContent = 'Edit customer ' + username;
+    editCustomerButton.textContent = 'Edit customer';
 });

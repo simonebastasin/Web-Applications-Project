@@ -123,6 +123,6 @@
     </div>
 </div>
 <c:import url="/jsp/include/footer-management.jsp"/>
-<script src="<c:url value="/js/customer-management.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/js/customer-management.js"/>"></script>
 </body>
 </html>
