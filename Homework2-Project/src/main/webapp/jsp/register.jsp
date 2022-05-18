@@ -128,7 +128,8 @@
             </form>
         </div>
     </div>
-    <c:import url="/jsp/include/footer.jsp"/>
-    <script src="<c:url value="/js/check-password.js"/>"></script>
+</div>
+<c:import url="/jsp/include/footer.jsp"/>
+<script src="<c:url value="/js/check-password.js"/>"></script>
 </body>
 </html>
