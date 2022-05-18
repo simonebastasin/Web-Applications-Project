@@ -9,25 +9,25 @@ formConfirmPassword.addEventListener('submit', (e) => {
         confirmPassword.setCustomValidity('Passwords do NOT match!');
         document.getElementById('newPasswordFeedback').innerHTML =  'Passwords do NOT match!';
         document.getElementById('confirmPasswordFeedback').innerHTML =  'Passwords do NOT match!';
-        e.preventDefault();
+
     } else if(password.validity.valueMissing && confirmPassword.validity.valueMissing) {
         password.setCustomValidity( 'Passwords is empty');
         confirmPassword.setCustomValidity( 'Confirm Passwords is empty');
         document.getElementById('newPasswordFeedback').innerHTML =  'Passwords is empty';
         document.getElementById('confirmPasswordFeedback').innerHTML =  'Confirm Passwords is empty';
-        e.preventDefault();
+
     }else if(password.validity.valueMissing) {
         password.setCustomValidity( 'Passwords is empty');
         confirmPassword.setCustomValidity('');
         document.getElementById('newPasswordFeedback').innerHTML =  'Passwords is empty';
-        e.preventDefault();
+
     } else if(confirmPassword.validity.valueMissing) {
         password.setCustomValidity('');
         confirmPassword.setCustomValidity( 'Confirm Passwords is empty');
         document.getElementById('confirmPasswordFeedback').innerHTML =  'Confirm Passwords is empty';
-        e.preventDefault();
     } else{
         password.setCustomValidity('');
         confirmPassword.setCustomValidity('');
     }
+    e.preventDefault();
 });

@@ -28,6 +28,7 @@
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/session/*</url-pattern>
+        <url-pattern>/rest/session/*</url-pattern>
     </servlet-mapping>
 
     <servlet>

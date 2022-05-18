@@ -14,8 +14,9 @@
 <body>
 <c:import url="/jsp/include/header.jsp"/>
 <div class="container main-container">
+    <div id="liveAlertPlaceholder"></div>
     <div class="m-5"></div>
-    <ul class="nav nav-pills nav-justified mb-3" id="pillsTab" role="tablist">
+    <ul class="nav nav-pills nav-justified mb-3 w-md-50 mx-auto bg-light rounded" id="pillsTab" role="tablist">
 
 
         <li class="nav-item" role="presentation">
@@ -27,15 +28,15 @@
 
     </ul>
 
-    <div class="tab-content card p-3 mb-3" id="pillsTabContent">
+    <div class="tab-content card p-3 mb-3 w-md-50 mx-auto" id="pillsTabContent">
         <div class="tab-pane fade" id="pillsLoginTab" role="tabpanel" aria-labelledby="pillsLoginButton">
-            <form method="POST" action="<c:url value="/session/login"/>" class="row g-3 w-lg-50 mx-auto needs-validation" novalidate>
+            <form class="row g-3 needs-validation" novalidate id="loginForm">
 
-                    <div class="form-floating mb-4">
-                        <input type="text" class="form-control" id="logIdentification" name="identification" placeholder="Username or Email" required>
-                        <label for="logIdentification">Username or Email</label>
-                        <div class="invalid-feedback">Insert your username or email.</div>
-                    </div>
+                <div class="form-floating mb-4">
+                    <input type="text" class="form-control" id="logIdentification" name="identification" placeholder="Username or Email" required>
+                    <label for="logIdentification">Username or Email</label>
+                    <div class="invalid-feedback">Insert your username or email.</div>
+                </div>
 
 
                 <div class="form-floating mb-4">
@@ -66,7 +67,7 @@
         </div>
 
         <div class="tab-pane fade" id="pillsRegisterTab" role="tabpanel" aria-labelledby="pillsRegisterButton">
-            <form method="post" action="<c:url value="/session/register"/>" class="row g-3 w-lg-50 mx-auto needs-validation" novalidate id="formConfirmPassword">
+            <form method="post" action="<c:url value="/session/register"/>" class="row g-3  needs-validation" novalidate id="formConfirmPassword">
 
                 <div class="form-floating mb-4">
                     <input id="name" type="text" class="form-control" name="name" required placeholder="name">
@@ -128,5 +129,6 @@
 <c:import url="/jsp/include/footer.jsp"/>
 <script src="<c:url value="/js/check-password.js"/>"></script>
 <script src="<c:url value="/js/register.js"/>"></script>
+<script src="<c:url value="/js/respond-register.js"/>"></script>
 </body>
 </html>
