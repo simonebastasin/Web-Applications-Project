@@ -24,6 +24,7 @@ editCustomerForm.addEventListener('submit', (e) => {
     // -> edit
     //alert("send edit " + username);
     xmlhttp.open("POST", rootPath + "/rest/management/customerManagement/editCustomer/" + username, true);
+    //formData.delete('username');
 
     xmlhttp.onreadystatechange = function() {
         if (xmlhttp.readyState === XMLHttpRequest.DONE) {
@@ -42,7 +43,7 @@ editCustomerForm.addEventListener('submit', (e) => {
                     '<td><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteCustomerModal" data-bs-whatever="'+username+'"> <i class="fa-solid fa-trash-can text-danger"></i></button></td>';
 
                 // -> edit
-                bootstrapAlert("Customer modified", 'success', alertPlaceholder);
+                bootstrapAlert("Customer " + username + " modified", 'success', alertPlaceholder);
                 document.getElementById(username).innerHTML = newInnerHTML;
 
                 bootstrap.Modal.getOrCreateInstance(editCustomerModal).hide();
@@ -62,8 +63,6 @@ editCustomerModal.addEventListener('show.bs.modal', (e) => {
     var button = e.relatedTarget;
     // Extract info from data-bs-* attributes
     username = button.getAttribute('data-bs-whatever');
-
-    alert("USERNAME: " + username);
 
     editCustomerForm.classList.toggle('was-validated', false);
     editCustomerForm.reset();

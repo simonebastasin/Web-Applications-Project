@@ -113,6 +113,10 @@
                             <label for="email" class="col-form-label">Email:</label>
                             <input class="form-control" id="email" name="email" required>
                         </div>
+                        <div class="mb-3">
+                            <label for="phoneNumber" class="col-form-label">Phone Number:</label>
+                            <input class="form-control" id="phoneNumber" name="phoneNumber" required>
+                        </div>
                     </form>
                 </div>
                 <div class="modal-footer">
