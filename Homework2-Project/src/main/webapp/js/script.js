@@ -245,8 +245,8 @@ function presentCart() {
 
         btn.addEventListener('click', event => {
             console.log("im in")
-            console.log( event.target.getAttribute("data-cart"));
-            localStorage.removeItem(event.target.getAttribute("data-cart"));
+            console.log( event.currentTarget.getAttribute("data-cart"));
+            localStorage.removeItem(event.currentTarget.getAttribute("data-cart"));
             if(number!=null)
                 number.innerHTML=localStorage.length.toString();
 
