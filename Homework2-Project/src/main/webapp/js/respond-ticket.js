@@ -1,6 +1,5 @@
 const respondTicketModal = document.getElementById('respondTicketModal');
 const respondTicketForm = document.getElementById('respondTicketForm');
-const respondTicketButton = document.getElementById('respondTicketButton');
 let id;
 
 respondTicketForm.addEventListener('submit', (e) => {
@@ -36,6 +35,12 @@ respondTicketForm.addEventListener('submit', (e) => {
 
                 bootstrapAlert("Ticket respond success", 'success', alertPlaceholder);
                 bootstrap.Modal.getOrCreateInstance(respondTicketModal).hide();
+
+                if(formData.get('status') === "CLOSED") {
+                    let respondTicketButton = document.getElementById('respondTicketButton-'+id);
+                    respondTicketButton.remove();
+                }
+
             }
             else {
                 const alertPlaceholder = document.getElementById('formAlertPlaceholder');

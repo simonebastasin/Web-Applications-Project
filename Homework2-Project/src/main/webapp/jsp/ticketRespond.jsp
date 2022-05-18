@@ -50,12 +50,12 @@
 
         <c:choose>
             <c:when test="${empty assistanceTicket.ticketStatusList}" >
-                <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#respondTicketModal" data-bs-whatever="${assistanceTicket.id}">
+                <button type="button" class="btn btn-outline-primary" id="respondTicketButton-${ticket.id}" data-bs-toggle="modal" data-bs-target="#respondTicketModal" data-bs-whatever="${assistanceTicket.id}">
                     Respond
                 </button>
             </c:when>
             <c:when test="${not (assistanceTicket.ticketStatusList[fn:length(assistanceTicket.ticketStatusList)-1].status eq TicketStatusEnum.CLOSED) }">
-                <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#respondTicketModal" data-bs-whatever="${assistanceTicket.id}">
+                <button type="button" class="btn btn-outline-primary" id="respondTicketButton-${ticket.id}" data-bs-toggle="modal" data-bs-target="#respondTicketModal" data-bs-whatever="${assistanceTicket.id}">
                     Respond
                 </button>
             </c:when>
@@ -110,7 +110,7 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary" id="respondTicketButton" form="respondTicketForm">Respond</button>
+                    <button type="submit" class="btn btn-primary" form="respondTicketForm">Respond</button>
                 </div>
             </div>
         </div>
