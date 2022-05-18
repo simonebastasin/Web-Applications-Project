@@ -24,14 +24,9 @@
 
 <c:forEach var="category" items="${productCategoryList}">
 
-    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-  <ol class="breadcrumb bg-secondary bg-opacity-25 p-3 mt-3 rounded">
-    <li class="breadcrumb-item"><a href="<c:url value="/"/>">Electromechanics Shop</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Category: ${category.name}</li>
-  </ol>
-</nav>
+    <h2 class="text-center"> ${category.name}</h2>
+    <h3><i>${category.description}</i></h3>
 
-    ${category.description}
 
     <c:choose>
         <c:when test="${productList.size() > 0}">
