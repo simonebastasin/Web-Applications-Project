@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix = "fn" uri = "http://java.sun.com/jsp/jstl/functions" %>
 <%@ page import="it.unipd.dei.wa2122.wadteam.resources.TicketStatusEnum" %>
 <%--@elvariable id="assistanceTicketList" type="List<it.unipd.dei.wa2122.wadteam.resources.AssistanceTicket>"--%>
 
@@ -53,12 +54,12 @@
                     Respond
                 </button>
             </c:when>
-            <c:when test="${not (assistanceTicket.ticketStatusList[0].status eq TicketStatusEnum.CLOSED) }">
+            <c:when test="${not (assistanceTicket.ticketStatusList[fn:length(assistanceTicket.ticketStatusList)-1].status eq TicketStatusEnum.CLOSED) }">
                 <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#respondTicketModal" data-bs-whatever="${assistanceTicket.id}">
                     Respond
                 </button>
-
             </c:when>
+
             <c:otherwise>
                 <li class="list-group-item">The ticket is closed</li>
             </c:otherwise>
