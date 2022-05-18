@@ -211,21 +211,10 @@ deleteProductForm.addEventListener('submit', (e) => {
                 const alertPlaceholder = document.getElementById('liveAlertPlaceholder');
                 bootstrapAlert("The product has been removed", 'success', alertPlaceholder);
 
-                //document.getElementsById(alias).children[5].innerHTML = "0"; //todo: use this
+                document.getElementById(alias).children[5].innerHTML = "0";
 
-                let newInnerHTML =
-                    '<td class="bg-primary"><a class="text-white" href="'+ rootPath + '/products/details/'+alias+'">'+formData.get('name')+'</a></td>'+
-                    '<td class="bg-primary">'+alias+'</td>'+
-                    '<td class="bg-primary">'+formData.get('brand')+'</td>'+
-                    '<td class="bg-primary">'+formData.get('category')+'</td>'+
-                    '<td class="bg-primary">'+formData.get('sale')+'</td>'+
-                    '<td class="bg-primary">0</td>'+
-                    '<td class="bg-primary">'+formData.get('evidence')+'</td>'+
-                    '<td class="bg-primary"><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#addProductModal" data-bs-whatever="'+alias+'"> <i class="fa-solid fa-pen-to-square text-light"></i></button></td>'+
-                    '<td class="bg-primary"><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteProductModal" data-bs-whatever="'+alias+'"> <i class="fa-solid fa-trash-can text-light"></i></button></td>';
-
-                document.getElementById(alias).innerHTML = newInnerHTML;
-                bootstrap.Modal.getOrCreateInstance(deleteProductModal).hide();
+                //todo: remove these comments which managed the row animation
+                /*
                 setTimeout(function(){
                     let newInnerHTML =
                         '<td><a href="'+ rootPath + '/products/details/'+alias+'">'+formData.get('name')+'</a></td>'+
@@ -238,8 +227,10 @@ deleteProductForm.addEventListener('submit', (e) => {
                         '<td><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#addProductModal" data-bs-whatever="'+alias+'"> <i class="fa-solid fa-pen-to-square text-primary"></i></button></td>'+
                         '<td><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteProductModal" data-bs-whatever="'+alias+'"> <i class="fa-solid fa-trash-can text-danger"></i></button></td>';
                     document.getElementById(alias).innerHTML = newInnerHTML;
+                }, 1700);*/
 
-                }, 1700);
+                bootstrap.Modal.getOrCreateInstance(deleteProductModal).hide();
+
             } else {
 
                 const alertPlaceholder = document.getElementById('formAlertPlaceholderDelete');
