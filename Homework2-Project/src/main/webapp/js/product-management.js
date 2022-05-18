@@ -211,6 +211,7 @@ deleteProductForm.addEventListener('submit', (e) => {
                 const alertPlaceholder = document.getElementById('liveAlertPlaceholder');
                 bootstrapAlert("The product has been removed", 'success', alertPlaceholder);
 
+                //document.getElementsById(alias).children[5].innerHTML = "0"; //todo: use this
 
                 let newInnerHTML =
                     '<td class="bg-primary"><a class="text-white" href="'+ rootPath + '/products/details/'+alias+'">'+formData.get('name')+'</a></td>'+
