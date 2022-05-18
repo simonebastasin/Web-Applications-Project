@@ -30,8 +30,7 @@
         <li class="breadcrumb-item active" aria-current="page">Product List</li>
       </ol>
     </nav>
-    <div id="liveAlertPlaceholder"></div>
-    <div id="liveAlertPlaceholderDelete"></div>
+    <div id="liveAlertPlaceholder" class="sticky-top" ></div>
 
 <div>
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addProductModal">
@@ -86,9 +85,9 @@
                     <h5 class="modal-title" id="addProductModalTitle">Add Product</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div id="formAlertPlaceholder"></div>
+                <div id="formAlertPlaceholder" class="sticky-top"></div>
                 <div class="modal-body">
-                    <form id="addCategoryForm" class="mb-3 needs-validation" novalidate>
+                    <form id="addCategoryForm" class="needs-validation" novalidate>
                     </form>
                     <form id="addProductForm" class="needs-validation" novalidate>
                         <div class="mb-3">
@@ -136,33 +135,31 @@
                                         </option>
                                     </c:forEach>
                                 </select>
-                                <a class="btn btn-outline-secondary toggle" href="#example">+</a>
+                                <a class="btn btn-outline-secondary toggle" data-toogle="toggleCategory">+</a>
 
 
                             </div>
 
 
-                            <div class="toggle-content" id="example" style="display: none;">
+                            <div class="d-none" id="toggleCategory" >
 
                                 <div class="mb-3">
 
 
                                         <div class="mb-3">
-                                            <label form="addCategoryForm" for="nameCategoryName" class="col-form-label">new category name:</label>
-                                            <input form="addCategoryForm" type="text" class="form-control" id="nameCategoryName" name="nameCategoryName" required/>
+                                            <label for="nameCategoryName" class="col-form-label">new category name:</label>
+                                            <input form="addCategoryForm" type="text" class="form-control" id="nameCategoryName" name="name" required/>
                                         </div>
 
                                         <div class="mb-3">
-                                            <label form="addCategoryForm" for="nameCategoryDescription" class="col-form-label">new category description:</label>
-                                            <input form="addCategoryForm" type="text" class="form-control" id="nameCategoryDescription" name="nameCategoryName" required/>
+                                            <label  for="nameCategoryDescription" class="col-form-label">new category description:</label>
+                                            <input form="addCategoryForm" type="text" class="form-control" id="nameCategoryDescription" name="description" required/>
                                         </div>
 
-                                    <div class="modal-footer">
+                                    <div class="mb-3">
                                         <button type="submit" class="btn btn-primary" id="addNewCategory" form="addCategoryForm">Add category</button>
                                     </div>
-                                </div>
                             </div>
-
 
 
                         </div>
@@ -222,7 +219,7 @@
                     <h5 class="modal-title" id="deleteProductModalTitle">Set product as finished</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div id="formAlertPlaceholderDelete"></div>
+                <div id="formAlertPlaceholderDelete" class="sticky-top"></div>
                 <div class="modal-body">
                     <form id="deleteProductForm" class="needs-validation"  novalidate>
 

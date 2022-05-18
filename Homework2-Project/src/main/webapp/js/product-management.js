@@ -203,7 +203,7 @@ deleteProductForm.addEventListener('submit', (e) => {
     xmlhttp.onreadystatechange = function() {
         if (xmlhttp.readyState === XMLHttpRequest.DONE) {
             if(xmlhttp.status === 200) {
-                const alertPlaceholder = document.getElementById('liveAlertPlaceholderDelete');
+                const alertPlaceholder = document.getElementById('liveAlertPlaceholder');
                 bootstrapAlert("The product was remove", 'success', alertPlaceholder);
 
 
@@ -269,7 +269,7 @@ deleteProductModal.addEventListener('show.bs.modal', (e) => {
 
 
             } else {
-                const alertPlaceholder = document.getElementById('liveAlertPlaceholderDelete');
+                const alertPlaceholder = document.getElementById('liveAlertPlaceholder');
                 bootstrapAlert(xmlhttp.statusText !== "" ? 'Error: '+xmlhttp.status : 'Generic error', 'danger', alertPlaceholder);
                 bootstrap.Modal.getOrCreateInstance(deleteProductModal).hide();
             }
@@ -284,46 +284,23 @@ deleteProductModal.addEventListener('show.bs.modal', (e) => {
 })
 
 
-var show = function (elem) {
-    elem.style.display = 'block';
-};
-
-var hide = function (elem) {
-    elem.style.display = 'none';
-};
-
-var toggle = function (elem) {
-// Otherwise, show it
-    if (window.getComputedStyle(elem).display === 'none') {
-        show(elem);
-        return;
-    }
-
-    // If the element is visible, hide it
-
-    hide(elem);
-
-};
-
-
+const toogleButton = document.getElementsByClassName('toggle');
 
 // Listen for click events
-document.addEventListener('click', function (event) {
-
-    // Make sure clicked element is our toggle
-    if (!event.target.classList.contains('toggle')) return;
+[...toogleButton].forEach(it => it.addEventListener('click', function (event) {
 
     // Prevent default link behavior
     event.preventDefault();
 
+    let id = event.target.getAttribute('data-toogle');
     // Get the content
-    var content = document.querySelector(event.target.hash);
+    var content = document.getElementById(id);
     if (!content) return;
 
     // Toggle the content
-    toggle(content);
+    content.classList.toggle('d-none');
 
-}, false);
+}, false));
 
 
 addCategoryForm.addEventListener('submit', (e) => {
@@ -340,24 +317,28 @@ addCategoryForm.addEventListener('submit', (e) => {
     xmlhttp.onreadystatechange = function() {
         if (xmlhttp.readyState === XMLHttpRequest.DONE) {
             if(xmlhttp.status === 200) {
-                const alertPlaceholder = document.getElementById('liveAlertPlaceholder');
+                let option=document.createElement('option');
+                option.value = formData.get('name');
+                option.text = formData.get('name');
+
+                let category = document.getElementById('category');
+                category.appendChild(option);
+                category.value = formData.get('name');
+
+
+                const alertPlaceholder = document.getElementById('formAlertPlaceholder');
                 bootstrapAlert("The category was added", 'success', alertPlaceholder);
 
+                // Get the content
+                var content = document.getElementById('toggleCategory');
+                if (!content) return;
 
-                let newInnerHTML =
-                    '<option value="' +formData.get('name')+'">'
-                        +formData.get('name')+
-                    '</option>;'
-                let tr=document.createElement('tr');
-                tr.id = alias;
-                tr.innerHTML = newInnerHTML;
-
-                document.getElementById(category).appendChild(tr);
-                bootstrap.Modal.getOrCreateInstance(deleteProductModal).hide();
+                // Toggle the content
+                content.classList.toggle('d-none', true);
 
             } else {
 
-                const alertPlaceholder = document.getElementById('formAlertPlaceholderDelete');
+                const alertPlaceholder = document.getElementById('formAlertPlaceholder');
                 bootstrapAlert(xmlhttp.responseText !== "" ? (xmlhttp.responseText.startsWith("<!doctype html>") ?  parseServletError(xmlhttp.response): xmlhttp.responseText ): (xmlhttp.statusText !== ""? 'Error: '+ xmlhttp.statusText : "Generic error"), 'danger', alertPlaceholder);
             }
         }
