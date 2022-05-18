@@ -88,6 +88,8 @@
                 </div>
                 <div id="formAlertPlaceholder"></div>
                 <div class="modal-body">
+                    <form id="addCategoryForm" class="mb-3 needs-validation" novalidate>
+                    </form>
                     <form id="addProductForm" class="needs-validation" novalidate>
                         <div class="mb-3">
                             <label for="alias" class="col-form-label">Alias:</label>
@@ -143,24 +145,24 @@
                             <div class="toggle-content" id="example" style="display: none;">
 
                                 <div class="mb-3">
-                                    <form id="addCategoryForm" class="mb-3 needs-validation" novalidate>
+
 
                                         <div class="mb-3">
-                                            <label for="nameCategoryName" class="col-form-label">new category name:</label>
-                                            <input type="text" class="form-control" id="nameCategoryName" name="name" required/>
+                                            <label form="addCategoryForm" for="nameCategoryName" class="col-form-label">new category name:</label>
+                                            <input form="addCategoryForm" type="text" class="form-control" id="nameCategoryName" name="nameCategoryName" required/>
                                         </div>
 
                                         <div class="mb-3">
-                                            <label for="nameCategoryDescription" class="col-form-label">new category description:</label>
-                                            <input type="text" class="form-control" id="nameCategoryDescription" name="description" required/>
+                                            <label form="addCategoryForm" for="nameCategoryDescription" class="col-form-label">new category description:</label>
+                                            <input form="addCategoryForm" type="text" class="form-control" id="nameCategoryDescription" name="nameCategoryName" required/>
                                         </div>
 
-                                    </form>
                                     <div class="modal-footer">
                                         <button type="submit" class="btn btn-primary" id="addNewCategory" form="addCategoryForm">Add category</button>
                                     </div>
                                 </div>
                             </div>
+
 
 
                         </div>
