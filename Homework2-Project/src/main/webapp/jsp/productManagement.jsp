@@ -139,9 +139,8 @@
 
 
                             </div>
-
-
-                            <div class="d-none" id="toggleCategory" >
+                        </div>
+                        <div class="d-none" id="toggleCategory" >
 
                                 <div class="mb-3">
 
@@ -159,37 +158,36 @@
                                     <div class="mb-3">
                                         <button type="submit" class="btn btn-primary" id="addNewCategory" form="addCategoryForm">Add category</button>
                                     </div>
-                                </div>
                             </div>
 
 
-                            <div class="mb-3">
-                                Evidence:
-                                <div class="form-check form-check-inline" >
-                                    <input class="form-check-input" type="radio" id="yes"
-                                           name="evidence" value="true" required>
-                                    <label class="form-check-label" for="yes">Yes</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" id="no"
-                                           name="evidence" value="false" required>
-                                    <label class="form-check-label" for="no">No</label>
-                                </div>
+                        </div>
+                        <div class="mb-3">
+                            Evidence:
+                            <div class="form-check form-check-inline" >
+                                <input class="form-check-input" type="radio" id="yes"
+                                       name="evidence" value="true" required>
+                                <label class="form-check-label" for="yes">Yes</label>
                             </div>
-                            <div class="mb-3 image-check-box">
-                                <ul>
-                                    <c:if test="${not empty media}">
-                                        <li><input type="checkbox" id="media-${media.id}" name="pictures" value="${media.id}"/>
-                                            <label for="media-${media.id}"><img src="<c:url value="/media/thumb/${media.id}" />" alt="${media.filename}" /></label>
-                                        </li>
-                                    </c:if>
-                                    <c:forEach var="media" items="${mediaList}">
-                                        <li><input type="checkbox" id="media-${media.id}" name="pictures" value="${media.id}"/>
-                                            <label for="media-${media.id}"><img src="<c:url value="/media/thumb/${media.id}" />" alt="${media.filename}" /></label>
-                                        </li>
-                                    </c:forEach>
-                                </ul>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" id="no"
+                                       name="evidence" value="false" required>
+                                <label class="form-check-label" for="no">No</label>
                             </div>
+                        </div>
+                        <div class="mb-3 image-check-box">
+                            <ul>
+                                <c:if test="${not empty media}">
+                                    <li><input type="checkbox" id="media-${media.id}" name="pictures" value="${media.id}"/>
+                                        <label for="media-${media.id}"><img src="<c:url value="/media/thumb/${media.id}" />" alt="${media.filename}" /></label>
+                                    </li>
+                                </c:if>
+                                <c:forEach var="media" items="${mediaList}">
+                                    <li><input type="checkbox" id="media-${media.id}" name="pictures" value="${media.id}"/>
+                                        <label for="media-${media.id}"><img src="<c:url value="/media/thumb/${media.id}" />" alt="${media.filename}" /></label>
+                                    </li>
+                                </c:forEach>
+                            </ul>
                         </div>
                     </form>
                     <form id="uploadImageForm" class="mb-3 needs-validation" novalidate>
@@ -198,7 +196,7 @@
                             <input class="form-control" type="file" name="file" id="formFile" required accept="image/*">
                             <button type="submit" class="btn btn-outline-secondary">Upload</button>
                         </div>
-                        <div class="progress mt-3 mb-3" id="uploadImageProgress" style="display: none;">
+                        <div class="progress mt-3 mb-3 d-none" id="uploadImageProgress">
                             <div id="uploadImageProgressBar" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>
                         </div>
                     </form>

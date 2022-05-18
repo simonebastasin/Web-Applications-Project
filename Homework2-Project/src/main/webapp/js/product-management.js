@@ -148,8 +148,14 @@ addProductModal.addEventListener('show.bs.modal', (e) => {
     uploadImageForm.classList.toggle('was-validated', false);
     uploadImageForm.reset();
 
+    addCategoryForm.classList.toggle('was-validated', false);
+    addCategoryForm.reset();
 
-    uploadImageProgress.style.display = "none";
+    uploadImageProgress.classList.toggle('d-none', true);
+
+    var content = document.getElementById('toggleCategory');
+    content.classList.toggle('d-none', true);
+
     if(createProduct) {
         let modalTitle = addProductModal.querySelector('.modal-title');
         modalTitle.textContent = 'Add product';
@@ -331,9 +337,6 @@ addCategoryForm.addEventListener('submit', (e) => {
 
                 // Get the content
                 var content = document.getElementById('toggleCategory');
-                if (!content) return;
-
-                // Toggle the content
                 content.classList.toggle('d-none', true);
 
             } else {
