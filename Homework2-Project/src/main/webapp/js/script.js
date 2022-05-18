@@ -150,7 +150,6 @@ searchAutocompleteInput.addEventListener('keyup', (e) => {
                     let inner = "";
                     let keys = jsonData.products.flatMap(x => {
                         let split = x.name.split(' ');
-                        console.log(split);
                         return split.map((x, i) => split.slice(0,i).join(' '));
                     }).filter(x => x !== null && x.length > 0);
                     keys = new Set(keys);
@@ -210,7 +209,7 @@ function showElement(e) {
 
 function invalidate()
 {
-    console.log(fromCart.toString());
+
     if(fromCart==true)
         localStorage.clear();
     fromCart=false;
@@ -224,9 +223,9 @@ function presentCart() {
         text += '<li><span class="dropdown-item-text" >Empty</span></li>';
     else {
         for (let i = 0; i < localStorage.length; i++) {
-            console.log(localStorage.length)
+
             if (localStorage.key(i).substring(0, 4).localeCompare("cart") == 0) {
-                console.log(localStorage.getItem(localStorage.key(i)));
+
                 const element = localStorage.getItem(localStorage.key(i)).split(";")
                 const qta = element[0];
                 const name = element[1];
@@ -247,8 +246,7 @@ function presentCart() {
     [...btns].forEach(btn => {
 
         btn.addEventListener('click', event => {
-            console.log("im in")
-            console.log( event.currentTarget.getAttribute("data-cart"));
+
             localStorage.removeItem(event.currentTarget.getAttribute("data-cart"));
             if(number!=null)
                 number.innerHTML=localStorage.length.toString();
@@ -271,19 +269,19 @@ function buyCart() {
             const element = localStorage.getItem(localStorage.key(i)).split(";")
             const qta = element[0];
             const name = element[1];
-            console.log(i);
+
             json.cart.push({quantity:qta,alias:localStorage.key(i).substring(4)});
         }
     }
 
     const send = JSON.stringify(json, undefined, 4);
-    console.log(send);
+
     var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance
     xmlhttp.onreadystatechange = function () {
         if (xmlhttp.readyState === XMLHttpRequest.DONE) {
-            console.log(xmlhttp.responseText);
+
             let id = JSON.parse(xmlhttp.responseText).resourceId;
-            console.log(id);
+
 
             location.href = rootPath+"/buy/pay/"  + id;
             invalidate();
@@ -304,9 +302,9 @@ function cart()
         const name = form.getAttribute("data-product-name");
 
         const qt = new FormData(form).get("quantity");
-        console.log(qt.toString() + " " + name);
+
         localStorage.setItem("cart" + alias, qt.toString() + ";" + name);
-        console.log(localStorage.length);
+
         if (number != null)
             number.innerHTML = localStorage.length.toString();
     }
