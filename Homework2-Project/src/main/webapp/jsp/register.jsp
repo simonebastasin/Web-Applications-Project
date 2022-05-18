@@ -31,7 +31,7 @@
 
     </ul>
 
-    <div class="tab-content" id="pills-tabContent">
+    <div class="tab-content card p-3 mb-3" id="pills-tabContent">
         <div class="tab-pane fade" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
             <form method="POST" action="<c:url value="/session/login"/>" class="row g-3 w-50 mx-auto needs-validation" novalidate>
 
@@ -66,60 +66,66 @@
 
                 <button type="submit" class="btn btn-primary btn-block mb-4">Sign in</button>
 
-                </form>
+            </form>
         </div>
 
         <div class="tab-pane fade  show active" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-                    <form method="post" action="<c:url value="/session/register"/>" class="row g-3 w-50 mx-auto needs-validation" novalidate id="formConfirmPassword">
+            <form method="post" action="<c:url value="/session/register"/>" class="row g-3 w-50 mx-auto needs-validation" novalidate id="formConfirmPassword">
 
-                        <div class="form-floating mb-4">
-                            <input id="name" type="text" class="form-control" name="name" required placeholder="name">
-                            <label for="name">Name</label>
-                            <div class="invalid-feedback">Insert your name.</div>
-                        </div>
+                <div class="form-floating mb-4">
+                    <input id="name" type="text" class="form-control" name="name" required placeholder="name">
+                    <label for="name">Name</label>
+                    <div class="invalid-feedback">Insert your name.</div>
+                </div>
 
-                        <div class="form-floating mb-4">
-                            <input id="fiscalCode" type="text" class="form-control" name="fiscalCode" required placeholder="fiscal code">
-                            <label for="fiscalCode">Fiscal Code</label>
-                            <div class="invalid-feedback">Insert your fiscal code.</div>
-                        </div>
+                <div class="form-floating mb-3">
+                    <input id="surname" type="text" class="form-control" name="surname" required placeholder="surname">
+                    <label for="surname">Surname</label>
+                    <div class="invalid-feedback">Insert your surname.</div>
+                </div>
 
-                        <div class="form-floating mb-4">
-                            <input id="email" type="email" class="form-control" name="email" required placeholder="name@example.com">
-                            <label for="email">Email</label>
-                            <div class="invalid-feedback">Insert your email.</div>
-                        </div>
+                <div class="form-floating mb-4">
+                    <input id="fiscalCode" type="text" class="form-control" name="fiscalCode" required placeholder="fiscal code">
+                    <label for="fiscalCode">Fiscal Code</label>
+                    <div class="invalid-feedback">Insert your fiscal code.</div>
+                </div>
 
-                        <div class="form-floating mb-4">
-                            <input id="phoneNumber" type="text" class="form-control" name="phoneNumber" placeholder="+39">
-                            <label for="phoneNumber">Phone Number</label>
-                        </div>
+                <div class="form-floating mb-4">
+                    <input id="email" type="email" class="form-control" name="email" required placeholder="name@example.com">
+                    <label for="email">Email</label>
+                    <div class="invalid-feedback">Insert your email.</div>
+                </div>
 
-                        <div class="form-floating mb-4">
-                            <input id="address" type="text" class="form-control" name="address" placeholder="Via Padova 1, Padova (PD)">
-                            <label for="address">Address</label>
-                        </div>
+                <div class="form-floating mb-4">
+                    <input id="phoneNumber" type="text" class="form-control" name="phoneNumber" placeholder="+39">
+                    <label for="phoneNumber">Phone Number</label>
+                </div>
 
-                        <div class="form-floating mb-4">
-                            <input id="username" type="text" class="form-control" name="username" placeholder="username" required>
-                            <label for="username">Username</label>
-                            <div class="invalid-feedback">Insert your username.</div>
-                        </div>
+                <div class="form-floating mb-4">
+                    <input id="address" type="text" class="form-control" name="address" placeholder="Via Padova 1, Padova (PD)">
+                    <label for="address">Address</label>
+                </div>
 
-                        <div class="form-floating mb-4">
-                            <input id="newPassword" type="password" class="form-control" name="newPassword" placeholder="password" required>
-                            <label for="newPassword">Password</label>
-                            <div class="invalid-feedback" id="newPasswordFeedback">Insert the password</div>
-                        </div>
+                <div class="form-floating mb-4">
+                    <input id="username" type="text" class="form-control" name="username" placeholder="username" required>
+                    <label for="username">Username</label>
+                    <div class="invalid-feedback">Insert your username.</div>
+                </div>
 
-                        <div class="form-floating mb-4">
-                            <input id="confirmPassword" type="password" class="form-control" name="confirmPassword" placeholder="confirm_password" required>
-                            <label for="confirmPassword">Confirm Password</label>
-                            <div class="invalid-feedback" id="confirmPasswordFeedback">Confirm your password</div>
-                        </div>
+                <div class="form-floating mb-4">
+                    <input id="newPassword" type="password" class="form-control" name="newPassword" placeholder="password" required>
+                    <label for="newPassword">Password</label>
+                    <div class="invalid-feedback" id="newPasswordFeedback">Insert the password</div>
+                </div>
 
-                        <button type="submit" class="btn btn-primary btn-block mb-3">Register</button>
-                    </form>
+                <div class="form-floating mb-4">
+                    <input id="confirmPassword" type="password" class="form-control" name="confirmPassword" placeholder="confirm_password" required>
+                    <label for="confirmPassword">Confirm Password</label>
+                    <div class="invalid-feedback" id="confirmPasswordFeedback">Confirm your password</div>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block mb-3">Register</button>
+            </form>
         </div>
     </div>
     <c:import url="/jsp/include/footer.jsp"/>

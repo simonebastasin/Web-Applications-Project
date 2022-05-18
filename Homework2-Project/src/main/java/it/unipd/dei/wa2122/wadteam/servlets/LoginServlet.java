@@ -23,15 +23,6 @@ public class LoginServlet extends AbstractDatabaseServlet {
         String param = req.getPathInfo() != null ? req.getPathInfo().substring(1).lastIndexOf('/') != -1 ? req.getPathInfo().substring(req.getPathInfo().lastIndexOf('/')+1) : "" : "";
 
         switch (path){
-            case "login" ->  {
-                if(req.getSession(false) != null && req.getSession(false).getAttribute(USER_ATTRIBUTE) != null) {
-                    Message m = new Message("User is already logged in");
-                    //ErrorMessage m = new ErrorMessage.AlreadyLoggedInError("");
-                    writeMessageOrRedirect(req, resp, m, req.getContextPath() + "/");
-                } else {
-                    writeJsp(req, resp, "/jsp/login.jsp");
-                }
-            }
             case "logout" -> {
                 HttpSession session = req.getSession(false);
                 Message m = null;
@@ -43,8 +34,7 @@ public class LoginServlet extends AbstractDatabaseServlet {
                 else logger.info("Somebody tried logging out without logging in first");
                 writeMessageOrRedirect(req, resp, m, req.getContextPath() + "/");
             }
-            case "register" -> {
-
+            case "register", "login" -> {
                 if(req.getSession(false) != null && req.getSession(false).getAttribute(USER_ATTRIBUTE) != null) {
                     //ErrorMessage m = new ErrorMessage.AlreadyLoggedInError("");
                     Message m = new Message("User is already logged in");
