@@ -19,6 +19,7 @@
 
 <body>
 <c:import url="/jsp/include/header.jsp"/>
+
 <div class="container main-container">
     <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
       <ol class="breadcrumb bg-secondary bg-opacity-25 p-3 mt-3 rounded">
@@ -36,15 +37,16 @@
                     <th>Username</th>
                     <th>Name</th>
                     <th>Surname</th>
-                    <th>Fiscal_Code</th>
+                    <th>Fiscal Code</th>
                     <th>Address</th>
                     <th>Email</th>
-                    <th>Phone_Number</th>
+                    <th>Phone Number</th>
                 </tr>
             </thead>
             <tbody>
                 <c:forEach var="customer" items="${customerList}">
                     <tr id="${customer.username}">
+
                         <td>${customer.id}</td>
                         <td>${customer.username}</td>
                         <td>${customer.name}</td>
@@ -57,17 +59,11 @@
                             <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#editCustomerModal" data-bs-whatever="${customer.username}">
                                 <i class="fa-solid fa-pen-to-square text-primary"></i>
                             </button>
-                            <!--<a href="<c:url value="/management/customerManagement/editCustomer/${customer.username}"/>">
-                                Edit
-                            </a>-->
                         </td>
                         <td>
                             <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteCustomerModal" data-bs-whatever="${customer.username}">
                                 <i class="fa-solid fa-trash-can text-danger"></i>
                             </button>
-                            <!--<a href="<c:url value="/management/customerManagement/deleteCustomer/${customer.username}"/>">
-                                Delete
-                            </a>-->
                         </td>
                     </tr>
                 </c:forEach>
@@ -126,6 +122,7 @@
         </div>
     </div>
 </div>
+
 <c:import url="/jsp/include/footer-management.jsp"/>
 <script type="text/javascript" src="<c:url value="/js/customer-management.js"/>"></script>
 </body>

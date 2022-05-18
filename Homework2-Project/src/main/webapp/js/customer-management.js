@@ -40,15 +40,15 @@ editCustomerForm.addEventListener('submit', (e) => {
                     '<td>'+formData.get('address')+'</td>'+
                     '<td>'+formData.get('email')+'</td>'+
                     '<td>'+formData.get('phoneNumber')+'</td>'+
-                    '<td><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#editCustomerModal" data-bs-whatever="'+username+'"> <i class="fa-solid fa-pen-to-square text-primary"></i></button></td>'+
-                    '<td><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteCustomerModal" data-bs-whatever="'+username+'"> <i class="fa-solid fa-trash-can text-danger"></i></button></td>';
+                    '<td><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#editCustomerModal" data-bs-whatever="'+username+'"><i class="fa-solid fa-pen-to-square text-primary"></i></button></td>'+
+                    '<td><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteCustomerModal" data-bs-whatever="'+username+'"><i class="fa-solid fa-trash-can text-danger"></i></button></td>';
 
                 // -> edit
                 bootstrapAlert("Customer " + username + " modified", 'success', alertPlaceholder);
                 document.getElementById(username).innerHTML = newInnerHTML;
 
-                evidenceRow( document.getElementById(username));
                 bootstrap.Modal.getOrCreateInstance(editCustomerModal).hide();
+                evidenceRow(document.getElementById(username));
 
             } else {
                 const alertPlaceholder = document.getElementById('formAlertPlaceholder');
@@ -69,7 +69,6 @@ editCustomerModal.addEventListener('show.bs.modal', (e) => {
     editCustomerForm.classList.toggle('was-validated', false);
     editCustomerForm.reset();
 
-
     document.getElementById('id').disabled = true;
     document.getElementById('username').disabled = true;
 
@@ -81,6 +80,7 @@ editCustomerModal.addEventListener('show.bs.modal', (e) => {
             if (xmlhttp.status === 200) {
                 const response = JSON.parse(xmlhttp.responseText);
                 id = (response?.[0] ?? response).id;
+                alert(id);
                 populateForm(editCustomerForm, response);
             } else {
                 const alertPlaceholder = document.getElementById('liveAlertPlaceholder');
