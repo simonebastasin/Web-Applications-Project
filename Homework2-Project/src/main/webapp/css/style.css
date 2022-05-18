@@ -227,7 +227,10 @@ span.roboto {
         border-top-left-radius: 0  !important;
     }
 }
-
+.mwcard
+{
+    max-width: 540px;
+}
 /*
     Ticket color
  */

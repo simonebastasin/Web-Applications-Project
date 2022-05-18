@@ -210,8 +210,11 @@ function showElement(e) {
 function invalidate()
 {
 
-    if(fromCart==true)
+    if(fromCart==true) {
+        number.style.content='none';
+        console.log(number.style.content.toString())
         localStorage.clear();
+    }
     fromCart=false;
 }
 const number=document.getElementById("numberOfElementCart");
