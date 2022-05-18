@@ -74,7 +74,55 @@
             </tbody>
         </table>
     </div>
+
+    <div class="modal fade" id="editCustomerModal" tabindex="-1" aria-labelledby="editCustomerModal" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false" >
+        <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg modal-fullscreen-md-down">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editCustomerModalTitle">Edit Customer</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div id="formAlertPlaceholder" class="sticky-top"></div>
+                <div class="modal-body">
+                    <form id="editCustomerForm" class="needs-validation" novalidate>
+                        <div class="mb-3">
+                            <label for="id" class="col-form-label">ID:</label>
+                            <input type="text" class="form-control" id="id" name="id" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="username" class="col-form-label">Username:</label>
+                            <input type="text" class="form-control" id="username" name="username" required/>
+                        </div>
+                        <div class="mb-3">
+                            <label for="name" class="col-form-label">Name:</label>
+                            <input type="text" class="form-control" id="name" name="name" required/>
+                        </div>
+                        <div class="mb-3">
+                            <label for="surname" class="col-form-label">Surname:</label>
+                            <input type="text" class="form-control" id="surname" name="surname" required/>
+                        </div>
+                        <div class="mb-3">
+                            <label for="fiscalCode" class="col-form-label">Fiscal Code:</label>
+                            <input type="text" class="form-control" id="fiscalCode" name="fiscalCode" required/>
+                        </div>
+                        <div class="mb-3">
+                            <label for="address" class="col-form-label">Address:</label>
+                            <input class="form-control" id="address" name="address" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="col-form-label">Email:</label>
+                            <input class="form-control" id="email" name="email" required>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary" id="editCustomerButton" form="editCustomerForm">Edit customer</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <c:import url="/jsp/include/footer-management.jsp"/>
+<script src="<c:url value="/js/customer-management.js"/>"></script>
 </body>
 </html>

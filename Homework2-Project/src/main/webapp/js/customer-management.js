@@ -5,9 +5,9 @@ const editCustomerButton = document.getElementById('editCustomerButton');
 const editCustomerForm = document.getElementById('editCustomerForm');
 const editCustomerModal = document.getElementById('editCustomerModal');
 
-const deleteCustomerButton = document.getElementById('deleteCustomerButton');
-const deleteCustomerForm = document.getElementById('deleteCustomerForm');
-const deleteCustomerModal = document.getElementById('deleteCustomerModal');
+//const deleteCustomerButton = document.getElementById('deleteCustomerButton');
+//const deleteCustomerForm = document.getElementById('deleteCustomerForm');
+//const deleteCustomerModal = document.getElementById('deleteCustomerModal');
 
 
 let username;
@@ -39,8 +39,8 @@ editCustomerForm.addEventListener('submit', (e) => {
                     '<td class="bg-primary">'+formData.get('address')+'</td>'+
                     '<td class="bg-primary">'+formData.get('email')+'</td>'+
                     '<td class="bg-primary">'+formData.get('phoneNumber')+'</td>'+
-                    '<td><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#editCustomerModal" data-bs-whatever="'+idCustomer+'"> <i class="fa-solid fa-pen-to-square text-primary"></i></button></td>'+
-                    '<td><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteCustomerModal" data-bs-whatever="'+idCustomer+'"> <i class="fa-solid fa-trash-can text-danger"></i></button></td>';
+                    '<td><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#editCustomerModal" data-bs-whatever="'+username+'"> <i class="fa-solid fa-pen-to-square text-primary"></i></button></td>'+
+                    '<td><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteCustomerModal" data-bs-whatever="'+username+'"> <i class="fa-solid fa-trash-can text-danger"></i></button></td>';
 
                 // -> edit
                 bootstrapAlert("Customer modified", 'success', alertPlaceholder);
@@ -64,8 +64,8 @@ editCustomerModal.addEventListener('show.bs.modal', (e) => {
     username = button.getAttribute('data-bs-whatever');
     // let notEditCustomer = (idCustomer  === null);
 
-    addDiscountForm.classList.toggle('was-validated', false);
-    addDiscountForm.reset();
+    editCustomerForm.classList.toggle('was-validated', false);
+    editCustomerForm.reset();
 
     // -> edit
     const xmlhttp = new XMLHttpRequest();
