@@ -49,14 +49,14 @@ addProductForm.addEventListener('submit', (e) => {
                     '<td class="bg-primary"><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#addProductModal" data-bs-whatever="'+alias+'"> <i class="fa-solid fa-pen-to-square text-light"></i></button></td>'+
                     '<td class="bg-primary"><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteProductModal" data-bs-whatever="'+alias+'"> <i class="fa-solid fa-trash-can text-light"></i></button></td>';
                 if(createProduct) {
-                    bootstrapAlert("The product has been created", 'success', alertPlaceholder);
+                    bootstrapAlert("The product " + alias + " has been created", 'success', alertPlaceholder);
                     let tr=document.createElement('tr');
                     tr.id = alias;
                     tr.innerHTML = newInnerHTML;
                     productTableBody.appendChild(tr);
                 }
                 else {
-                    bootstrapAlert("The product has been modified", 'success', alertPlaceholder);
+                    bootstrapAlert("The product " + alias + " has been modified", 'success', alertPlaceholder);
                     document.getElementById(alias).innerHTML = newInnerHTML;
                 }
                 bootstrap.Modal.getOrCreateInstance(addProductModal).hide();
@@ -209,7 +209,7 @@ deleteProductForm.addEventListener('submit', (e) => {
         if (xmlhttp.readyState === XMLHttpRequest.DONE) {
             if(xmlhttp.status === 200) {
                 const alertPlaceholder = document.getElementById('liveAlertPlaceholder');
-                bootstrapAlert("The product has been removed", 'success', alertPlaceholder);
+                bootstrapAlert("The product " + alias + " has been removed", 'success', alertPlaceholder);
 
                 document.getElementById(alias).children[5].innerHTML = "0";
 
