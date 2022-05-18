@@ -216,9 +216,9 @@ const number=document.getElementById("numberOfElementCart");
 if(number!=null)
 number.innerHTML=localStorage.length.toString();
 function presentCart() {
-var text="";
+    let text = "<div id='wrapper'>";
     if (localStorage.length == 0)
-        text = '<li><span class="dropdown-item-text" >Empty</span></li>';
+        text += '<li><span class="dropdown-item-text" >Empty</span></li>';
     else {
         for (let i = 0; i < localStorage.length; i++) {
             console.log(localStorage.length)
@@ -229,14 +229,32 @@ var text="";
                 const name = element[1];
                 text += '<li><span class="dropdown-item-text" >' + name + '<br>' +
                     '<div class="d-inline p-2 "><i>quantity: </i>'+ qta +'</div>' +
-                    '<div class="d-inline p-2 "><button class="btn "><i class="fa-solid fa-trash"></i></button><li><hr class="dropdown-divider"></div>' +
+                    '<div class="d-inline p-2 "><button class="btn cartButton" data-cart='+localStorage.key(i)+'>' +
+                    '<i class="fa-solid fa-trash"></i></button><li><hr class="dropdown-divider"></div>' +
                     '</li>';
             }
         }
         text += '<li><span class="dropdown-item-text "><button  class="btn btn-primary " id="buyButton" >buy</button></span></li>';
     }
+    text+="</div>";
+
     const list = document.getElementById("cart");
     list.innerHTML = text;
+    const btns = document.getElementsByClassName("cartButton");
+    [...btns].forEach(btn => {
+
+        btn.addEventListener('click', event => {
+            console.log("im in")
+            console.log( event.target.getAttribute("data-cart"));
+            localStorage.removeItem(event.target.getAttribute("data-cart"));
+            if(number!=null)
+                number.innerHTML=localStorage.length.toString();
+
+            presentCart()
+        });
+
+    });
+
     const buyButton=document.getElementById("buyButton");
     buyButton?.addEventListener("click",buyCart);
 
