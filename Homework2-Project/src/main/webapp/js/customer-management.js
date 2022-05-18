@@ -5,9 +5,9 @@ const editCustomerButton = document.getElementById('editCustomerButton');
 const editCustomerForm = document.getElementById('editCustomerForm');
 const editCustomerModal = document.getElementById('editCustomerModal');
 
-//const deleteCustomerButton = document.getElementById('deleteCustomerButton');
-//const deleteCustomerForm = document.getElementById('deleteCustomerForm');
-//const deleteCustomerModal = document.getElementById('deleteCustomerModal');
+const deleteCustomerButton = document.getElementById('deleteCustomerButton');
+const deleteCustomerForm = document.getElementById('deleteCustomerForm');
+const deleteCustomerModal = document.getElementById('deleteCustomerModal');
 
 
 let username;
@@ -55,6 +55,7 @@ editCustomerForm.addEventListener('submit', (e) => {
     }
     xmlhttp.send(urlencodedData);
 });
+
 
 editCustomerModal.addEventListener('show.bs.modal', (e) => {
     // Button that triggered the modal
