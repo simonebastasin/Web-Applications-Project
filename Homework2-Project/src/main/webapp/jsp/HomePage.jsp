@@ -240,7 +240,9 @@
 
             <div class="carousel carousel-category carousel-dark slide" id="categoryCarousel${count}"  data-bs-interval="false" data-bs-ride="carousel">
 
-                <c:if test="${only_row eq false}">
+                <c:if test="${only_row}">
+                    <div class="only_row">
+                </c:if>
                     <button class="carousel-control-prev" type="button" data-bs-target="#categoryCarousel${count}"
                             data-bs-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -251,7 +253,10 @@
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                         <span class="visually-hidden">Next</span>
                     </button>
+                <c:if test="${only_row}">
+                    </div>
                 </c:if>
+
 
 
                 <c:set var="i" value="${0}"/>
@@ -285,7 +290,7 @@
                                     <c:when test="${active == true}">
 
 
-                                        <div class="carousel-item active p-3">
+                                        <div class="carousel-item active p-3 bg-light">
 
                                             <div class="col-md-3 text-center">
                                                 <div class="square one img-cat">
@@ -339,7 +344,7 @@
 
                                     </c:when>
                                     <c:otherwise>
-                                        <div class="carousel-item p-3">
+                                        <div class="carousel-item p-3 bg-light">
 
                                             <div class="col-md-3 text-center">
                                                 <div class="square one img-cat">
