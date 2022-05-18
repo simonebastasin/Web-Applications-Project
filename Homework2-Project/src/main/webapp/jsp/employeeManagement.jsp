@@ -8,6 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--@elvariable id="employee" type="it.unipd.dei.wa2122.wadteam.resources.Employee"--%>
+<%--@elvariable id="role" type="it.unipd.dei.wa2122.wadteam.resources.Role"--%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -86,7 +87,54 @@
         </table>
     </div>
 
+    <div class="modal fade" id="addEmployeeModal" tabindex="-1" aria-labelledby="addEmployeeModal" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false" >
+        <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg modal-fullscreen-md-down">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addEmployeeModalTitle">Add/Edit Employee</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div id="formAlertPlaceholder" class="sticky-top"></div>
+                <div class="modal-body">
+                    <form id="addEmployeeForm" class="needs-validation" novalidate>
+                        <div class="mb-3">
+                            <label for="username" class="col-form-label">Username:</label>
+                            <input type="text" class="form-control" id="username" name="username" required/>
+                        </div>
+                        <div class="mb-3">
+                            <label for="name" class="col-form-label">Name:</label>
+                            <input type="text" class="form-control" id="name" name="name" required/>
+                        </div>
+                        <div class="mb-3">
+                            <label for="surname" class="col-form-label">Surname:</label>
+                            <input type="text" class="form-control" id="surname" name="surname" required/>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="role">Role:</label>
+                            <div class="input-group">
+                                <select class="form-control" name="role" id="role" required>
+                                    <option value=""  hidden selected disabled>Choose</option>
+                                    <c:forEach var="role" items="${roleList}">
+                                        <option value="${role.name}">
+                                                ${role.name}
+                                        </option>
+                                    </c:forEach>
+                                </select>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary" id="addEmployeeButton" form="addEmployeeForm">Edit employee</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
 <c:import url="/jsp/include/footer-management.jsp"/>
+<script type="text/javascript" src="<c:url value="/js/employee-management.js"/>"></script>
 </body>
 </html>
