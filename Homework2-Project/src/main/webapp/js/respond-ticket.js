@@ -15,7 +15,9 @@ respondTicketForm.addEventListener('submit', (e) => {
         if (xmlhttp.readyState === XMLHttpRequest.DONE) {
             if(xmlhttp.status === 200) {
                 const alertPlaceholder = document.getElementById('liveAlertPlaceholder');
-                let ul = document.getElementById(id);
+                let div = document.getElementById(id);
+                let ul = div.getElementsByTagName('ul')[0];
+                let button = div.getElementsByTagName('button')?.[0];
 
                 let lis = document.createElement("li");
                 lis.classList.add('list-group-item');
@@ -37,8 +39,7 @@ respondTicketForm.addEventListener('submit', (e) => {
                 bootstrap.Modal.getOrCreateInstance(respondTicketModal).hide();
 
                 if(formData.get('status') === "CLOSED") {
-                    let respondTicketButton = document.getElementById('respondTicketButton-'+id);
-                    respondTicketButton.remove();
+                    button.remove();
                 }
 
             }

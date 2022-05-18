@@ -34,9 +34,9 @@
     <c:forEach var="assistanceTicket" items="${assistanceTicketList}">
     <div class="mx-auto w-50">
     <div class="card text-center">
-        <div class="card-body">
+        <div class="card-body" id="${assistanceTicket.id}">
             <h5 class="card-title">Ticket ID: ${assistanceTicket.id}</h5>
-            <ul class="list-group list-group-flush" id="${assistanceTicket.id}">
+            <ul class="list-group list-group-flush">
             <li class="list-group-item">${assistanceTicket.description}</li>
             <li class="list-group-item">Customer: ${assistanceTicket.idCustomer}</li>
             <li class="list-group-item"><a href="<c:url value="/products/details/${assistanceTicket.productAlias}"/>">Product ${assistanceTicket.productAlias}</a></li>
@@ -50,18 +50,18 @@
 
         <c:choose>
             <c:when test="${empty assistanceTicket.ticketStatusList}" >
-                <button type="button" class="btn btn-outline-primary" id="respondTicketButton-${ticket.id}" data-bs-toggle="modal" data-bs-target="#respondTicketModal" data-bs-whatever="${assistanceTicket.id}">
+                <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#respondTicketModal" data-bs-whatever="${assistanceTicket.id}">
                     Respond
                 </button>
             </c:when>
             <c:when test="${not (assistanceTicket.ticketStatusList[fn:length(assistanceTicket.ticketStatusList)-1].status eq TicketStatusEnum.CLOSED) }">
-                <button type="button" class="btn btn-outline-primary" id="respondTicketButton-${ticket.id}" data-bs-toggle="modal" data-bs-target="#respondTicketModal" data-bs-whatever="${assistanceTicket.id}">
+                <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#respondTicketModal" data-bs-whatever="${assistanceTicket.id}">
                     Respond
                 </button>
             </c:when>
 
             <c:otherwise>
-                <li class="list-group-item">The ticket is closed</li>
+                <span class="list-group-item">The ticket is closed</span>
             </c:otherwise>
         </c:choose>
 
