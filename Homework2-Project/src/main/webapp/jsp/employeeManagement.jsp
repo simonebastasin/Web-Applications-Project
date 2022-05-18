@@ -8,7 +8,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--@elvariable id="employee" type="it.unipd.dei.wa2122.wadteam.resources.Employee"--%>
+<%--@elvariable id="employeeList" type="java.util.List<it.unipd.dei.wa2122.wadteam.resources.Employee>"--%>
 <%--@elvariable id="role" type="it.unipd.dei.wa2122.wadteam.resources.Role"--%>
+<%--@elvariable id="roleList" type="java.util.List<it.unipd.dei.wa2122.wadteam.resources.Role>"--%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -62,7 +64,7 @@
                         </td>
 
                         <c:choose>
-                            <c:when test = "${employee.role == 'Administrator'}">
+                            <c:when test="${employee.role=='Administrator'}">
                                 <td>
                                 </td>
                             </c:when>
@@ -107,7 +109,7 @@
                             <label for="role">Role:</label>
                             <div class="input-group">
                                 <select class="form-control" name="role" id="role" required>
-                                    <option value=""  hidden selected disabled>Choose</option>
+                                    <option value="" hidden selected disabled>Choose</option>
                                     <c:forEach var="role" items="${roleList}">
                                         <option value="${role.name}">
                                                 ${role.name}

@@ -8,6 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--@elvariable id="customer" type="it.unipd.dei.wa2122.wadteam.resources.Customer"--%>
+<%--@elvariable id="customerList" type="java.util.List<it.unipd.dei.wa2122.wadteam.resources.Customer>"--%>
 
 <!DOCTYPE html>
 <html lang="en">
