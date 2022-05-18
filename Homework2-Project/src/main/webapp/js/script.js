@@ -216,9 +216,7 @@ const number=document.getElementById("numberOfElementCart");
 if(number!=null)
 number.innerHTML=localStorage.length.toString();
 function presentCart() {
-    var text = "";
-
-
+var text="";
     if (localStorage.length == 0)
         text = '<li><span class="dropdown-item-text" >Empty</span></li>';
     else {
@@ -229,10 +227,13 @@ function presentCart() {
                 const element = localStorage.getItem(localStorage.key(i)).split(";")
                 const qta = element[0];
                 const name = element[1];
-                text += '<li><span class="dropdown-item-text" >' + name + '<br>'+'<i>quantity: </i>'+ qta + '</a></li> <button class="btn"><i class="fa-solid fa-trash"></i></button><li><hr class="dropdown-divider"></li>';
+                text += '<li><span class="dropdown-item-text" >' + name + '<br>' +
+                    '<div class="d-inline p-2 "><i>quantity: </i>'+ qta +'</div>' +
+                    '<div class="d-inline p-2 "><button class="btn "><i class="fa-solid fa-trash"></i></button><li><hr class="dropdown-divider"></div>' +
+                    '</li>';
             }
         }
-        text += '<li><span class="dropdown-item-text"><button  class="btn btn-primary" id="buyButton" >buy</button></span></li>';
+        text += '<li><span class="dropdown-item-text "><button  class="btn btn-primary " id="buyButton" >buy</button></span></li>';
     }
     const list = document.getElementById("cart");
     list.innerHTML = text;

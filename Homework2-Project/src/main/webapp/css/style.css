@@ -221,3 +221,11 @@ span.roboto {
 @media screen and (max-width: 992px){
     .dropdown-menu-login {width: 100%}
 }
+
+@media screen and (min-width: 992px){
+    .dropdown-menu-cart {width: 300px}
+}
+
+@media screen and (max-width: 992px){
+    .dropdown-menu-cart {width: 100%}
+}
