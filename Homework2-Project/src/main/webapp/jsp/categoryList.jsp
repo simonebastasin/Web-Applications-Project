@@ -29,7 +29,7 @@
 
 <c:forEach var="cat" items="${categories}">
 
-    <div class="row w-50 mx-auto justify-content-center border mt-3 mb-3 rounded bg-light">
+    <div class="row w-lg-50 mx-auto justify-content-center border mt-3 mb-3 rounded bg-light">
         <div class="d-inline p-3">
             <h3 class="title d-inline">${cat.name}</h3>
             <div class="text-end">

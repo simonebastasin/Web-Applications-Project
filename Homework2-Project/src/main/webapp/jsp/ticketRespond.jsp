@@ -32,7 +32,7 @@
     <div id="liveAlertPlaceholder"></div>
 
     <c:forEach var="assistanceTicket" items="${assistanceTicketList}">
-    <div class="mx-auto w-50">
+    <div class="mx-auto w-lg-50">
     <div class="card text-center">
         <div class="card-body" id="${assistanceTicket.id}">
             <h5 class="card-title">Ticket ID: ${assistanceTicket.id}</h5>

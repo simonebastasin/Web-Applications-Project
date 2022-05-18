@@ -17,23 +17,25 @@
     <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
         <ol class="breadcrumb bg-secondary bg-opacity-25 p-3 mt-3 rounded">
             <li class="breadcrumb-item"><a href="<c:url value="/"/>">Electromechanics Shop</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Login</li>
+            <li class="breadcrumb-item active" aria-current="page" id="breadcrumbName">Login</li>
         </ol>
     </nav>
 
-    <ul class="nav nav-pills nav-justified mb-3" id="pills-tab" role="tablist">
+    <ul class="nav nav-pills nav-justified mb-3" id="pillsTab" role="tablist">
+
+
         <li class="nav-item" role="presentation">
-            <button class="nav-link active" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="true">Register</button>
+            <button class="nav-link" id="pillsLoginButton" data-bs-toggle="pill" data-bs-target="#pillsLoginTab" type="button" role="tab" aria-controls="pillsRegisterTab" aria-selected="${trueLogin}">Login</button>
         </li>
         <li class="nav-item" role="presentation">
-            <button class="nav-link" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="false">Login</button>
+            <button class="nav-link" id="pillsRegisterButton" data-bs-toggle="pill" data-bs-target="#pillsRegisterTab" type="button" role="tab" aria-controls="pillsLoginTab" aria-selected="${trueRegister}">Register</button>
         </li>
 
     </ul>
 
-    <div class="tab-content card p-3 mb-3" id="pills-tabContent">
-        <div class="tab-pane fade" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-            <form method="POST" action="<c:url value="/session/login"/>" class="row g-3 w-50 mx-auto needs-validation" novalidate>
+    <div class="tab-content card p-3 mb-3" id="pillsTabContent">
+        <div class="tab-pane fade" id="pillsLoginTab" role="tabpanel" aria-labelledby="pillsLoginButton">
+            <form method="POST" action="<c:url value="/session/login"/>" class="row g-3 w-lg-50 mx-auto needs-validation" novalidate>
 
                     <div class="form-floating mb-4">
                         <input type="text" class="form-control" id="logIdentification" name="identification" placeholder="Username or Email" required>
@@ -69,8 +71,8 @@
             </form>
         </div>
 
-        <div class="tab-pane fade  show active" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-            <form method="post" action="<c:url value="/session/register"/>" class="row g-3 w-50 mx-auto needs-validation" novalidate id="formConfirmPassword">
+        <div class="tab-pane fade" id="pillsRegisterTab" role="tabpanel" aria-labelledby="pillsRegisterButton">
+            <form method="post" action="<c:url value="/session/register"/>" class="row g-3 w-lg-50 mx-auto needs-validation" novalidate id="formConfirmPassword">
 
                 <div class="form-floating mb-4">
                     <input id="name" type="text" class="form-control" name="name" required placeholder="name">
@@ -131,5 +133,6 @@
 </div>
 <c:import url="/jsp/include/footer.jsp"/>
 <script src="<c:url value="/js/check-password.js"/>"></script>
+<script src="<c:url value="/js/register.js"/>"></script>
 </body>
 </html>

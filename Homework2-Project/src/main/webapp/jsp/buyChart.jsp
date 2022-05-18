@@ -30,7 +30,7 @@
   </ol>
 </nav>
     <div class="card-body">
-    <div class="mx-auto w-50">
+    <div class="mx-auto w-lg-50">
         <div class="card mt-3 mb-3">
 
 <table >
