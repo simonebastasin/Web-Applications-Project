@@ -20,6 +20,7 @@
 
 <body>
 <c:import url="/jsp/include/header.jsp"/>
+
 <div class="container main-container">
     <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
       <ol class="breadcrumb bg-secondary bg-opacity-25 p-3 mt-3 rounded">
@@ -34,9 +35,6 @@
             <i class="fa-solid fa-circle-plus"></i>
             Add new employee
         </button>
-        <!--<a href="<c:url value="/management/employeeManagement/createEmployee"/>">
-            Add new employee
-        </a>-->
     </div><br>
 
     <div class="card">
@@ -52,6 +50,7 @@
             <tbody>
                 <c:forEach var="employee" items="${employeeList}">
                     <tr id="${employee.username}">
+
                         <td>${employee.username}</td>
                         <td>${employee.name}</td>
                         <td>${employee.surname}</td>
@@ -60,13 +59,10 @@
                             <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#addEmployeeModal" data-bs-whatever="${employee.username}">
                                 <i class="fa-solid fa-pen-to-square text-primary"></i>
                             </button>
-                            <!--<a href="<c:url value="/management/employeeManagement/editEmployee/${employee.username}"/>">
-                                Edit
-                            </a>-->
                         </td>
 
                         <c:choose>
-                            <c:when test =  "${employee.role == 'Administrator'}">
+                            <c:when test = "${employee.role == 'Administrator'}">
                                 <td>
                                 </td>
                             </c:when>
@@ -75,9 +71,6 @@
                                     <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteEmployeeModal" data-bs-whatever="${employee.username}">
                                         <i class="fa-solid fa-trash-can text-danger"></i>
                                     </button>
-                                    <!--<a href="<c:url value="/management/employeeManagement/deleteEmployee/${employee.username}"/>" aria-disabled="false">
-                                        Delete
-                                    </a>-->
                                 </td>
                             </c:otherwise>
                         </c:choose>
@@ -132,9 +125,9 @@
             </div>
         </div>
     </div>
-
 </div>
 <c:import url="/jsp/include/footer-management.jsp"/>
+
 <script type="text/javascript" src="<c:url value="/js/employee-management.js"/>"></script>
 </body>
 </html>
