@@ -5,6 +5,14 @@
     max-height: 100px;
 }
 
+.highlight .mask { z-index: 2000; }
+
+.no-highlight .mask { display: none; }
+
+.modal-dialog.modal-dialog-nav .modal-header {
+    border-bottom: 0;
+}
+
 @media screen and (max-width: 992px) {
     .table-hide-lg-col-1 th:nth-child(1),
     .table-hide-lg-col-1 td:nth-child(1) {

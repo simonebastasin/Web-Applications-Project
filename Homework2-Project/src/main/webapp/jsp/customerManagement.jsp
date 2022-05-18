@@ -44,7 +44,7 @@
             </thead>
             <tbody>
                 <c:forEach var="customer" items="${customerList}">
-                    <tr>
+                    <tr id="${customer.username}">
                         <td>${customer.id}</td>
                         <td>${customer.username}</td>
                         <td>${customer.name}</td>

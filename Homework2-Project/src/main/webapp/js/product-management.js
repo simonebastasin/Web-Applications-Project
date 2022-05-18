@@ -18,7 +18,10 @@ let alias;
 
 
 addProductForm.addEventListener('submit', (e) => {
-    if(!addProductForm.checkValidity()) return;
+    if(!addProductForm.checkValidity()) {
+        document.getElementById('navProductInfo').click();
+        return;
+    }
 
     e.preventDefault();
     let createProduct = (alias  === null);
@@ -39,15 +42,15 @@ addProductForm.addEventListener('submit', (e) => {
             if(xmlhttp.status === 200) {
                 const alertPlaceholder = document.getElementById('liveAlertPlaceholder');
                 let newInnerHTML =
-                    '<td class="bg-primary" ><a class="text-white" href="'+ rootPath + '/products/details/'+alias+'">'+formData.get('name')+'</a></td>'+
-                    '<td class="bg-primary">'+alias+'</td>'+
-                    '<td class="bg-primary">'+formData.get('brand')+'</td>'+
-                    '<td class="bg-primary">'+formData.get('category')+'</td>'+
-                    '<td class="bg-primary">'+formData.get('sale')+'</td>'+
-                    '<td class="bg-primary">'+formData.get('quantity')+'</td>'+
-                    '<td class="bg-primary">'+formData.get('evidence')+'</td>'+
-                    '<td class="bg-primary"><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#addProductModal" data-bs-whatever="'+alias+'"> <i class="fa-solid fa-pen-to-square text-light"></i></button></td>'+
-                    '<td class="bg-primary"><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteProductModal" data-bs-whatever="'+alias+'"> <i class="fa-solid fa-trash-can text-light"></i></button></td>';
+                    '<td><a href="'+ rootPath + '/products/details/'+alias+'">'+formData.get('name')+'</a></td>'+
+                    '<td>'+alias+'</td>'+
+                    '<td>'+formData.get('brand')+'</td>'+
+                    '<td>'+formData.get('category')+'</td>'+
+                    '<td>'+formData.get('sale')+'</td>'+
+                    '<td>'+formData.get('quantity')+'</td>'+
+                    '<td>'+formData.get('evidence')+'</td>'+
+                    '<td><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#addProductModal" data-bs-whatever="'+alias+'"> <i class="fa-solid fa-pen-to-square text-primary"></i></button></td>'+
+                    '<td><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteProductModal" data-bs-whatever="'+alias+'"> <i class="fa-solid fa-trash-can text-danger"></i></button></td>';
                 if(createProduct) {
                     bootstrapAlert("The product " + alias + " has been created", 'success', alertPlaceholder);
                     let tr=document.createElement('tr');
@@ -61,21 +64,7 @@ addProductForm.addEventListener('submit', (e) => {
                 }
                 bootstrap.Modal.getOrCreateInstance(addProductModal).hide();
 
-
-                setTimeout(function(){
-                    let newInnerHTML =
-                        '<td><a href="'+ rootPath + '/products/details/'+alias+'">'+formData.get('name')+'</a></td>'+
-                        '<td>'+alias+'</td>'+
-                        '<td>'+formData.get('brand')+'</td>'+
-                        '<td>'+formData.get('category')+'</td>'+
-                        '<td>'+formData.get('sale')+'</td>'+
-                        '<td>'+formData.get('quantity')+'</td>'+
-                        '<td>'+formData.get('evidence')+'</td>'+
-                        '<td><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#addProductModal" data-bs-whatever="'+alias+'"> <i class="fa-solid fa-pen-to-square text-primary"></i></button></td>'+
-                        '<td><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteProductModal" data-bs-whatever="'+alias+'"> <i class="fa-solid fa-trash-can text-danger"></i></button></td>';
-                    document.getElementById(alias).innerHTML = newInnerHTML;
-
-                }, 1700);
+                evidenceRow(document.getElementById(alias));
 
             } else {
                 if(createProduct) alias = null;
@@ -94,8 +83,12 @@ uploadImageForm.addEventListener('submit', (e) => {
 
     e.preventDefault();
 
-    const multipart_data = new FormData(uploadImageForm);
+    const multipartData = new FormData(uploadImageForm);
 
+    uploadFile(multipartData);
+});
+
+function uploadFile(multipartData){
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.open("POST", rootPath + "/rest/media/upload", true);
     xmlhttp.upload.addEventListener("progress", function(e) {
@@ -111,7 +104,7 @@ uploadImageForm.addEventListener('submit', (e) => {
                 [...imageCheckBox].forEach(
                     (element) => {
                         const li = document.createElement('li');
-                        li.innerHTML = '<input type="checkbox" id="media-'+response.resourceId+'" name="pictures" value="'+response.resourceId+'"/>'+
+                        li.innerHTML = '<input type="checkbox" id="media-'+response.resourceId+'" name="pictures" value="'+response.resourceId+'" form="addProductForm"/>'+
                             '<label for="media-'+response.resourceId+'"><img src="'+rootPath+"/media/thumb/"+response.resourceId+'" /></label>';
                         element.appendChild(li);
                     }
@@ -128,9 +121,9 @@ uploadImageForm.addEventListener('submit', (e) => {
             }
         }
     }
-    xmlhttp.send(multipart_data);
+    xmlhttp.send(multipartData);
     updateProgressBar(0, false);
-})
+}
 
 
 addProductModal.addEventListener('show.bs.modal', (e) => {
@@ -155,16 +148,16 @@ addProductModal.addEventListener('show.bs.modal', (e) => {
     var content = document.getElementById('toggleCategory');
     content.classList.toggle('d-none', true);
 
+
+    document.getElementById('alias').readOnly = !createProduct;
+    document.getElementById('alias').disabled = !createProduct;
+
     if(createProduct) {
         let modalTitle = addProductModal.querySelector('.modal-title');
         modalTitle.textContent = 'Add product';
         addProductButton.textContent = 'Add product';
     }
     else {
-
-
-
-
         const xmlhttp = new XMLHttpRequest();
         xmlhttp.open("GET", rootPath+"/rest/management/productManagement/editProduct/"+alias, true);
         xmlhttp.onreadystatechange = function() {
@@ -172,8 +165,6 @@ addProductModal.addEventListener('show.bs.modal', (e) => {
                 if(xmlhttp.status === 200) {
                     const response = JSON.parse(xmlhttp.responseText);
                     populateForm(addProductForm, response["product"] ?? response,)
-                    document.getElementById('alias').readOnly = true;
-                    document.getElementById('alias').disabled = true;
 
                 } else {
                     const alertPlaceholder = document.getElementById('liveAlertPlaceholder');
@@ -190,6 +181,65 @@ addProductModal.addEventListener('show.bs.modal', (e) => {
     }
 
 })
+
+let dropArea = document.getElementById('tabProductMedia');
+
+['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+    dropArea.addEventListener(eventName, preventDefaults, false)
+});
+dropArea.addEventListener('dragenter', highlight, false);
+dropArea.addEventListener('dragover', forceHighlight, false);
+dropArea.addEventListener('dragleave', unHighlight, false);
+dropArea.addEventListener('drop', handleDrop, false);
+dropArea.addEventListener('drop', forceUnHighlight, false);
+
+var count = 0;
+function highlight(e) {
+    count++;
+    dropArea.classList.toggle('highlight', true)
+    dropArea.classList.toggle('no-highlight', false)
+}
+
+function forceHighlight(e) {
+    dropArea.classList.toggle('highlight', true)
+    dropArea.classList.toggle('no-highlight', false)
+}
+
+function unHighlight(e) {
+    count--;
+    if(count === 0) {
+        dropArea.classList.toggle('highlight', false)
+        dropArea.classList.toggle('no-highlight', true)
+    }
+}
+
+function forceUnHighlight(e) {
+    count = 0;
+    dropArea.classList.toggle('highlight', false)
+    dropArea.classList.toggle('no-highlight', true)
+}
+
+function preventDefaults (e) {
+    e.preventDefault()
+    e.stopPropagation()
+}
+
+function handleDrop(e) {
+    let dt = e.dataTransfer
+    let files = dt.files
+
+    handleFiles(files)
+}
+
+function handleFiles(files) {
+    ([...files]).map(file => {
+        let formData = new FormData();
+        formData.append('file', file)
+        return formData;
+    }).forEach(uploadFile);
+
+}
+
 
 
 
@@ -211,30 +261,19 @@ deleteProductForm.addEventListener('submit', (e) => {
                 const alertPlaceholder = document.getElementById('liveAlertPlaceholder');
                 bootstrapAlert("The product " + alias + " has been removed", 'success', alertPlaceholder);
 
-                document.getElementById(alias).children[5].innerHTML = "0";
 
-                //todo: remove these comments which managed the row animation
-                /*
-                setTimeout(function(){
-                    let newInnerHTML =
-                        '<td><a href="'+ rootPath + '/products/details/'+alias+'">'+formData.get('name')+'</a></td>'+
-                        '<td>'+alias+'</td>'+
-                        '<td>'+formData.get('brand')+'</td>'+
-                        '<td>'+formData.get('category')+'</td>'+
-                        '<td>'+formData.get('sale')+'</td>'+
-                        '<td>0</td>'+
-                        '<td>'+formData.get('evidence')+'</td>'+
-                        '<td><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#addProductModal" data-bs-whatever="'+alias+'"> <i class="fa-solid fa-pen-to-square text-primary"></i></button></td>'+
-                        '<td><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteProductModal" data-bs-whatever="'+alias+'"> <i class="fa-solid fa-trash-can text-danger"></i></button></td>';
-                    document.getElementById(alias).innerHTML = newInnerHTML;
-                }, 1700);*/
+                let row = document.getElementById(alias);
+
+                row.children[5].innerHTML = "0";
+
+                evidenceRow(row);
 
                 bootstrap.Modal.getOrCreateInstance(deleteProductModal).hide();
 
             } else {
 
                 const alertPlaceholder = document.getElementById('formAlertPlaceholderDelete');
-                bootstrapAlert(xmlhttp.responseText !== "" ? (xmlhttp.responseText.startsWith("<!doctype html>") ?  parseServletError(xmlhttp.response): xmlhttp.responseText ): (xmlhttp.statusText !== ""? 'Error: '+ xmlhttp.statusText : "Generic error"), 'danger', alertPlaceholder);
+                bootstrapAlert(parseError(xmlhttp), 'danger', alertPlaceholder);
             }
         }
     }
@@ -254,6 +293,13 @@ deleteProductModal.addEventListener('show.bs.modal', (e) => {
     deleteProductForm.reset();
 
 
+    document.getElementById('aliasDelete').readOnly = true;
+    document.getElementById('aliasDelete').disabled = true;
+    document.getElementById('nameDelete').readOnly = true;
+    document.getElementById('nameDelete').disabled = true;
+    document.getElementById('brandDelete').readOnly = true;
+    document.getElementById('brandDelete').disabled = true;
+
     const xmlhttp = new XMLHttpRequest();
     xmlhttp.open("GET", rootPath+"/rest/management/productManagement/deleteProduct/"+alias, true);
     xmlhttp.onreadystatechange = function() {
@@ -261,16 +307,10 @@ deleteProductModal.addEventListener('show.bs.modal', (e) => {
             if(xmlhttp.status === 200) {
                 const response = JSON.parse(xmlhttp.responseText);
                 populateForm(deleteProductForm, response["product"] ?? response,);
-                document.getElementById('aliasDelete').readOnly = true;
-                document.getElementById('aliasDelete').disabled = true;
-                document.getElementById('nameDelete').readOnly = true;
-                document.getElementById('nameDelete').disabled = true;
-                document.getElementById('brandDelete').readOnly = true;
-                document.getElementById('brandDelete').disabled = true;
 
             } else {
                 const alertPlaceholder = document.getElementById('liveAlertPlaceholder');
-                bootstrapAlert(xmlhttp.statusText !== "" ? 'Error: '+xmlhttp.status : 'Generic error', 'danger', alertPlaceholder);
+                bootstrapAlert(parseError(xmlhttp), 'danger', alertPlaceholder);
                 bootstrap.Modal.getOrCreateInstance(deleteProductModal).hide();
             }
         }
@@ -335,7 +375,7 @@ addCategoryForm.addEventListener('submit', (e) => {
             } else {
 
                 const alertPlaceholder = document.getElementById('formAlertPlaceholder');
-                bootstrapAlert(xmlhttp.responseText !== "" ? (xmlhttp.responseText.startsWith("<!doctype html>") ?  parseServletError(xmlhttp.response): xmlhttp.responseText ): (xmlhttp.statusText !== ""? 'Error: '+ xmlhttp.statusText : "Generic error"), 'danger', alertPlaceholder);
+                bootstrapAlert(parseError(xmlhttp), 'danger', alertPlaceholder);
             }
         }
     }

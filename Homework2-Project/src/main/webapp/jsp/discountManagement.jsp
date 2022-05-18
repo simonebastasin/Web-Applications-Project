@@ -106,54 +106,66 @@
 
 
     <div class="modal fade" id="addDiscountModal" tabindex="-1" aria-labelledby="addDiscountModal" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false" >
-        <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg modal-fullscreen-md-down">
+        <div class="modal-dialog modal-dialog-nav modal-dialog-scrollable modal-dialog-centered modal-lg modal-fullscreen-md-down">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="addDiscountModalTitle">Add Discount</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
+                <nav>
+                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                        <button class="nav-link active" id="navDiscountInfo" data-bs-toggle="tab" data-bs-target="#tabDiscountInfo" type="button" role="tab" aria-controls="tabDiscountInfo" aria-selected="true">Discount Info</button>
+                        <button class="nav-link" id="navDiscountProduct" data-bs-toggle="tab" data-bs-target="#tabDiscountProduct" type="button" role="tab" aria-controls="tabDiscountProduct" aria-selected="false">Discount Product</button>
+                    </div>
+                </nav>
                 <div id="formAlertPlaceholder"></div>
                 <div class="modal-body">
-                    <form id="addDiscountForm" class="needs-validation" novalidate>
-                        <div class="mb-3">
-                            <label for="percentage" class="col-form-label">Percentage:</label>
-                            <div class="input-group">
-                                <span class="input-group-text">%</span>
-                                <input type="number" class="form-control" min="1" step="1" max="100" placeholder="10" id="percentage" name="percentage" required/>
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <label for="startDate">Start Date</label>
-                            <input type="date" class="form-control" id="startDate" required name="startDate"
-                                   value="<%=(LocalDateTime.now()).getYear()%>-<%= month %>-<%= day %>"
-                                   min="<%=(LocalDateTime.now()).getYear()%>-<%= month %>-<%= day %>"
-                                   max="<%=(LocalDateTime.now()).getYear() + 1%>-<%= month %>-<%= day %>">
+                    <div class="tab-content" id="tabProduct">
+                        <div class="tab-pane fade show active" id="tabDiscountInfo" role="tabpanel" aria-labelledby="navDiscountInfo">
+                            <form id="addDiscountForm" class="needs-validation" novalidate>
+                                <div class="mb-3">
+                                    <label for="percentage" class="col-form-label">Percentage:</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text">%</span>
+                                        <input type="number" class="form-control" min="1" step="1" max="100" placeholder="10" id="percentage" name="percentage" required/>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="startDate">Start Date</label>
+                                    <input type="date" class="form-control" id="startDate" required name="startDate"
+                                           value="<%=(LocalDateTime.now()).getYear()%>-<%= month %>-<%= day %>"
+                                           min="<%=(LocalDateTime.now()).getYear()%>-<%= month %>-<%= day %>"
+                                           max="<%=(LocalDateTime.now()).getYear() + 1%>-<%= month %>-<%= day %>">
 
+                                </div>
+                                <div class="mb-3">
+                                    <label for="endDate" class="col-2 col-form-label">End Date</label>
+                                    <input type="date" class="form-control" id="endDate" required name="endDate"
+                                           value="<%=(LocalDateTime.now()).getYear()%>-<%= month %>-<%= day %>"
+                                           min="<%=(LocalDateTime.now()).getYear()%>-<%= month %>-<%= day %>"
+                                           max="<%=(LocalDateTime.now()).getYear() + 1%>-<%= month %>-<%= day %>">
+                                </div>
+                            </form>
                         </div>
-                        <div class="mb-3">
-                            <label for="endDate" class="col-2 col-form-label">End Date</label>
-                            <input type="date" class="form-control" id="endDate" required name="endDate"
-                                   value="<%=(LocalDateTime.now()).getYear()%>-<%= month %>-<%= day %>"
-                                   min="<%=(LocalDateTime.now()).getYear()%>-<%= month %>-<%= day %>"
-                                   max="<%=(LocalDateTime.now()).getYear() + 1%>-<%= month %>-<%= day %>">
+                        <div class="tab-pane fade" id="tabDiscountProduct" role="tabpanel" aria-labelledby="navDiscountProduct">
+                            <p>Select the products to be discounted</p>
+                            <c:forEach var="prod" items="${productList}">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" role="switch" value="${prod.alias}" id="selectProduct-${prod.alias}" name="productList"
+                                           form="addDiscountForm">
+                                    <label class="form-check-label" for="selectProduct-${prod.alias}">
+                                            ${prod.alias}&nbsp
+                                        <a href="<c:url value="/productDetail/${prod.alias}"/>">${prod.name}</a>&nbsp
+                                            ${prod.brand}&nbsp
+                                            ${prod.salePrice}&nbsp
+                                            ${prod.quantity}&nbsp
+                                            ${prod.category.name}&nbsp
+                                            ${prod.evidence}<br>
+                                    </label>
+                                </div>
+                            </c:forEach>
                         </div>
-
-                        <p>Select the products to be discounted</p>
-                        <c:forEach var="prod" items="${productList}">
-                            <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" role="switch" value="${prod.alias}" id="selectProduct-${prod.alias}" name="productList" >
-                                <label class="form-check-label" for="selectProduct-${prod.alias}">
-                                        ${prod.alias}&nbsp
-                                    <a href="<c:url value="/productDetail/${prod.alias}"/>">${prod.name}</a>&nbsp
-                                        ${prod.brand}&nbsp
-                                        ${prod.salePrice}&nbsp
-                                        ${prod.quantity}&nbsp
-                                        ${prod.category.name}&nbsp
-                                        ${prod.evidence}<br>
-                                </label>
-                            </div>
-                        </c:forEach>
-                    </form>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary" id="addDiscountButton" form="addDiscountForm">Add discount</button>

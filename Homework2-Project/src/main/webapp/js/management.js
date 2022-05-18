@@ -6,3 +6,31 @@ function updateProgressBar(progress, isError) {
     uploadImageProgressBar.classList.toggle('progress-bar-striped', progress < 100 && !isError);
     uploadImageProgressBar.classList.toggle('bg-danger', isError);
 }
+
+function evidenceRow(row) {
+    [...row.children].forEach(
+        (element) => {
+            element.classList.add('bg-primary')
+            element.classList.add('text-white')
+        }
+    );
+    [...row.querySelectorAll('a, button, i')].forEach(
+        (element) => {
+            element.classList.add('text-white')
+        }
+    );
+
+    setTimeout(function(){
+        [...row.children].forEach(
+            (element) => {
+                element.classList.remove('bg-primary')
+                element.classList.remove('text-white')
+            }
+        );
+        [...row.querySelectorAll('a, button, i')].forEach(
+            (element) => {
+                element.classList.remove('text-white')
+            }
+        )
+    }, 1700);
+}

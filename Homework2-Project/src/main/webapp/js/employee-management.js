@@ -37,10 +37,10 @@ addEmployeeForm.addEventListener('submit', (e) => {
             if (xmlhttp.status === 200) {
                 const alertPlaceholder = document.getElementById('liveAlertPlaceholder');
                 let newInnerHTML =
-                    '<td class="bg-primary">' + username + '</td>' +
-                    '<td class="bg-primary">' + formData.get('name') + '</td>' +
-                    '<td class="bg-primary">' + formData.get('surname') + '</td>' +
-                    '<td class="bg-primary">' + formData.get('role') + '</td>' +
+                    '<td>' + username + '</td>' +
+                    '<td>' + formData.get('name') + '</td>' +
+                    '<td>' + formData.get('surname') + '</td>' +
+                    '<td>' + formData.get('role') + '</td>' +
                     '<td><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#addEmployeeModal" data-bs-whatever="' + username + '"> <i class="fa-solid fa-pen-to-square text-primary"></i></button></td>' +
                     '<td><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteEmployeeModal" data-bs-whatever="' + username + '"> <i class="fa-solid fa-trash-can text-danger"></i></button></td>';
 
@@ -55,6 +55,8 @@ addEmployeeForm.addEventListener('submit', (e) => {
                     bootstrapAlert("Employee " + username + " modified", 'success', alertPlaceholder);
                     document.getElementById(username).innerHTML = newInnerHTML;
                 }
+
+                evidenceRow( document.getElementById(username));
 
                 bootstrap.Modal.getOrCreateInstance(addEmployeeModal).hide();
 
@@ -81,6 +83,9 @@ addEmployeeModal.addEventListener('show.bs.modal', (e) => {
     addEmployeeForm.classList.toggle('was-validated', false);
     addEmployeeForm.reset();
 
+    document.getElementById('username').disabled = !createEmployee;
+
+
     if(createEmployee) { // -> add
         let modalTitle = addProductModal.querySelector('.modal-title');
         modalTitle.textContent = 'Add employee';
@@ -93,8 +98,7 @@ addEmployeeModal.addEventListener('show.bs.modal', (e) => {
             if (xmlhttp.readyState === XMLHttpRequest.DONE) {
                 if (xmlhttp.status === 200) {
                     const response = JSON.parse(xmlhttp.responseText);
-                    populateForm(addEmployeeForm, response);
-                    document.getElementById('username').disabled = true;
+                    populateForm(addEmployeeForm, response.employeeList?.[0] ?? response.employee ?? response);
                 } else {
                     const alertPlaceholder = document.getElementById('liveAlertPlaceholder');
                     bootstrapAlert(parseError(xmlhttp), 'danger', alertPlaceholder);

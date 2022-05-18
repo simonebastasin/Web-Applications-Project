@@ -6,7 +6,10 @@ const addDiscountModal = document.getElementById('addDiscountModal');
 let idDiscount;
 
 addDiscountForm.addEventListener('submit', (e) => {
-    if(!addDiscountForm.checkValidity()) return;
+    if(!addDiscountForm.checkValidity()) {
+        document.getElementById('navDiscountInfo').click();
+        return;
+    }
 
     e.preventDefault();
     let createDiscount = (idDiscount  === null);
@@ -49,6 +52,8 @@ addDiscountForm.addEventListener('submit', (e) => {
                     document.getElementById(idDiscount).innerHTML = newInnerHTML;
                 }
                 bootstrap.Modal.getOrCreateInstance(addDiscountModal).hide();
+
+                evidenceRow(document.getElementById(idDiscount));
             }else {
                 const alertPlaceholder = document.getElementById('formAlertPlaceholder');
                 bootstrapAlert(parseError(xmlhttp), 'danger', alertPlaceholder);
