@@ -25,55 +25,55 @@
 <c:import url="/jsp/include/header.jsp"/>
 <div class="container main-container">
     <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-      <ol class="breadcrumb bg-secondary bg-opacity-25 p-3 mt-3 rounded">
-        <li class="breadcrumb-item"><a href="<c:url value="/"/>">Electromechanics Shop</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Product List</li>
-      </ol>
+        <ol class="breadcrumb bg-secondary bg-opacity-25 p-3 mt-3 rounded">
+            <li class="breadcrumb-item"><a href="<c:url value="/"/>">Electromechanics Shop</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Product List</li>
+        </ol>
     </nav>
     <div id="liveAlertPlaceholder" class="sticky-top" ></div>
 
-<div>
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addProductModal">
-        <i class="fa-solid fa-circle-plus"></i>
-        Add new product
-    </button>
-</div><br>
+    <div>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addProductModal">
+            <i class="fa-solid fa-circle-plus"></i>
+            Add new product
+        </button>
+    </div><br>
 
     <div class="card">
         <table id="productTable" class="table table-hover table-hide-lg-col-7 table-hide-lg-col-8 table-hide-md-col-4 table-hide-md-col-5 table-hide-md-col-6 table-hide-sm-col-2 table-hide-sm-col-3" >
             <thead>
-                <tr>
-                        <th>Name</th>
-                        <th>Alias</th>
-                        <th>Brand</th>
-                        <th>Category</th>
-                        <th>Sale Price</th>
-                        <th>Quantity</th>
-                        <th>Evidence</th>
+            <tr>
+                <th>Name</th>
+                <th>Alias</th>
+                <th>Brand</th>
+                <th>Category</th>
+                <th>Sale Price</th>
+                <th>Quantity</th>
+                <th>Evidence</th>
 
-                </tr>
+            </tr>
             </thead>
             <tbody>
-                <c:forEach var="prod" items="${productList}">
+            <c:forEach var="prod" items="${productList}">
 
-                    <tr id="${prod.alias}">
-                        <td><a href="<c:url value="/products/details/${prod.alias}"/>">${prod.name}</a></td>
-                        <td>${prod.alias}</td>
-                        <td>${prod.brand}</td>
-                        <td>${prod.category.name}</td>
-                        <td>${prod.salePrice}</td>
-                        <td >${prod.quantity}</td>
-                        <td>${prod.evidence}</td>
-                        <td><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#addProductModal" data-bs-whatever="${prod.alias}">
-                            <i class="fa-solid fa-pen-to-square text-primary"></i>
-                        </button></td>
-                        <td><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteProductModal" data-bs-whatever="${prod.alias}">
-                            <i class="fa-solid fa-trash-can text-danger"></i>
-                        </button></td>
+                <tr id="${prod.alias}">
+                    <td><a href="<c:url value="/products/details/${prod.alias}"/>">${prod.name}</a></td>
+                    <td>${prod.alias}</td>
+                    <td>${prod.brand}</td>
+                    <td>${prod.category.name}</td>
+                    <td>${prod.salePrice}</td>
+                    <td >${prod.quantity}</td>
+                    <td>${prod.evidence}</td>
+                    <td><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#addProductModal" data-bs-whatever="${prod.alias}">
+                        <i class="fa-solid fa-pen-to-square text-primary"></i>
+                    </button></td>
+                    <td><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteProductModal" data-bs-whatever="${prod.alias}">
+                        <i class="fa-solid fa-trash-can text-danger"></i>
+                    </button></td>
                         <%--<td><a class="btn btn-outline-danger" href="<c:url value="/management/productManagement/deleteProduct/${prod.alias}"/>">Delete</a></td>--%>
-                    </tr>
+                </tr>
 
-                </c:forEach>
+            </c:forEach>
             </tbody>
         </table>
     </div>
@@ -146,51 +146,50 @@
                                 <div class="mb-3">
 
 
-                                        <div class="mb-3">
-                                            <label for="nameCategoryName" class="col-form-label">new category name:</label>
-                                            <input form="addCategoryForm" type="text" class="form-control" id="nameCategoryName" name="name" required/>
-                                        </div>
+                                    <div class="mb-3">
+                                        <label for="nameCategoryName" class="col-form-label">new category name:</label>
+                                        <input form="addCategoryForm" type="text" class="form-control" id="nameCategoryName" name="name" required/>
+                                    </div>
 
-                                        <div class="mb-3">
-                                            <label  for="nameCategoryDescription" class="col-form-label">new category description:</label>
-                                            <input form="addCategoryForm" type="text" class="form-control" id="nameCategoryDescription" name="description" required/>
-                                        </div>
+                                    <div class="mb-3">
+                                        <label  for="nameCategoryDescription" class="col-form-label">new category description:</label>
+                                        <input form="addCategoryForm" type="text" class="form-control" id="nameCategoryDescription" name="description" required/>
+                                    </div>
 
                                     <div class="mb-3">
                                         <button type="submit" class="btn btn-primary" id="addNewCategory" form="addCategoryForm">Add category</button>
                                     </div>
+                                </div>
                             </div>
 
 
-                        </div>
-
-
-                        <div class="mb-3">
-                            Evidence:
-                            <div class="form-check form-check-inline" >
-                                <input class="form-check-input" type="radio" id="yes"
-                                       name="evidence" value="true" required>
-                                <label class="form-check-label" for="yes">Yes</label>
+                            <div class="mb-3">
+                                Evidence:
+                                <div class="form-check form-check-inline" >
+                                    <input class="form-check-input" type="radio" id="yes"
+                                           name="evidence" value="true" required>
+                                    <label class="form-check-label" for="yes">Yes</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" id="no"
+                                           name="evidence" value="false" required>
+                                    <label class="form-check-label" for="no">No</label>
+                                </div>
                             </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" id="no"
-                                       name="evidence" value="false" required>
-                                <label class="form-check-label" for="no">No</label>
+                            <div class="mb-3 image-check-box">
+                                <ul>
+                                    <c:if test="${not empty media}">
+                                        <li><input type="checkbox" id="media-${media.id}" name="pictures" value="${media.id}"/>
+                                            <label for="media-${media.id}"><img src="<c:url value="/media/thumb/${media.id}" />" alt="${media.filename}" /></label>
+                                        </li>
+                                    </c:if>
+                                    <c:forEach var="media" items="${mediaList}">
+                                        <li><input type="checkbox" id="media-${media.id}" name="pictures" value="${media.id}"/>
+                                            <label for="media-${media.id}"><img src="<c:url value="/media/thumb/${media.id}" />" alt="${media.filename}" /></label>
+                                        </li>
+                                    </c:forEach>
+                                </ul>
                             </div>
-                        </div>
-                        <div class="mb-3 image-check-box">
-                            <ul>
-                                <c:if test="${not empty media}">
-                                    <li><input type="checkbox" id="media-${media.id}" name="pictures" value="${media.id}"/>
-                                        <label for="media-${media.id}"><img src="<c:url value="/media/thumb/${media.id}" />" alt="${media.filename}" /></label>
-                                    </li>
-                                </c:if>
-                                <c:forEach var="media" items="${mediaList}">
-                                    <li><input type="checkbox" id="media-${media.id}" name="pictures" value="${media.id}"/>
-                                        <label for="media-${media.id}"><img src="<c:url value="/media/thumb/${media.id}" />" alt="${media.filename}" /></label>
-                                    </li>
-                                </c:forEach>
-                            </ul>
                         </div>
                     </form>
                     <form id="uploadImageForm" class="mb-3 needs-validation" novalidate>
