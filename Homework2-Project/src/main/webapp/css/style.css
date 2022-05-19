@@ -237,6 +237,13 @@ span.roboto {
         border-top-left-radius: 0  !important;
     }
 }
+.text-red
+{
+    color: red;
+}
+.txtDecoration{
+    text-decoration: line-through;
+}
 .mwcard
 {
     max-width: 540px;
