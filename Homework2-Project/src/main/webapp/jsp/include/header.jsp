@@ -111,7 +111,8 @@
                                     Login
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-lg-end dropdown-menu-login" aria-labelledby="dropdownMenuLogin">
-                                    <form class="px-4 py-3 g-3 needs-validation" novalidate method="POST" action="<c:url value="/session/login"/>">
+                                    <div id="liveAlertPlaceholderDrop"></div>
+                                    <form class="px-4 py-3 g-3 needs-validation" novalidate id="loginFormDrop">
                                         <div class="form-floating mb-3">
                                             <input type="text" class="form-control" id="identification" name="identification" placeholder="Username or Email" required>
                                             <label for="identification">Username or Email</label>
@@ -148,4 +149,5 @@
             </ul>
         </div>
     </div>
+    <script src="<c:url value="/js/login-dropmenu-error.js"/>"></script>
 </nav>
