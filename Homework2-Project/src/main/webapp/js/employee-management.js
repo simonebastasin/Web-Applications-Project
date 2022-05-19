@@ -129,9 +129,7 @@ deleteEmployeeForm.addEventListener('submit', (e) => {
                 bootstrapAlert("Employee " + username + " removed", 'success', alertPlaceholder);
 
                 let row = document.querySelector('tr[data-id="'+username+'"]');
-                row.children[5].innerHTML = "0";
-
-                evidenceRow(row);
+                row.remove();
                 bootstrap.Modal.getOrCreateInstance(deleteEmployeeModal).hide();
 
             } else {
@@ -159,7 +157,6 @@ deleteEmployeeModal.addEventListener('show.bs.modal', (e) => {
     document.getElementById('roleDelete').disabled = true;
 
     const xmlhttp = new XMLHttpRequest();
-    alert(username);
     xmlhttp.open("GET", rootPath + "/rest/management/employeeManagement/deleteEmployee/" + username, true);
     xmlhttp.onreadystatechange = function() {
         if (xmlhttp.readyState === XMLHttpRequest.DONE) {
@@ -174,7 +171,6 @@ deleteEmployeeModal.addEventListener('show.bs.modal', (e) => {
         }
     }
     xmlhttp.send();
-    alert("sent"+username);
 
     let modalTitle = deleteEmployeeModal.querySelector('.modal-title');
     modalTitle.textContent = 'Delete employee ' + username;
