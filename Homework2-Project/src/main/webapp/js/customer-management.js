@@ -113,8 +113,6 @@ deleteCustomerForm.addEventListener('submit', (e) => {
 
                 let row = document.querySelector('tr[data-id="'+username+'"]');
                 row.children[5].innerHTML = "0";
-
-                evidenceRow(row);
                 bootstrap.Modal.getOrCreateInstance(deleteCustomerModal).hide();
 
             } else {
@@ -159,7 +157,6 @@ deleteCustomerModal.addEventListener('show.bs.modal', (e) => {
         }
     }
     xmlhttp.send();
-    alert("sent"+username);
 
     let modalTitle = deleteCustomerModal.querySelector('.modal-title');
     modalTitle.textContent = 'Delete customer ' + username;
