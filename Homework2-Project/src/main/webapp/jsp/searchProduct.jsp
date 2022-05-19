@@ -20,12 +20,7 @@
 <body>
 <c:import url="/jsp/include/header.jsp"/>
 <div class="container main-container">
-<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-  <ol class="breadcrumb bg-secondary bg-opacity-25 p-3 mt-3 rounded">
-    <li class="breadcrumb-item"><a href="<c:url value="/"/>">Electromechanics Shop</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Search Results</li>
-  </ol>
-</nav>
+<h1 class="title text-center">Search Results</h1>
 
 <c:choose>
     <c:when test="${productList.size() > 0}">
