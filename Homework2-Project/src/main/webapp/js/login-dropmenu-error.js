@@ -1,5 +1,5 @@
 const loginFormDrop = document.getElementById("loginFormDrop");
-loginFormDrop.addEventListener('submit', (e) => {
+loginFormDrop?.addEventListener('submit', (e) => {
     if(!loginFormDrop.checkValidity()) return;
 
     e.preventDefault();

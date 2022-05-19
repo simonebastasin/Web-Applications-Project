@@ -28,6 +28,7 @@ function formatDate(date) {
 addDiscountForm.addEventListener('submit', (e) => {
     if(!addDiscountForm.checkValidity()) {
         document.getElementById('navDiscountInfo').click();
+
         return;
     }
 
@@ -36,6 +37,8 @@ addDiscountForm.addEventListener('submit', (e) => {
     const formData = new FormData(addDiscountForm);
     const urlencodedData = new URLSearchParams(formData);
     const xmlhttp = new XMLHttpRequest();
+
+
 
 
     if(createDiscount) {
@@ -58,7 +61,7 @@ addDiscountForm.addEventListener('submit', (e) => {
                 const alertPlaceholder = document.getElementById('liveAlertPlaceholder');
                 const response = JSON.parse(xmlhttp.responseText);
 
-
+                idDiscount = response.resourceId;
 
                 let newInnerHTML =
                     '<td class="bg-primary">'+response.resourceId+'</td>'+
@@ -151,8 +154,8 @@ deleteDiscountForm.addEventListener('submit', (e) => {
             if(xmlhttp.status === 200) {
                 const alertPlaceholder = document.getElementById('liveAlertPlaceholder');
                 bootstrapAlert("The discount " + idDiscount + " has been removed", 'success', alertPlaceholder);
-
-                document.getElementById(idDiscount).remove();
+                let row = document.querySelector('tr[data-id="'+idDiscount+'"]');
+                row.remove();
 
 
                 bootstrap.Modal.getOrCreateInstance(deleteDiscountModal).hide();
@@ -173,7 +176,7 @@ deleteDiscountModal.addEventListener('show.bs.modal', (e) => {
     // Button that triggered the modal
     var button = e.relatedTarget;
     // Extract info from data-bs-* attributes
-    idDiscount = button.getAttribute('data-bs-whatever');
+    idDiscount = button.getAttribute('data-id');
 
 
     deleteDiscountForm.classList.toggle('was-validated', false);
@@ -197,7 +200,7 @@ deleteDiscountModal.addEventListener('show.bs.modal', (e) => {
             } else {
                 const alertPlaceholder = document.getElementById('liveAlertPlaceholder');
                 bootstrapAlert(xmlhttp.statusText !== "" ? 'Error: '+xmlhttp.status : 'Generic error', 'danger', alertPlaceholder);
-                bootstrap.Modal.getOrCreateInstance(deleteProductModal).hide();
+                bootstrap.Modal.getOrCreateInstance(deleteDiscountModal).hide();
             }
         }
     }
