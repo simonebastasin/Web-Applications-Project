@@ -268,3 +268,12 @@ span.roboto {
 @media screen and (max-width: 992px){
     .dropdown-menu-cart {width: 100%}
 }
+
+/*
+    Product detail responsive
+ */
+@media (max-width: 768px) {
+    .product-card .card {
+        margin-top: 0 !important;
+    }
+}

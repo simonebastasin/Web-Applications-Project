@@ -115,6 +115,7 @@
                 </c:choose>
             </div>
             <div class="col-md-5 me-md-4 float-end mt-3 mb-4">
+                <div class="product-card">
                 <div class="card mt-5">
                     <div class="card-body ms-10">
                     <h3 class="title">${product.name}</h3>
@@ -189,6 +190,7 @@
                         </c:otherwise>
                     </c:choose>
                     </div>
+                </div>
                 </div>
             </div>
     </div>

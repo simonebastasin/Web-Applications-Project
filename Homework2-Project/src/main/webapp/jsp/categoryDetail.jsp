@@ -37,7 +37,7 @@
                 <c:choose>
                     <c:when test="${not empty prod.discount}">
                         <div class="mx-auto w-lg-75" >
-                            <div class="card mt-3">
+                            <div class="card mt-3 bg-light">
                                 <div class="row g-0 justify-content-center">
                                     <div class="col-md-4 justify-content-center ratio ratio-1x1">
                                         <c:choose>
@@ -88,7 +88,7 @@
                     </c:when>
                     <c:otherwise>
                             <div class="mx-auto w-lg-75" >
-                                <div class="card mt-3">
+                                <div class="card mt-3 bg-light">
                                 <div class="row g-0 justify-content-center">
                                     <div class="col-md-4 justify-content-center ratio ratio-1x1">
                                         <c:choose>
