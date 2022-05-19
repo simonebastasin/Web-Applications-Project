@@ -54,16 +54,16 @@
             <c:forEach var="product" items="${onlineOrder.products}">
                 <li class="list-group-item">
                     <div class="row">
-                        <div class="col">
+                        <div class="col text-break">
                                 ${product.name}
                         </div>
-                        <div class="col">
+                        <div class="col text-break">
                                 ${product.finalSalePrice}€
                         </div>
-                        <div class="col">
+                        <div class="col text-break">
                                 ${product.quantity}
                         </div>
-                        <div class="col">
+                        <div class="col text-break">
                                 ${product.finalSalePrice*product.quantity}€
                         </div>
                     </div>
