@@ -223,19 +223,19 @@
     </c:if>
     <c:choose>
         <c:when test="${empty_cat eq true}">
-    <div class="row mx-auto justify-content-center border mt-3 mb-3 rounded bg-light">
-        <div class="d-inline p-3">
-            <h3 class="title d-inline pe-3">${item.name}</h3>
-            <span>Sorry, there are no products at the moment for this category</span>
-        </div>
-    </div>
+            <div class="row mx-auto justify-content-center border mt-3 mb-3 rounded bg-light">
+                <div class="d-inline p-3">
+                    <h3 class="title d-inline pe-3">${item.name}</h3>
+                    <span>Sorry, there are no products at the moment for this category</span>
+                </div>
+            </div>
         </c:when>
         <c:otherwise>
 
             <div class="row mx-auto justify-content-center border mt-3 mb-3 rounded bg-light">
             <div class="d-inline p-3">
                 <h3 class="title d-inline">${item.name}</h3>
-                <a href="<c:url value="products/category/${item.name}"/>" class="d-inline p-3 fw-bold">Shop now</a>
+                <a href="<c:url value="products/category/${item.name}"/>" class="d-inline p-3 fw-bold link-secondary">Shop now</a>
             </div>
 
             <div class="carousel carousel-category carousel-dark slide" id="categoryCarousel${count}"  data-bs-interval="false" data-bs-ride="carousel">

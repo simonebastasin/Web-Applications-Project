@@ -72,6 +72,9 @@
                                                     <span  class="text-decoration-line-through">${String.format("%.2f",prod.salePrice)}€</span>
                                                     <span class="text-red display-6">${String.format("%.2f",prod.discountSale)}€</span>
                                                 </div>
+                                                <div class="col text-end">
+                                                    -${prod.discount.percentage}% (until ${prod.discount.endDate.humanDate})
+                                                </div>
                                             </div>
                                             <c:if test="${prod.quantity <= 10}">
                                                 <div class="text-center mt-5 text-red bold">
@@ -143,7 +146,12 @@
             </c:forEach>
         </c:when>
         <c:otherwise>
-            There are no more products for this category! =(
+            <div class="row mx-auto justify-content-center border mt-3 mb-3 rounded bg-light">
+                <div class="d-inline p-3">
+                    <h3 class="title d-inline pe-3">${item.name}</h3>
+                    <span>Sorry, there are no products at the moment for this category</span>
+                </div>
+            </div>
         </c:otherwise>
     </c:choose>
 

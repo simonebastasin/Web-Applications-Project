@@ -154,7 +154,7 @@
                                                 <label class="col-form-label" for="quantity">Quantity</label>
                                             </div>
                                             <div class="col-auto">
-                                                <input type="number" name="quantity" max="${product.quantity}" min="1" id="quantity" required class="form-control">
+                                                <input type="number" name="quantity" max="${product.quantity}" min="1" id="quantity" value="1" required class="form-control">
                                             </div>
                                             <div class="col-auto">
                                                 <span class="form-text text-danger">Available quantity: ${product.quantity}</span>
