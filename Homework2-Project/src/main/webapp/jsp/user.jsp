@@ -28,14 +28,16 @@
   </ol>
 </nav>
 
-<ul>
-    <li>Name: ${employee.name}</li>
-    <li>Surname: ${employee.surname}</li>
-    <li>Role: ${employee.role.toString()}</li>
-    <br>
-    <a href="<c:url value="/user/modify"/>">Edit</a>
-    <a href="<c:url value="/user/password"/>">Change Password</a>
-</ul>
+    <h5>User Info</h5>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">Name: ${employee.name}</li>
+            <li class="list-group-item">Surname: ${employee.surname}</li>
+            <li class="list-group-item">Role: ${employee.role.toString()}</li>
+        </ul>
+        <br>
+
+    <a href="<c:url value="/user/modify"/>" class="btn btn-primary">Edit</a>
+    <a href="<c:url value="/user/password"/>" class="btn btn-danger">Change Password</a>
 
 
 </div>
