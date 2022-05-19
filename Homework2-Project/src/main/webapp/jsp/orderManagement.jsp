@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="it.unipd.dei.wa2122.wadteam.resources.OrderStatusEnum" %>
 <%--@elvariable id="onlineOrder" type="it.unipd.dei.wa2122.wadteam.resources.OnlineOrder"--%>
 
 <!DOCTYPE html>
@@ -123,11 +124,11 @@
                             <div class="input-group">
                                 <select class="form-control" name="status" id="status" required>
                                     <option value="" hidden selected disabled>Choose</option>
-                                    <option value="${OrderStatusEnum.OPEN}" selected>${status.status}</option>
-                                    <option value="${OrderStatusEnum.PAYMENT_ACCEPTED}" selected>${OrderStatusEnum.PAYMENT_ACCEPTED}</option>
-                                    <option value="${OrderStatusEnum.SHIPPED}" selected>Shipped</option>
-                                    <option value="${OrderStatusEnum.DELIVERED}" selected>Delivered</option>
-                                    <option value="${OrderStatusEnum.CANCELLED}" selected>Cancelled</option>
+                                    <option value="${OrderStatusEnum.OPEN}">${OrderStatusEnum.OPEN}</option>
+                                    <option value="${OrderStatusEnum.PAYMENT_ACCEPTED}">${OrderStatusEnum.PAYMENT_ACCEPTED}</option>
+                                    <option value="${OrderStatusEnum.SHIPPED}">${OrderStatusEnum.SHIPPED}</option>
+                                    <option value="${OrderStatusEnum.DELIVERED}">${OrderStatusEnum.DELIVERED}</option>
+                                    <option value="${OrderStatusEnum.CANCELLED}">${OrderStatusEnum.CANCELLED}</option>
                                 </select>
                             </div>
                         </div>
