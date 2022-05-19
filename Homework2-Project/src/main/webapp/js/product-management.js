@@ -333,7 +333,7 @@ const toogleButton = document.getElementsByClassName('toggle');
 
     let query = event.target.getAttribute('data-toogle');
     // Get the content
-    var content = document.querySelector(id);
+    var content = document.querySelector(query);
     if (!content) return;
 
     // Toggle the content

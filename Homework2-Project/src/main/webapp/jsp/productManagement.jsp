@@ -153,15 +153,15 @@
                         <div class="d-none" id="toggleCategory" >
                                 <div class="mb-3">
                                     <div class="mb-3">
-                                        <label for="nameCategoryName" class="col-form-label">new category name:</label>
+                                        <label for="nameCategoryName" class="col-form-label">New category name:</label>
                                         <input form="addCategoryForm" type="text" class="form-control" id="nameCategoryName" name="name" required/>
                                     </div>
                                     <div class="mb-3">
-                                        <label  for="nameCategoryDescription" class="col-form-label">new category description:</label>
+                                        <label  for="nameCategoryDescription" class="col-form-label">New category description:</label>
                                         <input form="addCategoryForm" type="text" class="form-control" id="nameCategoryDescription" name="description" required/>
                                     </div>
                                     <div class="mb-3">
-                                        <button type="submit" class="btn btn-primary" id="addNewCategory" form="addCategoryForm">Add category</button>
+                                        <button type="submit" class="btn btn-secondary" id="addNewCategory" form="addCategoryForm">Add category</button>
                                     </div>
                             </div>
                         </div>
