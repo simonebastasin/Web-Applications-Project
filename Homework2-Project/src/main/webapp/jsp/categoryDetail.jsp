@@ -24,7 +24,7 @@
 
 <c:forEach var="category" items="${productCategoryList}">
 
-    <h2 class="text-center"> ${category.name}</h2>
+    <h2 class="text-center title"> ${category.name}</h2>
     <h3><i>${category.description}</i></h3>
 
 
