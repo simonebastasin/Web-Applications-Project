@@ -36,12 +36,40 @@
             <c:forEach var="prod" items="${productList}">
                 <c:choose>
                     <c:when test="${not empty prod.discount}">
-                        <li>Product name: <a href="<c:url value="/products/details/${prod.alias}"/>">${prod.name}</a>  - Brand: ${prod.brand} - Quantity: ${prod.quantity} - Price: <span  class="txtDecoration">${prod.salePrice}€</span> <span class="text-red">${prod.discountSale}€</span><br>
-                            <c:forEach var="picture" items="${prod.pictures}">
+                        <div class="mx-auto w-lg-50 bg-light mwcard" >
+                                <div class="row g-0 justify-content-center">
+                                    <div class="col-md-4 justify-content-center">
+                                        <c:choose>
+                                            <c:when test="${not empty prod.pictures}">
 
-                                <img src="<c:url value="/media/view/${picture}"/>" alt="${prod.alias}" width="250px"/>
-                            </c:forEach>
-                        </li>
+                                                <c:set var="i" value="${0}"/>
+                                                <c:forEach var="pic" items="${prod.pictures}">
+                                                    <c:if test="${i == 0}">
+                                                        <c:set var="picture" value="${pic}"/>
+                                                    </c:if>
+                                                    <c:set var="i" value="${1}"/>
+                                                </c:forEach>
+                                                <img src="<c:url value="/media/view/${picture}"/>" alt="${prod.alias}" class="img-fluid rounded-start" >
+
+                                            </c:when>
+                                            <c:otherwise>
+
+                                                <img src="<c:url value="/images/No_image_available_circle.png"/>" alt="${prod.alias}" class="img-fluid rounded-start" >
+
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Product name: <a href="<c:url value="/products/details/${prod.alias}"/>">${prod.name}</a></h5>
+                                            <p class="card-text"><b>Brand:</b> ${prod.brand}<br><b>Price:</b> <span  class="txtDecoration">${prod.salePrice}€</span> <span class="text-red">${prod.discountSale}€</span><br><b>Quantity:</b> ${prod.quantity}</p>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+
                     </c:when>
                     <c:otherwise>
                             <div class="mx-auto w-lg-50 bg-light mwcard" >
