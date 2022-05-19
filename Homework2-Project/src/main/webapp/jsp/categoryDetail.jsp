@@ -24,8 +24,11 @@
 
 <c:forEach var="category" items="${productCategoryList}">
 
-    <h2 class="text-center title"> ${category.name}</h2>
-    <h3><i>${category.description}</i></h3>
+    <div class="d-flex align-items-baseline">
+        <h1 class="title me-3"> ${category.name}</h1>
+        <h3>${category.description}</h3>
+    </div>
+
 
 
     <c:choose>
