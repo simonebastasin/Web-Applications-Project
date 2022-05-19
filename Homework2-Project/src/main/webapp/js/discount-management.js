@@ -9,7 +9,7 @@ const deleteDiscountForm = document.getElementById('deleteDiscountForm');
 const deleteDiscountModal = document.getElementById('deleteDiscountModal');
 const deleteDiscountButton = document.getElementById('deleteDiscountButton');
 
-
+let arrayName = [];
 let idDiscount;
 
 function padTo2Digits(num) {
@@ -24,7 +24,27 @@ function formatDate(date) {
     ].join('/');
 }
 
+function resolveNameProduct(productc) {
 
+    // Creating Our XMLHttpRequest object
+    var xhr = new XMLHttpRequest();
+
+    // Making our connection
+    var url = rootPath + '/rest/products/details/'+productc;
+    xhr.open("GET", url, false);
+    let obj;
+    // function execute after request is successful
+    xhr.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            obj = JSON.parse(this.responseText);
+
+            arrayName.push(obj[0].name);
+            console.log(arrayName.toString());
+        }
+    }
+    // Sending our request
+    xhr.send();
+}
 addDiscountForm.addEventListener('submit', (e) => {
     if(!addDiscountForm.checkValidity()) {
         document.getElementById('navDiscountInfo').click();
@@ -63,15 +83,32 @@ addDiscountForm.addEventListener('submit', (e) => {
 
                 idDiscount = response.resourceId;
 
-                let newInnerHTML =
-                    '<td class="bg-primary">'+response.resourceId+'</td>'+
 
-                    '<td class="bg-primary">'+formData.get('percentage')+'%</td>'+
-                    '<td class="bg-primary">'+formatDate(new Date(formData.get('startDate')))+'</td>'+
-                    '<td class="bg-primary">'+formatDate(new Date(formData.get('endDate')))+'</td>'+
-                    '<td class="bg-primary">'+formData.getAll('productList').join(' ')+'</td>'+
-                    '<td class="bg-primary"><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#addDiscountModal" data-bs-whatever="'+response.resourceId+'"> <i class="fa-solid fa-pen-to-square text-light"></i></button></td>'+
-                    '<td class="bg-primary"><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteDiscountModal" data-bs-whatever="'+response.resourceId+'"> <i class="fa-solid fa-trash-can text-light"></i></button></td>';
+                arrayName = [];
+                const array = formData.getAll('productList');
+                //console.log(array.toString());
+                array.forEach(element =>
+                    resolveNameProduct(element));
+
+
+                const arrayHtml = [];
+                let i = 0;
+                arrayName.forEach(element => {
+                    arrayHtml.push('<a href=' + rootPath + '/products/details/' + array[i].toString() + '>' + element.toString() + ' </a>');
+                    i++;
+                });
+
+
+
+                let newInnerHTML =
+                    '<td>'+response.resourceId+'</td>'+
+
+                    '<td>'+formData.get('percentage')+'%</td>'+
+                    '<td>'+formatDate(new Date(formData.get('startDate')))+'</td>'+
+                    '<td>'+formatDate(new Date(formData.get('endDate')))+'</td>'+
+                    '<td>'+arrayHtml.toString()+'</td>'+
+                    '<td><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#addDiscountModal" data-id="'+response.resourceId+'"> <i class="fa-solid fa-pen-to-square text-primary"></i></button></td>'+
+                    '<td><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteDiscountModal" data-id="'+response.resourceId+'"> <i class="fa-solid fa-trash-can text-danger"></i></button></td>';
 
                 if(createDiscount) {
                     bootstrapAlert("The discount was created", 'success', alertPlaceholder);
