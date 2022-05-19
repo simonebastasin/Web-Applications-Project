@@ -36,8 +36,15 @@
         </ul>
         <br>
 
-    <a href="<c:url value="/user/modify"/>" class="btn btn-primary">Edit</a>
-    <a href="<c:url value="/user/password"/>" class="btn btn-danger">Change Password</a>
+    <a href="<c:url value="/user/modify"/>" class="btn" type="button">
+        <i class="fa-solid fa-pen-to-square text-primary"></i>
+        <span class="text-primary">Edit</span>
+    </a>
+
+    <a href="<c:url value="/user/password"/>" class="btn" type="button">
+        <i class="fa-solid fa-key text-danger"></i>
+        <span class="text-danger">Change Password</span>
+    </a>
 
 
 </div>
