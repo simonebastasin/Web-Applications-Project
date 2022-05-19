@@ -1,24 +1,24 @@
-const formConfirmPassword2 = document.getElementById("formConfirmPassword");
-formConfirmPassword2.addEventListener('submit', (e) => {
-    if(!formConfirmPassword2.checkValidity()) return;
+const editUserForm = document.getElementById("editUserForm");
+editUserForm.addEventListener('submit', (e) => {
+    if(!editUserForm.checkValidity()) return;
 
     e.preventDefault();
-    const formData = new FormData(formConfirmPassword2);
+    const formData = new FormData(editUserForm);
     const urlencodedData = new URLSearchParams(formData);
     const xmlhttp = new XMLHttpRequest();
-    xmlhttp.open("POST", rootPath + "/rest/user/password", true);
+    xmlhttp.open("POST", rootPath + "/rest/user/modify", true);
     xmlhttp.onreadystatechange = function() {
         if (xmlhttp.readyState === XMLHttpRequest.DONE) {
             if(xmlhttp.status === 200) {
                 const alertPlaceholder = document.getElementById('liveAlertPlaceholder');
                 const cancelchanges = document.getElementById('cancel');
                 cancelchanges.innerHTML = "Go back to detail";
-                bootstrapAlert("Password was modified successfully", 'success', alertPlaceholder);
+                bootstrapAlert("Details was modified successfully", 'success', alertPlaceholder);
 
             }
             else{
                 const alertPlaceholder = document.getElementById('liveAlertPlaceholder');
-                const cancelchanges = document.getElementById('cancel');
+                const cancelchanges = document.getElementById("cancel");
                 cancelchanges.innerHTML = "Cancel changes";
                 bootstrapAlert(parseError(xmlhttp), 'danger', alertPlaceholder);
             }

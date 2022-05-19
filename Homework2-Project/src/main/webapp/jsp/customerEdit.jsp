@@ -26,8 +26,8 @@
     <li class="breadcrumb-item active" aria-current="page">Edit Customer</li>
   </ol>
 </nav>
-
-<form method="post" action="<c:url value="/user/modify"/>" class="row g-3 needs-validation" novalidate>
+<div id="liveAlertPlaceholder"></div>
+<form class="row g-3 needs-validation" novalidate id="editUserForm">
 
     <div class="form-floating mb-3">
         <input type="text" id="name" name="name" class="form-control" value="${customer.name}" required placeholder="name">
@@ -55,16 +55,13 @@
 
     <div class="mb-3">
         <button class="btn btn-outline-primary" type="submit">Submit</button>
-        <a href="<c:url value="/user/info"/>" class="btn btn-outline-danger">Cancel changes</a>
+        <a href="<c:url value="/user/info"/>" class="btn btn-outline-danger" id="cancel">Cancel changes</a>
     </div>
-    <div class="mb-3">
-
-    </div>
-
 
 </form>
 
 </div>
 <c:import url="/jsp/include/footer.jsp"/>
+<script src="<c:url value="/js/check-edit-user.js"/>"></script>
 </body>
 </html>
