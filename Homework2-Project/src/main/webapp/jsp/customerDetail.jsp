@@ -37,7 +37,7 @@
     <li class="list-group-item">Address: ${customer.address}</li>
     <li class="list-group-item">Phone number: ${customer.phoneNumber}</li>
     <li class="list-group-item">Email: ${customer.email}</li>
-    <li class="list-group-item">FiscalCode: ${customer.fiscalCode}</li>
+    <li class="list-group-item">Fiscal code: ${customer.fiscalCode}</li>
 </ul>
 <br>
 
@@ -83,12 +83,10 @@
                             <input type="text" id="address" name="address" class="form-control" value="${customer.address}" placeholder="Via Padova 1, Padova (PD)">
                             <label for="address">Address </label>
                         </div>
-
-                        <div class="mb-3">
-                            <button class="btn btn-outline-primary" type="submit">Submit</button>
-                            <a href="<c:url value="/user/info"/>" class="btn btn-outline-danger" id="cancel">Cancel changes</a>
-                        </div>
                     </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class = "btn btn-primary" form="editUserForm">Edit info</button>
                 </div>
             </div>
         </div>
@@ -119,12 +117,10 @@
                             <label for="confirmPassword">Confirm New Password</label>
                             <div class="invalid-feedback"  id="confirmPasswordFeedback">Confirm your password.</div>
                         </div>
-
-                        <div class="mb-3">
-                            <input type="submit" id="submit" value="Submit" class = "btn btn-primary">
-                            <a href="<c:url value="/user/info"/>" class="btn btn-danger" id="passwordCancel">Cancel changes</a>
-                        </div>
                     </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class = "btn btn-danger" form="formConfirmPassword">Change Password</button>
                 </div>
             </div>
         </div>
@@ -132,8 +128,7 @@
 
 </div>
 <c:import url="/jsp/include/footer.jsp"/>
-<script src="<c:url value="/js/check-edit-user.js"/>"></script>
 <script src="<c:url value="/js/check-password.js"/>"></script>
-<script src="<c:url value="/js/password-change-error.js"/>"></script>
+<script src="<c:url value="/js/user.js"/>"></script>
 </body>
 </html>

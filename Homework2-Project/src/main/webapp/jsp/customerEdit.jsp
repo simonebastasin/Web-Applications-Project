@@ -62,6 +62,6 @@
 
 </div>
 <c:import url="/jsp/include/footer.jsp"/>
-<script src="<c:url value="/js/check-edit-user.js"/>"></script>
+<script src="<c:url value="/js/user.js"/>"></script>
 </body>
 </html>

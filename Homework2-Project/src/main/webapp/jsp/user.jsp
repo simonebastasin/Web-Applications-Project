@@ -69,13 +69,10 @@
                             <label for="surname">Surname </label>
                             <div class="invalid-feedback">Insert your surname.</div>
                         </div>
-
-                        <div class="mb-3">
-                            <button class="btn btn-outline-primary" type="submit">Submit</button>
-                            <a href="<c:url value="/user/info"/>" class="btn btn-outline-danger" id="cancel">Cancel changes</a>
-                        </div>
-
                     </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class = "btn btn-primary" form="editUserForm">Edit info</button>
                 </div>
             </div>
         </div>
@@ -88,7 +85,7 @@
                     <h5 class="modal-title" id="changePasswordModalTitle">Change Password</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-
+                <div id="formPasswordAlertPlaceholder"></div>
                 <div class="modal-body">
                     <form class="row g-3 needs-validation" novalidate id="formConfirmPassword">
                         <div class="form-floating mb-3">
@@ -106,12 +103,10 @@
                             <label for="confirmPassword">Confirm New Password</label>
                             <div class="invalid-feedback"  id="confirmPasswordFeedback">Confirm your password.</div>
                         </div>
-
-                        <div class="mb-3">
-                            <input type="submit" id="submit" value="Submit" class = "btn btn-primary">
-                            <a href="<c:url value="/user/info"/>" class="btn btn-danger" id="passwordCancel">Cancel changes</a>
-                        </div>
                     </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class = "btn btn-danger" form="formConfirmPassword">Change Password</button>
                 </div>
             </div>
         </div>
@@ -119,8 +114,7 @@
 
 </div>
 <c:import url="/jsp/include/footer.jsp"/>
-<script src="<c:url value="/js/check-edit-user.js"/>"></script>
 <script src="<c:url value="/js/check-password.js"/>"></script>
-<script src="<c:url value="/js/password-change-error.js"/>"></script>
+<script src="<c:url value="/js/user.js"/>"></script>
 </body>
 </html>
