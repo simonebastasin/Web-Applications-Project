@@ -56,8 +56,8 @@ addEmployeeForm.addEventListener('submit', (e) => {
                     document.getElementById(username).innerHTML = newInnerHTML;
                 }
 
+                evidenceRow(document.getElementById(username));
                 bootstrap.Modal.getOrCreateInstance(addEmployeeModal).hide();
-                evidenceRow( document.getElementById(username));
 
             } else {
                 if(createEmployee) username = null;
@@ -129,8 +129,8 @@ deleteEmployeeForm.addEventListener('submit', (e) => {
                 let row = document.getElementById(username);
                 row.children[5].innerHTML = "0";
 
-                bootstrap.Modal.getOrCreateInstance(deleteEmployeeModal).hide();
                 evidenceRow(row);
+                bootstrap.Modal.getOrCreateInstance(deleteEmployeeModal).hide();
 
             } else {
                 const alertPlaceholder = document.getElementById('formAlertPlaceholderDelete');
@@ -146,7 +146,7 @@ deleteEmployeeModal.addEventListener('show.bs.modal', (e) => {
     // Button that triggered the modal
     var button = e.relatedTarget;
     // Extract info from data-bs-* attributes
-    alias = button.getAttribute('data-bs-whatever');
+    username = button.getAttribute('data-bs-whatever');
 
     deleteEmployeeForm.classList.toggle('was-validated', false);
     deleteEmployeeForm.reset();
@@ -157,13 +157,13 @@ deleteEmployeeModal.addEventListener('show.bs.modal', (e) => {
     document.getElementById('roleDelete').disabled = true;
 
     const xmlhttp = new XMLHttpRequest();
+    alert(username);
     xmlhttp.open("GET", rootPath + "/rest/management/employeeManagement/deleteEmployee/" + username, true);
     xmlhttp.onreadystatechange = function() {
         if (xmlhttp.readyState === XMLHttpRequest.DONE) {
             if(xmlhttp.status === 200) {
                 const response = JSON.parse(xmlhttp.responseText);
                 populateForm(deleteEmployeeForm, response.employeeList?.[0] ?? response.employee ?? response);
-
             } else {
                 const alertPlaceholder = document.getElementById('liveAlertPlaceholder');
                 bootstrapAlert(parseError(xmlhttp), 'danger', alertPlaceholder);
@@ -172,8 +172,9 @@ deleteEmployeeModal.addEventListener('show.bs.modal', (e) => {
         }
     }
     xmlhttp.send();
+    alert("sent"+username);
 
     let modalTitle = deleteEmployeeModal.querySelector('.modal-title');
     modalTitle.textContent = 'Delete employee ' + username;
-    addEmployeeButton.textContent = 'Delete employee';
+    deleteEmployeeButton.textContent = 'Delete employee';
 })
