@@ -47,8 +47,8 @@ editCustomerForm.addEventListener('submit', (e) => {
                 bootstrapAlert("Customer " + username + " modified", 'success', alertPlaceholder);
                 document.getElementById(username).innerHTML = newInnerHTML;
 
-                bootstrap.Modal.getOrCreateInstance(editCustomerModal).hide();
                 evidenceRow(document.getElementById(username));
+                bootstrap.Modal.getOrCreateInstance(editCustomerModal).hide();
 
             } else {
                 const alertPlaceholder = document.getElementById('formAlertPlaceholder');
@@ -114,8 +114,8 @@ deleteCustomerForm.addEventListener('submit', (e) => {
                 let row = document.getElementById(username);
                 row.children[5].innerHTML = "0";
 
-                bootstrap.Modal.getOrCreateInstance(deleteCustomerModal).hide();
                 evidenceRow(row);
+                bootstrap.Modal.getOrCreateInstance(deleteCustomerModal).hide();
 
             } else {
                 const alertPlaceholder = document.getElementById('formAlertPlaceholderDelete');
@@ -131,7 +131,7 @@ deleteCustomerModal.addEventListener('show.bs.modal', (e) => {
     // Button that triggered the modal
     var button = e.relatedTarget;
     // Extract info from data-bs-* attributes
-    alias = button.getAttribute('data-bs-whatever');
+    username = button.getAttribute('data-bs-whatever');
 
     deleteCustomerForm.classList.toggle('was-validated', false);
     deleteCustomerForm.reset();
@@ -142,12 +142,13 @@ deleteCustomerModal.addEventListener('show.bs.modal', (e) => {
     document.getElementById('fiscalCodeDelete').disabled = true;
 
     const xmlhttp = new XMLHttpRequest();
+    alert(username);
     xmlhttp.open("GET", rootPath + "/rest/management/customerManagement/deleteCustomer/" + username, true);
     xmlhttp.onreadystatechange = function() {
         if (xmlhttp.readyState === XMLHttpRequest.DONE) {
             if(xmlhttp.status === 200) {
                 const response = JSON.parse(xmlhttp.responseText);
-                id = (response?.[0] ?? response).id;
+                //id = (response?.[0] ?? response).id;
                 populateForm(deleteCustomerForm, response);
 
             } else {
@@ -158,8 +159,9 @@ deleteCustomerModal.addEventListener('show.bs.modal', (e) => {
         }
     }
     xmlhttp.send();
+    alert("sent"+username);
 
     let modalTitle = deleteCustomerModal.querySelector('.modal-title');
     modalTitle.textContent = 'Delete customer ' + username;
-    addCustomerButton.textContent = 'Delete customer';
+    deleteCustomerButton.textContent = 'Delete customer';
 })
