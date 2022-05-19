@@ -39,8 +39,8 @@
     </div>
 
     <div class="mb-3">
-        <input type="submit" id="submit" value="Submit" class = "btn btn-outline-primary">
-        <a href="<c:url value="/user/info"/>" class="btn btn-outline-danger" id="cancel">Cancel changes</a>
+        <input type="submit" id="submit" value="Submit" class = "btn btn-primary">
+        <a href="<c:url value="/user/info"/>" class="btn btn-danger" id="cancel">Cancel changes</a>
     </div>
 </form>
 

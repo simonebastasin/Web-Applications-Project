@@ -27,14 +27,25 @@
   </ol>
 </nav>
 
-<form method="post" action="<c:url value="/user/modify"/>">
-    <ul>
-        <li>Name: <input type="text" name="name" value="${employee.name}" required></li>
-        <li>Surname: <input type="text" name="surname" value="${employee.surname}" required></li>
+<form class="row g-3 needs-validation" novalidate id="editEmployeeForm">
 
+    <div class="form-floating mb-3">
+        <input type="text" id="name" name="name" class="form-control" value="${employee.name}" required placeholder="name">
+        <label for="name">Name </label>
+        <div class="invalid-feedback">Insert your name.</div>
+    </div>
 
-        <input type="submit" value="submit">
-    </ul>
+    <div class="form-floating mb-3">
+        <input type="text" id="surname" name="surname" class="form-control" value="${employee.surname}" required placeholder="surname">
+        <label for="surname">Surname </label>
+        <div class="invalid-feedback">Insert your surname.</div>
+    </div>
+
+    <div class="mb-3">
+        <button class="btn btn-outline-primary" type="submit">Submit</button>
+        <a href="<c:url value="/user/info"/>" class="btn btn-outline-danger" id="cancel">Cancel changes</a>
+    </div>
+
 </form>
 
 
