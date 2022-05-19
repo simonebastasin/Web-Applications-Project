@@ -34,7 +34,7 @@
     <c:forEach var="assistanceTicket" items="${assistanceTicketList}">
     <div class="mx-auto w-lg-50">
     <div class="card text-center">
-        <div class="card-body" id="${assistanceTicket.id}">
+        <div class="card-body" data-id="${assistanceTicket.id}">
             <h5 class="card-title">Ticket ID: ${assistanceTicket.id}</h5>
             <ul class="list-group list-group-flush">
             <li class="list-group-item">${assistanceTicket.description}</li>
@@ -50,12 +50,12 @@
 
         <c:choose>
             <c:when test="${empty assistanceTicket.ticketStatusList}" >
-                <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#respondTicketModal" data-bs-whatever="${assistanceTicket.id}">
+                <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#respondTicketModal" data-id="${assistanceTicket.id}">
                     Respond
                 </button>
             </c:when>
             <c:when test="${not (assistanceTicket.ticketStatusList[fn:length(assistanceTicket.ticketStatusList)-1].status eq TicketStatusEnum.CLOSED) }">
-                <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#respondTicketModal" data-bs-whatever="${assistanceTicket.id}">
+                <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#respondTicketModal" data-id="${assistanceTicket.id}">
                     Respond
                 </button>
             </c:when>

@@ -32,17 +32,19 @@
         <table id="orderTable" class="table table-hover">
             <thead>
                 <tr>
-                    <th>ID_Order</th>
-                    <th>ID_Customer</th>
-                    <th>Order_Date</th>
+                    <th>ID Order</th>
+                    <th>ID Customer</th>
+                    <th>Order Date</th>
                     <th>Products</th>
                     <th>Status</th>
-                    <th>Last_Status_Update</th>
+                    <th>Last Status Update</th>
+                    <th></th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
                 <c:forEach var="onlineOrder" items="${onlineOrderList}">
-                    <tr>
+                    <tr data-id="${onlineOrder.idOrder}">
                         <td>${onlineOrder.idOrder}</td>
                         <td>${onlineOrder.idCustomer}</td>
                         <td>${onlineOrder.ooDateTime.getHumanDate()}</td>
@@ -54,13 +56,13 @@
                         <td>${onlineOrder.status}</td>
                         <td>${onlineOrder.status.osDateTime.getHumanDate()}</td>
                         <td>
-                            <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#editOrderModal" data-bs-whatever="${onlineOrder.idOrder}">
+                            <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#editOrderModal" data-id="${onlineOrder.idOrder}">
                                 <i class="fa-solid fa-pen-to-square text-primary"></i>
                             </button>
                             <!--<a href="<c:url value="/management/orderManagement/editOrder/${onlineOrder.idOrder}"/>">Edit</a>-->
                         </td>
                         <td>
-                            <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteOrderModal" data-bs-whatever="${onlineOrder.idOrder}">
+                            <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteOrderModal" data-id="${onlineOrder.idOrder}">
                                 <i class="fa-solid fa-trash-can text-danger"></i>
                             </button></td>
                             <!--<a href="<c:url value="/management/orderManagement/deleteOrder/${onlineOrder.idOrder}"/>">Delete</a>-->

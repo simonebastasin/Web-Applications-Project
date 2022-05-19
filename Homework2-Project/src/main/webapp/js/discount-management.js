@@ -38,8 +38,8 @@ addDiscountForm.addEventListener('submit', (e) => {
                     '<td>'+formData.get('start')+'</td>'+
                     '<td>'+formData.get('end')+'</td>'+
                     '<td>'+formData.getAll('productList').join(' ')+'</td>'+
-                    '<td><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#addDiscountModal" data-bs-whatever="'+idDiscount+'"> <i class="fa-solid fa-pen-to-square text-primary"></i></button></td>'+
-                    '<td><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteDiscountModal" data-bs-whatever="'+idDiscount+'"> <i class="fa-solid fa-trash-can text-danger"></i></button></td>';
+                    '<td><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#addDiscountModal" data-id="'+idDiscount+'"> <i class="fa-solid fa-pen-to-square text-primary"></i></button></td>'+
+                    '<td><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteDiscountModal" data-id="'+idDiscount+'"> <i class="fa-solid fa-trash-can text-danger"></i></button></td>';
                 if(createDiscount) {
                     bootstrapAlert("The discount was created", 'success', alertPlaceholder);
                     let tr = document.createElement('tr');
@@ -49,11 +49,11 @@ addDiscountForm.addEventListener('submit', (e) => {
                 }
                 else {
                     bootstrapAlert("The discount was modified", 'success', alertPlaceholder);
-                    document.getElementById(idDiscount).innerHTML = newInnerHTML;
+                    document.querySelector('tr[data-id="'+idDiscount+'"]').innerHTML = newInnerHTML;
                 }
                 bootstrap.Modal.getOrCreateInstance(addDiscountModal).hide();
 
-                evidenceRow(document.getElementById(idDiscount));
+                evidenceRow(document.querySelector('tr[data-id="'+idDiscount+'"]'));
             }else {
                 const alertPlaceholder = document.getElementById('formAlertPlaceholder');
                 bootstrapAlert(parseError(xmlhttp), 'danger', alertPlaceholder);
@@ -67,7 +67,7 @@ addDiscountModal.addEventListener('show.bs.modal', (e) => {
     // Button that triggered the modal
     var button = e.relatedTarget;
     // Extract info from data-bs-* attributes
-    idDiscount = button.getAttribute('data-bs-whatever');
+    idDiscount = button.getAttribute('data-id');
     let createDiscount = (idDiscount  === null);
 
     addDiscountForm.classList.toggle('was-validated', false);

@@ -66,11 +66,13 @@
                     <th>Start Date</th>
                     <th>End Date</th>
                     <th>Product List</th>
+                    <th></th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
                 <c:forEach var="discountListProduct" items="${discountListProductList}">
-                    <tr id="${discountListProduct.discount.id}">
+                    <tr data-id="${discountListProduct.discount.id}">
                         <td>${discountListProduct.discount.id}</td>
                         <td>${discountListProduct.discount.percentage}%</td>
                         <td>${discountListProduct.discount.startDate.getHumanDateTimeless()}</td>
@@ -83,12 +85,12 @@
                         </td>
 
                         <td>
-                            <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#addDiscountModal" data-bs-whatever="${discountListProduct.discount.id}">
+                            <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#addDiscountModal" data-id="${discountListProduct.discount.id}">
                                 <i class="fa-solid fa-pen-to-square text-primary"></i>
                             </button>
                         </td>
                         <td>
-                            <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteDiscountModal" data-bs-whatever="${discountListProduct.discount.id}">
+                            <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteDiscountModal" data-id="${discountListProduct.discount.id}">
                                 <i class="fa-solid fa-trash-can text-danger"></i>
                             </button>
                             <!--<a href="<c:url value="/management/discountManagement/deleteDiscount/${discountListProduct.discount.id}"/>">

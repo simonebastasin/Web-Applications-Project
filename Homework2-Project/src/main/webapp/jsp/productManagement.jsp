@@ -51,13 +51,14 @@
                 <th>Sale Price</th>
                 <th>Quantity</th>
                 <th>Evidence</th>
-
+                <th></th>
+                <th></th>
             </tr>
             </thead>
             <tbody>
             <c:forEach var="prod" items="${productList}">
 
-                <tr id="${prod.alias}">
+                <tr data-id="${prod.alias}">
                     <td><a href="<c:url value="/products/details/${prod.alias}"/>">${prod.name}</a></td>
                     <td>${prod.alias}</td>
                     <td>${prod.brand}</td>
@@ -65,10 +66,10 @@
                     <td>${prod.salePrice}</td>
                     <td>${prod.quantity}</td>
                     <td>${prod.evidence}</td>
-                    <td><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#addProductModal" data-bs-whatever="${prod.alias}">
+                    <td><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#addProductModal" data-id="${prod.alias}">
                         <i class="fa-solid fa-pen-to-square text-primary"></i>
                     </button></td>
-                    <td><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteProductModal" data-bs-whatever="${prod.alias}">
+                    <td><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteProductModal" data-id="${prod.alias}">
                         <i class="fa-solid fa-trash-can text-danger"></i>
                     </button></td>
                         <%--<td><a class="btn btn-outline-danger" href="<c:url value="/management/productManagement/deleteProduct/${prod.alias}"/>">Delete</a></td>--%>
@@ -144,7 +145,7 @@
                                         </option>
                                     </c:forEach>
                                 </select>
-                                <a class="btn btn-outline-secondary toggle" data-toogle="toggleCategory">+</a>
+                                <a class="btn btn-outline-secondary toggle" data-toogle="#toggleCategory">+</a>
 
 
                             </div>

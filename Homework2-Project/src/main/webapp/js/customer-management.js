@@ -40,14 +40,14 @@ editCustomerForm.addEventListener('submit', (e) => {
                     '<td>'+formData.get('address')+'</td>'+
                     '<td>'+formData.get('email')+'</td>'+
                     '<td>'+formData.get('phoneNumber')+'</td>'+
-                    '<td><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#editCustomerModal" data-bs-whatever="'+username+'"><i class="fa-solid fa-pen-to-square text-primary"></i></button></td>'+
-                    '<td><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteCustomerModal" data-bs-whatever="'+username+'"><i class="fa-solid fa-trash-can text-danger"></i></button></td>';
+                    '<td><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#editCustomerModal" data-id="'+username+'"><i class="fa-solid fa-pen-to-square text-primary"></i></button></td>'+
+                    '<td><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteCustomerModal" data-id="'+username+'"><i class="fa-solid fa-trash-can text-danger"></i></button></td>';
 
                 // -> edit
                 bootstrapAlert("Customer " + username + " modified", 'success', alertPlaceholder);
-                document.getElementById(username).innerHTML = newInnerHTML;
+                document.querySelector('tr[data-id="'+username+'"]').innerHTML = newInnerHTML;
 
-                evidenceRow(document.getElementById(username));
+                evidenceRow(document.querySelector('tr[data-id="'+username+'"]'));
                 bootstrap.Modal.getOrCreateInstance(editCustomerModal).hide();
 
             } else {
@@ -64,7 +64,7 @@ editCustomerModal.addEventListener('show.bs.modal', (e) => {
     // Button that triggered the modal
     var button = e.relatedTarget;
     // Extract info from data-bs-* attributes
-    username = button.getAttribute('data-bs-whatever');
+    username = button.getAttribute('data-id');
 
     editCustomerForm.classList.toggle('was-validated', false);
     editCustomerForm.reset();
@@ -111,7 +111,7 @@ deleteCustomerForm.addEventListener('submit', (e) => {
                 const alertPlaceholder = document.getElementById('liveAlertPlaceholder');
                 bootstrapAlert("Customer " + username + " removed", 'success', alertPlaceholder);
 
-                let row = document.getElementById(username);
+                let row = document.querySelector('tr[data-id="'+username+'"]');
                 row.children[5].innerHTML = "0";
 
                 evidenceRow(row);
@@ -131,7 +131,7 @@ deleteCustomerModal.addEventListener('show.bs.modal', (e) => {
     // Button that triggered the modal
     var button = e.relatedTarget;
     // Extract info from data-bs-* attributes
-    username = button.getAttribute('data-bs-whatever');
+    username = button.getAttribute('data-id');
 
     deleteCustomerForm.classList.toggle('was-validated', false);
     deleteCustomerForm.reset();

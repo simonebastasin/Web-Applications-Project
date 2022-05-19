@@ -41,8 +41,8 @@ addEmployeeForm.addEventListener('submit', (e) => {
                     '<td>'+formData.get('name')+'</td>'+
                     '<td>'+formData.get('surname')+'</td>'+
                     '<td>'+formData.get('role')+'</td>'+
-                    '<td><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#addEmployeeModal" data-bs-whatever="'+username+'"><i class="fa-solid fa-pen-to-square text-primary"></i></button></td>' +
-                    '<td><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteEmployeeModal" data-bs-whatever="'+username+'"><i class="fa-solid fa-trash-can text-danger"></i></button></td>';
+                    '<td><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#addEmployeeModal" data-id="'+username+'"><i class="fa-solid fa-pen-to-square text-primary"></i></button></td>' +
+                    '<td><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteEmployeeModal" data-id="'+username+'"><i class="fa-solid fa-trash-can text-danger"></i></button></td>';
 
                 if(createEmployee) { // -> add
                     bootstrapAlert("Employee " + username + " created", 'success', alertPlaceholder);
@@ -53,10 +53,10 @@ addEmployeeForm.addEventListener('submit', (e) => {
 
                 } else { // -> edit
                     bootstrapAlert("Employee " + username + " modified", 'success', alertPlaceholder);
-                    document.getElementById(username).innerHTML = newInnerHTML;
+                    document.querySelector('tr[data-id="'+username+'"]').innerHTML = newInnerHTML;
                 }
 
-                evidenceRow(document.getElementById(username));
+                evidenceRow(document.querySelector('tr[data-id="'+username+'"]'));
                 bootstrap.Modal.getOrCreateInstance(addEmployeeModal).hide();
 
             } else {
@@ -74,7 +74,7 @@ addEmployeeModal.addEventListener('show.bs.modal', (e) => {
     // Button that triggered the modal
     var button = e.relatedTarget;
     // Extract info from data-bs-* attributes
-    username = button.getAttribute('data-bs-whatever');
+    username = button.getAttribute('data-id');
     let createEmployee = (username === null);
 
     addEmployeeForm.classList.toggle('was-validated', false);
@@ -126,7 +126,7 @@ deleteEmployeeForm.addEventListener('submit', (e) => {
                 const alertPlaceholder = document.getElementById('liveAlertPlaceholder');
                 bootstrapAlert("Employee " + username + " removed", 'success', alertPlaceholder);
 
-                let row = document.getElementById(username);
+                let row = document.querySelector('tr[data-id="'+username+'"]');
                 row.children[5].innerHTML = "0";
 
                 evidenceRow(row);
@@ -146,7 +146,7 @@ deleteEmployeeModal.addEventListener('show.bs.modal', (e) => {
     // Button that triggered the modal
     var button = e.relatedTarget;
     // Extract info from data-bs-* attributes
-    username = button.getAttribute('data-bs-whatever');
+    username = button.getAttribute('data-id');
 
     deleteEmployeeForm.classList.toggle('was-validated', false);
     deleteEmployeeForm.reset();

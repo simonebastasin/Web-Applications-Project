@@ -49,8 +49,8 @@ addProductForm.addEventListener('submit', (e) => {
                     '<td>'+formData.get('sale')+'</td>'+
                     '<td>'+formData.get('quantity')+'</td>'+
                     '<td>'+formData.get('evidence')+'</td>'+
-                    '<td><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#addProductModal" data-bs-whatever="'+alias+'"> <i class="fa-solid fa-pen-to-square text-primary"></i></button></td>'+
-                    '<td><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteProductModal" data-bs-whatever="'+alias+'"> <i class="fa-solid fa-trash-can text-danger"></i></button></td>';
+                    '<td><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#addProductModal" data-id="'+alias+'"> <i class="fa-solid fa-pen-to-square text-primary"></i></button></td>'+
+                    '<td><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteProductModal" data-id="'+alias+'"> <i class="fa-solid fa-trash-can text-danger"></i></button></td>';
                 if(createProduct) {
                     bootstrapAlert("The product " + alias + " has been created", 'success', alertPlaceholder);
                     let tr=document.createElement('tr');
@@ -60,11 +60,11 @@ addProductForm.addEventListener('submit', (e) => {
                 }
                 else {
                     bootstrapAlert("The product " + alias + " has been modified", 'success', alertPlaceholder);
-                    document.getElementById(alias).innerHTML = newInnerHTML;
+                    document.querySelector('tr[data-id="'+alias+'"]').innerHTML = newInnerHTML;
                 }
                 bootstrap.Modal.getOrCreateInstance(addProductModal).hide();
 
-                evidenceRow(document.getElementById(alias));
+                evidenceRow(document.querySelector('tr[data-id="'+alias+'"]'));
 
             } else {
                 if(createProduct) alias = null;
@@ -130,7 +130,7 @@ addProductModal.addEventListener('show.bs.modal', (e) => {
     // Button that triggered the modal
     var button = e.relatedTarget;
     // Extract info from data-bs-* attributes
-    alias = button.getAttribute('data-bs-whatever');
+    alias = button.getAttribute('data-id');
     let createProduct = (alias  === null);
 
 
@@ -261,14 +261,14 @@ deleteProductForm.addEventListener('submit', (e) => {
                 const alertPlaceholder = document.getElementById('liveAlertPlaceholder');
                 bootstrapAlert("The product " + alias + " has been removed", 'success', alertPlaceholder);
 
-
-                let row = document.getElementById(alias);
+                let row = document.querySelector('tr[data-id="'+alias+'"]');
 
                 row.children[5].innerHTML = "0";
 
+                bootstrap.Modal.getOrCreateInstance(deleteProductModal).hide();
+
                 evidenceRow(row);
 
-                bootstrap.Modal.getOrCreateInstance(deleteProductModal).hide();
 
             } else {
 
@@ -286,7 +286,7 @@ deleteProductModal.addEventListener('show.bs.modal', (e) => {
     // Button that triggered the modal
     var button = e.relatedTarget;
     // Extract info from data-bs-* attributes
-    alias = button.getAttribute('data-bs-whatever');
+    alias = button.getAttribute('data-id');
 
 
     deleteProductForm.classList.toggle('was-validated', false);
@@ -331,9 +331,9 @@ const toogleButton = document.getElementsByClassName('toggle');
     // Prevent default link behavior
     event.preventDefault();
 
-    let id = event.target.getAttribute('data-toogle');
+    let query = event.target.getAttribute('data-toogle');
     // Get the content
-    var content = document.getElementById(id);
+    var content = document.querySelector(id);
     if (!content) return;
 
     // Toggle the content

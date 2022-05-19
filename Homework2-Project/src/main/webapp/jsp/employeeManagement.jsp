@@ -47,18 +47,20 @@
                     <th>Name</th>
                     <th>Surname</th>
                     <th>Role</th>
+                    <th></th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
                 <c:forEach var="employee" items="${employeeList}">
-                    <tr id="${employee.username}">
+                    <tr data-id="${employee.username}">
 
                         <td>${employee.username}</td>
                         <td>${employee.name}</td>
                         <td>${employee.surname}</td>
                         <td>${employee.role}</td>
                         <td>
-                            <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#addEmployeeModal" data-bs-whatever="${employee.username}">
+                            <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#addEmployeeModal" data-id="${employee.username}">
                                 <i class="fa-solid fa-pen-to-square text-primary"></i>
                             </button>
                         </td>
@@ -70,7 +72,7 @@
                             </c:when>
                             <c:otherwise>
                                 <td>
-                                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteEmployeeModal" data-bs-whatever="${employee.username}">
+                                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteEmployeeModal" data-id="${employee.username}">
                                         <i class="fa-solid fa-trash-can text-danger"></i>
                                     </button>
                                 </td>

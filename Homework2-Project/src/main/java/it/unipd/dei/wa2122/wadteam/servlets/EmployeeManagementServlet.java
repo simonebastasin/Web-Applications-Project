@@ -50,8 +50,12 @@ public class EmployeeManagementServlet extends AbstractDatabaseServlet {
      */
     private void getEmployeeList(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         try {
+            List<Role> roleList = new ListRoleDatabase(getDataSource().getConnection()).getRole();
             List<Employee> employeeList = new ListEmployeeDatabase(getDataSource().getConnection()).getEmployee();
-            writeResource(req, res, "/jsp/employeeManagement.jsp", false, employeeList.toArray(Resource[]::new));
+            List<Resource> resourcesList = new ArrayList<>();
+            resourcesList.addAll(roleList);
+            resourcesList.addAll(employeeList);
+            writeResource(req, res, "/jsp/employeeManagement.jsp", false, resourcesList.toArray(Resource[]::new));
         } catch (SQLException e) {
             logger.error(e.getMessage());
             writeError(req, res, new ErrorMessage.SqlInternalError(e.getMessage()));

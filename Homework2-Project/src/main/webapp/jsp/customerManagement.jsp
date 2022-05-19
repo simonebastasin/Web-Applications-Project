@@ -42,11 +42,13 @@
                     <th>Address</th>
                     <th>Email</th>
                     <th>Phone Number</th>
+                    <th></th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
                 <c:forEach var="customer" items="${customerList}">
-                    <tr id="${customer.username}">
+                    <tr data-id="${customer.username}">
 
                         <td>${customer.id}</td>
                         <td>${customer.username}</td>
@@ -57,12 +59,12 @@
                         <td>${customer.email}</td>
                         <td>${customer.phoneNumber}</td>
                         <td>
-                            <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#editCustomerModal" data-bs-whatever="${customer.username}">
+                            <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#editCustomerModal" data-id="${customer.username}">
                                 <i class="fa-solid fa-pen-to-square text-primary"></i>
                             </button>
                         </td>
                         <td>
-                            <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteCustomerModal" data-bs-whatever="${customer.username}">
+                            <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteCustomerModal" data-id="${customer.username}">
                                 <i class="fa-solid fa-trash-can text-danger"></i>
                             </button>
                         </td>

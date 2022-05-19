@@ -15,7 +15,7 @@ respondTicketForm.addEventListener('submit', (e) => {
         if (xmlhttp.readyState === XMLHttpRequest.DONE) {
             if(xmlhttp.status === 200) {
                 const alertPlaceholder = document.getElementById('liveAlertPlaceholder');
-                let div = document.getElementById(id);
+                let div = document.querySelector('div[data-id="'+id+'"]');
                 let ul = div.getElementsByTagName('ul')[0];
                 let button = div.getElementsByTagName('button')?.[0];
 
@@ -56,7 +56,7 @@ respondTicketModal.addEventListener('show.bs.modal', (e) => {
     // Button that triggered the modal
     var button = e.relatedTarget;
     // Extract info from data-bs-* attributes
-    id = button.getAttribute('data-bs-whatever');
+    id = button.getAttribute('data-id');
 
     respondTicketForm.classList.toggle('was-validated', false);
     respondTicketForm.reset();
