@@ -27,7 +27,6 @@ addEmployeeForm.addEventListener('submit', (e) => {
         username = formData.get('username');
     }
     else { // -> edit
-        //alert("send edit " + username);
         xmlhttp.open("POST", rootPath + "/rest/management/employeeManagement/editEmployee/" + username, true);
         //formData.delete('username');
     }

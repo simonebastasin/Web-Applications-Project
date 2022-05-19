@@ -85,8 +85,7 @@ editOrderModal.addEventListener('show.bs.modal', (e) => {
                 console.log("3)");
                 console.log(response?.[0].status);
                 */
-                //id = (response?.[0] ?? response).id;
-                populateForm(editOrderForm, response);
+                populateForm(editOrderForm, response?.[0] ?? response);
             } else {
                 const alertPlaceholder = document.getElementById('liveAlertPlaceholder');
                 bootstrapAlert(parseError(xmlhttp), 'danger', alertPlaceholder);
@@ -165,8 +164,7 @@ deleteOrderModal.addEventListener('show.bs.modal', (e) => {
         if (xmlhttp.readyState === XMLHttpRequest.DONE) {
             if(xmlhttp.status === 200) {
                 const response = JSON.parse(xmlhttp.responseText);
-                populateForm(deleteOrderForm, response);
-
+                populateForm(editOrderForm, response?.[0] ?? response);
             } else {
                 const alertPlaceholder = document.getElementById('liveAlertPlaceholder');
                 bootstrapAlert(parseError(xmlhttp), 'danger', alertPlaceholder);
