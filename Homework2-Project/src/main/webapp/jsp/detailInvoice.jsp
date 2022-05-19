@@ -30,8 +30,8 @@
 
     <div id="invoice">
         <div class="d-none d-print-block">Electromechanics Shop</div>
-
-        <h3>Invoice ID: ${onlineInvoice.id}</h3>
+        <div class=" mx-auto w-lg-50 bg-white p-3 rounded">
+        <h3>ID INVOICE # ${onlineInvoice.id}</h3>
         <ul class="list-group list-group-flush">
             <li class="list-group-item">Transaction ID: ${onlineInvoice.transactionId}</li>
             <li class="list-group-item">Payment Type: ${onlineInvoice.paymentType.text}</li>
@@ -41,7 +41,7 @@
         <br>
 
         <h3>Product list</h3>
-        <h5>Order ID: ${onlineInvoice.idOrder.idOrder}</h5>
+        <h5>ID ORDER # ${onlineInvoice.idOrder.idOrder}</h5>
 
         <table class="table">
             <thead>
@@ -71,12 +71,14 @@
             </tbody>
         </table>
 
-        Date: ${onlineInvoice.idOrder.ooDateTime.getHumanDate()} <br>
-        Total price: ${onlineInvoice.totalPrice}€ <br>
+
+            Date: ${onlineInvoice.idOrder.ooDateTime.getHumanDate()}<br>
+            Total price: ${onlineInvoice.totalPrice}€<br>
+            <div class="mb-3">
+                <button class="btn btn-primary" onclick="printDiv('invoice')">Print Invoice</button>
+            </div>
+        </div>
     </div>
-
-    <button class="btn btn-primary" onclick="printDiv('invoice')">Print Invoice</button>
-
 </div>
 <c:import url="/jsp/include/footer.jsp"/>
 </body>

@@ -29,10 +29,11 @@
 
     <c:forEach var="invoice" items="${onlineInvoiceList}">
         <div class="mx-auto w-lg-50">
-            <div class="card text-center">
+            <div class="card mt-3 mb-3">
+                <div class="card-header text-end">
+                    ID INVOICE # ${invoice.id} <br>
+                </div>
                 <div class="card-body">
-                    <h5 class="card-title">Invoice ID: ${invoice.id}</h5>
-
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item text-start">
                             <div class="row align-items-start">
@@ -55,7 +56,8 @@
                             </div>
                         </li>
                     </ul>
-
+                </div>
+                <div class="card-footer text-start">
                     <a href="<c:url value="/invoice/detail/${invoice.id}"/>" class="btn btn-primary">Detail Invoice</a>
                 </div>
             </div>
