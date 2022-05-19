@@ -113,7 +113,11 @@ function populateForm(form, data, basename) {
                 break;
 
             case 'date':
-                element.value = new Date(value).toISOString().split('T')[0];
+                date = new Date(value);
+                date.setDate(date.getDate() + 1);
+                element.value = date.toISOString().split('T')[0];
+
+
                 break;
         }
 

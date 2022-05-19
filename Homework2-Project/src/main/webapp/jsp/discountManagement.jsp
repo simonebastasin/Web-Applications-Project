@@ -176,6 +176,40 @@
         </div>
     </div>
 
+
+    <div class="modal fade" id="deleteDiscountModal" tabindex="-1" aria-labelledby="deleteDiscountModal" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false" >
+        <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg modal-fullscreen-md-down">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteDiscountModalTitle">Remove discount</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div id="formAlertPlaceholderDelete"></div>
+                <div class="modal-body">
+                    <form id="deleteDiscountForm" class="needs-validation" novalidate>
+                        <div class="mb-3">
+                            <label for="percentageDelete" class="col-form-label">Percentage:</label>
+                            <input type="text" class="form-control" id="percentageDelete" name="percentage" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="startDateDelete" class="col-form-label">Start date:</label>
+                            <input type="text" class="form-control" id="startDateDelete" name="startDate" required/>
+                        </div>
+                        <div class="mb-3">
+                            <label for="endDateDelete" class="col-form-label">End date:</label>
+                            <input type="text" class="form-control" id="endDateDelete" name="endDate" required/>
+                        </div>
+
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary" id="deleteDiscountButton" form="deleteDiscountForm">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
 <c:import url="/jsp/include/footer-management.jsp"/>
 <script type="text/javascript"  src="<c:url value="/js/discount-management.js"/>"></script>

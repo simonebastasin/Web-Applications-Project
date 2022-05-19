@@ -246,6 +246,7 @@
                             <label for="brandDelete" class="col-form-label">Brand:</label>
                             <input type="text" class="form-control" id="brandDelete" name="brand" required/>
                         </div>
+
                     </form>
                 </div>
                 <div class="modal-footer">
