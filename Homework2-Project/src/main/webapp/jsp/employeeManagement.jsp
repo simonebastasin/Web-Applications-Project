@@ -82,11 +82,12 @@
         </table>
     </div>
 
+
     <div class="modal fade" id="addEmployeeModal" tabindex="-1" aria-labelledby="addEmployeeModal" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false" >
         <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg modal-fullscreen-md-down">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="addEmployeeModalTitle">Add/Edit Employee</h5>
+                    <h5 class="modal-title" id="addEmployeeModalTitle">Add/Edit</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div id="formAlertPlaceholder" class="sticky-top"></div>
@@ -122,11 +123,48 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary" id="addEmployeeButton" form="addEmployeeForm">Edit employee</button>
+                    <button type="submit" class="btn btn-primary" id="addEmployeeButton" form="addEmployeeForm">Add/Edit</button>
                 </div>
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="deleteEmployeeModal" tabindex="-1" aria-labelledby="deleteEmployeeModal"
+         aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg modal-fullscreen-md-down">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteEmployeeModalTitle">Delete</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div id="formAlertPlaceholderDelete" class="sticky-top"></div>
+                <div class="modal-body">
+                    <form id="deleteEmployeeForm" class="needs-validation" novalidate>
+                        <div class="mb-3">
+                            <label for="usernameDelete" class="col-form-label">Username:</label>
+                            <input type="text" class="form-control" id="usernameDelete" name="username" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="nameDelete" class="col-form-label">Name:</label>
+                            <input type="text" class="form-control" id="nameDelete" name="name" required/>
+                        </div>
+                        <div class="mb-3">
+                            <label for="surnameDelete" class="col-form-label">Surname:</label>
+                            <input type="text" class="form-control" id="surnameDelete" name="surname" required/>
+                        </div>
+                        <div class="mb-3">
+                            <label for="roleDelete" class="col-form-label">Role:</label>
+                            <input type="text" class="form-control" id="roleDelete" name="role" required/>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-danger" id="deleteEmployeeButton" form="deleteEmployeeForm">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
 <c:import url="/jsp/include/footer-management.jsp"/>
 

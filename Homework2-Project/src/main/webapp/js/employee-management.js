@@ -5,9 +5,9 @@ const addEmployeeButton = document.getElementById('addEmployeeButton');
 const addEmployeeForm = document.getElementById('addEmployeeForm');
 const addEmployeeModal = document.getElementById('addEmployeeModal');
 
-const deleteCustomerButton = document.getElementById('deleteEmployeeButton');
-const deleteCustomerForm = document.getElementById('deleteEmployeeForm');
-const deleteCustomerModal = document.getElementById('deleteEmployeeModal');
+const deleteEmployeeButton = document.getElementById('deleteEmployeeButton');
+const deleteEmployeeForm = document.getElementById('deleteEmployeeForm');
+const deleteEmployeeModal = document.getElementById('deleteEmployeeModal');
 
 
 let username;
@@ -49,7 +49,7 @@ addEmployeeForm.addEventListener('submit', (e) => {
                     let tr = document.createElement('tr');
                     tr.id = username;
                     tr.innerHTML = newInnerHTML;
-                    productTableBody.appendChild(tr);
+                    employeeTableBody.appendChild(tr);
 
                 } else { // -> edit
                     bootstrapAlert("Employee " + username + " modified", 'success', alertPlaceholder);
@@ -83,9 +83,9 @@ addEmployeeModal.addEventListener('show.bs.modal', (e) => {
     document.getElementById('username').disabled = !createEmployee;
 
     if(createEmployee) { // -> add
-        let modalTitle = addProductModal.querySelector('.modal-title');
+        let modalTitle = addEmployeeModal.querySelector('.modal-title');
         modalTitle.textContent = 'Add employee';
-        addProductButton.textContent = 'Add employee';
+        addEmployeeButton.textContent = 'Add employee';
 
     } else { // -> edit
         const xmlhttp = new XMLHttpRequest();
@@ -109,3 +109,71 @@ addEmployeeModal.addEventListener('show.bs.modal', (e) => {
         addEmployeeButton.textContent = 'Edit employee';
     }
 });
+
+
+deleteEmployeeForm.addEventListener('submit', (e) => {
+    if(!deleteEmployeeForm.checkValidity()) return;
+
+    e.preventDefault();
+    const formData = new FormData(deleteEmployeeForm);
+    const urlencodedData = new URLSearchParams(formData);
+    const xmlhttp = new XMLHttpRequest();
+
+    xmlhttp.open("POST", rootPath + "/rest/management/employeeManagement/deleteEmployee/" + username, true);
+    xmlhttp.onreadystatechange = function() {
+        if (xmlhttp.readyState === XMLHttpRequest.DONE) {
+            if(xmlhttp.status === 200) {
+                const alertPlaceholder = document.getElementById('liveAlertPlaceholder');
+                bootstrapAlert("Employee " + username + " removed", 'success', alertPlaceholder);
+
+                let row = document.getElementById(username);
+                row.children[5].innerHTML = "0";
+
+                bootstrap.Modal.getOrCreateInstance(deleteEmployeeModal).hide();
+                evidenceRow(row);
+
+            } else {
+                const alertPlaceholder = document.getElementById('formAlertPlaceholderDelete');
+                bootstrapAlert(parseError(xmlhttp), 'danger', alertPlaceholder);
+            }
+        }
+    }
+    xmlhttp.send(urlencodedData);
+})
+
+
+deleteEmployeeModal.addEventListener('show.bs.modal', (e) => {
+    // Button that triggered the modal
+    var button = e.relatedTarget;
+    // Extract info from data-bs-* attributes
+    alias = button.getAttribute('data-bs-whatever');
+
+    deleteEmployeeForm.classList.toggle('was-validated', false);
+    deleteEmployeeForm.reset();
+
+    document.getElementById('usernameDelete').disabled = true;
+    document.getElementById('nameDelete').disabled = true;
+    document.getElementById('surnameDelete').disabled = true;
+    document.getElementById('roleDelete').disabled = true;
+
+    const xmlhttp = new XMLHttpRequest();
+    xmlhttp.open("GET", rootPath + "/rest/management/employeeManagement/deleteEmployee/" + username, true);
+    xmlhttp.onreadystatechange = function() {
+        if (xmlhttp.readyState === XMLHttpRequest.DONE) {
+            if(xmlhttp.status === 200) {
+                const response = JSON.parse(xmlhttp.responseText);
+                populateForm(deleteEmployeeForm, response.employeeList?.[0] ?? response.employee ?? response);
+
+            } else {
+                const alertPlaceholder = document.getElementById('liveAlertPlaceholder');
+                bootstrapAlert(parseError(xmlhttp), 'danger', alertPlaceholder);
+                bootstrap.Modal.getOrCreateInstance(deleteEmployeeModal).hide();
+            }
+        }
+    }
+    xmlhttp.send();
+
+    let modalTitle = deleteEmployeeModal.querySelector('.modal-title');
+    modalTitle.textContent = 'Delete employee ' + username;
+    addEmployeeButton.textContent = 'Delete employee';
+})
