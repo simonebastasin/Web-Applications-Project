@@ -27,53 +27,92 @@
   </ol>
 </nav>
 
-Order you are deleting:<br>
-<br>
-<table>
-    <tr>
-        <th>ID Order</th>
-        <th>ID Customer</th>
-        <th>Order Date</th>
-        <th>Status</th>
-        <th>Description</th>
-    </tr>
-    <tr>
-        <td>${onlineOrder.idOrder}</td>
-        <td>${onlineOrder.idCustomer}</td>
-        <td>${onlineOrder.ooDateTime.getHumanDate()}</td>
-        <td>${onlineOrder.status}</td>
-        <td>${onlineOrder.status.description}</td>
-    </tr>
-</table><br>
-With these products:<br>
-<br>
-<table>
-    <tr>
-        <th>Alias</th>
-        <th>Brand</th>
-        <th>Name</th>
-        <th>Quantity</th>
-        <th>Sale Price</th>
-    </tr>
-    <c:forEach var="product" items="${onlineOrder.products}">
-        <tr>
-            <td>${product.alias}</td>
-            <td>${product.brand}</td>
-            <td>${product.name}</td>
-            <td>${product.quantity}</td>
-            <td>${product.salePrice}</td>
-        </tr>
-    </c:forEach>
-</table><br>
-Sure to delete?<br>
+    <div class="mx-auto border rounded bg-white w-lg-50 p-3">
 
-<br>
-<form method="POST" action="">
-    <input type="submit" value="Yes">
-</form>
-<a href="<c:url value="/management/orderManagement"/>">
-    <input type="submit" value="No"/>
-</a>
+        <h5>Order you are deleting:</h5>
+
+        <div class="row">
+            <div class="col">ID Order:</div>
+            <div class="col">${onlineOrder.idOrder}</div>
+            <div class="col"></div>
+        </div>
+        <div class="row">
+            <div class="col">Order Date:</div>
+            <div class="col">${onlineOrder.ooDateTime.getHumanDate()} </div>
+            <div class="col"></div>
+        </div>
+        <div class="row">
+            <div class="col">Status:</div>
+            <div class="col">${onlineOrder.status}</div>
+            <div class="col"></div>
+        </div>
+        <div class="row">
+            <div class="col">Description:</div>
+            <div class="col">${onlineOrder.status.description}</div>
+            <div class="col"></div>
+        </div>
+
+
+
+        <div class="card row m-3">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col">
+                        Alias
+                    </div>
+                    <div class="col">
+                        Name
+                    </div>
+                    <div class="col">
+                        Brand
+                    </div>
+                    <div class="col">
+                        Price
+                    </div>
+                    <div class="col">
+                        Quantity
+                    </div>
+                </div>
+            </div>
+            <ul class="list-group list-group-flush">
+                <c:forEach var="product" items="${onlineOrder.products}">
+                    <li class="list-group-item row px-0">
+                        <div class="col text-break">
+                                ${product.alias}
+                        </div>
+                        <div class="col text-break">
+                                ${product.name}
+                        </div>
+                        <div class="col text-break">
+                                ${product.brand}
+                        </div>
+                        <div class="col text-break">
+                                ${product.quantity}
+                        </div>
+                        <div class="col text-break">
+                                ${product.salePrice}
+                        </div>
+                    </li>
+                </c:forEach>
+            </ul>
+        </div>
+
+
+    </div>
+
+    <h3 class="text-center">Sure to delete?</h3>
+
+
+    <div class="d-flex justify-content-center">
+    <form method="POST" action="">
+        <input type="submit" value="Yes" class="btn btn-primary mx-3"/>
+    </form>
+    <a href="<c:url value="/management/orderManagement"/>">
+        <input type="submit" value="No" class="btn btn-primary mx-3"/>
+    </a>
+    </div>
+
+
 
 
 </div>
