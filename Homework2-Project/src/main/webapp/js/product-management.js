@@ -54,7 +54,7 @@ addProductForm.addEventListener('submit', (e) => {
                 if(createProduct) {
                     bootstrapAlert("The product " + alias + " has been created", 'success', alertPlaceholder);
                     let tr=document.createElement('tr');
-                    tr.id = alias;
+                    tr.setAttribute('data-id',alias);
                     tr.innerHTML = newInnerHTML;
                     productTableBody.appendChild(tr);
                 }

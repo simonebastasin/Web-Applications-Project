@@ -21,7 +21,6 @@ addDiscountForm.addEventListener('submit', (e) => {
     if(createDiscount) {
        //alert("send create");
         xmlhttp.open("POST", rootPath + "/rest/management/discountManagement/createDiscount", true);
-        idDiscount = formData.get('idDiscount');
     } else {
         //alert("send edit "+idDiscount);
         xmlhttp.open("POST", rootPath + "/rest/management/discountManagement/editDiscount/" + idDiscount, true);
@@ -31,6 +30,11 @@ addDiscountForm.addEventListener('submit', (e) => {
     xmlhttp.onreadystatechange = function() {
         if (xmlhttp.readyState === XMLHttpRequest.DONE) {
             if(xmlhttp.status === 200) {
+                if(createDiscount) {
+                    const response = JSON.parse(xmlhttp.responseText);
+                    idDiscount = (response?.[0] ?? response).resourceId;
+                }
+
                 const alertPlaceholder = document.getElementById('liveAlertPlaceholder');
                 let newInnerHTML =
                     '<td>'+idDiscount+'</td>'+
@@ -43,7 +47,7 @@ addDiscountForm.addEventListener('submit', (e) => {
                 if(createDiscount) {
                     bootstrapAlert("The discount was created", 'success', alertPlaceholder);
                     let tr = document.createElement('tr');
-                    tr.id = idDiscount;
+                    tr.setAttribute('data-id',idDiscount);
                     tr.innerHTML = newInnerHTML;
                     discountTableBody.appendChild(tr);
                 }

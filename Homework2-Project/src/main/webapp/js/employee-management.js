@@ -41,13 +41,15 @@ addEmployeeForm.addEventListener('submit', (e) => {
                     '<td>'+formData.get('name')+'</td>'+
                     '<td>'+formData.get('surname')+'</td>'+
                     '<td>'+formData.get('role')+'</td>'+
-                    '<td><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#addEmployeeModal" data-id="'+username+'"><i class="fa-solid fa-pen-to-square text-primary"></i></button></td>' +
-                    '<td><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteEmployeeModal" data-id="'+username+'"><i class="fa-solid fa-trash-can text-danger"></i></button></td>';
+                    '<td><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#addEmployeeModal" data-id="'+username+'"><i class="fa-solid fa-pen-to-square text-primary"></i></button></td>';
+                if(formData.get('role') !== 'Administrator')
+                    newInnerHTML += '<td><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteEmployeeModal" data-id="'+username+'"><i class="fa-solid fa-trash-can text-danger"></i></button></td>';
+                else newInnerHTML += '<td></td>';
 
                 if(createEmployee) { // -> add
                     bootstrapAlert("Employee " + username + " created", 'success', alertPlaceholder);
                     let tr = document.createElement('tr');
-                    tr.id = username;
+                    tr.setAttribute('data-id',username);
                     tr.innerHTML = newInnerHTML;
                     employeeTableBody.appendChild(tr);
 
