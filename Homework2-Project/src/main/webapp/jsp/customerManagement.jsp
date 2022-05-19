@@ -72,11 +72,12 @@
         </table>
     </div>
 
+
     <div class="modal fade" id="editCustomerModal" tabindex="-1" aria-labelledby="editCustomerModal" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false" >
         <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg modal-fullscreen-md-down">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="editCustomerModalTitle">Edit Customer</h5>
+                    <h5 class="modal-title" id="editCustomerModalTitle">Edit</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div id="formAlertPlaceholder" class="sticky-top"></div>
@@ -117,14 +118,52 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary" id="editCustomerButton" form="editCustomerForm">Edit customer</button>
+                    <button type="submit" class="btn btn-primary" id="editCustomerButton" form="editCustomerForm">Edit</button>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
+
+    <div class="modal fade" id="deleteCustomerModal" tabindex="-1" aria-labelledby="deleteCustomerModal"
+         aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg modal-fullscreen-md-down">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteCustomerModalTitle">Delete</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div id="formAlertPlaceholderDelete" class="sticky-top"></div>
+                <div class="modal-body">
+                    <form id="deleteCustomerForm" class="needs-validation" novalidate>
+                        <div class="mb-3">
+                            <label for="usernameDelete" class="col-form-label">Username:</label>
+                            <input type="text" class="form-control" id="usernameDelete" name="username" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="nameDelete" class="col-form-label">Name:</label>
+                            <input type="text" class="form-control" id="nameDelete" name="name" required/>
+                        </div>
+                        <div class="mb-3">
+                            <label for="surnameDelete" class="col-form-label">Surname:</label>
+                            <input type="text" class="form-control" id="surnameDelete" name="surname" required/>
+                        </div>
+                        <div class="mb-3">
+                            <label for="fiscalCodeDelete" class="col-form-label">Fiscal Code:</label>
+                            <input type="text" class="form-control" id="fiscalCodeDelete" name="fiscalCode" required/>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-danger" id="deleteCustomerButton" form="deleteCustomerForm">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
 <c:import url="/jsp/include/footer-management.jsp"/>
+
 <script type="text/javascript" src="<c:url value="/js/customer-management.js"/>"></script>
 </body>
 </html>

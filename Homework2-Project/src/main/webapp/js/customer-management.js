@@ -80,7 +80,6 @@ editCustomerModal.addEventListener('show.bs.modal', (e) => {
             if (xmlhttp.status === 200) {
                 const response = JSON.parse(xmlhttp.responseText);
                 id = (response?.[0] ?? response).id;
-                alert(id);
                 populateForm(editCustomerForm, response);
             } else {
                 const alertPlaceholder = document.getElementById('liveAlertPlaceholder');
@@ -95,3 +94,72 @@ editCustomerModal.addEventListener('show.bs.modal', (e) => {
     modalTitle.textContent = 'Edit customer ' + username;
     editCustomerButton.textContent = 'Edit customer';
 });
+
+
+deleteCustomerForm.addEventListener('submit', (e) => {
+    if(!deleteCustomerForm.checkValidity()) return;
+
+    e.preventDefault();
+    const formData = new FormData(deleteCustomerForm);
+    const urlencodedData = new URLSearchParams(formData);
+    const xmlhttp = new XMLHttpRequest();
+
+    xmlhttp.open("POST", rootPath + "/rest/management/customerManagement/deleteCustomer/" + username, true);
+    xmlhttp.onreadystatechange = function() {
+        if (xmlhttp.readyState === XMLHttpRequest.DONE) {
+            if(xmlhttp.status === 200) {
+                const alertPlaceholder = document.getElementById('liveAlertPlaceholder');
+                bootstrapAlert("Customer " + username + " removed", 'success', alertPlaceholder);
+
+                let row = document.getElementById(username);
+                row.children[5].innerHTML = "0";
+
+                bootstrap.Modal.getOrCreateInstance(deleteCustomerModal).hide();
+                evidenceRow(row);
+
+            } else {
+                const alertPlaceholder = document.getElementById('formAlertPlaceholderDelete');
+                bootstrapAlert(parseError(xmlhttp), 'danger', alertPlaceholder);
+            }
+        }
+    }
+    xmlhttp.send(urlencodedData);
+})
+
+
+deleteCustomerModal.addEventListener('show.bs.modal', (e) => {
+    // Button that triggered the modal
+    var button = e.relatedTarget;
+    // Extract info from data-bs-* attributes
+    alias = button.getAttribute('data-bs-whatever');
+
+    deleteCustomerForm.classList.toggle('was-validated', false);
+    deleteCustomerForm.reset();
+
+    document.getElementById('usernameDelete').disabled = true;
+    document.getElementById('nameDelete').disabled = true;
+    document.getElementById('surnameDelete').disabled = true;
+    document.getElementById('fiscalCodeDelete').disabled = true;
+
+    const xmlhttp = new XMLHttpRequest();
+    xmlhttp.open("GET", rootPath + "/rest/management/customerManagement/deleteCustomer/" + username, true);
+    xmlhttp.onreadystatechange = function() {
+        if (xmlhttp.readyState === XMLHttpRequest.DONE) {
+            if(xmlhttp.status === 200) {
+                const response = JSON.parse(xmlhttp.responseText);
+                id = (response?.[0] ?? response).id;
+                populateForm(deleteCustomerForm, response);
+
+            } else {
+                const alertPlaceholder = document.getElementById('liveAlertPlaceholder');
+                bootstrapAlert(parseError(xmlhttp), 'danger', alertPlaceholder);
+                bootstrap.Modal.getOrCreateInstance(deleteCustomerModal).hide();
+            }
+        }
+    }
+    xmlhttp.send();
+
+    let modalTitle = deleteCustomerModal.querySelector('.modal-title');
+    modalTitle.textContent = 'Delete customer ' + username;
+    addCustomerButton.textContent = 'Delete customer';
+})
