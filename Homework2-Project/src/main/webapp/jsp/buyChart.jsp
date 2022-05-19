@@ -58,13 +58,13 @@
                                 ${product.name}
                         </div>
                         <div class="col text-break">
-                                ${product.finalSalePrice}€
+                                ${String.format("%.2f", product.finalSalePrice)}€
                         </div>
                         <div class="col text-break">
                                 ${product.quantity}
                         </div>
                         <div class="col text-break">
-                                ${product.finalSalePrice*product.quantity}€
+                                ${String.format("%.2f", product.finalSalePrice*product.quantity)}€
                         </div>
                     </div>
                 </li>

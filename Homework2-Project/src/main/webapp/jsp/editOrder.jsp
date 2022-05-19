@@ -53,7 +53,7 @@
                     <td>${product.brand}</td>
                     <td>${product.name}</td>
                     <td>${product.quantity}</td>
-                    <td>${product.salePrice}</td>
+                    <td>${String.format("%.2f", product.salePrice)}€</td>
                 </tr>
             </c:forEach>
         </table>

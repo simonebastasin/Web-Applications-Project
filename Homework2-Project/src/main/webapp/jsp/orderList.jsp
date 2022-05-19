@@ -44,7 +44,7 @@
                                     Price:
                                 </div>
                                 <div class="col-4">
-                                        ${prod.salePrice}€
+                                        ${String.format("%.2f",prod.salePrice)}€
                                 </div>
                             </div>
                             <div class="row">
@@ -65,7 +65,7 @@
                 <div class="col">
                     Date: ${order.ooDateTime.getHumanDate()} <br>
                     Status: ${order.status.status.text} <br>
-                    Total price: ${order.getTotalPrice()}€ <br>
+                    Total price: ${String.format("%.2f",order.getTotalPrice())}€<br>
                 </div>
             </div>
         </div>

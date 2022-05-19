@@ -90,7 +90,7 @@
                                 ${product.quantity}
                         </div>
                         <div class="col text-break">
-                                ${product.salePrice}
+                                ${String.format("%.2f", product.salePrice)}€
                         </div>
                     </li>
                 </c:forEach>

@@ -117,10 +117,10 @@
                                     <div class="col text-end">
                                         <c:choose>
                                             <c:when test="${not empty prod.discount}">
-                                                <span class="text-decoration-line-through roboto">${prod.salePrice}€</span> <span class="roboto text-red">${prod.discountSale}€</span>
+                                                <span class="text-decoration-line-through roboto">${String.format("%.2f",prod.salePrice)}€</span> <span class="roboto text-red">${String.format("%.2f",prod.discountSale)}€</span>
                                             </c:when>
                                             <c:otherwise>
-                                                <span class="roboto">${prod.salePrice}€</span>
+                                                <span class="roboto">${String.format("%.2f",prod.salePrice)}€</span>
                                             </c:otherwise>
                                         </c:choose>
                                     </div>
@@ -173,10 +173,10 @@
                                         <div class="col text-end">
                                             <c:choose>
                                                 <c:when test="${not empty prod.discount}">
-                                                    <span class="text-decoration-line-through roboto">${prod.salePrice}€</span> <span class="roboto text-red">${prod.discountSale}€</span>
+                                                    <span class="text-decoration-line-through roboto">${String.format("%.2f",prod.salePrice)}€</span> <span class="roboto text-red">${String.format("%.2f",prod.discountSale)}€</span>
                                                 </c:when>
                                                 <c:otherwise>
-                                                    <span class="roboto">${prod.salePrice}€</span>
+                                                    <span class="roboto">${String.format("%.2f",prod.salePrice)}€</span>
                                                 </c:otherwise>
                                             </c:choose>
                                         </div>
@@ -318,7 +318,7 @@
                                                                     <div class="text-center text-white mt-3 mb-3">
                                                                         <b>${prod.name}</b><br>
                                                                         <span class="roboto">${prod.brand}</span> <br> <br>
-                                                                        <span class="text-decoration-line-through roboto"> ${prod.salePrice}€</span> <span class="roboto text-red">${prod.discountSale}€</span>
+                                                                        <span class="text-decoration-line-through roboto">${String.format("%.2f",prod.salePrice)}€ </span> <span class="roboto text-red">${String.format("%.2f", prod.discountSale)}€</span>
                                                                     </div>
                                                                 </div>
                                                             </c:when>
@@ -328,7 +328,7 @@
                                                                     <div class="text-center text-white mt-3 mb-3">
                                                                         <b>${prod.name}</b><br>
                                                                         <span class="roboto">${prod.brand}</span> <br> <br>
-                                                                        <span class="roboto">${prod.salePrice}€ </span>
+                                                                        <span class="roboto">${String.format("%.2f", prod.salePrice)}€</span>
                                                                     </div>
 
                                                                 </div>
@@ -372,7 +372,7 @@
                                                                     <div class="text-center text-white mt-3 mb-3">
                                                                         <b>${prod.name}</b><br>
                                                                         <span class="roboto">${prod.brand}</span> <br> <br>
-                                                                        <span class="text-decoration-line-through roboto">${prod.salePrice}€</span> <span class="roboto text-red">${prod.discountSale}€</span>
+                                                                        <span class="text-decoration-line-through roboto">${String.format("%.2f", prod.salePrice)}€</span> <span class="roboto text-red">${String.format("%.2f", prod.discountSale)}€</span>
                                                                     </div>
                                                                 </div>
                                                             </c:when>
@@ -382,7 +382,7 @@
                                                                 <div class="text-center text-white mt-3 mb-3">
                                                                     <b>${prod.name}</b><br>
                                                                     <span class="roboto">${prod.brand}</span> <br> <br>
-                                                                    <span class="roboto">${prod.salePrice}€</span>
+                                                                    <span class="roboto">${String.format("%.2f", prod.salePrice)}€</span>
                                                                 </div>
                                                             </div>
 

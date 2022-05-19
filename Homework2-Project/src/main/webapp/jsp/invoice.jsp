@@ -51,7 +51,7 @@
                                     Price:
                                 </div>
                                 <div class="col">
-                                    ${invoice.totalPrice}€
+                                    ${String.format("%.2f",invoice.totalPrice)}€
                                 </div>
                             </div>
                         </li>

@@ -124,12 +124,12 @@
                     <c:choose>
                         <c:when test="${not empty product.discount}">
                             <div class="row">
-                                <div class="col-md-6">Price: <span class="text-decoration-line-through">${product.salePrice}€</span> <span class="text-red display-6">${product.discountSale}€</span></div>
+                                <div class="col-md-6">Price: <span class="text-decoration-line-through">${String.format("%.2f",product.salePrice)}€</span> <span class="text-red display-6">${String.format("%.2f",product.discountSale)}€</span></div>
                                 <div class="col-md-6 text-end"> -${product.discount.percentage}% (until ${product.discount.endDate.humanDate})</div>
                             </div>
                         </c:when>
                         <c:otherwise>
-                                Price: <span class="display-6"> ${product.salePrice}€</span>
+                                Price: <span class="display-6"> ${String.format("%.2f",product.salePrice)}€</span>
                         </c:otherwise>
                     </c:choose>
 

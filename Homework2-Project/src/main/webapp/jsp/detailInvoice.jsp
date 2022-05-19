@@ -36,7 +36,7 @@
             <li class="list-group-item">Transaction ID: ${onlineInvoice.transactionId}</li>
             <li class="list-group-item">Payment Type: ${onlineInvoice.paymentType.text}</li>
             <li class="list-group-item">Date: ${onlineInvoice.oiDate.humanDate}</li>
-            <li class="list-group-item">Total Price: ${onlineInvoice.totalPrice}€</li>
+            <li class="list-group-item">Total Price: ${String.format("%.2f", onlineInvoice.totalPrice)}€</li>
         </ul>
         <br>
 
@@ -56,9 +56,9 @@
             <c:forEach var="prod" items="${onlineInvoice.idOrder.products}">
                 <tr>
                     <td> ${prod.name} </td>
-                    <td>${prod.salePrice}€ </td>
+                    <td>${String.format("%.2f", prod.salePrice)}€</td>
                     <td>${prod.quantity} </td>
-                    <td>${prod.quantity * prod.salePrice}</td>
+                    <td>${String.format("%.2f", prod.quantity * prod.salePrice)}€</td>
                 </tr>
             </c:forEach>
 
@@ -66,14 +66,14 @@
                 <td>Total</td>
                 <td></td>
                 <td></td>
-                <td>${onlineInvoice.idOrder.getTotalPrice()}€</td>
+                <td>${String.format("%.2f", onlineInvoice.idOrder.getTotalPrice())}€</td>
             </tr>
             </tbody>
         </table>
 
 
             Date: ${onlineInvoice.idOrder.ooDateTime.getHumanDate()}<br>
-            Total price: ${onlineInvoice.totalPrice}€<br>
+            Total price: ${String.format("%.2f", onlineInvoice.totalPrice)}€<br>
             <div class="mb-3">
                 <button class="btn btn-primary" onclick="printDiv('invoice')">Print Invoice</button>
             </div>
