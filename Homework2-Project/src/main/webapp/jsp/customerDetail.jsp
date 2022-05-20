@@ -29,26 +29,29 @@
 </nav>
 
     <div id="liveAlertPlaceholder" class="sticky-top"></div>
-
-<h5>User Info</h5>
-<ul class="list-group list-group-flush" data-id="${customer.username}">
-    <li class="list-group-item">Name: ${customer.name}</li>
-    <li class="list-group-item">Surname: ${customer.surname}</li>
-    <li class="list-group-item">Address: ${customer.address}</li>
-    <li class="list-group-item">Phone number: ${customer.phoneNumber}</li>
-    <li class="list-group-item">Email: ${customer.email}</li>
-    <li class="list-group-item">Fiscal code: ${customer.fiscalCode}</li>
-</ul>
-<br>
-
-<a href="<c:url value="/user/modify"/>" class="btn" type="button" data-bs-toggle="modal" data-bs-target="#editUserModal" data-id="${customer.username}">
-    <i class="fa-solid fa-pen-to-square text-primary"></i>
-    <span class="text-primary">Edit</span>
-</a>
-<a href="<c:url value="/user/password"/>" class="btn" type="button" data-bs-toggle="modal" data-bs-target="#changePasswordModal" data-id="${customer.username}">
-    <i class="fa-solid fa-key text-danger"></i>
-    <span class="text-danger">Change Password</span>
-</a>
+    <div class="card w-lg-50 mx-auto bg-white p-3 rounded">
+        <div class="card-header">
+            <h5 class="card-title">User Info</h5>
+        </div>
+        <ul class="list-group list-group-flush" data-id="${customer.username}">
+            <li class="list-group-item">Name: ${customer.name}</li>
+            <li class="list-group-item">Surname: ${customer.surname}</li>
+            <li class="list-group-item">Address: ${customer.address}</li>
+            <li class="list-group-item">Phone number: ${customer.phoneNumber}</li>
+            <li class="list-group-item">Email: ${customer.email}</li>
+            <li class="list-group-item">Fiscal code: ${customer.fiscalCode}</li>
+        </ul>
+        <div class="card-footer">
+            <a href="<c:url value="/user/modify"/>" class="btn" type="button" data-bs-toggle="modal" data-bs-target="#editUserModal" data-id="${customer.username}">
+                <i class="fa-solid fa-pen-to-square text-primary"></i>
+                <span class="text-primary">Edit</span>
+            </a>
+            <a href="<c:url value="/user/password"/>" class="btn" type="button" data-bs-toggle="modal" data-bs-target="#changePasswordModal" data-id="${customer.username}">
+                <i class="fa-solid fa-key text-danger"></i>
+                <span class="text-danger">Change Password</span>
+            </a>
+        </div>
+    </div>
 
     <div class="modal fade" id="editUserModal" tabindex="-1" aria-labelledby="editUserModal" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false" >
         <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg modal-fullscreen-md-down">

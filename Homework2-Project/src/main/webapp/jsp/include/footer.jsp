@@ -1,10 +1,18 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="java.time.LocalDateTime" %>
+<%@ page import="java.lang.*" %>
+<%
+    LocalDateTime now = LocalDateTime.now();
+
+    int year = now.getYear();
+
+%>
 
 <footer class="bg-dark bg-gradient skyline text-white">
     <div class="container footer-container">
         <p class="p-3 m-0">
-            Electromechanics Shop &copy; 2022
+            Electromechanics Shop &copy; <%= year%>
         </p>
         <p class="p-3 m-0">
             Made with <i class="fa-solid fa-heart"></i> by S. Bastasin, S. Bortolin, G. Ceccon, D. Colussi, G. Czaczkes, M. Lando, G. Nicoletti, A. Pastore, M. Pozzer

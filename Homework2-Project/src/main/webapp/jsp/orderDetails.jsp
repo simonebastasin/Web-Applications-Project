@@ -28,7 +28,7 @@
   </ol>
 </nav>
 
-
+<div id="liveAlertPlaceholder"></div>
 <div class="mx-auto w-lg-50">
     <div class="card mt-3 mb-3">
         <div class="card-body ms-10">
@@ -56,7 +56,9 @@
                 </div>
 
                     <div class="col text-end">
-                        <a href="<c:url value="/ticket/create"/>/${prod.alias}" class="card-link mt-5">Open Ticket</a>
+                        <a href="#" type="button" class="card-link mt-5" data-bs-toggle="modal" data-bs-target="#createTicketModal" data-id="${prod.alias}">
+                            Open Ticket
+                        </a>
                     </div>
 
             </li>
@@ -91,13 +93,35 @@
 
 </div>
 
-
-
-
-
-
-
 </div>
+
+<div class="modal fade" id="createTicketModal" tabindex="-1" aria-labelledby="createTicketModal" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false" >
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg modal-fullscreen-md-down">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="createTicketModalTitle">Create Ticket</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div id="formAlertPlaceholderCreateTicket" class="sticky-top"></div>
+            <div class="modal-body">
+                <form id="createTicketForm" class="needs-validation" novalidate>
+                    <div class="mb-3">
+                        <label for="description" class="col-form-label">Description:</label>
+                        <textarea class="form-control" id="description" name="description" required></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer p-3">
+                <button type="submit" class="btn btn-primary" form="createTicketForm">Create</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
 <c:import url="/jsp/include/footer.jsp"/>
+<script src="<c:url value="/js/create-ticket.js"/>"></script>
 </body>
 </html>

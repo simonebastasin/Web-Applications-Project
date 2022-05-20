@@ -27,15 +27,16 @@ function parseServletError(message) {
 
 }
 
-function bootstrapAlert(message, type, placeholder) {
+function bootstrapAlert(message, type, placeholder, timeout=10000) {
     var wrapper = document.createElement('div');
     wrapper.innerHTML = '<div class="alert alert-' + type + ' alert-dismissible" role="alert">' + message + '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
 
     placeholder.append(wrapper);
 
-    setTimeout(function(){
-        wrapper.remove();
-    }, 10000);
+    if(timeout!==-1)
+        setTimeout(function(){
+            wrapper.remove();
+        }, timeout);
 }
 
 function populateForm(form, data, basename) {
