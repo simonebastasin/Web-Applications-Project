@@ -122,6 +122,11 @@
                             </div>
                         </div>
 
+                        <div class="mb-3">
+                            <label for="password" class="col-form-label" id="password-label">Password:</label>
+                            <input type="password" class="form-control" id="password" name="password" required/>
+                        </div>
+
                     </form>
                 </div>
                 <div class="modal-footer">

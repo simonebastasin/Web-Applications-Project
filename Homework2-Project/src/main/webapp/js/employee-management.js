@@ -81,21 +81,29 @@ addEmployeeModal.addEventListener('show.bs.modal', (e) => {
     addEmployeeForm.classList.toggle('was-validated', false);
     addEmployeeForm.reset();
 
-    document.getElementById('username').disabled = !createEmployee;
+    document.getElementById('username').readOnly = !createEmployee;
+    document.getElementById('password').readOnly = !createEmployee;
 
     if(createEmployee) { // -> add
+        document.getElementById('password').style.visibility = 'visible';
+        document.getElementById('password-label').style.visibility = 'visible';
+
         let modalTitle = addEmployeeModal.querySelector('.modal-title');
         modalTitle.textContent = 'Add employee';
         addEmployeeButton.textContent = 'Add employee';
 
     } else { // -> edit
+        document.getElementById('password').style.visibility = 'hidden';
+        document.getElementById('password-label').style.visibility = 'hidden';
+
         const xmlhttp = new XMLHttpRequest();
         xmlhttp.open("GET", rootPath + "/rest/management/employeeManagement/editEmployee/" + username, true);
         xmlhttp.onreadystatechange = function () {
             if (xmlhttp.readyState === XMLHttpRequest.DONE) {
                 if (xmlhttp.status === 200) {
                     const response = JSON.parse(xmlhttp.responseText);
-                    populateForm(addEmployeeForm, response.employeeList?.[0] ?? response.employee ?? response);
+                    populateForm(addEmployeeForm, response.employeeList?.[0] ?? response);
+                    //populateForm(addEmployeeForm, response.employeeList?.[0] ?? response.employee ?? response);
                 } else {
                     const alertPlaceholder = document.getElementById('liveAlertPlaceholder');
                     bootstrapAlert(parseError(xmlhttp), 'danger', alertPlaceholder);
@@ -150,10 +158,10 @@ deleteEmployeeModal.addEventListener('show.bs.modal', (e) => {
     deleteEmployeeForm.classList.toggle('was-validated', false);
     deleteEmployeeForm.reset();
 
-    document.getElementById('usernameDelete').disabled = true;
-    document.getElementById('nameDelete').disabled = true;
-    document.getElementById('surnameDelete').disabled = true;
-    document.getElementById('roleDelete').disabled = true;
+    document.getElementById('usernameDelete').readOnly = true;
+    document.getElementById('nameDelete').readOnly = true;
+    document.getElementById('surnameDelete').readOnly = true;
+    document.getElementById('roleDelete').readOnly = true;
 
     const xmlhttp = new XMLHttpRequest();
     xmlhttp.open("GET", rootPath + "/rest/management/employeeManagement/deleteEmployee/" + username, true);
@@ -161,7 +169,8 @@ deleteEmployeeModal.addEventListener('show.bs.modal', (e) => {
         if (xmlhttp.readyState === XMLHttpRequest.DONE) {
             if(xmlhttp.status === 200) {
                 const response = JSON.parse(xmlhttp.responseText);
-                populateForm(deleteEmployeeForm, response.employeeList?.[0] ?? response.employee ?? response);
+                populateForm(deleteEmployeeForm, response.employeeList?.[0] ?? response);
+                //populateForm(deleteEmployeeForm, response.employeeList?.[0] ?? response.employee ?? response);
             } else {
                 const alertPlaceholder = document.getElementById('liveAlertPlaceholder');
                 bootstrapAlert(parseError(xmlhttp), 'danger', alertPlaceholder);
