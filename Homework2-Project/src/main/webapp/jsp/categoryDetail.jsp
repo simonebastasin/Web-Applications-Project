@@ -34,12 +34,11 @@
     <c:choose>
         <c:when test="${productList.size() > 0}">
             <c:forEach var="prod" items="${productList}">
-                <c:choose>
-                    <c:when test="${not empty prod.discount}">
+
                         <div class="mx-auto w-lg-75" >
                             <div class="card mt-3 bg-light">
                                 <div class="row g-0 justify-content-center">
-                                    <div class="col-md-4 justify-content-center ratio ratio-1x1">
+                                    <div class="col-md-4 ratio ratio-1x1 product-detail">
                                         <c:choose>
                                             <c:when test="${not empty prod.pictures}">
 
@@ -50,12 +49,12 @@
                                                     </c:if>
                                                     <c:set var="i" value="${1}"/>
                                                 </c:forEach>
-                                                <img src="<c:url value="/media/view/${picture}"/>" alt="${prod.alias}" class="img-fluid w-100" >
+                                                <img src="<c:url value="/media/view/${picture}"/>" alt="${prod.alias}" class="card-img" >
 
                                             </c:when>
                                             <c:otherwise>
 
-                                                <img src="<c:url value="/images/No_image_available_circle.png"/>" alt="${prod.alias}" class="img-fluid w-100" >
+                                                <img src="<c:url value="/images/No_image_available_circle.png"/>" alt="${prod.alias}" class="card-img" >
 
                                             </c:otherwise>
                                         </c:choose>
@@ -67,6 +66,8 @@
                                             <span class="roboto-thin text-primary">Brand: ${prod.brand}</span>
                                             <hr/>
                                             <div class="row card-text">
+                                            <c:choose>
+                                                <c:when test="${not empty prod.discount}">
                                                 <div class="col">
                                                     Price:
                                                     <span  class="text-decoration-line-through">${String.format("%.2f",prod.salePrice)}€</span>
@@ -75,6 +76,16 @@
                                                 <div class="col text-end">
                                                     -${prod.discount.percentage}% (until ${prod.discount.endDate.humanDate})
                                                 </div>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <div class="col">
+                                                    Price:
+                                                    <span class="display-6">
+                                                    ${String.format("%.2f",prod.salePrice)}€
+                                                    </span>
+                                                    </div>
+                                                </c:otherwise>
+                                            </c:choose>
                                             </div>
                                             <c:if test="${prod.quantity <= 10}">
                                                 <div class="text-center mt-5 text-red bold">
@@ -88,61 +99,7 @@
                             </div>
                         </div>
 
-                    </c:when>
-                    <c:otherwise>
-                            <div class="mx-auto w-lg-75" >
-                                <div class="card mt-3 bg-light">
-                                <div class="row g-0 justify-content-center">
-                                    <div class="col-md-4 justify-content-center ratio ratio-1x1">
-                                        <c:choose>
-                                            <c:when test="${not empty prod.pictures}">
 
-                                                <c:set var="i" value="${0}"/>
-                                                <c:forEach var="pic" items="${prod.pictures}">
-                                                    <c:if test="${i == 0}">
-                                                        <c:set var="picture" value="${pic}"/>
-                                                    </c:if>
-                                                    <c:set var="i" value="${1}"/>
-                                                </c:forEach>
-                                                <img src="<c:url value="/media/view/${picture}"/>" alt="${prod.alias}" class="w-100 img-fluid" >
-
-                                            </c:when>
-                                            <c:otherwise>
-
-                                                <img src="<c:url value="/images/No_image_available_circle.png"/>" alt="${prod.alias}" class="w-100 img-fluid" >
-
-                                            </c:otherwise>
-                                        </c:choose>
-                                    </div>
-                                    <div class="col-md-8">
-                                        <div class="card-body">
-                                            <a class="stretched-link" href="<c:url value="/products/details/${prod.alias}"/>"></a>
-                                            <h2 class="title">${prod.name}</h2>
-                                            <p class="card-text">
-                                                <span class="roboto-thin text-primary"> Brand: ${prod.brand} </span>
-                                                <hr/>
-                                                Price:
-                                                <span class="display-6">
-                                                ${String.format("%.2f",prod.salePrice)}€
-                                                </span>
-                                                <c:if test="${prod.quantity <= 10}">
-                                                    <div class="text-center text-red mt-5 bold">
-                                                        Only ${prod.quantity} left in stock.
-                                                    </div>
-                                                </c:if>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                                </div>
-                            </div>
-                            <br>
-
-
-
-                        </li>
-                    </c:otherwise>
-                </c:choose>
             </c:forEach>
         </c:when>
         <c:otherwise>
