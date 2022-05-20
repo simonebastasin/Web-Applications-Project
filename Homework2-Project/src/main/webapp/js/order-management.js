@@ -13,6 +13,19 @@ const deleteOrderModal = document.getElementById('deleteOrderModal');
 let id;
 
 
+function padTo2Digits(num) {
+    return num.toString().padStart(2, '0');
+}
+
+function formatDate(date) {
+    return [
+        padTo2Digits(date.getDate()),
+        padTo2Digits(date.getMonth() + 1),
+        date.getFullYear(),
+    ].join('/');
+}
+
+
 editOrderForm.addEventListener('submit', (e) => {
     if(!editOrderForm.checkValidity()) return;
 
@@ -32,10 +45,10 @@ editOrderForm.addEventListener('submit', (e) => {
                 let newInnerHTML =
                     '<td>'+id+'</td>'+
                     '<td>'+formData.get('idCustomer')+'</td>'+
-                    '<td>'+formData.get('ooDateTime')+'</td>'+
+                    '<td>'+formatDate(new Date(formData.get('ooDateTime')))+'</td>'+
                     '<td>'+formData.get('products')+'</td>'+
                     '<td>'+formData.get('status')+'</td>'+
-                    '<td>'+formData.get('osDateTime')+'</td>'+
+                    '<td>'+formatDate(new Date(formData.get('osDateTime')))+'</td>'+
                     '<td><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#editOrderModal" data-id="'+id+'"><i class="fa-solid fa-pen-to-square text-primary"></i></button></td>'+
                     '<td><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteOrderModal" data-id="'+id+'"><i class="fa-solid fa-trash-can text-danger"></i></button></td>';
 
@@ -86,6 +99,7 @@ editOrderModal.addEventListener('show.bs.modal', (e) => {
                 console.log(response?.[0].status);
                 */
                 populateForm(editOrderForm, response?.[0] ?? response);
+
             } else {
                 const alertPlaceholder = document.getElementById('liveAlertPlaceholder');
                 bootstrapAlert(parseError(xmlhttp), 'danger', alertPlaceholder);
@@ -117,10 +131,10 @@ deleteOrderForm.addEventListener('submit', (e) => {
                 let newInnerHTML =
                     '<td>'+id+'</td>'+
                     '<td>'+formData.get('idCustomer')+'</td>'+
-                    '<td>'+formData.get('ooDateTime')+'</td>'+
+                    '<td>'+formatDate(new Date(formData.get('ooDateTime')))+'</td>'+
                     '<td>'+formData.get('products')+'</td>'+
                     '<td>'+formData.get('status')+'</td>'+
-                    '<td>'+formData.get('osDateTime')+'</td>'+
+                    '<td>'+formatDate(new Date(formData.get('osDateTime')))+'</td>'+
                     '<td><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#editOrderModal" data-id="'+id+'"><i class="fa-solid fa-pen-to-square text-primary"></i></button></td>'+
                     '<td><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteOrderModal" data-id="'+id+'"><i class="fa-solid fa-trash-can text-danger"></i></button></td>';
 

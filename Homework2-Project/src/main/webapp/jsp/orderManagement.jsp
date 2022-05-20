@@ -95,7 +95,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="ooDateTime" class="col-form-label">Order Date:</label>
-                            <input type="text" class="form-control" id="ooDateTime" name="ooDateTime" required/>
+                            <input type="date" class="form-control" id="ooDateTime" name="ooDateTime" required/>
                         </div>
 
                         Products:
@@ -135,11 +135,11 @@
 
                         <div class="mb-3">
                             <label for="osDateTime" class="col-form-label">Last Status Update:</label>
-                            <input class="form-control" id="osDateTime" name="osDateTime" required>
+                            <input type="date" class="form-control" id="osDateTime" name="osDateTime" required>
                         </div>
                         <div class="mb-3">
                             <label for="description" class="col-form-label">Description:</label>
-                            <input class="form-control" id="description" name="description" required>
+                            <input type="text" class="form-control" id="description" name="description" required>
                         </div>
                     </form>
                 </div>
@@ -172,7 +172,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="ooDateTimeDelete" class="col-form-label">Order Date:</label>
-                            <input type="text" class="form-control" id="ooDateTimeDelete" name="ooDateTime" required/>
+                            <input type="date" class="form-control" id="ooDateTimeDelete" name="ooDateTime" required/>
                         </div>
 
                         Products:
@@ -203,11 +203,11 @@
 
                         <div class="mb-3">
                             <label for="osDateTimeDelete" class="col-form-label">Last Status Update:</label>
-                            <input class="form-control" id="osDateTimeDelete" name="osDateTime" required>
+                            <input type="date" class="form-control" id="osDateTimeDelete" name="osDateTime" required>
                         </div>
                         <div class="mb-3">
                             <label for="descriptionDelete" class="col-form-label">Description:</label>
-                            <input class="form-control" id="descriptionDelete" name="description" required>
+                            <input type="text" class="form-control" id="descriptionDelete" name="description" required>
                         </div>
                     </form>
                 </div>
