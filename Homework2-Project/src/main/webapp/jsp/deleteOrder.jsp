@@ -107,7 +107,7 @@
     <form method="POST" action="">
         <input type="submit" value="Yes" class="btn btn-primary mx-3"/>
     </form>
-    <a href="<c:url value="/management/orderManagement"/>">
+    <a href="<c:url value="/order/detail/${onlineOrder.idOrder}"/>">
         <input type="submit" value="No" class="btn btn-primary mx-3"/>
     </a>
     </div>
