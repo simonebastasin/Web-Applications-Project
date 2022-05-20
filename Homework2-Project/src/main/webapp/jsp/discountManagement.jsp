@@ -25,7 +25,7 @@
 <body>
 <c:import url="/jsp/include/header.jsp"/>
 <div class="container main-container">
-    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+    <nav class="custom-breadcrumb-divider" aria-label="breadcrumb">
       <ol class="breadcrumb bg-secondary bg-opacity-25 p-3 mt-3 rounded">
         <li class="breadcrumb-item"><a href="<c:url value="/"/>">Electromechanics Shop</a></li>
         <li class="breadcrumb-item active" aria-current="page">Discount List</li>
@@ -49,7 +49,7 @@
         }
     %>
 
-    <div id="liveAlertPlaceholder"></div>
+    <div id="liveAlertPlaceholder" class="sticky-top"></div>
     <div>
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addDiscountModal">
             <i class="fa-solid fa-circle-plus"></i>
@@ -120,7 +120,7 @@
                         <button class="nav-link" id="navDiscountProduct" data-bs-toggle="tab" data-bs-target="#tabDiscountProduct" type="button" role="tab" aria-controls="tabDiscountProduct" aria-selected="false">Discount Product</button>
                     </div>
                 </nav>
-                <div id="formAlertPlaceholder"></div>
+                <div id="formAlertPlaceholder" class="sticky-top"></div>
                 <div class="modal-body">
                     <div class="tab-content" id="tabProduct">
                         <div class="tab-pane fade show active" id="tabDiscountInfo" role="tabpanel" aria-labelledby="navDiscountInfo">
@@ -184,7 +184,7 @@
                     <h5 class="modal-title" id="deleteDiscountModalTitle">Remove discount</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div id="formAlertPlaceholderDelete"></div>
+                <div id="formAlertPlaceholderDelete" class="sticky-top"></div>
                 <div class="modal-body">
                     <form id="deleteDiscountForm" class="needs-validation" novalidate>
                         <div class="mb-3">

@@ -14,8 +14,8 @@
 <body>
 <c:import url="/jsp/include/header.jsp"/>
 <div class="container main-container">
-    <div id="liveAlertPlaceholder"></div>
-    <div class="m-5"></div>
+    <div id="liveAlertPlaceholder" class="sticky-top"></div>
+    <div class="p-4"></div>
     <ul class="nav nav-pills nav-justified mb-3 w-md-50 mx-auto bg-light rounded" id="pillsTab" role="tablist">
 
 

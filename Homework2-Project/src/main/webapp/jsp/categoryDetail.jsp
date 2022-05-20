@@ -64,7 +64,7 @@
                                         <div class="card-body">
                                             <a class="stretched-link" href="<c:url value="/products/details/${prod.alias}"/>"></a>
                                             <h2 class="title">${prod.name}</h2>
-                                            <span class="roboto text-primary">Brand: ${prod.brand}</span>
+                                            <span class="roboto-thin text-primary">Brand: ${prod.brand}</span>
                                             <hr/>
                                             <div class="row card-text">
                                                 <div class="col">
@@ -119,7 +119,7 @@
                                             <a class="stretched-link" href="<c:url value="/products/details/${prod.alias}"/>"></a>
                                             <h2 class="title">${prod.name}</h2>
                                             <p class="card-text">
-                                                <span class="roboto text-primary"> Brand: ${prod.brand} </span>
+                                                <span class="roboto-thin text-primary"> Brand: ${prod.brand} </span>
                                                 <hr/>
                                                 Price:
                                                 <span class="display-6">

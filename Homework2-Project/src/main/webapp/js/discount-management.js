@@ -27,23 +27,25 @@ function formatDate(date) {
 function resolveNameProduct(productc) {
 
     // Creating Our XMLHttpRequest object
-    var xhr = new XMLHttpRequest();
+    var xmlhttp = new XMLHttpRequest();
 
     // Making our connection
     var url = rootPath + '/rest/products/details/'+productc;
-    xhr.open("GET", url, false);
+    xmlhttp.open("GET", url, false);
     let obj;
     // function execute after request is successful
-    xhr.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
-            obj = JSON.parse(this.responseText);
+    xmlhttp.onreadystatechange = function () {
+        if (xmlhttp.readyState === XMLHttpRequest.DONE) {
+            if (xmlhttp.status === 200) {
+                obj = JSON.parse(this.responseText);
 
-            arrayName.push(obj[0].name);
-            console.log(arrayName.toString());
+                arrayName.push(obj[0].name);
+                console.log(arrayName.toString());
+            }
         }
     }
     // Sending our request
-    xhr.send();
+    xmlhttp.send();
 }
 addDiscountForm.addEventListener('submit', (e) => {
     if(!addDiscountForm.checkValidity()) {

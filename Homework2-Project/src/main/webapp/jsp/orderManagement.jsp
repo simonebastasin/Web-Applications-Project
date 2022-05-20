@@ -13,7 +13,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <c:import url="/jsp/include/head.jsp"/>
+    <c:import url="/jsp/include/head-management.jsp"/>
 
     <title>Order List | Electromechanics Shop</title>
 </head>
@@ -21,13 +21,13 @@
 <body>
 <c:import url="/jsp/include/header.jsp"/>
 <div class="container main-container">
-    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+    <nav class="custom-breadcrumb-divider" aria-label="breadcrumb">
       <ol class="breadcrumb bg-secondary bg-opacity-25 p-3 mt-3 rounded">
         <li class="breadcrumb-item"><a href="<c:url value="/"/>">Electromechanics Shop</a></li>
         <li class="breadcrumb-item active" aria-current="page">Order List</li>
       </ol>
     </nav>
-    <div id="liveAlertPlaceholder"></div>
+    <div id="liveAlertPlaceholder" class="sticky-top"></div>
 
     <div class="card">
         <table id="orderTable" class="table table-hover">
@@ -122,13 +122,13 @@
                         <div class="mb-3">
                             <label for="status">Status:</label>
                             <div class="input-group">
-                                <select class="form-control" name="status" id="status" required>
+                                <select class="form-select" name="status" id="status" required>
                                     <option value="" hidden selected disabled>Choose</option>
-                                    <option value="${OrderStatusEnum.OPEN}">${OrderStatusEnum.OPEN}</option>
-                                    <option value="${OrderStatusEnum.PAYMENT_ACCEPTED}">${OrderStatusEnum.PAYMENT_ACCEPTED}</option>
-                                    <option value="${OrderStatusEnum.SHIPPED}">${OrderStatusEnum.SHIPPED}</option>
-                                    <option value="${OrderStatusEnum.DELIVERED}">${OrderStatusEnum.DELIVERED}</option>
-                                    <option value="${OrderStatusEnum.CANCELLED}">${OrderStatusEnum.CANCELLED}</option>
+                                    <option value="${OrderStatusEnum.OPEN}">Open</option>
+                                    <option value="${OrderStatusEnum.PAYMENT_ACCEPTED}">Payment accepted</option>
+                                    <option value="${OrderStatusEnum.SHIPPED}">Shipped</option>
+                                    <option value="${OrderStatusEnum.DELIVERED}">Delivered</option>
+                                    <option value="${OrderStatusEnum.CANCELLED}">Cancelled</option>
                                 </select>
                             </div>
                         </div>

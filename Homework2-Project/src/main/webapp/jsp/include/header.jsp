@@ -111,7 +111,7 @@
                                     Login
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-lg-end dropdown-menu-login" aria-labelledby="dropdownMenuLogin">
-                                    <div id="liveAlertPlaceholderDrop"></div>
+                                    <div id="liveAlertPlaceholderDrop" class="sticky-top"></div>
                                     <form class="px-4 py-3 g-3 needs-validation" novalidate id="loginFormDrop">
                                         <div class="form-floating mb-3">
                                             <input type="text" class="form-control" id="identification" name="identification" placeholder="Username or Email" required>

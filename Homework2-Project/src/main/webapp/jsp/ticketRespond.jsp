@@ -22,14 +22,14 @@
 <body>
 <c:import url="/jsp/include/header.jsp"/>
 <div class="container main-container">
-<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+<nav class="custom-breadcrumb-divider" aria-label="breadcrumb">
   <ol class="breadcrumb bg-secondary bg-opacity-25 p-3 mt-3 rounded">
     <li class="breadcrumb-item"><a href="<c:url value="/"/>">Electromechanics Shop</a></li>
     <li class="breadcrumb-item active" aria-current="page">Ticket List</li>
   </ol>
 </nav>
 
-    <div id="liveAlertPlaceholder"></div>
+    <div id="liveAlertPlaceholder" class="sticky-top"></div>
 
     <c:forEach var="assistanceTicket" items="${assistanceTicketList}">
     <div class="mx-auto w-lg-50">
@@ -82,7 +82,7 @@
                     <h5 class="modal-title" id="respondTicketModalTitle">Respond Ticket</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div id="formAlertPlaceholder"></div>
+                <div id="formAlertPlaceholder" class="sticky-top"></div>
                 <div class="modal-body">
                     <form id="respondTicketForm" class="needs-validation" novalidate>
                         <div class="mb-3"> Ticket Status:

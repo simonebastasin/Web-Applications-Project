@@ -119,7 +119,7 @@
                 <div class="card mt-5">
                     <div class="card-body ms-10">
                     <h3 class="title">${product.name}</h3>
-                    <span class="roboto text-primary">Brand: ${product.brand}</span>
+                    <span class="roboto-thin text-primary">Brand: ${product.brand}</span>
                     <hr/>
 
                     <c:choose>

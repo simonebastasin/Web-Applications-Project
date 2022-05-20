@@ -47,7 +47,7 @@ editOrderForm.addEventListener('submit', (e) => {
                     '<td>'+formData.get('idCustomer')+'</td>'+
                     '<td>'+formatDate(new Date(formData.get('ooDateTime')))+'</td>'+
                     '<td>'+formData.get('products')+'</td>'+
-                    '<td>'+formData.get('status')+'</td>'+
+                    '<td>'+document.getElementById('status').options[document.getElementById('status').selectedIndex].text+'</td>'+
                     '<td>'+formatDate(new Date(formData.get('osDateTime')))+'</td>'+
                     '<td><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#editOrderModal" data-id="'+id+'"><i class="fa-solid fa-pen-to-square text-primary"></i></button></td>'+
                     '<td><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteOrderModal" data-id="'+id+'"><i class="fa-solid fa-trash-can text-danger"></i></button></td>';
@@ -99,7 +99,6 @@ editOrderModal.addEventListener('show.bs.modal', (e) => {
                 console.log(response?.[0].status);
                 */
                 populateForm(editOrderForm, response?.[0] ?? response);
-
             } else {
                 const alertPlaceholder = document.getElementById('liveAlertPlaceholder');
                 bootstrapAlert(parseError(xmlhttp), 'danger', alertPlaceholder);
@@ -133,7 +132,7 @@ deleteOrderForm.addEventListener('submit', (e) => {
                     '<td>'+formData.get('idCustomer')+'</td>'+
                     '<td>'+formatDate(new Date(formData.get('ooDateTime')))+'</td>'+
                     '<td>'+formData.get('products')+'</td>'+
-                    '<td>'+formData.get('status')+'</td>'+
+                    '<td>'+document.getElementById('status').options[document.getElementById('status').selectedIndex].text+'</td>'+
                     '<td>'+formatDate(new Date(formData.get('osDateTime')))+'</td>'+
                     '<td><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#editOrderModal" data-id="'+id+'"><i class="fa-solid fa-pen-to-square text-primary"></i></button></td>'+
                     '<td><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteOrderModal" data-id="'+id+'"><i class="fa-solid fa-trash-can text-danger"></i></button></td>';

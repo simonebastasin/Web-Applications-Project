@@ -15,7 +15,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <c:import url="/jsp/include/head.jsp"/>
+    <c:import url="/jsp/include/head-management.jsp"/>
 
     <title>Employee List | Electromechanics Shop</title>
 </head>
@@ -24,13 +24,13 @@
 <c:import url="/jsp/include/header.jsp"/>
 
 <div class="container main-container">
-    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+    <nav class="custom-breadcrumb-divider" aria-label="breadcrumb">
       <ol class="breadcrumb bg-secondary bg-opacity-25 p-3 mt-3 rounded">
         <li class="breadcrumb-item"><a href="<c:url value="/"/>">Electromechanics Shop</a></li>
         <li class="breadcrumb-item active" aria-current="page">Employee List</li>
       </ol>
     </nav>
-    <div id="liveAlertPlaceholder"></div>
+    <div id="liveAlertPlaceholder" class="sticky-top"></div>
 
     <div>
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addEmployeeModal">
@@ -111,7 +111,7 @@
                         <div class="mb-3">
                             <label for="role">Role:</label>
                             <div class="input-group">
-                                <select class="form-control" name="role" id="role" required>
+                                <select class="form-select" name="role" id="role" required>
                                     <option value="" hidden selected disabled>Choose</option>
                                     <c:forEach var="role" items="${roleList}">
                                         <option value="${role.name}">

@@ -3,6 +3,7 @@ body {
     background-size: 100vw;
     background-repeat: repeat-y;
     background-position-y: 50%;
+    --bs-body-font-family: 'Roboto', var(--bs-font-sans-serif);
 }
 
 /*
@@ -31,8 +32,9 @@ h3.title{
 /*
     the accent span like price
  */
-span.roboto {
-    font-family: "Roboto Thin", sans-serif;
+span.roboto-thin {
+    font-family: 'Roboto', var(--bs-font-sans-serif);
+    font-weight: 100;
 }
 
 /*
@@ -276,4 +278,8 @@ span.roboto {
     .product-card .card {
         margin-top: 0 !important;
     }
+}
+
+.custom-breadcrumb-divider {
+    --bs-breadcrumb-divider: '>';
 }

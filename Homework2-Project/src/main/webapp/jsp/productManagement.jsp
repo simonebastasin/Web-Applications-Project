@@ -24,7 +24,7 @@
 <body>
 <c:import url="/jsp/include/header.jsp"/>
 <div class="container main-container">
-    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+    <nav class="custom-breadcrumb-divider" aria-label="breadcrumb">
         <ol class="breadcrumb bg-secondary bg-opacity-25 p-3 mt-3 rounded">
             <li class="breadcrumb-item"><a href="<c:url value="/"/>">Electromechanics Shop</a></li>
             <li class="breadcrumb-item active" aria-current="page">Product List</li>
@@ -137,7 +137,7 @@
                         <div class="mb-3">
                             <label for="category">Category:</label>
                             <div class="input-group">
-                                <select class="form-control" name="category" id="category" required>
+                                <select class="form-select" name="category" id="category" required>
                                     <option value=""  hidden selected disabled>Choose</option>
                                     <c:forEach var="cat" items="${productCategoryList}">
                                         <option value="${cat.name}">
@@ -208,7 +208,7 @@
                             <button type="submit" class="btn btn-outline-secondary">Upload</button>
                         </div>
                         <div class="progress mt-3 mb-3 d-none" id="uploadImageProgress">
-                            <div id="uploadImageProgressBar" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>
+                            <div id="uploadImageProgressBar" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0"></div>
                         </div>
                     </form>
                         </div>

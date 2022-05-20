@@ -129,6 +129,24 @@
                     <include>**/*.*</include>
                 </includes>
             </resource>
+
+            <!-- copy webfonts resources to the target directory -->
+            <resource>
+                <targetPath>${basedir}/target/${project.artifactId}-${project.version}/webfonts</targetPath>
+                <directory>${basedir}/src/main/webapp/webfonts</directory>
+                <includes>
+                    <include>**/*.*</include>
+                </includes>
+            </resource>
+
+            <!-- copy favicon resources to the target directory -->
+            <resource>
+                <targetPath>${basedir}/target/${project.artifactId}-${project.version}/favicon</targetPath>
+                <directory>${basedir}/src/main/webapp/favicon</directory>
+                <includes>
+                    <include>**/*.*</include>
+                </includes>
+            </resource>
         </resources>
 
     </build>

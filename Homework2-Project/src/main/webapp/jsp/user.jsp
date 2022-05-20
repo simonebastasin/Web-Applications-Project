@@ -21,14 +21,14 @@
 <body>
 <c:import url="/jsp/include/header.jsp"/>
 <div class="container main-container">
-<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+<nav class="custom-breadcrumb-divider" aria-label="breadcrumb">
   <ol class="breadcrumb bg-secondary bg-opacity-25 p-3 mt-3 rounded">
     <li class="breadcrumb-item"><a href="<c:url value="/"/>">Electromechanics Shop</a></li>
     <li class="breadcrumb-item active" aria-current="page">User: <c:out value="${employee.username}"/></li>
   </ol>
 </nav>
 
-    <div id="liveAlertPlaceholder"></div>
+    <div id="liveAlertPlaceholder" class="sticky-top"></div>
 
     <h5>User Info</h5>
         <ul class="list-group list-group-flush" data-id="${employee.username}">
@@ -55,7 +55,7 @@
                     <h5 class="modal-title" id="editUserModalTitle">Edit User</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div id="formAlertPlaceholder"></div>
+                <div id="formAlertPlaceholder" class="sticky-top"></div>
                 <div class="modal-body">
                     <form class="row g-3 needs-validation" novalidate id="editUserForm">
                         <div class="form-floating mb-3">
@@ -85,7 +85,7 @@
                     <h5 class="modal-title" id="changePasswordModalTitle">Change Password</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div id="formPasswordAlertPlaceholder"></div>
+                <div id="formPasswordAlertPlaceholder" class="sticky-top"></div>
                 <div class="modal-body">
                     <form class="row g-3 needs-validation" novalidate id="formConfirmPassword">
                         <div class="form-floating mb-3">
