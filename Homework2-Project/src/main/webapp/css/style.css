@@ -1,3 +1,7 @@
+/*
+    global setting
+ */
+
 body {
     background-image: url('../images/cool-background.svg');
     background-size: 100vw;
@@ -6,11 +10,53 @@ body {
     --bs-body-font-family: 'Roboto', var(--bs-font-sans-serif);
 }
 
-/*
-    global setting
- */
+.skyline {
+    -webkit-mask: url(../images/cool-footer.svg);
+    -webkit-mask-size: 100%;
+    mask: url(../images/cool-footer.svg);
+    mask-size: 100%;
+    background-size: 100%;
+    width: 100%;
+    padding-top: 112px;
+    min-height: 56px;
+}
+
 .main-container {
-    min-height: calc(100vh - 112px);
+    min-height: calc(100vh - 280px);
+}
+
+@media (max-width: 575.98px) {
+    .skyline {
+        -webkit-mask-size: 400%;
+        mask-size: 400%;
+        background-size: 100%;
+        width: 100%;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .skyline {
+        -webkit-mask-size: 200%;
+        mask-size: 200%;
+        background-size: 100%;
+        width: 100%;
+    }
+}
+
+@media (min-width: 2000px) {
+    .skyline {
+        -webkit-mask-size: 50%;
+        mask-size: 50%;
+        background-size: 100%;
+        width: 100%;
+    }
+}
+
+
+@media (max-width: 991.98px) {
+    .main-container {
+        min-height: calc(100vh - 304px);
+    }
 }
 
 /*
