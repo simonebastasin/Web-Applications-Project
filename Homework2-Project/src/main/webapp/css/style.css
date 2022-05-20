@@ -292,7 +292,7 @@ span.roboto-thin {
 }
 .text-red
 {
-    color: red;
+    color: var(--bs-red);
 }
 
 /*
