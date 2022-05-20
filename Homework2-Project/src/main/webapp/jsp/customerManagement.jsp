@@ -1,6 +1,6 @@
 <%--
   Created by IntelliJ IDEA.
-  User: simon
+  User: simonebastasin
   Date: 21/04/2022
   Time: 01:23
   To change this template use File | Settings | File Templates.
@@ -107,15 +107,15 @@
                         </div>
                         <div class="mb-3">
                             <label for="address" class="col-form-label">Address:</label>
-                            <input class="form-control" id="address" name="address" required>
+                            <input type="text" class="form-control" id="address" name="address" required>
                         </div>
                         <div class="mb-3">
                             <label for="email" class="col-form-label">Email:</label>
-                            <input class="form-control" id="email" name="email" required>
+                            <input type="email" class="form-control" id="email" name="email" required>
                         </div>
                         <div class="mb-3">
                             <label for="phoneNumber" class="col-form-label">Phone Number:</label>
-                            <input class="form-control" id="phoneNumber" name="phoneNumber" required>
+                            <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" required>
                         </div>
                     </form>
                 </div>

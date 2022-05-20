@@ -23,7 +23,6 @@ editCustomerForm.addEventListener('submit', (e) => {
     const xmlhttp = new XMLHttpRequest();
 
     // -> edit
-    //alert("send edit " + username);
     xmlhttp.open("POST", rootPath + "/rest/management/customerManagement/editCustomer/" + username, true);
     //formData.delete('username');
 
@@ -69,8 +68,8 @@ editCustomerModal.addEventListener('show.bs.modal', (e) => {
     editCustomerForm.classList.toggle('was-validated', false);
     editCustomerForm.reset();
 
-    document.getElementById('id').disabled = true;
-    document.getElementById('username').disabled = true;
+    document.getElementById('id').readOnly = true;
+    document.getElementById('username').readOnly = true;
 
     // -> edit
     const xmlhttp = new XMLHttpRequest();
@@ -134,13 +133,12 @@ deleteCustomerModal.addEventListener('show.bs.modal', (e) => {
     deleteCustomerForm.classList.toggle('was-validated', false);
     deleteCustomerForm.reset();
 
-    document.getElementById('usernameDelete').disabled = true;
-    document.getElementById('nameDelete').disabled = true;
-    document.getElementById('surnameDelete').disabled = true;
-    document.getElementById('fiscalCodeDelete').disabled = true;
+    document.getElementById('usernameDelete').readOnly = true;
+    document.getElementById('nameDelete').readOnly = true;
+    document.getElementById('surnameDelete').readOnly = true;
+    document.getElementById('fiscalCodeDelete').readOnly = true;
 
     const xmlhttp = new XMLHttpRequest();
-    alert(username);
     xmlhttp.open("GET", rootPath + "/rest/management/customerManagement/deleteCustomer/" + username, true);
     xmlhttp.onreadystatechange = function() {
         if (xmlhttp.readyState === XMLHttpRequest.DONE) {
