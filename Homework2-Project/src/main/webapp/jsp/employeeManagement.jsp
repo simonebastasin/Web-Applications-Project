@@ -39,7 +39,7 @@
         </button>
     </div><br>
 
-    <div class="card">
+    <div class="card card-body">
         <table id="employeeTable" class="table table-hover">
             <thead>
                 <tr>
@@ -51,7 +51,7 @@
                     <th></th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="align-middle">
                 <c:forEach var="employee" items="${employeeList}">
                     <tr data-id="${employee.username}">
 

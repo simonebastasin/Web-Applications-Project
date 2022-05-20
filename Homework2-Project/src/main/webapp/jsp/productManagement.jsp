@@ -40,7 +40,7 @@
     </div>
     <br>
 
-    <div class="card">
+    <div class="card card-body">
         <table id="productTable" class="table table-hover table-hide-lg-col-7 table-hide-md-col-4 table-hide-md-col-5 table-hide-md-col-6 table-hide-sm-col-2 table-hide-sm-col-3" >
             <thead>
             <tr>
@@ -55,7 +55,7 @@
                 <th></th>
             </tr>
             </thead>
-            <tbody>
+            <tbody class="align-middle">
             <c:forEach var="prod" items="${productList}">
 
                 <tr data-id="${prod.alias}">

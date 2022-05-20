@@ -57,7 +57,7 @@
         </button>
     </div><br>
 
-    <div class="card">
+    <div class="card card-body">
         <table id="discountTable" class="table table-hover table-hide-lg-col-5 table-hide-sm-col-1 table-hide-sm-col-3" >
             <thead>
                 <tr>
@@ -70,7 +70,7 @@
                     <th></th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="align-middle">
                 <c:forEach var="discountListProduct" items="${discountListProductList}">
                     <tr data-id="${discountListProduct.discount.id}">
                         <td>${discountListProduct.discount.id}</td>

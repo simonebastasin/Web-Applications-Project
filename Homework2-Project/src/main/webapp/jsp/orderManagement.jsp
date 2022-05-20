@@ -29,7 +29,7 @@
     </nav>
     <div id="liveAlertPlaceholder" class="sticky-top"></div>
 
-    <div class="card">
+    <div class="card card-body">
         <table id="orderTable" class="table table-hover">
             <thead>
                 <tr>
@@ -43,7 +43,7 @@
                     <th></th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="align-middle">
                 <c:forEach var="onlineOrder" items="${onlineOrderList}">
                     <tr data-id="${onlineOrder.idOrder}">
                         <td>${onlineOrder.idOrder}</td>
