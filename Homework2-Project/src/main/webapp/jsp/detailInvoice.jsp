@@ -29,8 +29,10 @@
     </nav>
 
     <div id="invoice">
-        <div class=" mx-auto w-lg-50 bg-white p-3 rounded">
-        <h3>ID INVOICE # ${onlineInvoice.id}</h3>
+        <h1 class="d-none d-print-block">Electromechanics Shop</h1>
+
+        <div class="card w-lg-50 mx-auto bg-white p-3 rounded">
+            <h3>ID INVOICE # ${onlineInvoice.id}</h3>
 
             <div class="row">
                 <div class="col">Transaction ID:</div>
@@ -41,7 +43,7 @@
                 <div class="col">${onlineInvoice.paymentType.text}</div>
             </div>
             <div class="row">
-                <div class="col">Date: </div>
+                <div class="col">Date:</div>
                 <div class="col">${onlineInvoice.oiDate.humanDate}</div>
             </div>
             <div class="row">
@@ -49,40 +51,41 @@
                 <div class="col">${String.format("%.2f", onlineInvoice.totalPrice)}€</div>
             </div>
 
-        <h3>Product list</h3>
-        <h5>ID ORDER # ${onlineInvoice.idOrder.idOrder}</h5>
+            <h3>Product list</h3>
+            <h5>ID ORDER # ${onlineInvoice.idOrder.idOrder}</h5>
 
-        <div class="card row m-3">
-            <div class="card-header">
-                <div class="row">
-                    <div class="col">Product name</div>
-                    <div class="col">Price</div>
-                    <div class="col">Quantity</div>
-                    <div class="col">Total price</div>
+            <div class="card row m-3">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col">Product name</div>
+                        <div class="col">Price</div>
+                        <div class="col">Quantity</div>
+                        <div class="col">Total price</div>
+                    </div>
                 </div>
+                <ul class="list-group list-group-flush">
+                    <c:forEach var="prod" items="${onlineInvoice.idOrder.products}">
+                        <li class="list-group-item row px-0">
+                            <div class="col text-break">
+                                    ${prod.name}
+                            </div>
+                            <div class="col text-break">
+                                    ${String.format("%.2f", prod.salePrice)}€
+                            </div>
+                            <div class="col text-break">
+                                    ${prod.quantity}
+                            </div>
+                            <div class="col text-break">
+                                    ${String.format("%.2f", prod.quantity * prod.salePrice)}€
+                            </div>
+                        </li>
+                    </c:forEach>
+                </ul>
             </div>
-            <ul class="list-group list-group-flush">
-                <c:forEach var="prod" items="${onlineInvoice.idOrder.products}">
-                    <li class="list-group-item row px-0">
-                        <div class="col text-break">
-                                ${prod.name}
-                        </div>
-                        <div class="col text-break">
-                                ${String.format("%.2f", prod.salePrice)}€
-                        </div>
-                        <div class="col text-break">
-                                ${prod.quantity}
-                        </div>
-                        <div class="col text-break">
-                                ${String.format("%.2f", prod.quantity * prod.salePrice)}€
-                        </div>
-                    </li>
-                </c:forEach>
-            </ul>
-        </div>
             <div class="mb-3">
-                <button class="btn btn-primary" onclick="printDiv('invoice')">Print Invoice</button>
+                <button class="btn btn-primary d-print-none" id="printInvoice">Print Invoice</button>
             </div>
+        </div>
     </div>
 </div>
 <c:import url="/jsp/include/footer.jsp"/>
