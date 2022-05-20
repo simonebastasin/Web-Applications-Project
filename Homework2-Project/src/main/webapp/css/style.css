@@ -135,15 +135,15 @@ span.roboto {
     width: 5%;
 }
 .carousel-category .carousel-inner .carousel-item.active {
-    z-index: 2000;
+    z-index: 999;
 }
 
 .carousel-category .carousel-inner .carousel-item-next,
 .carousel-category .carousel-inner .carousel-item-prev {
-    z-index: 2001;
+    z-index: 1000;
 }
 
-.carousel-category .carousel-inner .carousel-item.active.carousel-item-end  > div:not(:last-child),
+.carousel-category .carousel-inner .carousel-item.carousel-item-prev.carousel-item-end  > div:not(:first-child),
 .carousel-category .carousel-inner .carousel-item.active.carousel-item-start  > div:not(:first-child) {
     visibility: hidden;
 }
