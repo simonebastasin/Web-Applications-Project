@@ -259,9 +259,14 @@ span.roboto-thin {
 /*
     product carousel  linear gradient for arrows and indicators
  */
-.product-carousel .carousel-control-prev:hover, .product-carousel .carousel-control-next:hover {
+.product-carousel .carousel-control-prev:hover {
     background: rgb(255,255,255);
     background: linear-gradient(270deg, rgba(255,255,255,0) 0%, rgba(204,204,204,0.5) 10%, rgba(153,153,153,1) 100%);
+}
+
+.product-carousel .carousel-control-next:hover {
+    background: rgb(255,255,255);
+    background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(204,204,204,0.5) 10%, rgba(153,153,153,1) 100%);
 }
 
 .product-carousel .carousel-indicators {
