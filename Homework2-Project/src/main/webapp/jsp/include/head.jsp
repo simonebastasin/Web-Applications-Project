@@ -11,6 +11,6 @@
 <link rel="stylesheet" href="<c:url value="/css/style.css"/>" type="text/css">
 
 <meta charset="utf-8">
-<meta name="description" content="Electromechanics Shop">
+<meta name="description" content="Electromechanical Shop">
 <meta name="author" content="WAD Team">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
