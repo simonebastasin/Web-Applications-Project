@@ -29,55 +29,60 @@
     </nav>
 
     <div id="invoice">
-        <div class="d-none d-print-block">Electromechanics Shop</div>
         <div class=" mx-auto w-lg-50 bg-white p-3 rounded">
         <h3>ID INVOICE # ${onlineInvoice.id}</h3>
-        <ul class="list-group list-group-flush">
-            <li class="list-group-item">Transaction ID: ${onlineInvoice.transactionId}</li>
-            <li class="list-group-item">Payment Type: ${onlineInvoice.paymentType.text}</li>
-            <li class="list-group-item">Date: ${onlineInvoice.oiDate.humanDate}</li>
-            <li class="list-group-item">Total Price: ${String.format("%.2f", onlineInvoice.totalPrice)}€</li>
-        </ul>
-        <br>
+
+            <div class="row">
+                <div class="col">Transaction ID:</div>
+                <div class="col">${onlineInvoice.transactionId}</div>
+            </div>
+            <div class="row">
+                <div class="col">Payment Type:</div>
+                <div class="col">${onlineInvoice.paymentType.text}</div>
+            </div>
+            <div class="row">
+                <div class="col">Date: </div>
+                <div class="col">${onlineInvoice.oiDate.humanDate}</div>
+            </div>
+            <div class="row">
+                <div class="col">Total Price:</div>
+                <div class="col">${String.format("%.2f", onlineInvoice.totalPrice)}€</div>
+            </div>
 
         <h3>Product list</h3>
         <h5>ID ORDER # ${onlineInvoice.idOrder.idOrder}</h5>
 
-        <table class="table">
-            <thead>
-            <tr>
-                <th scope="col">Product name</th>
-                <th scope="col">Price</th>
-                <th scope="col">Quantity</th>
-                <th scope="col">Total price</th>
-            </tr>
-            </thead>
-            <tbody>
-            <c:forEach var="prod" items="${onlineInvoice.idOrder.products}">
-                <tr>
-                    <td> ${prod.name} </td>
-                    <td>${String.format("%.2f", prod.salePrice)}€</td>
-                    <td>${prod.quantity} </td>
-                    <td>${String.format("%.2f", prod.quantity * prod.salePrice)}€</td>
-                </tr>
-            </c:forEach>
-
-            <tr>
-                <td>Total</td>
-                <td></td>
-                <td></td>
-                <td>${String.format("%.2f", onlineInvoice.idOrder.getTotalPrice())}€</td>
-            </tr>
-            </tbody>
-        </table>
-
-
-            Date: ${onlineInvoice.idOrder.ooDateTime.getHumanDate()}<br>
-            Total price: ${String.format("%.2f", onlineInvoice.totalPrice)}€<br>
+        <div class="card row m-3">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col">Product name</div>
+                    <div class="col">Price</div>
+                    <div class="col">Quantity</div>
+                    <div class="col">Total price</div>
+                </div>
+            </div>
+            <ul class="list-group list-group-flush">
+                <c:forEach var="prod" items="${onlineInvoice.idOrder.products}">
+                    <li class="list-group-item row px-0">
+                        <div class="col text-break">
+                                ${prod.name}
+                        </div>
+                        <div class="col text-break">
+                                ${String.format("%.2f", prod.salePrice)}€
+                        </div>
+                        <div class="col text-break">
+                                ${prod.quantity}
+                        </div>
+                        <div class="col text-break">
+                                ${String.format("%.2f", prod.quantity * prod.salePrice)}€
+                        </div>
+                    </li>
+                </c:forEach>
+            </ul>
+        </div>
             <div class="mb-3">
                 <button class="btn btn-primary" onclick="printDiv('invoice')">Print Invoice</button>
             </div>
-        </div>
     </div>
 </div>
 <c:import url="/jsp/include/footer.jsp"/>
