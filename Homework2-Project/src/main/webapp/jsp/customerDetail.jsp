@@ -29,7 +29,7 @@
 </nav>
 
     <div id="liveAlertPlaceholder"></div>
-    <div class="card w-lg-50 mx-auto bg-white p-3 rounded">
+    <div class="card w-lg-50 mx-auto bg-white rounded">
         <div class="card-header">
             <h5 class="card-title">User Info</h5>
         </div>

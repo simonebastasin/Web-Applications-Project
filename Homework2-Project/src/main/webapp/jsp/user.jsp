@@ -29,24 +29,26 @@
 </nav>
 
     <div id="liveAlertPlaceholder"></div>
-
-    <h5>User Info</h5>
+    <div class="card w-lg-50 mx-auto bg-white rounded">
+        <div class="card-header">
+            <h5 class="card-title">User Info</h5>
+        </div>
         <ul class="list-group list-group-flush" data-id="${employee.username}">
             <li class="list-group-item">Name: ${employee.name}</li>
             <li class="list-group-item">Surname: ${employee.surname}</li>
             <li class="list-group-item">Role: ${employee.role.toString()}</li>
         </ul>
-        <br>
-
-    <a href="<c:url value="/user/modify"/>" class="btn" type="button" data-bs-toggle="modal" data-bs-target="#editUserModal" data-id="${employee.username}">
-        <i class="fa-solid fa-pen-to-square text-primary"></i>
-        <span class="text-primary">Edit</span>
-    </a>
-
-    <a href="<c:url value="/user/password"/>" class="btn" type="button" data-bs-toggle="modal" data-bs-target="#changePasswordModal" data-id="${employee.username}">
-        <i class="fa-solid fa-key text-danger"></i>
-        <span class="text-danger">Change Password</span>
-    </a>
+        <div class="card-footer">
+            <a href="<c:url value="/user/modify"/>" class="btn" type="button" data-bs-toggle="modal" data-bs-target="#editUserModal" data-id="${employee.username}">
+                <i class="fa-solid fa-pen-to-square text-primary"></i>
+                <span class="text-primary">Edit</span>
+            </a>
+            <a href="<c:url value="/user/password"/>" class="btn" type="button" data-bs-toggle="modal" data-bs-target="#changePasswordModal" data-id="${employee.username}">
+                <i class="fa-solid fa-key text-danger"></i>
+                <span class="text-danger">Change Password</span>
+            </a>
+        </div>
+    </div>
 
 </div>
 
