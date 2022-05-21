@@ -9,9 +9,7 @@ const deleteEmployeeButton = document.getElementById('deleteEmployeeButton');
 const deleteEmployeeForm = document.getElementById('deleteEmployeeForm');
 const deleteEmployeeModal = document.getElementById('deleteEmployeeModal');
 
-
 let username;
-
 
 addEmployeeForm.addEventListener('submit', (e) => {
     if(!addEmployeeForm.checkValidity()) return;
@@ -70,7 +68,6 @@ addEmployeeForm.addEventListener('submit', (e) => {
     xmlhttp.send(urlencodedData);
 });
 
-
 addEmployeeModal.addEventListener('show.bs.modal', (e) => {
     // Button that triggered the modal
     var button = e.relatedTarget;
@@ -119,7 +116,6 @@ addEmployeeModal.addEventListener('show.bs.modal', (e) => {
     }
 });
 
-
 deleteEmployeeForm.addEventListener('submit', (e) => {
     if(!deleteEmployeeForm.checkValidity()) return;
 
@@ -146,8 +142,7 @@ deleteEmployeeForm.addEventListener('submit', (e) => {
         }
     }
     xmlhttp.send(urlencodedData);
-})
-
+});
 
 deleteEmployeeModal.addEventListener('show.bs.modal', (e) => {
     // Button that triggered the modal
@@ -183,4 +178,4 @@ deleteEmployeeModal.addEventListener('show.bs.modal', (e) => {
     let modalTitle = deleteEmployeeModal.querySelector('.modal-title');
     modalTitle.textContent = 'Delete employee ' + username;
     deleteEmployeeButton.textContent = 'Delete employee';
-})
+});

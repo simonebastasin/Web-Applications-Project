@@ -9,10 +9,8 @@ const deleteCustomerButton = document.getElementById('deleteCustomerButton');
 const deleteCustomerForm = document.getElementById('deleteCustomerForm');
 const deleteCustomerModal = document.getElementById('deleteCustomerModal');
 
-
 let username;
 let id;
-
 
 editCustomerForm.addEventListener('submit', (e) => {
     if(!editCustomerForm.checkValidity()) return;
@@ -58,7 +56,6 @@ editCustomerForm.addEventListener('submit', (e) => {
     xmlhttp.send(urlencodedData);
 });
 
-
 editCustomerModal.addEventListener('show.bs.modal', (e) => {
     // Button that triggered the modal
     var button = e.relatedTarget;
@@ -94,7 +91,6 @@ editCustomerModal.addEventListener('show.bs.modal', (e) => {
     editCustomerButton.textContent = 'Edit customer';
 });
 
-
 deleteCustomerForm.addEventListener('submit', (e) => {
     if(!deleteCustomerForm.checkValidity()) return;
 
@@ -121,8 +117,7 @@ deleteCustomerForm.addEventListener('submit', (e) => {
         }
     }
     xmlhttp.send(urlencodedData);
-})
-
+});
 
 deleteCustomerModal.addEventListener('show.bs.modal', (e) => {
     // Button that triggered the modal
@@ -159,4 +154,4 @@ deleteCustomerModal.addEventListener('show.bs.modal', (e) => {
     let modalTitle = deleteCustomerModal.querySelector('.modal-title');
     modalTitle.textContent = 'Delete customer ' + username;
     deleteCustomerButton.textContent = 'Delete customer';
-})
+});

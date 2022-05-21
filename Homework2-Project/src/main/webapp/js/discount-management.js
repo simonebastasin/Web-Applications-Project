@@ -24,13 +24,13 @@ function formatDate(date) {
     ].join('/');
 }
 
-function resolveNameProduct(productc) {
+function resolveNameProduct(product) {
 
     // Creating Our XMLHttpRequest object
     var xmlhttp = new XMLHttpRequest();
 
     // Making our connection
-    var url = rootPath + '/rest/products/details/'+productc;
+    var url = rootPath + '/rest/products/details/'+product;
     xmlhttp.open("GET", url, false);
     let obj;
     // function execute after request is successful
@@ -47,6 +47,7 @@ function resolveNameProduct(productc) {
     // Sending our request
     xmlhttp.send();
 }
+
 addDiscountForm.addEventListener('submit', (e) => {
     if(!addDiscountForm.checkValidity()) {
         document.getElementById('navDiscountInfo').click();
@@ -176,7 +177,6 @@ addDiscountModal.addEventListener('show.bs.modal', (e) => {
     }
 });
 
-
 deleteDiscountForm.addEventListener('submit', (e) => {
     if(!deleteDiscountForm.checkValidity()) return;
 
@@ -207,9 +207,7 @@ deleteDiscountForm.addEventListener('submit', (e) => {
         }
     }
     xmlhttp.send(urlencodedData);
-})
-
-
+});
 
 deleteDiscountModal.addEventListener('show.bs.modal', (e) => {
     // Button that triggered the modal
@@ -248,4 +246,4 @@ deleteDiscountModal.addEventListener('show.bs.modal', (e) => {
     let modalTitle = deleteDiscountModal.querySelector('.modal-title');
     modalTitle.textContent = 'Are you sure to delete this discount?';
 
-})
+});

@@ -106,7 +106,7 @@
             </div>
             <div id="formPasswordAlertPlaceholder" class="sticky-top"></div>
             <div class="modal-body">
-                <form class="row g-3 needs-validation" novalidate id="formConfirmPassword">
+                <form class="row g-3 needs-validation" novalidate id="formConfirmPassword" data-confirm-password>
                     <div class="form-floating mb-3">
                         <input id="oldPassword" type="password" class="form-control" name="oldPassword" placeholder="Old Password" required>
                         <label for="oldPassword">Old Password</label>
@@ -132,7 +132,7 @@
 </div>
 
 <c:import url="/jsp/include/footer.jsp"/>
-<script src="<c:url value="/js/check-password.js"/>"></script>
+
 <script src="<c:url value="/js/user.js"/>"></script>
 </body>
 </html>

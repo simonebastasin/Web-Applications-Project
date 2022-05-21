@@ -1,6 +1,7 @@
 const createTicketForm = document.getElementById("createTicketForm");
-const createTicketModal = document.getElementById('createTicketModal')
-var alias;
+const createTicketModal = document.getElementById('createTicketModal');
+let alias;
+
 createTicketForm.addEventListener('submit', (e) => {
     if(!createTicketForm.checkValidity()) return;
 
@@ -13,7 +14,7 @@ createTicketForm.addEventListener('submit', (e) => {
         if (xmlhttp.readyState === XMLHttpRequest.DONE) {
             if(xmlhttp.status === 200) {
                 const response = JSON.parse(xmlhttp.responseText);
-                idTicket = (response?.[0] ?? response).id;
+                let idTicket = (response?.[0] ?? response).id;
                 bootstrapAlert("Ticket #" +idTicket + " for product " + alias + " was created <a href='"+rootPath +"/ticket/list'"+">View Ticket </a>", 'info', document.getElementById("liveAlertPlaceholder"),-1);
                 bootstrap.Modal.getOrCreateInstance(createTicketModal).hide();
 
@@ -28,14 +29,13 @@ createTicketForm.addEventListener('submit', (e) => {
 
 });
 
-
 createTicketModal.addEventListener('show.bs.modal', function (event) {
 
-    var button = event.relatedTarget
+    const button = event.relatedTarget
 
     alias = button.getAttribute('data-id')
 
-    var modalTitle = createTicketModal.querySelector('.modal-title')
+    const modalTitle = createTicketModal.querySelector('.modal-title')
 
     modalTitle.textContent = 'Create ticket for product ' + alias;
 });

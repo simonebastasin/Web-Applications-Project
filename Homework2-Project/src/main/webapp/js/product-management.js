@@ -13,8 +13,34 @@ const uploadImageForm = document.getElementById('uploadImageForm');
 const uploadImageProgress = document.getElementById('uploadImageProgress');
 const uploadImageProgressBar = document.getElementById('uploadImageProgressBar');
 
-//const plusButton =
+const toogleButton = document.getElementsByClassName('toggle');
+
 let alias;
+
+const ready = (xmlhttp) => {
+    if(xmlhttp.status === 200) {
+        const alertPlaceholder = document.getElementById('formAlertPlaceholder');
+        const response = JSON.parse(xmlhttp.responseText)[0];
+        const imageCheckBox = document.querySelectorAll('.image-check-box ul');
+        [...imageCheckBox].forEach(
+            (element) => {
+                const li = document.createElement('li');
+                li.innerHTML = '<input type="checkbox" id="media-'+response.resourceId+'" name="pictures" value="'+response.resourceId+'" form="addProductForm"/>'+
+                    '<label for="media-'+response.resourceId+'"><img src="'+rootPath+"/media/thumb/"+response.resourceId+'" /></label>';
+                element.appendChild(li);
+            }
+        );
+
+        const imageCheckBoxItem = document.querySelectorAll('.image-check-box ul li:last-child input');
+        [...imageCheckBoxItem].forEach((element) => element.click());
+
+        bootstrapAlert(response.message, 'success', alertPlaceholder);
+    } else {
+        const alertPlaceholder = document.getElementById('formAlertPlaceholder');
+        bootstrapAlert(parseError(xmlhttp), 'danger', alertPlaceholder);
+        updateProgressBar(0, true);
+    }
+};
 
 
 addProductForm.addEventListener('submit', (e) => {
@@ -76,7 +102,7 @@ addProductForm.addEventListener('submit', (e) => {
     xmlhttp.send(urlencodedData);
 
 
-})
+});
 
 uploadImageForm.addEventListener('submit', (e) => {
     if(!uploadImageForm.checkValidity()) return;
@@ -142,32 +168,7 @@ addProductModal.addEventListener('show.bs.modal', (e) => {
         addProductButton.textContent = 'Edit product';
     }
 
-})
-
-const ready = (xmlhttp) => {
-    if(xmlhttp.status === 200) {
-        const alertPlaceholder = document.getElementById('formAlertPlaceholder');
-        const response = JSON.parse(xmlhttp.responseText)[0];
-        const imageCheckBox = document.querySelectorAll('.image-check-box ul');
-        [...imageCheckBox].forEach(
-            (element) => {
-                const li = document.createElement('li');
-                li.innerHTML = '<input type="checkbox" id="media-'+response.resourceId+'" name="pictures" value="'+response.resourceId+'" form="addProductForm"/>'+
-                    '<label for="media-'+response.resourceId+'"><img src="'+rootPath+"/media/thumb/"+response.resourceId+'" /></label>';
-                element.appendChild(li);
-            }
-        );
-
-        const imageCheckBoxItem = document.querySelectorAll('.image-check-box ul li:last-child input');
-        [...imageCheckBoxItem].forEach((element) => element.click());
-
-        bootstrapAlert(response.message, 'success', alertPlaceholder);
-    } else {
-        const alertPlaceholder = document.getElementById('formAlertPlaceholder');
-        bootstrapAlert(parseError(xmlhttp), 'danger', alertPlaceholder);
-        updateProgressBar(0, true);
-    }
-};
+});
 
 initDropArea(document.getElementById('tabProductMedia'), ready);
 
@@ -205,7 +206,7 @@ deleteProductForm.addEventListener('submit', (e) => {
         }
     }
     xmlhttp.send(urlencodedData);
-})
+});
 
 deleteProductModal.addEventListener('show.bs.modal', (e) => {
     // Button that triggered the modal
@@ -245,11 +246,8 @@ deleteProductModal.addEventListener('show.bs.modal', (e) => {
     let modalTitle = deleteProductModal.querySelector('.modal-title');
     modalTitle.textContent = 'Are you sure to delete this product?';
 
-})
+});
 
-const toogleButton = document.getElementsByClassName('toggle');
-
-// Listen for click events
 [...toogleButton].forEach(it => it.addEventListener('click', function (event) {
 
     // Prevent default link behavior
@@ -264,7 +262,6 @@ const toogleButton = document.getElementsByClassName('toggle');
     content.classList.toggle('d-none');
 
 }, false));
-
 
 addCategoryForm.addEventListener('submit', (e) => {
     if(!addCategoryForm.checkValidity()) return;
@@ -304,4 +301,4 @@ addCategoryForm.addEventListener('submit', (e) => {
         }
     }
     xmlhttp.send(urlencodedData);
-})
+});

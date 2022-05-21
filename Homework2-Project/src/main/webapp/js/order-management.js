@@ -9,9 +9,7 @@ const deleteOrderButton = document.getElementById('deleteOrderButton');
 const deleteOrderForm = document.getElementById('deleteOrderForm');
 const deleteOrderModal = document.getElementById('deleteOrderModal');
 
-
 let id;
-
 
 function padTo2Digits(num) {
     return num.toString().padStart(2, '0');
@@ -24,7 +22,6 @@ function formatDate(date) {
         date.getFullYear(),
     ].join('/');
 }
-
 
 editOrderForm.addEventListener('submit', (e) => {
     if(!editOrderForm.checkValidity()) return;
@@ -67,7 +64,6 @@ editOrderForm.addEventListener('submit', (e) => {
     }
     xmlhttp.send(urlencodedData);
 });
-
 
 editOrderModal.addEventListener('show.bs.modal', (e) => {
     // Button that triggered the modal
@@ -113,7 +109,6 @@ editOrderModal.addEventListener('show.bs.modal', (e) => {
     editOrderButton.textContent = 'Edit Order';
 });
 
-
 deleteOrderForm.addEventListener('submit', (e) => {
     if(!deleteOrderForm.checkValidity()) return;
 
@@ -154,8 +149,7 @@ deleteOrderForm.addEventListener('submit', (e) => {
         }
     }
     xmlhttp.send(urlencodedData);
-})
-
+});
 
 deleteOrderModal.addEventListener('show.bs.modal', (e) => {
     // Button that triggered the modal
@@ -190,4 +184,4 @@ deleteOrderModal.addEventListener('show.bs.modal', (e) => {
     let modalTitle = deleteOrderModal.querySelector('.modal-title');
     modalTitle.textContent = 'Delete Order ' + id;
     deleteOrderButton.textContent = 'Delete Order';
-})
+});

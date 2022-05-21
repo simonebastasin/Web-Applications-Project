@@ -1,6 +1,23 @@
+const searchForm = document.getElementById('searchForm');
+const searchAutocompleteInput = document.getElementById('searchAutocompleteInput');
+const searchAutocompleteMenu = document.getElementById('searchAutocompleteMenu');
+const logout=document.getElementById("logoutButton");
+const cartButton=document.getElementById("navbarDropdownCart");
+const dropdownMenuLogin = document.getElementById('dropdownMenuLogin');
+const loginForBuy = document.getElementById('loginForBuy');
+const carousels = document.querySelectorAll('.carousel-category');
+const popperInstance = Popper.createPopper(searchAutocompleteInput, searchAutocompleteMenu, {
+    placement: 'bottom-start',
+});
+const number=document.getElementById("numberOfElementCart");
+let fromCart;
+const addToCart=document.getElementById("addToCart");
+const printInvoice = document.getElementById('printInvoice');
+const loginFormDrop = document.getElementById("loginFormDrop");
+const formConfirmPassword = document.querySelector('form[data-confirm-password]');
+
 function printElement(query) {
-    var printContents = document.querySelector(query).innerHTML;
-    document.body.innerHTML = printContents;
+    document.body.innerHTML = document.querySelector(query).innerHTML;
     window.print();
 }
 
@@ -11,7 +28,7 @@ function parseError(xmlhttp) {
             return parseServletError(message);
         }
         try{
-            var json = JSON.parse(message);
+            const json = JSON.parse(message);
             return "Error " + json.errorCode + ": " + json.message +  " ("+ json.errorDetails + ")";
         }
         catch (e) {
@@ -20,6 +37,7 @@ function parseError(xmlhttp) {
     }
     return xmlhttp.statusText !== ""? 'HTTP Error: '+ xmlhttp.statusText : "Generic error";
 }
+
 function parseServletError(message) {
     const parser = new DOMParser();
     const floatingElement = parser.parseFromString(message, 'text/html');
@@ -28,7 +46,7 @@ function parseServletError(message) {
 }
 
 function bootstrapAlert(message, type, placeholder, timeout=10000) {
-    var wrapper = document.createElement('div');
+    const wrapper = document.createElement('div');
     wrapper.innerHTML = '<div class="alert alert-' + type + ' alert-dismissible" role="alert">' + message + '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
 
     placeholder.append(wrapper);
@@ -120,19 +138,90 @@ function populateForm(form, data, basename) {
     }
 }
 
-const searchForm = document.getElementById('searchForm');
-const searchAutocompleteInput = document.getElementById('searchAutocompleteInput');
-const searchAutocompleteMenu = document.getElementById('searchAutocompleteMenu');
-const logout=document.getElementById("logoutButton");
-const cartButton=document.getElementById("navbarDropdownCart");
-const payment=document.getElementById("confirmPayment");
-const dropdownMenuLogin = document.getElementById('dropdownMenuLogin');
-const loginForBuy = document.getElementById('loginForBuy');
-let carousels = document.querySelectorAll('.carousel-category');
+function showElement(e) {
+    searchAutocompleteInput.value = e.target.getAttribute('data-autocomplete');
+}
 
-const popperInstance = Popper.createPopper(searchAutocompleteInput, searchAutocompleteMenu, {
-    placement: 'bottom-start',
-});
+function buyCart(e) {
+    fromCart=true;
+    let json = {cart: []};
+    for (let i = 0; i < localStorage.length; i++) {
+        if (localStorage.key(i).substring(0, 4).localeCompare("cart") == 0) {
+            const element = localStorage.getItem(localStorage.key(i)).split(";")
+            const qta = element[0];
+
+            json.cart.push({quantity:qta,alias:localStorage.key(i).substring(4)});
+        }
+    }
+
+    const send = JSON.stringify(json, undefined, 4);
+
+    const xmlhttp = new XMLHttpRequest();   // new HttpRequest instance
+    xmlhttp.onreadystatechange = function () {
+        if (xmlhttp.readyState === XMLHttpRequest.DONE) {
+
+            let id = JSON.parse(xmlhttp.responseText).resourceId;
+
+
+            location.href = rootPath+"/buy/pay/"  + id;
+            invalidate();
+        }
+    }
+
+    xmlhttp.open("POST",rootPath+"/rest/buy/cart");
+    xmlhttp.setRequestHeader("Content-Type", "application/json");
+    xmlhttp.send(send);
+}
+
+function invalidate(e) {
+    if(fromCart==true) {
+        number.style.content='none';
+        console.log(number.style.content.toString())
+        localStorage.clear();
+    }
+    fromCart=false;
+}
+
+function presentCart(e) {
+    let text = "<div id='wrapper'>";
+    if (localStorage.length == 0)
+        text += '<li><span class="dropdown-item-text" >Empty</span></li>';
+    else {
+        for (let i = 0; i < localStorage.length; i++) {
+
+            if (localStorage.key(i).substring(0, 4).localeCompare("cart") == 0) {
+
+                const element = localStorage.getItem(localStorage.key(i)).split(";")
+                const qta = element[0];
+                const name = element[1];
+                text += '<li><span class="dropdown-item-text" > ' + name + '<br>' +
+                    '<div class="d-inline p-2 "><i>quantity: </i>'+ qta +'</div>' +
+                    '<div class="d-inline p-2 "><button class="btn cartButton" data-cart='+localStorage.key(i)+'>' +
+                    '<i class="fa-solid fa-trash"></i></button><li><hr class="dropdown-divider"></div>' +
+                    '</li>';
+            }
+        }
+        text += '<li><span class="dropdown-item-text d-flex justify-content-center "><button  class="btn btn-primary " id="buyButton" >buy</button></span></li>';
+    }
+    text+="</div>";
+
+    const list = document.getElementById("cart");
+    list.innerHTML = text;
+    const btns = document.getElementsByClassName("cartButton");
+    [...btns].forEach(btn => {
+
+        btn.addEventListener('click', (event) => {
+            localStorage.removeItem(event.currentTarget.getAttribute("data-cart"));
+            if(number!=null)
+                number.innerHTML=localStorage.length.toString();
+        });
+        btn.addEventListener('click', presentCart);
+    });
+
+    const buyButton=document.getElementById("buyButton");
+    buyButton?.addEventListener("click",buyCart);
+
+}
 
 searchAutocompleteInput.addEventListener('keyup', (e) => {
     let formData = new FormData(searchForm);
@@ -183,15 +272,11 @@ searchAutocompleteInput.addEventListener('keyup', (e) => {
     xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xmlhttp.send(new URLSearchParams(formData));
 });
-function showElement(e) {
-    searchAutocompleteInput.value = e.target.getAttribute('data-autocomplete');
-    //searchForm.submit();
-}
 
-(function () {
+(function() {
     'use strict'
 
-    var forms = document.querySelectorAll('.needs-validation')
+    const forms = document.querySelectorAll('.needs-validation');
 
     // Loop over them and prevent submission
     Array.prototype.slice.call(forms)
@@ -205,99 +290,14 @@ function showElement(e) {
                 form.classList.add('was-validated')
             }, false)
         })
-})()
+})();
 
-function invalidate()
-{
+(function() {
+    if(number!=null)
+        number.innerHTML=localStorage.length.toString();
+})();
 
-    if(fromCart==true) {
-        number.style.content='none';
-        console.log(number.style.content.toString())
-        localStorage.clear();
-    }
-    fromCart=false;
-}
-const number=document.getElementById("numberOfElementCart");
-if(number!=null)
-    number.innerHTML=localStorage.length.toString();
-function presentCart() {
-    let text = "<div id='wrapper'>";
-    if (localStorage.length == 0)
-        text += '<li><span class="dropdown-item-text" >Empty</span></li>';
-    else {
-        for (let i = 0; i < localStorage.length; i++) {
-
-            if (localStorage.key(i).substring(0, 4).localeCompare("cart") == 0) {
-
-                const element = localStorage.getItem(localStorage.key(i)).split(";")
-                const qta = element[0];
-                const name = element[1];
-                text += '<li><span class="dropdown-item-text" > ' + name + '<br>' +
-                    '<div class="d-inline p-2 "><i>quantity: </i>'+ qta +'</div>' +
-                    '<div class="d-inline p-2 "><button class="btn cartButton" data-cart='+localStorage.key(i)+'>' +
-                    '<i class="fa-solid fa-trash"></i></button><li><hr class="dropdown-divider"></div>' +
-                    '</li>';
-            }
-        }
-        text += '<li><span class="dropdown-item-text d-flex justify-content-center "><button  class="btn btn-primary " id="buyButton" >buy</button></span></li>';
-    }
-    text+="</div>";
-
-    const list = document.getElementById("cart");
-    list.innerHTML = text;
-    const btns = document.getElementsByClassName("cartButton");
-    [...btns].forEach(btn => {
-
-        btn.addEventListener('click', event => {
-
-            localStorage.removeItem(event.currentTarget.getAttribute("data-cart"));
-            if(number!=null)
-                number.innerHTML=localStorage.length.toString();
-
-            presentCart()
-        });
-
-    });
-
-    const buyButton=document.getElementById("buyButton");
-    buyButton?.addEventListener("click",buyCart);
-
-}
-var fromCart;
-function buyCart() {
-    fromCart=true;
-    var json={cart:[]};
-    for (let i = 0; i < localStorage.length; i++) {
-        if (localStorage.key(i).substring(0, 4).localeCompare("cart") == 0) {
-            const element = localStorage.getItem(localStorage.key(i)).split(";")
-            const qta = element[0];
-            const name = element[1];
-
-            json.cart.push({quantity:qta,alias:localStorage.key(i).substring(4)});
-        }
-    }
-
-    const send = JSON.stringify(json, undefined, 4);
-
-    var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance
-    xmlhttp.onreadystatechange = function () {
-        if (xmlhttp.readyState === XMLHttpRequest.DONE) {
-
-            let id = JSON.parse(xmlhttp.responseText).resourceId;
-
-
-            location.href = rootPath+"/buy/pay/"  + id;
-            invalidate();
-        }
-    }
-
-    xmlhttp.open("POST",rootPath+"/rest/buy/cart");
-    xmlhttp.setRequestHeader("Content-Type", "application/json");
-    xmlhttp.send(send);
-}
-
-function cart()
-{
+addToCart?.addEventListener("click",(e) => {
     const form=document.getElementById("formSend");
 
     if (form.checkValidity()) {
@@ -312,15 +312,11 @@ function cart()
             number.innerHTML = localStorage.length.toString();
     }
     form.classList.add('was-validated');
-}
-const addToCart=document.getElementById("addToCart");
-addToCart?.addEventListener("click",cart);
-logout?.addEventListener("click",invalidate);
-if(number!=null)
-    number.innerHTML=localStorage.length.toString();
-cartButton?.addEventListener("click",presentCart);
+});
 
-//payment?.addEventListener("click",invalidate);
+logout?.addEventListener("click",invalidate);
+
+cartButton?.addEventListener("click",presentCart);
 
 loginForBuy?.addEventListener('click', (e) => {dropdownMenuLogin.click()});
 
@@ -331,7 +327,7 @@ carousels?.forEach((it) => {
         const minPerSlide = 4 // number of slides per carousel-item
 
         let next = el.nextElementSibling
-        for (var i=1; i<minPerSlide; i++) {
+        for (let i=1; i<minPerSlide; i++) {
             if (!next) {
                 // wrap carousel by using first child
                 next = items[0]
@@ -347,12 +343,65 @@ carousels?.forEach((it) => {
             }
         }
     })
-})
-
-const printInvoice = document.getElementById('printInvoice');
+});
 
 printInvoice?.addEventListener('click', (e) =>{
     printElement('#invoice');
 
     location.reload();
+});
+
+loginFormDrop?.addEventListener('submit', (e) => {
+    if(!loginFormDrop.checkValidity()) return;
+
+    e.preventDefault();
+    const formData = new FormData(loginFormDrop);
+    const urlencodedData = new URLSearchParams(formData);
+    const xmlhttp = new XMLHttpRequest();
+    xmlhttp.open("POST", rootPath + "/rest/session/login", true);
+    xmlhttp.onreadystatechange = function() {
+        if (xmlhttp.readyState === XMLHttpRequest.DONE) {
+            if(xmlhttp.status === 200) {
+                location.reload();
+
+            }
+            else{
+                const alertPlaceholder = document.getElementById('liveAlertPlaceholderDrop');
+                bootstrapAlert(parseError(xmlhttp), 'danger', alertPlaceholder);
+            }
+        }
+    }
+    xmlhttp.send(urlencodedData);
+});
+
+formConfirmPassword?.addEventListener('submit', (e) => {
+    const formData = new FormData(formConfirmPassword);
+    const password = document.getElementById("newPassword");
+    const confirmPassword = document.getElementById("confirmPassword");
+    if(formData.get('newPassword') !== formData.get('confirmPassword') ) {
+        password.setCustomValidity('Passwords do NOT match!');
+        confirmPassword.setCustomValidity('Passwords do NOT match!');
+        document.getElementById('newPasswordFeedback').innerHTML =  'Passwords do NOT match!';
+        document.getElementById('confirmPasswordFeedback').innerHTML =  'Passwords do NOT match!';
+
+    } else if(password.validity.valueMissing && confirmPassword.validity.valueMissing) {
+        password.setCustomValidity( 'Passwords is empty');
+        confirmPassword.setCustomValidity( 'Confirm Passwords is empty');
+        document.getElementById('newPasswordFeedback').innerHTML =  'Passwords is empty';
+        document.getElementById('confirmPasswordFeedback').innerHTML =  'Confirm Passwords is empty';
+
+    }else if(password.validity.valueMissing) {
+        password.setCustomValidity( 'Passwords is empty');
+        confirmPassword.setCustomValidity('');
+        document.getElementById('newPasswordFeedback').innerHTML =  'Passwords is empty';
+
+    } else if(confirmPassword.validity.valueMissing) {
+        password.setCustomValidity('');
+        confirmPassword.setCustomValidity( 'Confirm Passwords is empty');
+        document.getElementById('confirmPasswordFeedback').innerHTML =  'Confirm Passwords is empty';
+    } else{
+        password.setCustomValidity('');
+        confirmPassword.setCustomValidity('');
+    }
+    e.preventDefault();
 });

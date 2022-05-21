@@ -67,7 +67,7 @@
         </div>
 
         <div class="tab-pane fade" id="pillsRegisterTab" role="tabpanel" aria-labelledby="pillsRegisterButton">
-            <form method="post" action="<c:url value="/session/register"/>" class="row g-3  needs-validation" novalidate id="formConfirmPassword">
+            <form method="post" action="<c:url value="/session/register"/>" class="row g-3  needs-validation" novalidate id="formConfirmPassword"  data-confirm-password>
 
                 <div class="form-floating mb-4">
                     <input id="name" type="text" class="form-control" name="name" required placeholder="name">
@@ -127,8 +127,7 @@
     </div>
 </div>
 <c:import url="/jsp/include/footer.jsp"/>
-<script src="<c:url value="/js/check-password.js"/>"></script>
+
 <script src="<c:url value="/js/register.js"/>"></script>
-<script src="<c:url value="/js/respond-register.js"/>"></script>
 </body>
 </html>

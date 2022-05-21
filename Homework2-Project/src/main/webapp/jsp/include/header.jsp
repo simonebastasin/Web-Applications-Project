@@ -149,5 +149,4 @@
             </ul>
         </div>
     </div>
-    <script src="<c:url value="/js/login-dropmenu-error.js"/>"></script>
 </nav>
