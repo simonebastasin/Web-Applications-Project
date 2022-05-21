@@ -57,7 +57,7 @@
                                             <span id="numberOfElementCart"  class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary"><span class="visually-hidden">Distinct product</span></span>
                                         </i>
                                     </a>
-                                    <ul class="dropdown-menu dropdown-menu-lg-end dropdown-menu-cart dropCartMenu" id="cart" aria-labelledby="navbarDropdownCart">
+                                    <ul class="dropdown-menu dropdown-menu-lg-end dropdown-menu-cart drop-cart-menu" id="cart" aria-labelledby="navbarDropdownCart">
 
                                     </ul>
 
