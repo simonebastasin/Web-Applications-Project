@@ -43,16 +43,15 @@ editUserForm.addEventListener('submit', (e) => {
 
             }
             else{
-                const alertPlaceholder = document.getElementById('liveAlertPlaceholder');
-                const cancelchanges = document.getElementById("cancel");
-                cancelchanges.innerHTML = "Cancel changes";
-                bootstrapAlert(parseError(xmlhttp), 'danger', alertPlaceholder);
+
+                const alertPlaceholder2 = document.getElementById('formAlertPlaceholder');
+                bootstrapAlert(parseError(xmlhttp), 'danger', alertPlaceholder2);
             }
         }
     }
     xmlhttp.send(urlencodedData);
 
-})
+});
 
 editUserModal.addEventListener('show.bs.modal', (e) => {
     // Button that triggered the modal
