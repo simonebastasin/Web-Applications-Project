@@ -143,7 +143,11 @@ span.roboto-thin {
         transform: translate(0, -2.5rem);
     }
 }
-
+.dropCartMenu
+{
+    max-height: 300px;
+    overflow-y: auto;
+}
 /*
     carousel category
  */
