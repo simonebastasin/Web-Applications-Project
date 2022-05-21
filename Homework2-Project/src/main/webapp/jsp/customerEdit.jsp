@@ -26,7 +26,7 @@
     <li class="breadcrumb-item active" aria-current="page">Edit Customer</li>
   </ol>
 </nav>
-<div id="liveAlertPlaceholder" class="sticky-top"></div>
+<div id="liveAlertPlaceholder"></div>
 <form class="row g-3 needs-validation" novalidate id="editUserForm">
 
     <div class="form-floating mb-3">

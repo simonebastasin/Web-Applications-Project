@@ -49,7 +49,7 @@
         }
     %>
 
-    <div id="liveAlertPlaceholder" class="sticky-top"></div>
+    <div id="liveAlertPlaceholder"></div>
     <div>
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addDiscountModal">
             <i class="fa-solid fa-circle-plus"></i>

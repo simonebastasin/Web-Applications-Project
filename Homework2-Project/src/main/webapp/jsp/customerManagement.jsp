@@ -28,7 +28,7 @@
         <li class="breadcrumb-item active" aria-current="page">Customer List</li>
       </ol>
     </nav>
-    <div id="liveAlertPlaceholder" class="sticky-top"></div>
+    <div id="liveAlertPlaceholder"></div>
 
     <div class="card card-body">
         <table id="customerTable" class="table table-hover">

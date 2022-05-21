@@ -77,10 +77,10 @@
                                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownManagement">
                                         <li><a class="dropdown-item" href="<c:url value="/ticket/list"/>">View Tickets</a></li>
                                         <li><a class="dropdown-item" href="<c:url value="/invoice/list"/>">View Invoices</a></li>
+                                        <li><hr class="dropdown-divider"></li>
                                         <li><a class="dropdown-item" href="<c:url value="/management/productManagement/"/>">Product Management</a></li>
                                         <li><a class="dropdown-item" href="<c:url value="/management/discountManagement/"/>">Discount Management</a></li>
-                                        <li><a class="dropdown-item" href="<c:url value="/media/list"/>">View Media</a></li>
-                                        <li><a class="dropdown-item" href="<c:url value="/media/upload"/>">Upload Media</a></li>
+                                        <li><a class="dropdown-item" href="<c:url value="/media/list"/>">Media Management</a></li>
                                         <li><a class="dropdown-item" href="<c:url value="/management/orderManagement/"/>">Order Management</a></li>
                                         <c:choose>
                                             <c:when test="${user.role == 'Administrator'}">

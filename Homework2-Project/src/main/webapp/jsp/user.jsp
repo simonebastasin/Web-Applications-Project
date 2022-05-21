@@ -28,7 +28,7 @@
   </ol>
 </nav>
 
-    <div id="liveAlertPlaceholder" class="sticky-top"></div>
+    <div id="liveAlertPlaceholder"></div>
 
     <h5>User Info</h5>
         <ul class="list-group list-group-flush" data-id="${employee.username}">

@@ -29,7 +29,7 @@
   </ol>
 </nav>
 
-    <div id="liveAlertPlaceholder" class="sticky-top"></div>
+    <div id="liveAlertPlaceholder"></div>
 
     <c:forEach var="assistanceTicket" items="${assistanceTicketList}">
     <div class="mx-auto w-lg-50">

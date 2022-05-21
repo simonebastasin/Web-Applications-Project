@@ -30,7 +30,7 @@
             <li class="breadcrumb-item active" aria-current="page">Product List</li>
         </ol>
     </nav>
-    <div id="liveAlertPlaceholder" class="sticky-top"></div>
+    <div id="liveAlertPlaceholder"></div>
 
     <div>
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addProductModal">
