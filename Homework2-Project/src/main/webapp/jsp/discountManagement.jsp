@@ -79,8 +79,8 @@
                         <td>${discountListProduct.discount.endDate.getHumanDateTimeless()}</td>
 
                         <td>
-                        <c:forEach var="prod" items="${discountListProduct.productList}">
-                            <a href="<c:url value="/products/details/${prod.alias}"/>">${prod.name}, </a>&nbsp
+                        <c:forEach var="prod" items="${discountListProduct.productList}" varStatus="loop">
+                            <a href="<c:url value="/products/details/${prod.alias}"/>">${prod.name}</a><c:if test="${!loop.last}">, &nbsp</c:if>
                         </c:forEach>
                         </td>
 
