@@ -75,7 +75,7 @@ addEmployeeModal.addEventListener('show.bs.modal', (e) => {
     username = button.getAttribute('data-id');
     let createEmployee = (username === null);
 
-    addEmployeeForm.classList.toggle('was-validated', false);
+    toogleWasValidated(addEmployeeForm, false);
     addEmployeeForm.reset();
 
     document.getElementById('username').readOnly = !createEmployee;
@@ -150,7 +150,7 @@ deleteEmployeeModal.addEventListener('show.bs.modal', (e) => {
     // Extract info from data-bs-* attributes
     username = button.getAttribute('data-id');
 
-    deleteEmployeeForm.classList.toggle('was-validated', false);
+    toogleWasValidated(deleteEmployeeForm, false);
     deleteEmployeeForm.reset();
 
     document.getElementById('usernameDelete').readOnly = true;

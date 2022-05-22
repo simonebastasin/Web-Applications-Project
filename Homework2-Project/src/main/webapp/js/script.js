@@ -223,6 +223,13 @@ function presentCart(e) {
 
 }
 
+function toogleWasValidated(form, force) {
+    if(force === undefined)
+        [...form.elements].map(e => e.parentNode).forEach(e => e.classList.toggle('was-validated'));
+    else
+        [...form.elements].map(e => e.parentNode).forEach(e => e.classList.toggle('was-validated', force));
+}
+
 searchAutocompleteInput.addEventListener('keyup', (e) => {
     let formData = new FormData(searchForm);
     if (formData.get('q').length < 3) {
@@ -286,8 +293,7 @@ searchAutocompleteInput.addEventListener('keyup', (e) => {
                     event.preventDefault()
                     event.stopPropagation()
                 }
-
-                form.classList.add('was-validated')
+                toogleWasValidated(form, true);
             }, false)
         })
 })();
@@ -311,7 +317,7 @@ addToCart?.addEventListener("click",(e) => {
         if (number != null)
             number.innerHTML = localStorage.length.toString();
     }
-    form.classList.add('was-validated');
+    toogleWasValidated(form, true);
 });
 
 logout?.addEventListener("click",invalidate);

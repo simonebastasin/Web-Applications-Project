@@ -143,7 +143,7 @@ addDiscountModal.addEventListener('show.bs.modal', (e) => {
     idDiscount = button.getAttribute('data-id');
     let createDiscount = (idDiscount  === null);
 
-    addDiscountForm.classList.toggle('was-validated', false);
+    toogleWasValidated(addDiscountForm, false);
     addDiscountForm.reset();
     if(createDiscount) {
         let modalTitle = addDiscountModal.querySelector('.modal-title');
@@ -216,7 +216,7 @@ deleteDiscountModal.addEventListener('show.bs.modal', (e) => {
     idDiscount = button.getAttribute('data-id');
 
 
-    deleteDiscountForm.classList.toggle('was-validated', false);
+    toogleWasValidated(deleteDiscountForm, false);
     deleteDiscountForm.reset();
 
 

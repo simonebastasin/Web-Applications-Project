@@ -122,13 +122,13 @@ addProductModal.addEventListener('show.bs.modal', (e) => {
     let createProduct = (alias  === null);
 
 
-    addProductForm.classList.toggle('was-validated', false);
+    toogleWasValidated(addProductForm, false);
     addProductForm.reset();
 
-    uploadImageForm.classList.toggle('was-validated', false);
+    toogleWasValidated(uploadImageForm, false);
     uploadImageForm.reset();
 
-    addCategoryForm.classList.toggle('was-validated', false);
+    toogleWasValidated(addCategoryForm, false);
     addCategoryForm.reset();
 
     uploadImageProgress.classList.toggle('d-none', true);
@@ -215,7 +215,7 @@ deleteProductModal.addEventListener('show.bs.modal', (e) => {
     alias = button.getAttribute('data-id');
 
 
-    deleteProductForm.classList.toggle('was-validated', false);
+    toogleWasValidated(deleteProductForm, false);
     deleteProductForm.reset();
 
 

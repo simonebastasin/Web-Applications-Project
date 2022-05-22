@@ -39,7 +39,10 @@ respondTicketForm.addEventListener('submit', (e) => {
                 bootstrap.Modal.getOrCreateInstance(respondTicketModal).hide();
 
                 if(formData.get('status') === "CLOSED") {
-                    button.remove();
+                    const newItem = document.createElement('span');
+                    newItem.textContent = 'The ticket is closed';
+                    newItem.classList.add('list-group-item');
+                    button.parentNode.replace(newItem, button);
                 }
 
             }
@@ -58,7 +61,7 @@ respondTicketModal.addEventListener('show.bs.modal', (e) => {
     // Extract info from data-bs-* attributes
     id = button.getAttribute('data-id');
 
-    respondTicketForm.classList.toggle('was-validated', false);
+    toogleWasValidated(respondTicketForm, false);
     respondTicketForm.reset();
 
     let modalTitle = respondTicketModal.querySelector('.modal-title');

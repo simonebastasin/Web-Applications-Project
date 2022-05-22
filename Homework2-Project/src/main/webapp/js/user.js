@@ -43,9 +43,8 @@ editUserForm.addEventListener('submit', (e) => {
 
             }
             else{
-
-                const alertPlaceholder2 = document.getElementById('formAlertPlaceholder');
-                bootstrapAlert(parseError(xmlhttp), 'danger', alertPlaceholder2);
+                const alertPlaceholder = document.getElementById('formAlertPlaceholder');
+                bootstrapAlert(parseError(xmlhttp), 'danger', alertPlaceholder);
             }
         }
     }
@@ -59,7 +58,7 @@ editUserModal.addEventListener('show.bs.modal', (e) => {
     // Extract info from data-bs-* attributes
     id = button.getAttribute('data-id');
 
-    editUserForm.classList.toggle('was-validated', false);
+    toogleWasValidated(editUserForm, false);
     editUserForm.reset();
 
     let modalTitle = editUserModal.querySelector('.modal-title');

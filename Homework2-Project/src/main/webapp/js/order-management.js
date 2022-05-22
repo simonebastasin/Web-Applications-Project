@@ -71,7 +71,7 @@ editOrderModal.addEventListener('show.bs.modal', (e) => {
     // Extract info from data-bs-* attributes
     id = button.getAttribute('data-id');
 
-    editOrderForm.classList.toggle('was-validated', false);
+    toogleWasValidated(editOrderForm, false);
     editOrderForm.reset();
 
     document.getElementById('idOrder').readOnly = true;
@@ -157,7 +157,7 @@ deleteOrderModal.addEventListener('show.bs.modal', (e) => {
     // Extract info from data-bs-* attributes
     id = button.getAttribute('data-id');
 
-    deleteOrderForm.classList.toggle('was-validated', false);
+    toogleWasValidated(deleteOrderForm, false);
     deleteOrderForm.reset();
 
     document.getElementById('idOrderDelete').readOnly = true;

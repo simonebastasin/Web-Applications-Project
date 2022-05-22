@@ -62,9 +62,8 @@ editCustomerModal.addEventListener('show.bs.modal', (e) => {
     // Extract info from data-bs-* attributes
     username = button.getAttribute('data-id');
 
-    editCustomerForm.classList.toggle('was-validated', false);
+    toogleWasValidated(editCustomerForm, false);
     editCustomerForm.reset();
-
     document.getElementById('id').readOnly = true;
     document.getElementById('username').readOnly = true;
 
@@ -125,7 +124,7 @@ deleteCustomerModal.addEventListener('show.bs.modal', (e) => {
     // Extract info from data-bs-* attributes
     username = button.getAttribute('data-id');
 
-    deleteCustomerForm.classList.toggle('was-validated', false);
+    toogleWasValidated(deleteCustomerForm, false);
     deleteCustomerForm.reset();
 
     document.getElementById('usernameDelete').readOnly = true;
