@@ -1,3 +1,7 @@
+const uploadImageForm = document.getElementById('uploadImageForm');
+const uploadImageProgress = document.getElementById('uploadImageProgress');
+const uploadImageProgressBar = document.getElementById('uploadImageProgressBar');
+
 const ready = (xmlhttp,filename) => {
     if(xmlhttp.status === 200) {
         const alertPlaceholder = document.getElementById('liveAlertPlaceholder');
@@ -21,3 +25,14 @@ const ready = (xmlhttp,filename) => {
 };
 
 initDropArea(document.getElementById('dropArea'), ready);
+
+
+uploadImageForm.addEventListener('submit', (e) => {
+    if(!uploadImageForm.checkValidity()) return;
+
+    e.preventDefault();
+
+    const multipartData = new FormData(uploadImageForm);
+
+    uploadFile(multipartData, ready);
+});
