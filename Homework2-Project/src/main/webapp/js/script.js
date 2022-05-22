@@ -131,6 +131,12 @@ function populateForm(form, data, basename) {
                 date.setMinutes(date.getMinutes() - date.getTimezoneOffset());
                 element.value = date.toISOString().substring(0, 10);
                 break;
+
+            case 'datetime-local':
+                let datetime = new Date(value);
+                datetime.setMinutes(datetime.getMinutes() - datetime.getTimezoneOffset());
+                element.value = datetime.toISOString().substring(0, 16);
+                break;
         }
 
     }

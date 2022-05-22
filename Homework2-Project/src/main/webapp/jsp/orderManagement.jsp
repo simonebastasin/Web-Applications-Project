@@ -49,24 +49,22 @@
                         <td>${onlineOrder.idOrder}</td>
                         <td>${onlineOrder.idCustomer}</td>
                         <td>${onlineOrder.ooDateTime.getHumanDate()}</td>
-                        <td><ul>
-                            <c:forEach var="product" items="${onlineOrder.products}">
-                                <li>${product.alias}, ${product.brand}, ${product.name}, ${product.quantity}</li>
+                        <td>
+                            <c:forEach var="product" items="${onlineOrder.products}" varStatus="loop">
+                                <a href="<c:url value="/products/details/${product.alias}"/>">${product.name}</a> &times; ${product.quantity}<c:if test="${!loop.last}">, &nbsp</c:if>
                             </c:forEach>
-                        </ul></td>
+                        </td>
                         <td>${onlineOrder.status}</td>
                         <td>${onlineOrder.status.osDateTime.getHumanDate()}</td>
                         <td>
                             <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#editOrderModal" data-id="${onlineOrder.idOrder}">
                                 <i class="fa-solid fa-pen-to-square text-primary"></i>
                             </button>
-                            <!--<a href="<c:url value="/management/orderManagement/editOrder/${onlineOrder.idOrder}"/>">Edit</a>-->
                         </td>
                         <td>
                             <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteOrderModal" data-id="${onlineOrder.idOrder}">
                                 <i class="fa-solid fa-trash-can text-danger"></i>
                             </button></td>
-                            <!--<a href="<c:url value="/management/orderManagement/deleteOrder/${onlineOrder.idOrder}"/>">Delete</a>-->
                         </td>
                     </tr>
                 </c:forEach>
@@ -95,28 +93,26 @@
                         </div>
                         <div class="mb-3">
                             <label for="ooDateTime" class="col-form-label">Order Date:</label>
-                            <input type="date" class="form-control" id="ooDateTime" name="ooDateTime" required/>
+                            <input type="datetime-local" class="form-control" id="ooDateTime" name="ooDateTime" required/>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="osDateTime" class="col-form-label">Last Status Update:</label>
+                            <input type="datetime-local" class="form-control" id="osDateTime" name="osDateTime" required>
                         </div>
 
                         Products:
-                        <table>
-                            <tr>
-                                <th>Alias</th>
-                                <th>Brand</th>
-                                <th>Name</th>
-                                <th>Quantity</th>
-                                <th>Sale Price</th>
-                            </tr>
-                            <c:forEach var="product" items="${products}">
-                                <tr data-id="${product.alias}">
-
-                                    <td>1${product.alias}</td>
-                                    <td>2${product.brand}</td>
-                                    <td>3${product.name}</td>
-                                    <td>4${product.quantity}</td>
-                                    <td>5${product.salePrice}</td>
+                        <table id="editOrderTable" class="table">
+                            <thead>
+                                <tr>
+                                    <th>Alias</th>
+                                    <th>Brand</th>
+                                    <th>Name</th>
+                                    <th>Quantity</th>
+                                    <th>Sale Price</th>
                                 </tr>
-                            </c:forEach>
+                            </thead>
+                            <tbody></tbody>
                         </table>
 
                         <div class="mb-3">
@@ -131,11 +127,6 @@
                                     <option value="${OrderStatusEnum.CANCELLED}">Cancelled</option>
                                 </select>
                             </div>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="osDateTime" class="col-form-label">Last Status Update:</label>
-                            <input type="date" class="form-control" id="osDateTime" name="osDateTime" required>
                         </div>
                         <div class="mb-3">
                             <label for="description" class="col-form-label">Description:</label>
@@ -172,43 +163,42 @@
                         </div>
                         <div class="mb-3">
                             <label for="ooDateTimeDelete" class="col-form-label">Order Date:</label>
-                            <input type="date" class="form-control" id="ooDateTimeDelete" name="ooDateTime" required/>
+                            <input type="datetime-local" class="form-control" id="ooDateTimeDelete" name="ooDateTime" required/>
                         </div>
 
-                        Products:
-                        <table>
-                            <tr>
-                                <th>Alias</th>
-                                <th>Brand</th>
-                                <th>Name</th>
-                                <th>Quantity</th>
-                                <th>Sale Price</th>
-                            </tr>
-                            <c:forEach var="product" items="${products}">
-                                <tr data-id="${product.alias}">
-
-                                    <td>${product.alias}</td>
-                                    <td>${product.brand}</td>
-                                    <td>${product.name}</td>
-                                    <td>${product.quantity}</td>
-                                    <td>${product.salePrice}</td>
-                                </tr>
-                            </c:forEach>
-                        </table>
-
-                        <div class="mb-3">
-                            <label for="statusDelete" class="col-form-label">Status:</label>
-                            <input type="text" class="form-control" id="statusDelete" name="status" required/>
-                        </div>
 
                         <div class="mb-3">
                             <label for="osDateTimeDelete" class="col-form-label">Last Status Update:</label>
-                            <input type="date" class="form-control" id="osDateTimeDelete" name="osDateTime" required>
+                            <input type="datetime-local" class="form-control" id="osDateTimeDelete" name="osDateTime" disabled>
                         </div>
+
+                        Products:
+                        <table  id="deleteOrderTable" class="table">
+                            <thead>
+                                <tr>
+                                    <th>Alias</th>
+                                    <th>Brand</th>
+                                    <th>Name</th>
+                                    <th>Quantity</th>
+                                    <th>Sale Price</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+
                         <div class="mb-3">
-                            <label for="descriptionDelete" class="col-form-label">Description:</label>
-                            <input type="text" class="form-control" id="descriptionDelete" name="description" required>
+                            <label for="statusDelete">Status:</label>
+                            <div class="input-group">
+                                <select class="form-select" name="status" id="statusDelete" disabled>
+                                    <option value="${OrderStatusEnum.OPEN}">Open</option>
+                                    <option value="${OrderStatusEnum.PAYMENT_ACCEPTED}">Payment accepted</option>
+                                    <option value="${OrderStatusEnum.SHIPPED}">Shipped</option>
+                                    <option value="${OrderStatusEnum.DELIVERED}">Delivered</option>
+                                    <option value="${OrderStatusEnum.CANCELLED}">Cancelled</option>
+                                </select>
+                            </div>
                         </div>
+
                     </form>
                 </div>
                 <div class="modal-footer">

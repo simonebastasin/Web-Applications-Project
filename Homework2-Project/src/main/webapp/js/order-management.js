@@ -4,23 +4,20 @@ const orderTableBody = orderTable.getElementsByTagName('tbody')[0] ?? orderTable
 const editOrderButton = document.getElementById('editOrderButton');
 const editOrderForm = document.getElementById('editOrderForm');
 const editOrderModal = document.getElementById('editOrderModal');
+const editOrderTable = document.getElementById('editOrderTable');
 
 const deleteOrderButton = document.getElementById('deleteOrderButton');
 const deleteOrderForm = document.getElementById('deleteOrderForm');
 const deleteOrderModal = document.getElementById('deleteOrderModal');
+const deleteOrderTable = document.getElementById('deleteOrderTable');
 
 let id;
 
-function padTo2Digits(num) {
-    return num.toString().padStart(2, '0');
-}
 
-function formatDate(date) {
-    return [
-        padTo2Digits(date.getDate()),
-        padTo2Digits(date.getMonth() + 1),
-        date.getFullYear(),
-    ].join('/');
+
+function populateTableProduct(table, orderList) {
+    const tableBody = table.getElementsByTagName('tbody')[0] ?? table;
+    tableBody.innerHTML = orderList.map(element => '<tr><td>'+element.alias+'</td><td>'+element.brand+'</td><td>'+element.name+'</td><td>'+element.quantity+'</td><td>'+element.sale+'</td></tr>').join('');
 }
 
 editOrderForm.addEventListener('submit', (e) => {
@@ -39,21 +36,22 @@ editOrderForm.addEventListener('submit', (e) => {
         if (xmlhttp.readyState === XMLHttpRequest.DONE) {
             if (xmlhttp.status === 200) {
                 const alertPlaceholder = document.getElementById('liveAlertPlaceholder');
+                const item = document.querySelector('tr[data-id="'+id+'"]');
                 let newInnerHTML =
                     '<td>'+id+'</td>'+
-                    '<td>'+formData.get('idCustomer')+'</td>'+
-                    '<td>'+formatDate(new Date(formData.get('ooDateTime')))+'</td>'+
-                    '<td>'+formData.get('products')+'</td>'+
+                    '<td>'+item.children[1].innerHTML+'</td>'+
+                    '<td>'+item.children[2].innerHTML+'</td>'+
+                    '<td>'+item.children[3].innerHTML+'</td>'+
                     '<td>'+document.getElementById('status').options[document.getElementById('status').selectedIndex].text+'</td>'+
-                    '<td>'+formatDate(new Date(formData.get('osDateTime')))+'</td>'+
+                    '<td>'+formatDateTime(new Date(Date.now()))+'</td>'+
                     '<td><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#editOrderModal" data-id="'+id+'"><i class="fa-solid fa-pen-to-square text-primary"></i></button></td>'+
                     '<td><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteOrderModal" data-id="'+id+'"><i class="fa-solid fa-trash-can text-danger"></i></button></td>';
 
                 // -> edit
                 bootstrapAlert("Order " + id + " modified", 'success', alertPlaceholder);
-                document.querySelector('tr[data-id="'+id+'"]').innerHTML = newInnerHTML;
+                item.innerHTML = newInnerHTML;
 
-                evidenceRow(document.querySelector('tr[data-id="'+id+'"]'));
+                evidenceRow(item);
                 bootstrap.Modal.getOrCreateInstance(editOrderModal).hide();
 
             } else {
@@ -86,15 +84,11 @@ editOrderModal.addEventListener('show.bs.modal', (e) => {
         if (xmlhttp.readyState === XMLHttpRequest.DONE) {
             if (xmlhttp.status === 200) {
                 const response = JSON.parse(xmlhttp.responseText);
-                /*
-                console.log("1)");
-                console.log(response);
-                console.log("2)");
-                console.log(response?.[0]);
-                console.log("3)");
-                console.log(response?.[0].status);
-                */
+
+                populateTableProduct(editOrderTable, (response?.[0] ?? response).products);
                 populateForm(editOrderForm, response?.[0] ?? response);
+
+
             } else {
                 const alertPlaceholder = document.getElementById('liveAlertPlaceholder');
                 bootstrapAlert(parseError(xmlhttp), 'danger', alertPlaceholder);
@@ -122,24 +116,22 @@ deleteOrderForm.addEventListener('submit', (e) => {
         if (xmlhttp.readyState === XMLHttpRequest.DONE) {
             if(xmlhttp.status === 200) {
                 const alertPlaceholder = document.getElementById('liveAlertPlaceholder');
+                const item = document.querySelector('tr[data-id="'+id+'"]');
                 let newInnerHTML =
                     '<td>'+id+'</td>'+
-                    '<td>'+formData.get('idCustomer')+'</td>'+
-                    '<td>'+formatDate(new Date(formData.get('ooDateTime')))+'</td>'+
-                    '<td>'+formData.get('products')+'</td>'+
-                    '<td>'+document.getElementById('status').options[document.getElementById('status').selectedIndex].text+'</td>'+
-                    '<td>'+formatDate(new Date(formData.get('osDateTime')))+'</td>'+
+                    '<td>'+item.children[1].innerHTML+'</td>'+
+                    '<td>'+item.children[2].innerHTML+'</td>'+
+                    '<td>'+item.children[3].innerHTML+'</td>'+
+                    '<td>Cancelled</td>'+
+                    '<td>'+formatDateTime(new Date(Date.now()))+'</td>'+
                     '<td><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#editOrderModal" data-id="'+id+'"><i class="fa-solid fa-pen-to-square text-primary"></i></button></td>'+
                     '<td><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteOrderModal" data-id="'+id+'"><i class="fa-solid fa-trash-can text-danger"></i></button></td>';
 
                 bootstrapAlert("Order " + id + " cancelled", 'success', alertPlaceholder);
-                document.querySelector('tr[data-id="'+id+'"]').innerHTML = newInnerHTML;
+                item.innerHTML = newInnerHTML;
 
-                evidenceRow(document.querySelector('tr[data-id="'+id+'"]'));
+                evidenceRow(item);
 
-                //let row = document.querySelector('tr[data-id="'+id+'"]');
-                //row.children[5].innerHTML = "0";
-                //evidenceRow(row);
                 bootstrap.Modal.getOrCreateInstance(deleteOrderModal).hide();
 
             } else {
@@ -171,6 +163,7 @@ deleteOrderModal.addEventListener('show.bs.modal', (e) => {
         if (xmlhttp.readyState === XMLHttpRequest.DONE) {
             if(xmlhttp.status === 200) {
                 const response = JSON.parse(xmlhttp.responseText);
+                populateTableProduct(deleteOrderTable, (response?.[0] ?? response).products);
                 populateForm(deleteOrderForm, response);
             } else {
                 const alertPlaceholder = document.getElementById('liveAlertPlaceholder');
