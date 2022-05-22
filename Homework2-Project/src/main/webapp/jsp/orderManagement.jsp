@@ -30,7 +30,7 @@
     <div id="liveAlertPlaceholder"></div>
 
     <div class="card card-body">
-        <table id="orderTable" class="table table-hover">
+        <table id="orderTable" class="table table-hover table-hide-lg-col-2 table-hide-md-col-3 table-hide-sm-col-4 table-hide-md-col-6">
             <thead>
                 <tr>
                     <th>ID Order</th>

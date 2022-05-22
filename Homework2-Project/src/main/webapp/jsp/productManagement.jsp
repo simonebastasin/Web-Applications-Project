@@ -41,7 +41,7 @@
     <br>
 
     <div class="card card-body">
-        <table id="productTable" class="table table-hover table-hide-lg-col-7 table-hide-md-col-4 table-hide-md-col-5 table-hide-md-col-6 table-hide-sm-col-2 table-hide-sm-col-3" >
+        <table id="productTable" class="table table-hover table-hide-sm-col-2 table-hide-lg-col-4 table-hide-md-col-5 table-hide-md-col-6 table-hide-lg-col-7" >
             <thead>
             <tr>
                 <th>Name</th>

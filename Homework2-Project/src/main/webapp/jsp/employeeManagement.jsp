@@ -40,7 +40,7 @@
     </div><br>
 
     <div class="card card-body">
-        <table id="employeeTable" class="table table-hover">
+        <table id="employeeTable" class="table table-hover table-hide-md-col-1 table-hide-sm-col-2" >
             <thead>
                 <tr>
                     <th>Username</th>
