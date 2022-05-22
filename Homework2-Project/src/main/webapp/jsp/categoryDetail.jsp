@@ -49,12 +49,12 @@
                                                     </c:if>
                                                     <c:set var="i" value="${1}"/>
                                                 </c:forEach>
-                                                <img src="<c:url value="/media/view/${picture}"/>" alt="${prod.alias}" class="card-img" >
+                                                <img src="<c:url value="/media/view/${picture}"/>" alt="${prod.alias}" class="card-img d-block w-100 img-thumbnail" >
 
                                             </c:when>
                                             <c:otherwise>
 
-                                                <img src="<c:url value="/images/No_image_available_circle.png"/>" alt="${prod.alias}" class="card-img" >
+                                                <img src="<c:url value="/images/No_image_available_circle.png"/>" alt="${prod.alias}" class="card-img d-block w-100 img-thumbnail" >
 
                                             </c:otherwise>
                                         </c:choose>

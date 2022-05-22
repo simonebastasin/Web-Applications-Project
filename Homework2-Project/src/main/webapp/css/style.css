@@ -249,7 +249,7 @@ span.roboto-thin {
     images in productDetail.jsp
  */
 .product-detail img {
-    object-fit: cover;
+    object-fit: contain;
     object-position: center;
 }
 
