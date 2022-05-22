@@ -36,24 +36,23 @@ function evidenceRow(row,timeout=1700) {
         }, timeout);
 }
 
-function initDropArea(dropArea, ready) {
-
-    function uploadFile(multipartData) {
-        var xmlhttp = new XMLHttpRequest();
-        xmlhttp.open("POST", rootPath + "/rest/media/upload", true);
-        xmlhttp.upload.addEventListener("progress", function (e) {
-            let progress = ((e.loaded * 100.0 / e.total) || 100);
-            updateProgressBar(progress, false);
-        });
-        xmlhttp.onreadystatechange = function () {
-            if (xmlhttp.readyState === XMLHttpRequest.DONE) {
-                ready(xmlhttp);
-            }
+function uploadFile(multipartData) {
+    let xmlhttp = new XMLHttpRequest();
+    xmlhttp.open("POST", rootPath + "/rest/media/upload", true);
+    xmlhttp.upload.addEventListener("progress", function (e) {
+        let progress = ((e.loaded * 100.0 / e.total) || 100);
+        updateProgressBar(progress, false);
+    });
+    xmlhttp.onreadystatechange = function () {
+        if (xmlhttp.readyState === XMLHttpRequest.DONE) {
+            ready(xmlhttp, multipartData.get('file').name);
         }
-        xmlhttp.send(multipartData);
-        updateProgressBar(0, false);
     }
+    xmlhttp.send(multipartData);
+    updateProgressBar(0, false);
+}
 
+function initDropArea(dropArea, ready) {
 
     ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
         dropArea.addEventListener(eventName, preventDefaults, false)
@@ -63,6 +62,12 @@ function initDropArea(dropArea, ready) {
     dropArea.addEventListener('dragleave', unHighlight, false);
     dropArea.addEventListener('drop', handleDrop, false);
     dropArea.addEventListener('drop', forceUnHighlight, false);
+    dropArea.addEventListener('paste', (event) => {
+        let files = (event.clipboardData || window.clipboardData).files;
+        if(files) {
+            handleFiles(files);
+        }
+    });
 
     var count = 0;
 
@@ -108,7 +113,7 @@ function initDropArea(dropArea, ready) {
             let formData = new FormData();
             formData.append('file', file)
             return formData;
-        }).forEach(uploadFile, ready);
+        }).forEach(uploadFile);
 
     }
 }

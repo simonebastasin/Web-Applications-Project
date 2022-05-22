@@ -17,7 +17,7 @@ const toogleButton = document.getElementsByClassName('toggle');
 
 let alias;
 
-const ready = (xmlhttp) => {
+const ready = (xmlhttp, filename) => {
     if(xmlhttp.status === 200) {
         const alertPlaceholder = document.getElementById('formAlertPlaceholder');
         const response = JSON.parse(xmlhttp.responseText)[0];
@@ -26,7 +26,7 @@ const ready = (xmlhttp) => {
             (element) => {
                 const li = document.createElement('li');
                 li.innerHTML = '<input type="checkbox" id="media-'+response.resourceId+'" name="pictures" value="'+response.resourceId+'" form="addProductForm"/>'+
-                    '<label for="media-'+response.resourceId+'"><img src="'+rootPath+"/media/thumb/"+response.resourceId+'" /></label>';
+                    '<label for="media-'+response.resourceId+'"><img src="'+rootPath+"/media/thumb/"+response.resourceId+'" alt="'+filename+'"/></label>';
                 element.appendChild(li);
             }
         );

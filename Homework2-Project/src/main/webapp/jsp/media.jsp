@@ -37,7 +37,7 @@
         <div class="image-check-box">
             <ul>
                 <c:forEach var="item" items="${mediaList}">
-                    <li><label><img src="<c:url value="/media/view"/>/${item.id}" alt="${item.filename}" width="400px"/></label>
+                    <li><label><img src="<c:url value="/media/view"/>/${item.id}" alt="${item.filename}"/></label>
                     </li>
                 </c:forEach>
             </ul>

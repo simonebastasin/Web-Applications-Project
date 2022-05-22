@@ -1,4 +1,4 @@
-const ready = (xmlhttp) => {
+const ready = (xmlhttp,filename) => {
     if(xmlhttp.status === 200) {
         const alertPlaceholder = document.getElementById('liveAlertPlaceholder');
         const response = JSON.parse(xmlhttp.responseText)[0];
@@ -7,7 +7,7 @@ const ready = (xmlhttp) => {
             (element) => {
                 const li = document.createElement('li');
                 li.innerHTML =
-                    '<label><img src="'+rootPath+"/media/thumb/"+response.resourceId+'" /></label>';
+                    '<label><img src="'+rootPath+"/media/thumb/"+response.resourceId+'" alt="'+filename+'"/></label>';
                 element.appendChild(li);
             }
         );
