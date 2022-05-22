@@ -23,30 +23,16 @@ function formatDate(date) {
         date.getFullYear(),
     ].join('/');
 }
-
-function resolveNameProduct(product) {
-
-    // Creating Our XMLHttpRequest object
-    var xmlhttp = new XMLHttpRequest();
-
-    // Making our connection
+async function asyncResolveNameProduct(product) {
     var url = rootPath + '/rest/products/details/'+product;
-    xmlhttp.open("GET", url, false);
-    let obj;
-    // function execute after request is successful
-    xmlhttp.onreadystatechange = function () {
-        if (xmlhttp.readyState === XMLHttpRequest.DONE) {
-            if (xmlhttp.status === 200) {
-                obj = JSON.parse(this.responseText);
 
-                arrayName.push(obj[0].name);
-                console.log(arrayName.toString());
-            }
-        }
-    }
-    // Sending our request
-    xmlhttp.send();
+    const response = await fetch(url);
+
+    const json = await response.json();
+
+    return {alias: product, name: json[0].name };
 }
+
 
 addDiscountForm.addEventListener('submit', (e) => {
     if(!addDiscountForm.checkValidity()) {
@@ -73,10 +59,10 @@ addDiscountForm.addEventListener('submit', (e) => {
 
     }
 
-    xmlhttp.onreadystatechange = function() {
+    xmlhttp.onreadystatechange = async function () {
         if (xmlhttp.readyState === XMLHttpRequest.DONE) {
-            if(xmlhttp.status === 200) {
-                if(createDiscount) {
+            if (xmlhttp.status === 200) {
+                if (createDiscount) {
                     const response = JSON.parse(xmlhttp.responseText);
                     idDiscount = (response?.[0] ?? response).resourceId;
                 }
@@ -86,48 +72,35 @@ addDiscountForm.addEventListener('submit', (e) => {
 
                 idDiscount = response.resourceId;
 
-
-                arrayName = [];
                 const array = formData.getAll('productList');
-                //console.log(array.toString());
-                array.forEach(element =>
-                    resolveNameProduct(element));
 
-
-                const arrayHtml = [];
-                let i = 0;
-                arrayName.forEach(element => {
-                    arrayHtml.push('<a href=' + rootPath + '/products/details/' + array[i].toString() + '>' + element.toString() + ' </a>');
-                    i++;
-                });
-
-
+                let promise = await Promise.all(array.map(element => asyncResolveNameProduct(element)));
+                let arrayHtml = promise.map(element => '<a href=' + rootPath + '/products/details/' + element.alias + '>' + element.name + '</a>').join(', ');
 
                 let newInnerHTML =
-                    '<td>'+response.resourceId+'</td>'+
+                    '<td>' + response.resourceId + '</td>' +
 
-                    '<td>'+formData.get('percentage')+'%</td>'+
-                    '<td>'+formatDate(new Date(formData.get('startDate')))+'</td>'+
-                    '<td>'+formatDate(new Date(formData.get('endDate')))+'</td>'+
-                    '<td>'+arrayHtml.toString()+'</td>'+
-                    '<td><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#addDiscountModal" data-id="'+response.resourceId+'"> <i class="fa-solid fa-pen-to-square text-primary"></i></button></td>'+
-                    '<td><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteDiscountModal" data-id="'+response.resourceId+'"> <i class="fa-solid fa-trash-can text-danger"></i></button></td>';
+                    '<td>' + formData.get('percentage') + '%</td>' +
+                    '<td>' + formatDate(new Date(formData.get('startDate'))) + '</td>' +
+                    '<td>' + formatDate(new Date(formData.get('endDate'))) + '</td>' +
+                    '<td>' + arrayHtml + '</td>' +
+                    '<td><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#addDiscountModal" data-id="' + response.resourceId + '"> <i class="fa-solid fa-pen-to-square text-primary"></i></button></td>' +
+                    '<td><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteDiscountModal" data-id="' + response.resourceId + '"> <i class="fa-solid fa-trash-can text-danger"></i></button></td>';
 
-                if(createDiscount) {
+                if (createDiscount) {
                     bootstrapAlert("The discount was created", 'success', alertPlaceholder);
                     let tr = document.createElement('tr');
-                    tr.setAttribute('data-id',idDiscount);
+                    tr.setAttribute('data-id', idDiscount);
                     tr.innerHTML = newInnerHTML;
                     discountTableBody.insertBefore(tr, discountTableBody.firstChild);
-                }
-                else {
+                } else {
                     bootstrapAlert("The discount was modified", 'success', alertPlaceholder);
-                    document.querySelector('tr[data-id="'+idDiscount+'"]').innerHTML = newInnerHTML;
+                    document.querySelector('tr[data-id="' + idDiscount + '"]').innerHTML = newInnerHTML;
                 }
                 bootstrap.Modal.getOrCreateInstance(addDiscountModal).hide();
 
-                evidenceRow(document.querySelector('tr[data-id="'+idDiscount+'"]'));
-            }else {
+                evidenceRow(document.querySelector('tr[data-id="' + idDiscount + '"]'));
+            } else {
                 const alertPlaceholder = document.getElementById('formAlertPlaceholder');
                 bootstrapAlert(parseError(xmlhttp), 'danger', alertPlaceholder);
             }

@@ -21,19 +21,26 @@ respondTicketForm.addEventListener('submit', (e) => {
 
                 let lis = document.createElement("li");
                 lis.classList.add('list-group-item');
-                lis.innerHTML  = '<b> Ticket Status : <span class = "ticket-'+ formData.get('status') +'">'+ formData.get('status') +'</span></b>';
-                ul.appendChild(lis);
+                lis.classList.add('text-start');
 
-                let lid = document.createElement("li");
-                lid.classList.add('list-group-item');
-                lid.innerHTML  = '<i>'+ formData.get('description') +'</i>';
-                ul.appendChild(lid);
-
-                let lit = document.createElement("li");
-                lit.classList.add('list-group-item');
                 var resp = JSON.parse(xmlhttp.responseText);
-                lit.innerHTML  = resp[0].ticketStatusList.at(-1).tsDate.date.replaceAll('-','/').replace('T',' ').slice(0, -3);
-                ul.appendChild(lit);
+                let date = resp[0].ticketStatusList.at(-1).tsDate.date.replaceAll('-','/').replace('T',' ').slice(0, -3);
+
+                lis.innerHTML =
+                    '<div class="row align-items-start">' +
+                    '<div class="col"><b> Ticket Status :</b></div>' +
+                    '<div class="col"><b> <span class = "ticket-' + formData.get('status') + '">' + formData.get('status') + '</span></b></div>' +
+                    '</div>' +
+                    '<div class="row align-items-start">' +
+                    '<div class="col"></div>' +
+                    '<div class="col"><i>'+ formData.get('description') + '</i></div>' +
+                    '</div>' +
+                    '<div class="row align-items-start">' +
+                    '<div class="col"></div>' +
+                    '<div class="col">'+ date + '</div>' +
+                    '</div>';
+
+                ul.appendChild(lis);
 
                 bootstrapAlert("Ticket respond success", 'success', alertPlaceholder);
                 bootstrap.Modal.getOrCreateInstance(respondTicketModal).hide();

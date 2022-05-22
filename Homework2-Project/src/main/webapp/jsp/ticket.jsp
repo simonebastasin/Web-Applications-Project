@@ -29,22 +29,41 @@
 
 
     <c:forEach var="assistanceTicket" items="${assistanceTicketList}">
-    <div class="mx-auto w-lg-50">
-    <div class="card text-center">
+    <div class="card w-lg-50 mx-auto bg-white rounded">
+        <h3 class="card-header">Ticket ID: ${assistanceTicket.id}</h3>
         <div class="card-body">
-            <h5 class="card-title">Ticket ID: ${assistanceTicket.id}</h5>
             <ul class="list-group list-group-flush">
-            <li class="list-group-item">${assistanceTicket.description}</li>
-            <li class="list-group-item"><a href="<c:url value="/products/details/${assistanceTicket.productAlias}"/>">Product ${assistanceTicket.productAlias}</a></li>
+                <li class="list-group-item text-start">
+                    <div class="row align-items-start">
+                        <div class="col">Description: </div>
+                        <div class="col">${assistanceTicket.description}</div>
+                    </div>
+                </li>
+                <li class="list-group-item text-start">
+                    <div class="row align-items-start">
+                        <div class="col">Product: </div>
+                        <div class="col"><a href="<c:url value="/products/details/${assistanceTicket.productAlias}"/>">Product ${assistanceTicket.productAlias}</a></div>
+                    </div>
+                </li>
 
-        <c:forEach var="item" items="${assistanceTicket.ticketStatusList}">
-            <li class="list-group-item"><b> Ticket Status : <span class = "ticket-${item.status}">${item.status}</span></b></li>
-            <li class="list-group-item"><i>${item.description}</i></li>
-            <li class="list-group-item">${item.tsDate.humanDate}</li>
-        </c:forEach>
+                <c:forEach var="item" items="${assistanceTicket.ticketStatusList}">
+                <li class="list-group-item text-start">
+                        <div class="row align-items-start">
+                            <div class="col"><b> Ticket Status :</b></div>
+                            <div class="col"><b> <span class = "ticket-${item.status}">${item.status}</span></b></div>
+                        </div>
+                        <div class="row align-items-start">
+                            <div class="col"></div>
+                            <div class="col"><i>${item.description}</i></div>
+                        </div>
+                        <div class="row align-items-start">
+                            <div class="col"></div>
+                            <div class="col">${item.tsDate.humanDate}</div>
+                        </div>
+                </li>
+                </c:forEach>
             </ul>
         </div>
-    </div>
     </div>
     <br>
     </c:forEach>
