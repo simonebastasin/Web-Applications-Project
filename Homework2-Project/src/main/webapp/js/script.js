@@ -127,11 +127,9 @@ function populateForm(form, data, basename) {
                 break;
 
             case 'date':
-                date = new Date(value);
-                date.setDate(date.getDate() + 1);
-                element.value = date.toISOString().split('T')[0];
-
-
+                let date = new Date(value);
+                date.setMinutes(date.getMinutes() - date.getTimezoneOffset());
+                element.value = date.toISOString().substring(0, 10);
                 break;
         }
 
