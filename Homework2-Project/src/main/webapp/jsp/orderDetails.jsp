@@ -73,25 +73,18 @@
             </div>
         </div>
     </div>
-
-    <c:if test="${onlineOrder.status.status ne OrderStatusEnum.OPEN }">
-
-            <a href="<c:url value="/invoice/order/${onlineOrder.idOrder}" />" class="btn btn-primary me-3 float-end">Invoice</a>
-
-    </c:if>
-    <c:if test="${onlineOrder.status.status eq OrderStatusEnum.OPEN }">
-
-            <a href="<c:url value="/buy/pay/${onlineOrder.idOrder}"/>" class="btn btn-primary me-3 float-end">Pay</a>
-            <a href="#" data-bs-toggle="modal" data-bs-target="#deleteOrderModal" class="btn btn-primary me-3 float-end">Cancel</a>
-
-    </c:if>
-    <c:if test="${onlineOrder.status.status eq OrderStatusEnum.PAYMENT_ACCEPTED }">
-
-        <a href="#" data-bs-toggle="modal" data-bs-target="#deleteOrderModal" class="btn btn-primary me-3 float-end">Cancel</a>
-
-
-    </c:if>
-
+    <div class="mt-3 mb-3 d-flex justify-content-end">
+        <c:if test="${onlineOrder.status.status ne OrderStatusEnum.OPEN }">
+            <a href="<c:url value="/invoice/order/${onlineOrder.idOrder}" />" class="btn btn-primary me-3"><i class="fa-solid fa-file-invoice-dollar"></i><span>Invoice</span></a>
+        </c:if>
+        <c:if test="${onlineOrder.status.status eq OrderStatusEnum.OPEN }">
+            <a href="<c:url value="/buy/pay/${onlineOrder.idOrder}"/>" class="btn btn-primary me-3 float-end"><i class="fa-solid fa-money-check"></i><span>Pay</span></a>
+            <a href="#" data-bs-toggle="modal" data-bs-target="#deleteOrderModal" class="btn btn-primary me-3"><i class="fa-solid fa-ban"></i><span>Cancel</span></a>
+        </c:if>
+        <c:if test="${onlineOrder.status.status eq OrderStatusEnum.PAYMENT_ACCEPTED }">
+            <a href="#" data-bs-toggle="modal" data-bs-target="#deleteOrderModal" class="btn btn-primary me-3"><i class="fa-solid fa-ban"></i><span>Cancel</span></a>
+        </c:if>
+    </div>
 </div>
 
 </div>

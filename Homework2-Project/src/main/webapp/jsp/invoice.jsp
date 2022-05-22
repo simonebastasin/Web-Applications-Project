@@ -58,7 +58,7 @@
                     </ul>
                 </div>
                 <div class="card-footer text-start">
-                    <a href="<c:url value="/invoice/detail/${invoice.id}"/>" class="btn btn-primary">Detail Invoice</a>
+                    <a href="<c:url value="/invoice/detail/${invoice.id}"/>" class="btn btn-primary"><i class="fa-solid fa-file-invoice-dollar"></i><span>Detail Invoice</span></a>
                 </div>
             </div>
         </div>

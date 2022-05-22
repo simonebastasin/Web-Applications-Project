@@ -28,10 +28,10 @@
         </ol>
     </nav>
 
-    <div id="invoice">
+    <div id="invoice" class="w-lg-50 mx-auto">
         <h1 class="d-none d-print-block">Electromechanics Shop</h1>
 
-        <div class="card w-lg-50 mx-auto bg-white p-3 rounded">
+        <div class="card bg-white p-3 rounded mt-3 mb-3">
             <h3>ID INVOICE # ${onlineInvoice.id}</h3>
 
             <div class="row">
@@ -82,9 +82,9 @@
                     </c:forEach>
                 </ul>
             </div>
-            <div class="mb-3">
-                <button class="btn btn-primary d-print-none" id="printInvoice">Print Invoice</button>
-            </div>
+        </div>
+        <div class="mt-3 mb-3 d-flex justify-content-end">
+            <button class="btn btn-primary d-print-none me-3" id="printInvoice"><i class="fa-solid fa-print"></i><span>Print Invoice</span></button>
         </div>
     </div>
 </div>
