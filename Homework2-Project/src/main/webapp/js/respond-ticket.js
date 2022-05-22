@@ -42,7 +42,7 @@ respondTicketForm.addEventListener('submit', (e) => {
                     const newItem = document.createElement('span');
                     newItem.textContent = 'The ticket is closed';
                     newItem.classList.add('list-group-item');
-                    button.parentNode.replace(newItem, button);
+                    button.parentNode.replaceChild(newItem, button);
                 }
 
             }
