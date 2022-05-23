@@ -31,7 +31,7 @@
     <div id="liveAlertPlaceholder"></div>
 
     <div class="card card-body">
-        <table id="customerTable" class="table table-hover table-hide-lg-col-2 table-hide-lg-col-5 table-hide-md-col-6 table-hide-lg-col-7 table-hide-sm-col-8">
+        <table id="customerTable" class="table table-hover table-hide-lg-col-2 table-hide-xl-col-5 table-hide-md-col-6 table-hide-lg-col-7 table-hide-sm-col-8">
             <thead>
                 <tr>
                     <th>ID</th>
