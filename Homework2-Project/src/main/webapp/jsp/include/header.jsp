@@ -148,7 +148,7 @@
                                             <button class="btn btn-outline-primary" type="submit">Login</button>
                                     </form>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item"  href="<c:url value="/session/register"/>">Register</a>
+                                    <div class="mx-3 align-middle">Don't have an account? <a href="<c:url value="/session/register"/>">Register now</a></div>
                                 </div>
                         </li>
                     </c:otherwise>

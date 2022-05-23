@@ -51,8 +51,8 @@
                 <div class="col">${String.format("%.2f", onlineInvoice.totalPrice)}€</div>
             </div>
 
-            <h3>Product list</h3>
-            <h5>ID ORDER # ${onlineInvoice.idOrder.idOrder}</h5>
+
+            <h5 class="mt-3">ID ORDER # ${onlineInvoice.idOrder.idOrder}</h5>
 
             <div class="card row m-3">
                 <div class="card-header">
@@ -84,7 +84,7 @@
             </div>
         </div>
         <div class="mt-3 mb-3 d-flex justify-content-end">
-            <button class="btn btn-primary d-print-none me-3" id="printInvoice"><i class="fa-solid fa-print"></i><span>Print Invoice</span></button>
+            <button class="btn btn-primary d-print-none me-3" id="printInvoice"><i class="fa-solid fa-print me-3"></i><span>Print Invoice</span></button>
         </div>
     </div>
 </div>

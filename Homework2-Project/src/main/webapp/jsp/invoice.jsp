@@ -32,6 +32,7 @@
             <div class="card mt-3 mb-3">
                 <div class="card-header text-end">
                     ID INVOICE # ${invoice.id} <br>
+                    <a href="<c:url value="/invoice/detail/${invoice.id}"/>" class="card-link mt-5">Detail Invoice</a>
                 </div>
                 <div class="card-body">
                     <ul class="list-group list-group-flush">
@@ -46,6 +47,10 @@
                             </div>
                         </li>
                         <li class="list-group-item text-start">
+                            <div class="row align-items-star">
+                                <div class="col">Payment Type:</div>
+                                <div class="col">${invoice.paymentType.text}</div>
+                            </div>
                             <div class="row align-items-start">
                                 <div class="col">
                                     Price:
@@ -56,9 +61,6 @@
                             </div>
                         </li>
                     </ul>
-                </div>
-                <div class="card-footer text-start">
-                    <a href="<c:url value="/invoice/detail/${invoice.id}"/>" class="btn btn-primary"><i class="fa-solid fa-file-invoice-dollar"></i><span>Detail Invoice</span></a>
                 </div>
             </div>
         </div>

@@ -46,6 +46,20 @@
                     </div>
                 </li>
 
+                <c:choose>
+                <c:when test="${empty assistanceTicket.ticketStatusList}">
+                    <li class="list-group-item text-start">
+                        <div class="row align-items-start">
+                            <div class="col"><b> Ticket Status :</b></div>
+                            <div class="col text-secondary"><b>WAITING FOR A RESPONSE</b></div>
+                        </div>
+                        <div class="row align-items-start">
+                            <div class="col"></div>
+                            <div class="col"><i>One of our staff members will take care of your request soon</i></div>
+                        </div>
+                    </li>
+                </c:when>
+                <c:otherwise>
                 <c:forEach var="item" items="${assistanceTicket.ticketStatusList}">
                 <li class="list-group-item text-start">
                         <div class="row align-items-start">
@@ -62,6 +76,8 @@
                         </div>
                 </li>
                 </c:forEach>
+                </c:otherwise>
+                </c:choose>
             </ul>
         </div>
     </div>
