@@ -39,13 +39,16 @@
                 </c:choose>
             </ul>
             <form class="input-group w-100 w-lg-25" method="GET" id="searchForm" action="<c:url value="/products/search"/>">
+                <div class="btn-group" role="group">
                 <input class="form-control" type="text" id="searchAutocompleteInput" name="q"  pattern="[A-Za-z0-9 ]{1,20}" placeholder="Write here to search" aria-describedby="button-search" autocomplete="off">
-                <ul class="dropdown-menu" id="searchAutocompleteMenu">
+                <ul class="dropdown-menu dropdown-menu-wide"  id="searchAutocompleteMenu">
                 </ul>
+
 
                 <button class="btn btn-outline-primary" type="submit" id="button-search">
                     <i class="fa-solid fa-search"></i>
                 </button>
+                </div>
                 </form>
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 <c:choose>

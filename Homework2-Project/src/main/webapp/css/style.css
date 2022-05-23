@@ -143,6 +143,10 @@ span.roboto-thin {
         transform: translate(0, -2.5rem);
     }
 }
+.dropdown-menu-wide
+{
+    min-width: 100%;
+}
 .drop-cart-menu
 {
     max-height: 300px;
