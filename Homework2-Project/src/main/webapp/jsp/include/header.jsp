@@ -97,7 +97,7 @@
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownUser" role="button" data-bs-toggle="dropdown" aria-expanded="false"  href="#">
                                   <span class="fa-stack fa-1x">
                                     <i class="fa fa-circle fa-stack-2x"></i>
-                                    <span class="fa fa-stack-1x fa-inverse">${fn:substring(user.identification, 0, 2)}</span>
+                                    <span class="fa-stack-1x fa-inverse">${fn:toUpperCase(fn:substring(user.identification, 0, 2))}</span>
                                   </span>
                                 <span>Hello, ${user.identification}</span>
                             </a>
