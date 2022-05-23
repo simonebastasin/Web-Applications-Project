@@ -11,6 +11,15 @@ const deleteEmployeeModal = document.getElementById('deleteEmployeeModal');
 
 let username;
 
+function showPassword() {
+    var x = document.getElementById("password");
+    if (x.type === "password") {
+        x.type = "text";
+    } else {
+        x.type = "password";
+    }
+}
+
 addEmployeeForm.addEventListener('submit', (e) => {
     if(!addEmployeeForm.checkValidity()) return;
 
@@ -80,18 +89,35 @@ addEmployeeModal.addEventListener('show.bs.modal', (e) => {
 
     document.getElementById('username').readOnly = !createEmployee;
     document.getElementById('password').readOnly = !createEmployee;
+    document.getElementById('password').type = 'password';
 
     if(createEmployee) { // -> add
+        /*
         document.getElementById('password').style.visibility = 'visible';
         document.getElementById('password-label').style.visibility = 'visible';
+        document.getElementById('password-checkbox').style.visibility = 'visible';
+        document.getElementById('password-checkbox-label').style.visibility = 'visible';
+        */
+        document.getElementById('password').style.display = 'initial';
+        document.getElementById('password-label').style.display = 'initial';
+        document.getElementById('password-checkbox').style.display = 'initial';
+        document.getElementById('password-checkbox-label').style.display = 'initial';
 
         let modalTitle = addEmployeeModal.querySelector('.modal-title');
         modalTitle.textContent = 'Add employee';
         addEmployeeButton.textContent = 'Add employee';
 
     } else { // -> edit
+        /*
         document.getElementById('password').style.visibility = 'hidden';
         document.getElementById('password-label').style.visibility = 'hidden';
+        document.getElementById('password-checkbox').style.visibility = 'hidden';
+        document.getElementById('password-checkbox-label').style.visibility = 'hidden';
+        */
+        document.getElementById('password').style.display = 'none';
+        document.getElementById('password-label').style.display = 'none';
+        document.getElementById('password-checkbox').style.display = 'none';
+        document.getElementById('password-checkbox-label').style.display = 'none';
 
         const xmlhttp = new XMLHttpRequest();
         xmlhttp.open("GET", rootPath + "/rest/management/employeeManagement/editEmployee/" + username, true);

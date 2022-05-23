@@ -125,6 +125,7 @@
                         <div class="mb-3">
                             <label for="password" class="col-form-label" id="password-label">Password:</label>
                             <input type="password" class="form-control" id="password" name="password" required/>
+                            <input type="checkbox" onclick="showPassword()" id="password-checkbox"> <label class="col-form-label" id="password-checkbox-label"><i>Show password</i></label>
                         </div>
 
                     </form>
