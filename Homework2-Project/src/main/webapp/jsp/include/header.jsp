@@ -8,6 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="it.unipd.dei.wa2122.wadteam.resources.TypeUserEnum" %>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <%--@elvariable id="user" type="it.unipd.dei.wa2122.wadteam.resources.UserCredential"--%>
 <%--@elvariable id="employee" type="it.unipd.dei.wa2122.wadteam.resources.Employee"--%>
 <%--@elvariable id="categories" type="java.util.List<ProductCategory>"--%>
@@ -93,7 +94,13 @@
                             </c:when>
                         </c:choose>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownUser" role="button" data-bs-toggle="dropdown" aria-expanded="false"  href="#">Hello, ${user.identification}</a>
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownUser" role="button" data-bs-toggle="dropdown" aria-expanded="false"  href="#">
+                                  <span class="fa-stack fa-1x">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <span class="fa fa-stack-1x fa-inverse">${fn:substring(user.identification, 0, 2)}</span>
+                                  </span>
+                                <span>Hello, ${user.identification}</span>
+                            </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdownUser">
                                 <li><a class="dropdown-item" href="<c:url value="/user/info"/>">
                                     <i class="fa-solid fa-gear"></i>
