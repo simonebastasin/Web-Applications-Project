@@ -264,9 +264,9 @@ searchAutocompleteInput.addEventListener('keyup', (e) => {
                     for (const product of jsonData.products) {
                         let alias = product.alias;
                         let name = product.name;
-                        let price = product.finalSalePrice;
+                        let brand=product.brand;
                         let url = rootPath + '/products/details/'+alias;
-                        inner+="<li><a class='dropdown-item' href='"+url+"'><i>"+name+"</i> <small>Price: "+price+"€</small></a></li>";
+                        inner+="<li><a class='dropdown-item' href='"+url+"'><i>"+name+":</i> <small> "+brand+"</small></a></li>";
                     }
                     searchAutocompleteMenu.innerHTML = inner;
                     searchAutocompleteMenu.classList.add("show");
