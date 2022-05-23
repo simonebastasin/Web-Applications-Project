@@ -12,6 +12,9 @@ const deleteDiscountButton = document.getElementById('deleteDiscountButton');
 let arrayName = [];
 let idDiscount;
 
+var startDateAttribute;
+
+
 async function asyncResolveNameProduct(product) {
     var url = rootPath + '/rest/products/details/'+product;
 
@@ -24,6 +27,14 @@ async function asyncResolveNameProduct(product) {
 
 
 addDiscountForm.addEventListener('submit', (e) => {
+    let createDiscount = (idDiscount  === null);
+
+    if(!createDiscount){
+        var startDate = document.getElementById("startDate");
+        startDate.setAttribute("min",startDateAttribute);
+
+    }
+
     if(!addDiscountForm.checkValidity()) {
         document.getElementById('navDiscountInfo').click();
 
@@ -31,7 +42,7 @@ addDiscountForm.addEventListener('submit', (e) => {
     }
 
     e.preventDefault();
-    let createDiscount = (idDiscount  === null);
+
     const formData = new FormData(addDiscountForm);
     const urlencodedData = new URLSearchParams(formData);
     const xmlhttp = new XMLHttpRequest();
@@ -76,6 +87,7 @@ addDiscountForm.addEventListener('submit', (e) => {
                     '<td><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#addDiscountModal" data-id="' + response.resourceId + '"> <i class="fa-solid fa-pen-to-square text-primary"></i></button></td>' +
                     '<td><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteDiscountModal" data-id="' + response.resourceId + '"> <i class="fa-solid fa-trash-can text-danger"></i></button></td>';
 
+                startDateAtetribute = formData.get('startDate');
                 if (createDiscount) {
                     bootstrapAlert("The discount was created", 'success', alertPlaceholder);
                     let tr = document.createElement('tr');
