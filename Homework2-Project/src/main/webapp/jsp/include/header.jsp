@@ -148,7 +148,7 @@
                                                 <div class="invalid-feedback">Select the type of user you are.</div>
                                             </div>
                                         </div>
-                                            <button class="btn btn-outline-primary" type="submit">Login</button>
+                                            <button class="btn btn-outline-primary" id="loginButton" type="submit">Login</button>
                                     </form>
                                     <div class="dropdown-divider"></div>
                                     <div class="mx-3 align-middle">Don't have an account? <a href="<c:url value="/session/register"/>">Register now</a></div>

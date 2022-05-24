@@ -15,6 +15,7 @@ const addToCart=document.getElementById("addToCart");
 const printInvoice = document.getElementById('printInvoice');
 const loginFormDrop = document.getElementById("loginFormDrop");
 const formConfirmPassword = document.querySelector('form[data-confirm-password]');
+const loginButton=document.getElementById("loginButton");
 
 function printElement(query) {
     document.body.innerHTML = document.querySelector(query).innerHTML;
@@ -179,8 +180,6 @@ function buyCart(e) {
 
 function invalidate(e) {
     if(fromCart==true) {
-        number.style.content='none';
-        console.log(number.style.content.toString())
         localStorage.clear();
     }
     fromCart=false;
@@ -415,3 +414,6 @@ formConfirmPassword?.addEventListener('submit', (e) => {
     }
     e.preventDefault();
 });
+loginButton.addEventListener('click',(e)=>{localStorage.clear()});
+if(number!=null)
+    number.innerHTML=localStorage.length.toString();
