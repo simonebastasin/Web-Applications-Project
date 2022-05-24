@@ -29,11 +29,6 @@ async function asyncResolveNameProduct(product) {
 addDiscountForm.addEventListener('submit', (e) => {
     let createDiscount = (idDiscount  === null);
 
-    if(!createDiscount){
-        var startDate = document.getElementById("startDate");
-        startDate.setAttribute("min",startDateAttribute);
-
-    }
 
     if(!addDiscountForm.checkValidity()) {
         document.getElementById('navDiscountInfo').click();
@@ -87,7 +82,6 @@ addDiscountForm.addEventListener('submit', (e) => {
                     '<td><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#addDiscountModal" data-id="' + response.resourceId + '"> <i class="fa-solid fa-pen-to-square text-primary"></i></button></td>' +
                     '<td><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteDiscountModal" data-id="' + response.resourceId + '"> <i class="fa-solid fa-trash-can text-danger"></i></button></td>';
 
-                startDateAtetribute = formData.get('startDate');
                 if (createDiscount) {
                     bootstrapAlert("The discount was created", 'success', alertPlaceholder);
                     let tr = document.createElement('tr');
@@ -97,6 +91,27 @@ addDiscountForm.addEventListener('submit', (e) => {
                 } else {
                     bootstrapAlert("The discount was modified", 'success', alertPlaceholder);
                     document.querySelector('tr[data-id="' + idDiscount + '"]').innerHTML = newInnerHTML;
+
+
+
+                    const start = new Date();
+                    let monthCorrectto = start.getMonth()+1;
+                    var day = "";
+                    var month = "";
+                    if(start.getDate()<10) {
+                        day = "0" + start.getDate();
+                    } else {
+                        day = ""+start.getDate();
+                    }
+
+                    if(monthCorrectto<10) {
+                        month = "0" + monthCorrectto;
+                    } else {
+                        month = ""+monthCorrectto;
+                    }
+                    startDate.setAttribute("min", start.getFullYear()+"-"+month+"-"+day);
+
+
                 }
                 bootstrap.Modal.getOrCreateInstance(addDiscountModal).hide();
 
@@ -134,7 +149,31 @@ addDiscountModal.addEventListener('show.bs.modal', (e) => {
                     let respondeElaborated = Object.assign({}, response, {productList : response.productList.map(it =>  it.alias)});
                     const response1 = JSON.parse(xmlhttp.responseText).discountListProduct;
 
+                    startDateAttribute = new Date(respondeElaborated.discount.startDate.date);
                     populateForm(addDiscountForm, respondeElaborated);
+                    if(!createDiscount){
+                        var startDate = document.getElementById("startDate");
+
+
+                        var monthCorrect = startDateAttribute.getMonth()+1;
+
+                        var day = "";
+                        var month = "";
+                        if(startDateAttribute.getDate()<10) {
+                            day = "0" + startDateAttribute.getDate();
+                        } else {
+                            day = ""+startDateAttribute.getDate();
+                        }
+
+                        if(monthCorrect<10) {
+                            month = "0" + (monthCorrect);
+                        } else {
+                            month = ""+(monthCorrect);
+                        }
+
+                        startDate.setAttribute("min", startDateAttribute.getFullYear()+"-"+month+"-"+day);
+
+                    }
 
                 } else {
                     const alertPlaceholder = document.getElementById('liveAlertPlaceholder');
