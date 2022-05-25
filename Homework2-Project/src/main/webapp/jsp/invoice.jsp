@@ -14,7 +14,7 @@
 <head>
     <c:import url="/jsp/include/head.jsp"/>
 
-    <title>Your Invoice List | Electromechanics Shop</title>
+    <title>Invoice List | Electromechanics Shop</title>
 </head>
 
 <body>

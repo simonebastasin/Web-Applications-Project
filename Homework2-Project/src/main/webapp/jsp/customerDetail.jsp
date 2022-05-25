@@ -108,18 +108,18 @@
             <div class="modal-body">
                 <form class="row g-3 needs-validation" novalidate id="formConfirmPassword" data-confirm-password>
                     <div class="form-floating mb-3">
-                        <input id="oldPassword" type="password" class="form-control" name="oldPassword" placeholder="Old Password" required>
-                        <label for="oldPassword">Old Password</label>
+                        <input id="oldPassword" type="password" class="form-control" name="oldPassword" placeholder="Current password" required>
+                        <label for="oldPassword">Current password</label>
                         <div class="invalid-feedback" id="oldPasswordFeedback">Insert the current password.</div>
                     </div>
                     <div class="form-floating mb-3">
-                        <input id="newPassword" type="password" class="form-control" name="newPassword" placeholder="New Password" required>
-                        <label for="newPassword">New Password</label>
+                        <input id="newPassword" type="password" class="form-control" name="newPassword" placeholder="New password" required>
+                        <label for="newPassword">New password</label>
                         <div class="invalid-feedback"  id="newPasswordFeedback">Insert the new password.</div>
                     </div>
                     <div class="form-floating mb-3">
-                        <input id="confirmPassword" type="password" class="form-control" name="confirmPassword" placeholder="Confirm Password" required>
-                        <label for="confirmPassword">Confirm New Password</label>
+                        <input id="confirmPassword" type="password" class="form-control" name="confirmPassword" placeholder="Confirm new password" required>
+                        <label for="confirmPassword">Confirm new password</label>
                         <div class="invalid-feedback"  id="confirmPasswordFeedback">Confirm your password.</div>
                     </div>
                 </form>

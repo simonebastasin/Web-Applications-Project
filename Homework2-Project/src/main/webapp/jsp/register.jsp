@@ -83,7 +83,7 @@
 
                 <div class="form-floating mb-4">
                     <input id="fiscalCode" type="text" class="form-control" name="fiscalCode" required placeholder="fiscal code">
-                    <label for="fiscalCode">Fiscal Code</label>
+                    <label for="fiscalCode">Fiscal code</label>
                     <div class="invalid-feedback">Insert your fiscal code.</div>
                 </div>
 
@@ -95,7 +95,7 @@
 
                 <div class="form-floating mb-4">
                     <input id="phoneNumber" type="text" class="form-control" name="phoneNumber" placeholder="+39">
-                    <label for="phoneNumber">Phone Number</label>
+                    <label for="phoneNumber">Phone number</label>
                 </div>
 
                 <div class="form-floating mb-4">
@@ -117,7 +117,7 @@
 
                 <div class="form-floating mb-4">
                     <input id="confirmPassword" type="password" class="form-control" name="confirmPassword" placeholder="confirm_password" required>
-                    <label for="confirmPassword">Confirm Password</label>
+                    <label for="confirmPassword">Confirm password</label>
                     <div class="invalid-feedback" id="confirmPasswordFeedback">Confirm your password</div>
                 </div>
 
