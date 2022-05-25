@@ -31,15 +31,15 @@
     <div id="liveAlertPlaceholder"></div>
     <div class="card w-lg-50 mx-auto bg-white rounded">
         <div class="card-header">
-            <h5 class="card-title">User Info</h5>
+            <h5 class="card-title">My Account</h5>
         </div>
         <ul class="list-group list-group-flush" data-id="${customer.username}">
-            <li class="list-group-item">Name: ${customer.name}</li>
-            <li class="list-group-item">Surname: ${customer.surname}</li>
-            <li class="list-group-item">Address: ${customer.address}</li>
-            <li class="list-group-item">Phone number: ${customer.phoneNumber}</li>
-            <li class="list-group-item">Email: ${customer.email}</li>
-            <li class="list-group-item">Fiscal code: ${customer.fiscalCode}</li>
+            <li class="list-group-item"><b>Name</b>: ${customer.name}</li>
+            <li class="list-group-item"><b>Surname</b>: ${customer.surname}</li>
+            <li class="list-group-item"><b>Address</b>: ${customer.address}</li>
+            <li class="list-group-item"><b>Phone number</b>: ${customer.phoneNumber}</li>
+            <li class="list-group-item"><b>Email</b>: ${customer.email}</li>
+            <li class="list-group-item"><b>Fiscal code</b>: ${customer.fiscalCode}</li>
         </ul>
         <div class="card-footer">
             <a href="<c:url value="/user/modify"/>" class="btn" type="button" data-bs-toggle="modal" data-bs-target="#editUserModal" data-id="${customer.username}">
