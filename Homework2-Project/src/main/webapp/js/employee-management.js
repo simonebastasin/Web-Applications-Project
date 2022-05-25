@@ -9,9 +9,11 @@ const deleteEmployeeButton = document.getElementById('deleteEmployeeButton');
 const deleteEmployeeForm = document.getElementById('deleteEmployeeForm');
 const deleteEmployeeModal = document.getElementById('deleteEmployeeModal');
 
+const passwordCheckbox = document.getElementById('password-checkbox');
+
 let username;
 
-function showPassword() {
+passwordCheckbox.onclick = function() {
     var x = document.getElementById("password");
     if (x.type === "password") {
         x.type = "text";
