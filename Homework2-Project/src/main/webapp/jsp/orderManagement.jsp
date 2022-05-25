@@ -15,7 +15,7 @@
 <head>
     <c:import url="/jsp/include/head-management.jsp"/>
 
-    <title>Order List | Electromechanics Shop</title>
+    <title>Order Management | Electromechanics Shop</title>
 </head>
 
 <body>
@@ -33,12 +33,12 @@
         <table id="orderTable" class="table table-hover table-hide-lg-col-2 table-hide-md-col-3 table-hide-sm-col-4 table-hide-md-col-6">
             <thead>
                 <tr>
-                    <th>ID Order</th>
-                    <th>ID Customer</th>
-                    <th>Order Date</th>
+                    <th>Order ID</th>
+                    <th>Customer ID</th>
+                    <th>Order date</th>
                     <th>Products</th>
                     <th>Status</th>
-                    <th>Last Status Update</th>
+                    <th>Last status update</th>
                     <th></th>
                     <th></th>
                 </tr>
@@ -77,27 +77,27 @@
         <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg modal-fullscreen-md-down">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="editOrderModalTitle">Edit</h5>
+                    <h5 class="modal-title" id="editOrderModalTitle">Edit Order</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div id="formAlertPlaceholder" class="sticky-top"></div>
                 <div class="modal-body">
                     <form id="editOrderForm" class="needs-validation" novalidate>
                         <div class="mb-3">
-                            <label for="idOrder" class="col-form-label">ID Order:</label>
+                            <label for="idOrder" class="col-form-label">Order ID:</label>
                             <input type="text" class="form-control" id="idOrder" name="idOrder" required>
                         </div>
                         <div class="mb-3">
-                            <label for="idCustomer" class="col-form-label">ID Customer:</label>
+                            <label for="idCustomer" class="col-form-label">Customer ID:</label>
                             <input type="text" class="form-control" id="idCustomer" name="idCustomer" required/>
                         </div>
                         <div class="mb-3">
-                            <label for="ooDateTime" class="col-form-label">Order Date:</label>
+                            <label for="ooDateTime" class="col-form-label">Order date:</label>
                             <input type="datetime-local" class="form-control" id="ooDateTime" name="ooDateTime" required/>
                         </div>
 
                         <div class="mb-3">
-                            <label for="osDateTime" class="col-form-label">Last Status Update:</label>
+                            <label for="osDateTime" class="col-form-label">Last status update:</label>
                             <input type="datetime-local" class="form-control" id="osDateTime" name="osDateTime" required>
                         </div>
 
@@ -109,7 +109,7 @@
                                     <th>Brand</th>
                                     <th>Name</th>
                                     <th>Quantity</th>
-                                    <th>Sale Price</th>
+                                    <th>Sale price</th>
                                 </tr>
                             </thead>
                             <tbody></tbody>
@@ -135,7 +135,7 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary" id="editOrderButton" form="editOrderForm">Edit</button>
+                    <button type="submit" class="btn btn-primary" id="editOrderButton" form="editOrderForm">Edit Order</button>
                 </div>
             </div>
         </div>
@@ -147,28 +147,27 @@
         <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg modal-fullscreen-md-down">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="deleteOrderModalTitle">Delete</h5>
+                    <h5 class="modal-title" id="deleteOrderModalTitle">Delete Order</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div id="formAlertPlaceholderDelete" class="sticky-top"></div>
                 <div class="modal-body">
                     <form id="deleteOrderForm" class="needs-validation" novalidate>
                         <div class="mb-3">
-                            <label for="idOrderDelete" class="col-form-label">ID Order:</label>
+                            <label for="idOrderDelete" class="col-form-label">Order ID:</label>
                             <input type="text" class="form-control" id="idOrderDelete" name="idOrder" required>
                         </div>
                         <div class="mb-3">
-                            <label for="idCustomerDelete" class="col-form-label">ID Customer:</label>
+                            <label for="idCustomerDelete" class="col-form-label">Customer ID:</label>
                             <input type="text" class="form-control" id="idCustomerDelete" name="idCustomer" required/>
                         </div>
                         <div class="mb-3">
-                            <label for="ooDateTimeDelete" class="col-form-label">Order Date:</label>
+                            <label for="ooDateTimeDelete" class="col-form-label">Order date:</label>
                             <input type="datetime-local" class="form-control" id="ooDateTimeDelete" name="ooDateTime" required/>
                         </div>
 
-
                         <div class="mb-3">
-                            <label for="osDateTimeDelete" class="col-form-label">Last Status Update:</label>
+                            <label for="osDateTimeDelete" class="col-form-label">Last status update:</label>
                             <input type="datetime-local" class="form-control" id="osDateTimeDelete" name="osDateTime" disabled>
                         </div>
 
@@ -180,7 +179,7 @@
                                     <th>Brand</th>
                                     <th>Name</th>
                                     <th>Quantity</th>
-                                    <th>Sale Price</th>
+                                    <th>Sale price</th>
                                 </tr>
                             </thead>
                             <tbody></tbody>
@@ -202,7 +201,7 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-danger" id="deleteOrderButton" form="deleteOrderForm">Delete</button>
+                    <button type="submit" class="btn btn-danger" id="deleteOrderButton" form="deleteOrderForm">Delete Order</button>
                 </div>
             </div>
         </div>

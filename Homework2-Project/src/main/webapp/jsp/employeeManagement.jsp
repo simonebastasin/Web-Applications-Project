@@ -17,7 +17,7 @@
 <head>
     <c:import url="/jsp/include/head-management.jsp"/>
 
-    <title>Employee List | Electromechanics Shop</title>
+    <title>Employee Management | Electromechanics Shop</title>
 </head>
 
 <body>
@@ -89,7 +89,7 @@
         <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg modal-fullscreen-md-down">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="addEmployeeModalTitle">Add/Edit</h5>
+                    <h5 class="modal-title" id="addEmployeeModalTitle">Add Employee</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div id="formAlertPlaceholder" class="sticky-top"></div>
@@ -131,7 +131,7 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary" id="addEmployeeButton" form="addEmployeeForm">Add/Edit</button>
+                    <button type="submit" class="btn btn-primary" id="addEmployeeButton" form="addEmployeeForm">Add Employee</button>
                 </div>
             </div>
         </div>
@@ -142,7 +142,7 @@
         <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg modal-fullscreen-md-down">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="deleteEmployeeModalTitle">Delete</h5>
+                    <h5 class="modal-title" id="deleteEmployeeModalTitle">Delete Employee</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div id="formAlertPlaceholderDelete" class="sticky-top"></div>
@@ -167,7 +167,7 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-danger" id="deleteEmployeeButton" form="deleteEmployeeForm">Delete</button>
+                    <button type="submit" class="btn btn-danger" id="deleteEmployeeButton" form="deleteEmployeeForm">Delete Employee</button>
                 </div>
             </div>
         </div>

@@ -1,13 +1,14 @@
 const productTable = document.getElementById('productTable');
 const productTableBody = productTable.getElementsByTagName('tbody')[0] ?? productTable;
-const addProductButton = document.getElementById('addProductButton');
-const addProductForm = document.getElementById('addProductForm');
-const deleteProductForm = document.getElementById('deleteProductForm');
-const addCategoryForm = document.getElementById('addCategoryForm');
 
 const addProductModal = document.getElementById('addProductModal');
+const addProductForm = document.getElementById('addProductForm');
+const addProductButton = document.getElementById('addProductButton');
+const addCategoryForm = document.getElementById('addCategoryForm');
 
 const deleteProductModal = document.getElementById('deleteProductModal');
+const deleteProductForm = document.getElementById('deleteProductForm');
+const deleteProductButton = document.getElementById('deleteProductButton');
 
 const uploadImageForm = document.getElementById('uploadImageForm');
 const uploadImageProgress = document.getElementById('uploadImageProgress');
@@ -41,7 +42,6 @@ const ready = (xmlhttp, filename) => {
         updateProgressBar(0, true);
     }
 };
-
 
 addProductForm.addEventListener('submit', (e) => {
     if(!addProductForm.checkValidity()) {
@@ -100,17 +100,12 @@ addProductForm.addEventListener('submit', (e) => {
         }
     }
     xmlhttp.send(urlencodedData);
-
-
 });
 
 uploadImageForm.addEventListener('submit', (e) => {
     if(!uploadImageForm.checkValidity()) return;
-
     e.preventDefault();
-
     const multipartData = new FormData(uploadImageForm);
-
     uploadFile(multipartData, ready);
 });
 
@@ -120,7 +115,6 @@ addProductModal.addEventListener('show.bs.modal', (e) => {
     // Extract info from data-bs-* attributes
     alias = button.getAttribute('data-id');
     let createProduct = (alias  === null);
-
 
     toogleWasValidated(addProductForm, false);
     addProductForm.reset();
@@ -136,14 +130,13 @@ addProductModal.addEventListener('show.bs.modal', (e) => {
     var content = document.getElementById('toggleCategory');
     content.classList.toggle('d-none', true);
 
-
     document.getElementById('alias').readOnly = !createProduct;
     document.getElementById('alias').disabled = !createProduct;
 
     if(createProduct) {
         let modalTitle = addProductModal.querySelector('.modal-title');
-        modalTitle.textContent = 'Add product';
-        addProductButton.textContent = 'Add product';
+        modalTitle.textContent = 'Add Product';
+        addProductButton.textContent = 'Add Product';
     }
     else {
         const xmlhttp = new XMLHttpRequest();
@@ -164,10 +157,9 @@ addProductModal.addEventListener('show.bs.modal', (e) => {
         xmlhttp.send();
 
         let modalTitle = addProductModal.querySelector('.modal-title');
-        modalTitle.textContent = 'Edit product ' + alias;
-        addProductButton.textContent = 'Edit product';
+        modalTitle.textContent = 'Edit Product: ' + alias;
+        addProductButton.textContent = 'Edit Product';
     }
-
 });
 
 initDropArea(document.getElementById('tabProductMedia'), ready);
@@ -180,7 +172,6 @@ deleteProductForm.addEventListener('submit', (e) => {
     const urlencodedData = new URLSearchParams(formData);
     const xmlhttp = new XMLHttpRequest();
 
-
     xmlhttp.open("POST", rootPath + "/rest/management/productManagement/deleteProduct/" + alias, true);
 
     xmlhttp.onreadystatechange = function() {
@@ -190,13 +181,10 @@ deleteProductForm.addEventListener('submit', (e) => {
                 bootstrapAlert("The product " + alias + " has been removed", 'success', alertPlaceholder);
 
                 let row = document.querySelector('tr[data-id="'+alias+'"]');
-
                 row.children[5].innerHTML = "0";
 
                 bootstrap.Modal.getOrCreateInstance(deleteProductModal).hide();
-
                 evidenceRow(row);
-
 
             } else {
 
@@ -214,10 +202,8 @@ deleteProductModal.addEventListener('show.bs.modal', (e) => {
     // Extract info from data-bs-* attributes
     alias = button.getAttribute('data-id');
 
-
     toogleWasValidated(deleteProductForm, false);
     deleteProductForm.reset();
-
 
     document.getElementById('aliasDelete').readOnly = true;
     document.getElementById('aliasDelete').disabled = true;
@@ -244,12 +230,12 @@ deleteProductModal.addEventListener('show.bs.modal', (e) => {
     xmlhttp.send();
 
     let modalTitle = deleteProductModal.querySelector('.modal-title');
-    modalTitle.textContent = 'Are you sure to delete this product?';
+    modalTitle.textContent = 'Delete Product: ' + alias;
+    deleteProductButton.textContent = 'Delete Product';
 
 });
 
 [...toogleButton].forEach(it => it.addEventListener('click', function (event) {
-
     // Prevent default link behavior
     event.preventDefault();
 
@@ -271,7 +257,6 @@ addCategoryForm.addEventListener('submit', (e) => {
     const urlencodedData = new URLSearchParams(formData);
     const xmlhttp = new XMLHttpRequest();
 
-
     xmlhttp.open("POST", rootPath + "/rest/management/productManagement/createCategory/", true);
 
     xmlhttp.onreadystatechange = function() {
@@ -285,7 +270,6 @@ addCategoryForm.addEventListener('submit', (e) => {
                 category.appendChild(option);
                 category.value = formData.get('name');
 
-
                 const alertPlaceholder = document.getElementById('formAlertPlaceholder');
                 bootstrapAlert("The category has been added", 'success', alertPlaceholder);
 
@@ -294,7 +278,6 @@ addCategoryForm.addEventListener('submit', (e) => {
                 content.classList.toggle('d-none', true);
 
             } else {
-
                 const alertPlaceholder = document.getElementById('formAlertPlaceholder');
                 bootstrapAlert(parseError(xmlhttp), 'danger', alertPlaceholder);
             }

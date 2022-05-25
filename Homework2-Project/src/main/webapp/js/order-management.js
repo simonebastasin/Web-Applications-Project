@@ -13,8 +13,6 @@ const deleteOrderTable = document.getElementById('deleteOrderTable');
 
 let id;
 
-
-
 function populateTableProduct(table, orderList) {
     const tableBody = table.getElementsByTagName('tbody')[0] ?? table;
     tableBody.innerHTML = orderList.map(element => '<tr><td>'+element.alias+'</td><td>'+element.brand+'</td><td>'+element.name+'</td><td>'+element.quantity+'</td><td>'+element.sale+'</td></tr>').join('');
@@ -88,7 +86,6 @@ editOrderModal.addEventListener('show.bs.modal', (e) => {
                 populateTableProduct(editOrderTable, (response?.[0] ?? response).products);
                 populateForm(editOrderForm, response?.[0] ?? response);
 
-
             } else {
                 const alertPlaceholder = document.getElementById('liveAlertPlaceholder');
                 bootstrapAlert(parseError(xmlhttp), 'danger', alertPlaceholder);
@@ -99,7 +96,7 @@ editOrderModal.addEventListener('show.bs.modal', (e) => {
     xmlhttp.send();
 
     let modalTitle = editOrderModal.querySelector('.modal-title');
-    modalTitle.textContent = 'Edit Order ' + id;
+    modalTitle.textContent = 'Edit Order: ' + id;
     editOrderButton.textContent = 'Edit Order';
 });
 
@@ -175,6 +172,6 @@ deleteOrderModal.addEventListener('show.bs.modal', (e) => {
     xmlhttp.send();
 
     let modalTitle = deleteOrderModal.querySelector('.modal-title');
-    modalTitle.textContent = 'Delete Order ' + id;
+    modalTitle.textContent = 'Delete Order: ' + id;
     deleteOrderButton.textContent = 'Delete Order';
 });

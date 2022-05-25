@@ -90,32 +90,20 @@ addEmployeeModal.addEventListener('show.bs.modal', (e) => {
     addEmployeeForm.reset();
 
     document.getElementById('username').readOnly = !createEmployee;
-    document.getElementById('password').readOnly = !createEmployee;
+    //document.getElementById('password').readOnly = !createEmployee;
     document.getElementById('password').type = 'password';
 
     if(createEmployee) { // -> add
-        /*
-        document.getElementById('password').style.visibility = 'visible';
-        document.getElementById('password-label').style.visibility = 'visible';
-        document.getElementById('password-checkbox').style.visibility = 'visible';
-        document.getElementById('password-checkbox-label').style.visibility = 'visible';
-        */
         document.getElementById('password').style.display = 'initial';
         document.getElementById('password-label').style.display = 'initial';
         document.getElementById('password-checkbox').style.display = 'initial';
         document.getElementById('password-checkbox-label').style.display = 'initial';
 
         let modalTitle = addEmployeeModal.querySelector('.modal-title');
-        modalTitle.textContent = 'Add employee';
-        addEmployeeButton.textContent = 'Add employee';
+        modalTitle.textContent = 'Add Employee';
+        addEmployeeButton.textContent = 'Add Employee';
 
     } else { // -> edit
-        /*
-        document.getElementById('password').style.visibility = 'hidden';
-        document.getElementById('password-label').style.visibility = 'hidden';
-        document.getElementById('password-checkbox').style.visibility = 'hidden';
-        document.getElementById('password-checkbox-label').style.visibility = 'hidden';
-        */
         document.getElementById('password').style.display = 'none';
         document.getElementById('password-label').style.display = 'none';
         document.getElementById('password-checkbox').style.display = 'none';
@@ -139,8 +127,8 @@ addEmployeeModal.addEventListener('show.bs.modal', (e) => {
         xmlhttp.send();
 
         let modalTitle = addEmployeeModal.querySelector('.modal-title');
-        modalTitle.textContent = 'Edit employee ' + username;
-        addEmployeeButton.textContent = 'Edit employee';
+        modalTitle.textContent = 'Edit Employee: ' + username;
+        addEmployeeButton.textContent = 'Edit Employee';
     }
 });
 
@@ -204,6 +192,6 @@ deleteEmployeeModal.addEventListener('show.bs.modal', (e) => {
     xmlhttp.send();
 
     let modalTitle = deleteEmployeeModal.querySelector('.modal-title');
-    modalTitle.textContent = 'Delete employee ' + username;
-    deleteEmployeeButton.textContent = 'Delete employee';
+    modalTitle.textContent = 'Delete Employee: ' + username;
+    deleteEmployeeButton.textContent = 'Delete Employee';
 });

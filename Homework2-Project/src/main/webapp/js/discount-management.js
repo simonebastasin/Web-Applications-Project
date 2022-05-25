@@ -4,7 +4,6 @@ const addDiscountButton = document.getElementById('addDiscountButton');
 const addDiscountForm = document.getElementById('addDiscountForm');
 const addDiscountModal = document.getElementById('addDiscountModal');
 
-
 const deleteDiscountForm = document.getElementById('deleteDiscountForm');
 const deleteDiscountModal = document.getElementById('deleteDiscountModal');
 const deleteDiscountButton = document.getElementById('deleteDiscountButton');
@@ -14,36 +13,26 @@ let idDiscount;
 
 var startDateAttribute;
 
-
 async function asyncResolveNameProduct(product) {
     var url = rootPath + '/rest/products/details/'+product;
-
     const response = await fetch(url);
-
     const json = await response.json();
-
     return {alias: product, name: json[0].name };
 }
 
-
 addDiscountForm.addEventListener('submit', (e) => {
     let createDiscount = (idDiscount  === null);
-
 
     if(!addDiscountForm.checkValidity()) {
         document.getElementById('navDiscountInfo').click();
 
         return;
     }
-
     e.preventDefault();
 
     const formData = new FormData(addDiscountForm);
     const urlencodedData = new URLSearchParams(formData);
     const xmlhttp = new XMLHttpRequest();
-
-
-
 
     if(createDiscount) {
        //alert("send create");
@@ -51,9 +40,7 @@ addDiscountForm.addEventListener('submit', (e) => {
     } else {
         //alert("send edit "+idDiscount);
         xmlhttp.open("POST", rootPath + "/rest/management/discountManagement/editDiscount/" + idDiscount, true);
-
     }
-
     xmlhttp.onreadystatechange = async function () {
         if (xmlhttp.readyState === XMLHttpRequest.DONE) {
             if (xmlhttp.status === 200) {
@@ -61,7 +48,6 @@ addDiscountForm.addEventListener('submit', (e) => {
                     const response = JSON.parse(xmlhttp.responseText);
                     idDiscount = (response?.[0] ?? response).resourceId;
                 }
-
                 const alertPlaceholder = document.getElementById('liveAlertPlaceholder');
                 const response = JSON.parse(xmlhttp.responseText);
 
@@ -74,7 +60,6 @@ addDiscountForm.addEventListener('submit', (e) => {
 
                 let newInnerHTML =
                     '<td>' + response.resourceId + '</td>' +
-
                     '<td>' + formData.get('percentage') + '%</td>' +
                     '<td>' + formatDate(new Date(formData.get('startDate'))) + '</td>' +
                     '<td>' + formatDate(new Date(formData.get('endDate'))) + '</td>' +
@@ -92,8 +77,6 @@ addDiscountForm.addEventListener('submit', (e) => {
                     bootstrapAlert("The discount was modified", 'success', alertPlaceholder);
                     document.querySelector('tr[data-id="' + idDiscount + '"]').innerHTML = newInnerHTML;
 
-
-
                     const start = new Date();
                     let monthCorrectto = start.getMonth()+1;
                     var day = "";
@@ -110,8 +93,6 @@ addDiscountForm.addEventListener('submit', (e) => {
                         month = ""+monthCorrectto;
                     }
                     startDate.setAttribute("min", start.getFullYear()+"-"+month+"-"+day);
-
-
                 }
                 bootstrap.Modal.getOrCreateInstance(addDiscountModal).hide();
 
@@ -136,8 +117,8 @@ addDiscountModal.addEventListener('show.bs.modal', (e) => {
     addDiscountForm.reset();
     if(createDiscount) {
         let modalTitle = addDiscountModal.querySelector('.modal-title');
-        modalTitle.textContent = 'Add discount';
-        addDiscountButton.textContent = 'Add discount';
+        modalTitle.textContent = 'Add Discount';
+        addDiscountButton.textContent = 'Add Discount';
     } else {
         const xmlhttp = new XMLHttpRequest();
         xmlhttp.open("GET", rootPath+"/rest/management/discountManagement/editDiscount/"+idDiscount, true);
@@ -153,7 +134,6 @@ addDiscountModal.addEventListener('show.bs.modal', (e) => {
                     populateForm(addDiscountForm, respondeElaborated);
                     if(!createDiscount){
                         var startDate = document.getElementById("startDate");
-
 
                         var monthCorrect = startDateAttribute.getMonth()+1;
 
@@ -172,7 +152,6 @@ addDiscountModal.addEventListener('show.bs.modal', (e) => {
                         }
 
                         startDate.setAttribute("min", startDateAttribute.getFullYear()+"-"+month+"-"+day);
-
                     }
 
                 } else {
@@ -185,8 +164,8 @@ addDiscountModal.addEventListener('show.bs.modal', (e) => {
         xmlhttp.send();
 
         let modalTitle = addDiscountModal.querySelector('.modal-title');
-        modalTitle.textContent = 'Edit discount ' + idDiscount;
-        addDiscountButton.textContent = 'Edit discount';
+        modalTitle.textContent = 'Edit Discount: ' + idDiscount;
+        addDiscountButton.textContent = 'Edit Discount';
     }
 });
 
@@ -198,7 +177,6 @@ deleteDiscountForm.addEventListener('submit', (e) => {
     const urlencodedData = new URLSearchParams(formData);
     const xmlhttp = new XMLHttpRequest();
 
-
     xmlhttp.open("POST", rootPath + "/rest/management/discountManagement/deleteDiscount/" + idDiscount, true);
 
     xmlhttp.onreadystatechange = function() {
@@ -208,7 +186,6 @@ deleteDiscountForm.addEventListener('submit', (e) => {
                 bootstrapAlert("The discount " + idDiscount + " has been removed", 'success', alertPlaceholder);
                 let row = document.querySelector('tr[data-id="'+idDiscount+'"]');
                 row.remove();
-
 
                 bootstrap.Modal.getOrCreateInstance(deleteDiscountModal).hide();
 
@@ -228,10 +205,8 @@ deleteDiscountModal.addEventListener('show.bs.modal', (e) => {
     // Extract info from data-bs-* attributes
     idDiscount = button.getAttribute('data-id');
 
-
     toogleWasValidated(deleteDiscountForm, false);
     deleteDiscountForm.reset();
-
 
     const xmlhttp = new XMLHttpRequest();
     xmlhttp.open("GET", rootPath+"/rest/management/discountManagement/deleteDiscount/"+idDiscount, true);
@@ -257,6 +232,6 @@ deleteDiscountModal.addEventListener('show.bs.modal', (e) => {
     xmlhttp.send();
 
     let modalTitle = deleteDiscountModal.querySelector('.modal-title');
-    modalTitle.textContent = 'Are you sure to delete this discount?';
-
+    modalTitle.textContent = 'Delete Discount: ' + idDiscount;
+    deleteDiscountButton.textContent = 'Delete Discount';
 });

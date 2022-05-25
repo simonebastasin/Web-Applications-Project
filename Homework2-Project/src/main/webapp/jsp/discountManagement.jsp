@@ -20,7 +20,7 @@
 <head>
     <c:import url="/jsp/include/head-management.jsp"/>
 
-    <title>Discount List | Electromechanics Shop</title>
+    <title>Discount Management | Electromechanics Shop</title>
 </head>
 <body>
 <c:import url="/jsp/include/header.jsp"/>
@@ -61,11 +61,11 @@
         <table id="discountTable" class="table table-hover table-hide-md-col-3 table-hide-md-col-4 table-hide-sm-col-5">
             <thead>
                 <tr>
-                    <th>Id</th>
+                    <th>ID</th>
                     <th>Percentage</th>
-                    <th>Start Date</th>
-                    <th>End Date</th>
-                    <th>Product List</th>
+                    <th>Start date</th>
+                    <th>End date</th>
+                    <th>Products</th>
                     <th></th>
                     <th></th>
                 </tr>
@@ -117,7 +117,7 @@
                 <nav>
                     <div class="nav nav-tabs" id="nav-tab" role="tablist">
                         <button class="nav-link active" id="navDiscountInfo" data-bs-toggle="tab" data-bs-target="#tabDiscountInfo" type="button" role="tab" aria-controls="tabDiscountInfo" aria-selected="true">Discount Info</button>
-                        <button class="nav-link" id="navDiscountProduct" data-bs-toggle="tab" data-bs-target="#tabDiscountProduct" type="button" role="tab" aria-controls="tabDiscountProduct" aria-selected="false">Discount Product</button>
+                        <button class="nav-link" id="navDiscountProduct" data-bs-toggle="tab" data-bs-target="#tabDiscountProduct" type="button" role="tab" aria-controls="tabDiscountProduct" aria-selected="false">Discount Products</button>
                     </div>
                 </nav>
                 <div id="formAlertPlaceholder" class="sticky-top"></div>
@@ -133,7 +133,7 @@
                                     </div>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="startDate">Start Date</label>
+                                    <label for="startDate">Start date</label>
                                     <input type="date" class="form-control" id="startDate" required name="startDate"
                                            value="<%=(LocalDateTime.now()).getYear()%>-<%= month %>-<%= day %>"
                                            min="<%=(LocalDateTime.now()).getYear()%>-<%= month %>-<%= day %>"
@@ -141,7 +141,7 @@
 
                                 </div>
                                 <div class="mb-3">
-                                    <label for="endDate" class="col-2 col-form-label">End Date</label>
+                                    <label for="endDate" class="col-2 col-form-label">End date</label>
                                     <input type="date" class="form-control" id="endDate" required name="endDate"
                                            value="<%=(LocalDateTime.now()).getYear()%>-<%= month %>-<%= day %>"
                                            min="<%=(LocalDateTime.now()).getYear()%>-<%= month %>-<%= day %>"
@@ -170,7 +170,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary" id="addDiscountButton" form="addDiscountForm">Add discount</button>
+                    <button type="submit" class="btn btn-primary" id="addDiscountButton" form="addDiscountForm">Add Discount</button>
                 </div>
             </div>
         </div>
@@ -181,7 +181,7 @@
         <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg modal-fullscreen-md-down">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="deleteDiscountModalTitle">Remove discount</h5>
+                    <h5 class="modal-title" id="deleteDiscountModalTitle">Delete Discount</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div id="formAlertPlaceholderDelete" class="sticky-top"></div>
@@ -204,7 +204,7 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary" id="deleteDiscountButton" form="deleteDiscountForm">Delete</button>
+                    <button type="submit" class="btn btn-primary" id="deleteDiscountButton" form="deleteDiscountForm">Delete Discount</button>
                 </div>
             </div>
         </div>

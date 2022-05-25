@@ -18,7 +18,7 @@
 <head>
     <c:import url="/jsp/include/head-management.jsp"/>
 
-    <title>Product List | Electromechanics Shop</title>
+    <title>Product Management | Electromechanics Shop</title>
 </head>
 
 <body>
@@ -48,7 +48,7 @@
                 <th>Alias</th>
                 <th>Brand</th>
                 <th>Category</th>
-                <th>Sale Price</th>
+                <th>Sale price</th>
                 <th>Quantity</th>
                 <th>Evidence</th>
                 <th></th>
@@ -161,7 +161,7 @@
                                         <input form="addCategoryForm" type="text" class="form-control" id="nameCategoryDescription" name="description" required/>
                                     </div>
                                     <div class="mb-3">
-                                        <button type="submit" class="btn btn-secondary" id="addNewCategory" form="addCategoryForm">Add category</button>
+                                        <button type="submit" class="btn btn-secondary" id="addNewCategory" form="addCategoryForm">Add Category</button>
                                     </div>
                             </div>
                         </div>
@@ -215,7 +215,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary" id="addProductButton" form="addProductForm">Add product</button>
+                    <button type="submit" class="btn btn-primary" id="addProductButton" form="addProductForm">Add Product</button>
                 </div>
             </div>
         </div>
@@ -227,7 +227,7 @@
         <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg modal-fullscreen-md-down">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="deleteProductModalTitle">Set product as finished</h5>
+                    <h5 class="modal-title" id="deleteProductModalTitle">Delete Product</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div id="formAlertPlaceholderDelete" class="sticky-top"></div>
@@ -250,7 +250,7 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-danger" id="deleteProductButton" form="deleteProductForm">Delete</button>
+                    <button type="submit" class="btn btn-danger" id="deleteProductButton" form="deleteProductForm">Delete Product</button>
                 </div>
             </div>
         </div>

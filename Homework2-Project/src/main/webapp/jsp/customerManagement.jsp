@@ -15,7 +15,7 @@
 <head>
     <c:import url="/jsp/include/head-management.jsp"/>
 
-    <title>Customer List | Electromechanics Shop</title>
+    <title>Customer Management | Electromechanics Shop</title>
 </head>
 
 <body>
@@ -38,10 +38,10 @@
                     <th>Username</th>
                     <th>Name</th>
                     <th>Surname</th>
-                    <th>Fiscal Code</th>
+                    <th>Fiscal code</th>
                     <th>Address</th>
                     <th>Email</th>
-                    <th>Phone Number</th>
+                    <th>Phone number</th>
                     <th></th>
                     <th></th>
                 </tr>
@@ -79,7 +79,7 @@
         <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg modal-fullscreen-md-down">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="editCustomerModalTitle">Edit</h5>
+                    <h5 class="modal-title" id="editCustomerModalTitle">Edit Customer</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div id="formAlertPlaceholder" class="sticky-top"></div>
@@ -102,7 +102,7 @@
                             <input type="text" class="form-control" id="surname" name="surname" required/>
                         </div>
                         <div class="mb-3">
-                            <label for="fiscalCode" class="col-form-label">Fiscal Code:</label>
+                            <label for="fiscalCode" class="col-form-label">Fiscal code:</label>
                             <input type="text" class="form-control" id="fiscalCode" name="fiscalCode" required/>
                         </div>
                         <div class="mb-3">
@@ -114,13 +114,13 @@
                             <input type="email" class="form-control" id="email" name="email" required>
                         </div>
                         <div class="mb-3">
-                            <label for="phoneNumber" class="col-form-label">Phone Number:</label>
+                            <label for="phoneNumber" class="col-form-label">Phone number:</label>
                             <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" required>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary" id="editCustomerButton" form="editCustomerForm">Edit</button>
+                    <button type="submit" class="btn btn-primary" id="editCustomerButton" form="editCustomerForm">Edit Customer</button>
                 </div>
             </div>
         </div>
@@ -132,7 +132,7 @@
         <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg modal-fullscreen-md-down">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="deleteCustomerModalTitle">Delete</h5>
+                    <h5 class="modal-title" id="deleteCustomerModalTitle">Delete Customer</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div id="formAlertPlaceholderDelete" class="sticky-top"></div>
@@ -151,13 +151,17 @@
                             <input type="text" class="form-control" id="surnameDelete" name="surname" required/>
                         </div>
                         <div class="mb-3">
-                            <label for="fiscalCodeDelete" class="col-form-label">Fiscal Code:</label>
+                            <label for="fiscalCodeDelete" class="col-form-label">Fiscal code:</label>
                             <input type="text" class="form-control" id="fiscalCodeDelete" name="fiscalCode" required/>
+                        </div>
+                        <div class="mb-3">
+                            <label for="emailDelete" class="col-form-label">Email:</label>
+                            <input type="email" class="form-control" id="emailDelete" name="email" required>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-danger" id="deleteCustomerButton" form="deleteCustomerForm">Delete</button>
+                    <button type="submit" class="btn btn-danger" id="deleteCustomerButton" form="deleteCustomerForm">Delete Customer</button>
                 </div>
             </div>
         </div>

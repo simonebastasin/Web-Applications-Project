@@ -86,8 +86,8 @@ editCustomerModal.addEventListener('show.bs.modal', (e) => {
     xmlhttp.send();
 
     let modalTitle = editCustomerModal.querySelector('.modal-title');
-    modalTitle.textContent = 'Edit customer ' + username;
-    editCustomerButton.textContent = 'Edit customer';
+    modalTitle.textContent = 'Edit Customer: ' + username;
+    editCustomerButton.textContent = 'Edit Customer';
 });
 
 deleteCustomerForm.addEventListener('submit', (e) => {
@@ -131,6 +131,7 @@ deleteCustomerModal.addEventListener('show.bs.modal', (e) => {
     document.getElementById('nameDelete').readOnly = true;
     document.getElementById('surnameDelete').readOnly = true;
     document.getElementById('fiscalCodeDelete').readOnly = true;
+    document.getElementById('emailDelete').readOnly = true;
 
     const xmlhttp = new XMLHttpRequest();
     xmlhttp.open("GET", rootPath + "/rest/management/customerManagement/deleteCustomer/" + username, true);
@@ -151,6 +152,6 @@ deleteCustomerModal.addEventListener('show.bs.modal', (e) => {
     xmlhttp.send();
 
     let modalTitle = deleteCustomerModal.querySelector('.modal-title');
-    modalTitle.textContent = 'Delete customer ' + username;
-    deleteCustomerButton.textContent = 'Delete customer';
+    modalTitle.textContent = 'Delete Customer: ' + username;
+    deleteCustomerButton.textContent = 'Delete Customer';
 });
