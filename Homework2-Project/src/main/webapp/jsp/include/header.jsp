@@ -107,7 +107,7 @@
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdownUser">
                                 <li><a class="dropdown-item" href="<c:url value="/user/info"/>">
                                     <i class="fa-solid fa-gear"></i>
-                                    Info</a></li>
+                                    My Account</a></li>
                                 <li><a class="dropdown-item" href="<c:url value="/session/logout"/>" id="logoutButton" >
                                     <i class="fa-solid fa-right-from-bracket"></i>
                                     Logout</a></li>

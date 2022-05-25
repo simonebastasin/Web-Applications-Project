@@ -31,12 +31,12 @@
     <div id="liveAlertPlaceholder"></div>
     <div class="card w-lg-50 mx-auto bg-white rounded">
         <div class="card-header">
-            <h5 class="card-title">User Info</h5>
+            <h5 class="card-title">My Account</h5>
         </div>
         <ul class="list-group list-group-flush" data-id="${employee.username}">
-            <li class="list-group-item">Name: ${employee.name}</li>
-            <li class="list-group-item">Surname: ${employee.surname}</li>
-            <li class="list-group-item">Role: ${employee.role.toString()}</li>
+            <li class="list-group-item"><b>Name</b>: ${employee.name}</li>
+            <li class="list-group-item"><b>Surname</b>: ${employee.surname}</li>
+            <li class="list-group-item"><b>Role</b>: ${employee.role.toString()}</li>
         </ul>
         <div class="card-footer">
             <a href="<c:url value="/user/modify"/>" class="btn" type="button" data-bs-toggle="modal" data-bs-target="#editUserModal" data-id="${employee.username}">
