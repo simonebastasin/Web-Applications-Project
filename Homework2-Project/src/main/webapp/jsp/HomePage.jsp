@@ -23,7 +23,7 @@
 
 <div class="container main-container">
 
-<h1 class="title">Electromechanical <small class="text-secondary" >Shop</small></h1>
+<h1 class="title">Electromechanics <small class="text-secondary" >Shop</small></h1>
 
     <c:set value="${false}" var="showcase"/>
     <c:forEach var="prod" items="${productList}">
