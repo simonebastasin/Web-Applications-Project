@@ -13,8 +13,6 @@
 <%--@elvariable id="discountList" type="it.unipd.dei.wa2122.wadteam.resources.Discount"--%>
 <%--@elvariable id="productList" type="java.util.List<it.unipd.dei.wa2122.wadteam.resources.Product>"--%>
 
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,8 +20,10 @@
 
     <title>Discount Management | Electromechanics Shop</title>
 </head>
+
 <body>
 <c:import url="/jsp/include/header.jsp"/>
+
 <div class="container main-container">
     <nav class="custom-breadcrumb-divider" aria-label="breadcrumb">
       <ol class="breadcrumb bg-secondary bg-opacity-25 p-3 mt-3 rounded">
@@ -104,9 +104,6 @@
     </div>
 
 
-
-
-
     <div class="modal fade" id="addDiscountModal" tabindex="-1" aria-labelledby="addDiscountModal" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false" >
         <div class="modal-dialog modal-dialog-nav modal-dialog-scrollable modal-dialog-centered modal-lg modal-fullscreen-md-down">
             <div class="modal-content">
@@ -138,7 +135,6 @@
                                            value="<%=(LocalDateTime.now()).getYear()%>-<%= month %>-<%= day %>"
                                            min="<%=(LocalDateTime.now()).getYear()%>-<%= month %>-<%= day %>"
                                            max="<%=(LocalDateTime.now()).getYear() + 1%>-<%= month %>-<%= day %>">
-
                                 </div>
                                 <div class="mb-3">
                                     <label for="endDate" class="col-2 col-form-label">End date</label>
@@ -193,14 +189,12 @@
                         </div>
                         <div class="mb-3">
                             <label for="startDateDelete" class="col-form-label">Start date:</label>
-                            <input type="text" class="form-control" id="startDateDelete" name="startDate" required/>
+                            <input type="date" class="form-control" id="startDateDelete" name="startDate" required/>
                         </div>
                         <div class="mb-3">
                             <label for="endDateDelete" class="col-form-label">End date:</label>
-                            <input type="text" class="form-control" id="endDateDelete" name="endDate" required/>
+                            <input type="date" class="form-control" id="endDateDelete" name="endDate" required/>
                         </div>
-
-
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -212,7 +206,7 @@
 
 </div>
 <c:import url="/jsp/include/footer-management.jsp"/>
-<script type="text/javascript"  src="<c:url value="/js/discount-management.js"/>"></script>
 
+<script type="text/javascript"  src="<c:url value="/js/discount-management.js"/>"></script>
 </body>
 </html>
