@@ -15,7 +15,7 @@
 <head>
     <c:import url="/jsp/include/head.jsp"/>
 
-    <title>Customer: ${customer.username} | Electromechanics Shop</title>
+    <title>My Account | Electromechanics Shop</title>
 </head>
 
 <body>
@@ -24,14 +24,14 @@
 <nav class="custom-breadcrumb-divider" aria-label="breadcrumb">
   <ol class="breadcrumb bg-secondary bg-opacity-25 p-3 mt-3 rounded">
     <li class="breadcrumb-item"><a href="<c:url value="/"/>">Electromechanics Shop</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Customer: ${customer.username}</li>
+    <li class="breadcrumb-item active" aria-current="page">My Account</li>
   </ol>
 </nav>
 
     <div id="liveAlertPlaceholder"></div>
     <div class="card w-lg-50 mx-auto bg-white rounded">
         <div class="card-header">
-            <h5 class="card-title">My Account</h5>
+            <h5 class="card-title">My Account | <b>Username</b>: ${customer.username}</h5>
         </div>
         <ul class="list-group list-group-flush" data-id="${customer.username}">
             <li class="list-group-item"><b>Name</b>: ${customer.name}</li>
