@@ -416,6 +416,4 @@ formConfirmPassword?.addEventListener('submit', (e) => {
     }
     e.preventDefault();
 });
-loginButton.addEventListener('click',(e)=>{localStorage.clear()});
-if(number!=null)
-    number.innerHTML=localStorage.length.toString();
+loginButton?.addEventListener('click',(e)=>{localStorage.clear()});

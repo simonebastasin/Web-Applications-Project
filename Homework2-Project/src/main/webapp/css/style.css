@@ -8,6 +8,8 @@ body {
     background-repeat: repeat-y;
     background-position-y: 50%;
     --bs-body-font-family: 'Roboto', var(--bs-font-sans-serif);
+    position: relative;
+    min-height: 100vh;
 }
 
 .skyline {
@@ -17,12 +19,14 @@ body {
     mask-size: 100%;
     background-size: 100%;
     width: 100%;
-    padding-top: 112px;
-    min-height: 56px;
+    padding-top: 6rem;
+    min-height: 3rem;
+    position: absolute;
+    bottom: 0;
 }
 
 .main-container {
-    min-height: calc(100vh - 280px);
+    padding-bottom: 15rem;
 }
 
 @media (max-width: 575.98px) {
@@ -49,13 +53,6 @@ body {
         mask-size: 50%;
         background-size: 100%;
         width: 100%;
-    }
-}
-
-
-@media (max-width: 991.98px) {
-    .main-container {
-        min-height: calc(100vh - 304px);
     }
 }
 
