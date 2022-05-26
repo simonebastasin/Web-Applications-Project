@@ -204,7 +204,9 @@ function presentCart(e) {
                     '</li>';
             }
         }
-        text += '<li><span class="dropdown-item-text d-flex justify-content-center "><button  class="btn btn-primary " id="buyButton" >buy</button></span></li>';
+        text += '<li><span class="dropdown-item-text d-flex justify-content-center "><button id="buyButton" class="btn btn-outline-primary mt-1">\n' +
+            '                                                    Buy <i class="fa-solid fa-money-check"></i>\n' +
+            '                                                </button></span></li>';
     }
     text+="</div>";
 
