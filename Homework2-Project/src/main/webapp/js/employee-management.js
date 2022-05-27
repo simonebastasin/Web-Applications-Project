@@ -82,7 +82,7 @@ addEmployeeForm.addEventListener('submit', (e) => {
 addEmployeeModal.addEventListener('show.bs.modal', (e) => {
     // Button that triggered the modal
     var button = e.relatedTarget;
-    // Extract info from data-bs-* attributes
+    // Extract username from data-id attributes
     username = button.getAttribute('data-id');
     let createEmployee = (username === null);
 
@@ -163,7 +163,7 @@ deleteEmployeeForm.addEventListener('submit', (e) => {
 deleteEmployeeModal.addEventListener('show.bs.modal', (e) => {
     // Button that triggered the modal
     var button = e.relatedTarget;
-    // Extract info from data-bs-* attributes
+    // Extract username from data-id attributes
     username = button.getAttribute('data-id');
 
     toogleWasValidated(deleteEmployeeForm, false);

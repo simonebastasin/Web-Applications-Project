@@ -59,7 +59,7 @@ editCustomerForm.addEventListener('submit', (e) => {
 editCustomerModal.addEventListener('show.bs.modal', (e) => {
     // Button that triggered the modal
     var button = e.relatedTarget;
-    // Extract info from data-bs-* attributes
+    // Extract username from data-id attributes
     username = button.getAttribute('data-id');
 
     toogleWasValidated(editCustomerForm, false);
@@ -121,7 +121,7 @@ deleteCustomerForm.addEventListener('submit', (e) => {
 deleteCustomerModal.addEventListener('show.bs.modal', (e) => {
     // Button that triggered the modal
     var button = e.relatedTarget;
-    // Extract info from data-bs-* attributes
+    // Extract username from data-id attributes
     username = button.getAttribute('data-id');
 
     toogleWasValidated(deleteCustomerForm, false);

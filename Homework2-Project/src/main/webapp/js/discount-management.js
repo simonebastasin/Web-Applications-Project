@@ -109,7 +109,7 @@ addDiscountForm.addEventListener('submit', (e) => {
 addDiscountModal.addEventListener('show.bs.modal', (e) => {
     // Button that triggered the modal
     var button = e.relatedTarget;
-    // Extract info from data-bs-* attributes
+    // Extract id from data-id attributes
     idDiscount = button.getAttribute('data-id');
     let createDiscount = (idDiscount  === null);
 
@@ -202,7 +202,7 @@ deleteDiscountForm.addEventListener('submit', (e) => {
 deleteDiscountModal.addEventListener('show.bs.modal', (e) => {
     // Button that triggered the modal
     var button = e.relatedTarget;
-    // Extract info from data-bs-* attributes
+    // Extract id from data-id attributes
     idDiscount = button.getAttribute('data-id');
 
     toogleWasValidated(deleteDiscountForm, false);

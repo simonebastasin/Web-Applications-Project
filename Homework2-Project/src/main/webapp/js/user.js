@@ -55,7 +55,7 @@ editUserForm.addEventListener('submit', (e) => {
 editUserModal.addEventListener('show.bs.modal', (e) => {
     // Button that triggered the modal
     var button = e.relatedTarget;
-    // Extract info from data-bs-* attributes
+    // Extract id from data-id attributes
     id = button.getAttribute('data-id');
 
     toogleWasValidated(editUserForm, false);

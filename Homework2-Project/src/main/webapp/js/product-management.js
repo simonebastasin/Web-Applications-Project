@@ -112,7 +112,7 @@ uploadImageForm.addEventListener('submit', (e) => {
 addProductModal.addEventListener('show.bs.modal', (e) => {
     // Button that triggered the modal
     var button = e.relatedTarget;
-    // Extract info from data-bs-* attributes
+    // Extract alias from data-id attributes
     alias = button.getAttribute('data-id');
     let createProduct = (alias  === null);
 
@@ -199,7 +199,7 @@ deleteProductForm.addEventListener('submit', (e) => {
 deleteProductModal.addEventListener('show.bs.modal', (e) => {
     // Button that triggered the modal
     var button = e.relatedTarget;
-    // Extract info from data-bs-* attributes
+    // Extract alias from data-id attributes
     alias = button.getAttribute('data-id');
 
     toogleWasValidated(deleteProductForm, false);
