@@ -68,13 +68,13 @@ addDiscountForm.addEventListener('submit', (e) => {
                     '<td><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteDiscountModal" data-id="' + response.resourceId + '"> <i class="fa-solid fa-trash-can text-danger"></i></button></td>';
 
                 if (createDiscount) {
-                    bootstrapAlert("The discount was created", 'success', alertPlaceholder);
+                    bootstrapAlert("Discount " + idDiscount + " created", 'success', alertPlaceholder);
                     let tr = document.createElement('tr');
                     tr.setAttribute('data-id', idDiscount);
                     tr.innerHTML = newInnerHTML;
                     discountTableBody.insertBefore(tr, discountTableBody.firstChild);
                 } else {
-                    bootstrapAlert("The discount was modified", 'success', alertPlaceholder);
+                    bootstrapAlert("Discount " + idDiscount + " modified", 'success', alertPlaceholder);
                     document.querySelector('tr[data-id="' + idDiscount + '"]').innerHTML = newInnerHTML;
 
                     const start = new Date();
@@ -183,7 +183,7 @@ deleteDiscountForm.addEventListener('submit', (e) => {
         if (xmlhttp.readyState === XMLHttpRequest.DONE) {
             if(xmlhttp.status === 200) {
                 const alertPlaceholder = document.getElementById('liveAlertPlaceholder');
-                bootstrapAlert("The discount " + idDiscount + " has been removed", 'success', alertPlaceholder);
+                bootstrapAlert("Discount " + idDiscount + " removed", 'success', alertPlaceholder);
                 let row = document.querySelector('tr[data-id="'+idDiscount+'"]');
                 row.remove();
 

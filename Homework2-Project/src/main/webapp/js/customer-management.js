@@ -139,7 +139,6 @@ deleteCustomerModal.addEventListener('show.bs.modal', (e) => {
         if (xmlhttp.readyState === XMLHttpRequest.DONE) {
             if(xmlhttp.status === 200) {
                 const response = JSON.parse(xmlhttp.responseText);
-                //id = (response?.[0] ?? response).id;
                 populateForm(deleteCustomerForm, response);
 
             } else {

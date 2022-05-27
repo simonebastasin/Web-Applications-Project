@@ -90,7 +90,7 @@ addEmployeeModal.addEventListener('show.bs.modal', (e) => {
     addEmployeeForm.reset();
 
     document.getElementById('username').readOnly = !createEmployee;
-    //document.getElementById('password').readOnly = !createEmployee;
+    document.getElementById('password').readOnly = !createEmployee;
     document.getElementById('password').type = 'password';
 
     if(createEmployee) { // -> add

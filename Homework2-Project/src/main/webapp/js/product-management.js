@@ -78,14 +78,14 @@ addProductForm.addEventListener('submit', (e) => {
                     '<td><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#addProductModal" data-id="'+alias+'"> <i class="fa-solid fa-pen-to-square text-primary"></i></button></td>'+
                     '<td><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteProductModal" data-id="'+alias+'"> <i class="fa-solid fa-trash-can text-danger"></i></button></td>';
                 if(createProduct) {
-                    bootstrapAlert("The product " + alias + " has been created", 'success', alertPlaceholder);
+                    bootstrapAlert("Product " + alias + " created", 'success', alertPlaceholder);
                     let tr=document.createElement('tr');
                     tr.setAttribute('data-id',alias);
                     tr.innerHTML = newInnerHTML;
                     productTableBody.appendChild(tr);
                 }
                 else {
-                    bootstrapAlert("The product " + alias + " has been modified", 'success', alertPlaceholder);
+                    bootstrapAlert("Product " + alias + " modified", 'success', alertPlaceholder);
                     document.querySelector('tr[data-id="'+alias+'"]').innerHTML = newInnerHTML;
                 }
                 bootstrap.Modal.getOrCreateInstance(addProductModal).hide();
@@ -178,7 +178,7 @@ deleteProductForm.addEventListener('submit', (e) => {
         if (xmlhttp.readyState === XMLHttpRequest.DONE) {
             if(xmlhttp.status === 200) {
                 const alertPlaceholder = document.getElementById('liveAlertPlaceholder');
-                bootstrapAlert("The product " + alias + " has been removed", 'success', alertPlaceholder);
+                bootstrapAlert("Product " + alias + " removed", 'success', alertPlaceholder);
 
                 let row = document.querySelector('tr[data-id="'+alias+'"]');
                 row.children[5].innerHTML = "0";
@@ -271,7 +271,7 @@ addCategoryForm.addEventListener('submit', (e) => {
                 category.value = formData.get('name');
 
                 const alertPlaceholder = document.getElementById('formAlertPlaceholder');
-                bootstrapAlert("The category has been added", 'success', alertPlaceholder);
+                bootstrapAlert("New Category created", 'success', alertPlaceholder);
 
                 // Get the content
                 var content = document.getElementById('toggleCategory');
