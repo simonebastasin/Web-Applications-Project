@@ -257,28 +257,6 @@
                     </div>
                 </c:if>
 
-
-
-                <c:set var="i" value="${0}"/>
-                <div class="carousel-indicators">
-                    <c:forEach var="prod" items="${productList}">
-                        <c:if test="${prod.category.name.equals(item.name)}">
-                            <c:choose>
-                                <c:when test="${i == 0}">
-                                    <button type="button" data-bs-target="#categoryCarousel${count}" data-bs-slide-to="0"
-                                            class="active" aria-current="true"
-                                            aria-label="Slide 1"></button>
-                                </c:when>
-                                <c:otherwise>
-                                    <button type="button" data-bs-target="#categoryCarousel${count}"
-                                            data-bs-slide-to="${i}" aria-label="Slide ${i+1}"></button>
-                                </c:otherwise>
-                            </c:choose>
-                            <c:set var="i" value="${i+1}"/>
-                        </c:if>
-                    </c:forEach>
-                </div>
-
                 <c:set var="active" value="${true}"/>
 
                         <div class="carousel-inner ps-5 pe-5" role="listbox">
