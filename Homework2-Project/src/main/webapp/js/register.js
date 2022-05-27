@@ -26,6 +26,7 @@ pillsRegisterTab.addEventListener('shown.bs.tab', function (event) {
 });
 
 (function () {
+    loadPath = loadPath.split(';')[0];
     if (loadPath === 'register') {
         let tab = bootstrap.Tab.getOrCreateInstance(pillsRegisterTab);
         tab.show();

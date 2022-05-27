@@ -26,5 +26,10 @@ of the  [Department of Information Engineering](https://www.dei.unipd.it/en/), [
 
 * [Report - Latex source code](https://bitbucket.org/upd-dei-stud-prj/wa2122-wadteam/src/master/Homework1/)
 * [Report - Download Pdf](https://bitbucket.org/upd-dei-stud-prj/wa2122-wadteam/raw/master/Homework1/main.pdf)
-* [Project - Server side source code](https://bitbucket.org/upd-dei-stud-prj/wa2122-wadteam/src/master/Homework1-Project/)
+* [Project - Server-side source code](https://bitbucket.org/upd-dei-stud-prj/wa2122-wadteam/src/master/Homework1-Project/)
+
+## Homework 2 – Client-side Design and Development
+
+* [Presentation - Download Pdf](https://bitbucket.org/upd-dei-stud-prj/wa2122-wadteam/raw/master/WADTeam-Presentation.pdf)
+* [Project - Client-side source code](https://bitbucket.org/upd-dei-stud-prj/wa2122-wadteam/src/master/Homework2-Project/)
 
